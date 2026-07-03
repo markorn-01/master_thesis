@@ -1,0 +1,13 @@
+# run this command to create the environment:
+# conda env create --file astrolink_env.yml
+
+name: astrolink-env
+channels:
+  - defaults
+dependencies:
+  - python=3.11
+  - astrolink
+  - jupyterlab
+  - matplotlib
+  - scikit-learn
+prefix: /opt/anaconda3/envs/astrolink-env
