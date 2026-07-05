@@ -1,12 +1,17 @@
 # run this command to create the environment:
-# conda env create --file astrolink_env.yml
+# conda env create --file fuzzycat_env.yml
 
-name: astrolink-env
+name: fuzzycat-env
 channels:
+  - conda-forge
   - defaults
+
 dependencies:
   - python=3.11
   - astrolink
-  - jupyterlab
   - matplotlib
+  - numpy
   - scikit-learn
+  - pip
+  - pip:
+      - fuzzycategories

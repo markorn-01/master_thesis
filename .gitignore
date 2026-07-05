@@ -15,3 +15,5 @@ env/
 *.env
 .vscode/
 .idea/
+# FuzzyCat generated cluster files
+experiments/fuzzycat/Clusters/
