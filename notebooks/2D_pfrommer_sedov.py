@@ -21,7 +21,6 @@
 
 #%%
 from astrolink import AstroLink, visualize
-from scipy.ndimage import label
 import jax.numpy as jnp
 import numpy as np
 import matplotlib.pyplot as plt
@@ -33,8 +32,6 @@ from astronomix import time_integration
 from astronomix.option_classes.simulation_config import HLLC, MINMOD
 from astronomix._physics_modules._shock_finder.pfrommer_shock_finder import find_shocks_pfrommer
 
-from matplotlib.patches import Patch
-from matplotlib.lines import Line2D
 
 #%%
 # CONFIGURATION
@@ -144,165 +141,85 @@ result = find_shocks_pfrommer(
 # RUN ASTROLINK ON DETECTED SHOCK-SURFACE CELLS
 
 # Convert JAX arrays to NumPy.
-# geometry_x_np = np.array(geometry_x)
-# geometry_y_np = np.array(geometry_y)
-# surface_mask_np = np.array(result.shock_surface_cells, dtype=bool)
-
-# # Each detected shock-surface cell becomes one 2D point.
-# x_surface = geometry_x_np[surface_mask_np]
-# y_surface = geometry_y_np[surface_mask_np]
-
-# P = np.column_stack((x_surface, y_surface))
-
-# print("\n=== AstroLink shock clustering ===")
-# print("Shock-surface point-cloud shape:", P.shape)
-# if len(P) == 0:
-#     raise RuntimeError("No shock-surface points were detected.")
-
-# # Use physical x-y scaling without automatic feature rescaling.
-# clusterer = AstroLink(
-#     P,
-#     adaptive=0,
-#     d_intrinsic=1,
-#     verbose=1,
-# )
-
-# clusterer.run()
-
-# print("AstroLink cluster IDs:", clusterer.ids)
-# print("Number of hierarchy entries:", len(clusterer.clusters))
-# print("Cluster significances:", clusterer.significances)
-
-# # Plot AstroLink labels on the shock-surface point cloud.
-# visualize.labelsOnX(
-#     clusterer,
-#     P,
-#     skipZeroth=False,
-# )
-
-# plt.title("AstroLink hierarchy for the Sedov shock surface")
-# plt.xlabel("x")
-# plt.ylabel("y")
-# plt.axis("equal")
-# plt.show()
-
-# #%%
-# # PER-ENTITY SHOCK QUANTITIES
-
-# # Flatten the shock-surface values in the same order used to build P.
-# mach_surface = np.array(result.mach_numbers)[surface_mask_np]
-# flux_surface = np.array(result.thermal_energy_flux)[surface_mask_np]
-
-# shock_dir_x_surface = np.array(result.shock_direction[0])[surface_mask_np]
-# shock_dir_y_surface = np.array(result.shock_direction[1])[surface_mask_np]
-
-# for cluster_id, (start, end) in zip(
-#     clusterer.ids[1:],          # skip root cluster
-#     clusterer.clusters[1:],
-# ):
-#     point_indices = clusterer.ordering[start:end]
-#     cluster_points = P[point_indices]
-
-#     centroid = cluster_points.mean(axis=0)
-
-#     cluster_mach = mach_surface[point_indices]
-#     cluster_flux = flux_surface[point_indices]
-
-#     cluster_dir_x = shock_dir_x_surface[point_indices]
-#     cluster_dir_y = shock_dir_y_surface[point_indices]
-
-#     mean_direction = np.array([
-#         cluster_dir_x.mean(),
-#         cluster_dir_y.mean(),
-#     ])
-
-#     direction_norm = np.linalg.norm(mean_direction)
-
-#     if direction_norm > 0:
-#         mean_direction /= direction_norm
-
-#     mean_angle_deg = np.degrees(
-#         np.arctan2(
-#             mean_direction[1],
-#             mean_direction[0],
-#         )
-#     )
-
-#     print(f"\nShock entity {cluster_id}")
-#     print(f"  number of surface cells : {len(point_indices)}")
-#     print(
-#         f"  centroid                : "
-#         f"({centroid[0]:.3f}, {centroid[1]:.3f})"
-#     )
-#     print(
-#         f"  Mach number             : "
-#         f"mean={cluster_mach.mean():.3f}, "
-#         f"min={cluster_mach.min():.3f}, "
-#         f"max={cluster_mach.max():.3f}"
-#     )
-#     print(
-#         f"  mean shock direction    : "
-#         f"({mean_direction[0]:.3f}, {mean_direction[1]:.3f})"
-#     )
-#     print(
-#         f"  mean direction angle    : "
-#         f"{mean_angle_deg:.2f} degrees"
-#     )
-#     print(
-#         f"  thermal-energy flux     : "
-#         f"mean={cluster_flux.mean():.6e}, "
-#         f"sum={cluster_flux.sum():.6e}"
-#     )
-
-# %%
-
-#%%
-# IDENTIFY SPATIALLY CONNECTED SHOCK ENTITIES
-
-surface_mask_np = np.array(
-    result.shock_surface_cells,
-    dtype=bool,
-)
-
-# 8-neighbour connectivity in 2D:
-# horizontal, vertical, and diagonal neighbours are connected.
-connectivity = np.ones((3, 3), dtype=np.int8)
-
-component_labels, num_components = label(
-    surface_mask_np,
-    structure=connectivity,
-)
-
-print("\n=== Connected shock entities ===")
-print("Number of connected components:", num_components)
-
 geometry_x_np = np.array(geometry_x)
 geometry_y_np = np.array(geometry_y)
+surface_mask_np = np.array(result.shock_surface_cells, dtype=bool)
 
-mach_np = np.array(result.mach_numbers)
-flux_np = np.array(result.thermal_energy_flux)
-dir_x_np = np.array(result.shock_direction[0])
-dir_y_np = np.array(result.shock_direction[1])
+# Each detected shock-surface cell becomes one 2D point.
+x_surface = geometry_x_np[surface_mask_np]
+y_surface = geometry_y_np[surface_mask_np]
 
-for entity_id in range(1, num_components + 1):
-    entity_mask = component_labels == entity_id
+P = np.column_stack((x_surface, y_surface))
 
-    x_entity = geometry_x_np[entity_mask]
-    y_entity = geometry_y_np[entity_mask]
+print("\n=== AstroLink shock clustering ===")
+print("Shock-surface point-cloud shape:", P.shape)
+if len(P) == 0:
+    raise RuntimeError("No shock-surface points were detected.")
 
-    mach_entity = mach_np[entity_mask]
-    flux_entity = flux_np[entity_mask]
-    dir_x_entity = dir_x_np[entity_mask]
-    dir_y_entity = dir_y_np[entity_mask]
+# ---------------------------------------------------------------------------
+# Shuffle point order before AstroLink.
+# This avoids artificial ordering effects for very regular rings/circles.
+# ---------------------------------------------------------------------------
+rng = np.random.default_rng(0)
+perm = rng.permutation(len(P))
 
-    centroid = np.array([
-        x_entity.mean(),
-        y_entity.mean(),
-    ])
+P_for_astrolink = P[perm]
+
+clusterer = AstroLink(
+    P_for_astrolink,
+    adaptive=0,
+    d_intrinsic=1,
+    verbose=1,
+)
+clusterer.run()
+
+print("AstroLink cluster IDs:", clusterer.ids)
+print("Number of hierarchy entries:", len(clusterer.clusters))
+print("Cluster significances:", clusterer.significances)
+
+# Plot AstroLink labels on the shock-surface point cloud.
+visualize.labelsOnX(
+    clusterer,
+    P_for_astrolink,
+    skipZeroth=False,
+)
+
+plt.title("AstroLink hierarchy for the Sedov shock surface")
+plt.xlabel("x")
+plt.ylabel("y")
+plt.axis("equal")
+plt.show()
+
+#%%
+# PER-ENTITY SHOCK QUANTITIES
+
+# Flatten the shock-surface values in the same order used to build P.
+mach_surface = np.array(result.mach_numbers)[surface_mask_np]
+flux_surface = np.array(result.thermal_energy_flux)[surface_mask_np]
+
+shock_dir_x_surface = np.array(result.shock_direction[0])[surface_mask_np]
+shock_dir_y_surface = np.array(result.shock_direction[1])[surface_mask_np]
+
+for cluster_id, (start, end) in zip(
+    clusterer.ids[1:],          # skip root cluster
+    clusterer.clusters[1:],
+):
+    shuffled_indices = clusterer.ordering[start:end]
+    point_indices = perm[shuffled_indices]
+
+    cluster_points = P[point_indices]
+
+    centroid = cluster_points.mean(axis=0)
+
+    cluster_mach = mach_surface[point_indices]
+    cluster_flux = flux_surface[point_indices]
+
+    cluster_dir_x = shock_dir_x_surface[point_indices]
+    cluster_dir_y = shock_dir_y_surface[point_indices]
 
     mean_direction = np.array([
-        dir_x_entity.mean(),
-        dir_y_entity.mean(),
+        cluster_dir_x.mean(),
+        cluster_dir_y.mean(),
     ])
 
     direction_norm = np.linalg.norm(mean_direction)
@@ -310,58 +227,52 @@ for entity_id in range(1, num_components + 1):
     if direction_norm > 0:
         mean_direction /= direction_norm
 
-    direction_angle = np.degrees(
+    mean_angle_deg = np.degrees(
         np.arctan2(
             mean_direction[1],
             mean_direction[0],
         )
     )
 
-    print(f"\nShock entity {entity_id}")
-    print(f"  surface cells           : {entity_mask.sum()}")
+    print(f"\nShock entity {cluster_id}")
+    print(f"  number of surface cells : {len(point_indices)}")
     print(
         f"  centroid                : "
         f"({centroid[0]:.3f}, {centroid[1]:.3f})"
     )
     print(
         f"  Mach number             : "
-        f"mean={mach_entity.mean():.3f}, "
-        f"min={mach_entity.min():.3f}, "
-        f"max={mach_entity.max():.3f}"
+        f"mean={cluster_mach.mean():.3f}, "
+        f"min={cluster_mach.min():.3f}, "
+        f"max={cluster_mach.max():.3f}"
     )
     print(
         f"  mean shock direction    : "
         f"({mean_direction[0]:.3f}, {mean_direction[1]:.3f})"
     )
     print(
-        f"  direction angle         : "
-        f"{direction_angle:.2f} degrees"
+        f"  mean direction angle    : "
+        f"{mean_angle_deg:.2f} degrees"
     )
     print(
         f"  thermal-energy flux     : "
-        f"mean={flux_entity.mean():.6e}, "
-        f"sum={flux_entity.sum():.6e}"
-    )
-    
-#%%
-# PLOT CONNECTED SHOCK ENTITIES
-
-plt.figure(figsize=(7, 7))
-
-for entity_id in range(1, num_components + 1):
-    entity_mask = component_labels == entity_id
-
-    plt.scatter(
-        geometry_x_np[entity_mask],
-        geometry_y_np[entity_mask],
-        s=12,
-        label=f"Entity {entity_id}",
+        f"mean={cluster_flux.mean():.6e}, "
+        f"sum={cluster_flux.sum():.6e}"
     )
 
-plt.title("Connected shock entities in X interaction")
-plt.xlabel("x")
-plt.ylabel("y")
-plt.axis("equal")
-plt.legend()
-plt.tight_layout()
-plt.show()
+# %%
+# ASTROLINK DENSITY PER CLUSTER
+
+for cluster_id, (start, end) in zip(
+    clusterer.ids,
+    clusterer.clusters,
+):
+    shuffled_indices = clusterer.ordering[start:end]
+    cluster_log_density = clusterer.logRho[shuffled_indices]
+
+    print(f"\nCluster {cluster_id}")
+    print(f"  points           : {len(shuffled_indices)}")
+    print(f"  mean log density : {cluster_log_density.mean():.4f}")
+    print(f"  min log density  : {cluster_log_density.min():.4f}")
+    print(f"  max log density  : {cluster_log_density.max():.4f}")
+# %%
