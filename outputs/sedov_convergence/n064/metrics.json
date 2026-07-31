@@ -1,0 +1,15 @@
+{
+  "resolution": 64,
+  "grid_spacing": 0.015625,
+  "injection_cells": 136,
+  "deposited_energy": 1.0,
+  "surface_cell_count": 5328,
+  "radius_median": 0.35792848467826843,
+  "radius_p16": 0.35242947936058044,
+  "radius_p84": 0.3673536777496338,
+  "normalized_radial_spread": 0.04169603434179952,
+  "analytic_radius": 0.3474689930754484,
+  "relative_radius_error": 0.030101942363959123,
+  "median_radial_alignment": 0.9921334298858978,
+  "elapsed_seconds": 66.49387066700729
+}
