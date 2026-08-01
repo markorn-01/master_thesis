@@ -177,10 +177,16 @@ geometry_x_np = np.asarray(geometry_x)
 geometry_y_np = np.asarray(geometry_y)
 geometry_z_np = np.asarray(geometry_z)
 r_np = np.asarray(r)
+surface_offsets = np.asarray(result.shock_surface_offsets)
+shock_direction = np.asarray(result.shock_direction)
+grid_spacing = float(config.grid_spacing)
 
-x_surface = geometry_x_np[surface_mask]
-y_surface = geometry_y_np[surface_mask]
-z_surface = geometry_z_np[surface_mask]
+refined_x = geometry_x_np + grid_spacing * surface_offsets * shock_direction[0]
+refined_y = geometry_y_np + grid_spacing * surface_offsets * shock_direction[1]
+refined_z = geometry_z_np + grid_spacing * surface_offsets * shock_direction[2]
+x_surface = refined_x[surface_mask]
+y_surface = refined_y[surface_mask]
+z_surface = refined_z[surface_mask]
 
 # Every detected surface cell becomes one 3D point.
 P = np.column_stack((x_surface, y_surface, z_surface))
@@ -189,6 +195,13 @@ print("\n=== 3D shock finder ===")
 print("Shock-zone cells         :", int(shock_zone_mask.sum()))
 print("Shock-surface cells      :", int(surface_mask.sum()))
 print("Shock point-cloud shape  :", P.shape)
+print(
+    "Sub-cell offset range    :",
+    (
+        float(surface_offsets[surface_mask].min()),
+        float(surface_offsets[surface_mask].max()),
+    ),
+)
 if len(P) == 0:
     raise RuntimeError("No 3D shock-surface cells were detected.")
 
@@ -199,6 +212,17 @@ if len(P) == 0:
 
 # %%
 mach_surface = mach[surface_mask]
+mach_mean = float(np.mean(mach_surface))
+mach_median = float(np.median(mach_surface))
+mach_p16, mach_p84 = np.percentile(mach_surface, [16.0, 84.0])
+mach_cv = float(np.std(mach_surface) / mach_mean)
+
+print("\n=== Angular Mach-uniformity check ===")
+print("Mean Mach              :", mach_mean)
+print("Median Mach            :", mach_median)
+print("16th–84th percentile   :", (mach_p16, mach_p84))
+print("Coefficient of variation:", mach_cv)
+print("Minimum–maximum Mach   :", (mach_surface.min(), mach_surface.max()))
 
 figure = plt.figure(figsize=(9, 8))
 axis = figure.add_subplot(111, projection="3d")
@@ -222,6 +246,11 @@ axis.set(
 )
 axis.set_box_aspect((1, 1, 1))
 figure.colorbar(surface_plot, ax=axis, label="Mach number", shrink=0.7)
+sedov_output_dir = Path("outputs/sedov_3d")
+sedov_output_dir.mkdir(parents=True, exist_ok=True)
+surface_figure_path = sedov_output_dir / "sedov_3d_mach_surface.png"
+figure.savefig(surface_figure_path, dpi=180)
+print("Saved static 3D Mach graph:", surface_figure_path.resolve())
 plt.show()
 
 
@@ -265,8 +294,7 @@ interactive_figure.update_layout(
     height=800,
 )
 
-interactive_output = Path("outputs/sedov_3d/sedov_3d_interactive.html")
-interactive_output.parent.mkdir(parents=True, exist_ok=True)
+interactive_output = sedov_output_dir / "sedov_3d_interactive.html"
 interactive_figure.write_html(interactive_output, include_plotlyjs=True)
 print("Saved interactive 3D graph:", interactive_output.resolve())
 try:
@@ -371,7 +399,11 @@ plt.show()
 # ============================================================================
 
 # %%
-surface_radii = r_np[surface_mask]
+surface_radii = np.sqrt(
+    (refined_x - TARGET_CENTER[0]) ** 2
+    + (refined_y - TARGET_CENTER[1]) ** 2
+    + (refined_z - TARGET_CENTER[2]) ** 2
+)[surface_mask]
 radius_p16, radius_median, radius_p84 = np.percentile(
     surface_radii, [16.0, 50.0, 84.0]
 )

@@ -72,6 +72,7 @@ def calculate_thermal_energy_flux(
     primitive_state,
     shock_surface,
     shock_direction,
+    surface_offsets,
     mach_numbers,
     config,
     registered_variables,
@@ -104,6 +105,10 @@ def calculate_thermal_energy_flux(
 
         shock_direction:
             Vector indicating the direction of the shock.
+
+        surface_offsets:
+            Signed sub-cell surface position along the shock direction, in
+            grid-cell units.
 
         mach_numbers:
             Array of Mach numbers at each grid point.
@@ -143,6 +148,7 @@ def calculate_thermal_energy_flux(
         pressure,
         density,
         max_steps=sampling_steps,
+        center_offsets=shock_direction * surface_offsets[jnp.newaxis, ...],
     )
 
     # Avoid invalid sound-speed calculations if numerical noise produces

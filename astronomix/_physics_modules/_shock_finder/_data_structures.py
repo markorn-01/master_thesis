@@ -11,6 +11,9 @@ class ShockFinderResult:
     * shock_surface_cells: 
         boolean array, 
         one True per shock (the single cell of maximum compression)
+    * shock_surface_offsets:
+        signed sub-cell displacement along ``shock_direction``, in grid-cell
+        units; zero outside the shock surface
     * shock_direction: 
         the unit vector field 
         d_s = -∇T/|∇T| at every cell, pointing from hot toward cold gas
@@ -32,6 +35,7 @@ class ShockFinderResult:
     * shock_zone_ids: same idea but for the broader zone
     """
     shock_surface_cells: BOOL_FIELD_TYPE
+    shock_surface_offsets: FIELD_TYPE
     shock_direction:     FIELD_TYPE
     mach_numbers:        FIELD_TYPE 
     thermal_energy_flux: FIELD_TYPE 
@@ -44,6 +48,7 @@ class ShockFinderResult:
 def _shockresult_flatten(result):
     children = (
         result.shock_surface_cells,
+        result.shock_surface_offsets,
         result.shock_direction,
         result.mach_numbers,
         result.thermal_energy_flux,
@@ -58,13 +63,14 @@ def _shockresult_flatten(result):
 def _shockresult_unflatten(aux, children):
     return ShockFinderResult(
         shock_surface_cells=children[0],
-        shock_direction=children[1],
-        mach_numbers=children[2],
-        thermal_energy_flux=children[3],
-        shock_zones=children[4],
-        shock_ids=children[5],
-        shock_zone_ids=children[6],
-        num_shocks=children[7],
+        shock_surface_offsets=children[1],
+        shock_direction=children[2],
+        mach_numbers=children[3],
+        thermal_energy_flux=children[4],
+        shock_zones=children[5],
+        shock_ids=children[6],
+        shock_zone_ids=children[7],
+        num_shocks=children[8],
     )
 
 tree_util.register_pytree_node(

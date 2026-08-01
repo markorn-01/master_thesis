@@ -5,6 +5,7 @@
 from functools import partial
 import jax.numpy as jnp
 import jax
+from jax.scipy.ndimage import map_coordinates
 
 from astronomix.data_classes.simulation_helper_data import HelperData
 from astronomix.variable_registry.registered_variables import RegisteredVariables
@@ -68,13 +69,15 @@ def get_post_pre_shock_values(
     field_a,
     field_b,
     max_steps=1,
+    center_offsets=None,
 ):
     """
     Sample two scalar fields on both sides of a candidate shock.
 
     The shock direction points from the hot/post-shock side toward the
-    cold/pre-shock side. For every cell, the dominant component of the
-    shock-direction vector determines which grid axis is used for sampling.
+    cold/pre-shock side.  Sampling follows the complete continuous direction
+    vector and uses multilinear interpolation at off-grid positions.  This
+    avoids discontinuities where the dominant Cartesian component changes.
 
     Args:
         shock_direction:
@@ -87,7 +90,11 @@ def get_post_pre_shock_values(
             Second scalar field to sample, for example temperature or density.
 
         max_steps:
-            Number of grid cells to move away from the candidate shock cell.
+            Distance, in grid-cell units, from the candidate shock cell.
+
+        center_offsets:
+            Optional vector displacement from each cell centre, in grid-cell
+            units, with the same shape as ``shock_direction``.
 
     Returns:
         field_a_post:
@@ -103,119 +110,52 @@ def get_post_pre_shock_values(
             field_b sampled on the pre-shock side.
     """
 
-    dominant_axis = jnp.argmax(
-        jnp.abs(shock_direction),
+    ndim = field_a.ndim
+    if shock_direction.shape[0] != ndim:
+        raise ValueError(
+            "shock_direction must have one component per spatial dimension."
+        )
+
+    coordinate_dtype = jnp.result_type(field_a.dtype, jnp.float32)
+    grid_coordinates = jnp.stack(
+        jnp.meshgrid(
+            *[
+                jnp.arange(size, dtype=coordinate_dtype)
+                for size in field_a.shape
+            ],
+            indexing="ij",
+        ),
         axis=0,
     )
-
-    dominant_direction = jnp.take_along_axis(
-        shock_direction,
-        dominant_axis[jnp.newaxis],
-        axis=0,
-    )[0]
-
-    step_sign = jnp.sign(
-        dominant_direction
-    ).astype(jnp.int32)
-
-    ndim = field_a.ndim
-
-    def shift_field(field, shift, axis):
-        """
-        Move a scalar field by a fixed number of cells.
-
-        Note:
-            jnp.roll wraps around at domain boundaries. Boundary cells must
-            therefore be masked elsewhere before the sampled values are used.
-        """
-
-        shifted_field = field
-
-        for _ in range(max_steps):
-            shifted_field = jnp.roll(
-                shifted_field,
-                shift=shift,
-                axis=axis,
+    if center_offsets is not None:
+        if center_offsets.shape != shock_direction.shape:
+            raise ValueError(
+                "center_offsets must have the same shape as shock_direction."
             )
+        grid_coordinates = grid_coordinates + center_offsets.astype(
+            coordinate_dtype
+        )
+    displacement = (
+        jnp.asarray(max_steps, dtype=coordinate_dtype)
+        * shock_direction.astype(coordinate_dtype)
+    )
 
-        return shifted_field
+    # d_shock points from hot/post-shock gas toward cold/pre-shock gas.
+    post_coordinates = grid_coordinates - displacement
+    pre_coordinates = grid_coordinates + displacement
 
-    # Default values are the original cell values. They are replaced only
-    # along the locally selected dominant shock axis.
-    field_a_post = field_a
-    field_a_pre = field_a
-    field_b_post = field_b
-    field_b_pre = field_b
-
-    for axis in range(ndim):
-        uses_this_axis = dominant_axis == axis
-
-        points_in_positive_direction = (
-            uses_this_axis
-            & (step_sign > 0)
+    def interpolate(field, coordinates):
+        return map_coordinates(
+            field,
+            coordinates,
+            order=1,
+            mode="nearest",
         )
 
-        points_in_negative_direction = (
-            uses_this_axis
-            & (step_sign < 0)
-        )
-
-        # If the shock direction points in the positive axis direction,
-        # the pre-shock gas is ahead (+axis), while the post-shock gas is
-        # behind (-axis).
-        field_a_post_positive = shift_field(field_a, +1, axis)
-        field_a_pre_positive  = shift_field(field_a, -1, axis)
-
-        field_b_post_positive = shift_field(field_b, +1, axis)
-        field_b_pre_positive  = shift_field(field_b, -1, axis)
-
-        # Reverse the sampling sides if the shock direction points
-        # in the negative axis direction.
-        field_a_post_negative = shift_field(field_a, -1, axis)
-        field_a_pre_negative  = shift_field(field_a, +1, axis)
-
-        field_b_post_negative = shift_field(field_b, -1, axis)
-        field_b_pre_negative  = shift_field(field_b, +1, axis)
-
-        field_a_post = jnp.where(
-            points_in_positive_direction,
-            field_a_post_positive,
-            jnp.where(
-                points_in_negative_direction,
-                field_a_post_negative,
-                field_a_post,
-            ),
-        )
-
-        field_a_pre = jnp.where(
-            points_in_positive_direction,
-            field_a_pre_positive,
-            jnp.where(
-                points_in_negative_direction,
-                field_a_pre_negative,
-                field_a_pre,
-            ),
-        )
-
-        field_b_post = jnp.where(
-            points_in_positive_direction,
-            field_b_post_positive,
-            jnp.where(
-                points_in_negative_direction,
-                field_b_post_negative,
-                field_b_post,
-            ),
-        )
-
-        field_b_pre = jnp.where(
-            points_in_positive_direction,
-            field_b_pre_positive,
-            jnp.where(
-                points_in_negative_direction,
-                field_b_pre_negative,
-                field_b_pre,
-            ),
-        )
+    field_a_post = interpolate(field_a, post_coordinates)
+    field_a_pre = interpolate(field_a, pre_coordinates)
+    field_b_post = interpolate(field_b, post_coordinates)
+    field_b_pre = interpolate(field_b, pre_coordinates)
 
     return (
         field_a_post,

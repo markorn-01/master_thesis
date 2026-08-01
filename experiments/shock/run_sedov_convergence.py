@@ -149,18 +149,26 @@ def run_one_resolution(resolution: int, output_dir: Path) -> dict:
 
     surface = np.asarray(result.shock_surface_cells, dtype=bool)
     radii_np = np.asarray(radii)
-    surface_radii = radii_np[surface]
+    centers_np = np.asarray(centers)
+    shock_direction = np.moveaxis(
+        np.asarray(result.shock_direction), 0, -1
+    )
+    surface_offsets = np.asarray(result.shock_surface_offsets)
+    refined_centers = centers_np + (
+        grid_spacing * surface_offsets[..., np.newaxis] * shock_direction
+    )
+    refined_displacement = refined_centers - EXPLOSION_CENTER
+    refined_radii = np.linalg.norm(refined_displacement, axis=-1)
+    surface_radii = refined_radii[surface]
     if surface_radii.size == 0:
         raise RuntimeError(f"No shock surface was detected at {resolution}^3.")
 
     radius_p16, radius_median, radius_p84 = np.percentile(
         surface_radii, [16.0, 50.0, 84.0]
     )
-    centers_np = np.asarray(centers)
     displacement_np = centers_np - EXPLOSION_CENTER
     radial_norm = np.linalg.norm(displacement_np, axis=-1, keepdims=True)
     radial_unit = displacement_np / np.maximum(radial_norm, 1.0e-30)
-    shock_direction = np.moveaxis(np.asarray(result.shock_direction), 0, -1)
     radial_alignment = np.sum(
         shock_direction[surface] * radial_unit[surface], axis=-1
     )

@@ -24,6 +24,7 @@ def _calculate_mach_at_surface(
     primitive_state: STATE_TYPE,
     shock_surface: BOOL_FIELD_TYPE,
     shock_direction: FIELD_TYPE,        # ← needed for direction-aware p_post/p_pre
+    surface_offsets: FIELD_TYPE,
     config: SimulationConfig,
     registered_variables: RegisteredVariables
 ) -> FIELD_TYPE:
@@ -36,7 +37,8 @@ def _calculate_mach_at_surface(
     # direction-aware post/pre selection — same helper as criterion 3
     p_post, p_pre, _, _ = get_post_pre_shock_values(
         shock_direction, pressure, temperature,
-        max_steps=8
+        max_steps=8,
+        center_offsets=shock_direction * surface_offsets[jnp.newaxis, ...],
     )
     
     # calculate Mach number for all cells

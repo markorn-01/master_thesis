@@ -266,9 +266,26 @@ def analyze_shocks_3d(
             helper_data,
         )
         surface_mask = np.asarray(result.shock_surface_cells, dtype=bool)
+        surface_offsets = np.asarray(result.shock_surface_offsets)
+        shock_direction = np.moveaxis(
+            np.asarray(result.shock_direction), 0, -1
+        )
+        centers = np.asarray(helper_data.geometric_centers)
+        refined_centers = centers + (
+            float(config.grid_spacing)
+            * surface_offsets[..., np.newaxis]
+            * shock_direction
+        )
+        star_position = np.full(3, BOX_SIZE / 2.0)
+        refined_radii = np.linalg.norm(
+            refined_centers - star_position,
+            axis=-1,
+        )
         shock_results.append(
             {
                 "surface_mask": surface_mask,
+                "refined_centers": refined_centers,
+                "refined_radii": refined_radii,
                 "mach_numbers": np.asarray(result.mach_numbers),
                 "thermal_energy_flux": np.asarray(result.thermal_energy_flux),
             }
@@ -293,15 +310,14 @@ def plot_shock_diagnostics(
     """Plot central-slab views and radial distributions of 3D detections."""
     selected = np.array([0, len(times) // 2, len(times) - 1])
     midplane = states.shape[-1] // 2
-    centers = np.asarray(helper_data.geometric_centers)
-    radii = np.asarray(helper_data.r)
-
     figure, axes = plt.subplots(2, 3, figsize=(12, 7), constrained_layout=True)
     print("\n=== 3D shock-finder diagnostics ===")
 
     for column, snapshot_index in enumerate(selected):
         surface_mask = shock_results[snapshot_index]["surface_mask"]
-        surface_radii = radii[surface_mask]
+        surface_radii = shock_results[snapshot_index]["refined_radii"][
+            surface_mask
+        ]
         surface_mach = shock_results[snapshot_index]["mach_numbers"][
             surface_mask
         ]
@@ -327,7 +343,9 @@ def plot_shock_diagnostics(
         slab_start = max(0, midplane - 1)
         slab_stop = min(surface_mask.shape[-1], midplane + 2)
         slab_mask = surface_mask[:, :, slab_start:slab_stop]
-        slab_centers = centers[:, :, slab_start:slab_stop, :]
+        slab_centers = shock_results[snapshot_index]["refined_centers"][
+            :, :, slab_start:slab_stop, :
+        ]
         slab_x = slab_centers[..., 0][slab_mask]
         slab_y = slab_centers[..., 1][slab_mask]
         axes[0, column].scatter(
@@ -502,7 +520,6 @@ def measure_shock_histories(
     csv_path: Path,
 ) -> list[dict]:
     """Separate and track reverse/forward radial candidates in 3D snapshots."""
-    radii = np.asarray(helper_data.r)
     weaver = Weaver(
         v_inf=WIND_FINAL_VELOCITY,
         M_dot=WIND_MASS_LOSS_RATE,
@@ -515,7 +532,9 @@ def measure_shock_histories(
     print("\n=== Candidate reverse/forward shock histories ===")
     for snapshot_index, time in enumerate(times):
         surface_mask = shock_results[snapshot_index]["surface_mask"]
-        surface_radii = radii[surface_mask]
+        surface_radii = shock_results[snapshot_index]["refined_radii"][
+            surface_mask
+        ]
         surface_mach = shock_results[snapshot_index]["mach_numbers"][surface_mask]
         outside_mask = surface_radii > injection_radius
         outside_radii = surface_radii[outside_mask]

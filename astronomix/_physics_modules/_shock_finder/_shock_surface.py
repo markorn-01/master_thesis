@@ -7,6 +7,7 @@
 from functools import partial
 import jax.numpy as jnp
 import jax
+from jax.scipy.ndimage import map_coordinates
 
 # typing
 from astronomix.variable_registry.registered_variables import RegisteredVariables
@@ -257,120 +258,151 @@ def _find_shock_surface_2d(
     return shock_surface & jnp.any(shock_zones)
 
 
+def _sample_along_direction(
+    field: FIELD_TYPE,
+    direction: FIELD_TYPE,
+    distance: float,
+    order: int = 1,
+) -> FIELD_TYPE:
+    """Interpolate a scalar field at a displacement along a vector field."""
+    coordinate_dtype = jnp.result_type(field.dtype, jnp.float32)
+    coordinates = jnp.stack(
+        jnp.meshgrid(
+            *[
+                jnp.arange(size, dtype=coordinate_dtype)
+                for size in field.shape
+            ],
+            indexing="ij",
+        ),
+        axis=0,
+    )
+    sample_coordinates = coordinates + distance * direction.astype(
+        coordinate_dtype
+    )
+    return map_coordinates(
+        field,
+        sample_coordinates,
+        order=order,
+        mode="nearest",
+    )
+
+
+def _direction_sample_is_in_bounds(
+    shape: tuple[int, ...],
+    direction: FIELD_TYPE,
+    distance: float,
+) -> BOOL_FIELD_TYPE:
+    """Mark samples that remain inside every grid dimension."""
+    coordinate_dtype = jnp.result_type(direction.dtype, jnp.float32)
+    coordinates = jnp.stack(
+        jnp.meshgrid(
+            *[
+                jnp.arange(size, dtype=coordinate_dtype)
+                for size in shape
+            ],
+            indexing="ij",
+        ),
+        axis=0,
+    )
+    samples = coordinates + distance * direction
+    broadcast_shape = (len(shape),) + (1,) * len(shape)
+    upper_bounds = jnp.asarray(shape, dtype=coordinate_dtype).reshape(
+        broadcast_shape
+    )
+    return jnp.all((samples >= 0.0) & (samples <= upper_bounds - 1.0), axis=0)
+
+
 def _find_shock_surface_3d(
     div_v: FIELD_TYPE,
     shock_zones: BOOL_FIELD_TYPE,
     shock_direction: FIELD_TYPE,
 ) -> BOOL_FIELD_TYPE:
-    """Select one maximum-compression layer from three-dimensional shock zones.
+    """Select maximum-compression cells along the continuous shock normal.
 
-    For every shock-zone cell, the dominant component of the local shock
-    direction defines an axis-aligned ray.  The ray is followed through the
-    contiguous shock zone in both directions.  A cell is retained only when
-    neither side contains a cell with a smaller (more negative) velocity
-    divergence.
-
-    If several adjacent cells have exactly the same minimum divergence, the
-    backward/post-shock comparison also rejects equal values.  This provides a
-    deterministic one-cell tie break instead of returning a multi-cell plateau.
-
-    Args:
-        div_v: Velocity-divergence field with shape ``(nx, ny, nz)``.
-        shock_zones: Boolean shock-zone mask with shape ``(nx, ny, nz)``.
-        shock_direction: Unit-vector field with shape ``(3, nx, ny, nz)``.
-
-    Returns:
-        Boolean shock-surface mask with shape ``(nx, ny, nz)``.
+    Divergence is interpolated one grid-cell distance ahead of and behind
+    every candidate.  This removes the discontinuous Cartesian-axis switch
+    used by the original 3D raycaster.
     """
-    nx, ny, nz = shock_zones.shape
+    direction_norm = jnp.sqrt(jnp.sum(shock_direction**2, axis=0))
+    has_direction = direction_norm > 0.0
 
-    dominant_axis = jnp.argmax(jnp.abs(shock_direction), axis=0)
-    dominant_component = jnp.take_along_axis(
+    div_backward = _sample_along_direction(
+        div_v, shock_direction, distance=-1.0, order=1
+    )
+    div_forward = _sample_along_direction(
+        div_v, shock_direction, distance=1.0, order=1
+    )
+    zone_backward = _sample_along_direction(
+        shock_zones.astype(jnp.float32),
         shock_direction,
-        dominant_axis[jnp.newaxis, ...],
-        axis=0,
-    )[0]
-    step_sign = jnp.sign(dominant_component).astype(jnp.int32)
-
-    step_x = jnp.where(dominant_axis == 0, step_sign, 0)
-    step_y = jnp.where(dominant_axis == 1, step_sign, 0)
-    step_z = jnp.where(dominant_axis == 2, step_sign, 0)
-    has_direction = (step_x != 0) | (step_y != 0) | (step_z != 0)
-
-    i0, j0, k0 = jnp.meshgrid(
-        jnp.arange(nx, dtype=jnp.int32),
-        jnp.arange(ny, dtype=jnp.int32),
-        jnp.arange(nz, dtype=jnp.int32),
-        indexing="ij",
+        distance=-1.0,
+        order=0,
+    ) > 0.5
+    zone_backward = zone_backward & _direction_sample_is_in_bounds(
+        shock_zones.shape, shock_direction, distance=-1.0
     )
-    max_steps = int(max(nx, ny, nz))
-
-    def ray_contains_better_cell(direction_sign, reject_equal):
-        """Return a mask marking rays that encounter a better candidate."""
-        active0 = shock_zones & has_direction
-        found0 = jnp.zeros_like(shock_zones, dtype=jnp.bool_)
-
-        def ray_step(_, carry):
-            ci, cj, ck, active, found = carry
-
-            raw_i = ci + direction_sign * step_x
-            raw_j = cj + direction_sign * step_y
-            raw_k = ck + direction_sign * step_z
-            in_bounds = (
-                (raw_i >= 0)
-                & (raw_i < nx)
-                & (raw_j >= 0)
-                & (raw_j < ny)
-                & (raw_k >= 0)
-                & (raw_k < nz)
-            )
-
-            # Clip before indexed reads because JAX evaluates array indexing
-            # even where ``in_bounds`` is false.
-            ni = jnp.clip(raw_i, 0, nx - 1)
-            nj = jnp.clip(raw_j, 0, ny - 1)
-            nk = jnp.clip(raw_k, 0, nz - 1)
-            can_advance = active & in_bounds & shock_zones[ni, nj, nk]
-
-            neighbor_div = div_v[ni, nj, nk]
-            better = jnp.where(
-                reject_equal,
-                neighbor_div <= div_v,
-                neighbor_div < div_v,
-            )
-            found = found | (can_advance & better)
-
-            ci = jnp.where(can_advance, ni, ci)
-            cj = jnp.where(can_advance, nj, cj)
-            ck = jnp.where(can_advance, nk, ck)
-            active = can_advance & ~found
-            return ci, cj, ck, active, found
-
-        _, _, _, _, found = jax.lax.fori_loop(
-            0,
-            max_steps,
-            ray_step,
-            (i0, j0, k0, active0, found0),
-        )
-        return found
-
-    # ``+1`` follows d_s toward the pre-shock gas.  Strict comparison in that
-    # direction and non-strict comparison backward provide a stable tie break.
-    better_forward = ray_contains_better_cell(
-        direction_sign=jnp.int32(1),
-        reject_equal=False,
-    )
-    better_backward = ray_contains_better_cell(
-        direction_sign=jnp.int32(-1),
-        reject_equal=True,
+    zone_forward = _sample_along_direction(
+        shock_zones.astype(jnp.float32),
+        shock_direction,
+        distance=1.0,
+        order=0,
+    ) > 0.5
+    zone_forward = zone_forward & _direction_sample_is_in_bounds(
+        shock_zones.shape, shock_direction, distance=1.0
     )
 
+    # Strict comparison forward and non-strict comparison backward provide a
+    # deterministic tie break for a flat two-cell minimum.
+    better_forward = zone_forward & (div_forward < div_v)
+    better_backward = zone_backward & (div_backward <= div_v)
     return (
         shock_zones
         & has_direction
         & ~better_forward
         & ~better_backward
         & jnp.any(shock_zones)
+    )
+
+
+def _refine_surface_offsets_3d(
+    div_v: FIELD_TYPE,
+    shock_surface: BOOL_FIELD_TYPE,
+    shock_direction: FIELD_TYPE,
+) -> FIELD_TYPE:
+    """Fit the maximum-compression position along the normal to sub-cell precision."""
+    div_backward = _sample_along_direction(
+        div_v, shock_direction, distance=-1.0
+    )
+    div_forward = _sample_along_direction(
+        div_v, shock_direction, distance=1.0
+    )
+    curvature = div_backward - 2.0 * div_v + div_forward
+    safe_curvature = jnp.where(
+        jnp.abs(curvature) > 1.0e-12,
+        curvature,
+        1.0,
+    )
+    offset = 0.5 * (div_backward - div_forward) / safe_curvature
+    offset = jnp.where(curvature > 1.0e-12, offset, 0.0)
+    return jnp.where(shock_surface, jnp.clip(offset, -0.5, 0.5), 0.0)
+
+
+@partial(jax.jit, static_argnames=["config", "registered_variables"])
+def calculate_shock_surface_offsets(
+    primitive_state: STATE_TYPE,
+    shock_surface: BOOL_FIELD_TYPE,
+    shock_direction: FIELD_TYPE,
+    config: SimulationConfig,
+    registered_variables: RegisteredVariables,
+) -> FIELD_TYPE:
+    """Return signed sub-cell surface offsets in grid-cell units."""
+    if config.dimensionality != 3:
+        return jnp.zeros_like(shock_surface, dtype=primitive_state.dtype)
+    div_v = _calculate_velocity_divergence(
+        primitive_state, config, registered_variables
+    )
+    return _refine_surface_offsets_3d(
+        div_v, shock_surface, shock_direction
     )
 
 

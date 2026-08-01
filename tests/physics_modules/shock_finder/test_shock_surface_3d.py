@@ -7,6 +7,7 @@ import unittest
 
 from astronomix._physics_modules._shock_finder._shock_surface import (
     _find_shock_surface_3d,
+    _refine_surface_offsets_3d,
 )
 
 
@@ -112,11 +113,23 @@ class ShockSurface3DTests(unittest.TestCase):
         )
         surface_array = np.asarray(surface)
         surface_radii = np.asarray(radius)[surface_array]
+        offsets = _refine_surface_offsets_3d(div_v, surface, direction)
+        refined_displacement = displacement + offsets[jnp.newaxis, ...] * direction
+        refined_radius = jnp.sqrt(jnp.sum(refined_displacement**2, axis=0))
+        refined_surface_radii = np.asarray(refined_radius)[surface_array]
 
         self.assertGreater(surface_radii.size, 100)
         self.assertTrue(np.asarray(shock_zones)[surface_array].all())
         self.assertLess(abs(float(np.median(surface_radii)) - 5.0), 0.35)
         self.assertLess(float(np.percentile(surface_radii, 90)), 5.8)
+        self.assertLess(
+            float(np.std(refined_surface_radii)),
+            float(np.std(surface_radii)),
+        )
+        self.assertLess(
+            abs(float(np.median(refined_surface_radii)) - 5.0),
+            abs(float(np.median(surface_radii)) - 5.0),
+        )
         # All six axial directions must be represented, guarding against an
         # implementation that accidentally raycasts along only one axis.
         for axis in range(3):
@@ -137,6 +150,27 @@ class ShockSurface3DTests(unittest.TestCase):
         self.assertEqual(surface.shape, shape)
         self.assertEqual(surface.dtype, jnp.bool_)
         self.assertEqual(int(jnp.sum(surface)), shape[1] * shape[2])
+
+    def test_quadratic_minimum_is_refined_to_subcell_position(self):
+        shape = (9, 5, 4)
+        coordinates = jnp.indices(shape, dtype=jnp.float32)
+        true_minimum = 4.25
+        div_v = (coordinates[0] - true_minimum) ** 2 - 10.0
+        shock_surface = jnp.zeros(shape, dtype=jnp.bool_).at[4, :, :].set(True)
+        direction = _constant_direction(shape, axis=0)
+
+        offsets = _refine_surface_offsets_3d(
+            div_v, shock_surface, direction
+        )
+
+        np.testing.assert_allclose(
+            np.asarray(offsets[4]),
+            np.full(shape[1:], 0.25),
+            rtol=1.0e-5,
+            atol=1.0e-5,
+        )
+        self.assertEqual(float(jnp.sum(jnp.abs(offsets[:4]))), 0.0)
+        self.assertEqual(float(jnp.sum(jnp.abs(offsets[5:]))), 0.0)
 
 
 if __name__ == "__main__":
