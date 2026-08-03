@@ -20,6 +20,7 @@ import jax.numpy as jnp
 import matplotlib.pyplot as plt
 import numpy as np
 import plotly.graph_objects as go
+from scipy.spatial import ConvexHull
 
 from astronomix import (
     CARTESIAN,
@@ -40,6 +41,38 @@ import astronomix
 from astronomix._physics_modules._shock_finder._shock_surface import (
     _find_shock_surface_3d,
 )
+
+
+def build_convex_surface_mesh(points, center):
+    """Triangulate one closed, convex point cloud for visualization.
+
+    This reconstruction is appropriate for the single Sedov shell.  It must
+    not be used for non-convex, disconnected, or multiple shock surfaces,
+    because a convex hull would bridge physically separate regions.
+    """
+    hull = ConvexHull(points)
+    vertex_indices, remapped_faces = np.unique(
+        hull.simplices,
+        return_inverse=True,
+    )
+    vertices = points[vertex_indices]
+    faces = remapped_faces.reshape(hull.simplices.shape)
+
+    # Qhull does not guarantee the winding expected by the renderer.  Orient
+    # every face away from the known centre for consistent surface lighting.
+    triangles = vertices[faces]
+    normals = np.cross(
+        triangles[:, 1] - triangles[:, 0],
+        triangles[:, 2] - triangles[:, 0],
+    )
+    outward = triangles.mean(axis=1) - center
+    inward_faces = np.einsum("ij,ij->i", normals, outward) < 0.0
+    faces[inward_faces, 1], faces[inward_faces, 2] = (
+        faces[inward_faces, 2].copy(),
+        faces[inward_faces, 1].copy(),
+    )
+    return vertex_indices, vertices, faces
+
 
 print("Using Astronomix from:", astronomix.__file__)
 print("Loaded 3D surface function:", _find_shock_surface_3d)
@@ -171,12 +204,10 @@ result = find_shocks_pfrommer(
 surface_mask = np.asarray(result.shock_surface_cells, dtype=bool)
 shock_zone_mask = np.asarray(result.shock_zones, dtype=bool)
 mach = np.asarray(result.mach_numbers)
-thermal_flux = np.asarray(result.thermal_energy_flux)
 
 geometry_x_np = np.asarray(geometry_x)
 geometry_y_np = np.asarray(geometry_y)
 geometry_z_np = np.asarray(geometry_z)
-r_np = np.asarray(r)
 surface_offsets = np.asarray(result.shock_surface_offsets)
 shock_direction = np.asarray(result.shock_direction)
 grid_spacing = float(config.grid_spacing)
@@ -188,13 +219,16 @@ x_surface = refined_x[surface_mask]
 y_surface = refined_y[surface_mask]
 z_surface = refined_z[surface_mask]
 
-# Every detected surface cell becomes one 3D point.
-P = np.column_stack((x_surface, y_surface, z_surface))
+# Every detected surface cell becomes one sub-cell-refined 3D point.
+surface_points = np.column_stack((x_surface, y_surface, z_surface))
+surface_radii = np.linalg.norm(surface_points - TARGET_CENTER, axis=1)
+if len(surface_points) == 0:
+    raise RuntimeError("No 3D shock-surface cells were detected.")
 
 print("\n=== 3D shock finder ===")
 print("Shock-zone cells         :", int(shock_zone_mask.sum()))
 print("Shock-surface cells      :", int(surface_mask.sum()))
-print("Shock point-cloud shape  :", P.shape)
+print("Shock point-cloud shape  :", surface_points.shape)
 print(
     "Sub-cell offset range    :",
     (
@@ -202,8 +236,6 @@ print(
         float(surface_offsets[surface_mask].max()),
     ),
 )
-if len(P) == 0:
-    raise RuntimeError("No 3D shock-surface cells were detected.")
 
 
 # ============================================================================
@@ -255,12 +287,56 @@ plt.show()
 
 
 # ============================================================================
-# INTERACTIVE 3D GRAPH — open the HTML file in a browser and drag to rotate
+# INTERACTIVE 3D GRAPH — reconstructed mesh plus optional raw detections
 # ============================================================================
 
 # %%
+# A Sedov shock is a single convex closed surface, so its convex hull provides
+# a suitable visualization mesh.  This assumption would not hold for multiple
+# or non-convex shocks.  Keep the raw points as a hidden trace so the mesh can
+# always be checked against the detector output.
+mesh_vertex_indices, mesh_points, mesh_faces = build_convex_surface_mesh(
+    surface_points,
+    TARGET_CENTER,
+)
+mesh_mach = mach_surface[mesh_vertex_indices]
+mesh_radii = surface_radii[mesh_vertex_indices]
+mach_color_min = float(mach_surface.min())
+mach_color_max = float(mach_surface.max())
+
+print("Mesh vertices            :", len(mesh_points))
+print("Mesh triangular faces    :", len(mesh_faces))
+
 interactive_figure = go.Figure(
     data=[
+        go.Mesh3d(
+            x=mesh_points[:, 0],
+            y=mesh_points[:, 1],
+            z=mesh_points[:, 2],
+            i=mesh_faces[:, 0],
+            j=mesh_faces[:, 1],
+            k=mesh_faces[:, 2],
+            intensity=mesh_mach,
+            intensitymode="vertex",
+            colorscale="Viridis",
+            cmin=mach_color_min,
+            cmax=mach_color_max,
+            colorbar={"title": "Mach number"},
+            customdata=mesh_radii,
+            hovertemplate=(
+                "x=%{x:.4f}<br>y=%{y:.4f}<br>z=%{z:.4f}"
+                "<br>Mach=%{intensity:.3f}<br>radius=%{customdata:.4f}"
+                "<extra></extra>"
+            ),
+            flatshading=False,
+            lighting={
+                "ambient": 0.55,
+                "diffuse": 0.75,
+                "specular": 0.15,
+                "roughness": 0.8,
+            },
+            name="reconstructed surface",
+        ),
         go.Scatter3d(
             x=x_surface,
             y=y_surface,
@@ -270,20 +346,24 @@ interactive_figure = go.Figure(
                 "size": 2.5,
                 "color": mach_surface,
                 "colorscale": "Viridis",
+                "cmin": mach_color_min,
+                "cmax": mach_color_max,
                 "opacity": 0.85,
-                "colorbar": {"title": "Mach number"},
+                "showscale": False,
             },
-            customdata=np.linalg.norm(P - TARGET_CENTER, axis=1),
+            customdata=surface_radii,
             hovertemplate=(
                 "x=%{x:.4f}<br>y=%{y:.4f}<br>z=%{z:.4f}"
                 "<br>Mach=%{marker.color:.3f}<br>radius=%{customdata:.4f}"
                 "<extra></extra>"
             ),
-        )
+            name="raw surface cells",
+            visible="legendonly",
+        ),
     ]
 )
 interactive_figure.update_layout(
-    title="Interactive 3D Sedov shock surface",
+    title="Interactive reconstructed 3D Sedov shock surface",
     scene={
         "xaxis": {"title": "x", "range": [0.0, box_size]},
         "yaxis": {"title": "y", "range": [0.0, box_size]},
@@ -292,6 +372,7 @@ interactive_figure.update_layout(
     },
     width=900,
     height=800,
+    legend={"orientation": "h"},
 )
 
 interactive_output = sedov_output_dir / "sedov_3d_interactive.html"
@@ -317,7 +398,7 @@ shock_direction = np.moveaxis(np.asarray(result.shock_direction), 0, -1)
 direction_surface = shock_direction[surface_mask]
 
 # Compare the detected direction with the expected outward radial direction.
-radial_vectors = P - TARGET_CENTER
+radial_vectors = surface_points - TARGET_CENTER
 radial_norms = np.linalg.norm(radial_vectors, axis=1, keepdims=True)
 radial_unit_vectors = radial_vectors / np.maximum(radial_norms, 1.0e-30)
 radial_alignment = np.sum(direction_surface * radial_unit_vectors, axis=1)
@@ -328,16 +409,22 @@ print("16th–84th percentile   :", np.percentile(radial_alignment, [16, 84]))
 print("1 means perfectly outward; -1 means inward.")
 
 # Plot only a subset of arrows so the graph remains readable.
-arrow_step = max(1, len(P) // 250)
-arrow_indices = np.arange(0, len(P), arrow_step)
+arrow_step = max(1, len(surface_points) // 250)
+arrow_indices = np.arange(0, len(surface_points), arrow_step)
 
 figure = plt.figure(figsize=(9, 8))
 axis = figure.add_subplot(111, projection="3d")
-axis.scatter(P[:, 0], P[:, 1], P[:, 2], s=3, alpha=0.2)
+axis.scatter(
+    surface_points[:, 0],
+    surface_points[:, 1],
+    surface_points[:, 2],
+    s=3,
+    alpha=0.2,
+)
 axis.quiver(
-    P[arrow_indices, 0],
-    P[arrow_indices, 1],
-    P[arrow_indices, 2],
+    surface_points[arrow_indices, 0],
+    surface_points[arrow_indices, 1],
+    surface_points[arrow_indices, 2],
     direction_surface[arrow_indices, 0],
     direction_surface[arrow_indices, 1],
     direction_surface[arrow_indices, 2],
@@ -399,11 +486,6 @@ plt.show()
 # ============================================================================
 
 # %%
-surface_radii = np.sqrt(
-    (refined_x - TARGET_CENTER[0]) ** 2
-    + (refined_y - TARGET_CENTER[1]) ** 2
-    + (refined_z - TARGET_CENTER[2]) ** 2
-)[surface_mask]
 radius_p16, radius_median, radius_p84 = np.percentile(
     surface_radii, [16.0, 50.0, 84.0]
 )
