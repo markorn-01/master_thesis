@@ -5,6 +5,7 @@ import unittest
 import numpy as np
 
 from experiments.wind_bubble.run_single_bubble import (
+    classify_reverse_shock_evidence,
     split_radial_shock_candidates,
 )
 
@@ -54,6 +55,63 @@ class RadialShockCandidateTests(unittest.TestCase):
         self.assertEqual(reverse.size, 0)
         self.assertEqual(forward.size, 102)
         self.assertTrue(np.isnan(separation))
+
+
+class ReverseShockVerificationTests(unittest.TestCase):
+    def setUp(self):
+        self.measurements = {
+            "upstream_flow_mach": 2.0,
+            "downstream_flow_mach": 0.5,
+            "density_ratio": 2.0,
+            "pressure_ratio": 4.0,
+            "temperature_ratio": 2.0,
+            "velocity_ratio": 0.4,
+            "minimum_divergence": -10.0,
+            "peak_surface_mach": 2.1,
+            "profile_jump_mach": 1.8,
+            "median_radial_normal_alignment": -0.95,
+        }
+
+    def classify(self, **overrides):
+        measurements = {**self.measurements, **overrides}
+        return classify_reverse_shock_evidence(
+            measurements,
+            persistent_detection=True,
+            resolved_from_injection=True,
+        )
+
+    def test_complete_reverse_shock_signature_is_verified(self):
+        result = self.classify()
+
+        self.assertTrue(result["verified"])
+        self.assertEqual(
+            result["classification"],
+            "consistent_with_reverse_shock",
+        )
+        self.assertTrue(all(result["criteria"].values()))
+
+    def test_invalid_adaptive_mach_is_reported_but_not_misclassified(self):
+        result = self.classify(peak_surface_mach=1.0)
+
+        self.assertTrue(result["verified"])
+        self.assertFalse(
+            result["diagnostic_checks"][
+                "adaptive_finder_mach_is_consistent"
+            ]
+        )
+        self.assertTrue(result["limitations"])
+
+    def test_outward_normal_rejects_reverse_shock_classification(self):
+        result = self.classify(median_radial_normal_alignment=0.95)
+
+        self.assertFalse(result["verified"])
+        self.assertFalse(result["criteria"]["shock_normal_points_inward"])
+
+    def test_subsonic_upstream_rejects_reverse_shock_classification(self):
+        result = self.classify(upstream_flow_mach=0.8)
+
+        self.assertFalse(result["verified"])
+        self.assertFalse(result["criteria"]["upstream_flow_is_supersonic"])
 
 
 if __name__ == "__main__":

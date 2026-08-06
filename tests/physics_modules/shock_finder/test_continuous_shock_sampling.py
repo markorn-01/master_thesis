@@ -7,6 +7,7 @@ import jax.numpy as jnp
 import numpy as np
 
 from astronomix._physics_modules._shock_finder._shock_zones import (
+    get_adaptive_post_pre_shock_values,
     get_post_pre_shock_values,
 )
 
@@ -136,6 +137,45 @@ class ContinuousShockSamplingTests(unittest.TestCase):
 
         self.assertAlmostEqual(float(post[4]), 2.25, places=5)
         self.assertAlmostEqual(float(pre[4]), 6.25, places=5)
+
+    def test_adaptive_sampling_stops_at_each_zone_boundary(self):
+        pressure = jnp.array([9.0, 9.0, 8.0, 7.0, 5.0, 2.0, 1.0, 1.0, 1.0])
+        density = jnp.arange(9.0) + 1.0
+        direction = jnp.ones((1, 9))
+        shock_zones = jnp.zeros(9, dtype=jnp.bool_).at[3:6].set(True)
+
+        p_post, p_pre, rho_post, rho_pre, valid, d_post, d_pre = (
+            get_adaptive_post_pre_shock_values(
+                direction,
+                shock_zones,
+                pressure,
+                density,
+                max_steps=4,
+            )
+        )
+
+        self.assertTrue(bool(valid[4]))
+        self.assertAlmostEqual(float(d_post[4]), 2.0)
+        self.assertAlmostEqual(float(d_pre[4]), 1.75)
+        self.assertAlmostEqual(float(p_post[4]), 8.0)
+        self.assertAlmostEqual(float(p_pre[4]), 1.25)
+        self.assertAlmostEqual(float(rho_post[4]), 3.0)
+        self.assertAlmostEqual(float(rho_pre[4]), 6.75)
+
+    def test_adaptive_sampling_invalidates_zone_that_reaches_boundary(self):
+        field = jnp.arange(7.0)
+        direction = jnp.ones((1, 7))
+        shock_zones = jnp.zeros(7, dtype=jnp.bool_).at[:4].set(True)
+
+        *_, valid, _, _ = get_adaptive_post_pre_shock_values(
+            direction,
+            shock_zones,
+            field,
+            field,
+            max_steps=4,
+        )
+
+        self.assertFalse(bool(valid[2]))
 
 
 if __name__ == "__main__":

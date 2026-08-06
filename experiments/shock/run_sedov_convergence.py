@@ -148,7 +148,6 @@ def run_one_resolution(resolution: int, output_dir: Path) -> dict:
     elapsed_seconds = time.perf_counter() - start_time
 
     surface = np.asarray(result.shock_surface_cells, dtype=bool)
-    radii_np = np.asarray(radii)
     centers_np = np.asarray(centers)
     shock_direction = np.moveaxis(
         np.asarray(result.shock_direction), 0, -1
@@ -162,6 +161,15 @@ def run_one_resolution(resolution: int, output_dir: Path) -> dict:
     surface_radii = refined_radii[surface]
     if surface_radii.size == 0:
         raise RuntimeError(f"No shock surface was detected at {resolution}^3.")
+
+    surface_mach = np.asarray(result.mach_numbers)[surface]
+    valid_surface_mach = surface_mach[
+        np.isfinite(surface_mach) & (surface_mach > 0.0)
+    ]
+    if valid_surface_mach.size == 0:
+        raise RuntimeError(
+            f"No valid surface Mach numbers were measured at {resolution}^3."
+        )
 
     radius_p16, radius_median, radius_p84 = np.percentile(
         surface_radii, [16.0, 50.0, 84.0]
@@ -193,6 +201,15 @@ def run_one_resolution(resolution: int, output_dir: Path) -> dict:
             (radius_median - expected_radius) / expected_radius
         ),
         "median_radial_alignment": float(np.median(radial_alignment)),
+        "valid_mach_fraction": float(
+            valid_surface_mach.size / surface_mach.size
+        ),
+        "mach_median": float(np.median(valid_surface_mach)),
+        "mach_p16": float(np.percentile(valid_surface_mach, 16.0)),
+        "mach_p84": float(np.percentile(valid_surface_mach, 84.0)),
+        "mach_coefficient_of_variation": float(
+            np.std(valid_surface_mach) / np.mean(valid_surface_mach)
+        ),
         "elapsed_seconds": elapsed_seconds,
     }
 

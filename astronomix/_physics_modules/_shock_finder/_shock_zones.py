@@ -164,6 +164,134 @@ def get_post_pre_shock_values(
         field_b_pre,
     )
 
+
+def get_adaptive_post_pre_shock_values(
+    shock_direction,
+    shock_zones,
+    field_a,
+    field_b,
+    max_steps=8,
+    center_offsets=None,
+    step_size=0.25,
+    outside_offset=0.25,
+):
+    """Sample fluid states immediately outside both shock-zone boundaries.
+
+    Starting at each (optionally refined) shock-surface position, this sampler
+    follows the complete continuous shock normal in both directions.  The
+    post- and pre-shock distances are chosen independently using a sub-cell
+    search for the first point outside the detected shock zone.  The final
+    sample is shifted slightly farther into the exterior state to avoid
+    interpolating exactly across the boolean zone boundary.  This avoids both
+    whole-cell angular banding and crossing compact shocks or nearby source
+    regions with one fixed distance.
+
+    Returns the four sampled fields, a validity mask requiring a zone exit on
+    both sides, and the independently selected post/pre distances in grid-cell
+    units.  Rays that reach a domain boundary before leaving the zone are
+    invalid.
+    """
+    ndim = field_a.ndim
+    if shock_direction.shape[0] != ndim:
+        raise ValueError(
+            "shock_direction must have one component per spatial dimension."
+        )
+    if shock_zones.shape != field_a.shape:
+        raise ValueError("shock_zones and sampled fields must have equal shape.")
+    if step_size <= 0.0:
+        raise ValueError("step_size must be positive.")
+    if outside_offset < 0.0 or outside_offset >= max_steps:
+        raise ValueError(
+            "outside_offset must be non-negative and smaller than max_steps."
+        )
+
+    coordinate_dtype = jnp.result_type(field_a.dtype, jnp.float32)
+    coordinates = jnp.stack(
+        jnp.meshgrid(
+            *[
+                jnp.arange(size, dtype=coordinate_dtype)
+                for size in field_a.shape
+            ],
+            indexing="ij",
+        ),
+        axis=0,
+    )
+    direction = shock_direction.astype(coordinate_dtype)
+    if center_offsets is not None:
+        if center_offsets.shape != shock_direction.shape:
+            raise ValueError(
+                "center_offsets must have the same shape as shock_direction."
+            )
+        coordinates = coordinates + center_offsets.astype(coordinate_dtype)
+
+    upper_bounds = jnp.asarray(field_a.shape, dtype=coordinate_dtype).reshape(
+        (ndim,) + (1,) * ndim
+    )
+
+    def find_exit_distance(sign):
+        distance = jnp.full(field_a.shape, float(max_steps), coordinate_dtype)
+        found = jnp.zeros(field_a.shape, dtype=jnp.bool_)
+
+        num_search_steps = int((max_steps - outside_offset) / step_size)
+        for step in range(1, num_search_steps + 1):
+            search_distance = jnp.asarray(
+                step * step_size,
+                dtype=coordinate_dtype,
+            )
+            sample_coordinates = (
+                coordinates + sign * search_distance * direction
+            )
+            in_bounds = jnp.all(
+                (sample_coordinates >= 0.0)
+                & (sample_coordinates <= upper_bounds - 1.0),
+                axis=0,
+            )
+            sampled_zone = map_coordinates(
+                shock_zones.astype(coordinate_dtype),
+                sample_coordinates,
+                order=0,
+                mode="nearest",
+            ) > 0.5
+            first_exit = ~found & in_bounds & ~sampled_zone
+            sampling_distance = search_distance + jnp.asarray(
+                outside_offset,
+                dtype=coordinate_dtype,
+            )
+            distance = jnp.where(first_exit, sampling_distance, distance)
+            found = found | first_exit
+
+        final_coordinates = coordinates + sign * distance * direction
+        final_in_bounds = jnp.all(
+            (final_coordinates >= 0.0)
+            & (final_coordinates <= upper_bounds - 1.0),
+            axis=0,
+        )
+        return distance, found & final_in_bounds
+
+    # d_shock points from hot/post-shock gas toward cold/pre-shock gas.
+    post_distance, post_found = find_exit_distance(-1.0)
+    pre_distance, pre_found = find_exit_distance(1.0)
+    post_coordinates = coordinates - post_distance[jnp.newaxis, ...] * direction
+    pre_coordinates = coordinates + pre_distance[jnp.newaxis, ...] * direction
+
+    def interpolate(field, sample_coordinates):
+        return map_coordinates(
+            field,
+            sample_coordinates,
+            order=1,
+            mode="nearest",
+        )
+
+    return (
+        interpolate(field_a, post_coordinates),
+        interpolate(field_a, pre_coordinates),
+        interpolate(field_b, post_coordinates),
+        interpolate(field_b, pre_coordinates),
+        post_found & pre_found,
+        post_distance,
+        pre_distance,
+    )
+
 def _make_interior_mask(spatial_shape):
     """
     Build a boolean mask that is True for interior cells (not on any boundary).

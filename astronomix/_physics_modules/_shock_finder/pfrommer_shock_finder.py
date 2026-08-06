@@ -78,7 +78,8 @@ def find_shocks_pfrommer(
 
     # Phase 4: Mach numbers (*spatial_shape)
     mach_numbers = _calculate_mach_at_surface(
-        primitive_state, shock_surface, shock_direction, surface_offsets,
+        primitive_state, shock_surface, shock_zones, shock_direction,
+        surface_offsets,
         config, registered_variables,
     )
     
@@ -86,6 +87,7 @@ def find_shocks_pfrommer(
     thermal_energy_flux = calculate_thermal_energy_flux(
         primitive_state=primitive_state,
         shock_surface=shock_surface,
+        shock_zones=shock_zones,
         shock_direction=shock_direction,
         surface_offsets=surface_offsets,
         mach_numbers=mach_numbers,

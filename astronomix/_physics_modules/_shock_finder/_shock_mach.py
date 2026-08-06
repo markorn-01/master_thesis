@@ -10,7 +10,10 @@ from astronomix.option_classes.simulation_config import (
     STATE_TYPE,
     SimulationConfig,
 )
-from astronomix._physics_modules._shock_finder._shock_zones import get_post_pre_shock_values
+from astronomix._physics_modules._shock_finder._shock_zones import (
+    get_adaptive_post_pre_shock_values,
+)
+
 
 """
 Calculate Mach number for all cells, 
@@ -23,31 +26,42 @@ but only keep it at the shock surface (where shock_surface is True) via filter
 def _calculate_mach_at_surface(
     primitive_state: STATE_TYPE,
     shock_surface: BOOL_FIELD_TYPE,
-    shock_direction: FIELD_TYPE,        # ← needed for direction-aware p_post/p_pre
+    shock_zones: BOOL_FIELD_TYPE,
+    shock_direction: FIELD_TYPE,
     surface_offsets: FIELD_TYPE,
     config: SimulationConfig,
-    registered_variables: RegisteredVariables
+    registered_variables: RegisteredVariables,
 ) -> FIELD_TYPE:
     gamma_gas = 5 / 3
 
     pressure = primitive_state[registered_variables.pressure_index]
-    density  = primitive_state[registered_variables.density_index]
+    density = primitive_state[registered_variables.density_index]
     temperature = pressure / density
 
-    # direction-aware post/pre selection — same helper as criterion 3
-    p_post, p_pre, _, _ = get_post_pre_shock_values(
-        shock_direction, pressure, temperature,
-        max_steps=8,
-        center_offsets=shock_direction * surface_offsets[jnp.newaxis, ...],
+    # Select the first samples beyond the two local shock-zone boundaries.
+    p_post, p_pre, _, _, valid_samples, _, _ = (
+        get_adaptive_post_pre_shock_values(
+            shock_direction,
+            shock_zones,
+            pressure,
+            temperature,
+            max_steps=8,
+            center_offsets=(
+                shock_direction * surface_offsets[jnp.newaxis, ...]
+            ),
+        )
     )
-    
+
     # calculate Mach number for all cells
     # p₂/p₁ = p_post/p_pre, but clamp to 1 to avoid numerical issues with very weak shocks
     p_ratio = jnp.maximum(p_post / jnp.maximum(p_pre, 1e-30), 1.0)
     # as p₂/p₁ = (2γM² − (γ−1)) / (γ+1) so M = √[ (p₂/p₁ · (γ+1) + (γ−1)) / (2γ) ]
-    M = jnp.sqrt((p_ratio * (gamma_gas + 1) + (gamma_gas - 1)) / (2 * gamma_gas))
+    M = jnp.sqrt(
+        (p_ratio * (gamma_gas + 1) + (gamma_gas - 1))
+        / (2 * gamma_gas)
+    )
 
     # write Mach only at surface cells, zero elsewhere
-    mach_array = jnp.where(shock_surface, M, 0.0)
+    mach_array = jnp.where(shock_surface & valid_samples, M, 0.0)
 
     return mach_array

@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
 from pathlib import Path
 
 import jax.numpy as jnp
@@ -67,6 +68,17 @@ DEFAULT_NUM_SNAPSHOTS = 20
 DEFAULT_T_END = 0.20
 DEFAULT_NUM_INJECTION_CELLS = 4
 DEFAULT_OUTPUT_DIR = Path("outputs/single_bubble_long")
+
+# Reverse-shock verification thresholds.  Keeping these values together makes
+# the physical classification explicit and easier to revisit in convergence
+# studies instead of hiding decisions inside plotting code.
+MIN_JUMP_RATIO = 1.05
+MAX_VELOCITY_RATIO = 0.95
+MIN_SHOCK_MACH = 1.3
+MAX_INWARD_NORMAL_ALIGNMENT = -0.5
+MIN_PERSISTENT_SNAPSHOTS = 3
+MIN_INJECTION_SEPARATION_CELLS = 2.0
+SURFACE_NEIGHBORHOOD_CELLS = 1.5
 
 
 def parse_args() -> argparse.Namespace:
@@ -286,6 +298,7 @@ def analyze_shocks_3d(
                 "surface_mask": surface_mask,
                 "refined_centers": refined_centers,
                 "refined_radii": refined_radii,
+                "shock_direction": shock_direction,
                 "mach_numbers": np.asarray(result.mach_numbers),
                 "thermal_energy_flux": np.asarray(result.thermal_energy_flux),
             }
@@ -513,7 +526,6 @@ def _radial_band_statistics(
 def measure_shock_histories(
     times: np.ndarray,
     shock_results,
-    helper_data,
     injection_radius: float,
     grid_spacing: float,
     plot_path: Path,
@@ -602,7 +614,11 @@ def measure_shock_histories(
 
     csv_path.parent.mkdir(parents=True, exist_ok=True)
     with csv_path.open("w", newline="", encoding="utf-8") as csv_file:
-        writer = csv.DictWriter(csv_file, fieldnames=list(rows[0]))
+        writer = csv.DictWriter(
+            csv_file,
+            fieldnames=list(rows[0]),
+            lineterminator="\n",
+        )
         writer.writeheader()
         writer.writerows(rows)
 
@@ -703,18 +719,215 @@ def _spherical_bin_median(
     return profile
 
 
-def plot_radial_verification_profiles(
+def classify_reverse_shock_evidence(
+    measurements: dict[str, float],
+    persistent_detection: bool,
+    resolved_from_injection: bool,
+) -> dict:
+    """Classify an inner surface from normal-shock signatures.
+
+    The inner surface is considered consistent with a reverse shock only when
+    the wind is supersonic on its inner/upstream side, subsonic on its
+    outer/downstream side, the gas is compressed and heated, the radial flow
+    decelerates, the local flow is compressive, and the temperature-derived
+    shock normal points inward.  Persistence and numerical separation from the
+    injection region are required to avoid classifying a source-boundary
+    artifact as a physical shock.
+    """
+    required_criteria = {
+        "persistent_detection": bool(persistent_detection),
+        "resolved_from_injection": bool(resolved_from_injection),
+        "upstream_flow_is_supersonic": measurements["upstream_flow_mach"] > 1.0,
+        "downstream_flow_is_subsonic": measurements["downstream_flow_mach"] < 1.0,
+        "density_increases": measurements["density_ratio"] > MIN_JUMP_RATIO,
+        "pressure_increases": measurements["pressure_ratio"] > MIN_JUMP_RATIO,
+        "temperature_increases": measurements["temperature_ratio"]
+        > MIN_JUMP_RATIO,
+        "radial_flow_decelerates": measurements["velocity_ratio"]
+        < MAX_VELOCITY_RATIO,
+        "flow_is_compressive": measurements["minimum_divergence"] < 0.0,
+        "profile_jump_is_supersonic": measurements["profile_jump_mach"]
+        >= MIN_SHOCK_MACH,
+        "shock_normal_points_inward": measurements[
+            "median_radial_normal_alignment"
+        ]
+        < MAX_INWARD_NORMAL_ALIGNMENT,
+    }
+    diagnostic_checks = {
+        "adaptive_finder_mach_is_consistent": measurements[
+            "peak_surface_mach"
+        ]
+        >= MIN_SHOCK_MACH,
+    }
+    verified = all(required_criteria.values())
+    finder_mach_warning = verified and not all(diagnostic_checks.values())
+    if not verified:
+        classification = "not_yet_verified_as_reverse_shock"
+    elif finder_mach_warning:
+        classification = (
+            "consistent_with_reverse_shock_but_finder_mach_needs_"
+            "adaptive_sampling"
+        )
+    else:
+        classification = "consistent_with_reverse_shock"
+
+    return {
+        "classification": classification,
+        "verified": verified,
+        "criteria": required_criteria,
+        "diagnostic_checks": diagnostic_checks,
+        "limitations": (
+            [
+                "Adaptive boundary sampling did not recover a supersonic "
+                "reverse-shock Mach number. Inspect the local shock-zone "
+                "topology before energy-dissipation work."
+            ]
+            if finder_mach_warning
+            else []
+        ),
+        "measurements": measurements,
+    }
+
+
+def _longest_consecutive_true_run(values: list[bool]) -> int:
+    """Return the longest consecutive run of true values."""
+    longest = 0
+    current = 0
+    for value in values:
+        current = current + 1 if value else 0
+        longest = max(longest, current)
+    return longest
+
+
+def evaluate_reverse_shock(
+    final_shock_result,
+    history_rows: list[dict],
+    bin_centers: np.ndarray,
+    profiles: dict[str, np.ndarray],
+    injection_radius: float,
+    grid_spacing: float,
+) -> dict:
+    """Measure physical evidence for the final inner shock surface."""
+    final_history_row = history_rows[-1]
+    reverse_radius = float(final_history_row["reverse_radius_median"])
+    if not np.isfinite(reverse_radius):
+        return {
+            "classification": "no_inner_surface_detected",
+            "verified": False,
+            "criteria": {},
+            "diagnostic_checks": {},
+            "limitations": ["No separated inner surface was detected."],
+            "measurements": {},
+        }
+
+    inner_bins = np.flatnonzero(bin_centers < reverse_radius)
+    outer_bins = np.flatnonzero(bin_centers > reverse_radius)
+    if not inner_bins.size or not outer_bins.size:
+        raise RuntimeError("The reverse-shock radius is outside the radial bins.")
+    upstream_index = int(inner_bins[-1])
+    downstream_index = int(outer_bins[0])
+
+    surface_mask = final_shock_result["surface_mask"]
+    refined_radii = final_shock_result["refined_radii"]
+    neighborhood = (
+        surface_mask
+        & (
+            np.abs(refined_radii - reverse_radius)
+            <= SURFACE_NEIGHBORHOOD_CELLS * grid_spacing
+        )
+    )
+    if not np.any(neighborhood):
+        raise RuntimeError("No detected surface cells surround the inner radius.")
+
+    refined_centers = final_shock_result["refined_centers"]
+    radial_vectors = refined_centers - BOX_SIZE / 2.0
+    radial_norm = np.linalg.norm(radial_vectors, axis=-1, keepdims=True)
+    radial_unit = radial_vectors / np.maximum(radial_norm, 1.0e-30)
+    radial_alignment = np.sum(
+        final_shock_result["shock_direction"] * radial_unit,
+        axis=-1,
+    )
+    local_indices = slice(upstream_index, downstream_index + 1)
+
+    measurements = {
+        "reverse_radius": reverse_radius,
+        "upstream_shell_radius": float(bin_centers[upstream_index]),
+        "downstream_shell_radius": float(bin_centers[downstream_index]),
+        "density_ratio": float(
+            profiles["density"][downstream_index]
+            / profiles["density"][upstream_index]
+        ),
+        "pressure_ratio": float(
+            profiles["pressure"][downstream_index]
+            / profiles["pressure"][upstream_index]
+        ),
+        "temperature_ratio": float(
+            profiles["temperature_proxy"][downstream_index]
+            / profiles["temperature_proxy"][upstream_index]
+        ),
+        "velocity_ratio": float(
+            profiles["radial_velocity"][downstream_index]
+            / profiles["radial_velocity"][upstream_index]
+        ),
+        "upstream_flow_mach": float(
+            profiles["radial_flow_mach"][upstream_index]
+        ),
+        "downstream_flow_mach": float(
+            profiles["radial_flow_mach"][downstream_index]
+        ),
+        "minimum_divergence": float(
+            np.nanmin(profiles["velocity_divergence"][local_indices])
+        ),
+        "peak_surface_mach": float(
+            np.nanmax(final_shock_result["mach_numbers"][neighborhood])
+        ),
+        "median_radial_normal_alignment": float(
+            np.nanmedian(radial_alignment[neighborhood])
+        ),
+    }
+    pressure_ratio = measurements["pressure_ratio"]
+    measurements["profile_jump_mach"] = float(
+        np.sqrt(
+            (
+                pressure_ratio * (GAMMA + 1.0)
+                + (GAMMA - 1.0)
+            )
+            / (2.0 * GAMMA)
+        )
+    )
+
+    detections = [
+        bool(row["two_bands_detected"])
+        and np.isfinite(float(row["reverse_radius_median"]))
+        for row in history_rows
+    ]
+    consecutive_detections = _longest_consecutive_true_run(detections)
+    measurements["consecutive_detection_snapshots"] = consecutive_detections
+    measurements["distance_beyond_injection_cells"] = (
+        reverse_radius - injection_radius
+    ) / grid_spacing
+
+    return classify_reverse_shock_evidence(
+        measurements,
+        persistent_detection=(
+            consecutive_detections >= MIN_PERSISTENT_SNAPSHOTS
+        ),
+        resolved_from_injection=(
+            reverse_radius
+            >= injection_radius
+            + MIN_INJECTION_SEPARATION_CELLS * grid_spacing
+        ),
+    )
+
+
+def calculate_radial_verification_profiles(
     final_state: np.ndarray,
     final_shock_result,
-    final_history_row: dict,
     registered_variables,
     helper_data,
     config: SimulationConfig,
-    injection_radius: float,
-    output_path: Path,
-    csv_path: Path,
-) -> None:
-    """Plot physical radial profiles across the final shock candidates."""
+) -> tuple[np.ndarray, dict[str, np.ndarray], np.ndarray]:
+    """Calculate spherically averaged profiles for the final snapshot."""
     density = final_state[registered_variables.density_index]
     pressure = final_state[registered_variables.pressure_index]
     velocity_x = final_state[registered_variables.velocity_index.x]
@@ -776,11 +989,25 @@ def plot_radial_verification_profiles(
         bin_indices[(bin_indices >= 0) & (bin_indices < num_bins)].ravel(),
         minlength=num_bins,
     )
+    return bin_centers, profiles, shell_cell_count
+
+
+def write_radial_verification_profiles(
+    csv_path: Path,
+    bin_centers: np.ndarray,
+    profiles: dict[str, np.ndarray],
+    shell_cell_count: np.ndarray,
+) -> None:
+    """Write the calculated radial profiles as a reproducible data table."""
 
     csv_path.parent.mkdir(parents=True, exist_ok=True)
     fieldnames = ["radius", "shell_cell_count", *profiles]
     with csv_path.open("w", newline="", encoding="utf-8") as csv_file:
-        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+        writer = csv.DictWriter(
+            csv_file,
+            fieldnames=fieldnames,
+            lineterminator="\n",
+        )
         writer.writeheader()
         for bin_index, radius in enumerate(bin_centers):
             writer.writerow(
@@ -794,52 +1021,68 @@ def plot_radial_verification_profiles(
                 }
             )
 
+
+def plot_radial_verification_profiles(
+    final_state: np.ndarray,
+    final_shock_result,
+    history_rows: list[dict],
+    registered_variables,
+    helper_data,
+    config: SimulationConfig,
+    injection_radius: float,
+    output_path: Path,
+    csv_path: Path,
+    verification_path: Path,
+) -> dict:
+    """Verify and plot the final reverse and forward shock surfaces."""
+    bin_centers, profiles, shell_cell_count = (
+        calculate_radial_verification_profiles(
+            final_state=final_state,
+            final_shock_result=final_shock_result,
+            registered_variables=registered_variables,
+            helper_data=helper_data,
+            config=config,
+        )
+    )
+    write_radial_verification_profiles(
+        csv_path=csv_path,
+        bin_centers=bin_centers,
+        profiles=profiles,
+        shell_cell_count=shell_cell_count,
+    )
+    grid_spacing = float(config.grid_spacing)
+
+    verification = evaluate_reverse_shock(
+        final_shock_result=final_shock_result,
+        history_rows=history_rows,
+        bin_centers=bin_centers,
+        profiles=profiles,
+        injection_radius=injection_radius,
+        grid_spacing=grid_spacing,
+    )
+    verification_path.write_text(
+        json.dumps(verification, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    print("\n=== Reverse-shock verification ===")
+    print("Classification          :", verification["classification"])
+    for name, passed in verification["criteria"].items():
+        print(f"{name:32}: {'PASS' if passed else 'FAIL'}")
+    for name, passed in verification["diagnostic_checks"].items():
+        print(f"{name:32}: {'PASS' if passed else 'WARNING'}")
+
+    final_history_row = history_rows[-1]
     reverse_radius = float(final_history_row["reverse_radius_median"])
     forward_radius = float(final_history_row["forward_radius_median"])
-    if np.isfinite(reverse_radius):
-        inner_candidates = np.flatnonzero(bin_centers < reverse_radius)
-        outer_candidates = np.flatnonzero(bin_centers > reverse_radius)
-        if inner_candidates.size and outer_candidates.size:
-            upstream_index = inner_candidates[-1]
-            downstream_index = outer_candidates[0]
-            pressure_ratio = (
-                profiles["pressure"][downstream_index]
-                / profiles["pressure"][upstream_index]
-            )
-            density_ratio = (
-                profiles["density"][downstream_index]
-                / profiles["density"][upstream_index]
-            )
-            temperature_ratio = (
-                profiles["temperature_proxy"][downstream_index]
-                / profiles["temperature_proxy"][upstream_index]
-            )
-            velocity_ratio = (
-                profiles["radial_velocity"][downstream_index]
-                / profiles["radial_velocity"][upstream_index]
-            )
-            print("\n=== Inner-candidate radial jump check ===")
-            print(
-                "Adjacent shell centres  : "
-                f"{bin_centers[upstream_index]:.6f} -> "
-                f"{bin_centers[downstream_index]:.6f}"
-            )
-            print(f"Density ratio           : {density_ratio:.3f}")
-            print(f"Pressure ratio          : {pressure_ratio:.3f}")
-            print(f"Temperature-proxy ratio : {temperature_ratio:.3f}")
-            print(f"Radial-velocity ratio   : {velocity_ratio:.3f}")
-            print(
-                "Upstream radial Mach    : "
-                f"{profiles['radial_flow_mach'][upstream_index]:.3f}"
-            )
-            print(
-                "Downstream divergence   : "
-                f"{profiles['velocity_divergence'][downstream_index]:.3f}"
-            )
+    reverse_label = (
+        "verified reverse shock"
+        if verification["verified"]
+        else "reverse-shock candidate"
+    )
     markers = [
         (injection_radius, "injection", "tab:red", "--"),
-        (reverse_radius, "reverse candidate", "tab:orange", "-"),
-        (forward_radius, "forward candidate", "tab:blue", "-"),
+        (reverse_radius, reverse_label, "tab:orange", "-"),
+        (forward_radius, "forward-shock candidate", "tab:blue", "-"),
     ]
 
     figure, axes = plt.subplots(2, 3, figsize=(13, 8), constrained_layout=True)
@@ -886,7 +1129,7 @@ def plot_radial_verification_profiles(
                     linewidth=1.2,
                     label=label,
                 )
-        axis.set_xlim(0.0, radial_limit)
+        axis.set_xlim(0.0, BOX_SIZE / 2.0)
         axis.set_xlabel("radius from star [code length]")
     axes.flat[0].legend(fontsize=8)
     figure.suptitle("Final-snapshot spherical profiles for shock verification")
@@ -894,6 +1137,7 @@ def plot_radial_verification_profiles(
     output_path.parent.mkdir(parents=True, exist_ok=True)
     figure.savefig(output_path, dpi=180)
     plt.close(figure)
+    return verification
 
 
 def main() -> None:
@@ -907,6 +1151,7 @@ def main() -> None:
     shock_history_csv_path = output_dir / "shock_histories.csv"
     verification_plot_path = output_dir / "radial_verification_profiles.png"
     verification_csv_path = output_dir / "radial_verification_profiles.csv"
+    reverse_verification_path = output_dir / "reverse_shock_verification.json"
 
     (
         initial_state,
@@ -987,7 +1232,6 @@ def main() -> None:
     history_rows = measure_shock_histories(
         times=times,
         shock_results=shock_results,
-        helper_data=helper_data,
         injection_radius=injection_radius,
         grid_spacing=float(config.grid_spacing),
         plot_path=shock_history_plot_path,
@@ -999,16 +1243,18 @@ def main() -> None:
     plot_radial_verification_profiles(
         final_state=states[-1],
         final_shock_result=shock_results[-1],
-        final_history_row=history_rows[-1],
+        history_rows=history_rows,
         registered_variables=registered_variables,
         helper_data=helper_data,
         config=config,
         injection_radius=injection_radius,
         output_path=verification_plot_path,
         csv_path=verification_csv_path,
+        verification_path=reverse_verification_path,
     )
     print(f"Saved verification plot : {verification_plot_path.resolve()}")
     print(f"Saved verification table: {verification_csv_path.resolve()}")
+    print(f"Saved verification result: {reverse_verification_path.resolve()}")
 
 
 if __name__ == "__main__":

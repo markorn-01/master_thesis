@@ -4,7 +4,7 @@ import jax
 import jax.numpy as jnp
 
 from astronomix._physics_modules._shock_finder._shock_zones import (
-    get_post_pre_shock_values,
+    get_adaptive_post_pre_shock_values,
 )
 
 
@@ -71,6 +71,7 @@ def _thermalization_efficiency(mach, gamma):
 def calculate_thermal_energy_flux(
     primitive_state,
     shock_surface,
+    shock_zones,
     shock_direction,
     surface_offsets,
     mach_numbers,
@@ -103,6 +104,9 @@ def calculate_thermal_energy_flux(
         shock_surface:
             Boolean mask indicating the location of shock surfaces.
 
+        shock_zones:
+            Boolean mask of the broader detected shock zones.
+
         shock_direction:
             Vector indicating the direction of the shock.
 
@@ -122,9 +126,9 @@ def calculate_thermal_energy_flux(
 
         gamma_gas:
             Adiabatic index of the gas. Default is 5/3.
-        
+
         sampling_steps:
-            Number of steps to sample pre/post-shock values along the shock direction.
+            Maximum number of cells searched for each shock-zone boundary.
 
     Returns:
         Thermal-energy flux with units of energy / area / time.
@@ -132,23 +136,24 @@ def calculate_thermal_energy_flux(
     """
 
     # Extract pressure and density from the primitive state.
-    pressure = primitive_state[
-        registered_variables.pressure_index
-    ]
+    pressure = primitive_state[registered_variables.pressure_index]
 
-    density = primitive_state[
-        registered_variables.density_index
-    ]
+    density = primitive_state[registered_variables.density_index]
 
     # Sample pressure and density on both sides of the shock.
     # Only the pre-shock values are needed here, so the post-shock
     # outputs are ignored using "_".
-    _, pressure_pre, _, density_pre = get_post_pre_shock_values(
-        shock_direction,
-        pressure,
-        density,
-        max_steps=sampling_steps,
-        center_offsets=shock_direction * surface_offsets[jnp.newaxis, ...],
+    _, pressure_pre, _, density_pre, valid_samples, _, _ = (
+        get_adaptive_post_pre_shock_values(
+            shock_direction,
+            shock_zones,
+            pressure,
+            density,
+            max_steps=sampling_steps,
+            center_offsets=(
+                shock_direction * surface_offsets[jnp.newaxis, ...]
+            ),
+        )
     )
 
     # Avoid invalid sound-speed calculations if numerical noise produces
@@ -167,7 +172,7 @@ def calculate_thermal_energy_flux(
 
     # Pre-shock adiabatic sound speed:
     #     c_pre = sqrt(gamma * P_pre / rho_pre)
-    sound_speed_pre = jnp.sqrt(gamma_gas * pressure_pre/ density_pre)
+    sound_speed_pre = jnp.sqrt(gamma_gas * pressure_pre / density_pre)
 
     # Upstream velocity relative to the shock:
     #     v_pre = M * c_pre
@@ -175,28 +180,17 @@ def calculate_thermal_energy_flux(
 
     # Incoming kinetic-energy flux:
     #     f_kin = 1/2 * rho_pre * v_pre³
-    kinetic_energy_flux = (0.5 * density_pre * velocity_pre**3)
+    kinetic_energy_flux = 0.5 * density_pre * velocity_pre**3
 
     # Fraction of the kinetic-energy flux that is converted into heat.
     efficiency = _thermalization_efficiency(mach_numbers, gamma_gas)
 
     # Dissipated thermal-energy flux:
     #     f_th = delta(M) * f_kin
-    thermal_energy_flux = (efficiency * kinetic_energy_flux)
-
-    # Pre/post sampling uses max_steps=8, so values within 8 cells
-    # of a boundary are not reliable because jnp.roll wraps around.
-    margin = sampling_steps
-    valid_interior = jnp.zeros_like(shock_surface, dtype=jnp.bool_)
-
-    interior_slices = tuple(
-        slice(margin, -margin) for _ in range(shock_surface.ndim)
-    )
-
-    valid_interior = valid_interior.at[interior_slices].set(True)
+    thermal_energy_flux = efficiency * kinetic_energy_flux
 
     return jnp.where(
-        shock_surface & valid_interior,
+        shock_surface & valid_samples,
         thermal_energy_flux,
         0.0,
     )
