@@ -11,9 +11,14 @@ pip-wheel-metadata/
 .ipynb_checkpoints/
 venv/
 .venv/
+.venv-helix/
 env/
 *.env
 .vscode/
 .idea/
 # FuzzyCat generated cluster files
 experiments/fuzzycat/Clusters/
+
+# Local/HPC runtime artifacts
+outputs/**/checkpoints/
+slurm-*.out

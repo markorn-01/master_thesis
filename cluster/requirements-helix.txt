@@ -1,0 +1,8 @@
+# CUDA 12 wheel; the Slurm job loads Helix's CUDA module.
+jax[cuda12]==0.6.2
+equinox==0.13.7
+jaxtyping==0.3.7
+matplotlib==3.10.9
+numpy==2.2.5
+scipy==1.15.3
+orbax-checkpoint>=0.11,<0.12

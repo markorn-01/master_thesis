@@ -23,6 +23,7 @@ import subprocess
 import sys
 import time
 
+import jax
 import jax.numpy as jnp
 import matplotlib
 
@@ -37,6 +38,8 @@ if str(REPOSITORY_ROOT) not in sys.path:
 
 from astronomix import (  # noqa: E402
     CARTESIAN,
+    ON_DEVICE,
+    TO_DISK,
     SimulationConfig,
     SimulationParams,
     construct_primitive_state,
@@ -44,6 +47,10 @@ from astronomix import (  # noqa: E402
     get_helper_data,
     get_registered_variables,
     time_integration,
+)
+from astronomix.setup_helpers import (  # noqa: E402
+    latest_checkpoint_step,
+    restart_from_latest_checkpoint,
 )
 from astronomix._modules._stellar_wind.stellar_wind_options import (  # noqa: E402
     EI,
@@ -108,7 +115,44 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Rebuild summary files from existing per-resolution metrics.",
     )
+    parser.add_argument(
+        "--checkpoint-segments",
+        type=int,
+        default=0,
+        help=(
+            "Write this many evenly spaced restart checkpoints per run. "
+            "Zero disables checkpointing (default: 0)."
+        ),
+    )
+    parser.add_argument(
+        "--resume",
+        action="store_true",
+        help="Resume each incomplete resolution from its latest checkpoint.",
+    )
+    parser.add_argument(
+        "--require-gpu",
+        action="store_true",
+        help="Fail before simulation setup unless JAX has a GPU backend.",
+    )
+    parser.add_argument(
+        "--memory-analysis",
+        action="store_true",
+        help="Print XLA's compiled memory estimate (without checkpoints only).",
+    )
     return parser.parse_args()
+
+
+def require_gpu_backend() -> None:
+    """Fail clearly when a cluster job accidentally uses a CPU-only JAX."""
+    backend = jax.default_backend()
+    devices = jax.devices()
+    if backend != "gpu" or not any(device.platform == "gpu" for device in devices):
+        raise RuntimeError(
+            "A GPU was required, but JAX selected "
+            f"backend={backend!r} with devices={devices!r}. Install the CUDA "
+            "JAX wheel and run this command inside a Slurm GPU allocation."
+        )
+    print(f"JAX backend: {backend}; devices: {devices}", flush=True)
 
 
 def injection_cells_for_resolution(
@@ -237,12 +281,19 @@ def run_one_resolution(
     t_end: float,
     injection_radius: float,
     output_dir: Path,
+    checkpoint_segments: int = 0,
+    resume: bool = False,
+    memory_analysis: bool = False,
 ) -> dict:
     """Run and analyse one final-state-only wind-bubble simulation."""
     injection_cells = injection_cells_for_resolution(
         resolution, injection_radius
     )
     grid_spacing = BOX_SIZE / resolution
+
+    resolution_dir = output_dir / f"n{resolution:03d}"
+    checkpoint_dir = resolution_dir / "checkpoints"
+    checkpointing = checkpoint_segments > 0
 
     config = SimulationConfig(
         geometry=CARTESIAN,
@@ -251,6 +302,13 @@ def run_one_resolution(
         num_cells=resolution,
         mhd=False,
         return_snapshots=False,
+        donate_state=True,
+        memory_analysis=memory_analysis,
+        snapshot_storage_mode=TO_DISK if checkpointing else ON_DEVICE,
+        snapshot_storage_path=str(checkpoint_dir.resolve())
+        if checkpointing
+        else None,
+        num_snapshots=checkpoint_segments if checkpointing else 10,
         wind_config=WindConfig(
             stellar_wind=True,
             num_injection_cells=injection_cells,
@@ -283,13 +341,36 @@ def run_one_resolution(
     )
     config = finalize_config(config, initial_state.shape)
 
+    restart_state = None
+    latest_step = latest_checkpoint_step(checkpoint_dir) if checkpointing else None
+    if resume and latest_step is not None:
+        initial_state, params, restart_state = restart_from_latest_checkpoint(
+            checkpoint_dir,
+            params,
+        )
+        print(
+            f"Resuming {resolution}^3 from checkpoint {latest_step} "
+            f"at t={float(params.t_start):.6f}.",
+            flush=True,
+        )
+    elif latest_step is not None:
+        raise RuntimeError(
+            f"Checkpoint data already exists in {checkpoint_dir}. Use --resume "
+            "or choose a different --output-dir."
+        )
+
     start_time = time.perf_counter()
-    final_state = time_integration(
-        initial_state,
-        config,
-        params,
-        registered_variables,
-    )
+    if float(params.t_start) >= t_end:
+        final_state = initial_state
+        print("Latest checkpoint is already at the requested end time.", flush=True)
+    else:
+        final_state = time_integration(
+            initial_state,
+            config,
+            params,
+            registered_variables,
+            restart_state=restart_state,
+        )
     if not bool(jnp.all(jnp.isfinite(final_state))):
         raise RuntimeError(f"The {resolution}^3 run produced non-finite values.")
 
@@ -370,7 +451,6 @@ def run_one_resolution(
         "elapsed_seconds": time.perf_counter() - start_time,
     }
 
-    resolution_dir = output_dir / f"n{resolution:03d}"
     resolution_dir.mkdir(parents=True, exist_ok=True)
     metrics_path = resolution_dir / "metrics.json"
     metrics_path.write_text(json.dumps(metrics, indent=2) + "\n")
@@ -507,6 +587,11 @@ def run_parent(args: argparse.Namespace) -> None:
                 str(args.injection_radius),
                 "--output-dir",
                 str(args.output_dir),
+                "--checkpoint-segments",
+                str(args.checkpoint_segments),
+                *(["--resume"] if args.resume else []),
+                *(["--require-gpu"] if args.require_gpu else []),
+                *(["--memory-analysis"] if args.memory_analysis else []),
             ],
             check=True,
             cwd=REPOSITORY_ROOT,
@@ -520,12 +605,26 @@ def main() -> None:
     args = parse_args()
     if args.t_end <= 0.0:
         raise ValueError("--t-end must be positive.")
+    if args.checkpoint_segments < 0:
+        raise ValueError("--checkpoint-segments cannot be negative.")
+    if args.resume and args.checkpoint_segments == 0:
+        raise ValueError("--resume requires --checkpoint-segments greater than zero.")
+    if args.memory_analysis and args.checkpoint_segments:
+        raise ValueError(
+            "--memory-analysis and disk checkpointing cannot currently be "
+            "combined; run a smaller non-checkpointed estimate first."
+        )
+    if args.require_gpu:
+        require_gpu_backend()
     if args.worker_resolution is not None:
         run_one_resolution(
             resolution=args.worker_resolution,
             t_end=args.t_end,
             injection_radius=args.injection_radius,
             output_dir=args.output_dir,
+            checkpoint_segments=args.checkpoint_segments,
+            resume=args.resume,
+            memory_analysis=args.memory_analysis,
         )
     elif args.aggregate_only:
         write_summary(
