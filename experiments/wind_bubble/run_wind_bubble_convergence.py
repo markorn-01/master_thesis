@@ -118,6 +118,14 @@ def parse_args() -> argparse.Namespace:
         help="Rebuild summary files from existing per-resolution metrics.",
     )
     parser.add_argument(
+        "--refresh-profile-metrics",
+        action="store_true",
+        help=(
+            "Recalculate shock-jump metrics from existing radial_profiles.csv "
+            "files without rerunning the simulations."
+        ),
+    )
+    parser.add_argument(
         "--checkpoint-segments",
         type=int,
         default=0,
@@ -258,7 +266,9 @@ def _safe_ratio(numerator: float, denominator: float) -> float:
 
 
 def _radial_profile_jump_statistics(
-    shock_radius: float,
+    shock_radius_median: float,
+    shock_radius_p16: float,
+    shock_radius_p84: float,
     bin_centers: np.ndarray,
     profiles: dict[str, np.ndarray],
     shock_kind: str,
@@ -286,11 +296,35 @@ def _radial_profile_jump_statistics(
         "minimum_divergence": np.nan,
         "jump_mach": np.nan,
     }
-    if not np.isfinite(shock_radius):
+    if (
+        not np.isfinite(shock_radius_p16)
+        or not np.isfinite(shock_radius_p84)
+        or not np.isfinite(shock_radius_median)
+        or shock_radius_p16 > shock_radius_p84
+    ):
         return empty
 
-    inner_bins = np.flatnonzero(bin_centers < shock_radius)
-    outer_bins = np.flatnonzero(bin_centers > shock_radius)
+    surface_mach_profile = profiles.get(
+        "surface_mach", np.full_like(bin_centers, np.nan)
+    )
+    surface_bins = np.flatnonzero(np.isfinite(surface_mach_profile))
+    if surface_bins.size:
+        groups = np.split(
+            surface_bins, np.flatnonzero(np.diff(surface_bins) > 1) + 1
+        )
+        shock_group = min(
+            groups,
+            key=lambda group: abs(
+                float(np.mean(bin_centers[group])) - shock_radius_median
+            ),
+        )
+        inner_bins = np.arange(int(shock_group[0]))
+        outer_bins = np.arange(int(shock_group[-1]) + 1, len(bin_centers))
+    else:
+        # Older profile tables may not contain surface Mach values.  In that
+        # case, fall back to the measured radial surface interval.
+        inner_bins = np.flatnonzero(bin_centers < shock_radius_p16)
+        outer_bins = np.flatnonzero(bin_centers > shock_radius_p84)
     if not inner_bins.size or not outer_bins.size:
         return empty
 
@@ -541,13 +575,17 @@ def run_one_resolution(
         )
     )
     reverse_profile = _radial_profile_jump_statistics(
-        shock_radius=float(reverse["radius_median"]),
+        shock_radius_median=float(reverse["radius_median"]),
+        shock_radius_p16=float(reverse["radius_p16"]),
+        shock_radius_p84=float(reverse["radius_p84"]),
         bin_centers=bin_centers,
         profiles=profiles,
         shock_kind="reverse",
     )
     forward_profile = _radial_profile_jump_statistics(
-        shock_radius=float(forward["radius_median"]),
+        shock_radius_median=float(forward["radius_median"]),
+        shock_radius_p16=float(forward["radius_p16"]),
+        shock_radius_p84=float(forward["radius_p84"]),
         bin_centers=bin_centers,
         profiles=profiles,
         shock_kind="forward",
@@ -613,6 +651,67 @@ def _load_metrics(resolutions: list[int], output_dir: Path) -> list[dict]:
     ]
 
 
+def _load_radial_profiles(
+    csv_path: Path,
+) -> tuple[np.ndarray, dict[str, np.ndarray]]:
+    """Load a radial-profile table written by one convergence worker."""
+    with csv_path.open(newline="", encoding="utf-8") as csv_file:
+        rows = list(csv.DictReader(csv_file))
+    if not rows:
+        raise RuntimeError(f"Radial-profile table is empty: {csv_path}")
+
+    ignored_columns = {"radius", "shell_cell_count"}
+    bin_centers = np.asarray([float(row["radius"]) for row in rows])
+    profiles = {
+        name: np.asarray([float(row[name]) for row in rows])
+        for name in rows[0]
+        if name not in ignored_columns
+    }
+    return bin_centers, profiles
+
+
+def refresh_profile_metrics(
+    resolutions: list[int], output_dir: Path
+) -> list[dict]:
+    """Refresh shock-jump metrics without repeating the simulations."""
+    refreshed = []
+    for resolution in resolutions:
+        resolution_dir = output_dir / f"n{resolution:03d}"
+        metrics_path = resolution_dir / "metrics.json"
+        metrics = json.loads(metrics_path.read_text(encoding="utf-8"))
+        bin_centers, profiles = _load_radial_profiles(
+            resolution_dir / "radial_profiles.csv"
+        )
+
+        for shock_kind in ("reverse", "forward"):
+            profile_metrics = _radial_profile_jump_statistics(
+                shock_radius_median=float(
+                    metrics[f"{shock_kind}_radius_median"]
+                ),
+                shock_radius_p16=float(
+                    metrics[f"{shock_kind}_radius_p16"]
+                ),
+                shock_radius_p84=float(
+                    metrics[f"{shock_kind}_radius_p84"]
+                ),
+                bin_centers=bin_centers,
+                profiles=profiles,
+                shock_kind=shock_kind,
+            )
+            metrics.update(
+                _prefix(f"{shock_kind}_profile", profile_metrics)
+            )
+
+        metrics_path.write_text(
+            json.dumps(metrics, indent=2) + "\n", encoding="utf-8"
+        )
+        refreshed.append(metrics)
+        print(f"Refreshed profile metrics: {metrics_path.resolve()}")
+
+    write_summary(refreshed, output_dir)
+    return refreshed
+
+
 def write_summary(metrics: list[dict], output_dir: Path) -> None:
     """Write the cross-resolution CSV and diagnostic comparison figure."""
     if not metrics:
@@ -624,7 +723,9 @@ def write_summary(metrics: list[dict], output_dir: Path) -> None:
     for row in metrics[1:]:
         fieldnames.extend(name for name in row if name not in fieldnames)
     with csv_path.open("w", newline="", encoding="utf-8") as csv_file:
-        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+        writer = csv.DictWriter(
+            csv_file, fieldnames=fieldnames, lineterminator="\n"
+        )
         writer.writeheader()
         writer.writerows(metrics)
 
@@ -775,6 +876,8 @@ def main() -> None:
             resume=args.resume,
             memory_analysis=args.memory_analysis,
         )
+    elif args.refresh_profile_metrics:
+        refresh_profile_metrics(args.resolutions, args.output_dir)
     elif args.aggregate_only:
         write_summary(
             _load_metrics(args.resolutions, args.output_dir), args.output_dir

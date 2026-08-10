@@ -72,36 +72,48 @@ class RadialProfileJumpTests(unittest.TestCase):
         }
 
     def test_reverse_shock_has_upstream_shell_inside(self):
+        self.profiles["surface_mach"] = np.array(
+            [np.nan, np.nan, 2.0, np.nan, np.nan]
+        )
         result = _radial_profile_jump_statistics(
-            shock_radius=0.125,
+            shock_radius_median=0.15,
+            shock_radius_p16=0.11,
+            shock_radius_p84=0.14,
             bin_centers=self.bin_centers,
             profiles=self.profiles,
             shock_kind="reverse",
         )
 
         self.assertAlmostEqual(result["upstream_shell_radius"], 0.10)
-        self.assertAlmostEqual(result["downstream_shell_radius"], 0.15)
-        self.assertAlmostEqual(result["density_ratio"], 2.0)
-        self.assertAlmostEqual(result["pressure_ratio"], 4.0)
+        self.assertAlmostEqual(result["downstream_shell_radius"], 0.20)
+        self.assertAlmostEqual(result["density_ratio"], 3.0)
+        self.assertAlmostEqual(result["pressure_ratio"], 5.0)
         self.assertAlmostEqual(result["minimum_divergence"], -4.0)
 
     def test_forward_shock_has_upstream_shell_outside(self):
+        self.profiles["surface_mach"] = np.array(
+            [np.nan, np.nan, np.nan, 6.0, np.nan]
+        )
         result = _radial_profile_jump_statistics(
-            shock_radius=0.225,
+            shock_radius_median=0.20,
+            shock_radius_p16=0.21,
+            shock_radius_p84=0.24,
             bin_centers=self.bin_centers,
             profiles=self.profiles,
             shock_kind="forward",
         )
 
         self.assertAlmostEqual(result["upstream_shell_radius"], 0.25)
-        self.assertAlmostEqual(result["downstream_shell_radius"], 0.20)
-        self.assertAlmostEqual(result["density_ratio"], 2.0)
-        self.assertAlmostEqual(result["pressure_ratio"], 3.0)
+        self.assertAlmostEqual(result["downstream_shell_radius"], 0.15)
+        self.assertAlmostEqual(result["density_ratio"], 4.0 / 3.0)
+        self.assertAlmostEqual(result["pressure_ratio"], 12.0 / 5.0)
         self.assertAlmostEqual(result["minimum_divergence"], -3.0)
 
     def test_missing_shock_returns_nan_metrics(self):
         result = _radial_profile_jump_statistics(
-            shock_radius=np.nan,
+            shock_radius_median=np.nan,
+            shock_radius_p16=np.nan,
+            shock_radius_p84=np.nan,
             bin_centers=self.bin_centers,
             profiles=self.profiles,
             shock_kind="reverse",
