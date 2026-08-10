@@ -6,6 +6,7 @@ import numpy as np
 
 from experiments.wind_bubble.run_wind_bubble_convergence import (
     _finite_band_statistics,
+    _radial_profile_jump_statistics,
     injection_cells_for_resolution,
 )
 
@@ -54,6 +55,60 @@ class BandStatisticsTests(unittest.TestCase):
         self.assertEqual(result["surface_cell_count"], 0)
         self.assertTrue(np.isnan(result["radius_median"]))
         self.assertTrue(np.isnan(result["mach_median"]))
+
+
+class RadialProfileJumpTests(unittest.TestCase):
+    def setUp(self):
+        self.bin_centers = np.array([0.05, 0.10, 0.15, 0.20, 0.25])
+        self.profiles = {
+            "density": np.array([1.0, 2.0, 4.0, 6.0, 3.0]),
+            "pressure": np.array([1.0, 3.0, 12.0, 15.0, 5.0]),
+            "temperature_proxy": np.array([1.0, 1.5, 3.0, 2.5, 1.0]),
+            "radial_velocity": np.array([3.0, 2.0, 1.0, 1.5, 0.5]),
+            "radial_flow_mach": np.array([2.5, 2.0, 0.5, 0.7, 0.2]),
+            "velocity_divergence": np.array(
+                [0.0, -4.0, -2.0, -3.0, -1.0]
+            ),
+        }
+
+    def test_reverse_shock_has_upstream_shell_inside(self):
+        result = _radial_profile_jump_statistics(
+            shock_radius=0.125,
+            bin_centers=self.bin_centers,
+            profiles=self.profiles,
+            shock_kind="reverse",
+        )
+
+        self.assertAlmostEqual(result["upstream_shell_radius"], 0.10)
+        self.assertAlmostEqual(result["downstream_shell_radius"], 0.15)
+        self.assertAlmostEqual(result["density_ratio"], 2.0)
+        self.assertAlmostEqual(result["pressure_ratio"], 4.0)
+        self.assertAlmostEqual(result["minimum_divergence"], -4.0)
+
+    def test_forward_shock_has_upstream_shell_outside(self):
+        result = _radial_profile_jump_statistics(
+            shock_radius=0.225,
+            bin_centers=self.bin_centers,
+            profiles=self.profiles,
+            shock_kind="forward",
+        )
+
+        self.assertAlmostEqual(result["upstream_shell_radius"], 0.25)
+        self.assertAlmostEqual(result["downstream_shell_radius"], 0.20)
+        self.assertAlmostEqual(result["density_ratio"], 2.0)
+        self.assertAlmostEqual(result["pressure_ratio"], 3.0)
+        self.assertAlmostEqual(result["minimum_divergence"], -3.0)
+
+    def test_missing_shock_returns_nan_metrics(self):
+        result = _radial_profile_jump_statistics(
+            shock_radius=np.nan,
+            bin_centers=self.bin_centers,
+            profiles=self.profiles,
+            shock_kind="reverse",
+        )
+
+        self.assertTrue(np.isnan(result["density_ratio"]))
+        self.assertTrue(np.isnan(result["jump_mach"]))
 
 
 if __name__ == "__main__":

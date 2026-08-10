@@ -69,7 +69,9 @@ from experiments.wind_bubble.run_single_bubble import (  # noqa: E402
     GAMMA,
     WIND_FINAL_VELOCITY,
     WIND_MASS_LOSS_RATE,
+    calculate_radial_verification_profiles,
     split_radial_shock_candidates,
+    write_radial_verification_profiles,
 )
 
 
@@ -246,6 +248,116 @@ def _prefix(prefix: str, values: dict) -> dict:
     return {f"{prefix}_{name}": value for name, value in values.items()}
 
 
+def _safe_ratio(numerator: float, denominator: float) -> float:
+    """Return a finite ratio, or NaN when it is not well defined."""
+    if not np.isfinite(numerator) or not np.isfinite(denominator):
+        return np.nan
+    if abs(denominator) <= np.finfo(float).tiny:
+        return np.nan
+    return float(numerator / denominator)
+
+
+def _radial_profile_jump_statistics(
+    shock_radius: float,
+    bin_centers: np.ndarray,
+    profiles: dict[str, np.ndarray],
+    shock_kind: str,
+) -> dict[str, float]:
+    """Measure upstream/downstream jumps around one radial shock surface.
+
+    The unshocked upstream gas lies inside a reverse shock but outside a
+    forward shock.  This orientation is important: all reported ratios are
+    downstream divided by upstream, independent of shock type.
+    """
+    if shock_kind not in {"forward", "reverse"}:
+        raise ValueError("shock_kind must be 'forward' or 'reverse'.")
+
+    empty = {
+        "upstream_shell_radius": np.nan,
+        "downstream_shell_radius": np.nan,
+        "density_ratio": np.nan,
+        "pressure_ratio": np.nan,
+        "temperature_ratio": np.nan,
+        "velocity_ratio": np.nan,
+        "upstream_radial_velocity": np.nan,
+        "downstream_radial_velocity": np.nan,
+        "upstream_flow_mach": np.nan,
+        "downstream_flow_mach": np.nan,
+        "minimum_divergence": np.nan,
+        "jump_mach": np.nan,
+    }
+    if not np.isfinite(shock_radius):
+        return empty
+
+    inner_bins = np.flatnonzero(bin_centers < shock_radius)
+    outer_bins = np.flatnonzero(bin_centers > shock_radius)
+    if not inner_bins.size or not outer_bins.size:
+        return empty
+
+    inner_index = int(inner_bins[-1])
+    outer_index = int(outer_bins[0])
+    if shock_kind == "reverse":
+        upstream_index, downstream_index = inner_index, outer_index
+    else:
+        upstream_index, downstream_index = outer_index, inner_index
+
+    density_ratio = _safe_ratio(
+        profiles["density"][downstream_index],
+        profiles["density"][upstream_index],
+    )
+    pressure_ratio = _safe_ratio(
+        profiles["pressure"][downstream_index],
+        profiles["pressure"][upstream_index],
+    )
+    temperature_ratio = _safe_ratio(
+        profiles["temperature_proxy"][downstream_index],
+        profiles["temperature_proxy"][upstream_index],
+    )
+    upstream_velocity = float(profiles["radial_velocity"][upstream_index])
+    downstream_velocity = float(
+        profiles["radial_velocity"][downstream_index]
+    )
+    local_divergence = profiles["velocity_divergence"][
+        min(inner_index, outer_index) : max(inner_index, outer_index) + 1
+    ]
+    finite_divergence = local_divergence[np.isfinite(local_divergence)]
+
+    jump_mach = np.nan
+    if np.isfinite(pressure_ratio) and pressure_ratio > 0.0:
+        jump_mach = float(
+            np.sqrt(
+                (
+                    pressure_ratio * (GAMMA + 1.0)
+                    + (GAMMA - 1.0)
+                )
+                / (2.0 * GAMMA)
+            )
+        )
+
+    return {
+        "upstream_shell_radius": float(bin_centers[upstream_index]),
+        "downstream_shell_radius": float(bin_centers[downstream_index]),
+        "density_ratio": density_ratio,
+        "pressure_ratio": pressure_ratio,
+        "temperature_ratio": temperature_ratio,
+        "velocity_ratio": _safe_ratio(
+            downstream_velocity, upstream_velocity
+        ),
+        "upstream_radial_velocity": upstream_velocity,
+        "downstream_radial_velocity": downstream_velocity,
+        "upstream_flow_mach": float(
+            profiles["radial_flow_mach"][upstream_index]
+        ),
+        "downstream_flow_mach": float(
+            profiles["radial_flow_mach"][downstream_index]
+        ),
+        "minimum_divergence": float(np.min(finite_divergence))
+        if finite_divergence.size
+        else np.nan,
+        "jump_mach": jump_mach,
+    }
+
+
 def _surface_samples(result, helper_data, grid_spacing: float):
     """Gather only detected surface samples from the full JAX result arrays."""
     surface_mask = np.asarray(result.shock_surface_cells, dtype=bool)
@@ -414,6 +526,32 @@ def run_one_resolution(
         outside_mach,
         outside_alignment,
     )
+    bin_centers, profiles, shell_cell_count = (
+        calculate_radial_verification_profiles(
+            final_state=np.asarray(final_state),
+            final_shock_result={
+                "surface_mask": np.asarray(
+                    result.shock_surface_cells, dtype=bool
+                ),
+                "mach_numbers": np.asarray(result.mach_numbers),
+            },
+            registered_variables=registered_variables,
+            helper_data=helper_data,
+            config=config,
+        )
+    )
+    reverse_profile = _radial_profile_jump_statistics(
+        shock_radius=float(reverse["radius_median"]),
+        bin_centers=bin_centers,
+        profiles=profiles,
+        shock_kind="reverse",
+    )
+    forward_profile = _radial_profile_jump_statistics(
+        shock_radius=float(forward["radius_median"]),
+        bin_centers=bin_centers,
+        profiles=profiles,
+        shock_kind="forward",
+    )
     weaver = Weaver(
         v_inf=WIND_FINAL_VELOCITY,
         M_dot=WIND_MASS_LOSS_RATE,
@@ -438,6 +576,8 @@ def run_one_resolution(
         "separation_radius": float(separation_radius),
         **_prefix("reverse", reverse),
         **_prefix("forward", forward),
+        **_prefix("reverse_profile", reverse_profile),
+        **_prefix("forward_profile", forward_profile),
         "reverse_distance_beyond_injection_cells": float(
             (float(reverse["radius_median"]) - injection_radius)
             / grid_spacing
@@ -452,6 +592,12 @@ def run_one_resolution(
     }
 
     resolution_dir.mkdir(parents=True, exist_ok=True)
+    write_radial_verification_profiles(
+        resolution_dir / "radial_profiles.csv",
+        bin_centers,
+        profiles,
+        shell_cell_count,
+    )
     metrics_path = resolution_dir / "metrics.json"
     metrics_path.write_text(json.dumps(metrics, indent=2) + "\n")
     print(json.dumps(metrics, indent=2), flush=True)
@@ -474,8 +620,11 @@ def write_summary(metrics: list[dict], output_dir: Path) -> None:
     metrics = sorted(metrics, key=lambda row: row["resolution"])
     output_dir.mkdir(parents=True, exist_ok=True)
     csv_path = output_dir / "wind_bubble_convergence.csv"
+    fieldnames = list(metrics[0])
+    for row in metrics[1:]:
+        fieldnames.extend(name for name in row if name not in fieldnames)
     with csv_path.open("w", newline="", encoding="utf-8") as csv_file:
-        writer = csv.DictWriter(csv_file, fieldnames=list(metrics[0]))
+        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(metrics)
 
