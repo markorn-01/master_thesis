@@ -80,6 +80,16 @@ MIN_PERSISTENT_SNAPSHOTS = 3
 MIN_INJECTION_SEPARATION_CELLS = 2.0
 SURFACE_NEIGHBORHOOD_CELLS = 1.5
 
+# Temporal-tracking and per-snapshot confidence thresholds.  Radial ordering
+# defines the two identities in the single-star problem; these thresholds flag
+# unreliable measurements without silently swapping or discarding a track.
+MAX_RADIUS_JUMP_CELLS_PER_SNAPSHOT = 4.0
+MAX_FRACTIONAL_RADIUS_JUMP = 0.35
+MAX_NORMALIZED_RADIAL_SPREAD = 0.25
+MIN_VALID_MACH_FRACTION = 0.5
+MIN_TRACK_SURFACE_CELLS = 8
+MIN_RADIAL_NORMAL_ALIGNMENT = 0.5
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -192,18 +202,12 @@ def plot_central_slices(
     selected = np.array([0, len(times) // 2, len(times) - 1])
     midplane = states.shape[-1] // 2
 
-    density_slices = [
-        states[i, density_index, :, :, midplane] for i in selected
-    ]
-    pressure_slices = [
-        states[i, pressure_index, :, :, midplane] for i in selected
-    ]
+    density_slices = [states[i, density_index, :, :, midplane] for i in selected]
+    pressure_slices = [states[i, pressure_index, :, :, midplane] for i in selected]
 
     # A common colour scale makes expansion between snapshots visually honest.
     density_log = [np.log10(np.maximum(field, 1.0e-30)) for field in density_slices]
-    pressure_log = [
-        np.log10(np.maximum(field, 1.0e-30)) for field in pressure_slices
-    ]
+    pressure_log = [np.log10(np.maximum(field, 1.0e-30)) for field in pressure_slices]
     density_limits = (
         min(field.min() for field in density_log),
         max(field.max() for field in density_log),
@@ -279,9 +283,7 @@ def analyze_shocks_3d(
         )
         surface_mask = np.asarray(result.shock_surface_cells, dtype=bool)
         surface_offsets = np.asarray(result.shock_surface_offsets)
-        shock_direction = np.moveaxis(
-            np.asarray(result.shock_direction), 0, -1
-        )
+        shock_direction = np.moveaxis(np.asarray(result.shock_direction), 0, -1)
         centers = np.asarray(helper_data.geometric_centers)
         refined_centers = centers + (
             float(config.grid_spacing)
@@ -304,8 +306,7 @@ def analyze_shocks_3d(
             }
         )
         print(
-            f"snapshot {snapshot_index:02d}: "
-            f"{surface_mask.sum()} shock-surface cells"
+            f"snapshot {snapshot_index:02d}: {surface_mask.sum()} shock-surface cells"
         )
     return shock_results
 
@@ -328,12 +329,8 @@ def plot_shock_diagnostics(
 
     for column, snapshot_index in enumerate(selected):
         surface_mask = shock_results[snapshot_index]["surface_mask"]
-        surface_radii = shock_results[snapshot_index]["refined_radii"][
-            surface_mask
-        ]
-        surface_mach = shock_results[snapshot_index]["mach_numbers"][
-            surface_mask
-        ]
+        surface_radii = shock_results[snapshot_index]["refined_radii"][surface_mask]
+        surface_mach = shock_results[snapshot_index]["mach_numbers"][surface_mask]
 
         pressure = states[
             snapshot_index,
@@ -388,9 +385,7 @@ def plot_shock_diagnostics(
             axes[0, column].legend(loc="upper right", fontsize=8)
 
         radial_limit = BOX_SIZE / 2.0
-        bins = np.linspace(
-            0.0, radial_limit, max(20, config.num_cells.x // 2)
-        )
+        bins = np.linspace(0.0, radial_limit, max(20, config.num_cells.x // 2))
         axes[1, column].hist(
             surface_radii,
             bins=bins,
@@ -433,9 +428,7 @@ def plot_shock_diagnostics(
         else:
             print("  no shock-surface cells detected outside injection region")
 
-    figure.suptitle(
-        "3D shock detections (central slab) and 3D radial distributions"
-    )
+    figure.suptitle("3D shock detections (central slab) and 3D radial distributions")
     output_path.parent.mkdir(parents=True, exist_ok=True)
     figure.savefig(output_path, dpi=180)
     plt.close(figure)
@@ -473,10 +466,7 @@ def split_radial_shock_candidates(
     for gap_index in np.flatnonzero(radial_gaps >= minimum_gap):
         inner_count = gap_index + 1
         outer_count = sorted_radii.size - inner_count
-        if (
-            inner_count >= minimum_band_cells
-            and outer_count >= minimum_band_cells
-        ):
+        if inner_count >= minimum_band_cells and outer_count >= minimum_band_cells:
             credible_splits.append(int(gap_index))
 
     if not credible_splits:
@@ -497,6 +487,7 @@ def _radial_band_statistics(
     band_radii: np.ndarray,
     all_surface_radii: np.ndarray,
     all_surface_mach: np.ndarray,
+    all_radial_alignment: np.ndarray,
 ) -> dict[str, float | int]:
     """Return robust radius and Mach statistics for one radial band."""
     if band_radii.size == 0:
@@ -504,22 +495,168 @@ def _radial_band_statistics(
             "radius_median": np.nan,
             "radius_p16": np.nan,
             "radius_p84": np.nan,
+            "normalized_radial_spread": np.nan,
             "surface_cell_count": 0,
+            "valid_mach_fraction": np.nan,
             "mach_median": np.nan,
+            "mach_p16": np.nan,
+            "mach_p84": np.nan,
+            "mach_coefficient_of_variation": np.nan,
+            "median_radial_alignment": np.nan,
         }
 
     lower = float(np.min(band_radii))
     upper = float(np.max(band_radii))
     band_mask = (all_surface_radii >= lower) & (all_surface_radii <= upper)
+    band_mach = all_surface_mach[band_mask]
+    valid_mach = band_mach[np.isfinite(band_mach) & (band_mach > 0.0)]
+    valid_alignment = all_radial_alignment[band_mask]
+    valid_alignment = valid_alignment[np.isfinite(valid_alignment)]
     radius_p16, radius_median, radius_p84 = np.percentile(
         band_radii, [16.0, 50.0, 84.0]
     )
-    return {
+    statistics = {
         "radius_median": float(radius_median),
         "radius_p16": float(radius_p16),
         "radius_p84": float(radius_p84),
+        "normalized_radial_spread": float((radius_p84 - radius_p16) / radius_median),
         "surface_cell_count": int(band_radii.size),
-        "mach_median": float(np.median(all_surface_mach[band_mask])),
+        "valid_mach_fraction": float(valid_mach.size / band_mach.size),
+        "median_radial_alignment": (
+            float(np.median(valid_alignment)) if valid_alignment.size else np.nan
+        ),
+    }
+    if valid_mach.size:
+        statistics.update(
+            {
+                "mach_median": float(np.median(valid_mach)),
+                "mach_p16": float(np.percentile(valid_mach, 16.0)),
+                "mach_p84": float(np.percentile(valid_mach, 84.0)),
+                "mach_coefficient_of_variation": float(
+                    np.std(valid_mach) / np.mean(valid_mach)
+                ),
+            }
+        )
+    else:
+        statistics.update(
+            {
+                "mach_median": np.nan,
+                "mach_p16": np.nan,
+                "mach_p84": np.nan,
+                "mach_coefficient_of_variation": np.nan,
+            }
+        )
+    return statistics
+
+
+def _temporal_tracking_diagnostics(
+    current_radius: float,
+    previous_radius: float,
+    snapshots_since_detection: int,
+    grid_spacing: float,
+) -> dict[str, float | bool | str]:
+    """Describe how one radial detection links to its previous detection."""
+    detected = np.isfinite(current_radius)
+    previously_detected = np.isfinite(previous_radius)
+    if not detected:
+        return {
+            "detected": False,
+            "track_status": ("missing" if previously_detected else "not_yet_detected"),
+            "radius_change": np.nan,
+            "allowed_radius_change": np.nan,
+            "continuity_ok": False,
+        }
+    if not previously_detected:
+        return {
+            "detected": True,
+            "track_status": "initialized",
+            "radius_change": np.nan,
+            "allowed_radius_change": np.nan,
+            "continuity_ok": True,
+        }
+
+    snapshot_gap = max(1, int(snapshots_since_detection))
+    radius_change = current_radius - previous_radius
+    allowed_change = max(
+        MAX_RADIUS_JUMP_CELLS_PER_SNAPSHOT * snapshot_gap * grid_spacing,
+        MAX_FRACTIONAL_RADIUS_JUMP * abs(previous_radius),
+    )
+    continuity_ok = abs(radius_change) <= allowed_change
+    if not continuity_ok:
+        status = "discontinuous"
+    elif snapshot_gap > 1:
+        status = "reacquired"
+    else:
+        status = "continued"
+    return {
+        "detected": True,
+        "track_status": status,
+        "radius_change": float(radius_change),
+        "allowed_radius_change": float(allowed_change),
+        "continuity_ok": bool(continuity_ok),
+    }
+
+
+def _shock_tracking_confidence(
+    shock_kind: str,
+    statistics: dict[str, float | int],
+    tracking: dict[str, float | bool | str],
+    injection_radius: float,
+    grid_spacing: float,
+    ordering_ok: bool,
+) -> dict[str, float | bool | str]:
+    """Return transparent quality checks and a compact confidence score."""
+    if shock_kind not in {"forward", "reverse"}:
+        raise ValueError("shock_kind must be 'forward' or 'reverse'.")
+    if not tracking["detected"]:
+        return {
+            "ordering_ok": bool(ordering_ok),
+            "resolved_from_injection": False,
+            "surface_cell_count_ok": False,
+            "radial_spread_ok": False,
+            "valid_mach_fraction_ok": False,
+            "normal_orientation_ok": False,
+            "confidence_score": 0.0,
+            "confidence_label": "not_detected",
+        }
+
+    radius = float(statistics["radius_median"])
+    alignment = float(statistics["median_radial_alignment"])
+    resolved_from_injection = (
+        radius >= injection_radius + MIN_INJECTION_SEPARATION_CELLS * grid_spacing
+    )
+    normal_orientation_ok = (
+        alignment >= MIN_RADIAL_NORMAL_ALIGNMENT
+        if shock_kind == "forward"
+        else alignment <= -MIN_RADIAL_NORMAL_ALIGNMENT
+    )
+    checks = {
+        "ordering_ok": bool(ordering_ok),
+        "resolved_from_injection": bool(resolved_from_injection),
+        "surface_cell_count_ok": (
+            int(statistics["surface_cell_count"]) >= MIN_TRACK_SURFACE_CELLS
+        ),
+        "radial_spread_ok": (
+            float(statistics["normalized_radial_spread"])
+            <= MAX_NORMALIZED_RADIAL_SPREAD
+        ),
+        "valid_mach_fraction_ok": (
+            float(statistics["valid_mach_fraction"]) >= MIN_VALID_MACH_FRACTION
+        ),
+        "normal_orientation_ok": bool(normal_orientation_ok),
+        "continuity_ok": bool(tracking["continuity_ok"]),
+    }
+    score = float(np.mean(list(checks.values())))
+    if score >= 0.99:
+        label = "high"
+    elif score >= 0.70:
+        label = "medium"
+    else:
+        label = "low"
+    return {
+        **checks,
+        "confidence_score": score,
+        "confidence_label": label,
     }
 
 
@@ -530,8 +667,9 @@ def measure_shock_histories(
     grid_spacing: float,
     plot_path: Path,
     csv_path: Path,
+    track_csv_path: Path,
 ) -> list[dict]:
-    """Separate and track reverse/forward radial candidates in 3D snapshots."""
+    """Separate and track reverse/forward radial surfaces through time."""
     weaver = Weaver(
         v_inf=WIND_FINAL_VELOCITY,
         M_dot=WIND_MASS_LOSS_RATE,
@@ -541,35 +679,83 @@ def measure_shock_histories(
     )
 
     rows = []
-    print("\n=== Candidate reverse/forward shock histories ===")
+    track_rows = []
+    track_state = {
+        "reverse": {"last_radius": np.nan, "last_snapshot": None},
+        "forward": {"last_radius": np.nan, "last_snapshot": None},
+    }
+    print("\n=== Tracked reverse/forward shock histories ===")
     for snapshot_index, time in enumerate(times):
         surface_mask = shock_results[snapshot_index]["surface_mask"]
-        surface_radii = shock_results[snapshot_index]["refined_radii"][
+        surface_radii = shock_results[snapshot_index]["refined_radii"][surface_mask]
+        surface_mach = shock_results[snapshot_index]["mach_numbers"][surface_mask]
+        surface_centers = shock_results[snapshot_index]["refined_centers"][surface_mask]
+        surface_direction = shock_results[snapshot_index]["shock_direction"][
             surface_mask
         ]
-        surface_mach = shock_results[snapshot_index]["mach_numbers"][surface_mask]
+        radial_vectors = surface_centers - BOX_SIZE / 2.0
+        radial_norm = np.linalg.norm(radial_vectors, axis=-1)
+        radial_unit = radial_vectors / np.maximum(radial_norm[:, np.newaxis], 1.0e-30)
+        radial_alignment = np.sum(surface_direction * radial_unit, axis=-1)
         outside_mask = surface_radii > injection_radius
         outside_radii = surface_radii[outside_mask]
         outside_mach = surface_mach[outside_mask]
+        outside_alignment = radial_alignment[outside_mask]
 
-        reverse_radii, forward_radii, separation_radius = (
-            split_radial_shock_candidates(
-                outside_radii,
-                injection_radius=injection_radius,
-                grid_spacing=grid_spacing,
-            )
+        reverse_radii, forward_radii, separation_radius = split_radial_shock_candidates(
+            outside_radii,
+            injection_radius=injection_radius,
+            grid_spacing=grid_spacing,
         )
         reverse = _radial_band_statistics(
-            reverse_radii, outside_radii, outside_mach
+            reverse_radii,
+            outside_radii,
+            outside_mach,
+            outside_alignment,
         )
         forward = _radial_band_statistics(
-            forward_radii, outside_radii, outside_mach
+            forward_radii,
+            outside_radii,
+            outside_mach,
+            outside_alignment,
         )
+        ordering_ok = not (
+            np.isfinite(float(reverse["radius_median"]))
+            and np.isfinite(float(forward["radius_median"]))
+        ) or (float(reverse["radius_median"]) < float(forward["radius_median"]))
+
+        tracked = {}
+        confidence = {}
+        for shock_kind, statistics in (
+            ("reverse", reverse),
+            ("forward", forward),
+        ):
+            state = track_state[shock_kind]
+            last_snapshot = state["last_snapshot"]
+            snapshots_since_detection = (
+                snapshot_index - int(last_snapshot) if last_snapshot is not None else 1
+            )
+            tracking = _temporal_tracking_diagnostics(
+                current_radius=float(statistics["radius_median"]),
+                previous_radius=float(state["last_radius"]),
+                snapshots_since_detection=snapshots_since_detection,
+                grid_spacing=grid_spacing,
+            )
+            tracked[shock_kind] = tracking
+            confidence[shock_kind] = _shock_tracking_confidence(
+                shock_kind=shock_kind,
+                statistics=statistics,
+                tracking=tracking,
+                injection_radius=injection_radius,
+                grid_spacing=grid_spacing,
+                ordering_ok=ordering_ok,
+            )
+            if tracking["detected"]:
+                state["last_radius"] = float(statistics["radius_median"])
+                state["last_snapshot"] = snapshot_index
 
         weaver_radius = (
-            float(weaver.get_outer_shock_radius(float(time)))
-            if time > 0.0
-            else 0.0
+            float(weaver.get_outer_shock_radius(float(time))) if time > 0.0 else 0.0
         )
         # The injection source occupies a finite sphere.  Do not interpret a
         # comparison as resolved until the analytic shock is at least two grid
@@ -577,36 +763,97 @@ def measure_shock_histories(
         resolved_for_weaver = weaver_radius >= injection_radius + 2.0 * grid_spacing
         relative_error = (
             (float(forward["radius_median"]) - weaver_radius) / weaver_radius
-            if resolved_for_weaver
-            and np.isfinite(float(forward["radius_median"]))
+            if resolved_for_weaver and np.isfinite(float(forward["radius_median"]))
             else np.nan
         )
 
         row = {
             "time": float(time),
             "two_bands_detected": bool(reverse_radii.size),
+            "radial_ordering_ok": bool(ordering_ok),
             "separation_radius": separation_radius,
+            "reverse_track_id": "reverse_shock",
+            "reverse_detected": tracked["reverse"]["detected"],
+            "reverse_track_status": tracked["reverse"]["track_status"],
+            "reverse_continuity_ok": tracked["reverse"]["continuity_ok"],
+            "reverse_radius_change": tracked["reverse"]["radius_change"],
+            "reverse_allowed_radius_change": tracked["reverse"][
+                "allowed_radius_change"
+            ],
             "reverse_radius_median": reverse["radius_median"],
             "reverse_radius_p16": reverse["radius_p16"],
             "reverse_radius_p84": reverse["radius_p84"],
+            "reverse_normalized_radial_spread": reverse["normalized_radial_spread"],
             "reverse_surface_cell_count": reverse["surface_cell_count"],
+            "reverse_valid_mach_fraction": reverse["valid_mach_fraction"],
             "reverse_mach_median": reverse["mach_median"],
+            "reverse_mach_p16": reverse["mach_p16"],
+            "reverse_mach_p84": reverse["mach_p84"],
+            "reverse_mach_coefficient_of_variation": reverse[
+                "mach_coefficient_of_variation"
+            ],
+            "reverse_median_radial_alignment": reverse["median_radial_alignment"],
+            "reverse_confidence_score": confidence["reverse"]["confidence_score"],
+            "reverse_confidence_label": confidence["reverse"]["confidence_label"],
+            "forward_track_id": "forward_shock",
+            "forward_detected": tracked["forward"]["detected"],
+            "forward_track_status": tracked["forward"]["track_status"],
+            "forward_continuity_ok": tracked["forward"]["continuity_ok"],
+            "forward_radius_change": tracked["forward"]["radius_change"],
+            "forward_allowed_radius_change": tracked["forward"][
+                "allowed_radius_change"
+            ],
             "forward_radius_median": forward["radius_median"],
             "forward_radius_p16": forward["radius_p16"],
             "forward_radius_p84": forward["radius_p84"],
+            "forward_normalized_radial_spread": forward["normalized_radial_spread"],
             "forward_surface_cell_count": forward["surface_cell_count"],
+            "forward_valid_mach_fraction": forward["valid_mach_fraction"],
             "forward_mach_median": forward["mach_median"],
+            "forward_mach_p16": forward["mach_p16"],
+            "forward_mach_p84": forward["mach_p84"],
+            "forward_mach_coefficient_of_variation": forward[
+                "mach_coefficient_of_variation"
+            ],
+            "forward_median_radial_alignment": forward["median_radial_alignment"],
+            "forward_confidence_score": confidence["forward"]["confidence_score"],
+            "forward_confidence_label": confidence["forward"]["confidence_label"],
             "weaver_outer_radius": weaver_radius,
             "resolved_for_weaver": resolved_for_weaver,
             "relative_error_vs_weaver": relative_error,
         }
         rows.append(row)
+        for shock_kind, statistics in (
+            ("reverse", reverse),
+            ("forward", forward),
+        ):
+            track_rows.append(
+                {
+                    "time": float(time),
+                    "snapshot_index": snapshot_index,
+                    "shock_id": f"{shock_kind}_shock",
+                    "shock_kind": shock_kind,
+                    **tracked[shock_kind],
+                    **statistics,
+                    **confidence[shock_kind],
+                    "weaver_outer_radius": (
+                        weaver_radius if shock_kind == "forward" else np.nan
+                    ),
+                    "relative_error_vs_weaver": (
+                        relative_error if shock_kind == "forward" else np.nan
+                    ),
+                }
+            )
         print(
             f"t={row['time']:.6f}: "
             f"reverse={row['reverse_radius_median']:.6f} "
-            f"(N={row['reverse_surface_cell_count']}), "
+            f"(N={row['reverse_surface_cell_count']}, "
+            f"{row['reverse_track_status']}, "
+            f"confidence={row['reverse_confidence_label']}), "
             f"forward={row['forward_radius_median']:.6f} "
-            f"(N={row['forward_surface_cell_count']}), "
+            f"(N={row['forward_surface_cell_count']}, "
+            f"{row['forward_track_status']}, "
+            f"confidence={row['forward_confidence_label']}), "
             f"Weaver={weaver_radius:.6f}, "
             f"relative error={relative_error:.3f}, "
             f"two bands={row['two_bands_detected']}"
@@ -622,6 +869,16 @@ def measure_shock_histories(
         writer.writeheader()
         writer.writerows(rows)
 
+    track_csv_path.parent.mkdir(parents=True, exist_ok=True)
+    with track_csv_path.open("w", newline="", encoding="utf-8") as csv_file:
+        writer = csv.DictWriter(
+            csv_file,
+            fieldnames=list(track_rows[0]),
+            lineterminator="\n",
+        )
+        writer.writeheader()
+        writer.writerows(track_rows)
+
     history_times = np.array([row["time"] for row in rows])
     forward_median = np.array([row["forward_radius_median"] for row in rows])
     forward_p16 = np.array([row["forward_radius_p16"] for row in rows])
@@ -634,15 +891,16 @@ def measure_shock_histories(
     valid_forward = np.isfinite(forward_median)
     valid_reverse = np.isfinite(reverse_median)
 
-    figure, axis = plt.subplots(figsize=(7, 4.5), constrained_layout=True)
-    axis.plot(
+    figure, axes = plt.subplots(2, 2, figsize=(12, 8), constrained_layout=True)
+    radius_axis, mach_axis, spread_axis, confidence_axis = axes.flat
+    radius_axis.plot(
         history_times[valid_forward],
         forward_median[valid_forward],
         marker="o",
         color="tab:blue",
-        label="forward-shock candidate",
+        label="forward shock",
     )
-    axis.fill_between(
+    radius_axis.fill_between(
         history_times[valid_forward],
         forward_p16[valid_forward],
         forward_p84[valid_forward],
@@ -651,14 +909,14 @@ def measure_shock_histories(
         label="forward 16th–84th percentile",
     )
     if np.any(valid_reverse):
-        axis.plot(
+        radius_axis.plot(
             history_times[valid_reverse],
             reverse_median[valid_reverse],
             marker="o",
             color="tab:orange",
-            label="reverse-shock candidate",
+            label="reverse shock",
         )
-        axis.fill_between(
+        radius_axis.fill_between(
             history_times[valid_reverse],
             reverse_p16[valid_reverse],
             reverse_p84[valid_reverse],
@@ -666,7 +924,7 @@ def measure_shock_histories(
             alpha=0.2,
             label="reverse 16th–84th percentile",
         )
-    axis.plot(
+    radius_axis.plot(
         history_times,
         weaver_radius,
         color="black",
@@ -675,26 +933,101 @@ def measure_shock_histories(
     )
     if np.any(resolved):
         first_resolved_time = history_times[np.flatnonzero(resolved)[0]]
-        axis.axvspan(
+        radius_axis.axvspan(
             history_times.min(),
             first_resolved_time,
             color="grey",
             alpha=0.12,
             label="unresolved near injection region",
         )
-    axis.axhline(
+    radius_axis.axhline(
         injection_radius,
         color="tab:red",
         linestyle="--",
         label="injection radius",
     )
-    axis.set(
-        xlabel="time [code units]",
+    radius_axis.set(
         ylabel="radius from star [code length]",
-        title="3D reverse/forward shock candidates and Weaver prediction",
+        title="Tracked shock radii",
     )
-    axis.grid(alpha=0.25)
-    axis.legend()
+    radius_axis.legend(fontsize=8)
+
+    for prefix, valid, color, label in (
+        ("forward", valid_forward, "tab:blue", "forward shock"),
+        ("reverse", valid_reverse, "tab:orange", "reverse shock"),
+    ):
+        median = np.array([row[f"{prefix}_mach_median"] for row in rows])
+        p16 = np.array([row[f"{prefix}_mach_p16"] for row in rows])
+        p84 = np.array([row[f"{prefix}_mach_p84"] for row in rows])
+        valid_mach = valid & np.isfinite(median) & np.isfinite(p16) & np.isfinite(p84)
+        mach_axis.plot(
+            history_times[valid_mach],
+            median[valid_mach],
+            marker="o",
+            color=color,
+            label=label,
+        )
+        mach_axis.fill_between(
+            history_times[valid_mach],
+            p16[valid_mach],
+            p84[valid_mach],
+            color=color,
+            alpha=0.2,
+        )
+    mach_axis.axhline(1.0, color="grey", linestyle=":", linewidth=1.0)
+    mach_axis.set(ylabel="Mach number", title="Surface Mach history")
+    mach_axis.legend(fontsize=8)
+
+    for prefix, valid, color, label in (
+        ("forward", valid_forward, "tab:blue", "forward shock"),
+        ("reverse", valid_reverse, "tab:orange", "reverse shock"),
+    ):
+        spread = np.array([row[f"{prefix}_normalized_radial_spread"] for row in rows])
+        valid_spread = valid & np.isfinite(spread)
+        spread_axis.plot(
+            history_times[valid_spread],
+            spread[valid_spread],
+            marker="o",
+            color=color,
+            label=label,
+        )
+    spread_axis.axhline(
+        MAX_NORMALIZED_RADIAL_SPREAD,
+        color="grey",
+        linestyle=":",
+        linewidth=1.0,
+        label="quality threshold",
+    )
+    spread_axis.set(
+        ylabel=r"normalized spread $(R_{84}-R_{16})/R_{50}$",
+        title="Radial surface spread",
+    )
+    spread_axis.legend(fontsize=8)
+
+    for prefix, color, label in (
+        ("forward", "tab:blue", "forward shock"),
+        ("reverse", "tab:orange", "reverse shock"),
+    ):
+        scores = np.array([row[f"{prefix}_confidence_score"] for row in rows])
+        confidence_axis.plot(
+            history_times,
+            scores,
+            marker="o",
+            color=color,
+            label=label,
+        )
+    confidence_axis.axhspan(0.99, 1.0, color="tab:green", alpha=0.1)
+    confidence_axis.set(
+        ylabel="confidence score",
+        ylim=(-0.03, 1.03),
+        title="Per-snapshot detection confidence",
+    )
+    confidence_axis.legend(fontsize=8)
+
+    for axis in axes.flat:
+        axis.set_xlabel("time [code units]")
+        axis.grid(alpha=0.25)
+    figure.suptitle("3D forward/reverse shock temporal tracking")
 
     plot_path.parent.mkdir(parents=True, exist_ok=True)
     figure.savefig(plot_path, dpi=180)
@@ -741,22 +1074,16 @@ def classify_reverse_shock_evidence(
         "downstream_flow_is_subsonic": measurements["downstream_flow_mach"] < 1.0,
         "density_increases": measurements["density_ratio"] > MIN_JUMP_RATIO,
         "pressure_increases": measurements["pressure_ratio"] > MIN_JUMP_RATIO,
-        "temperature_increases": measurements["temperature_ratio"]
-        > MIN_JUMP_RATIO,
-        "radial_flow_decelerates": measurements["velocity_ratio"]
-        < MAX_VELOCITY_RATIO,
+        "temperature_increases": measurements["temperature_ratio"] > MIN_JUMP_RATIO,
+        "radial_flow_decelerates": measurements["velocity_ratio"] < MAX_VELOCITY_RATIO,
         "flow_is_compressive": measurements["minimum_divergence"] < 0.0,
         "profile_jump_is_supersonic": measurements["profile_jump_mach"]
         >= MIN_SHOCK_MACH,
-        "shock_normal_points_inward": measurements[
-            "median_radial_normal_alignment"
-        ]
+        "shock_normal_points_inward": measurements["median_radial_normal_alignment"]
         < MAX_INWARD_NORMAL_ALIGNMENT,
     }
     diagnostic_checks = {
-        "adaptive_finder_mach_is_consistent": measurements[
-            "peak_surface_mach"
-        ]
+        "adaptive_finder_mach_is_consistent": measurements["peak_surface_mach"]
         >= MIN_SHOCK_MACH,
     }
     verified = all(required_criteria.values())
@@ -765,8 +1092,7 @@ def classify_reverse_shock_evidence(
         classification = "not_yet_verified_as_reverse_shock"
     elif finder_mach_warning:
         classification = (
-            "consistent_with_reverse_shock_but_finder_mach_needs_"
-            "adaptive_sampling"
+            "consistent_with_reverse_shock_but_finder_mach_needs_adaptive_sampling"
         )
     else:
         classification = "consistent_with_reverse_shock"
@@ -829,12 +1155,9 @@ def evaluate_reverse_shock(
 
     surface_mask = final_shock_result["surface_mask"]
     refined_radii = final_shock_result["refined_radii"]
-    neighborhood = (
-        surface_mask
-        & (
-            np.abs(refined_radii - reverse_radius)
-            <= SURFACE_NEIGHBORHOOD_CELLS * grid_spacing
-        )
+    neighborhood = surface_mask & (
+        np.abs(refined_radii - reverse_radius)
+        <= SURFACE_NEIGHBORHOOD_CELLS * grid_spacing
     )
     if not np.any(neighborhood):
         raise RuntimeError("No detected surface cells surround the inner radius.")
@@ -854,8 +1177,7 @@ def evaluate_reverse_shock(
         "upstream_shell_radius": float(bin_centers[upstream_index]),
         "downstream_shell_radius": float(bin_centers[downstream_index]),
         "density_ratio": float(
-            profiles["density"][downstream_index]
-            / profiles["density"][upstream_index]
+            profiles["density"][downstream_index] / profiles["density"][upstream_index]
         ),
         "pressure_ratio": float(
             profiles["pressure"][downstream_index]
@@ -869,12 +1191,8 @@ def evaluate_reverse_shock(
             profiles["radial_velocity"][downstream_index]
             / profiles["radial_velocity"][upstream_index]
         ),
-        "upstream_flow_mach": float(
-            profiles["radial_flow_mach"][upstream_index]
-        ),
-        "downstream_flow_mach": float(
-            profiles["radial_flow_mach"][downstream_index]
-        ),
+        "upstream_flow_mach": float(profiles["radial_flow_mach"][upstream_index]),
+        "downstream_flow_mach": float(profiles["radial_flow_mach"][downstream_index]),
         "minimum_divergence": float(
             np.nanmin(profiles["velocity_divergence"][local_indices])
         ),
@@ -887,13 +1205,7 @@ def evaluate_reverse_shock(
     }
     pressure_ratio = measurements["pressure_ratio"]
     measurements["profile_jump_mach"] = float(
-        np.sqrt(
-            (
-                pressure_ratio * (GAMMA + 1.0)
-                + (GAMMA - 1.0)
-            )
-            / (2.0 * GAMMA)
-        )
+        np.sqrt((pressure_ratio * (GAMMA + 1.0) + (GAMMA - 1.0)) / (2.0 * GAMMA))
     )
 
     detections = [
@@ -909,13 +1221,10 @@ def evaluate_reverse_shock(
 
     return classify_reverse_shock_evidence(
         measurements,
-        persistent_detection=(
-            consecutive_detections >= MIN_PERSISTENT_SNAPSHOTS
-        ),
+        persistent_detection=(consecutive_detections >= MIN_PERSISTENT_SNAPSHOTS),
         resolved_from_injection=(
             reverse_radius
-            >= injection_radius
-            + MIN_INJECTION_SEPARATION_CELLS * grid_spacing
+            >= injection_radius + MIN_INJECTION_SEPARATION_CELLS * grid_spacing
         ),
     )
 
@@ -944,9 +1253,7 @@ def calculate_radial_verification_profiles(
         + velocity_z * radial_vectors[..., 2]
     ) * inverse_radius
     temperature_proxy = pressure / np.maximum(density, 1.0e-30)
-    sound_speed = np.sqrt(
-        GAMMA * pressure / np.maximum(density, 1.0e-30)
-    )
+    sound_speed = np.sqrt(GAMMA * pressure / np.maximum(density, 1.0e-30))
     radial_flow_mach = np.abs(radial_velocity) / np.maximum(sound_speed, 1.0e-30)
     velocity_divergence = np.asarray(
         _calculate_velocity_divergence(
@@ -1035,14 +1342,12 @@ def plot_radial_verification_profiles(
     verification_path: Path,
 ) -> dict:
     """Verify and plot the final reverse and forward shock surfaces."""
-    bin_centers, profiles, shell_cell_count = (
-        calculate_radial_verification_profiles(
-            final_state=final_state,
-            final_shock_result=final_shock_result,
-            registered_variables=registered_variables,
-            helper_data=helper_data,
-            config=config,
-        )
+    bin_centers, profiles, shell_cell_count = calculate_radial_verification_profiles(
+        final_state=final_state,
+        final_shock_result=final_shock_result,
+        registered_variables=registered_variables,
+        helper_data=helper_data,
+        config=config,
     )
     write_radial_verification_profiles(
         csv_path=csv_path,
@@ -1149,6 +1454,7 @@ def main() -> None:
     shock_diagnostics_path = output_dir / "shock_diagnostics.png"
     shock_history_plot_path = output_dir / "shock_histories.png"
     shock_history_csv_path = output_dir / "shock_histories.csv"
+    shock_tracks_csv_path = output_dir / "shock_tracks.csv"
     verification_plot_path = output_dir / "radial_verification_profiles.png"
     verification_csv_path = output_dir / "radial_verification_profiles.csv"
     reverse_verification_path = output_dir / "reverse_shock_verification.json"
@@ -1162,9 +1468,7 @@ def main() -> None:
     ) = build_problem(args)
 
     injection_radius = args.num_injection_cells * float(config.grid_spacing)
-    wind_luminosity = (
-        0.5 * WIND_MASS_LOSS_RATE * WIND_FINAL_VELOCITY**2
-    )
+    wind_luminosity = 0.5 * WIND_MASS_LOSS_RATE * WIND_FINAL_VELOCITY**2
 
     print("=== 3D single-star wind-bubble analysis ===")
     print(f"Grid                 : {args.num_cells}^3")
@@ -1236,9 +1540,11 @@ def main() -> None:
         grid_spacing=float(config.grid_spacing),
         plot_path=shock_history_plot_path,
         csv_path=shock_history_csv_path,
+        track_csv_path=shock_tracks_csv_path,
     )
     print(f"Saved shock history     : {shock_history_plot_path.resolve()}")
     print(f"Saved history table     : {shock_history_csv_path.resolve()}")
+    print(f"Saved long-form tracks  : {shock_tracks_csv_path.resolve()}")
 
     plot_radial_verification_profiles(
         final_state=states[-1],

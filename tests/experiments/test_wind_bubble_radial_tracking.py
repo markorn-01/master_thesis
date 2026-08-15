@@ -5,6 +5,9 @@ import unittest
 import numpy as np
 
 from experiments.wind_bubble.run_single_bubble import (
+    _radial_band_statistics,
+    _shock_tracking_confidence,
+    _temporal_tracking_diagnostics,
     classify_reverse_shock_evidence,
     split_radial_shock_candidates,
 )
@@ -38,9 +41,7 @@ class RadialShockCandidateTests(unittest.TestCase):
     def test_two_well_separated_bands_are_labelled_by_radius(self):
         inner = np.linspace(0.085, 0.095, 40)
         outer = np.linspace(0.27, 0.29, 160)
-        reverse, forward, separation = self.split(
-            np.concatenate((outer, inner))
-        )
+        reverse, forward, separation = self.split(np.concatenate((outer, inner)))
         np.testing.assert_allclose(reverse, inner)
         np.testing.assert_allclose(forward, outer)
         self.assertGreater(separation, inner.max())
@@ -95,9 +96,7 @@ class ReverseShockVerificationTests(unittest.TestCase):
 
         self.assertTrue(result["verified"])
         self.assertFalse(
-            result["diagnostic_checks"][
-                "adaptive_finder_mach_is_consistent"
-            ]
+            result["diagnostic_checks"]["adaptive_finder_mach_is_consistent"]
         )
         self.assertTrue(result["limitations"])
 
@@ -112,6 +111,114 @@ class ReverseShockVerificationTests(unittest.TestCase):
 
         self.assertFalse(result["verified"])
         self.assertFalse(result["criteria"]["upstream_flow_is_supersonic"])
+
+
+class TemporalShockTrackingTests(unittest.TestCase):
+    def setUp(self):
+        self.grid_spacing = 0.015625
+
+    def test_band_statistics_include_mach_spread_and_alignment(self):
+        radii = np.array([0.10, 0.11, 0.12, 0.28, 0.29])
+        mach = np.array([1.8, 2.0, np.nan, 5.8, 6.0])
+        alignment = np.array([-0.99, -0.97, -0.98, 0.98, 0.99])
+
+        result = _radial_band_statistics(
+            band_radii=radii[:3],
+            all_surface_radii=radii,
+            all_surface_mach=mach,
+            all_radial_alignment=alignment,
+        )
+
+        self.assertAlmostEqual(result["radius_median"], 0.11)
+        self.assertAlmostEqual(result["valid_mach_fraction"], 2.0 / 3.0)
+        self.assertAlmostEqual(result["mach_median"], 1.9)
+        self.assertLess(result["median_radial_alignment"], -0.95)
+        self.assertGreater(result["normalized_radial_spread"], 0.0)
+
+    def test_missing_track_is_reacquired_without_changing_identity(self):
+        initialized = _temporal_tracking_diagnostics(
+            current_radius=0.10,
+            previous_radius=np.nan,
+            snapshots_since_detection=1,
+            grid_spacing=self.grid_spacing,
+        )
+        missing = _temporal_tracking_diagnostics(
+            current_radius=np.nan,
+            previous_radius=0.10,
+            snapshots_since_detection=1,
+            grid_spacing=self.grid_spacing,
+        )
+        reacquired = _temporal_tracking_diagnostics(
+            current_radius=0.12,
+            previous_radius=0.10,
+            snapshots_since_detection=2,
+            grid_spacing=self.grid_spacing,
+        )
+
+        self.assertEqual(initialized["track_status"], "initialized")
+        self.assertEqual(missing["track_status"], "missing")
+        self.assertEqual(reacquired["track_status"], "reacquired")
+        self.assertTrue(reacquired["continuity_ok"])
+
+    def test_implausible_radius_jump_is_flagged(self):
+        result = _temporal_tracking_diagnostics(
+            current_radius=0.40,
+            previous_radius=0.10,
+            snapshots_since_detection=1,
+            grid_spacing=self.grid_spacing,
+        )
+
+        self.assertEqual(result["track_status"], "discontinuous")
+        self.assertFalse(result["continuity_ok"])
+
+    def test_reverse_shock_quality_checks_use_inward_normal(self):
+        statistics = {
+            "radius_median": 0.11,
+            "normalized_radial_spread": 0.05,
+            "surface_cell_count": 100,
+            "valid_mach_fraction": 1.0,
+            "median_radial_alignment": -0.99,
+        }
+        tracking = {
+            "detected": True,
+            "continuity_ok": True,
+        }
+        result = _shock_tracking_confidence(
+            shock_kind="reverse",
+            statistics=statistics,
+            tracking=tracking,
+            injection_radius=0.0625,
+            grid_spacing=self.grid_spacing,
+            ordering_ok=True,
+        )
+
+        self.assertTrue(result["normal_orientation_ok"])
+        self.assertTrue(result["resolved_from_injection"])
+        self.assertEqual(result["confidence_label"], "high")
+
+    def test_forward_shock_rejects_inward_normal(self):
+        statistics = {
+            "radius_median": 0.28,
+            "normalized_radial_spread": 0.05,
+            "surface_cell_count": 100,
+            "valid_mach_fraction": 1.0,
+            "median_radial_alignment": -0.99,
+        }
+        tracking = {
+            "detected": True,
+            "continuity_ok": True,
+        }
+        result = _shock_tracking_confidence(
+            shock_kind="forward",
+            statistics=statistics,
+            tracking=tracking,
+            injection_radius=0.0625,
+            grid_spacing=self.grid_spacing,
+            ordering_ok=True,
+        )
+
+        self.assertFalse(result["normal_orientation_ok"])
+        self.assertLess(result["confidence_score"], 1.0)
 
 
 if __name__ == "__main__":
