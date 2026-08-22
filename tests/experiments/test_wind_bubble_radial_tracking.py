@@ -5,8 +5,11 @@ import unittest
 import numpy as np
 
 from experiments.wind_bubble.run_single_bubble import (
+    _cumulative_trapezoid_over_detections,
     _radial_band_statistics,
     _shock_tracking_confidence,
+    _surface_area_weights,
+    _surface_dissipation_statistics,
     _temporal_tracking_diagnostics,
     classify_reverse_shock_evidence,
     split_radial_shock_candidates,
@@ -219,6 +222,83 @@ class TemporalShockTrackingTests(unittest.TestCase):
 
         self.assertFalse(result["normal_orientation_ok"])
         self.assertLess(result["confidence_score"], 1.0)
+
+
+class ShockEnergyIntegrationTests(unittest.TestCase):
+    def test_axis_aligned_surface_weights_equal_grid_face_area(self):
+        directions = np.tile([1.0, 0.0, 0.0], (6, 1))
+
+        weights = _surface_area_weights(directions, grid_spacing=0.25)
+
+        np.testing.assert_allclose(weights, np.full(6, 0.25**2))
+
+    def test_oblique_surface_weights_include_projection_correction(self):
+        direction = np.array([[1.0, 1.0, 1.0]]) / np.sqrt(3.0)
+
+        weights = _surface_area_weights(direction, grid_spacing=0.5)
+
+        np.testing.assert_allclose(weights, [0.5**2 * np.sqrt(3.0)])
+
+    def test_duplicate_projected_surface_patch_is_counted_once(self):
+        directions = np.tile([1.0, 0.0, 0.0], (2, 1))
+        indices = np.array([[4, 2, 3], [5, 2, 3]])
+
+        weights = _surface_area_weights(
+            directions,
+            grid_spacing=0.25,
+            surface_indices=indices,
+        )
+
+        self.assertAlmostEqual(weights[0], 0.25**2)
+        self.assertTrue(np.isnan(weights[1]))
+
+    def test_surface_flux_is_integrated_with_area_weights(self):
+        flux = np.array([2.0, 3.0, 100.0])
+        directions = np.tile([1.0, 0.0, 0.0], (3, 1))
+        selection = np.array([True, True, False])
+
+        result = _surface_dissipation_statistics(
+            surface_flux=flux,
+            surface_direction=directions,
+            grid_spacing=0.5,
+            selection=selection,
+            radius_median=1.0,
+        )
+
+        self.assertEqual(result["surface_sample_count"], 2)
+        self.assertEqual(result["valid_flux_sample_count"], 2)
+        self.assertAlmostEqual(result["surface_area"], 0.5)
+        self.assertAlmostEqual(result["mean_thermal_energy_flux"], 2.5)
+        self.assertAlmostEqual(result["dissipation_rate"], 1.25)
+
+    def test_missing_flux_is_reported_as_incomplete_coverage(self):
+        result = _surface_dissipation_statistics(
+            surface_flux=np.array([2.0, 0.0]),
+            surface_direction=np.array([[1.0, 0.0, 0.0]] * 2),
+            grid_spacing=0.5,
+            selection=np.array([True, True]),
+            radius_median=1.0,
+        )
+
+        self.assertAlmostEqual(result["valid_flux_fraction"], 0.5)
+        self.assertAlmostEqual(result["surface_area"], 0.5)
+        self.assertAlmostEqual(result["flux_covered_surface_area"], 0.25)
+        self.assertAlmostEqual(result["dissipation_rate"], 0.5)
+
+    def test_cumulative_energy_does_not_bridge_missing_detections(self):
+        cumulative, interval_valid = _cumulative_trapezoid_over_detections(
+            times=np.array([0.0, 1.0, 2.0, 3.0, 4.0]),
+            rates=np.array([np.nan, 2.0, 4.0, np.nan, 8.0]),
+        )
+
+        np.testing.assert_allclose(
+            cumulative[1:],
+            np.array([0.0, 3.0, 3.0, 3.0]),
+        )
+        np.testing.assert_array_equal(
+            interval_valid,
+            np.array([False, False, True, False, False]),
+        )
 
 
 if __name__ == "__main__":

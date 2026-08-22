@@ -13,6 +13,8 @@ Run from the repository root:
     python3 experiments/wind_bubble/run_single_bubble.py
 
 Results are written to ``outputs/single_bubble_long/`` by default.
+The Phase-2 energy analysis writes ``shock_energy_histories.csv`` and
+``shock_energy_histories.png`` alongside the existing tracking diagnostics.
 """
 
 from __future__ import annotations
@@ -658,6 +660,348 @@ def _shock_tracking_confidence(
         "confidence_score": score,
         "confidence_label": label,
     }
+
+
+def _surface_area_weights(
+    surface_direction: np.ndarray,
+    grid_spacing: float,
+    surface_indices: np.ndarray | None = None,
+) -> np.ndarray:
+    """Estimate the physical area represented by Cartesian surface samples.
+
+    A detected surface cell represents one grid-face-sized projected patch.
+    Dividing that projected area by the largest absolute normal component
+    corrects for the patch orientation.  When Cartesian indices are supplied,
+    samples that map to the same projected patch on the same side of the
+    surface are counted once.  The estimate is exact for a planar surface and
+    converges for a resolved smooth shell without requiring a separate
+    voxel-to-mesh reconstruction.
+    """
+    directions = np.asarray(surface_direction, dtype=float)
+    if directions.ndim != 2 or directions.shape[1] != 3:
+        raise ValueError("surface_direction must have shape (num_samples, 3).")
+    if not np.isfinite(grid_spacing) or grid_spacing <= 0.0:
+        raise ValueError("grid_spacing must be finite and positive.")
+    if surface_indices is not None:
+        indices = np.asarray(surface_indices)
+        if indices.shape != directions.shape:
+            raise ValueError("surface_indices must match surface_direction.")
+    else:
+        indices = None
+
+    normal_norm = np.linalg.norm(directions, axis=1)
+    valid = np.isfinite(directions).all(axis=1) & (normal_norm > 0.0)
+    unit_direction = np.zeros_like(directions)
+    unit_direction[valid] = directions[valid] / normal_norm[valid, np.newaxis]
+    dominant_projection = np.max(np.abs(unit_direction), axis=1)
+
+    weights = np.full(directions.shape[0], np.nan, dtype=float)
+    weights[valid] = grid_spacing**2 / dominant_projection[valid]
+    if indices is not None:
+        dominant_axis = np.argmax(np.abs(unit_direction), axis=1)
+        positive_side = unit_direction[
+            np.arange(unit_direction.shape[0]), dominant_axis
+        ] >= 0.0
+        seen_patches: set[tuple[int, ...]] = set()
+        for sample_index in np.flatnonzero(valid):
+            axis = int(dominant_axis[sample_index])
+            projected_coordinates = tuple(
+                int(indices[sample_index, coordinate_axis])
+                for coordinate_axis in range(3)
+                if coordinate_axis != axis
+            )
+            patch_key = (
+                axis,
+                int(positive_side[sample_index]),
+                *projected_coordinates,
+            )
+            if patch_key in seen_patches:
+                weights[sample_index] = np.nan
+            else:
+                seen_patches.add(patch_key)
+    return weights
+
+
+def _surface_dissipation_statistics(
+    surface_flux: np.ndarray,
+    surface_direction: np.ndarray,
+    grid_spacing: float,
+    selection: np.ndarray,
+    radius_median: float,
+    surface_indices: np.ndarray | None = None,
+) -> dict[str, float | int]:
+    """Integrate local thermal-energy flux over one detected shock surface."""
+    flux = np.asarray(surface_flux, dtype=float)
+    selected = np.asarray(selection, dtype=bool)
+    if flux.ndim != 1 or selected.shape != flux.shape:
+        raise ValueError("surface_flux and selection must be matching 1D arrays.")
+
+    sample_count = int(selected.sum())
+    if sample_count == 0:
+        return {
+            "surface_sample_count": 0,
+            "unique_surface_patch_count": 0,
+            "valid_flux_sample_count": 0,
+            "valid_flux_fraction": np.nan,
+            "surface_area": np.nan,
+            "flux_covered_surface_area": np.nan,
+            "surface_area_vs_sphere": np.nan,
+            "mean_thermal_energy_flux": np.nan,
+            "dissipation_rate": np.nan,
+        }
+
+    selected_flux = flux[selected]
+    selected_direction = np.asarray(surface_direction)[selected]
+    selected_indices = (
+        np.asarray(surface_indices)[selected] if surface_indices is not None else None
+    )
+    area_weights = _surface_area_weights(
+        selected_direction,
+        grid_spacing,
+        surface_indices=selected_indices,
+    )
+    valid_area = np.isfinite(area_weights) & (area_weights > 0.0)
+    valid_flux = valid_area & np.isfinite(selected_flux) & (selected_flux > 0.0)
+    unique_patch_count = int(valid_area.sum())
+    surface_area = float(np.sum(area_weights[valid_area]))
+    covered_area = float(np.sum(area_weights[valid_flux]))
+    dissipation_rate = float(
+        np.sum(selected_flux[valid_flux] * area_weights[valid_flux])
+    )
+    sphere_area = (
+        4.0 * np.pi * radius_median**2
+        if np.isfinite(radius_median) and radius_median > 0.0
+        else np.nan
+    )
+    return {
+        "surface_sample_count": sample_count,
+        "unique_surface_patch_count": unique_patch_count,
+        "valid_flux_sample_count": int(valid_flux.sum()),
+        "valid_flux_fraction": (
+            float(valid_flux.sum() / unique_patch_count)
+            if unique_patch_count
+            else np.nan
+        ),
+        "surface_area": surface_area,
+        "flux_covered_surface_area": covered_area,
+        "surface_area_vs_sphere": (
+            float(surface_area / sphere_area) if np.isfinite(sphere_area) else np.nan
+        ),
+        "mean_thermal_energy_flux": (
+            float(dissipation_rate / covered_area) if covered_area > 0.0 else np.nan
+        ),
+        "dissipation_rate": dissipation_rate if covered_area > 0.0 else np.nan,
+    }
+
+
+def _cumulative_trapezoid_over_detections(
+    times: np.ndarray,
+    rates: np.ndarray,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Integrate consecutive finite detections without bridging missing data.
+
+    The cumulative energy is zero at the first resolved detection.  An
+    interval contributes only when both endpoint rates are finite; this avoids
+    silently treating an undetected shock as a physical zero-flux surface.
+    """
+    time_values = np.asarray(times, dtype=float)
+    rate_values = np.asarray(rates, dtype=float)
+    if time_values.ndim != 1 or rate_values.shape != time_values.shape:
+        raise ValueError("times and rates must be matching 1D arrays.")
+    if np.any(~np.isfinite(time_values)) or np.any(np.diff(time_values) < 0.0):
+        raise ValueError("times must be finite and monotonically non-decreasing.")
+
+    cumulative = np.full(time_values.shape, np.nan, dtype=float)
+    interval_valid = np.zeros(time_values.shape, dtype=bool)
+    detected = np.flatnonzero(np.isfinite(rate_values))
+    if detected.size == 0:
+        return cumulative, interval_valid
+
+    first_detection = int(detected[0])
+    cumulative[first_detection] = 0.0
+    running_total = 0.0
+    for index in range(first_detection + 1, time_values.size):
+        if np.isfinite(rate_values[index - 1]) and np.isfinite(rate_values[index]):
+            delta_time = time_values[index] - time_values[index - 1]
+            running_total += (
+                0.5
+                * (rate_values[index - 1] + rate_values[index])
+                * delta_time
+            )
+            interval_valid[index] = True
+        cumulative[index] = running_total
+    return cumulative, interval_valid
+
+
+def measure_shock_energy_histories(
+    times: np.ndarray,
+    shock_results,
+    history_rows: list[dict],
+    injection_radius: float,
+    grid_spacing: float,
+    wind_luminosity: float,
+    csv_path: Path,
+    plot_path: Path,
+) -> list[dict]:
+    """Integrate dissipation flux over each shock surface and through time."""
+    times = np.asarray(times, dtype=float)
+    if len(shock_results) != times.size or len(history_rows) != times.size:
+        raise ValueError("times, shock_results, and history_rows must align.")
+
+    per_snapshot: list[dict] = []
+    print("\n=== Forward/reverse shock energy dissipation ===")
+    for snapshot_index, (time, result, history) in enumerate(
+        zip(times, shock_results, history_rows)
+    ):
+        surface_mask = np.asarray(result["surface_mask"], dtype=bool)
+        indices = np.argwhere(surface_mask)
+        radii = np.asarray(result["refined_radii"])[surface_mask]
+        directions = np.asarray(result["shock_direction"])[surface_mask]
+        flux = np.asarray(result["thermal_energy_flux"])[surface_mask]
+        outside = np.isfinite(radii) & (radii > injection_radius)
+        separation_radius = float(history["separation_radius"])
+
+        if np.isfinite(separation_radius):
+            selections = {
+                "reverse": outside & (radii <= separation_radius),
+                "forward": outside & (radii > separation_radius),
+            }
+        else:
+            selections = {
+                "reverse": np.zeros(radii.shape, dtype=bool),
+                "forward": outside,
+            }
+
+        row: dict[str, float | int | bool] = {
+            "time": float(time),
+            "snapshot_index": snapshot_index,
+        }
+        for shock_kind in ("reverse", "forward"):
+            statistics = _surface_dissipation_statistics(
+                surface_flux=flux,
+                surface_direction=directions,
+                grid_spacing=grid_spacing,
+                selection=selections[shock_kind],
+                radius_median=float(history[f"{shock_kind}_radius_median"]),
+                surface_indices=indices,
+            )
+            for name, value in statistics.items():
+                row[f"{shock_kind}_{name}"] = value
+        per_snapshot.append(row)
+
+    for shock_kind in ("reverse", "forward"):
+        rates = np.asarray(
+            [row[f"{shock_kind}_dissipation_rate"] for row in per_snapshot],
+            dtype=float,
+        )
+        cumulative, interval_valid = _cumulative_trapezoid_over_detections(
+            times, rates
+        )
+        for index, row in enumerate(per_snapshot):
+            row[f"{shock_kind}_integration_interval_valid"] = bool(
+                interval_valid[index]
+            )
+            row[f"{shock_kind}_cumulative_dissipated_energy"] = float(
+                cumulative[index]
+            )
+
+    for row in per_snapshot:
+        cumulative_values = np.asarray(
+            [
+                row["reverse_cumulative_dissipated_energy"],
+                row["forward_cumulative_dissipated_energy"],
+            ],
+            dtype=float,
+        )
+        row["combined_cumulative_dissipated_energy"] = (
+            float(np.nansum(cumulative_values))
+            if np.any(np.isfinite(cumulative_values))
+            else np.nan
+        )
+        injected_energy = wind_luminosity * float(row["time"])
+        row["injected_wind_energy"] = injected_energy
+        row["combined_dissipation_to_injected_energy"] = (
+            float(row["combined_cumulative_dissipated_energy"] / injected_energy)
+            if injected_energy > 0.0
+            and np.isfinite(row["combined_cumulative_dissipated_energy"])
+            else np.nan
+        )
+        print(
+            f"t={row['time']:.6f}: "
+            f"reverse rate={row['reverse_dissipation_rate']:.6g}, "
+            f"forward rate={row['forward_dissipation_rate']:.6g}, "
+            f"cumulative={row['combined_cumulative_dissipated_energy']:.6g}"
+        )
+
+    csv_path.parent.mkdir(parents=True, exist_ok=True)
+    with csv_path.open("w", newline="", encoding="utf-8") as csv_file:
+        writer = csv.DictWriter(
+            csv_file,
+            fieldnames=list(per_snapshot[0]),
+            lineterminator="\n",
+        )
+        writer.writeheader()
+        writer.writerows(per_snapshot)
+
+    figure, axes = plt.subplots(2, 2, figsize=(12, 8), constrained_layout=True)
+    rate_axis, energy_axis, area_axis, coverage_axis = axes.flat
+    for shock_kind, color, label in (
+        ("forward", "tab:blue", "forward shock"),
+        ("reverse", "tab:orange", "reverse shock"),
+    ):
+        rates = np.asarray(
+            [row[f"{shock_kind}_dissipation_rate"] for row in per_snapshot]
+        )
+        cumulative = np.asarray(
+            [
+                row[f"{shock_kind}_cumulative_dissipated_energy"]
+                for row in per_snapshot
+            ]
+        )
+        area_ratio = np.asarray(
+            [row[f"{shock_kind}_surface_area_vs_sphere"] for row in per_snapshot]
+        )
+        coverage = np.asarray(
+            [row[f"{shock_kind}_valid_flux_fraction"] for row in per_snapshot]
+        )
+        rate_axis.plot(times, rates, marker="o", color=color, label=label)
+        energy_axis.plot(times, cumulative, marker="o", color=color, label=label)
+        area_axis.plot(
+            times, area_ratio, marker="o", color=color, label=label
+        )
+        coverage_axis.plot(
+            times, coverage, marker="o", color=color, label=label
+        )
+
+    injected = wind_luminosity * times
+    energy_axis.plot(
+        times,
+        injected,
+        color="black",
+        linestyle="--",
+        label="injected wind energy",
+    )
+    rate_axis.set(ylabel="dissipation rate [code energy/time]", title="Power")
+    energy_axis.set(ylabel="energy [code units]", title="Cumulative energy")
+    area_axis.axhline(1.0, color="black", linestyle="--", linewidth=1.0)
+    area_axis.set(
+        ylabel=r"$A_{\rm measured}/(4\pi R_{50}^2)$",
+        title="Surface-area consistency",
+    )
+    coverage_axis.set(
+        ylabel="valid flux-sample fraction",
+        ylim=(-0.03, 1.03),
+        title="Flux coverage",
+    )
+    for axis in axes.flat:
+        axis.set_xlabel("time [code units]")
+        axis.grid(alpha=0.25)
+        axis.legend(fontsize=8)
+    figure.suptitle("Forward/reverse shock energy dissipation")
+    plot_path.parent.mkdir(parents=True, exist_ok=True)
+    figure.savefig(plot_path, dpi=180)
+    plt.close(figure)
+    return per_snapshot
 
 
 def measure_shock_histories(
@@ -1455,6 +1799,8 @@ def main() -> None:
     shock_history_plot_path = output_dir / "shock_histories.png"
     shock_history_csv_path = output_dir / "shock_histories.csv"
     shock_tracks_csv_path = output_dir / "shock_tracks.csv"
+    energy_history_plot_path = output_dir / "shock_energy_histories.png"
+    energy_history_csv_path = output_dir / "shock_energy_histories.csv"
     verification_plot_path = output_dir / "radial_verification_profiles.png"
     verification_csv_path = output_dir / "radial_verification_profiles.csv"
     reverse_verification_path = output_dir / "reverse_shock_verification.json"
@@ -1545,6 +1891,19 @@ def main() -> None:
     print(f"Saved shock history     : {shock_history_plot_path.resolve()}")
     print(f"Saved history table     : {shock_history_csv_path.resolve()}")
     print(f"Saved long-form tracks  : {shock_tracks_csv_path.resolve()}")
+
+    measure_shock_energy_histories(
+        times=times,
+        shock_results=shock_results,
+        history_rows=history_rows,
+        injection_radius=injection_radius,
+        grid_spacing=float(config.grid_spacing),
+        wind_luminosity=wind_luminosity,
+        csv_path=energy_history_csv_path,
+        plot_path=energy_history_plot_path,
+    )
+    print(f"Saved energy history    : {energy_history_plot_path.resolve()}")
+    print(f"Saved energy table      : {energy_history_csv_path.resolve()}")
 
     plot_radial_verification_profiles(
         final_state=states[-1],
