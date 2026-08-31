@@ -85,8 +85,6 @@ SURFACE_NEIGHBORHOOD_CELLS = 1.5
 # Temporal-tracking and per-snapshot confidence thresholds.  Radial ordering
 # defines the two identities in the single-star problem; these thresholds flag
 # unreliable measurements without silently swapping or discarding a track.
-MAX_RADIUS_JUMP_CELLS_PER_SNAPSHOT = 4.0
-MAX_FRACTIONAL_RADIUS_JUMP = 0.35
 MAX_NORMALIZED_RADIAL_SPREAD = 0.25
 MIN_VALID_MACH_FRACTION = 0.5
 MIN_TRACK_SURFACE_CELLS = 8
@@ -551,13 +549,40 @@ def _radial_band_statistics(
     return statistics
 
 
+def _weaver_forward_shock_mach(
+    radius: float,
+    time: float,
+    ambient_density: float,
+    ambient_pressure: float,
+    gamma: float,
+) -> float:
+    """Return the kinematic Mach number from ``R_fs proportional t^(3/5)``."""
+    if time <= 0.0 or not np.isfinite(radius):
+        return np.nan
+    ambient_sound_speed = np.sqrt(gamma * ambient_pressure / ambient_density)
+    shock_speed = (3.0 / 5.0) * radius / time
+    return float(shock_speed / ambient_sound_speed)
+
+
 def _temporal_tracking_diagnostics(
     current_radius: float,
     previous_radius: float,
+    current_radius_uncertainty: float,
+    previous_radius_uncertainty: float,
+    current_time: float,
+    previous_time: float,
+    previous_radial_velocity: float,
     snapshots_since_detection: int,
     grid_spacing: float,
 ) -> dict[str, float | bool | str]:
-    """Describe how one radial detection links to its previous detection."""
+    """Compare a detection with an elapsed-time-aware track prediction.
+
+    Once two detections define a radial velocity, the next radius is predicted
+    by constant-velocity extrapolation over the actual elapsed time.  The
+    tolerance applies to the prediction residual, not to the total shock
+    displacement, so changing the snapshot cadence does not impose a fixed
+    maximum displacement per stored snapshot.
+    """
     detected = np.isfinite(current_radius)
     previously_detected = np.isfinite(previous_radius)
     if not detected:
@@ -565,6 +590,10 @@ def _temporal_tracking_diagnostics(
             "detected": False,
             "track_status": ("missing" if previously_detected else "not_yet_detected"),
             "radius_change": np.nan,
+            "elapsed_time": np.nan,
+            "radial_velocity": np.nan,
+            "predicted_radius": np.nan,
+            "prediction_residual": np.nan,
             "allowed_radius_change": np.nan,
             "continuity_ok": False,
         }
@@ -573,17 +602,47 @@ def _temporal_tracking_diagnostics(
             "detected": True,
             "track_status": "initialized",
             "radius_change": np.nan,
+            "elapsed_time": np.nan,
+            "radial_velocity": np.nan,
+            "predicted_radius": np.nan,
+            "prediction_residual": np.nan,
             "allowed_radius_change": np.nan,
             "continuity_ok": True,
         }
 
     snapshot_gap = max(1, int(snapshots_since_detection))
+    elapsed_time = current_time - previous_time
+    if not np.isfinite(elapsed_time) or elapsed_time <= 0.0:
+        raise ValueError("tracked shock detections must have increasing times")
     radius_change = current_radius - previous_radius
-    allowed_change = max(
-        MAX_RADIUS_JUMP_CELLS_PER_SNAPSHOT * snapshot_gap * grid_spacing,
-        MAX_FRACTIONAL_RADIUS_JUMP * abs(previous_radius),
-    )
-    continuity_ok = abs(radius_change) <= allowed_change
+    radial_velocity = radius_change / elapsed_time
+    has_velocity_prediction = np.isfinite(previous_radial_velocity)
+    if has_velocity_prediction:
+        predicted_displacement = previous_radial_velocity * elapsed_time
+        predicted_radius = previous_radius + predicted_displacement
+        prediction_residual = current_radius - predicted_radius
+        current_uncertainty = (
+            current_radius_uncertainty
+            if np.isfinite(current_radius_uncertainty)
+            else 0.0
+        )
+        previous_uncertainty = (
+            previous_radius_uncertainty
+            if np.isfinite(previous_radius_uncertainty)
+            else 0.0
+        )
+        # One cell is the irreducible radial localization scale.  The measured
+        # percentile half-widths account for the finite spread of both surfaces.
+        allowed_change = (
+            grid_spacing + current_uncertainty + previous_uncertainty
+        )
+        continuity_ok = abs(prediction_residual) <= allowed_change
+    else:
+        # A velocity prediction requires two accepted radius measurements.
+        predicted_radius = np.nan
+        prediction_residual = np.nan
+        allowed_change = np.nan
+        continuity_ok = True
     if not continuity_ok:
         status = "discontinuous"
     elif snapshot_gap > 1:
@@ -594,6 +653,10 @@ def _temporal_tracking_diagnostics(
         "detected": True,
         "track_status": status,
         "radius_change": float(radius_change),
+        "elapsed_time": float(elapsed_time),
+        "radial_velocity": float(radial_velocity),
+        "predicted_radius": float(predicted_radius),
+        "prediction_residual": float(prediction_residual),
         "allowed_radius_change": float(allowed_change),
         "continuity_ok": bool(continuity_ok),
     }
@@ -1025,8 +1088,20 @@ def measure_shock_histories(
     rows = []
     track_rows = []
     track_state = {
-        "reverse": {"last_radius": np.nan, "last_snapshot": None},
-        "forward": {"last_radius": np.nan, "last_snapshot": None},
+        "reverse": {
+            "last_radius": np.nan,
+            "last_radius_uncertainty": np.nan,
+            "last_time": np.nan,
+            "last_velocity": np.nan,
+            "last_snapshot": None,
+        },
+        "forward": {
+            "last_radius": np.nan,
+            "last_radius_uncertainty": np.nan,
+            "last_time": np.nan,
+            "last_velocity": np.nan,
+            "last_snapshot": None,
+        },
     }
     print("\n=== Tracked reverse/forward shock histories ===")
     for snapshot_index, time in enumerate(times):
@@ -1082,6 +1157,19 @@ def measure_shock_histories(
             tracking = _temporal_tracking_diagnostics(
                 current_radius=float(statistics["radius_median"]),
                 previous_radius=float(state["last_radius"]),
+                current_radius_uncertainty=(
+                    0.5
+                    * (
+                        float(statistics["radius_p84"])
+                        - float(statistics["radius_p16"])
+                    )
+                ),
+                previous_radius_uncertainty=float(
+                    state["last_radius_uncertainty"]
+                ),
+                current_time=float(time),
+                previous_time=float(state["last_time"]),
+                previous_radial_velocity=float(state["last_velocity"]),
                 snapshots_since_detection=snapshots_since_detection,
                 grid_spacing=grid_spacing,
             )
@@ -1096,10 +1184,23 @@ def measure_shock_histories(
             )
             if tracking["detected"]:
                 state["last_radius"] = float(statistics["radius_median"])
+                state["last_radius_uncertainty"] = 0.5 * (
+                    float(statistics["radius_p84"])
+                    - float(statistics["radius_p16"])
+                )
+                state["last_time"] = float(time)
+                state["last_velocity"] = float(tracking["radial_velocity"])
                 state["last_snapshot"] = snapshot_index
 
         weaver_radius = (
             float(weaver.get_outer_shock_radius(float(time))) if time > 0.0 else 0.0
+        )
+        weaver_forward_mach = _weaver_forward_shock_mach(
+            radius=weaver_radius,
+            time=float(time),
+            ambient_density=AMBIENT_DENSITY,
+            ambient_pressure=AMBIENT_PRESSURE,
+            gamma=GAMMA,
         )
         # The injection source occupies a finite sphere.  Do not interpret a
         # comparison as resolved until the analytic shock is at least two grid
@@ -1121,6 +1222,12 @@ def measure_shock_histories(
             "reverse_track_status": tracked["reverse"]["track_status"],
             "reverse_continuity_ok": tracked["reverse"]["continuity_ok"],
             "reverse_radius_change": tracked["reverse"]["radius_change"],
+            "reverse_elapsed_time": tracked["reverse"]["elapsed_time"],
+            "reverse_radial_velocity": tracked["reverse"]["radial_velocity"],
+            "reverse_predicted_radius": tracked["reverse"]["predicted_radius"],
+            "reverse_prediction_residual": tracked["reverse"][
+                "prediction_residual"
+            ],
             "reverse_allowed_radius_change": tracked["reverse"][
                 "allowed_radius_change"
             ],
@@ -1144,6 +1251,12 @@ def measure_shock_histories(
             "forward_track_status": tracked["forward"]["track_status"],
             "forward_continuity_ok": tracked["forward"]["continuity_ok"],
             "forward_radius_change": tracked["forward"]["radius_change"],
+            "forward_elapsed_time": tracked["forward"]["elapsed_time"],
+            "forward_radial_velocity": tracked["forward"]["radial_velocity"],
+            "forward_predicted_radius": tracked["forward"]["predicted_radius"],
+            "forward_prediction_residual": tracked["forward"][
+                "prediction_residual"
+            ],
             "forward_allowed_radius_change": tracked["forward"][
                 "allowed_radius_change"
             ],
@@ -1163,6 +1276,7 @@ def measure_shock_histories(
             "forward_confidence_score": confidence["forward"]["confidence_score"],
             "forward_confidence_label": confidence["forward"]["confidence_label"],
             "weaver_outer_radius": weaver_radius,
+            "weaver_forward_mach": weaver_forward_mach,
             "resolved_for_weaver": resolved_for_weaver,
             "relative_error_vs_weaver": relative_error,
         }
@@ -1182,6 +1296,9 @@ def measure_shock_histories(
                     **confidence[shock_kind],
                     "weaver_outer_radius": (
                         weaver_radius if shock_kind == "forward" else np.nan
+                    ),
+                    "weaver_forward_mach": (
+                        weaver_forward_mach if shock_kind == "forward" else np.nan
                     ),
                     "relative_error_vs_weaver": (
                         relative_error if shock_kind == "forward" else np.nan
@@ -1231,6 +1348,7 @@ def measure_shock_histories(
     reverse_p16 = np.array([row["reverse_radius_p16"] for row in rows])
     reverse_p84 = np.array([row["reverse_radius_p84"] for row in rows])
     weaver_radius = np.array([row["weaver_outer_radius"] for row in rows])
+    weaver_forward_mach = np.array([row["weaver_forward_mach"] for row in rows])
     resolved = np.array([row["resolved_for_weaver"] for row in rows])
     valid_forward = np.isfinite(forward_median)
     valid_reverse = np.isfinite(reverse_median)
@@ -1319,6 +1437,14 @@ def measure_shock_histories(
             alpha=0.2,
         )
     mach_axis.axhline(1.0, color="grey", linestyle=":", linewidth=1.0)
+    valid_weaver_mach = resolved & np.isfinite(weaver_forward_mach)
+    mach_axis.plot(
+        history_times[valid_weaver_mach],
+        weaver_forward_mach[valid_weaver_mach],
+        color="black",
+        linestyle="--",
+        label=r"adiabatic Weaver $\dot R/c_{s,0}$",
+    )
     mach_axis.set(ylabel="Mach number", title="Surface Mach history")
     mach_axis.legend(fontsize=8)
 

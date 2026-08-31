@@ -11,6 +11,7 @@ from experiments.wind_bubble.run_single_bubble import (
     _surface_area_weights,
     _surface_dissipation_statistics,
     _temporal_tracking_diagnostics,
+    _weaver_forward_shock_mach,
     classify_reverse_shock_evidence,
     split_radial_shock_candidates,
 )
@@ -142,18 +143,33 @@ class TemporalShockTrackingTests(unittest.TestCase):
         initialized = _temporal_tracking_diagnostics(
             current_radius=0.10,
             previous_radius=np.nan,
+            current_radius_uncertainty=0.005,
+            previous_radius_uncertainty=np.nan,
+            current_time=0.10,
+            previous_time=np.nan,
+            previous_radial_velocity=np.nan,
             snapshots_since_detection=1,
             grid_spacing=self.grid_spacing,
         )
         missing = _temporal_tracking_diagnostics(
             current_radius=np.nan,
             previous_radius=0.10,
+            current_radius_uncertainty=np.nan,
+            previous_radius_uncertainty=0.005,
+            current_time=0.20,
+            previous_time=0.10,
+            previous_radial_velocity=np.nan,
             snapshots_since_detection=1,
             grid_spacing=self.grid_spacing,
         )
         reacquired = _temporal_tracking_diagnostics(
             current_radius=0.12,
             previous_radius=0.10,
+            current_radius_uncertainty=0.005,
+            previous_radius_uncertainty=0.005,
+            current_time=0.30,
+            previous_time=0.10,
+            previous_radial_velocity=np.nan,
             snapshots_since_detection=2,
             grid_spacing=self.grid_spacing,
         )
@@ -167,12 +183,59 @@ class TemporalShockTrackingTests(unittest.TestCase):
         result = _temporal_tracking_diagnostics(
             current_radius=0.40,
             previous_radius=0.10,
+            current_radius_uncertainty=0.005,
+            previous_radius_uncertainty=0.005,
+            current_time=0.20,
+            previous_time=0.10,
+            previous_radial_velocity=0.5,
             snapshots_since_detection=1,
             grid_spacing=self.grid_spacing,
         )
 
         self.assertEqual(result["track_status"], "discontinuous")
         self.assertFalse(result["continuity_ok"])
+
+    def test_constant_velocity_prediction_is_independent_of_snapshot_spacing(self):
+        short_interval = _temporal_tracking_diagnostics(
+            current_radius=0.15,
+            previous_radius=0.10,
+            current_radius_uncertainty=0.005,
+            previous_radius_uncertainty=0.005,
+            current_time=0.20,
+            previous_time=0.10,
+            previous_radial_velocity=0.5,
+            snapshots_since_detection=1,
+            grid_spacing=self.grid_spacing,
+        )
+        long_interval = _temporal_tracking_diagnostics(
+            current_radius=0.20,
+            previous_radius=0.10,
+            current_radius_uncertainty=0.005,
+            previous_radius_uncertainty=0.005,
+            current_time=0.30,
+            previous_time=0.10,
+            previous_radial_velocity=0.5,
+            snapshots_since_detection=2,
+            grid_spacing=self.grid_spacing,
+        )
+
+        self.assertTrue(short_interval["continuity_ok"])
+        self.assertTrue(long_interval["continuity_ok"])
+        self.assertAlmostEqual(short_interval["prediction_residual"], 0.0)
+        self.assertAlmostEqual(long_interval["prediction_residual"], 0.0)
+        self.assertAlmostEqual(short_interval["radial_velocity"], 0.5)
+        self.assertAlmostEqual(long_interval["radial_velocity"], 0.5)
+
+    def test_adiabatic_weaver_forward_mach_uses_similarity_speed(self):
+        mach = _weaver_forward_shock_mach(
+            radius=0.291671956,
+            time=0.2,
+            ambient_density=1.0,
+            ambient_pressure=0.01,
+            gamma=5.0 / 3.0,
+        )
+
+        self.assertAlmostEqual(mach, 6.7778437, places=6)
 
     def test_reverse_shock_quality_checks_use_inward_normal(self):
         statistics = {
