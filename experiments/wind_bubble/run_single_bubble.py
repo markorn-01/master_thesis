@@ -118,6 +118,15 @@ def parse_args() -> argparse.Namespace:
         help="Injection radius in grid cells (default: 4).",
     )
     parser.add_argument(
+        "--plasma-beta",
+        type=float,
+        default=None,
+        help=(
+            "Enable MHD with a uniform z-directed field whose initial ambient "
+            "plasma beta is this value. Omit for the hydrodynamic baseline."
+        ),
+    )
+    parser.add_argument(
         "--output-dir",
         type=Path,
         default=DEFAULT_OUTPUT_DIR,
@@ -138,21 +147,39 @@ def validate_args(args: argparse.Namespace) -> None:
             "--num-injection-cells must be positive and smaller than "
             "one quarter of --num-cells."
         )
+    if args.plasma_beta is not None and (
+        not np.isfinite(args.plasma_beta) or args.plasma_beta <= 0.0
+    ):
+        raise ValueError("--plasma-beta must be finite and positive.")
+
+
+def magnetic_field_strength_from_plasma_beta(
+    plasma_beta: float,
+    thermal_pressure: float = AMBIENT_PRESSURE,
+) -> float:
+    """Return ``B/sqrt(mu_0)`` for ``beta = p_th / (B^2 / 2)``."""
+    if not np.isfinite(plasma_beta) or plasma_beta <= 0.0:
+        raise ValueError("plasma_beta must be finite and positive.")
+    if not np.isfinite(thermal_pressure) or thermal_pressure <= 0.0:
+        raise ValueError("thermal_pressure must be finite and positive.")
+    return float(np.sqrt(2.0 * thermal_pressure / plasma_beta))
 
 
 def build_problem(args: argparse.Namespace):
     """Construct the uniform ambient medium and enable a centred 3D EI wind."""
+    mhd_enabled = args.plasma_beta is not None
     config = SimulationConfig(
         geometry=CARTESIAN,
         dimensionality=3,
         box_size=BOX_SIZE,
         num_cells=args.num_cells,
-        mhd=False,
+        mhd=mhd_enabled,
         return_snapshots=True,
         num_snapshots=args.num_snapshots,
         snapshot_settings=SnapshotSettings(
             return_states=True,
             return_final_state=True,
+            return_magnetic_divergence=mhd_enabled,
         ),
         wind_config=WindConfig(
             stellar_wind=True,
@@ -177,6 +204,14 @@ def build_problem(args: argparse.Namespace):
     density = jnp.full(spatial_shape, AMBIENT_DENSITY)
     pressure = jnp.full(spatial_shape, AMBIENT_PRESSURE)
     zero_velocity = jnp.zeros(spatial_shape)
+    magnetic_field_z = (
+        jnp.full(
+            spatial_shape,
+            magnetic_field_strength_from_plasma_beta(args.plasma_beta),
+        )
+        if mhd_enabled
+        else None
+    )
 
     initial_state = construct_primitive_state(
         config=config,
@@ -185,6 +220,9 @@ def build_problem(args: argparse.Namespace):
         velocity_x=zero_velocity,
         velocity_y=zero_velocity,
         velocity_z=zero_velocity,
+        magnetic_field_x=zero_velocity if mhd_enabled else None,
+        magnetic_field_y=zero_velocity if mhd_enabled else None,
+        magnetic_field_z=magnetic_field_z,
         gas_pressure=pressure,
     )
     config = finalize_config(config, initial_state.shape)
@@ -263,6 +301,89 @@ def plot_central_slices(
     output_path.parent.mkdir(parents=True, exist_ok=True)
     figure.savefig(output_path, dpi=180)
     plt.close(figure)
+
+
+def write_mhd_validation_diagnostics(
+    states: np.ndarray,
+    times: np.ndarray,
+    magnetic_divergence: np.ndarray,
+    registered_variables,
+    csv_path: Path,
+    plot_path: Path,
+) -> list[dict[str, float]]:
+    """Write stability and magnetic-field diagnostics without hydro shock claims."""
+    magnetic = states[
+        :,
+        registered_variables.magnetic_index.x : registered_variables.magnetic_index.z
+        + 1,
+    ]
+    pressure = states[:, registered_variables.pressure_index]
+    density = states[:, registered_variables.density_index]
+    magnetic_squared = np.sum(magnetic**2, axis=1)
+    plasma_beta = np.where(
+        magnetic_squared > 0.0,
+        2.0 * pressure / magnetic_squared,
+        np.nan,
+    )
+
+    rows = []
+    for snapshot_index, time in enumerate(times):
+        rows.append(
+            {
+                "time": float(time),
+                "snapshot_index": snapshot_index,
+                "max_abs_magnetic_divergence": float(
+                    magnetic_divergence[snapshot_index]
+                ),
+                "minimum_density": float(np.min(density[snapshot_index])),
+                "minimum_gas_pressure": float(np.min(pressure[snapshot_index])),
+                "rms_magnetic_field_x": float(
+                    np.sqrt(np.mean(magnetic[snapshot_index, 0] ** 2))
+                ),
+                "rms_magnetic_field_y": float(
+                    np.sqrt(np.mean(magnetic[snapshot_index, 1] ** 2))
+                ),
+                "rms_magnetic_field_z": float(
+                    np.sqrt(np.mean(magnetic[snapshot_index, 2] ** 2))
+                ),
+                "mean_magnetic_energy_density": float(
+                    0.5 * np.mean(magnetic_squared[snapshot_index])
+                ),
+                "median_plasma_beta": float(
+                    np.nanmedian(plasma_beta[snapshot_index])
+                ),
+            }
+        )
+
+    csv_path.parent.mkdir(parents=True, exist_ok=True)
+    with csv_path.open("w", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+        writer.writeheader()
+        writer.writerows(rows)
+
+    figure, axes = plt.subplots(2, 2, figsize=(11, 7), constrained_layout=True)
+    axes[0, 0].semilogy(
+        times,
+        np.maximum(magnetic_divergence, 1.0e-30),
+        marker="o",
+    )
+    axes[0, 0].set(title="Magnetic divergence", ylabel=r"max $|\nabla\cdot B|$")
+    for component, color in enumerate(("tab:red", "tab:green", "tab:blue")):
+        rms = np.sqrt(np.mean(magnetic[:, component] ** 2, axis=(1, 2, 3)))
+        axes[0, 1].plot(times, rms, marker="o", color=color, label=f"B{component}")
+    axes[0, 1].set(title="RMS magnetic components", ylabel="RMS B")
+    axes[0, 1].legend()
+    axes[1, 0].plot(times, np.min(density, axis=(1, 2, 3)), marker="o")
+    axes[1, 0].set(title="Density positivity", ylabel="minimum density")
+    axes[1, 1].plot(times, np.min(pressure, axis=(1, 2, 3)), marker="o")
+    axes[1, 1].set(title="Pressure positivity", ylabel="minimum gas pressure")
+    for axis in axes.flat:
+        axis.set_xlabel("time [code units]")
+        axis.grid(alpha=0.25)
+    figure.suptitle("MHD wind-bubble validation diagnostics")
+    figure.savefig(plot_path, dpi=180)
+    plt.close(figure)
+    return rows
 
 
 def analyze_shocks_3d(
@@ -1930,6 +2051,8 @@ def main() -> None:
     verification_plot_path = output_dir / "radial_verification_profiles.png"
     verification_csv_path = output_dir / "radial_verification_profiles.csv"
     reverse_verification_path = output_dir / "reverse_shock_verification.json"
+    mhd_validation_csv_path = output_dir / "mhd_validation.csv"
+    mhd_validation_plot_path = output_dir / "mhd_validation.png"
 
     (
         initial_state,
@@ -1941,6 +2064,12 @@ def main() -> None:
 
     injection_radius = args.num_injection_cells * float(config.grid_spacing)
     wind_luminosity = 0.5 * WIND_MASS_LOSS_RATE * WIND_FINAL_VELOCITY**2
+    mhd_enabled = args.plasma_beta is not None
+    background_magnetic_field = (
+        magnetic_field_strength_from_plasma_beta(args.plasma_beta)
+        if mhd_enabled
+        else 0.0
+    )
 
     print("=== 3D single-star wind-bubble analysis ===")
     print(f"Grid                 : {args.num_cells}^3")
@@ -1952,6 +2081,11 @@ def main() -> None:
     print(f"Wind mass-loss rate   : {WIND_MASS_LOSS_RATE}")
     print(f"Wind terminal velocity: {WIND_FINAL_VELOCITY}")
     print(f"Wind luminosity       : {wind_luminosity}")
+    print(f"MHD enabled           : {mhd_enabled}")
+    if mhd_enabled:
+        print(f"Initial plasma beta   : {args.plasma_beta}")
+        print("Magnetic orientation  : +z")
+        print(f"Initial Bz/sqrt(mu0)  : {background_magnetic_field:.8f}")
     print(
         "Units                 : dimensionless code units "
         "(preliminary same-unit Weaver scaling only)"
@@ -1985,6 +2119,35 @@ def main() -> None:
         output_path=central_slices_path,
     )
     print(f"Saved diagnostic figure: {central_slices_path.resolve()}")
+
+    if mhd_enabled:
+        magnetic_divergence = np.asarray(snapshots.magnetic_divergence)
+        if magnetic_divergence.shape != times.shape or not np.all(
+            np.isfinite(magnetic_divergence)
+        ):
+            raise RuntimeError("Invalid magnetic-divergence snapshot diagnostic.")
+        rows = write_mhd_validation_diagnostics(
+            states=states,
+            times=times,
+            magnetic_divergence=magnetic_divergence,
+            registered_variables=registered_variables,
+            csv_path=mhd_validation_csv_path,
+            plot_path=mhd_validation_plot_path,
+        )
+        final = rows[-1]
+        print(f"Saved MHD validation   : {mhd_validation_plot_path.resolve()}")
+        print(f"Saved MHD table        : {mhd_validation_csv_path.resolve()}")
+        print(
+            "Final max |div B|      : "
+            f"{final['max_abs_magnetic_divergence']:.6e}"
+        )
+        print(f"Final minimum density : {final['minimum_density']:.6e}")
+        print(f"Final minimum pressure: {final['minimum_gas_pressure']:.6e}")
+        print(
+            "Hydrodynamic shock Mach numbers and thermalization rates are "
+            "intentionally not evaluated for this MHD validation run."
+        )
+        return
 
     shock_results = analyze_shocks_3d(
         states=states,

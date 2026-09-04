@@ -1,6 +1,7 @@
 """Tests for radial reverse/forward shock-candidate separation."""
 
 import unittest
+from types import SimpleNamespace
 
 import numpy as np
 
@@ -12,9 +13,48 @@ from experiments.wind_bubble.run_single_bubble import (
     _surface_dissipation_statistics,
     _temporal_tracking_diagnostics,
     _weaver_forward_shock_mach,
+    build_problem,
     classify_reverse_shock_evidence,
+    magnetic_field_strength_from_plasma_beta,
     split_radial_shock_candidates,
 )
+
+
+class MHDInitializationTests(unittest.TestCase):
+    def test_beta_to_z_field_uses_alfvenic_code_units(self):
+        self.assertAlmostEqual(
+            magnetic_field_strength_from_plasma_beta(100.0),
+            np.sqrt(2.0e-4),
+        )
+        self.assertAlmostEqual(
+            magnetic_field_strength_from_plasma_beta(1.0),
+            np.sqrt(2.0e-2),
+        )
+
+    def test_beta_must_be_positive(self):
+        with self.assertRaises(ValueError):
+            magnetic_field_strength_from_plasma_beta(0.0)
+
+    def test_mhd_problem_has_uniform_z_directed_field(self):
+        args = SimpleNamespace(
+            num_cells=8,
+            num_snapshots=3,
+            t_end=0.01,
+            num_injection_cells=1,
+            plasma_beta=100.0,
+        )
+        state, config, _, registered, _ = build_problem(args)
+        state = np.asarray(state)
+
+        self.assertTrue(config.mhd)
+        self.assertTrue(config.snapshot_settings.return_magnetic_divergence)
+        self.assertEqual(state.shape, (8, 8, 8, 8))
+        np.testing.assert_allclose(state[registered.magnetic_index.x], 0.0)
+        np.testing.assert_allclose(state[registered.magnetic_index.y], 0.0)
+        np.testing.assert_allclose(
+            state[registered.magnetic_index.z],
+            magnetic_field_strength_from_plasma_beta(100.0),
+        )
 
 
 class RadialShockCandidateTests(unittest.TestCase):
