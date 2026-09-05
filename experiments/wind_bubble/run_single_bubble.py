@@ -386,6 +386,35 @@ def _mhd_bubble_extents(
     return parallel, perpendicular, aspect_ratio
 
 
+def _mhd_pressure_weighted_extents(
+    pressure: np.ndarray,
+    grid_spacing: float,
+    ambient_pressure: float = AMBIENT_PRESSURE,
+) -> tuple[float, float, float]:
+    """Return pressure-excess-weighted RMS extents parallel/perpendicular to B0."""
+    pressure_excess = np.maximum(np.asarray(pressure) - ambient_pressure, 0.0)
+    total_weight = float(np.sum(pressure_excess))
+    if total_weight <= 0.0:
+        return 0.0, 0.0, np.nan
+
+    coordinates = (
+        np.arange(pressure_excess.shape[0], dtype=float) + 0.5
+    ) * grid_spacing - BOX_SIZE / 2.0
+    rms_squared = []
+    for axis in range(3):
+        shape = [1, 1, 1]
+        shape[axis] = coordinates.size
+        squared_distance = coordinates.reshape(shape) ** 2
+        rms_squared.append(
+            float(np.sum(pressure_excess * squared_distance) / total_weight)
+        )
+
+    parallel = float(np.sqrt(rms_squared[2]))
+    perpendicular = float(np.sqrt(0.5 * (rms_squared[0] + rms_squared[1])))
+    aspect_ratio = parallel / perpendicular if perpendicular > 0.0 else np.nan
+    return parallel, perpendicular, aspect_ratio
+
+
 def write_mhd_validation_diagnostics(
     states: np.ndarray,
     times: np.ndarray,
@@ -416,6 +445,11 @@ def write_mhd_validation_diagnostics(
         parallel_extent, perpendicular_extent, aspect_ratio = _mhd_bubble_extents(
             pressure[snapshot_index], grid_spacing
         )
+        (
+            weighted_parallel_extent,
+            weighted_perpendicular_extent,
+            weighted_aspect_ratio,
+        ) = _mhd_pressure_weighted_extents(pressure[snapshot_index], grid_spacing)
         rows.append(
             {
                 "time": float(time),
@@ -443,6 +477,13 @@ def write_mhd_validation_diagnostics(
                 "bubble_extent_parallel_to_field": parallel_extent,
                 "bubble_extent_perpendicular_to_field": perpendicular_extent,
                 "bubble_axis_aspect_ratio": aspect_ratio,
+                "pressure_weighted_extent_parallel_to_field": (
+                    weighted_parallel_extent
+                ),
+                "pressure_weighted_extent_perpendicular_to_field": (
+                    weighted_perpendicular_extent
+                ),
+                "pressure_weighted_axis_aspect_ratio": weighted_aspect_ratio,
             }
         )
 
@@ -481,6 +522,15 @@ def write_mhd_validation_diagnostics(
         [row["bubble_extent_perpendicular_to_field"] for row in rows]
     )
     aspect = np.array([row["bubble_axis_aspect_ratio"] for row in rows])
+    weighted_parallel = np.array(
+        [row["pressure_weighted_extent_parallel_to_field"] for row in rows]
+    )
+    weighted_perpendicular = np.array(
+        [row["pressure_weighted_extent_perpendicular_to_field"] for row in rows]
+    )
+    weighted_aspect = np.array(
+        [row["pressure_weighted_axis_aspect_ratio"] for row in rows]
+    )
     axes[0].plot(times, parallel, marker="o", label=r"parallel ($z$)")
     axes[0].plot(
         times,
@@ -488,11 +538,25 @@ def write_mhd_validation_diagnostics(
         marker="o",
         label=r"perpendicular (mean $x,y$)",
     )
+    axes[0].plot(
+        times,
+        weighted_parallel,
+        linestyle="--",
+        label=r"pressure-weighted parallel ($z$)",
+    )
+    axes[0].plot(
+        times,
+        weighted_perpendicular,
+        linestyle="--",
+        label=r"pressure-weighted perpendicular",
+    )
     axes[0].set_ylabel("pressure-disturbed extent [code length]")
     axes[0].legend()
-    axes[1].plot(times, aspect, marker="o")
+    axes[1].plot(times, aspect, marker="o", label="outer extent")
+    axes[1].plot(times, weighted_aspect, marker="s", label="pressure-weighted")
     axes[1].axhline(1.0, color="black", linestyle="--", linewidth=1)
     axes[1].set_ylabel(r"aspect ratio $R_\parallel/R_\perp$")
+    axes[1].legend()
     for axis in axes:
         axis.set_xlabel("time [code units]")
         axis.grid(alpha=0.25)

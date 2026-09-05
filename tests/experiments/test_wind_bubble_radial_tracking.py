@@ -8,6 +8,7 @@ import numpy as np
 from experiments.wind_bubble.run_single_bubble import (
     _cumulative_trapezoid_over_detections,
     _mhd_bubble_extents,
+    _mhd_pressure_weighted_extents,
     _radial_band_statistics,
     _shock_tracking_confidence,
     _surface_area_weights,
@@ -74,6 +75,15 @@ class MHDInitializationTests(unittest.TestCase):
 
         self.assertGreater(parallel, perpendicular)
         self.assertAlmostEqual(aspect, parallel / perpendicular)
+
+        weighted_parallel, weighted_perpendicular, weighted_aspect = (
+            _mhd_pressure_weighted_extents(pressure, 1.0 / 9.0)
+        )
+        self.assertGreater(weighted_parallel, weighted_perpendicular)
+        self.assertAlmostEqual(
+            weighted_aspect,
+            weighted_parallel / weighted_perpendicular,
+        )
 
 
 class RadialShockCandidateTests(unittest.TestCase):
