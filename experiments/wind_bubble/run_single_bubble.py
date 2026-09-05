@@ -303,13 +303,98 @@ def plot_central_slices(
     plt.close(figure)
 
 
+def plot_field_aligned_slices(
+    states: np.ndarray,
+    times: np.ndarray,
+    density_index: int,
+    pressure_index: int,
+    output_path: Path,
+) -> None:
+    """Plot density and pressure in the central x-z plane containing B0."""
+    selected = np.array([0, len(times) // 2, len(times) - 1])
+    midplane = states.shape[-2] // 2
+    density_slices = [states[i, density_index, :, midplane, :] for i in selected]
+    pressure_slices = [states[i, pressure_index, :, midplane, :] for i in selected]
+    density_log = [np.log10(np.maximum(field, 1.0e-30)) for field in density_slices]
+    pressure_log = [np.log10(np.maximum(field, 1.0e-30)) for field in pressure_slices]
+    density_limits = (
+        min(field.min() for field in density_log),
+        max(field.max() for field in density_log),
+    )
+    pressure_limits = (
+        min(field.min() for field in pressure_log),
+        max(field.max() for field in pressure_log),
+    )
+
+    figure, axes = plt.subplots(2, 3, figsize=(12, 7), constrained_layout=True)
+    for column, snapshot_index in enumerate(selected):
+        density_image = axes[0, column].imshow(
+            density_log[column].T,
+            origin="lower",
+            extent=(0.0, BOX_SIZE, 0.0, BOX_SIZE),
+            vmin=density_limits[0],
+            vmax=density_limits[1],
+            cmap="viridis",
+        )
+        pressure_image = axes[1, column].imshow(
+            pressure_log[column].T,
+            origin="lower",
+            extent=(0.0, BOX_SIZE, 0.0, BOX_SIZE),
+            vmin=pressure_limits[0],
+            vmax=pressure_limits[1],
+            cmap="magma",
+        )
+        axes[0, column].set_title(f"t = {times[snapshot_index]:.4f}")
+        axes[1, column].set_xlabel("x [code length]")
+        for row in range(2):
+            axes[row, column].set_aspect("equal")
+        if column == 0:
+            axes[0, column].set_ylabel("z [code length]")
+            axes[1, column].set_ylabel("z [code length]")
+    figure.colorbar(
+        density_image,
+        ax=axes[0, :],
+        label=r"$\log_{10}(\rho)$ [code units]",
+        shrink=0.9,
+    )
+    figure.colorbar(
+        pressure_image,
+        ax=axes[1, :],
+        label=r"$\log_{10}(p)$ [code units]",
+        shrink=0.9,
+    )
+    figure.suptitle("Single-star wind bubble: field-aligned x-z plane")
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    figure.savefig(output_path, dpi=180)
+    plt.close(figure)
+
+
+def _mhd_bubble_extents(
+    pressure: np.ndarray,
+    grid_spacing: float,
+    ambient_pressure: float = AMBIENT_PRESSURE,
+) -> tuple[float, float, float]:
+    """Return z-parallel, mean x/y-perpendicular extents and their ratio."""
+    mask = np.asarray(pressure) > 1.01 * ambient_pressure
+    if not np.any(mask):
+        return 0.0, 0.0, np.nan
+    coordinates = (np.argwhere(mask) + 0.5) * grid_spacing
+    half_extents = np.max(np.abs(coordinates - BOX_SIZE / 2.0), axis=0)
+    perpendicular = float(np.mean(half_extents[:2]))
+    parallel = float(half_extents[2])
+    aspect_ratio = parallel / perpendicular if perpendicular > 0.0 else np.nan
+    return parallel, perpendicular, aspect_ratio
+
+
 def write_mhd_validation_diagnostics(
     states: np.ndarray,
     times: np.ndarray,
     magnetic_divergence: np.ndarray,
     registered_variables,
+    grid_spacing: float,
     csv_path: Path,
     plot_path: Path,
+    morphology_plot_path: Path,
 ) -> list[dict[str, float]]:
     """Write stability and magnetic-field diagnostics without hydro shock claims."""
     magnetic = states[
@@ -328,6 +413,9 @@ def write_mhd_validation_diagnostics(
 
     rows = []
     for snapshot_index, time in enumerate(times):
+        parallel_extent, perpendicular_extent, aspect_ratio = _mhd_bubble_extents(
+            pressure[snapshot_index], grid_spacing
+        )
         rows.append(
             {
                 "time": float(time),
@@ -352,6 +440,9 @@ def write_mhd_validation_diagnostics(
                 "median_plasma_beta": float(
                     np.nanmedian(plasma_beta[snapshot_index])
                 ),
+                "bubble_extent_parallel_to_field": parallel_extent,
+                "bubble_extent_perpendicular_to_field": perpendicular_extent,
+                "bubble_axis_aspect_ratio": aspect_ratio,
             }
         )
 
@@ -382,6 +473,31 @@ def write_mhd_validation_diagnostics(
         axis.grid(alpha=0.25)
     figure.suptitle("MHD wind-bubble validation diagnostics")
     figure.savefig(plot_path, dpi=180)
+    plt.close(figure)
+
+    figure, axes = plt.subplots(1, 2, figsize=(10, 4), constrained_layout=True)
+    parallel = np.array([row["bubble_extent_parallel_to_field"] for row in rows])
+    perpendicular = np.array(
+        [row["bubble_extent_perpendicular_to_field"] for row in rows]
+    )
+    aspect = np.array([row["bubble_axis_aspect_ratio"] for row in rows])
+    axes[0].plot(times, parallel, marker="o", label=r"parallel ($z$)")
+    axes[0].plot(
+        times,
+        perpendicular,
+        marker="o",
+        label=r"perpendicular (mean $x,y$)",
+    )
+    axes[0].set_ylabel("pressure-disturbed extent [code length]")
+    axes[0].legend()
+    axes[1].plot(times, aspect, marker="o")
+    axes[1].axhline(1.0, color="black", linestyle="--", linewidth=1)
+    axes[1].set_ylabel(r"aspect ratio $R_\parallel/R_\perp$")
+    for axis in axes:
+        axis.set_xlabel("time [code units]")
+        axis.grid(alpha=0.25)
+    figure.suptitle("MHD bubble morphology relative to the initial field")
+    figure.savefig(morphology_plot_path, dpi=180)
     plt.close(figure)
     return rows
 
@@ -2053,6 +2169,8 @@ def main() -> None:
     reverse_verification_path = output_dir / "reverse_shock_verification.json"
     mhd_validation_csv_path = output_dir / "mhd_validation.csv"
     mhd_validation_plot_path = output_dir / "mhd_validation.png"
+    field_aligned_slices_path = output_dir / "field_aligned_slices.png"
+    mhd_morphology_plot_path = output_dir / "mhd_morphology.png"
 
     (
         initial_state,
@@ -2121,6 +2239,13 @@ def main() -> None:
     print(f"Saved diagnostic figure: {central_slices_path.resolve()}")
 
     if mhd_enabled:
+        plot_field_aligned_slices(
+            states=states,
+            times=times,
+            density_index=registered_variables.density_index,
+            pressure_index=registered_variables.pressure_index,
+            output_path=field_aligned_slices_path,
+        )
         magnetic_divergence = np.asarray(snapshots.magnetic_divergence)
         if magnetic_divergence.shape != times.shape or not np.all(
             np.isfinite(magnetic_divergence)
@@ -2131,12 +2256,16 @@ def main() -> None:
             times=times,
             magnetic_divergence=magnetic_divergence,
             registered_variables=registered_variables,
+            grid_spacing=float(config.grid_spacing),
             csv_path=mhd_validation_csv_path,
             plot_path=mhd_validation_plot_path,
+            morphology_plot_path=mhd_morphology_plot_path,
         )
         final = rows[-1]
         print(f"Saved MHD validation   : {mhd_validation_plot_path.resolve()}")
         print(f"Saved MHD table        : {mhd_validation_csv_path.resolve()}")
+        print(f"Saved field-aligned view: {field_aligned_slices_path.resolve()}")
+        print(f"Saved MHD morphology   : {mhd_morphology_plot_path.resolve()}")
         print(
             "Final max |div B|      : "
             f"{final['max_abs_magnetic_divergence']:.6e}"
