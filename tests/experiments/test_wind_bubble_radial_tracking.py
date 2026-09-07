@@ -85,6 +85,30 @@ class MHDInitializationTests(unittest.TestCase):
             weighted_parallel / weighted_perpendicular,
         )
 
+    def test_mhd_bubble_extents_handle_undisturbed_ambient_medium(self):
+        pressure = np.full((8, 8, 8), 0.01)
+
+        outer = _mhd_bubble_extents(pressure, 1.0 / 8.0)
+        weighted = _mhd_pressure_weighted_extents(pressure, 1.0 / 8.0)
+
+        self.assertEqual(outer[:2], (0.0, 0.0))
+        self.assertTrue(np.isnan(outer[2]))
+        self.assertEqual(weighted[:2], (0.0, 0.0))
+        self.assertTrue(np.isnan(weighted[2]))
+
+    def test_pressure_weighted_extent_is_unity_for_spherical_disturbance(self):
+        pressure = np.full((9, 9, 9), 0.01)
+        coordinates = (np.arange(9) + 0.5) / 9.0
+        x, y, z = np.meshgrid(coordinates, coordinates, coordinates, indexing="ij")
+        pressure[(x - 0.5) ** 2 + (y - 0.5) ** 2 + (z - 0.5) ** 2 <= 0.3**2] = 0.02
+
+        parallel, perpendicular, aspect = _mhd_pressure_weighted_extents(
+            pressure, 1.0 / 9.0
+        )
+
+        self.assertAlmostEqual(parallel, perpendicular)
+        self.assertAlmostEqual(aspect, 1.0)
+
 
 class RadialShockCandidateTests(unittest.TestCase):
     def setUp(self):
