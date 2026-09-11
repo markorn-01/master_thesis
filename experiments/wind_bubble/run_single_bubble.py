@@ -489,7 +489,11 @@ def write_mhd_validation_diagnostics(
 
     csv_path.parent.mkdir(parents=True, exist_ok=True)
     with csv_path.open("w", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=list(rows[0]),
+            lineterminator="\n",
+        )
         writer.writeheader()
         writer.writerows(rows)
 

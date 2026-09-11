@@ -100,7 +100,11 @@ def write_combined_history(
     output_path.parent.mkdir(parents=True, exist_ok=True)
     fieldnames = ("run_label", "source_csv", *REQUIRED_COLUMNS)
     with output_path.open("w", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=fieldnames,
+            lineterminator="\n",
+        )
         writer.writeheader()
         for label, source, rows in histories:
             for row in rows:
@@ -122,9 +126,13 @@ def plot_comparison(
         }
         times = values["time"]
         magnetic_energy = values["mean_magnetic_energy_density"]
+        rms_magnetic_field = np.sqrt(2.0 * magnetic_energy)
+        normalized_divergence = (
+            values["max_abs_magnetic_divergence"] / rms_magnetic_field
+        )
         axes[0, 0].semilogy(
             times,
-            np.maximum(values["max_abs_magnetic_divergence"], 1.0e-30),
+            np.maximum(normalized_divergence, 1.0e-30),
             marker="o",
             label=label,
         )
@@ -153,7 +161,10 @@ def plot_comparison(
             label=label,
         )
 
-    axes[0, 0].set(title="Magnetic divergence", ylabel=r"max $|\nabla\cdot B|$")
+    axes[0, 0].set(
+        title="Field-normalized magnetic divergence",
+        ylabel=r"max $|\nabla\cdot B|/B_{\mathrm{rms}}$ [length$^{-1}$]",
+    )
     axes[0, 1].set(
         title="Magnetic-energy evolution",
         ylabel=r"$\langle B^2/2\rangle / \langle B^2/2\rangle_{t=0}$",
