@@ -30,6 +30,12 @@ REQUIRED_COLUMNS = (
     "pressure_weighted_axis_aspect_ratio",
 )
 DEFAULT_OUTPUT_DIR = Path("outputs/mhd_comparison_n064")
+RUN_MARKERS = ("o", "x", "s", "^", "D", "v", "P", "X")
+
+
+def marker_for_run(run_index: int) -> str:
+    """Return a repeatable marker that keeps overlapping runs visible."""
+    return RUN_MARKERS[run_index % len(RUN_MARKERS)]
 
 
 def parse_run_specification(value: str) -> tuple[str, Path]:
@@ -119,7 +125,8 @@ def plot_comparison(
 ) -> None:
     """Plot stability and continuous morphology diagnostics across runs."""
     figure, axes = plt.subplots(2, 2, figsize=(11, 8), constrained_layout=True)
-    for label, _, rows in histories:
+    for run_index, (label, _, rows) in enumerate(histories):
+        marker = marker_for_run(run_index)
         values = {
             column: np.array([row[column] for row in rows])
             for column in REQUIRED_COLUMNS
@@ -133,31 +140,33 @@ def plot_comparison(
         axes[0, 0].semilogy(
             times,
             np.maximum(normalized_divergence, 1.0e-30),
-            marker="o",
+            marker=marker,
             label=label,
         )
         axes[0, 1].plot(
             times,
             magnetic_energy / magnetic_energy[0],
-            marker="o",
+            marker=marker,
             label=label,
         )
         line = axes[1, 0].plot(
             times,
             values["pressure_weighted_extent_parallel_to_field"],
+            marker=marker,
             label=f"{label}: parallel",
         )[0]
         axes[1, 0].plot(
             times,
             values["pressure_weighted_extent_perpendicular_to_field"],
             linestyle="--",
+            marker=marker,
             color=line.get_color(),
             label=f"{label}: perpendicular",
         )
         axes[1, 1].plot(
             times,
             values["pressure_weighted_axis_aspect_ratio"],
-            marker="o",
+            marker=marker,
             label=label,
         )
 

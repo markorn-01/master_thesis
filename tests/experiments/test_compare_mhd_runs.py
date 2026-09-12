@@ -8,6 +8,8 @@ import unittest
 
 from experiments.wind_bubble.compare_mhd_runs import (
     REQUIRED_COLUMNS,
+    RUN_MARKERS,
+    marker_for_run,
     parse_run_specification,
     read_mhd_history,
     write_combined_history,
@@ -39,6 +41,11 @@ class MHDComparisonTests(unittest.TestCase):
         self.assertEqual(path, Path("outputs/run.csv"))
         with self.assertRaises(argparse.ArgumentTypeError):
             parse_run_specification("outputs/run.csv")
+
+    def test_each_run_gets_a_distinct_repeatable_marker(self):
+        markers = [marker_for_run(index) for index in range(len(RUN_MARKERS))]
+        self.assertEqual(len(markers), len(set(markers)))
+        self.assertEqual(marker_for_run(len(RUN_MARKERS)), RUN_MARKERS[0])
 
     def test_read_and_combine_histories(self):
         with tempfile.TemporaryDirectory() as directory:
