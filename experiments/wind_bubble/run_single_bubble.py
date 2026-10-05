@@ -50,6 +50,9 @@ from astronomix._modules._stellar_wind.weaver import Weaver
 from astronomix._physics_modules._shock_finder.pfrommer_shock_finder import (
     find_shocks_pfrommer,
 )
+from astronomix._physics_modules._shock_finder.mhd_shock_finder import (
+    find_fast_mhd_shocks,
+)
 from astronomix._physics_modules._shock_finder._gradients import (
     _calculate_velocity_divergence,
 )
@@ -614,6 +617,245 @@ def analyze_shocks_3d(
             f"snapshot {snapshot_index:02d}: {surface_mask.sum()} shock-surface cells"
         )
     return shock_results
+
+
+def analyze_fast_mhd_shocks_3d(
+    states: np.ndarray,
+    config: SimulationConfig,
+    registered_variables,
+    helper_data,
+):
+    """Run the orientation-aware fast-MHD finder for every saved snapshot."""
+    shock_results = []
+    print("\n=== Orientation-aware fast-MHD shock finding ===")
+    for snapshot_index, state in enumerate(states):
+        result = find_fast_mhd_shocks(
+            jnp.asarray(state),
+            config,
+            registered_variables,
+            helper_data,
+            gamma_gas=GAMMA,
+        )
+        surface_mask = np.asarray(result.shock_surface_cells, dtype=bool)
+        fast_shock_mask = np.asarray(result.fast_shock_cells, dtype=bool)
+        surface_offsets = np.asarray(result.shock_surface_offsets)
+        shock_direction = np.moveaxis(
+            np.asarray(result.shock_direction),
+            0,
+            -1,
+        )
+        centers = np.asarray(helper_data.geometric_centers)
+        refined_centers = centers + (
+            float(config.grid_spacing)
+            * surface_offsets[..., np.newaxis]
+            * shock_direction
+        )
+        refined_radii = np.linalg.norm(
+            refined_centers - BOX_SIZE / 2.0,
+            axis=-1,
+        )
+        shock_results.append(
+            {
+                "surface_mask": surface_mask,
+                "fast_shock_mask": fast_shock_mask,
+                "sampling_valid": np.asarray(result.sampling_valid, dtype=bool),
+                "refined_radii": refined_radii,
+                "upstream_fast_mach": np.asarray(result.upstream_fast_mach),
+                "downstream_fast_mach": np.asarray(result.downstream_fast_mach),
+                "field_obliquity_degrees": np.asarray(
+                    result.field_obliquity_degrees
+                ),
+                "upstream_fast_speed": np.asarray(result.upstream_fast_speed),
+                "normal_shock_speed": np.asarray(result.normal_shock_speed),
+            }
+        )
+        print(
+            f"snapshot {snapshot_index:02d}: "
+            f"{surface_mask.sum()} candidates, "
+            f"{fast_shock_mask.sum()} classified fast shocks"
+        )
+    return shock_results
+
+
+def _mhd_fast_shock_band_statistics(
+    band_radii: np.ndarray,
+    all_radii: np.ndarray,
+    all_fast_mach: np.ndarray,
+    all_obliquity: np.ndarray,
+    all_fast_speed: np.ndarray,
+    all_shock_speed: np.ndarray,
+) -> dict[str, float | int]:
+    """Return robust scalar summaries for one radial fast-shock band."""
+    if band_radii.size == 0:
+        return {
+            "cell_count": 0,
+            "radius_median": np.nan,
+            "fast_mach_median": np.nan,
+            "obliquity_median_degrees": np.nan,
+            "upstream_fast_speed_median": np.nan,
+            "normal_shock_speed_median": np.nan,
+        }
+
+    band_mask = (all_radii >= np.min(band_radii)) & (
+        all_radii <= np.max(band_radii)
+    )
+
+    def finite_median(values):
+        selected = np.asarray(values)[band_mask]
+        selected = selected[np.isfinite(selected)]
+        return float(np.median(selected)) if selected.size else np.nan
+
+    return {
+        "cell_count": int(band_radii.size),
+        "radius_median": float(np.median(band_radii)),
+        "fast_mach_median": finite_median(all_fast_mach),
+        "obliquity_median_degrees": finite_median(all_obliquity),
+        "upstream_fast_speed_median": finite_median(all_fast_speed),
+        "normal_shock_speed_median": finite_median(all_shock_speed),
+    }
+
+
+def write_fast_mhd_shock_diagnostics(
+    times: np.ndarray,
+    shock_results,
+    injection_radius: float,
+    grid_spacing: float,
+    csv_path: Path,
+    plot_path: Path,
+) -> list[dict[str, float | int]]:
+    """Write per-snapshot forward/reverse fast-shock summaries."""
+    rows = []
+    for snapshot_index, time in enumerate(times):
+        result = shock_results[snapshot_index]
+        surface_mask = result["surface_mask"]
+        fast_mask = result["fast_shock_mask"]
+        outside = result["refined_radii"] > injection_radius
+        candidate_mask = surface_mask & outside
+        classified_mask = fast_mask & outside
+        candidate_count = int(np.count_nonzero(candidate_mask))
+        valid_count = int(
+            np.count_nonzero(result["sampling_valid"] & candidate_mask)
+        )
+        fast_count = int(np.count_nonzero(classified_mask))
+
+        radii = result["refined_radii"][classified_mask]
+        fast_mach = result["upstream_fast_mach"][classified_mask]
+        obliquity = result["field_obliquity_degrees"][classified_mask]
+        fast_speed = result["upstream_fast_speed"][classified_mask]
+        shock_speed = result["normal_shock_speed"][classified_mask]
+        reverse_radii, forward_radii, separation_radius = (
+            split_radial_shock_candidates(
+                radii,
+                injection_radius=injection_radius,
+                grid_spacing=grid_spacing,
+            )
+        )
+        reverse = _mhd_fast_shock_band_statistics(
+            reverse_radii,
+            radii,
+            fast_mach,
+            obliquity,
+            fast_speed,
+            shock_speed,
+        )
+        forward = _mhd_fast_shock_band_statistics(
+            forward_radii,
+            radii,
+            fast_mach,
+            obliquity,
+            fast_speed,
+            shock_speed,
+        )
+        row = {
+            "time": float(time),
+            "snapshot_index": snapshot_index,
+            "candidate_surface_cell_count": candidate_count,
+            "valid_sampling_fraction": (
+                float(valid_count / candidate_count)
+                if candidate_count
+                else np.nan
+            ),
+            "fast_shock_cell_count": fast_count,
+            "fast_shock_fraction": (
+                float(fast_count / candidate_count)
+                if candidate_count
+                else np.nan
+            ),
+            "separation_radius": separation_radius,
+        }
+        for shock_kind, statistics in (
+            ("reverse", reverse),
+            ("forward", forward),
+        ):
+            for name, value in statistics.items():
+                row[f"{shock_kind}_{name}"] = value
+        rows.append(row)
+
+    csv_path.parent.mkdir(parents=True, exist_ok=True)
+    with csv_path.open("w", newline="", encoding="utf-8") as csv_file:
+        writer = csv.DictWriter(csv_file, fieldnames=list(rows[0]))
+        writer.writeheader()
+        writer.writerows(rows)
+
+    figure, axes = plt.subplots(2, 2, figsize=(12, 9), constrained_layout=True)
+    candidate_count = np.asarray(
+        [row["candidate_surface_cell_count"] for row in rows]
+    )
+    fast_count = np.asarray([row["fast_shock_cell_count"] for row in rows])
+    axes[0, 0].plot(times, candidate_count, marker="o", label="candidates")
+    axes[0, 0].plot(times, fast_count, marker="s", label="fast shocks")
+    axes[0, 0].set(title="Surface classification", ylabel="cell count")
+    axes[0, 0].legend()
+
+    for shock_kind, color in (("reverse", "tab:orange"), ("forward", "tab:blue")):
+        radius = np.asarray(
+            [row[f"{shock_kind}_radius_median"] for row in rows],
+            dtype=float,
+        )
+        fast_mach_history = np.asarray(
+            [row[f"{shock_kind}_fast_mach_median"] for row in rows],
+            dtype=float,
+        )
+        angle = np.asarray(
+            [
+                row[f"{shock_kind}_obliquity_median_degrees"]
+                for row in rows
+            ],
+            dtype=float,
+        )
+        axes[0, 1].plot(
+            times,
+            radius,
+            marker="o",
+            color=color,
+            label=shock_kind,
+        )
+        axes[1, 0].plot(
+            times,
+            fast_mach_history,
+            marker="o",
+            color=color,
+            label=shock_kind,
+        )
+        axes[1, 1].plot(
+            times,
+            angle,
+            marker="o",
+            color=color,
+            label=shock_kind,
+        )
+    axes[0, 1].set(title="Fast-shock radius", ylabel="radius [code length]")
+    axes[1, 0].axhline(1.0, color="black", linestyle=":", linewidth=1.0)
+    axes[1, 0].set(title="Upstream fast Mach number", ylabel=r"$\mathcal{M}_f$")
+    axes[1, 1].set(title="Field obliquity", ylabel=r"$\theta_{Bn}$ [deg]")
+    for axis in axes.flat:
+        axis.set_xlabel("time [code units]")
+        axis.grid(alpha=0.25)
+        axis.legend(fontsize=8)
+    figure.suptitle("Orientation-aware fast-MHD shock diagnostics")
+    figure.savefig(plot_path, dpi=180)
+    plt.close(figure)
+    return rows
 
 
 def plot_shock_diagnostics(
@@ -2239,6 +2481,8 @@ def main() -> None:
     mhd_validation_plot_path = output_dir / "mhd_validation.png"
     field_aligned_slices_path = output_dir / "field_aligned_slices.png"
     mhd_morphology_plot_path = output_dir / "mhd_morphology.png"
+    mhd_shock_csv_path = output_dir / "mhd_shock_diagnostics.csv"
+    mhd_shock_plot_path = output_dir / "mhd_shock_diagnostics.png"
 
     (
         initial_state,
@@ -2341,8 +2585,28 @@ def main() -> None:
         print(f"Final minimum density : {final['minimum_density']:.6e}")
         print(f"Final minimum pressure: {final['minimum_gas_pressure']:.6e}")
         print(
-            "Hydrodynamic shock Mach numbers and thermalization rates are "
-            "intentionally not evaluated for this MHD validation run."
+            "Hydrodynamic shock Mach numbers and thermalization rates remain "
+            "disabled for this MHD run."
+        )
+        mhd_shock_results = analyze_fast_mhd_shocks_3d(
+            states=states,
+            config=config,
+            registered_variables=registered_variables,
+            helper_data=helper_data,
+        )
+        write_fast_mhd_shock_diagnostics(
+            times=times,
+            shock_results=mhd_shock_results,
+            injection_radius=injection_radius,
+            grid_spacing=float(config.grid_spacing),
+            csv_path=mhd_shock_csv_path,
+            plot_path=mhd_shock_plot_path,
+        )
+        print(f"Saved MHD shock table  : {mhd_shock_csv_path.resolve()}")
+        print(f"Saved MHD shock figure : {mhd_shock_plot_path.resolve()}")
+        print(
+            "MHD shock outputs use local fast-magnetosonic speeds; MHD "
+            "thermal-energy dissipation is not yet evaluated."
         )
         return
 
