@@ -105,12 +105,24 @@ def _smooth_ramp(
     return fraction**2 * (3.0 - 2.0 * fraction)
 
 
+def normalized_vector(components) -> np.ndarray:
+    """Return a three-component unit vector."""
+    vector = np.asarray(components, dtype=float)
+    if vector.shape != (3,):
+        raise ValueError("normal must contain exactly three components")
+    magnitude = np.linalg.norm(vector)
+    if not np.isfinite(magnitude) or magnitude <= 0.0:
+        raise ValueError("normal must be finite and nonzero")
+    return vector / magnitude
+
+
 def build_planar_shock_state(
     resolution: int,
     mach: float,
     ramp_cells: float,
+    normal=(1.0, 0.0, 0.0),
 ):
-    """Construct a 3D x-normal shock with exact constant plateau states."""
+    """Construct a 3D planar shock with exact constant plateau states."""
     if resolution < 12:
         raise ValueError("resolution must be at least 12")
     if ramp_cells <= 0.0:
@@ -126,11 +138,16 @@ def build_planar_shock_state(
     helper_data = get_helper_data(config)
     registered_variables = get_registered_variables(config)
     centers = helper_data.geometric_centers
-    x_coordinate = centers[..., 0]
+    unit_normal = normalized_vector(normal)
+    box_center = jnp.full((3,), SHOCK_POSITION)
+    signed_distance = jnp.sum(
+        (centers - box_center) * jnp.asarray(unit_normal),
+        axis=-1,
+    )
     grid_spacing = BOX_SIZE / resolution
     upstream_weight = _smooth_ramp(
-        x_coordinate,
-        SHOCK_POSITION,
+        signed_distance,
+        0.0,
         ramp_cells * grid_spacing,
     )
     states = rankine_hugoniot_states(mach)
@@ -146,7 +163,7 @@ def build_planar_shock_state(
     pressure = blend(
         states["downstream_pressure"], states["upstream_pressure"]
     )
-    velocity_x = blend(
+    normal_velocity = blend(
         states["downstream_velocity"], states["upstream_velocity"]
     )
     zeros = jnp.zeros_like(density)
@@ -154,25 +171,44 @@ def build_planar_shock_state(
         config=config,
         registered_variables=registered_variables,
         density=density,
-        velocity_x=velocity_x,
-        velocity_y=zeros,
-        velocity_z=zeros,
+        velocity_x=normal_velocity * unit_normal[0],
+        velocity_y=(
+            normal_velocity * unit_normal[1]
+            if unit_normal[1] != 0.0
+            else zeros
+        ),
+        velocity_z=(
+            normal_velocity * unit_normal[2]
+            if unit_normal[2] != 0.0
+            else zeros
+        ),
         gas_pressure=pressure,
     )
     config = finalize_config(config, primitive_state.shape)
-    return primitive_state, config, registered_variables, helper_data, states
+    return (
+        primitive_state,
+        config,
+        registered_variables,
+        helper_data,
+        states,
+        unit_normal,
+    )
 
 
 def benchmark_resolution(
     resolution: int,
     mach: float,
     ramp_cells: float,
+    normal=(1.0, 0.0, 0.0),
 ) -> dict[str, float | int]:
     """Run the unchanged finder and summarize its planar-shock recovery."""
-    state, config, variables, helper_data, _ = build_planar_shock_state(
-        resolution=resolution,
-        mach=mach,
-        ramp_cells=ramp_cells,
+    state, config, variables, helper_data, _, unit_normal = (
+        build_planar_shock_state(
+            resolution=resolution,
+            mach=mach,
+            ramp_cells=ramp_cells,
+            normal=normal,
+        )
     )
     result = find_shocks_pfrommer(
         state,
@@ -197,12 +233,16 @@ def benchmark_resolution(
     centers = np.asarray(helper_data.geometric_centers)
     direction = np.moveaxis(np.asarray(result.shock_direction), 0, -1)
     offsets = np.asarray(result.shock_surface_offsets)
-    refined_x = centers[..., 0] + (
-        config.grid_spacing * offsets * direction[..., 0]
+    refined_centers = centers + (
+        config.grid_spacing * offsets[..., np.newaxis] * direction
     )
-    surface_x = refined_x[surface]
+    plane_center = np.full(3, SHOCK_POSITION)
+    signed_surface_distance = np.sum(
+        (refined_centers[surface] - plane_center) * unit_normal,
+        axis=-1,
+    )
     surface_direction = direction[surface]
-    normal_alignment = surface_direction[:, 0]
+    normal_alignment = np.sum(surface_direction * unit_normal, axis=-1)
     p16, median, p84 = np.percentile(valid_mach, [16.0, 50.0, 84.0])
 
     return {
@@ -210,6 +250,9 @@ def benchmark_resolution(
         "grid_spacing": float(config.grid_spacing),
         "true_mach": float(mach),
         "ramp_cells": float(ramp_cells),
+        "normal_x": float(unit_normal[0]),
+        "normal_y": float(unit_normal[1]),
+        "normal_z": float(unit_normal[2]),
         "surface_cell_count": int(surface.sum()),
         "valid_mach_fraction": float(valid_mach.size / mach_values.size),
         "mach_median": float(median),
@@ -217,11 +260,13 @@ def benchmark_resolution(
         "mach_p84": float(p84),
         "mach_relative_bias": float(median / mach - 1.0),
         "mach_relative_scatter": float((p84 - p16) / (2.0 * mach)),
-        "surface_x_median": float(np.median(surface_x)),
-        "surface_position_error_cells": float(
-            (np.median(surface_x) - SHOCK_POSITION) / config.grid_spacing
+        "surface_signed_distance_median": float(
+            np.median(signed_surface_distance)
         ),
-        "normal_x_median": float(np.median(normal_alignment)),
+        "surface_position_error_cells": float(
+            np.median(signed_surface_distance) / config.grid_spacing
+        ),
+        "normal_alignment_median": float(np.median(normal_alignment)),
         "normal_angular_error_degrees": float(
             np.degrees(
                 np.arccos(np.clip(np.median(normal_alignment), -1.0, 1.0))
@@ -244,6 +289,9 @@ def write_outputs(rows: list[dict], output_dir: Path) -> None:
     p16 = np.asarray([row["mach_p16"] for row in rows])
     p84 = np.asarray([row["mach_p84"] for row in rows])
     true_mach = float(rows[0]["true_mach"])
+    unit_normal = np.asarray(
+        [rows[0]["normal_x"], rows[0]["normal_y"], rows[0]["normal_z"]]
+    )
     position_error = np.asarray(
         [row["surface_position_error_cells"] for row in rows]
     )
@@ -280,7 +328,8 @@ def write_outputs(rows: list[dict], output_dir: Path) -> None:
         axis.grid(alpha=0.25)
 
     figure.suptitle(
-        f"Planar hydrodynamic shock benchmark (Mach {true_mach:g})"
+        "Planar hydrodynamic shock benchmark "
+        f"(Mach {true_mach:g}, normal={np.array2string(unit_normal, precision=3)})"
     )
     figure_path = output_dir / "planar_shock_benchmark.png"
     figure.savefig(figure_path, dpi=180)
@@ -293,6 +342,14 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--mach", type=float, default=5.0)
     parser.add_argument("--ramp-cells", type=float, default=3.0)
+    parser.add_argument(
+        "--normal",
+        nargs=3,
+        type=float,
+        default=[1.0, 0.0, 0.0],
+        metavar=("NX", "NY", "NZ"),
+        help="Planar shock normal; it is normalized internally.",
+    )
     parser.add_argument(
         "--resolutions",
         nargs="+",
@@ -315,6 +372,7 @@ def main() -> None:
             resolution=resolution,
             mach=args.mach,
             ramp_cells=args.ramp_cells,
+            normal=args.normal,
         )
         rows.append(row)
         print(

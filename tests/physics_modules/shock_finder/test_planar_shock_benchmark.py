@@ -6,6 +6,7 @@ import numpy as np
 
 from experiments.shock.run_planar_shock_benchmark import (
     benchmark_resolution,
+    normalized_vector,
     rankine_hugoniot_states,
 )
 
@@ -46,6 +47,29 @@ class PlanarShockBenchmarkTests(unittest.TestCase):
         self.assertGreater(metrics["valid_mach_fraction"], 0.99)
         self.assertGreater(metrics["mach_median"], 1.3)
         self.assertLess(metrics["normal_angular_error_degrees"], 1.0e-3)
+
+    def test_face_diagonal_planar_snapshot_is_detected(self):
+        metrics = benchmark_resolution(
+            resolution=24,
+            mach=5.0,
+            ramp_cells=3.0,
+            normal=(1.0, 1.0, 0.0),
+        )
+
+        self.assertGreater(metrics["surface_cell_count"], 0)
+        self.assertGreater(metrics["valid_mach_fraction"], 0.99)
+        self.assertGreater(metrics["mach_median"], 1.3)
+        self.assertLess(metrics["normal_angular_error_degrees"], 1.0)
+
+    def test_normal_is_normalized(self):
+        np.testing.assert_allclose(
+            normalized_vector((1.0, 1.0, 1.0)),
+            np.full(3, 1.0 / np.sqrt(3.0)),
+        )
+
+    def test_zero_normal_is_rejected(self):
+        with self.assertRaises(ValueError):
+            normalized_vector((0.0, 0.0, 0.0))
 
     def test_invalid_mach_is_rejected(self):
         with self.assertRaises(ValueError):
