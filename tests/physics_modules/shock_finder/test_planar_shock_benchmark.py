@@ -61,6 +61,34 @@ class PlanarShockBenchmarkTests(unittest.TestCase):
         self.assertGreater(metrics["mach_median"], 1.3)
         self.assertLess(metrics["normal_angular_error_degrees"], 1.0)
 
+    def test_profile_estimator_removes_body_diagonal_sampling_bias(self):
+        metrics = benchmark_resolution(
+            resolution=24,
+            mach=5.0,
+            ramp_cells=3.0,
+            normal=(1.0, 1.0, 1.0),
+        )
+
+        self.assertGreater(abs(metrics["mach_relative_bias"]), 0.05)
+        self.assertLess(
+            abs(metrics["profile_mach_relative_bias"]),
+            0.005,
+        )
+        self.assertGreater(metrics["profile_valid_mach_fraction"], 0.99)
+
+    def test_profile_estimator_adapts_to_four_cell_ramp(self):
+        metrics = benchmark_resolution(
+            resolution=24,
+            mach=5.0,
+            ramp_cells=4.0,
+            normal=(1.0, 1.0, 1.0),
+        )
+
+        self.assertLess(
+            abs(metrics["profile_mach_relative_bias"]),
+            0.005,
+        )
+
     def test_normal_is_normalized(self):
         np.testing.assert_allclose(
             normalized_vector((1.0, 1.0, 1.0)),

@@ -42,6 +42,10 @@ from astronomix._physics_modules._shock_finder.pfrommer_shock_finder import (  #
 )
 from astronomix._physics_modules._shock_finder._shock_zones import (  # noqa: E402
     get_adaptive_post_pre_shock_values,
+    get_profile_aware_post_pre_shock_values,
+)
+from astronomix._physics_modules._shock_finder._shock_mach import (  # noqa: E402
+    _calculate_mach_at_surface,
 )
 from astronomix.option_classes.simulation_config import HLLC, MINMOD  # noqa: E402
 
@@ -161,6 +165,16 @@ def run_one_resolution(
         helper_data,
         mach_min=MACH_MIN,
     )
+    profile_mach_field = _calculate_mach_at_surface(
+        final_state,
+        result.shock_surface_cells,
+        result.shock_zones,
+        result.shock_direction,
+        result.shock_surface_offsets,
+        config,
+        registered_variables,
+        profile_aware=True,
+    )
     elapsed_seconds = time.perf_counter() - start_time
 
     surface = np.asarray(result.shock_surface_cells, dtype=bool)
@@ -185,6 +199,15 @@ def run_one_resolution(
     if valid_surface_mach.size == 0:
         raise RuntimeError(
             f"No valid surface Mach numbers were measured at {resolution}^3."
+        )
+    profile_surface_mach = np.asarray(profile_mach_field)[surface]
+    valid_profile_surface_mach = profile_surface_mach[
+        np.isfinite(profile_surface_mach) & (profile_surface_mach > 0.0)
+    ]
+    if valid_profile_surface_mach.size == 0:
+        raise RuntimeError(
+            "No valid profile-aware surface Mach numbers were measured at "
+            f"{resolution}^3."
         )
 
     pressure = final_state[registered_variables.pressure_index]
@@ -228,6 +251,34 @@ def run_one_resolution(
     diagnostic_pre_distance_values = np.asarray(
         diagnostic_pre_distance
     )[diagnostic_mask]
+    (
+        _,
+        _,
+        _,
+        _,
+        profile_samples_valid,
+        profile_post_distance,
+        profile_pre_distance,
+    ) = get_profile_aware_post_pre_shock_values(
+        result.shock_direction,
+        result.shock_zones,
+        pressure,
+        temperature,
+        max_steps=8,
+        center_offsets=(
+            result.shock_direction
+            * result.shock_surface_offsets[jnp.newaxis, ...]
+        ),
+    )
+    profile_sample_mask = surface & np.asarray(
+        profile_samples_valid, dtype=bool
+    )
+    profile_post_distance_values = np.asarray(profile_post_distance)[
+        profile_sample_mask
+    ]
+    profile_pre_distance_values = np.asarray(profile_pre_distance)[
+        profile_sample_mask
+    ]
 
     radius_p16, radius_median, radius_p84 = np.percentile(
         surface_radii, [16.0, 50.0, 84.0]
@@ -273,6 +324,28 @@ def run_one_resolution(
         "mach_p84": float(np.percentile(valid_surface_mach, 84.0)),
         "mach_coefficient_of_variation": float(
             np.std(valid_surface_mach) / np.mean(valid_surface_mach)
+        ),
+        "profile_valid_mach_fraction": float(
+            valid_profile_surface_mach.size / surface_mach.size
+        ),
+        "profile_mach_median": float(
+            np.median(valid_profile_surface_mach)
+        ),
+        "profile_mach_p16": float(
+            np.percentile(valid_profile_surface_mach, 16.0)
+        ),
+        "profile_mach_p84": float(
+            np.percentile(valid_profile_surface_mach, 84.0)
+        ),
+        "profile_mach_coefficient_of_variation": float(
+            np.std(valid_profile_surface_mach)
+            / np.mean(valid_profile_surface_mach)
+        ),
+        "profile_post_distance_cells_median": float(
+            np.median(profile_post_distance_values)
+        ),
+        "profile_pre_distance_cells_median": float(
+            np.median(profile_pre_distance_values)
         ),
         "analytic_kinematic_mach": float(analytic_mach),
         "diagnostic_outside_offset": float(diagnostic_outside_offset),
@@ -370,8 +443,16 @@ def write_summary(metrics: list[dict], output_dir: Path) -> None:
     error = np.abs([row["relative_radius_error"] for row in metrics])
     spread = np.array([row["normalized_radial_spread"] for row in metrics])
     alignment = np.array([row["median_radial_alignment"] for row in metrics])
+    mach_median = np.array([row["mach_median"] for row in metrics])
+    profile_mach_median = np.array(
+        [row["profile_mach_median"] for row in metrics]
+    )
+    analytic_mach = np.array(
+        [row["analytic_kinematic_mach"] for row in metrics]
+    )
 
-    figure, axes = plt.subplots(1, 3, figsize=(13, 4), constrained_layout=True)
+    figure, axes = plt.subplots(2, 2, figsize=(11, 8), constrained_layout=True)
+    axes = axes.ravel()
     axes[0].loglog(spacing, error, "o-")
     axes[0].invert_xaxis()
     axes[0].set(
@@ -392,6 +473,25 @@ def write_summary(metrics: list[dict], output_dir: Path) -> None:
         title="Direction alignment",
         ylim=(min(0.95, alignment.min() - 0.005), 1.0),
     )
+    axes[3].plot(resolution, mach_median, "o-", label="current estimator")
+    axes[3].plot(
+        resolution,
+        profile_mach_median,
+        "s-",
+        label="profile-aware estimator",
+    )
+    axes[3].plot(
+        resolution,
+        analytic_mach,
+        "k--",
+        label="analytic kinematic reference",
+    )
+    axes[3].set(
+        xlabel="cells per axis",
+        ylabel="median Mach number",
+        title="Mach recovery",
+    )
+    axes[3].legend()
     for axis in axes:
         axis.grid(alpha=0.25)
     figure.suptitle("3D Sedov shock-finder resolution convergence")

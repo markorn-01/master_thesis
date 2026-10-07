@@ -12,6 +12,7 @@ from astronomix.option_classes.simulation_config import (
 )
 from astronomix._physics_modules._shock_finder._shock_zones import (
     get_adaptive_post_pre_shock_values,
+    get_profile_aware_post_pre_shock_values,
 )
 
 
@@ -22,7 +23,10 @@ but only keep it at the shock surface (where shock_surface is True) via filter
 * Then apply some equation to get Mach number for all cells from p_post/p_pre
 * then filter to keep only Mach for surface cells
 """
-@partial(jax.jit, static_argnames=["registered_variables", "config"])
+@partial(
+    jax.jit,
+    static_argnames=["registered_variables", "config", "profile_aware"],
+)
 def _calculate_mach_at_surface(
     primitive_state: STATE_TYPE,
     shock_surface: BOOL_FIELD_TYPE,
@@ -31,6 +35,7 @@ def _calculate_mach_at_surface(
     surface_offsets: FIELD_TYPE,
     config: SimulationConfig,
     registered_variables: RegisteredVariables,
+    profile_aware: bool = False,
 ) -> FIELD_TYPE:
     gamma_gas = 5 / 3
 
@@ -38,18 +43,20 @@ def _calculate_mach_at_surface(
     density = primitive_state[registered_variables.density_index]
     temperature = pressure / density
 
-    # Select the first samples beyond the two local shock-zone boundaries.
-    p_post, p_pre, _, _, valid_samples, _, _ = (
-        get_adaptive_post_pre_shock_values(
-            shock_direction,
-            shock_zones,
-            pressure,
-            temperature,
-            max_steps=8,
-            center_offsets=(
-                shock_direction * surface_offsets[jnp.newaxis, ...]
-            ),
-        )
+    sampler = (
+        get_profile_aware_post_pre_shock_values
+        if profile_aware
+        else get_adaptive_post_pre_shock_values
+    )
+    p_post, p_pre, _, _, valid_samples, _, _ = sampler(
+        shock_direction,
+        shock_zones,
+        pressure,
+        temperature,
+        max_steps=8,
+        center_offsets=(
+            shock_direction * surface_offsets[jnp.newaxis, ...]
+        ),
     )
 
     # calculate Mach number for all cells

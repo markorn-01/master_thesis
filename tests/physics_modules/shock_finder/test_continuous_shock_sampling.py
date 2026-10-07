@@ -9,6 +9,7 @@ import numpy as np
 from astronomix._physics_modules._shock_finder._shock_zones import (
     get_adaptive_post_pre_shock_values,
     get_post_pre_shock_values,
+    get_profile_aware_post_pre_shock_values,
 )
 
 
@@ -176,6 +177,70 @@ class ContinuousShockSamplingTests(unittest.TestCase):
         )
 
         self.assertFalse(bool(valid[2]))
+
+    def test_profile_sampling_reaches_pressure_plateaus(self):
+        pressure = jnp.array(
+            [9.0, 9.0, 8.8, 8.0, 6.0, 3.0, 1.2, 1.0, 1.0]
+        )
+        density = jnp.array(
+            [4.0, 4.0, 3.9, 3.5, 2.8, 1.8, 1.1, 1.0, 1.0]
+        )
+        direction = jnp.ones((1, 9))
+        shock_zones = jnp.zeros(9, dtype=jnp.bool_).at[3:6].set(True)
+
+        p_post, p_pre, rho_post, rho_pre, valid, d_post, d_pre = (
+            get_profile_aware_post_pre_shock_values(
+                direction,
+                shock_zones,
+                pressure,
+                density,
+                max_steps=4,
+            )
+        )
+
+        self.assertTrue(bool(valid[4]))
+        self.assertAlmostEqual(float(p_post[4]), 9.0, places=5)
+        self.assertAlmostEqual(float(p_pre[4]), 1.0, places=5)
+        self.assertAlmostEqual(float(rho_post[4]), 4.0, places=5)
+        self.assertAlmostEqual(float(rho_pre[4]), 1.0, places=5)
+        self.assertGreater(float(d_post[4]), 1.0)
+        self.assertGreater(float(d_pre[4]), 1.0)
+
+    def test_profile_sampling_uses_nearer_candidate_at_boundary(self):
+        pressure = jnp.array([8.0, 8.0, 7.0, 4.0, 1.0, 1.0, 1.0])
+        density = jnp.ones(7)
+        direction = jnp.ones((1, 7))
+        shock_zones = jnp.zeros(7, dtype=jnp.bool_).at[2:4].set(True)
+
+        *_, valid, _, pre_distance = (
+            get_profile_aware_post_pre_shock_values(
+                direction,
+                shock_zones,
+                pressure,
+                density,
+                max_steps=4,
+                outside_offsets=(0.25, 0.5, 3.0),
+            )
+        )
+
+        # The farthest upstream candidate leaves the domain, but a nearer
+        # valid plateau sample keeps the surface estimate usable.
+        self.assertTrue(bool(valid[3]))
+        self.assertLess(float(pre_distance[3]), 3.0)
+
+    def test_profile_sampling_rejects_unsorted_offsets(self):
+        field = jnp.ones(7)
+        direction = jnp.ones((1, 7))
+        shock_zones = jnp.zeros(7, dtype=jnp.bool_).at[2:5].set(True)
+
+        with self.assertRaises(ValueError):
+            get_profile_aware_post_pre_shock_values(
+                direction,
+                shock_zones,
+                field,
+                field,
+                outside_offsets=(0.75, 0.25),
+            )
 
 
 if __name__ == "__main__":

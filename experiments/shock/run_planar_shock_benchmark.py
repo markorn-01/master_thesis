@@ -41,6 +41,10 @@ from astronomix._physics_modules._shock_finder.pfrommer_shock_finder import (  #
 )
 from astronomix._physics_modules._shock_finder._shock_zones import (  # noqa: E402
     get_adaptive_post_pre_shock_values,
+    get_profile_aware_post_pre_shock_values,
+)
+from astronomix._physics_modules._shock_finder._shock_mach import (  # noqa: E402
+    _calculate_mach_at_surface,
 )
 
 
@@ -221,6 +225,16 @@ def benchmark_resolution(
         helper_data,
         mach_min=MACH_MIN,
     )
+    profile_mach_field = _calculate_mach_at_surface(
+        state,
+        result.shock_surface_cells,
+        result.shock_zones,
+        result.shock_direction,
+        result.shock_surface_offsets,
+        config,
+        variables,
+        profile_aware=True,
+    )
 
     surface = np.asarray(result.shock_surface_cells, dtype=bool)
     if not surface.any():
@@ -232,6 +246,15 @@ def benchmark_resolution(
     if valid_mach.size == 0:
         raise RuntimeError(
             f"No valid Mach samples were produced at resolution {resolution}."
+        )
+    profile_mach_values = np.asarray(profile_mach_field)[surface]
+    valid_profile_mach = profile_mach_values[
+        np.isfinite(profile_mach_values) & (profile_mach_values > 0.0)
+    ]
+    if valid_profile_mach.size == 0:
+        raise RuntimeError(
+            "No valid profile-aware Mach samples were produced at "
+            f"resolution {resolution}."
         )
 
     centers = np.asarray(helper_data.geometric_centers)
@@ -248,6 +271,9 @@ def benchmark_resolution(
     surface_direction = direction[surface]
     normal_alignment = np.sum(surface_direction * unit_normal, axis=-1)
     p16, median, p84 = np.percentile(valid_mach, [16.0, 50.0, 84.0])
+    profile_p16, profile_median, profile_p84 = np.percentile(
+        valid_profile_mach, [16.0, 50.0, 84.0]
+    )
 
     pressure = state[variables.pressure_index]
     density = state[variables.density_index]
@@ -285,6 +311,43 @@ def benchmark_resolution(
     )
     sampled_post_distance = np.asarray(post_distance)[valid_sample_surface]
     sampled_pre_distance = np.asarray(pre_distance)[valid_sample_surface]
+    (
+        profile_pressure_post,
+        profile_pressure_pre,
+        _,
+        _,
+        profile_samples_valid,
+        profile_post_distance,
+        profile_pre_distance,
+    ) = get_profile_aware_post_pre_shock_values(
+        result.shock_direction,
+        result.shock_zones,
+        pressure,
+        temperature,
+        max_steps=8,
+        center_offsets=(
+            result.shock_direction
+            * result.shock_surface_offsets[jnp.newaxis, ...]
+        ),
+    )
+    profile_sample_surface = surface & np.asarray(
+        profile_samples_valid, dtype=bool
+    )
+    sampled_profile_pressure_post = np.asarray(profile_pressure_post)[
+        profile_sample_surface
+    ]
+    sampled_profile_pressure_pre = np.asarray(profile_pressure_pre)[
+        profile_sample_surface
+    ]
+    sampled_profile_pressure_ratio = (
+        sampled_profile_pressure_post / sampled_profile_pressure_pre
+    )
+    sampled_profile_post_distance = np.asarray(profile_post_distance)[
+        profile_sample_surface
+    ]
+    sampled_profile_pre_distance = np.asarray(profile_pre_distance)[
+        profile_sample_surface
+    ]
 
     return {
         "resolution": int(resolution),
@@ -301,6 +364,33 @@ def benchmark_resolution(
         "mach_p84": float(p84),
         "mach_relative_bias": float(median / mach - 1.0),
         "mach_relative_scatter": float((p84 - p16) / (2.0 * mach)),
+        "profile_valid_mach_fraction": float(
+            valid_profile_mach.size / profile_mach_values.size
+        ),
+        "profile_mach_median": float(profile_median),
+        "profile_mach_p16": float(profile_p16),
+        "profile_mach_p84": float(profile_p84),
+        "profile_mach_relative_bias": float(profile_median / mach - 1.0),
+        "profile_mach_relative_scatter": float(
+            (profile_p84 - profile_p16) / (2.0 * mach)
+        ),
+        "profile_sampled_pressure_ratio_median": float(
+            np.median(sampled_profile_pressure_ratio)
+        ),
+        "profile_sampled_post_pressure_fraction": float(
+            np.median(sampled_profile_pressure_post)
+            / states["downstream_pressure"]
+        ),
+        "profile_sampled_pre_pressure_fraction": float(
+            np.median(sampled_profile_pressure_pre)
+            / states["upstream_pressure"]
+        ),
+        "profile_post_sample_distance_cells_median": float(
+            np.median(sampled_profile_post_distance)
+        ),
+        "profile_pre_sample_distance_cells_median": float(
+            np.median(sampled_profile_pre_distance)
+        ),
         "diagnostic_outside_offset": float(diagnostic_outside_offset),
         "diagnostic_mach_median": float(np.median(diagnostic_mach)),
         "diagnostic_mach_relative_bias": float(
@@ -352,6 +442,11 @@ def write_outputs(rows: list[dict], output_dir: Path) -> None:
     p16 = np.asarray([row["mach_p16"] for row in rows])
     p84 = np.asarray([row["mach_p84"] for row in rows])
     true_mach = float(rows[0]["true_mach"])
+    profile_median = np.asarray(
+        [row["profile_mach_median"] for row in rows]
+    )
+    profile_p16 = np.asarray([row["profile_mach_p16"] for row in rows])
+    profile_p84 = np.asarray([row["profile_mach_p84"] for row in rows])
     unit_normal = np.asarray(
         [rows[0]["normal_x"], rows[0]["normal_y"], rows[0]["normal_z"]]
     )
@@ -373,6 +468,17 @@ def write_outputs(rows: list[dict], output_dir: Path) -> None:
         color="black",
         linestyle="--",
         label=f"true Mach = {true_mach:g}",
+    )
+    axes[0].errorbar(
+        resolution,
+        profile_median,
+        yerr=(
+            profile_median - profile_p16,
+            profile_p84 - profile_median,
+        ),
+        marker="s",
+        capsize=4,
+        label="profile-aware estimator",
     )
     axes[0].set(
         xlabel="cells per axis",
@@ -451,7 +557,9 @@ def main() -> None:
         print(
             f"N={resolution}: Mach={row['mach_median']:.6f} "
             f"(bias={100.0 * row['mach_relative_bias']:+.3f}%, "
-            f"p16-p84={row['mach_p16']:.6f}-{row['mach_p84']:.6f})"
+            f"p16-p84={row['mach_p16']:.6f}-{row['mach_p84']:.6f}); "
+            f"profile={row['profile_mach_median']:.6f} "
+            f"(bias={100.0 * row['profile_mach_relative_bias']:+.3f}%)"
         )
     write_outputs(rows, args.output_dir)
 

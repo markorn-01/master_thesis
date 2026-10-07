@@ -5,6 +5,7 @@ import jax.numpy as jnp
 
 from astronomix._physics_modules._shock_finder._shock_zones import (
     get_adaptive_post_pre_shock_values,
+    get_profile_aware_post_pre_shock_values,
 )
 
 
@@ -66,6 +67,7 @@ def _thermalization_efficiency(mach, gamma):
         "registered_variables",
         "gamma_gas",
         "sampling_steps",
+        "profile_aware_sampling",
     ],
 )
 def calculate_thermal_energy_flux(
@@ -79,6 +81,7 @@ def calculate_thermal_energy_flux(
     registered_variables,
     gamma_gas=5.0 / 3.0,
     sampling_steps=8,
+    profile_aware_sampling=False,
 ):
     """
     Calculate the dissipated thermal-energy flux at shock-surface cells.
@@ -130,6 +133,10 @@ def calculate_thermal_energy_flux(
         sampling_steps:
             Maximum number of cells searched for each shock-zone boundary.
 
+        profile_aware_sampling:
+            If True, use the same bounded pressure-profile selection as the
+            profile-aware Mach estimator when obtaining the upstream state.
+
     Returns:
         Thermal-energy flux with units of energy / area / time.
         Values are nonzero only on detected shock-surface cells.
@@ -143,17 +150,20 @@ def calculate_thermal_energy_flux(
     # Sample pressure and density on both sides of the shock.
     # Only the pre-shock values are needed here, so the post-shock
     # outputs are ignored using "_".
-    _, pressure_pre, _, density_pre, valid_samples, _, _ = (
-        get_adaptive_post_pre_shock_values(
-            shock_direction,
-            shock_zones,
-            pressure,
-            density,
-            max_steps=sampling_steps,
-            center_offsets=(
-                shock_direction * surface_offsets[jnp.newaxis, ...]
-            ),
-        )
+    sampler = (
+        get_profile_aware_post_pre_shock_values
+        if profile_aware_sampling
+        else get_adaptive_post_pre_shock_values
+    )
+    _, pressure_pre, _, density_pre, valid_samples, _, _ = sampler(
+        shock_direction,
+        shock_zones,
+        pressure,
+        density,
+        max_steps=sampling_steps,
+        center_offsets=(
+            shock_direction * surface_offsets[jnp.newaxis, ...]
+        ),
     )
 
     # Avoid invalid sound-speed calculations if numerical noise produces

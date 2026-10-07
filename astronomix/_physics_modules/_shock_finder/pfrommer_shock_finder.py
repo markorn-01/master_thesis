@@ -21,13 +21,21 @@ from astronomix._physics_modules._shock_finder._shock_surface import (
 from astronomix._physics_modules._shock_finder._shock_mach import _calculate_mach_at_surface
 from astronomix._physics_modules._shock_finder._energy_dissipation import calculate_thermal_energy_flux
 
-@partial(jax.jit, static_argnames=["registered_variables", "config"])
+@partial(
+    jax.jit,
+    static_argnames=[
+        "registered_variables",
+        "config",
+        "profile_aware_mach",
+    ],
+)
 def find_shocks_pfrommer(
     primitive_state: STATE_TYPE,
     config: SimulationConfig,
     registered_variables: RegisteredVariables,
     helper_data: HelperData,
     mach_min: float = 1.3,
+    profile_aware_mach: bool = False,
 ) -> ShockFinderResult:
     """
     Main entry point: Identify shocks using Pfrommer et al. 2017 methodology.
@@ -46,6 +54,10 @@ def find_shocks_pfrommer(
         registered_variables: registry of variable indices
         helper_data:          geometric centers etc.
         mach_min:             minimum Mach threshold (default 1.3)
+        profile_aware_mach:   if True, estimate upstream/downstream states
+                              from short pressure profiles beyond each zone
+                              boundary; False preserves the established
+                              first-outside-sample estimator
 
     Returns:
         ShockFinderResult
@@ -81,6 +93,7 @@ def find_shocks_pfrommer(
         primitive_state, shock_surface, shock_zones, shock_direction,
         surface_offsets,
         config, registered_variables,
+        profile_aware=profile_aware_mach,
     )
     
     # Phase 5: thermal-energy flux at shock-surface cells
@@ -93,6 +106,7 @@ def find_shocks_pfrommer(
         mach_numbers=mach_numbers,
         config=config,
         registered_variables=registered_variables,
+        profile_aware_sampling=profile_aware_mach,
     )
 
     num_shocks     = jnp.sum(shock_surface, dtype=jnp.int32)

@@ -292,6 +292,196 @@ def get_adaptive_post_pre_shock_values(
         pre_distance,
     )
 
+
+def get_profile_aware_post_pre_shock_values(
+    shock_direction,
+    shock_zones,
+    pressure,
+    field_b,
+    max_steps=8,
+    center_offsets=None,
+    step_size=0.25,
+    outside_offsets=(0.25, 0.5, 0.75, 1.0, 1.25, 1.5),
+):
+    """Select upstream and downstream states from short pressure profiles.
+
+    The adaptive sampler identifies the first point outside each local shock-
+    zone boundary.  A boolean zone can end while multilinear interpolation is
+    still inside the numerically broadened pressure ramp, especially when the
+    shock is oblique to the grid.  This sampler therefore evaluates several
+    bounded offsets beyond each exit:
+
+    * the downstream state is the largest valid positive pressure;
+    * the upstream state is the smallest valid positive pressure;
+    * ``field_b`` is taken at the same locations as the selected pressures.
+
+    The bounded search captures the shock-adjacent downstream pressure peak
+    without committing to one ramp width.  Ties are resolved in favour of the
+    nearest candidate because ``jax.numpy.argmax``/``argmin`` return the first
+    occurrence.  Candidates outside the domain or with non-finite/non-positive
+    thermodynamic values are ignored.  At least one valid candidate is
+    required on each side.
+
+    Distances and offsets are measured in grid-cell units.  The return layout
+    matches :func:`get_adaptive_post_pre_shock_values` so callers can compare
+    the two estimators directly.
+    """
+    ndim = pressure.ndim
+    if shock_direction.shape[0] != ndim:
+        raise ValueError(
+            "shock_direction must have one component per spatial dimension."
+        )
+    if shock_zones.shape != pressure.shape or field_b.shape != pressure.shape:
+        raise ValueError(
+            "shock_zones and sampled fields must have equal shape."
+        )
+    if not outside_offsets:
+        raise ValueError("outside_offsets must contain at least one value.")
+    if any(offset < 0.0 for offset in outside_offsets):
+        raise ValueError("outside_offsets must be non-negative.")
+    if tuple(outside_offsets) != tuple(sorted(outside_offsets)):
+        raise ValueError("outside_offsets must be sorted in ascending order.")
+
+    # First locate the two zone exits without adding an exterior margin.
+    (
+        _,
+        _,
+        _,
+        _,
+        exit_valid,
+        post_exit_distance,
+        pre_exit_distance,
+    ) = get_adaptive_post_pre_shock_values(
+        shock_direction,
+        shock_zones,
+        pressure,
+        field_b,
+        max_steps=max_steps,
+        center_offsets=center_offsets,
+        step_size=step_size,
+        outside_offset=0.0,
+    )
+
+    coordinate_dtype = jnp.result_type(pressure.dtype, jnp.float32)
+    coordinates = jnp.stack(
+        jnp.meshgrid(
+            *[
+                jnp.arange(size, dtype=coordinate_dtype)
+                for size in pressure.shape
+            ],
+            indexing="ij",
+        ),
+        axis=0,
+    )
+    direction = shock_direction.astype(coordinate_dtype)
+    if center_offsets is not None:
+        if center_offsets.shape != shock_direction.shape:
+            raise ValueError(
+                "center_offsets must have the same shape as shock_direction."
+            )
+        coordinates = coordinates + center_offsets.astype(coordinate_dtype)
+
+    upper_bounds = jnp.asarray(
+        pressure.shape, dtype=coordinate_dtype
+    ).reshape((ndim,) + (1,) * ndim)
+
+    def sample_candidates(sign, exit_distance):
+        pressure_samples = []
+        field_b_samples = []
+        valid_samples = []
+        distance_samples = []
+        for offset in outside_offsets:
+            distance = exit_distance + jnp.asarray(
+                offset, dtype=coordinate_dtype
+            )
+            sample_coordinates = (
+                coordinates + sign * distance[jnp.newaxis, ...] * direction
+            )
+            in_bounds = jnp.all(
+                (sample_coordinates >= 0.0)
+                & (sample_coordinates <= upper_bounds - 1.0),
+                axis=0,
+            )
+            pressure_sample = map_coordinates(
+                pressure,
+                sample_coordinates,
+                order=1,
+                mode="nearest",
+            )
+            field_b_sample = map_coordinates(
+                field_b,
+                sample_coordinates,
+                order=1,
+                mode="nearest",
+            )
+            valid = (
+                exit_valid
+                & in_bounds
+                & jnp.isfinite(pressure_sample)
+                & jnp.isfinite(field_b_sample)
+                & (pressure_sample > 0.0)
+                & (field_b_sample > 0.0)
+            )
+            pressure_samples.append(pressure_sample)
+            field_b_samples.append(field_b_sample)
+            valid_samples.append(valid)
+            distance_samples.append(distance)
+        return (
+            jnp.stack(pressure_samples, axis=0),
+            jnp.stack(field_b_samples, axis=0),
+            jnp.stack(valid_samples, axis=0),
+            jnp.stack(distance_samples, axis=0),
+        )
+
+    post_profiles = sample_candidates(-1.0, post_exit_distance)
+    pre_profiles = sample_candidates(1.0, pre_exit_distance)
+
+    def select_profile(profiles, select_largest):
+        pressure_samples, field_b_samples, valid_samples, distances = profiles
+        fill_value = -jnp.inf if select_largest else jnp.inf
+        selectable_pressure = jnp.where(
+            valid_samples, pressure_samples, fill_value
+        )
+        if select_largest:
+            selected_index = jnp.argmax(selectable_pressure, axis=0)
+        else:
+            selected_index = jnp.argmin(selectable_pressure, axis=0)
+        gather_index = selected_index[jnp.newaxis, ...]
+
+        def gather(values):
+            return jnp.take_along_axis(values, gather_index, axis=0)[0]
+
+        return (
+            gather(pressure_samples),
+            gather(field_b_samples),
+            gather(distances),
+            jnp.any(valid_samples, axis=0),
+        )
+
+    pressure_post, field_b_post, post_distance, post_valid = select_profile(
+        post_profiles, select_largest=True
+    )
+    pressure_pre, field_b_pre, pre_distance, pre_valid = select_profile(
+        pre_profiles, select_largest=False
+    )
+    valid = (
+        post_valid
+        & pre_valid
+        & (pressure_post >= pressure_pre)
+        & (field_b_post > 0.0)
+        & (field_b_pre > 0.0)
+    )
+
+    return (
+        pressure_post,
+        pressure_pre,
+        field_b_post,
+        field_b_pre,
+        valid,
+        post_distance,
+        pre_distance,
+    )
+
 def _make_interior_mask(spatial_shape):
     """
     Build a boolean mask that is True for interior cells (not on any boundary).
