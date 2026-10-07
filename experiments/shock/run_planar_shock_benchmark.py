@@ -203,6 +203,7 @@ def benchmark_resolution(
     mach: float,
     ramp_cells: float,
     normal=(1.0, 0.0, 0.0),
+    diagnostic_outside_offset: float = 0.25,
 ) -> dict[str, float | int]:
     """Run the unchanged finder and summarize its planar-shock recovery."""
     state, config, variables, helper_data, states, unit_normal = (
@@ -265,6 +266,7 @@ def benchmark_resolution(
         pressure,
         temperature,
         max_steps=8,
+        outside_offset=diagnostic_outside_offset,
         center_offsets=(
             result.shock_direction
             * result.shock_surface_offsets[jnp.newaxis, ...]
@@ -274,6 +276,13 @@ def benchmark_resolution(
     sampled_pressure_post = np.asarray(pressure_post)[valid_sample_surface]
     sampled_pressure_pre = np.asarray(pressure_pre)[valid_sample_surface]
     sampled_pressure_ratio = sampled_pressure_post / sampled_pressure_pre
+    diagnostic_mach = np.sqrt(
+        (
+            sampled_pressure_ratio * (GAMMA + 1.0)
+            + (GAMMA - 1.0)
+        )
+        / (2.0 * GAMMA)
+    )
     sampled_post_distance = np.asarray(post_distance)[valid_sample_surface]
     sampled_pre_distance = np.asarray(pre_distance)[valid_sample_surface]
 
@@ -292,6 +301,11 @@ def benchmark_resolution(
         "mach_p84": float(p84),
         "mach_relative_bias": float(median / mach - 1.0),
         "mach_relative_scatter": float((p84 - p16) / (2.0 * mach)),
+        "diagnostic_outside_offset": float(diagnostic_outside_offset),
+        "diagnostic_mach_median": float(np.median(diagnostic_mach)),
+        "diagnostic_mach_relative_bias": float(
+            np.median(diagnostic_mach) / mach - 1.0
+        ),
         "expected_pressure_ratio": float(states["pressure_ratio"]),
         "sampled_pressure_ratio_median": float(
             np.median(sampled_pressure_ratio)
@@ -392,6 +406,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--mach", type=float, default=5.0)
     parser.add_argument("--ramp-cells", type=float, default=3.0)
     parser.add_argument(
+        "--diagnostic-outside-offset",
+        type=float,
+        default=0.25,
+        help=(
+            "Diagnostic distance beyond the first shock-zone exit, in cells; "
+            "this does not change the production finder result."
+        ),
+    )
+    parser.add_argument(
         "--normal",
         nargs=3,
         type=float,
@@ -422,6 +445,7 @@ def main() -> None:
             mach=args.mach,
             ramp_cells=args.ramp_cells,
             normal=args.normal,
+            diagnostic_outside_offset=args.diagnostic_outside_offset,
         )
         rows.append(row)
         print(
