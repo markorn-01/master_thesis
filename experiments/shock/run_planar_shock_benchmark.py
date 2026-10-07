@@ -39,6 +39,9 @@ from astronomix import (  # noqa: E402
 from astronomix._physics_modules._shock_finder.pfrommer_shock_finder import (  # noqa: E402
     find_shocks_pfrommer,
 )
+from astronomix._physics_modules._shock_finder._shock_zones import (  # noqa: E402
+    get_adaptive_post_pre_shock_values,
+)
 
 
 GAMMA = 5.0 / 3.0
@@ -202,7 +205,7 @@ def benchmark_resolution(
     normal=(1.0, 0.0, 0.0),
 ) -> dict[str, float | int]:
     """Run the unchanged finder and summarize its planar-shock recovery."""
-    state, config, variables, helper_data, _, unit_normal = (
+    state, config, variables, helper_data, states, unit_normal = (
         build_planar_shock_state(
             resolution=resolution,
             mach=mach,
@@ -245,6 +248,35 @@ def benchmark_resolution(
     normal_alignment = np.sum(surface_direction * unit_normal, axis=-1)
     p16, median, p84 = np.percentile(valid_mach, [16.0, 50.0, 84.0])
 
+    pressure = state[variables.pressure_index]
+    density = state[variables.density_index]
+    temperature = pressure / density
+    (
+        pressure_post,
+        pressure_pre,
+        _,
+        _,
+        valid_samples,
+        post_distance,
+        pre_distance,
+    ) = get_adaptive_post_pre_shock_values(
+        result.shock_direction,
+        result.shock_zones,
+        pressure,
+        temperature,
+        max_steps=8,
+        center_offsets=(
+            result.shock_direction
+            * result.shock_surface_offsets[jnp.newaxis, ...]
+        ),
+    )
+    valid_sample_surface = surface & np.asarray(valid_samples, dtype=bool)
+    sampled_pressure_post = np.asarray(pressure_post)[valid_sample_surface]
+    sampled_pressure_pre = np.asarray(pressure_pre)[valid_sample_surface]
+    sampled_pressure_ratio = sampled_pressure_post / sampled_pressure_pre
+    sampled_post_distance = np.asarray(post_distance)[valid_sample_surface]
+    sampled_pre_distance = np.asarray(pre_distance)[valid_sample_surface]
+
     return {
         "resolution": int(resolution),
         "grid_spacing": float(config.grid_spacing),
@@ -260,6 +292,23 @@ def benchmark_resolution(
         "mach_p84": float(p84),
         "mach_relative_bias": float(median / mach - 1.0),
         "mach_relative_scatter": float((p84 - p16) / (2.0 * mach)),
+        "expected_pressure_ratio": float(states["pressure_ratio"]),
+        "sampled_pressure_ratio_median": float(
+            np.median(sampled_pressure_ratio)
+        ),
+        "sampled_post_pressure_fraction": float(
+            np.median(sampled_pressure_post)
+            / states["downstream_pressure"]
+        ),
+        "sampled_pre_pressure_fraction": float(
+            np.median(sampled_pressure_pre) / states["upstream_pressure"]
+        ),
+        "post_sample_distance_cells_median": float(
+            np.median(sampled_post_distance)
+        ),
+        "pre_sample_distance_cells_median": float(
+            np.median(sampled_pre_distance)
+        ),
         "surface_signed_distance_median": float(
             np.median(signed_surface_distance)
         ),
