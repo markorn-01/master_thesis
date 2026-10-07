@@ -40,6 +40,9 @@ from astronomix import (  # noqa: E402
 from astronomix._physics_modules._shock_finder.pfrommer_shock_finder import (  # noqa: E402
     find_shocks_pfrommer,
 )
+from astronomix._physics_modules._shock_finder._shock_zones import (  # noqa: E402
+    get_adaptive_post_pre_shock_values,
+)
 from astronomix.option_classes.simulation_config import HLLC, MINMOD  # noqa: E402
 
 
@@ -70,6 +73,15 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--worker-resolution", type=int, default=None)
     parser.add_argument(
+        "--diagnostic-outside-offset",
+        type=float,
+        default=0.25,
+        help=(
+            "Diagnostic distance beyond the shock-zone exit, in cells; "
+            "the production finder remains unchanged."
+        ),
+    )
+    parser.add_argument(
         "--aggregate-only",
         action="store_true",
         help="Build the summary from existing per-resolution metrics.",
@@ -83,7 +95,11 @@ def analytic_radius() -> float:
     ) ** 0.2
 
 
-def run_one_resolution(resolution: int, output_dir: Path) -> dict:
+def run_one_resolution(
+    resolution: int,
+    output_dir: Path,
+    diagnostic_outside_offset: float,
+) -> dict:
     grid_spacing = BOX_SIZE / resolution
     if INJECTION_RADIUS < 1.5 * grid_spacing:
         raise ValueError(
@@ -171,6 +187,48 @@ def run_one_resolution(resolution: int, output_dir: Path) -> dict:
             f"No valid surface Mach numbers were measured at {resolution}^3."
         )
 
+    pressure = final_state[registered_variables.pressure_index]
+    density = final_state[registered_variables.density_index]
+    temperature = pressure / density
+    (
+        diagnostic_pressure_post,
+        diagnostic_pressure_pre,
+        _,
+        _,
+        diagnostic_valid,
+        diagnostic_post_distance,
+        diagnostic_pre_distance,
+    ) = get_adaptive_post_pre_shock_values(
+        result.shock_direction,
+        result.shock_zones,
+        pressure,
+        temperature,
+        max_steps=8,
+        outside_offset=diagnostic_outside_offset,
+        center_offsets=(
+            result.shock_direction
+            * result.shock_surface_offsets[jnp.newaxis, ...]
+        ),
+    )
+    diagnostic_mask = surface & np.asarray(diagnostic_valid, dtype=bool)
+    diagnostic_pressure_ratio = (
+        np.asarray(diagnostic_pressure_post)[diagnostic_mask]
+        / np.asarray(diagnostic_pressure_pre)[diagnostic_mask]
+    )
+    diagnostic_mach = np.sqrt(
+        (
+            diagnostic_pressure_ratio * (GAMMA + 1.0)
+            + (GAMMA - 1.0)
+        )
+        / (2.0 * GAMMA)
+    )
+    diagnostic_post_distance_values = np.asarray(
+        diagnostic_post_distance
+    )[diagnostic_mask]
+    diagnostic_pre_distance_values = np.asarray(
+        diagnostic_pre_distance
+    )[diagnostic_mask]
+
     radius_p16, radius_median, radius_p84 = np.percentile(
         surface_radii, [16.0, 50.0, 84.0]
     )
@@ -181,6 +239,12 @@ def run_one_resolution(resolution: int, output_dir: Path) -> dict:
         shock_direction[surface] * radial_unit[surface], axis=-1
     )
     expected_radius = analytic_radius()
+    ambient_sound_speed = np.sqrt(
+        GAMMA * AMBIENT_PRESSURE / AMBIENT_DENSITY
+    )
+    analytic_mach = (2.0 / 5.0) * expected_radius / (
+        T_END * ambient_sound_speed
+    )
 
     metrics = {
         "resolution": resolution,
@@ -210,6 +274,27 @@ def run_one_resolution(resolution: int, output_dir: Path) -> dict:
         "mach_coefficient_of_variation": float(
             np.std(valid_surface_mach) / np.mean(valid_surface_mach)
         ),
+        "analytic_kinematic_mach": float(analytic_mach),
+        "diagnostic_outside_offset": float(diagnostic_outside_offset),
+        "diagnostic_valid_mach_fraction": float(
+            diagnostic_mach.size / surface_mach.size
+        ),
+        "diagnostic_mach_median": float(np.median(diagnostic_mach)),
+        "diagnostic_mach_p16": float(
+            np.percentile(diagnostic_mach, 16.0)
+        ),
+        "diagnostic_mach_p84": float(
+            np.percentile(diagnostic_mach, 84.0)
+        ),
+        "diagnostic_mach_coefficient_of_variation": float(
+            np.std(diagnostic_mach) / np.mean(diagnostic_mach)
+        ),
+        "diagnostic_post_distance_cells_median": float(
+            np.median(diagnostic_post_distance_values)
+        ),
+        "diagnostic_pre_distance_cells_median": float(
+            np.median(diagnostic_pre_distance_values)
+        ),
         "elapsed_seconds": elapsed_seconds,
     }
 
@@ -221,11 +306,23 @@ def run_one_resolution(resolution: int, output_dir: Path) -> dict:
     return metrics
 
 
-def run_worker(resolution: int, output_dir: Path) -> None:
-    run_one_resolution(resolution, output_dir)
+def run_worker(
+    resolution: int,
+    output_dir: Path,
+    diagnostic_outside_offset: float,
+) -> None:
+    run_one_resolution(
+        resolution,
+        output_dir,
+        diagnostic_outside_offset,
+    )
 
 
-def run_parent(resolutions: list[int], output_dir: Path) -> None:
+def run_parent(
+    resolutions: list[int],
+    output_dir: Path,
+    diagnostic_outside_offset: float,
+) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
     environment = os.environ.copy()
     existing_pythonpath = environment.get("PYTHONPATH")
@@ -243,6 +340,8 @@ def run_parent(resolutions: list[int], output_dir: Path) -> None:
                 str(resolution),
                 "--output-dir",
                 str(output_dir),
+                "--diagnostic-outside-offset",
+                str(diagnostic_outside_offset),
             ],
             check=True,
             cwd=REPOSITORY_ROOT,
@@ -307,7 +406,11 @@ def write_summary(metrics: list[dict], output_dir: Path) -> None:
 def main() -> None:
     args = parse_args()
     if args.worker_resolution is not None:
-        run_worker(args.worker_resolution, args.output_dir)
+        run_worker(
+            args.worker_resolution,
+            args.output_dir,
+            args.diagnostic_outside_offset,
+        )
     elif args.aggregate_only:
         metrics = [
             json.loads(
@@ -321,7 +424,11 @@ def main() -> None:
         ]
         write_summary(metrics, args.output_dir)
     else:
-        run_parent(args.resolutions, args.output_dir)
+        run_parent(
+            args.resolutions,
+            args.output_dir,
+            args.diagnostic_outside_offset,
+        )
 
 
 if __name__ == "__main__":
