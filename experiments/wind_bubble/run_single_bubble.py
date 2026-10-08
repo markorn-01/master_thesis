@@ -56,6 +56,12 @@ from astronomix._physics_modules._shock_finder.mhd_shock_finder import (
 from astronomix._physics_modules._shock_finder._gradients import (
     _calculate_velocity_divergence,
 )
+from astronomix._physics_modules._shock_finder._shock_mach import (
+    _calculate_mach_at_surface,
+)
+from astronomix._physics_modules._shock_finder._energy_dissipation import (
+    calculate_thermal_energy_flux,
+)
 from astronomix.option_classes.simulation_config import SnapshotSettings
 
 
@@ -589,6 +595,27 @@ def analyze_shocks_3d(
             registered_variables,
             helper_data,
         )
+        profile_mach_numbers = _calculate_mach_at_surface(
+            jnp.asarray(state),
+            result.shock_surface_cells,
+            result.shock_zones,
+            result.shock_direction,
+            result.shock_surface_offsets,
+            config,
+            registered_variables,
+            profile_aware=True,
+        )
+        profile_thermal_energy_flux = calculate_thermal_energy_flux(
+            primitive_state=jnp.asarray(state),
+            shock_surface=result.shock_surface_cells,
+            shock_zones=result.shock_zones,
+            shock_direction=result.shock_direction,
+            surface_offsets=result.shock_surface_offsets,
+            mach_numbers=profile_mach_numbers,
+            config=config,
+            registered_variables=registered_variables,
+            profile_aware_sampling=True,
+        )
         surface_mask = np.asarray(result.shock_surface_cells, dtype=bool)
         surface_offsets = np.asarray(result.shock_surface_offsets)
         shock_direction = np.moveaxis(np.asarray(result.shock_direction), 0, -1)
@@ -611,6 +638,12 @@ def analyze_shocks_3d(
                 "shock_direction": shock_direction,
                 "mach_numbers": np.asarray(result.mach_numbers),
                 "thermal_energy_flux": np.asarray(result.thermal_energy_flux),
+                "profile_aware_mach_numbers": np.asarray(
+                    profile_mach_numbers
+                ),
+                "profile_aware_thermal_energy_flux": np.asarray(
+                    profile_thermal_energy_flux
+                ),
             }
         )
         print(
@@ -1468,6 +1501,9 @@ def measure_shock_energy_histories(
         radii = np.asarray(result["refined_radii"])[surface_mask]
         directions = np.asarray(result["shock_direction"])[surface_mask]
         flux = np.asarray(result["thermal_energy_flux"])[surface_mask]
+        profile_aware_flux = np.asarray(
+            result["profile_aware_thermal_energy_flux"]
+        )[surface_mask]
         outside = np.isfinite(radii) & (radii > injection_radius)
         separation_radius = float(history["separation_radius"])
 
@@ -1487,60 +1523,83 @@ def measure_shock_energy_histories(
             "snapshot_index": snapshot_index,
         }
         for shock_kind in ("reverse", "forward"):
-            statistics = _surface_dissipation_statistics(
-                surface_flux=flux,
-                surface_direction=directions,
-                grid_spacing=grid_spacing,
-                selection=selections[shock_kind],
-                radius_median=float(history[f"{shock_kind}_radius_median"]),
-                surface_indices=indices,
-            )
-            for name, value in statistics.items():
-                row[f"{shock_kind}_{name}"] = value
+            for estimator_prefix, estimator_flux in (
+                ("", flux),
+                ("profile_aware_", profile_aware_flux),
+            ):
+                statistics = _surface_dissipation_statistics(
+                    surface_flux=estimator_flux,
+                    surface_direction=directions,
+                    grid_spacing=grid_spacing,
+                    selection=selections[shock_kind],
+                    radius_median=float(
+                        history[f"{shock_kind}_radius_median"]
+                    ),
+                    surface_indices=indices,
+                )
+                for name, value in statistics.items():
+                    row[f"{shock_kind}_{estimator_prefix}{name}"] = value
         per_snapshot.append(row)
 
-    for shock_kind in ("reverse", "forward"):
-        rates = np.asarray(
-            [row[f"{shock_kind}_dissipation_rate"] for row in per_snapshot],
-            dtype=float,
-        )
-        cumulative, interval_valid = _cumulative_trapezoid_over_detections(
-            times, rates
-        )
-        for index, row in enumerate(per_snapshot):
-            row[f"{shock_kind}_integration_interval_valid"] = bool(
-                interval_valid[index]
+    for estimator_prefix in ("", "profile_aware_"):
+        for shock_kind in ("reverse", "forward"):
+            rates = np.asarray(
+                [
+                    row[f"{shock_kind}_{estimator_prefix}dissipation_rate"]
+                    for row in per_snapshot
+                ],
+                dtype=float,
             )
-            row[f"{shock_kind}_cumulative_dissipated_energy"] = float(
-                cumulative[index]
+            cumulative, interval_valid = _cumulative_trapezoid_over_detections(
+                times, rates
             )
+            for index, row in enumerate(per_snapshot):
+                row[
+                    f"{shock_kind}_{estimator_prefix}integration_interval_valid"
+                ] = bool(interval_valid[index])
+                row[
+                    f"{shock_kind}_{estimator_prefix}cumulative_dissipated_energy"
+                ] = float(cumulative[index])
 
     for row in per_snapshot:
-        cumulative_values = np.asarray(
-            [
-                row["reverse_cumulative_dissipated_energy"],
-                row["forward_cumulative_dissipated_energy"],
-            ],
-            dtype=float,
-        )
-        row["combined_cumulative_dissipated_energy"] = (
-            float(np.nansum(cumulative_values))
-            if np.any(np.isfinite(cumulative_values))
-            else np.nan
-        )
         injected_energy = wind_luminosity * float(row["time"])
         row["injected_wind_energy"] = injected_energy
-        row["combined_dissipation_to_injected_energy"] = (
-            float(row["combined_cumulative_dissipated_energy"] / injected_energy)
-            if injected_energy > 0.0
-            and np.isfinite(row["combined_cumulative_dissipated_energy"])
-            else np.nan
-        )
+        for estimator_prefix in ("", "profile_aware_"):
+            cumulative_values = np.asarray(
+                [
+                    row[
+                        f"reverse_{estimator_prefix}cumulative_dissipated_energy"
+                    ],
+                    row[
+                        f"forward_{estimator_prefix}cumulative_dissipated_energy"
+                    ],
+                ],
+                dtype=float,
+            )
+            combined_key = (
+                f"{estimator_prefix}combined_cumulative_dissipated_energy"
+            )
+            ratio_key = (
+                f"{estimator_prefix}combined_dissipation_to_injected_energy"
+            )
+            row[combined_key] = (
+                float(np.nansum(cumulative_values))
+                if np.any(np.isfinite(cumulative_values))
+                else np.nan
+            )
+            row[ratio_key] = (
+                float(row[combined_key] / injected_energy)
+                if injected_energy > 0.0 and np.isfinite(row[combined_key])
+                else np.nan
+            )
         print(
             f"t={row['time']:.6f}: "
-            f"reverse rate={row['reverse_dissipation_rate']:.6g}, "
-            f"forward rate={row['forward_dissipation_rate']:.6g}, "
-            f"cumulative={row['combined_cumulative_dissipated_energy']:.6g}"
+            f"reverse rate current/profile="
+            f"{row['reverse_dissipation_rate']:.6g}/"
+            f"{row['reverse_profile_aware_dissipation_rate']:.6g}, "
+            f"forward rate current/profile="
+            f"{row['forward_dissipation_rate']:.6g}/"
+            f"{row['forward_profile_aware_dissipation_rate']:.6g}"
         )
 
     csv_path.parent.mkdir(parents=True, exist_ok=True)
@@ -1574,13 +1633,73 @@ def measure_shock_energy_histories(
         coverage = np.asarray(
             [row[f"{shock_kind}_valid_flux_fraction"] for row in per_snapshot]
         )
-        rate_axis.plot(times, rates, marker="o", color=color, label=label)
-        energy_axis.plot(times, cumulative, marker="o", color=color, label=label)
+        profile_rates = np.asarray(
+            [
+                row[f"{shock_kind}_profile_aware_dissipation_rate"]
+                for row in per_snapshot
+            ]
+        )
+        profile_cumulative = np.asarray(
+            [
+                row[
+                    f"{shock_kind}_profile_aware_cumulative_dissipated_energy"
+                ]
+                for row in per_snapshot
+            ]
+        )
+        profile_coverage = np.asarray(
+            [
+                row[f"{shock_kind}_profile_aware_valid_flux_fraction"]
+                for row in per_snapshot
+            ]
+        )
+        rate_axis.plot(
+            times,
+            rates,
+            marker="o",
+            linestyle="--",
+            color=color,
+            label=f"{label}: current",
+        )
+        rate_axis.plot(
+            times,
+            profile_rates,
+            marker="s",
+            color=color,
+            label=f"{label}: profile-aware",
+        )
+        energy_axis.plot(
+            times,
+            cumulative,
+            marker="o",
+            linestyle="--",
+            color=color,
+            label=f"{label}: current",
+        )
+        energy_axis.plot(
+            times,
+            profile_cumulative,
+            marker="s",
+            color=color,
+            label=f"{label}: profile-aware",
+        )
         area_axis.plot(
             times, area_ratio, marker="o", color=color, label=label
         )
         coverage_axis.plot(
-            times, coverage, marker="o", color=color, label=label
+            times,
+            coverage,
+            marker="o",
+            linestyle="--",
+            color=color,
+            label=f"{label}: current",
+        )
+        coverage_axis.plot(
+            times,
+            profile_coverage,
+            marker="s",
+            color=color,
+            label=f"{label}: profile-aware",
         )
 
     injected = wind_luminosity * times
@@ -1655,6 +1774,9 @@ def measure_shock_histories(
         surface_mask = shock_results[snapshot_index]["surface_mask"]
         surface_radii = shock_results[snapshot_index]["refined_radii"][surface_mask]
         surface_mach = shock_results[snapshot_index]["mach_numbers"][surface_mask]
+        profile_aware_surface_mach = shock_results[snapshot_index][
+            "profile_aware_mach_numbers"
+        ][surface_mask]
         surface_centers = shock_results[snapshot_index]["refined_centers"][surface_mask]
         surface_direction = shock_results[snapshot_index]["shock_direction"][
             surface_mask
@@ -1666,6 +1788,7 @@ def measure_shock_histories(
         outside_mask = surface_radii > injection_radius
         outside_radii = surface_radii[outside_mask]
         outside_mach = surface_mach[outside_mask]
+        outside_profile_aware_mach = profile_aware_surface_mach[outside_mask]
         outside_alignment = radial_alignment[outside_mask]
 
         reverse_radii, forward_radii, separation_radius = split_radial_shock_candidates(
@@ -1683,6 +1806,18 @@ def measure_shock_histories(
             forward_radii,
             outside_radii,
             outside_mach,
+            outside_alignment,
+        )
+        reverse_profile_aware = _radial_band_statistics(
+            reverse_radii,
+            outside_radii,
+            outside_profile_aware_mach,
+            outside_alignment,
+        )
+        forward_profile_aware = _radial_band_statistics(
+            forward_radii,
+            outside_radii,
+            outside_profile_aware_mach,
             outside_alignment,
         )
         ordering_ok = not (
@@ -1791,6 +1926,21 @@ def measure_shock_histories(
                 "mach_coefficient_of_variation"
             ],
             "reverse_median_radial_alignment": reverse["median_radial_alignment"],
+            "reverse_profile_aware_valid_mach_fraction": (
+                reverse_profile_aware["valid_mach_fraction"]
+            ),
+            "reverse_profile_aware_mach_median": reverse_profile_aware[
+                "mach_median"
+            ],
+            "reverse_profile_aware_mach_p16": reverse_profile_aware[
+                "mach_p16"
+            ],
+            "reverse_profile_aware_mach_p84": reverse_profile_aware[
+                "mach_p84"
+            ],
+            "reverse_profile_aware_mach_coefficient_of_variation": (
+                reverse_profile_aware["mach_coefficient_of_variation"]
+            ),
             "reverse_confidence_score": confidence["reverse"]["confidence_score"],
             "reverse_confidence_label": confidence["reverse"]["confidence_label"],
             "forward_track_id": "forward_shock",
@@ -1820,6 +1970,21 @@ def measure_shock_histories(
                 "mach_coefficient_of_variation"
             ],
             "forward_median_radial_alignment": forward["median_radial_alignment"],
+            "forward_profile_aware_valid_mach_fraction": (
+                forward_profile_aware["valid_mach_fraction"]
+            ),
+            "forward_profile_aware_mach_median": forward_profile_aware[
+                "mach_median"
+            ],
+            "forward_profile_aware_mach_p16": forward_profile_aware[
+                "mach_p16"
+            ],
+            "forward_profile_aware_mach_p84": forward_profile_aware[
+                "mach_p84"
+            ],
+            "forward_profile_aware_mach_coefficient_of_variation": (
+                forward_profile_aware["mach_coefficient_of_variation"]
+            ),
             "forward_confidence_score": confidence["forward"]["confidence_score"],
             "forward_confidence_label": confidence["forward"]["confidence_label"],
             "weaver_outer_radius": weaver_radius,
@@ -1840,6 +2005,16 @@ def measure_shock_histories(
                     "shock_kind": shock_kind,
                     **tracked[shock_kind],
                     **statistics,
+                    **{
+                        f"profile_aware_{name}": value
+                        for name, value in (
+                            reverse_profile_aware
+                            if shock_kind == "reverse"
+                            else forward_profile_aware
+                        ).items()
+                        if name.startswith("mach_")
+                        or name == "valid_mach_fraction"
+                    },
                     **confidence[shock_kind],
                     "weaver_outer_radius": (
                         weaver_radius if shock_kind == "forward" else np.nan
@@ -1864,7 +2039,12 @@ def measure_shock_histories(
             f"confidence={row['forward_confidence_label']}), "
             f"Weaver={weaver_radius:.6f}, "
             f"relative error={relative_error:.3f}, "
-            f"two bands={row['two_bands_detected']}"
+            f"two bands={row['two_bands_detected']}; "
+            f"Mach current/profile: "
+            f"reverse={row['reverse_mach_median']:.3f}/"
+            f"{row['reverse_profile_aware_mach_median']:.3f}, "
+            f"forward={row['forward_mach_median']:.3f}/"
+            f"{row['forward_profile_aware_mach_median']:.3f}"
         )
 
     csv_path.parent.mkdir(parents=True, exist_ok=True)
@@ -1974,7 +2154,8 @@ def measure_shock_histories(
             median[valid_mach],
             marker="o",
             color=color,
-            label=label,
+            linestyle="--",
+            label=f"{label}: current",
         )
         mach_axis.fill_between(
             history_times[valid_mach],
@@ -1982,6 +2163,35 @@ def measure_shock_histories(
             p84[valid_mach],
             color=color,
             alpha=0.2,
+        )
+        profile_median = np.array(
+            [row[f"{prefix}_profile_aware_mach_median"] for row in rows]
+        )
+        profile_p16 = np.array(
+            [row[f"{prefix}_profile_aware_mach_p16"] for row in rows]
+        )
+        profile_p84 = np.array(
+            [row[f"{prefix}_profile_aware_mach_p84"] for row in rows]
+        )
+        valid_profile = (
+            valid
+            & np.isfinite(profile_median)
+            & np.isfinite(profile_p16)
+            & np.isfinite(profile_p84)
+        )
+        mach_axis.plot(
+            history_times[valid_profile],
+            profile_median[valid_profile],
+            marker="s",
+            color=color,
+            label=f"{label}: profile-aware",
+        )
+        mach_axis.fill_between(
+            history_times[valid_profile],
+            profile_p16[valid_profile],
+            profile_p84[valid_profile],
+            color=color,
+            alpha=0.1,
         )
     mach_axis.axhline(1.0, color="grey", linestyle=":", linewidth=1.0)
     valid_weaver_mach = resolved & np.isfinite(weaver_forward_mach)
@@ -2099,12 +2309,21 @@ def classify_reverse_shock_evidence(
         "shock_normal_points_inward": measurements["median_radial_normal_alignment"]
         < MAX_INWARD_NORMAL_ALIGNMENT,
     }
+    profile_aware_peak_mach = measurements.get(
+        "profile_aware_peak_surface_mach",
+        measurements["peak_surface_mach"],
+    )
     diagnostic_checks = {
         "adaptive_finder_mach_is_consistent": measurements["peak_surface_mach"]
         >= MIN_SHOCK_MACH,
+        "profile_aware_finder_mach_is_consistent": profile_aware_peak_mach
+        >= MIN_SHOCK_MACH,
     }
     verified = all(required_criteria.values())
-    finder_mach_warning = verified and not all(diagnostic_checks.values())
+    finder_mach_warning = (
+        verified
+        and not diagnostic_checks["profile_aware_finder_mach_is_consistent"]
+    )
     if not verified:
         classification = "not_yet_verified_as_reverse_shock"
     elif finder_mach_warning:
@@ -2216,6 +2435,14 @@ def evaluate_reverse_shock(
         "peak_surface_mach": float(
             np.nanmax(final_shock_result["mach_numbers"][neighborhood])
         ),
+        "profile_aware_peak_surface_mach": float(
+            np.nanmax(
+                final_shock_result.get(
+                    "profile_aware_mach_numbers",
+                    final_shock_result["mach_numbers"],
+                )[neighborhood]
+            )
+        ),
         "median_radial_normal_alignment": float(
             np.nanmedian(radial_alignment[neighborhood])
         ),
@@ -2309,6 +2536,13 @@ def calculate_radial_verification_profiles(
             selection=surface_mask,
         ),
     }
+    if "profile_aware_mach_numbers" in final_shock_result:
+        profiles["profile_aware_surface_mach"] = _spherical_bin_median(
+            final_shock_result["profile_aware_mach_numbers"],
+            bin_indices,
+            num_bins,
+            selection=surface_mask,
+        )
     shell_cell_count = np.bincount(
         bin_indices[(bin_indices >= 0) & (bin_indices < num_bins)].ravel(),
         minlength=num_bins,
@@ -2434,8 +2668,17 @@ def plot_radial_verification_profiles(
         profiles["surface_mach"],
         color="tab:purple",
         s=24,
-        label="shock-finder Mach",
+        label="current shock-finder Mach",
     )
+    if "profile_aware_surface_mach" in profiles:
+        mach_axis.scatter(
+            bin_centers,
+            profiles["profile_aware_surface_mach"],
+            color="tab:green",
+            marker="x",
+            s=28,
+            label="profile-aware shock-finder Mach",
+        )
     mach_axis.axhline(1.0, color="grey", linestyle=":", linewidth=1.0)
     mach_axis.set_ylabel("Mach number")
     mach_axis.legend(fontsize=8)

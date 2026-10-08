@@ -2,6 +2,8 @@
 
 import unittest
 from types import SimpleNamespace
+from pathlib import Path
+from tempfile import TemporaryDirectory
 
 import numpy as np
 
@@ -18,6 +20,7 @@ from experiments.wind_bubble.run_single_bubble import (
     build_problem,
     classify_reverse_shock_evidence,
     magnetic_field_strength_from_plasma_beta,
+    measure_shock_energy_histories,
     split_radial_shock_candidates,
 )
 
@@ -381,6 +384,53 @@ class TemporalShockTrackingTests(unittest.TestCase):
 
 
 class ShockEnergyIntegrationTests(unittest.TestCase):
+    def test_energy_history_compares_current_and_profile_aware_flux(self):
+        surface_mask = np.ones((2, 1, 1), dtype=bool)
+        base_result = {
+            "surface_mask": surface_mask,
+            "refined_radii": np.array([[[0.2]], [[0.4]]]),
+            "shock_direction": np.broadcast_to(
+                np.array([1.0, 0.0, 0.0]),
+                (2, 1, 1, 3),
+            ),
+            "thermal_energy_flux": np.array([[[2.0]], [[4.0]]]),
+            "profile_aware_thermal_energy_flux": np.array(
+                [[[3.0]], [[6.0]]]
+            ),
+        }
+        history = {
+            "separation_radius": 0.3,
+            "reverse_radius_median": 0.2,
+            "forward_radius_median": 0.4,
+        }
+
+        with TemporaryDirectory() as directory:
+            output_dir = Path(directory)
+            rows = measure_shock_energy_histories(
+                times=np.array([0.0, 1.0]),
+                shock_results=[base_result, base_result],
+                history_rows=[history, history],
+                injection_radius=0.1,
+                grid_spacing=0.5,
+                wind_luminosity=1.0,
+                csv_path=output_dir / "energy.csv",
+                plot_path=output_dir / "energy.png",
+            )
+
+        final = rows[-1]
+        self.assertAlmostEqual(
+            final["reverse_profile_aware_dissipation_rate"],
+            1.5 * final["reverse_dissipation_rate"],
+        )
+        self.assertAlmostEqual(
+            final["forward_profile_aware_dissipation_rate"],
+            1.5 * final["forward_dissipation_rate"],
+        )
+        self.assertAlmostEqual(
+            final["profile_aware_combined_cumulative_dissipated_energy"],
+            1.5 * final["combined_cumulative_dissipated_energy"],
+        )
+
     def test_axis_aligned_surface_weights_equal_grid_face_area(self):
         directions = np.tile([1.0, 0.0, 0.0], (6, 1))
 
