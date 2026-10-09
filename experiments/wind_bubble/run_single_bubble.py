@@ -1144,6 +1144,82 @@ def _weaver_forward_shock_mach(
     return float(shock_speed / ambient_sound_speed)
 
 
+def _kinematic_forward_shock_mach(
+    radial_velocity: float,
+    ambient_density: float,
+    ambient_pressure: float,
+    gamma: float,
+) -> float:
+    """Convert the tracked forward-shock speed to an ambient-frame Mach.
+
+    The undisturbed ambient medium is stationary in this experiment, so the
+    tracked lab-frame shock speed is also the shock speed relative to its
+    upstream gas.  Missing or non-expanding tracks do not define a kinematic
+    shock Mach number.
+    """
+    if not np.isfinite(radial_velocity) or radial_velocity <= 0.0:
+        return np.nan
+    ambient_sound_speed = np.sqrt(gamma * ambient_pressure / ambient_density)
+    return float(radial_velocity / ambient_sound_speed)
+
+
+def _normal_shock_pressure_ratio(mach: float, gamma: float) -> float:
+    """Return the ideal-gas pressure jump implied by a normal-shock Mach."""
+    if not np.isfinite(mach) or mach < 1.0:
+        return np.nan
+    return float((2.0 * gamma * mach**2 - (gamma - 1.0)) / (gamma + 1.0))
+
+
+def _finite_relative_difference(value: float, reference: float) -> float:
+    """Return ``(value-reference)/reference`` when both values are usable."""
+    if (
+        not np.isfinite(value)
+        or not np.isfinite(reference)
+        or reference == 0.0
+    ):
+        return np.nan
+    return float((value - reference) / reference)
+
+
+def _forward_mach_diagnostic_values(
+    radial_velocity: float,
+    current_mach: float,
+    profile_aware_mach: float,
+    weaver_mach: float,
+) -> dict[str, float]:
+    """Build the forward-shock Mach and pressure-jump comparison fields."""
+    kinematic_mach = _kinematic_forward_shock_mach(
+        radial_velocity=radial_velocity,
+        ambient_density=AMBIENT_DENSITY,
+        ambient_pressure=AMBIENT_PRESSURE,
+        gamma=GAMMA,
+    )
+    return {
+        "forward_kinematic_mach": kinematic_mach,
+        "forward_current_sampled_pressure_ratio": (
+            _normal_shock_pressure_ratio(current_mach, GAMMA)
+        ),
+        "forward_profile_aware_sampled_pressure_ratio": (
+            _normal_shock_pressure_ratio(profile_aware_mach, GAMMA)
+        ),
+        "forward_kinematic_expected_pressure_ratio": (
+            _normal_shock_pressure_ratio(kinematic_mach, GAMMA)
+        ),
+        "weaver_expected_pressure_ratio": (
+            _normal_shock_pressure_ratio(weaver_mach, GAMMA)
+        ),
+        "forward_profile_aware_mach_relative_error_vs_kinematic": (
+            _finite_relative_difference(profile_aware_mach, kinematic_mach)
+        ),
+        "forward_kinematic_mach_relative_error_vs_weaver": (
+            _finite_relative_difference(kinematic_mach, weaver_mach)
+        ),
+        "forward_profile_aware_mach_relative_error_vs_weaver": (
+            _finite_relative_difference(profile_aware_mach, weaver_mach)
+        ),
+    }
+
+
 def _temporal_tracking_diagnostics(
     current_radius: float,
     previous_radius: float,
@@ -1893,6 +1969,17 @@ def measure_shock_histories(
             if resolved_for_weaver and np.isfinite(float(forward["radius_median"]))
             else np.nan
         )
+        forward_diagnostic = _forward_mach_diagnostic_values(
+            radial_velocity=float(tracked["forward"]["radial_velocity"]),
+            current_mach=float(forward["mach_median"]),
+            profile_aware_mach=float(
+                forward_profile_aware["mach_median"]
+            ),
+            weaver_mach=weaver_forward_mach,
+        )
+        forward_kinematic_mach = forward_diagnostic[
+            "forward_kinematic_mach"
+        ]
 
         row = {
             "time": float(time),
@@ -1985,6 +2072,7 @@ def measure_shock_histories(
             "forward_profile_aware_mach_coefficient_of_variation": (
                 forward_profile_aware["mach_coefficient_of_variation"]
             ),
+            **forward_diagnostic,
             "forward_confidence_score": confidence["forward"]["confidence_score"],
             "forward_confidence_label": confidence["forward"]["confidence_label"],
             "weaver_outer_radius": weaver_radius,
@@ -2021,6 +2109,11 @@ def measure_shock_histories(
                     ),
                     "weaver_forward_mach": (
                         weaver_forward_mach if shock_kind == "forward" else np.nan
+                    ),
+                    "kinematic_mach": (
+                        forward_kinematic_mach
+                        if shock_kind == "forward"
+                        else np.nan
                     ),
                     "relative_error_vs_weaver": (
                         relative_error if shock_kind == "forward" else np.nan
@@ -2202,6 +2295,17 @@ def measure_shock_histories(
         linestyle="--",
         label=r"adiabatic Weaver $\dot R/c_{s,0}$",
     )
+    forward_kinematic_mach = np.array(
+        [row["forward_kinematic_mach"] for row in rows]
+    )
+    valid_kinematic_mach = resolved & np.isfinite(forward_kinematic_mach)
+    mach_axis.plot(
+        history_times[valid_kinematic_mach],
+        forward_kinematic_mach[valid_kinematic_mach],
+        color="tab:green",
+        marker="^",
+        label=r"tracked forward $\Delta R/(\Delta t\,c_{s,0})$",
+    )
     mach_axis.set(ylabel="Mach number", title="Surface Mach history")
     mach_axis.legend(fontsize=8)
 
@@ -2256,6 +2360,138 @@ def measure_shock_histories(
         axis.grid(alpha=0.25)
     figure.suptitle("3D forward/reverse shock temporal tracking")
 
+    plot_path.parent.mkdir(parents=True, exist_ok=True)
+    figure.savefig(plot_path, dpi=180)
+    plt.close(figure)
+    return rows
+
+
+def write_forward_mach_diagnostics(
+    history_rows: list[dict],
+    csv_path: Path,
+    plot_path: Path,
+) -> list[dict]:
+    """Write a compact comparison of jump, kinematic, and Weaver Mach values."""
+    fieldnames = [
+        "time",
+        "resolved_for_weaver",
+        "forward_confidence_label",
+        "forward_radius_median",
+        "weaver_outer_radius",
+        "relative_error_vs_weaver",
+        "forward_mach_median",
+        "forward_profile_aware_mach_median",
+        "forward_kinematic_mach",
+        "weaver_forward_mach",
+        "forward_current_sampled_pressure_ratio",
+        "forward_profile_aware_sampled_pressure_ratio",
+        "forward_kinematic_expected_pressure_ratio",
+        "weaver_expected_pressure_ratio",
+        "forward_profile_aware_mach_relative_error_vs_kinematic",
+        "forward_kinematic_mach_relative_error_vs_weaver",
+        "forward_profile_aware_mach_relative_error_vs_weaver",
+    ]
+    rows = [{name: row[name] for name in fieldnames} for row in history_rows]
+    csv_path.parent.mkdir(parents=True, exist_ok=True)
+    with csv_path.open("w", newline="", encoding="utf-8") as csv_file:
+        writer = csv.DictWriter(
+            csv_file,
+            fieldnames=fieldnames,
+            lineterminator="\n",
+        )
+        writer.writeheader()
+        writer.writerows(rows)
+
+    times = np.asarray([row["time"] for row in rows], dtype=float)
+    resolved = np.asarray(
+        [row["resolved_for_weaver"] for row in rows], dtype=bool
+    )
+    figure, (mach_axis, pressure_axis) = plt.subplots(
+        2, 1, figsize=(9, 8), sharex=True, constrained_layout=True
+    )
+    mach_series = (
+        ("forward_mach_median", "current pressure jump", "tab:blue", "--", "o"),
+        (
+            "forward_profile_aware_mach_median",
+            "profile-aware pressure jump",
+            "tab:orange",
+            "-",
+            "s",
+        ),
+        (
+            "forward_kinematic_mach",
+            "tracked propagation speed",
+            "tab:green",
+            "-",
+            "^",
+        ),
+        ("weaver_forward_mach", "Weaver similarity speed", "black", ":", None),
+    )
+    for key, label, color, linestyle, marker in mach_series:
+        values = np.asarray([row[key] for row in rows], dtype=float)
+        valid = resolved & np.isfinite(values)
+        mach_axis.plot(
+            times[valid],
+            values[valid],
+            color=color,
+            linestyle=linestyle,
+            marker=marker,
+            label=label,
+        )
+    mach_axis.set(ylabel="Mach number", title="Forward-shock Mach comparison")
+    mach_axis.grid(alpha=0.25)
+    mach_axis.legend(fontsize=8)
+
+    pressure_series = (
+        (
+            "forward_current_sampled_pressure_ratio",
+            "current sampled jump",
+            "tab:blue",
+            "--",
+            "o",
+        ),
+        (
+            "forward_profile_aware_sampled_pressure_ratio",
+            "profile-aware sampled jump",
+            "tab:orange",
+            "-",
+            "s",
+        ),
+        (
+            "forward_kinematic_expected_pressure_ratio",
+            "jump expected from tracked speed",
+            "tab:green",
+            "-",
+            "^",
+        ),
+        (
+            "weaver_expected_pressure_ratio",
+            "jump expected from Weaver",
+            "black",
+            ":",
+            None,
+        ),
+    )
+    for key, label, color, linestyle, marker in pressure_series:
+        values = np.asarray([row[key] for row in rows], dtype=float)
+        valid = resolved & np.isfinite(values) & (values > 0.0)
+        pressure_axis.plot(
+            times[valid],
+            values[valid],
+            color=color,
+            linestyle=linestyle,
+            marker=marker,
+            label=label,
+        )
+    pressure_axis.set(
+        xlabel="time [code units]",
+        ylabel=r"pressure ratio $P_2/P_1$",
+        title="Sampled versus speed-implied pressure jump",
+        yscale="log",
+    )
+    pressure_axis.grid(alpha=0.25)
+    pressure_axis.legend(fontsize=8)
+    figure.suptitle("Forward-shock Mach-estimator diagnostic")
     plot_path.parent.mkdir(parents=True, exist_ok=True)
     figure.savefig(plot_path, dpi=180)
     plt.close(figure)
@@ -2715,6 +2951,12 @@ def main() -> None:
     shock_history_plot_path = output_dir / "shock_histories.png"
     shock_history_csv_path = output_dir / "shock_histories.csv"
     shock_tracks_csv_path = output_dir / "shock_tracks.csv"
+    forward_mach_diagnostic_plot_path = (
+        output_dir / "forward_mach_diagnostics.png"
+    )
+    forward_mach_diagnostic_csv_path = (
+        output_dir / "forward_mach_diagnostics.csv"
+    )
     energy_history_plot_path = output_dir / "shock_energy_histories.png"
     energy_history_csv_path = output_dir / "shock_energy_histories.csv"
     verification_plot_path = output_dir / "radial_verification_profiles.png"
@@ -2884,6 +3126,20 @@ def main() -> None:
     print(f"Saved shock history     : {shock_history_plot_path.resolve()}")
     print(f"Saved history table     : {shock_history_csv_path.resolve()}")
     print(f"Saved long-form tracks  : {shock_tracks_csv_path.resolve()}")
+
+    write_forward_mach_diagnostics(
+        history_rows=history_rows,
+        csv_path=forward_mach_diagnostic_csv_path,
+        plot_path=forward_mach_diagnostic_plot_path,
+    )
+    print(
+        "Saved Mach diagnostic   : "
+        f"{forward_mach_diagnostic_plot_path.resolve()}"
+    )
+    print(
+        "Saved Mach table        : "
+        f"{forward_mach_diagnostic_csv_path.resolve()}"
+    )
 
     measure_shock_energy_histories(
         times=times,

@@ -1,16 +1,22 @@
 """Tests for radial reverse/forward shock-candidate separation."""
 
+import csv
 import unittest
-from types import SimpleNamespace
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from types import SimpleNamespace
 
 import numpy as np
 
+from experiments.wind_bubble.compare_forward_mach_estimators import (
+    read_history_rows,
+)
 from experiments.wind_bubble.run_single_bubble import (
     _cumulative_trapezoid_over_detections,
     _mhd_bubble_extents,
     _mhd_pressure_weighted_extents,
+    _kinematic_forward_shock_mach,
+    _normal_shock_pressure_ratio,
     _radial_band_statistics,
     _shock_tracking_confidence,
     _surface_area_weights,
@@ -22,6 +28,7 @@ from experiments.wind_bubble.run_single_bubble import (
     magnetic_field_strength_from_plasma_beta,
     measure_shock_energy_histories,
     split_radial_shock_candidates,
+    write_forward_mach_diagnostics,
 )
 
 
@@ -332,6 +339,98 @@ class TemporalShockTrackingTests(unittest.TestCase):
         )
 
         self.assertAlmostEqual(mach, 6.7778437, places=6)
+
+    def test_kinematic_mach_uses_ambient_sound_speed(self):
+        sound_speed = np.sqrt((5.0 / 3.0) * 0.01)
+
+        mach = _kinematic_forward_shock_mach(
+            radial_velocity=5.0 * sound_speed,
+            ambient_density=1.0,
+            ambient_pressure=0.01,
+            gamma=5.0 / 3.0,
+        )
+
+        self.assertAlmostEqual(mach, 5.0)
+        self.assertTrue(
+            np.isnan(
+                _kinematic_forward_shock_mach(
+                    radial_velocity=np.nan,
+                    ambient_density=1.0,
+                    ambient_pressure=0.01,
+                    gamma=5.0 / 3.0,
+                )
+            )
+        )
+
+    def test_mach_five_implies_expected_pressure_jump(self):
+        self.assertAlmostEqual(
+            _normal_shock_pressure_ratio(5.0, gamma=5.0 / 3.0),
+            31.0,
+        )
+
+    def test_forward_mach_diagnostic_writes_compact_outputs(self):
+        row = {
+            "time": 0.1,
+            "resolved_for_weaver": True,
+            "forward_confidence_label": "high",
+            "forward_radius_median": 0.2,
+            "weaver_outer_radius": 0.21,
+            "relative_error_vs_weaver": -0.05,
+            "forward_mach_median": 4.0,
+            "forward_profile_aware_mach_median": 4.5,
+            "forward_kinematic_mach": 4.8,
+            "weaver_forward_mach": 5.0,
+            "forward_current_sampled_pressure_ratio": 19.75,
+            "forward_profile_aware_sampled_pressure_ratio": 25.0625,
+            "forward_kinematic_expected_pressure_ratio": 28.55,
+            "weaver_expected_pressure_ratio": 31.0,
+            "forward_profile_aware_mach_relative_error_vs_kinematic": -0.0625,
+            "forward_kinematic_mach_relative_error_vs_weaver": -0.04,
+            "forward_profile_aware_mach_relative_error_vs_weaver": -0.1,
+        }
+
+        with TemporaryDirectory() as directory:
+            output_dir = Path(directory)
+            rows = write_forward_mach_diagnostics(
+                history_rows=[row],
+                csv_path=output_dir / "diagnostic.csv",
+                plot_path=output_dir / "diagnostic.png",
+            )
+
+            self.assertTrue((output_dir / "diagnostic.csv").is_file())
+            self.assertTrue((output_dir / "diagnostic.png").is_file())
+        self.assertEqual(rows[0]["forward_kinematic_mach"], 4.8)
+
+    def test_existing_history_can_be_post_processed_without_rerun(self):
+        source = {
+            "time": "0.1",
+            "resolved_for_weaver": "True",
+            "forward_confidence_label": "high",
+            "forward_radius_median": "0.2",
+            "weaver_outer_radius": "0.21",
+            "relative_error_vs_weaver": "-0.05",
+            "forward_radial_velocity": str(
+                4.8 * np.sqrt((5.0 / 3.0) * 0.01)
+            ),
+            "forward_mach_median": "4.0",
+            "forward_profile_aware_mach_median": "4.5",
+            "weaver_forward_mach": "5.0",
+        }
+        with TemporaryDirectory() as directory:
+            path = Path(directory) / "shock_histories.csv"
+            with path.open("w", newline="", encoding="utf-8") as csv_file:
+                writer = csv.DictWriter(csv_file, fieldnames=list(source))
+                writer.writeheader()
+                writer.writerow(source)
+
+            rows = read_history_rows(path)
+
+        self.assertTrue(rows[0]["resolved_for_weaver"])
+        self.assertAlmostEqual(rows[0]["forward_kinematic_mach"], 4.8)
+        self.assertAlmostEqual(
+            rows[0]["forward_profile_aware_sampled_pressure_ratio"],
+            _normal_shock_pressure_ratio(4.5, 5.0 / 3.0),
+        )
 
     def test_reverse_shock_quality_checks_use_inward_normal(self):
         statistics = {
