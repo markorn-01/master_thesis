@@ -99,6 +99,77 @@ def analytic_radius() -> float:
     ) ** 0.2
 
 
+def save_mach_surface_comparison(
+    surface_points: np.ndarray,
+    current_mach: np.ndarray,
+    profile_mach: np.ndarray,
+    resolution: int,
+    output_path: Path,
+) -> None:
+    """Save matched 3D surface views for the two Mach estimators."""
+    current_valid = np.isfinite(current_mach) & (current_mach > 0.0)
+    profile_valid = np.isfinite(profile_mach) & (profile_mach > 0.0)
+    if not np.any(current_valid) or not np.any(profile_valid):
+        raise RuntimeError("Both Mach estimators need valid surface samples.")
+
+    combined = np.concatenate(
+        (current_mach[current_valid], profile_mach[profile_valid])
+    )
+    color_min = float(np.min(combined))
+    color_max = float(np.max(combined))
+    marker_size = max(0.5, min(8.0, 12000.0 / len(surface_points)))
+
+    figure = plt.figure(figsize=(12, 5), constrained_layout=True)
+    panels = (
+        (current_mach, current_valid, "Current estimator"),
+        (profile_mach, profile_valid, "Profile-aware estimator"),
+    )
+    scatter = None
+    for panel_index, (mach, valid, title) in enumerate(panels, start=1):
+        axis = figure.add_subplot(1, 2, panel_index, projection="3d")
+        points = surface_points[valid]
+        scatter = axis.scatter(
+            points[:, 0],
+            points[:, 1],
+            points[:, 2],
+            c=mach[valid],
+            cmap="viridis",
+            vmin=color_min,
+            vmax=color_max,
+            s=marker_size,
+            alpha=0.9,
+            linewidths=0.0,
+        )
+        axis.set(
+            title=(
+                f"{title}\n"
+                f"median={np.median(mach[valid]):.2f}, "
+                f"CV={np.std(mach[valid]) / np.mean(mach[valid]):.3f}"
+            ),
+            xlabel="x",
+            ylabel="y",
+            zlabel="z",
+            xlim=(0.0, BOX_SIZE),
+            ylim=(0.0, BOX_SIZE),
+            zlim=(0.0, BOX_SIZE),
+        )
+        axis.set_box_aspect((1, 1, 1))
+        axis.view_init(elev=25.0, azim=35.0)
+
+    figure.colorbar(
+        scatter,
+        ax=figure.axes,
+        label="Mach number",
+        shrink=0.72,
+        pad=0.04,
+    )
+    figure.suptitle(
+        f"{resolution}³ Sedov shock-surface Mach comparison"
+    )
+    figure.savefig(output_path, dpi=180)
+    plt.close(figure)
+
+
 def run_one_resolution(
     resolution: int,
     output_dir: Path,
@@ -209,6 +280,17 @@ def run_one_resolution(
             "No valid profile-aware surface Mach numbers were measured at "
             f"{resolution}^3."
         )
+
+    resolution_dir = output_dir / f"n{resolution:03d}"
+    resolution_dir.mkdir(parents=True, exist_ok=True)
+    surface_points = refined_centers[surface]
+    save_mach_surface_comparison(
+        surface_points,
+        surface_mach,
+        profile_surface_mach,
+        resolution,
+        resolution_dir / "mach_surface_comparison.png",
+    )
 
     pressure = final_state[registered_variables.pressure_index]
     density = final_state[registered_variables.density_index]
@@ -371,8 +453,6 @@ def run_one_resolution(
         "elapsed_seconds": elapsed_seconds,
     }
 
-    resolution_dir = output_dir / f"n{resolution:03d}"
-    resolution_dir.mkdir(parents=True, exist_ok=True)
     metrics_path = resolution_dir / "metrics.json"
     metrics_path.write_text(json.dumps(metrics, indent=2) + "\n")
     print(json.dumps(metrics, indent=2), flush=True)
