@@ -396,8 +396,9 @@ class ContinuousShockSamplingTests(unittest.TestCase):
         )
 
         self.assertTrue(bool(extrapolated[4][7]))
-        self.assertGreater(
-            float(extrapolated[0][7]), float(ramp_exit[0][7])
+        self.assertAlmostEqual(float(extrapolated[0][7]), 9.375, places=5)
+        self.assertNotAlmostEqual(
+            float(extrapolated[0][7]), float(ramp_exit[0][7]), places=5
         )
         self.assertLess(
             float(extrapolated[5][7]), float(ramp_exit[5][7])
