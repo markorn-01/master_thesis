@@ -509,6 +509,9 @@ def get_plateau_aware_post_pre_shock_values(
         3.75,
     ),
     relative_tolerance=0.01,
+    require_flat_plateau=True,
+    slope_stability_absolute_tolerance=0.002,
+    slope_stability_relative_tolerance=0.25,
 ):
     """Select the first locally flat state beyond each shock-zone edge.
 
@@ -547,8 +550,11 @@ def get_plateau_aware_post_pre_shock_values(
         raise ValueError(
             "shock_zones and sampled fields must have equal shape."
         )
-    if len(outside_offsets) < 3:
-        raise ValueError("outside_offsets must contain at least three values.")
+    minimum_offsets = 3 if require_flat_plateau else 4
+    if len(outside_offsets) < minimum_offsets:
+        raise ValueError(
+            f"outside_offsets must contain at least {minimum_offsets} values."
+        )
     if any(offset < 0.0 for offset in outside_offsets):
         raise ValueError("outside_offsets must be non-negative.")
     if tuple(outside_offsets) != tuple(sorted(outside_offsets)):
@@ -557,6 +563,14 @@ def get_plateau_aware_post_pre_shock_values(
         raise ValueError("outside_offsets must be smaller than max_steps.")
     if relative_tolerance <= 0.0:
         raise ValueError("relative_tolerance must be positive.")
+    if slope_stability_absolute_tolerance < 0.0:
+        raise ValueError(
+            "slope_stability_absolute_tolerance must be non-negative."
+        )
+    if slope_stability_relative_tolerance < 0.0:
+        raise ValueError(
+            "slope_stability_relative_tolerance must be non-negative."
+        )
 
     (
         _,
@@ -665,17 +679,45 @@ def get_plateau_aware_post_pre_shock_values(
 
         pressure_change = relative_change(pressure_samples)
         density_change = relative_change(density_samples)
-        flat_intervals = (
-            pair_valid
-            & (pressure_change <= relative_tolerance)
-            & (density_change <= relative_tolerance)
-        )
-        plateau_runs = flat_intervals[:-1] & flat_intervals[1:]
-        plateau_found = jnp.any(plateau_runs, axis=0)
-        run_index = jnp.argmax(plateau_runs, axis=0)
-        selected_index = run_index + 2
+        if require_flat_plateau:
+            flat_intervals = (
+                pair_valid
+                & (pressure_change <= relative_tolerance)
+                & (density_change <= relative_tolerance)
+            )
+            accepted_runs = flat_intervals[:-1] & flat_intervals[1:]
+            selected_index_offset = 2
+            final_interval_offset = 1
+        else:
+            def stable_slope(changes):
+                first = changes[:-1]
+                second = changes[1:]
+                allowed_change = (
+                    slope_stability_absolute_tolerance
+                    + slope_stability_relative_tolerance
+                    * jnp.maximum(first, second)
+                )
+                return jnp.abs(second - first) <= allowed_change
+
+            adjacent_intervals_valid = pair_valid[:-1] & pair_valid[1:]
+            smooth_transitions = (
+                adjacent_intervals_valid
+                & stable_slope(pressure_change)
+                & stable_slope(density_change)
+            )
+            accepted_runs = (
+                smooth_transitions[:-1] & smooth_transitions[1:]
+            )
+            selected_index_offset = 3
+            final_interval_offset = 2
+
+        plateau_found = jnp.any(accepted_runs, axis=0)
+        run_index = jnp.argmax(accepted_runs, axis=0)
+        selected_index = run_index + selected_index_offset
         gather_index = selected_index[jnp.newaxis, ...]
-        final_interval_index = (run_index + 1)[jnp.newaxis, ...]
+        final_interval_index = (
+            run_index + final_interval_offset
+        )[jnp.newaxis, ...]
 
         def gather(values):
             return jnp.take_along_axis(values, gather_index, axis=0)[0]
@@ -730,6 +772,61 @@ def get_plateau_aware_post_pre_shock_values(
         pre_pressure_change,
         post_density_change,
         pre_density_change,
+    )
+
+
+def get_ramp_exit_aware_post_pre_shock_values(
+    shock_direction,
+    shock_zones,
+    pressure,
+    density,
+    max_steps=8,
+    center_offsets=None,
+    step_size=0.25,
+    outside_offsets=(
+        0.25,
+        0.5,
+        0.75,
+        1.0,
+        1.25,
+        1.5,
+        1.75,
+        2.0,
+        2.25,
+        2.5,
+        2.75,
+        3.0,
+        3.25,
+        3.5,
+        3.75,
+    ),
+    slope_stability_absolute_tolerance=0.002,
+    slope_stability_relative_tolerance=0.25,
+):
+    """Select states after the numerical ramp becomes smoothly varying.
+
+    A physical downstream solution need not be flat.  This variant accepts
+    the first four-point run for which the fractional pressure and density
+    slopes are stable across three consecutive intervals.  It therefore
+    distinguishes a rapidly changing numerical shock ramp from a resolved,
+    smoothly varying physical profile without requiring a zero gradient.
+    """
+    return get_plateau_aware_post_pre_shock_values(
+        shock_direction,
+        shock_zones,
+        pressure,
+        density,
+        max_steps=max_steps,
+        center_offsets=center_offsets,
+        step_size=step_size,
+        outside_offsets=outside_offsets,
+        require_flat_plateau=False,
+        slope_stability_absolute_tolerance=(
+            slope_stability_absolute_tolerance
+        ),
+        slope_stability_relative_tolerance=(
+            slope_stability_relative_tolerance
+        ),
     )
 
 

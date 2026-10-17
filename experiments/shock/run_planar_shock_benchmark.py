@@ -44,10 +44,12 @@ from astronomix._physics_modules._shock_finder._shock_zones import (  # noqa: E4
     get_plateau_aware_post_pre_shock_values,
     get_post_pre_sample_relative_changes,
     get_profile_aware_post_pre_shock_values,
+    get_ramp_exit_aware_post_pre_shock_values,
 )
 from astronomix._physics_modules._shock_finder._shock_mach import (  # noqa: E402
     _calculate_mach_at_surface,
     _calculate_plateau_mach_at_surface,
+    _calculate_ramp_exit_mach_at_surface,
 )
 
 
@@ -247,6 +249,15 @@ def benchmark_resolution(
         config,
         variables,
     )
+    ramp_exit_mach_field = _calculate_ramp_exit_mach_at_surface(
+        state,
+        result.shock_surface_cells,
+        result.shock_zones,
+        result.shock_direction,
+        result.shock_surface_offsets,
+        config,
+        variables,
+    )
 
     surface = np.asarray(result.shock_surface_cells, dtype=bool)
     if not surface.any():
@@ -277,6 +288,15 @@ def benchmark_resolution(
             "No valid plateau-aware Mach samples were produced at "
             f"resolution {resolution}."
         )
+    ramp_exit_mach_values = np.asarray(ramp_exit_mach_field)[surface]
+    valid_ramp_exit_mach = ramp_exit_mach_values[
+        np.isfinite(ramp_exit_mach_values) & (ramp_exit_mach_values > 0.0)
+    ]
+    if valid_ramp_exit_mach.size == 0:
+        raise RuntimeError(
+            "No valid ramp-exit-aware Mach samples were produced at "
+            f"resolution {resolution}."
+        )
 
     centers = np.asarray(helper_data.geometric_centers)
     direction = np.moveaxis(np.asarray(result.shock_direction), 0, -1)
@@ -297,6 +317,9 @@ def benchmark_resolution(
     )
     plateau_p16, plateau_median, plateau_p84 = np.percentile(
         valid_plateau_mach, [16.0, 50.0, 84.0]
+    )
+    ramp_p16, ramp_median, ramp_p84 = np.percentile(
+        valid_ramp_exit_mach, [16.0, 50.0, 84.0]
     )
 
     pressure = state[variables.pressure_index]
@@ -433,6 +456,36 @@ def benchmark_resolution(
     def plateau_values(field):
         return np.asarray(field)[plateau_sample_surface]
 
+    (
+        _,
+        _,
+        _,
+        _,
+        ramp_samples_valid,
+        ramp_post_distance,
+        ramp_pre_distance,
+        ramp_post_pressure_change,
+        ramp_pre_pressure_change,
+        ramp_post_density_change,
+        ramp_pre_density_change,
+    ) = get_ramp_exit_aware_post_pre_shock_values(
+        result.shock_direction,
+        result.shock_zones,
+        pressure,
+        density,
+        max_steps=8,
+        center_offsets=(
+            result.shock_direction
+            * result.shock_surface_offsets[jnp.newaxis, ...]
+        ),
+    )
+    ramp_sample_surface = surface & np.asarray(
+        ramp_samples_valid, dtype=bool
+    )
+
+    def ramp_values(field):
+        return np.asarray(field)[ramp_sample_surface]
+
     return {
         "resolution": int(resolution),
         "grid_spacing": float(config.grid_spacing),
@@ -485,6 +538,34 @@ def benchmark_resolution(
         ),
         "plateau_pre_density_change_median": float(
             np.median(plateau_values(plateau_pre_density_change))
+        ),
+        "ramp_exit_valid_mach_fraction": float(
+            valid_ramp_exit_mach.size / ramp_exit_mach_values.size
+        ),
+        "ramp_exit_mach_median": float(ramp_median),
+        "ramp_exit_mach_p16": float(ramp_p16),
+        "ramp_exit_mach_p84": float(ramp_p84),
+        "ramp_exit_mach_relative_bias": float(ramp_median / mach - 1.0),
+        "ramp_exit_mach_relative_scatter": float(
+            (ramp_p84 - ramp_p16) / (2.0 * mach)
+        ),
+        "ramp_exit_post_sample_distance_cells_median": float(
+            np.median(ramp_values(ramp_post_distance))
+        ),
+        "ramp_exit_pre_sample_distance_cells_median": float(
+            np.median(ramp_values(ramp_pre_distance))
+        ),
+        "ramp_exit_post_pressure_change_median": float(
+            np.median(ramp_values(ramp_post_pressure_change))
+        ),
+        "ramp_exit_pre_pressure_change_median": float(
+            np.median(ramp_values(ramp_pre_pressure_change))
+        ),
+        "ramp_exit_post_density_change_median": float(
+            np.median(ramp_values(ramp_post_density_change))
+        ),
+        "ramp_exit_pre_density_change_median": float(
+            np.median(ramp_values(ramp_pre_density_change))
         ),
         "profile_sampled_pressure_ratio_median": float(
             np.median(sampled_profile_pressure_ratio)
@@ -579,6 +660,11 @@ def write_outputs(rows: list[dict], output_dir: Path) -> None:
     )
     plateau_p16 = np.asarray([row["plateau_mach_p16"] for row in rows])
     plateau_p84 = np.asarray([row["plateau_mach_p84"] for row in rows])
+    ramp_median = np.asarray(
+        [row["ramp_exit_mach_median"] for row in rows]
+    )
+    ramp_p16 = np.asarray([row["ramp_exit_mach_p16"] for row in rows])
+    ramp_p84 = np.asarray([row["ramp_exit_mach_p84"] for row in rows])
     unit_normal = np.asarray(
         [rows[0]["normal_x"], rows[0]["normal_y"], rows[0]["normal_z"]]
     )
@@ -622,6 +708,14 @@ def write_outputs(rows: list[dict], output_dir: Path) -> None:
         marker="^",
         capsize=4,
         label="plateau-aware estimator",
+    )
+    axes[0].errorbar(
+        resolution,
+        ramp_median,
+        yerr=(ramp_median - ramp_p16, ramp_p84 - ramp_median),
+        marker="D",
+        capsize=4,
+        label="ramp-exit-aware estimator",
     )
     axes[0].set(
         xlabel="cells per axis",
@@ -704,7 +798,9 @@ def main() -> None:
             f"profile={row['profile_mach_median']:.6f} "
             f"(bias={100.0 * row['profile_mach_relative_bias']:+.3f}%); "
             f"plateau={row['plateau_mach_median']:.6f} "
-            f"(bias={100.0 * row['plateau_mach_relative_bias']:+.3f}%)"
+            f"(bias={100.0 * row['plateau_mach_relative_bias']:+.3f}%); "
+            f"ramp-exit={row['ramp_exit_mach_median']:.6f} "
+            f"(bias={100.0 * row['ramp_exit_mach_relative_bias']:+.3f}%)"
         )
     write_outputs(rows, args.output_dir)
 

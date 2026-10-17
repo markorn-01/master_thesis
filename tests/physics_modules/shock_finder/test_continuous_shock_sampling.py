@@ -12,6 +12,7 @@ from astronomix._physics_modules._shock_finder._shock_zones import (
     get_post_pre_sample_relative_changes,
     get_post_pre_shock_values,
     get_profile_aware_post_pre_shock_values,
+    get_ramp_exit_aware_post_pre_shock_values,
 )
 
 
@@ -327,6 +328,42 @@ class ContinuousShockSamplingTests(unittest.TestCase):
         self.assertAlmostEqual(float(dp_pre[3]), 0.0)
         self.assertAlmostEqual(float(drho_post[3]), 0.0)
         self.assertAlmostEqual(float(drho_pre[3]), 0.0)
+
+    def test_ramp_exit_sampling_accepts_stable_nonzero_physical_gradient(self):
+        pressure = jnp.array(
+            [12.0, 11.5, 11.0, 10.5, 10.0, 9.5, 7.0, 5.0,
+             3.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+        )
+        density = jnp.array(
+            [7.5, 7.0, 6.5, 6.0, 5.5, 5.0, 4.0, 3.0,
+             2.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+        )
+        direction = jnp.ones((1, pressure.size))
+        shock_zones = jnp.zeros(pressure.size, dtype=jnp.bool_).at[6:9].set(
+            True
+        )
+
+        plateau = get_plateau_aware_post_pre_shock_values(
+            direction,
+            shock_zones,
+            pressure,
+            density,
+            max_steps=6,
+        )
+        ramp_exit = get_ramp_exit_aware_post_pre_shock_values(
+            direction,
+            shock_zones,
+            pressure,
+            density,
+            max_steps=6,
+        )
+
+        self.assertFalse(bool(plateau[4][7]))
+        self.assertTrue(bool(ramp_exit[4][7]))
+        self.assertGreater(float(ramp_exit[7][7]), 0.01)
+        self.assertGreater(float(ramp_exit[9][7]), 0.01)
+        self.assertAlmostEqual(float(ramp_exit[8][7]), 0.0)
+        self.assertAlmostEqual(float(ramp_exit[10][7]), 0.0)
 
 
 if __name__ == "__main__":
