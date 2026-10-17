@@ -1,0 +1,40 @@
+{
+  "classification": "consistent_with_reverse_shock",
+  "verified": true,
+  "criteria": {
+    "persistent_detection": true,
+    "resolved_from_injection": true,
+    "upstream_flow_is_supersonic": true,
+    "downstream_flow_is_subsonic": true,
+    "density_increases": true,
+    "pressure_increases": true,
+    "temperature_increases": true,
+    "radial_flow_decelerates": true,
+    "flow_is_compressive": true,
+    "profile_jump_is_supersonic": true,
+    "shock_normal_points_inward": true
+  },
+  "diagnostic_checks": {
+    "adaptive_finder_mach_is_consistent": true,
+    "profile_aware_finder_mach_is_consistent": true
+  },
+  "limitations": [],
+  "measurements": {
+    "reverse_radius": 0.10861598549559387,
+    "upstream_shell_radius": 0.10677083333333333,
+    "downstream_shell_radius": 0.11197916666666666,
+    "density_ratio": 1.9117569151560043,
+    "pressure_ratio": 3.50204523838803,
+    "temperature_ratio": 1.8482437510149197,
+    "velocity_ratio": 0.46025835565037637,
+    "upstream_flow_mach": 1.7862309217453003,
+    "downstream_flow_mach": 0.605899453163147,
+    "minimum_divergence": -551.780029296875,
+    "peak_surface_mach": 2.7421982288360596,
+    "profile_aware_peak_surface_mach": 2.8159101009368896,
+    "median_radial_normal_alignment": -0.9962869882583618,
+    "profile_jump_mach": 1.7325230707584889,
+    "consecutive_detection_snapshots": 13,
+    "distance_beyond_injection_cells": 8.854269215154023
+  }
+}
