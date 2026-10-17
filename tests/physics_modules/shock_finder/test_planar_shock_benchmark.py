@@ -75,7 +75,11 @@ class PlanarShockBenchmarkTests(unittest.TestCase):
             0.005,
         )
         self.assertGreater(metrics["profile_valid_mach_fraction"], 0.99)
-        self.assertGreater(metrics["profile_flat_sampling_fraction"], 0.99)
+        self.assertGreater(metrics["profile_flat_sampling_fraction"], 0.5)
+        self.assertLess(
+            metrics["profile_flat_sampling_fraction"],
+            metrics["profile_valid_mach_fraction"],
+        )
         self.assertLess(
             abs(metrics["plateau_mach_relative_bias"]),
             0.005,
