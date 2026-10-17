@@ -1,9 +1,9 @@
 """Post-process a wind-bubble shock history into a Mach diagnostic.
 
-This utility reuses completed simulations.  It reads the current and
-profile-aware pressure-jump Mach histories, derives the tracked-speed Mach and
-the corresponding ideal normal-shock pressure ratios, and writes a compact
-table and comparison figure without rerunning the hydrodynamics.
+This utility reuses completed simulations.  It reads the available
+pressure-jump Mach histories, derives the tracked-speed Mach and corresponding
+ideal normal-shock pressure ratios, and writes a compact table and comparison
+figure without rerunning the hydrodynamics.
 """
 
 import argparse
@@ -51,6 +51,12 @@ def read_history_rows(path: Path) -> list[dict]:
             profile_mach = float(
                 source["forward_profile_aware_mach_median"]
             )
+            plateau_mach = float(
+                source.get("forward_plateau_aware_mach_median", "nan")
+            )
+            extrapolated_mach = float(
+                source.get("forward_extrapolated_mach_median", "nan")
+            )
             weaver_mach = float(source["weaver_forward_mach"])
             radial_velocity = float(source["forward_radial_velocity"])
             rows.append(
@@ -73,12 +79,16 @@ def read_history_rows(path: Path) -> list[dict]:
                     ),
                     "forward_mach_median": current_mach,
                     "forward_profile_aware_mach_median": profile_mach,
+                    "forward_plateau_aware_mach_median": plateau_mach,
+                    "forward_extrapolated_mach_median": extrapolated_mach,
                     "weaver_forward_mach": weaver_mach,
                     **_forward_mach_diagnostic_values(
                         radial_velocity=radial_velocity,
                         current_mach=current_mach,
                         profile_aware_mach=profile_mach,
                         weaver_mach=weaver_mach,
+                        plateau_aware_mach=plateau_mach,
+                        extrapolated_mach=extrapolated_mach,
                     ),
                 }
             )

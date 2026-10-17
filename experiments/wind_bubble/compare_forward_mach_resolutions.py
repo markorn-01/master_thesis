@@ -32,11 +32,14 @@ REQUIRED_COLUMNS = (
     "forward_mach_median",
     "forward_profile_aware_mach_median",
     "forward_plateau_aware_mach_median",
+    "forward_extrapolated_mach_median",
+    "forward_extrapolated_valid_mach_fraction",
     "forward_kinematic_mach",
     "weaver_forward_mach",
     "forward_current_sampled_pressure_ratio",
     "forward_profile_aware_sampled_pressure_ratio",
     "forward_plateau_aware_sampled_pressure_ratio",
+    "forward_extrapolated_sampled_pressure_ratio",
     "forward_kinematic_expected_pressure_ratio",
     "forward_profile_flat_sampling_fraction",
     "forward_profile_post_pressure_change_median",
@@ -59,9 +62,12 @@ SUMMARY_COLUMNS = (
     "mean_current_mach_relative_error_vs_weaver",
     "mean_profile_aware_mach_relative_error_vs_weaver",
     "mean_plateau_aware_mach_relative_error_vs_weaver",
+    "mean_extrapolated_mach_relative_error_vs_weaver",
     "mean_kinematic_mach_relative_error_vs_weaver",
     "mean_profile_aware_mach_relative_error_vs_kinematic",
     "mean_plateau_aware_mach_relative_error_vs_kinematic",
+    "mean_extrapolated_mach_relative_error_vs_kinematic",
+    "mean_extrapolated_valid_mach_fraction",
     "mean_current_pressure_ratio_relative_error_vs_kinematic",
     "mean_profile_pressure_ratio_relative_error_vs_kinematic",
     "mean_profile_flat_sampling_fraction",
@@ -70,6 +76,7 @@ SUMMARY_COLUMNS = (
     "mean_profile_post_density_change",
     "mean_profile_pre_density_change",
     "mean_plateau_pressure_ratio_relative_error_vs_kinematic",
+    "mean_extrapolated_pressure_ratio_relative_error_vs_kinematic",
     "mean_plateau_valid_sampling_fraction",
     "mean_plateau_post_pressure_change",
     "mean_plateau_pre_pressure_change",
@@ -245,6 +252,13 @@ def summarize_histories(
                         "weaver_forward_mach",
                     )
                 ),
+                "mean_extrapolated_mach_relative_error_vs_weaver": (
+                    _mean_relative_difference(
+                        matched,
+                        "forward_extrapolated_mach_median",
+                        "weaver_forward_mach",
+                    )
+                ),
                 "mean_kinematic_mach_relative_error_vs_weaver": (
                     _mean_relative_difference(
                         matched,
@@ -264,6 +278,25 @@ def summarize_histories(
                         matched,
                         "forward_plateau_aware_mach_median",
                         "forward_kinematic_mach",
+                    )
+                ),
+                "mean_extrapolated_mach_relative_error_vs_kinematic": (
+                    _mean_relative_difference(
+                        matched,
+                        "forward_extrapolated_mach_median",
+                        "forward_kinematic_mach",
+                    )
+                ),
+                "mean_extrapolated_valid_mach_fraction": float(
+                    np.mean(
+                        [
+                            float(
+                                row[
+                                    "forward_extrapolated_valid_mach_fraction"
+                                ]
+                            )
+                            for row in matched
+                        ]
                     )
                 ),
                 "mean_current_pressure_ratio_relative_error_vs_kinematic": (
@@ -324,6 +357,13 @@ def summarize_histories(
                     _mean_relative_difference(
                         matched,
                         "forward_plateau_aware_sampled_pressure_ratio",
+                        "forward_kinematic_expected_pressure_ratio",
+                    )
+                ),
+                "mean_extrapolated_pressure_ratio_relative_error_vs_kinematic": (
+                    _mean_relative_difference(
+                        matched,
+                        "forward_extrapolated_sampled_pressure_ratio",
                         "forward_kinematic_expected_pressure_ratio",
                     )
                 ),
@@ -393,7 +433,7 @@ def plot_comparison(
 ) -> None:
     """Plot estimator and resolution effects over the common time interval."""
     start, end = matched_time_window(histories)
-    figure, axes = plt.subplots(2, 3, figsize=(16, 8), constrained_layout=True)
+    figure, axes = plt.subplots(2, 4, figsize=(21, 8), constrained_layout=True)
     colors = plt.rcParams["axes.prop_cycle"].by_key()["color"]
     for index, (label, _, rows) in enumerate(histories):
         matched = select_matched_rows(rows, start, end)
@@ -423,6 +463,13 @@ def plot_comparison(
             values["forward_plateau_aware_mach_median"],
             color=color,
             marker="D",
+            label=label,
+        )
+        axes[0, 3].plot(
+            times,
+            values["forward_extrapolated_mach_median"],
+            color=color,
+            marker="X",
             label=label,
         )
         axes[1, 0].plot(
@@ -482,6 +529,31 @@ def plot_comparison(
             linestyle="--",
             label=f"{label}: pressure jump",
         )
+        extrapolated_mach_error = (
+            values["forward_extrapolated_mach_median"]
+            / values["forward_kinematic_mach"]
+            - 1.0
+        )
+        extrapolated_pressure_error = (
+            values["forward_extrapolated_sampled_pressure_ratio"]
+            / values["forward_kinematic_expected_pressure_ratio"]
+            - 1.0
+        )
+        axes[1, 3].plot(
+            times,
+            100.0 * extrapolated_mach_error,
+            color=color,
+            marker="X",
+            label=f"{label}: Mach",
+        )
+        axes[1, 3].plot(
+            times,
+            100.0 * extrapolated_pressure_error,
+            color=color,
+            marker="x",
+            linestyle="--",
+            label=f"{label}: pressure jump",
+        )
 
     reference_rows = select_matched_rows(histories[-1][2], start, end)
     reference_times = np.asarray(
@@ -490,7 +562,13 @@ def plot_comparison(
     reference_mach = np.asarray(
         [float(row["weaver_forward_mach"]) for row in reference_rows]
     )
-    for axis in (axes[0, 0], axes[0, 1], axes[0, 2], axes[1, 0]):
+    for axis in (
+        axes[0, 0],
+        axes[0, 1],
+        axes[0, 2],
+        axes[0, 3],
+        axes[1, 0],
+    ):
         axis.plot(
             reference_times,
             reference_mach,
@@ -503,6 +581,7 @@ def plot_comparison(
     axes[0, 0].set_title("Current pressure-jump estimator")
     axes[0, 1].set_title("Profile-aware pressure-jump estimator")
     axes[0, 2].set_title("Plateau-aware pressure-jump estimator")
+    axes[0, 3].set_title("Shock-front-extrapolated estimator")
     axes[1, 0].set_title("Tracked propagation-speed Mach")
     axes[1, 1].axhline(0.0, color="black", linestyle=":", linewidth=1.0)
     axes[1, 1].set(
@@ -516,6 +595,12 @@ def plot_comparison(
         ylabel="relative difference [%]",
     )
     axes[1, 2].legend(fontsize=8)
+    axes[1, 3].axhline(0.0, color="black", linestyle=":", linewidth=1.0)
+    axes[1, 3].set(
+        title="Extrapolated deficit relative to tracked speed",
+        ylabel="relative difference [%]",
+    )
+    axes[1, 3].legend(fontsize=8)
     for axis in axes.flat:
         axis.set_xlabel("time [code units]")
         axis.grid(alpha=0.25)

@@ -420,15 +420,20 @@ class TemporalShockTrackingTests(unittest.TestCase):
             "relative_error_vs_weaver": -0.05,
             "forward_mach_median": 4.0,
             "forward_profile_aware_mach_median": 4.5,
+            "forward_extrapolated_mach_median": 4.7,
+            "forward_extrapolated_valid_mach_fraction": 0.9,
             "forward_kinematic_mach": 4.8,
             "weaver_forward_mach": 5.0,
             "forward_current_sampled_pressure_ratio": 19.75,
             "forward_profile_aware_sampled_pressure_ratio": 25.0625,
+            "forward_extrapolated_sampled_pressure_ratio": 27.3625,
             "forward_kinematic_expected_pressure_ratio": 28.55,
             "weaver_expected_pressure_ratio": 31.0,
             "forward_profile_aware_mach_relative_error_vs_kinematic": -0.0625,
+            "forward_extrapolated_mach_relative_error_vs_kinematic": -0.0208,
             "forward_kinematic_mach_relative_error_vs_weaver": -0.04,
             "forward_profile_aware_mach_relative_error_vs_weaver": -0.1,
+            "forward_extrapolated_mach_relative_error_vs_weaver": -0.06,
         }
 
         with TemporaryDirectory() as directory:
@@ -442,6 +447,7 @@ class TemporalShockTrackingTests(unittest.TestCase):
             self.assertTrue((output_dir / "diagnostic.csv").is_file())
             self.assertTrue((output_dir / "diagnostic.png").is_file())
         self.assertEqual(rows[0]["forward_kinematic_mach"], 4.8)
+        self.assertEqual(rows[0]["forward_extrapolated_mach_median"], 4.7)
 
     def test_existing_history_can_be_post_processed_without_rerun(self):
         source = {

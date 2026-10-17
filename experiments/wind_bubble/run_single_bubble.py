@@ -57,6 +57,7 @@ from astronomix._physics_modules._shock_finder._gradients import (
     _calculate_velocity_divergence,
 )
 from astronomix._physics_modules._shock_finder._shock_mach import (
+    _calculate_extrapolated_mach_at_surface,
     _calculate_mach_at_surface,
     _calculate_plateau_mach_at_surface,
 )
@@ -620,6 +621,15 @@ def analyze_shocks_3d(
             config,
             registered_variables,
         )
+        extrapolated_mach_numbers = _calculate_extrapolated_mach_at_surface(
+            jnp.asarray(state),
+            result.shock_surface_cells,
+            result.shock_zones,
+            result.shock_direction,
+            result.shock_surface_offsets,
+            config,
+            registered_variables,
+        )
         pressure = jnp.asarray(state)[registered_variables.pressure_index]
         density = jnp.asarray(state)[registered_variables.density_index]
         (
@@ -720,6 +730,9 @@ def analyze_shocks_3d(
                 ),
                 "plateau_aware_mach_numbers": np.asarray(
                     plateau_mach_numbers
+                ),
+                "extrapolated_mach_numbers": np.asarray(
+                    extrapolated_mach_numbers
                 ),
                 "profile_sampling_valid": np.asarray(
                     profile_flatness_valid, dtype=bool
@@ -1407,6 +1420,7 @@ def _forward_mach_diagnostic_values(
     profile_aware_mach: float,
     weaver_mach: float,
     plateau_aware_mach: float = np.nan,
+    extrapolated_mach: float = np.nan,
 ) -> dict[str, float]:
     """Build the forward-shock Mach and pressure-jump comparison fields."""
     kinematic_mach = _kinematic_forward_shock_mach(
@@ -1426,6 +1440,9 @@ def _forward_mach_diagnostic_values(
         "forward_plateau_aware_sampled_pressure_ratio": (
             _normal_shock_pressure_ratio(plateau_aware_mach, GAMMA)
         ),
+        "forward_extrapolated_sampled_pressure_ratio": (
+            _normal_shock_pressure_ratio(extrapolated_mach, GAMMA)
+        ),
         "forward_kinematic_expected_pressure_ratio": (
             _normal_shock_pressure_ratio(kinematic_mach, GAMMA)
         ),
@@ -1438,6 +1455,9 @@ def _forward_mach_diagnostic_values(
         "forward_plateau_aware_mach_relative_error_vs_kinematic": (
             _finite_relative_difference(plateau_aware_mach, kinematic_mach)
         ),
+        "forward_extrapolated_mach_relative_error_vs_kinematic": (
+            _finite_relative_difference(extrapolated_mach, kinematic_mach)
+        ),
         "forward_kinematic_mach_relative_error_vs_weaver": (
             _finite_relative_difference(kinematic_mach, weaver_mach)
         ),
@@ -1446,6 +1466,9 @@ def _forward_mach_diagnostic_values(
         ),
         "forward_plateau_aware_mach_relative_error_vs_weaver": (
             _finite_relative_difference(plateau_aware_mach, weaver_mach)
+        ),
+        "forward_extrapolated_mach_relative_error_vs_weaver": (
+            _finite_relative_difference(extrapolated_mach, weaver_mach)
         ),
     }
 
@@ -2086,6 +2109,9 @@ def measure_shock_histories(
         plateau_aware_surface_mach = shock_results[snapshot_index][
             "plateau_aware_mach_numbers"
         ][surface_mask]
+        extrapolated_surface_mach = shock_results[snapshot_index][
+            "extrapolated_mach_numbers"
+        ][surface_mask]
         profile_sampling_valid = shock_results[snapshot_index][
             "profile_sampling_valid"
         ][surface_mask]
@@ -2127,6 +2153,7 @@ def measure_shock_histories(
         outside_mach = surface_mach[outside_mask]
         outside_profile_aware_mach = profile_aware_surface_mach[outside_mask]
         outside_plateau_aware_mach = plateau_aware_surface_mach[outside_mask]
+        outside_extrapolated_mach = extrapolated_surface_mach[outside_mask]
         outside_profile_sampling_valid = profile_sampling_valid[outside_mask]
         outside_profile_diagnostics = {
             name: values[outside_mask]
@@ -2178,6 +2205,18 @@ def measure_shock_histories(
             forward_radii,
             outside_radii,
             outside_plateau_aware_mach,
+            outside_alignment,
+        )
+        reverse_extrapolated = _radial_band_statistics(
+            reverse_radii,
+            outside_radii,
+            outside_extrapolated_mach,
+            outside_alignment,
+        )
+        forward_extrapolated = _radial_band_statistics(
+            forward_radii,
+            outside_radii,
+            outside_extrapolated_mach,
             outside_alignment,
         )
         reverse_profile_sampling = _radial_band_sample_flatness_statistics(
@@ -2307,6 +2346,9 @@ def measure_shock_histories(
             plateau_aware_mach=float(
                 forward_plateau_aware["mach_median"]
             ),
+            extrapolated_mach=float(
+                forward_extrapolated["mach_median"]
+            ),
         )
         forward_kinematic_mach = forward_diagnostic[
             "forward_kinematic_mach"
@@ -2382,6 +2424,21 @@ def measure_shock_histories(
                 f"reverse_plateau_{name}": value
                 for name, value in reverse_plateau_sampling.items()
             },
+            "reverse_extrapolated_valid_mach_fraction": (
+                reverse_extrapolated["valid_mach_fraction"]
+            ),
+            "reverse_extrapolated_mach_median": reverse_extrapolated[
+                "mach_median"
+            ],
+            "reverse_extrapolated_mach_p16": reverse_extrapolated[
+                "mach_p16"
+            ],
+            "reverse_extrapolated_mach_p84": reverse_extrapolated[
+                "mach_p84"
+            ],
+            "reverse_extrapolated_mach_coefficient_of_variation": (
+                reverse_extrapolated["mach_coefficient_of_variation"]
+            ),
             "reverse_confidence_score": confidence["reverse"]["confidence_score"],
             "reverse_confidence_label": confidence["reverse"]["confidence_label"],
             "forward_track_id": "forward_shock",
@@ -2449,6 +2506,21 @@ def measure_shock_histories(
                 f"forward_plateau_{name}": value
                 for name, value in forward_plateau_sampling.items()
             },
+            "forward_extrapolated_valid_mach_fraction": (
+                forward_extrapolated["valid_mach_fraction"]
+            ),
+            "forward_extrapolated_mach_median": forward_extrapolated[
+                "mach_median"
+            ],
+            "forward_extrapolated_mach_p16": forward_extrapolated[
+                "mach_p16"
+            ],
+            "forward_extrapolated_mach_p84": forward_extrapolated[
+                "mach_p84"
+            ],
+            "forward_extrapolated_mach_coefficient_of_variation": (
+                forward_extrapolated["mach_coefficient_of_variation"]
+            ),
             **forward_diagnostic,
             "forward_confidence_score": confidence["forward"]["confidence_score"],
             "forward_confidence_label": confidence["forward"]["confidence_label"],
@@ -2486,6 +2558,16 @@ def measure_shock_histories(
                             reverse_plateau_aware
                             if shock_kind == "reverse"
                             else forward_plateau_aware
+                        ).items()
+                        if name.startswith("mach_")
+                        or name == "valid_mach_fraction"
+                    },
+                    **{
+                        f"extrapolated_{name}": value
+                        for name, value in (
+                            reverse_extrapolated
+                            if shock_kind == "reverse"
+                            else forward_extrapolated
                         ).items()
                         if name.startswith("mach_")
                         or name == "valid_mach_fraction"
@@ -2536,13 +2618,15 @@ def measure_shock_histories(
             f"Weaver={weaver_radius:.6f}, "
             f"relative error={relative_error:.3f}, "
             f"two bands={row['two_bands_detected']}; "
-            f"Mach current/profile/plateau: "
+            f"Mach current/profile/plateau/extrapolated: "
             f"reverse={row['reverse_mach_median']:.3f}/"
             f"{row['reverse_profile_aware_mach_median']:.3f}/"
-            f"{row['reverse_plateau_aware_mach_median']:.3f}, "
+            f"{row['reverse_plateau_aware_mach_median']:.3f}/"
+            f"{row['reverse_extrapolated_mach_median']:.3f}, "
             f"forward={row['forward_mach_median']:.3f}/"
             f"{row['forward_profile_aware_mach_median']:.3f}/"
-            f"{row['forward_plateau_aware_mach_median']:.3f}"
+            f"{row['forward_plateau_aware_mach_median']:.3f}/"
+            f"{row['forward_extrapolated_mach_median']:.3f}"
         )
 
     csv_path.parent.mkdir(parents=True, exist_ok=True)
@@ -2714,6 +2798,29 @@ def measure_shock_histories(
             linestyle=":",
             label=f"{label}: plateau-aware",
         )
+        extrapolated_median = np.array(
+            [row[f"{prefix}_extrapolated_mach_median"] for row in rows]
+        )
+        extrapolated_p16 = np.array(
+            [row[f"{prefix}_extrapolated_mach_p16"] for row in rows]
+        )
+        extrapolated_p84 = np.array(
+            [row[f"{prefix}_extrapolated_mach_p84"] for row in rows]
+        )
+        valid_extrapolated = (
+            valid
+            & np.isfinite(extrapolated_median)
+            & np.isfinite(extrapolated_p16)
+            & np.isfinite(extrapolated_p84)
+        )
+        mach_axis.plot(
+            history_times[valid_extrapolated],
+            extrapolated_median[valid_extrapolated],
+            marker="X",
+            color=color,
+            linestyle="-.",
+            label=f"{label}: shock-front extrapolated",
+        )
     mach_axis.axhline(1.0, color="grey", linestyle=":", linewidth=1.0)
     valid_weaver_mach = resolved & np.isfinite(weaver_forward_mach)
     mach_axis.plot(
@@ -2810,18 +2917,23 @@ def write_forward_mach_diagnostics(
         "forward_mach_median",
         "forward_profile_aware_mach_median",
         "forward_plateau_aware_mach_median",
+        "forward_extrapolated_mach_median",
+        "forward_extrapolated_valid_mach_fraction",
         "forward_kinematic_mach",
         "weaver_forward_mach",
         "forward_current_sampled_pressure_ratio",
         "forward_profile_aware_sampled_pressure_ratio",
         "forward_plateau_aware_sampled_pressure_ratio",
+        "forward_extrapolated_sampled_pressure_ratio",
         "forward_kinematic_expected_pressure_ratio",
         "weaver_expected_pressure_ratio",
         "forward_profile_aware_mach_relative_error_vs_kinematic",
         "forward_plateau_aware_mach_relative_error_vs_kinematic",
+        "forward_extrapolated_mach_relative_error_vs_kinematic",
         "forward_kinematic_mach_relative_error_vs_weaver",
         "forward_profile_aware_mach_relative_error_vs_weaver",
         "forward_plateau_aware_mach_relative_error_vs_weaver",
+        "forward_extrapolated_mach_relative_error_vs_weaver",
         "forward_profile_valid_sampling_fraction",
         "forward_profile_flat_sampling_fraction",
         "forward_profile_post_distance_median",
@@ -2876,6 +2988,13 @@ def write_forward_mach_diagnostics(
             "D",
         ),
         (
+            "forward_extrapolated_mach_median",
+            "shock-front-extrapolated pressure jump",
+            "tab:red",
+            "-.",
+            "X",
+        ),
+        (
             "forward_kinematic_mach",
             "tracked propagation speed",
             "tab:green",
@@ -2920,6 +3039,13 @@ def write_forward_mach_diagnostics(
             "tab:purple",
             "-",
             "D",
+        ),
+        (
+            "forward_extrapolated_sampled_pressure_ratio",
+            "shock-front-extrapolated sampled jump",
+            "tab:red",
+            "-.",
+            "X",
         ),
         (
             "forward_kinematic_expected_pressure_ratio",

@@ -30,6 +30,7 @@ class ForwardMachResolutionComparisonTests(unittest.TestCase):
                 kinematic = scale * weaver
                 profile = 0.9 * kinematic
                 plateau = 0.95 * kinematic
+                extrapolated = 0.98 * kinematic
                 current = 0.8 * kinematic
                 writer.writerow(
                     {
@@ -39,11 +40,14 @@ class ForwardMachResolutionComparisonTests(unittest.TestCase):
                         "forward_mach_median": current,
                         "forward_profile_aware_mach_median": profile,
                         "forward_plateau_aware_mach_median": plateau,
+                        "forward_extrapolated_mach_median": extrapolated,
+                        "forward_extrapolated_valid_mach_fraction": 0.9,
                         "forward_kinematic_mach": kinematic,
                         "weaver_forward_mach": weaver,
                         "forward_current_sampled_pressure_ratio": 0.7,
                         "forward_profile_aware_sampled_pressure_ratio": 0.8,
                         "forward_plateau_aware_sampled_pressure_ratio": 0.9,
+                        "forward_extrapolated_sampled_pressure_ratio": 0.96,
                         "forward_kinematic_expected_pressure_ratio": 1.0,
                         "forward_profile_flat_sampling_fraction": 0.5,
                         "forward_profile_post_pressure_change_median": 0.03,
@@ -90,6 +94,12 @@ class ForwardMachResolutionComparisonTests(unittest.TestCase):
                     "mean_plateau_aware_mach_relative_error_vs_kinematic"
                 ],
                 -0.05,
+            )
+            self.assertAlmostEqual(
+                summaries[1][
+                    "mean_extrapolated_mach_relative_error_vs_kinematic"
+                ],
+                -0.02,
             )
 
             summary_path = directory / "summary.csv"
