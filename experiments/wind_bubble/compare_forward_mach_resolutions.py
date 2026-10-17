@@ -205,6 +205,8 @@ def _mean_relative_difference(
     values = np.asarray([float(row[value_key]) for row in rows])
     references = np.asarray([float(row[reference_key]) for row in rows])
     valid = np.isfinite(values) & np.isfinite(references) & (references != 0.0)
+    if not np.any(valid):
+        return np.nan
     return float(np.mean((values[valid] - references[valid]) / references[valid]))
 
 
