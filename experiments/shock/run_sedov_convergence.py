@@ -114,18 +114,21 @@ def save_mach_surface_comparison(
     current_valid = np.isfinite(current_mach) & (current_mach > 0.0)
     profile_valid = np.isfinite(profile_mach) & (profile_mach > 0.0)
     plateau_valid = np.isfinite(plateau_mach) & (plateau_mach > 0.0)
-    if not all(
-        np.any(valid)
-        for valid in (current_valid, profile_valid, plateau_valid)
-    ):
-        raise RuntimeError("All Mach estimators need valid surface samples.")
+    if not np.any(current_valid) or not np.any(profile_valid):
+        raise RuntimeError(
+            "Current and profile-aware estimators need valid surface samples."
+        )
 
     combined = np.concatenate(
-        (
-            current_mach[current_valid],
-            profile_mach[profile_valid],
-            plateau_mach[plateau_valid],
-        )
+        [
+            mach[valid]
+            for mach, valid in (
+                (current_mach, current_valid),
+                (profile_mach, profile_valid),
+                (plateau_mach, plateau_valid),
+            )
+            if np.any(valid)
+        ]
     )
     color_min = float(np.min(combined))
     color_max = float(np.max(combined))
@@ -140,6 +143,25 @@ def save_mach_surface_comparison(
     scatter = None
     for panel_index, (mach, valid, title) in enumerate(panels, start=1):
         axis = figure.add_subplot(1, 3, panel_index, projection="3d")
+        if not np.any(valid):
+            axis.text2D(
+                0.5,
+                0.5,
+                "no valid plateau samples",
+                transform=axis.transAxes,
+                ha="center",
+                va="center",
+            )
+            axis.set(
+                title=title,
+                xlabel="x",
+                ylabel="y",
+                zlabel="z",
+                xlim=(0.0, BOX_SIZE),
+                ylim=(0.0, BOX_SIZE),
+                zlim=(0.0, BOX_SIZE),
+            )
+            continue
         points = surface_points[valid]
         scatter = axis.scatter(
             points[:, 0],
@@ -169,13 +191,14 @@ def save_mach_surface_comparison(
         axis.set_box_aspect((1, 1, 1))
         axis.view_init(elev=25.0, azim=35.0)
 
-    figure.colorbar(
-        scatter,
-        ax=figure.axes,
-        label="Mach number",
-        shrink=0.72,
-        pad=0.04,
-    )
+    if scatter is not None:
+        figure.colorbar(
+            scatter,
+            ax=figure.axes,
+            label="Mach number",
+            shrink=0.72,
+            pad=0.04,
+        )
     figure.suptitle(
         f"{resolution}³ Sedov shock-surface Mach comparison"
     )
@@ -306,12 +329,6 @@ def run_one_resolution(
     valid_plateau_surface_mach = plateau_surface_mach[
         np.isfinite(plateau_surface_mach) & (plateau_surface_mach > 0.0)
     ]
-    if valid_plateau_surface_mach.size == 0:
-        raise RuntimeError(
-            "No valid plateau-aware surface Mach numbers were measured at "
-            f"{resolution}^3."
-        )
-
     resolution_dir = output_dir / f"n{resolution:03d}"
     resolution_dir.mkdir(parents=True, exist_ok=True)
     surface_points = refined_centers[surface]
@@ -454,6 +471,34 @@ def run_one_resolution(
     def plateau_values(field):
         return np.asarray(field)[plateau_sample_mask]
 
+    def finite_distribution_statistics(values):
+        values = np.asarray(values)
+        values = values[np.isfinite(values)]
+        if values.size == 0:
+            return {
+                "median": np.nan,
+                "p16": np.nan,
+                "p84": np.nan,
+                "coefficient_of_variation": np.nan,
+            }
+        return {
+            "median": float(np.median(values)),
+            "p16": float(np.percentile(values, 16.0)),
+            "p84": float(np.percentile(values, 84.0)),
+            "coefficient_of_variation": float(
+                np.std(values) / np.mean(values)
+            ),
+        }
+
+    def finite_median(values):
+        values = np.asarray(values)
+        values = values[np.isfinite(values)]
+        return float(np.median(values)) if values.size else np.nan
+
+    plateau_mach_statistics = finite_distribution_statistics(
+        valid_plateau_surface_mach
+    )
+
     radius_p16, radius_median, radius_p84 = np.percentile(
         surface_radii, [16.0, 50.0, 84.0]
     )
@@ -539,36 +584,29 @@ def run_one_resolution(
         "plateau_valid_mach_fraction": float(
             valid_plateau_surface_mach.size / surface_mach.size
         ),
-        "plateau_mach_median": float(
-            np.median(valid_plateau_surface_mach)
-        ),
-        "plateau_mach_p16": float(
-            np.percentile(valid_plateau_surface_mach, 16.0)
-        ),
-        "plateau_mach_p84": float(
-            np.percentile(valid_plateau_surface_mach, 84.0)
-        ),
-        "plateau_mach_coefficient_of_variation": float(
-            np.std(valid_plateau_surface_mach)
-            / np.mean(valid_plateau_surface_mach)
+        "plateau_mach_median": plateau_mach_statistics["median"],
+        "plateau_mach_p16": plateau_mach_statistics["p16"],
+        "plateau_mach_p84": plateau_mach_statistics["p84"],
+        "plateau_mach_coefficient_of_variation": (
+            plateau_mach_statistics["coefficient_of_variation"]
         ),
         "plateau_post_distance_cells_median": float(
-            np.median(plateau_values(plateau_post_distance))
+            finite_median(plateau_values(plateau_post_distance))
         ),
         "plateau_pre_distance_cells_median": float(
-            np.median(plateau_values(plateau_pre_distance))
+            finite_median(plateau_values(plateau_pre_distance))
         ),
         "plateau_post_pressure_change_median": float(
-            np.median(plateau_values(plateau_post_pressure_change))
+            finite_median(plateau_values(plateau_post_pressure_change))
         ),
         "plateau_pre_pressure_change_median": float(
-            np.median(plateau_values(plateau_pre_pressure_change))
+            finite_median(plateau_values(plateau_pre_pressure_change))
         ),
         "plateau_post_density_change_median": float(
-            np.median(plateau_values(plateau_post_density_change))
+            finite_median(plateau_values(plateau_post_density_change))
         ),
         "plateau_pre_density_change_median": float(
-            np.median(plateau_values(plateau_pre_density_change))
+            finite_median(plateau_values(plateau_pre_density_change))
         ),
         "analytic_kinematic_mach": float(analytic_mach),
         "diagnostic_outside_offset": float(diagnostic_outside_offset),
