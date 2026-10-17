@@ -75,6 +75,20 @@ class PlanarShockBenchmarkTests(unittest.TestCase):
             0.005,
         )
         self.assertGreater(metrics["profile_valid_mach_fraction"], 0.99)
+        self.assertGreater(metrics["profile_flat_sampling_fraction"], 0.99)
+        self.assertLess(
+            abs(metrics["plateau_mach_relative_bias"]),
+            0.005,
+        )
+        self.assertGreater(metrics["plateau_valid_mach_fraction"], 0.99)
+        self.assertLessEqual(
+            metrics["plateau_post_pressure_change_median"],
+            0.02,
+        )
+        self.assertLessEqual(
+            metrics["plateau_pre_pressure_change_median"],
+            0.02,
+        )
 
     def test_profile_estimator_adapts_to_four_cell_ramp(self):
         metrics = benchmark_resolution(
@@ -86,6 +100,10 @@ class PlanarShockBenchmarkTests(unittest.TestCase):
 
         self.assertLess(
             abs(metrics["profile_mach_relative_bias"]),
+            0.005,
+        )
+        self.assertLess(
+            abs(metrics["plateau_mach_relative_bias"]),
             0.005,
         )
 

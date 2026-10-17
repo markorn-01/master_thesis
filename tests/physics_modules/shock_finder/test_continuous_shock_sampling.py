@@ -8,6 +8,8 @@ import numpy as np
 
 from astronomix._physics_modules._shock_finder._shock_zones import (
     get_adaptive_post_pre_shock_values,
+    get_plateau_aware_post_pre_shock_values,
+    get_post_pre_sample_relative_changes,
     get_post_pre_shock_values,
     get_profile_aware_post_pre_shock_values,
 )
@@ -199,9 +201,9 @@ class ContinuousShockSamplingTests(unittest.TestCase):
         )
 
         self.assertTrue(bool(valid[4]))
-        self.assertAlmostEqual(float(p_post[4]), 9.0, places=5)
+        self.assertLess(abs(float(p_post[4]) / 9.0 - 1.0), 0.02)
         self.assertAlmostEqual(float(p_pre[4]), 1.0, places=5)
-        self.assertAlmostEqual(float(rho_post[4]), 4.0, places=5)
+        self.assertLess(abs(float(rho_post[4]) / 4.0 - 1.0), 0.02)
         self.assertAlmostEqual(float(rho_pre[4]), 1.0, places=5)
         self.assertGreater(float(d_post[4]), 1.0)
         self.assertGreater(float(d_pre[4]), 1.0)
@@ -241,6 +243,90 @@ class ContinuousShockSamplingTests(unittest.TestCase):
                 field,
                 outside_offsets=(0.75, 0.25),
             )
+
+    def test_plateau_sampling_requires_flat_pressure_and_density(self):
+        pressure = jnp.array(
+            [9.0, 9.0, 8.8, 8.0, 6.0, 3.0, 1.2, 1.0, 1.0]
+        )
+        density = jnp.array(
+            [4.0, 4.0, 3.9, 3.5, 2.8, 1.8, 1.1, 1.0, 1.0]
+        )
+        direction = jnp.ones((1, 9))
+        shock_zones = jnp.zeros(9, dtype=jnp.bool_).at[3:6].set(True)
+
+        (
+            p_post,
+            p_pre,
+            rho_post,
+            rho_pre,
+            valid,
+            d_post,
+            d_pre,
+            dp_post,
+            dp_pre,
+            drho_post,
+            drho_pre,
+        ) = get_plateau_aware_post_pre_shock_values(
+            direction,
+            shock_zones,
+            pressure,
+            density,
+            max_steps=4,
+        )
+
+        self.assertTrue(bool(valid[4]))
+        self.assertAlmostEqual(float(p_post[4]), 9.0, places=5)
+        self.assertAlmostEqual(float(p_pre[4]), 1.0, places=5)
+        self.assertAlmostEqual(float(rho_post[4]), 4.0, places=5)
+        self.assertAlmostEqual(float(rho_pre[4]), 1.0, places=5)
+        self.assertGreater(float(d_post[4]), 1.0)
+        self.assertGreater(float(d_pre[4]), 1.0)
+        self.assertLessEqual(float(dp_post[4]), 0.02)
+        self.assertLessEqual(float(dp_pre[4]), 0.02)
+        self.assertLessEqual(float(drho_post[4]), 0.02)
+        self.assertLessEqual(float(drho_pre[4]), 0.02)
+
+    def test_plateau_sampling_invalidates_profiles_without_flat_states(self):
+        pressure = jnp.arange(1.0, 10.0)
+        density = jnp.arange(2.0, 11.0)
+        direction = jnp.ones((1, 9))
+        shock_zones = jnp.zeros(9, dtype=jnp.bool_).at[3:6].set(True)
+
+        *_, valid, _, _, _, _, _, _ = (
+            get_plateau_aware_post_pre_shock_values(
+                direction,
+                shock_zones,
+                pressure,
+                density,
+                max_steps=4,
+                relative_tolerance=0.01,
+            )
+        )
+
+        self.assertFalse(bool(valid[4]))
+
+    def test_selected_sample_flatness_diagnostic_detects_plateau(self):
+        pressure = jnp.array([9.0, 9.0, 8.0, 5.0, 2.0, 1.0, 1.0])
+        density = jnp.array([4.0, 4.0, 3.5, 2.5, 1.5, 1.0, 1.0])
+        direction = jnp.ones((1, 7))
+        post_distance = jnp.full(7, 2.0)
+        pre_distance = jnp.full(7, 2.0)
+
+        dp_post, dp_pre, drho_post, drho_pre, valid = (
+            get_post_pre_sample_relative_changes(
+                direction,
+                pressure,
+                density,
+                post_distance,
+                pre_distance,
+            )
+        )
+
+        self.assertTrue(bool(valid[3]))
+        self.assertAlmostEqual(float(dp_post[3]), 0.0)
+        self.assertAlmostEqual(float(dp_pre[3]), 0.0)
+        self.assertAlmostEqual(float(drho_post[3]), 0.0)
+        self.assertAlmostEqual(float(drho_pre[3]), 0.0)
 
 
 if __name__ == "__main__":

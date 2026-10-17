@@ -482,6 +482,361 @@ def get_profile_aware_post_pre_shock_values(
         pre_distance,
     )
 
+
+def get_plateau_aware_post_pre_shock_values(
+    shock_direction,
+    shock_zones,
+    pressure,
+    density,
+    max_steps=8,
+    center_offsets=None,
+    step_size=0.25,
+    outside_offsets=(
+        0.25,
+        0.5,
+        0.75,
+        1.0,
+        1.25,
+        1.5,
+        1.75,
+        2.0,
+        2.25,
+        2.5,
+        2.75,
+        3.0,
+        3.25,
+        3.5,
+        3.75,
+    ),
+    relative_tolerance=0.01,
+):
+    """Select the first locally flat state beyond each shock-zone edge.
+
+    Unlike :func:`get_profile_aware_post_pre_shock_values`, which selects
+    pressure extrema from a bounded profile, this sampler explicitly checks
+    that both pressure and density have stopped changing.  Candidate points
+    are ordered by distance beyond the detected shock-zone boundary.  The
+    selected state is the farthest point of the first three-point run whose
+    two adjacent intervals both satisfy
+
+    ``abs(q[i + 1] - q[i]) / max(abs(q[i + 1]), abs(q[i])) <= tolerance``
+
+    for both pressure and density.  Requiring two consecutive flat intervals
+    is more robust than accepting one accidentally shallow part of a
+    broadened shock ramp.
+
+    A ray is invalid when it leaves the domain, cannot leave the shock zone,
+    or does not reach a pressure-and-density plateau within the configured
+    exterior offset window.
+    The four returned relative-change fields quantify the flatness at the
+    selected downstream and upstream locations and make the sampling choice
+    directly diagnosable.
+
+    Returns
+    -------
+    pressure_post, pressure_pre, density_post, density_pre, valid,
+    post_distance, pre_distance, post_pressure_change, pre_pressure_change,
+    post_density_change, pre_density_change
+    """
+    ndim = pressure.ndim
+    if shock_direction.shape[0] != ndim:
+        raise ValueError(
+            "shock_direction must have one component per spatial dimension."
+        )
+    if shock_zones.shape != pressure.shape or density.shape != pressure.shape:
+        raise ValueError(
+            "shock_zones and sampled fields must have equal shape."
+        )
+    if len(outside_offsets) < 3:
+        raise ValueError("outside_offsets must contain at least three values.")
+    if any(offset < 0.0 for offset in outside_offsets):
+        raise ValueError("outside_offsets must be non-negative.")
+    if tuple(outside_offsets) != tuple(sorted(outside_offsets)):
+        raise ValueError("outside_offsets must be sorted in ascending order.")
+    if any(offset >= max_steps for offset in outside_offsets):
+        raise ValueError("outside_offsets must be smaller than max_steps.")
+    if relative_tolerance <= 0.0:
+        raise ValueError("relative_tolerance must be positive.")
+
+    (
+        _,
+        _,
+        _,
+        _,
+        exit_valid,
+        post_exit_distance,
+        pre_exit_distance,
+    ) = get_adaptive_post_pre_shock_values(
+        shock_direction,
+        shock_zones,
+        pressure,
+        density,
+        max_steps=max_steps,
+        center_offsets=center_offsets,
+        step_size=step_size,
+        outside_offset=0.0,
+    )
+
+    coordinate_dtype = jnp.result_type(pressure.dtype, jnp.float32)
+    coordinates = jnp.stack(
+        jnp.meshgrid(
+            *[
+                jnp.arange(size, dtype=coordinate_dtype)
+                for size in pressure.shape
+            ],
+            indexing="ij",
+        ),
+        axis=0,
+    )
+    direction = shock_direction.astype(coordinate_dtype)
+    if center_offsets is not None:
+        if center_offsets.shape != shock_direction.shape:
+            raise ValueError(
+                "center_offsets must have the same shape as shock_direction."
+            )
+        coordinates = coordinates + center_offsets.astype(coordinate_dtype)
+
+    upper_bounds = jnp.asarray(
+        pressure.shape, dtype=coordinate_dtype
+    ).reshape((ndim,) + (1,) * ndim)
+
+    def sample_candidates(sign, exit_distance):
+        pressure_samples = []
+        density_samples = []
+        valid_samples = []
+        distance_samples = []
+        for offset in outside_offsets:
+            distance = exit_distance + jnp.asarray(
+                offset, dtype=coordinate_dtype
+            )
+            sample_coordinates = (
+                coordinates + sign * distance[jnp.newaxis, ...] * direction
+            )
+            in_bounds = jnp.all(
+                (sample_coordinates >= 0.0)
+                & (sample_coordinates <= upper_bounds - 1.0),
+                axis=0,
+            )
+            pressure_sample = map_coordinates(
+                pressure,
+                sample_coordinates,
+                order=1,
+                mode="nearest",
+            )
+            density_sample = map_coordinates(
+                density,
+                sample_coordinates,
+                order=1,
+                mode="nearest",
+            )
+            valid = (
+                exit_valid
+                & in_bounds
+                & jnp.isfinite(pressure_sample)
+                & jnp.isfinite(density_sample)
+                & (pressure_sample > 0.0)
+                & (density_sample > 0.0)
+            )
+            pressure_samples.append(pressure_sample)
+            density_samples.append(density_sample)
+            valid_samples.append(valid)
+            distance_samples.append(distance)
+        return (
+            jnp.stack(pressure_samples, axis=0),
+            jnp.stack(density_samples, axis=0),
+            jnp.stack(valid_samples, axis=0),
+            jnp.stack(distance_samples, axis=0),
+        )
+
+    post_profiles = sample_candidates(-1.0, post_exit_distance)
+    pre_profiles = sample_candidates(1.0, pre_exit_distance)
+
+    def select_first_plateau(profiles):
+        pressure_samples, density_samples, valid_samples, distances = profiles
+        pair_valid = valid_samples[:-1] & valid_samples[1:]
+        numerical_floor = jnp.asarray(1.0e-30, dtype=coordinate_dtype)
+
+        def relative_change(values):
+            denominator = jnp.maximum(
+                jnp.maximum(jnp.abs(values[:-1]), jnp.abs(values[1:])),
+                numerical_floor,
+            )
+            return jnp.abs(values[1:] - values[:-1]) / denominator
+
+        pressure_change = relative_change(pressure_samples)
+        density_change = relative_change(density_samples)
+        flat_intervals = (
+            pair_valid
+            & (pressure_change <= relative_tolerance)
+            & (density_change <= relative_tolerance)
+        )
+        plateau_runs = flat_intervals[:-1] & flat_intervals[1:]
+        plateau_found = jnp.any(plateau_runs, axis=0)
+        run_index = jnp.argmax(plateau_runs, axis=0)
+        selected_index = run_index + 2
+        gather_index = selected_index[jnp.newaxis, ...]
+        final_interval_index = (run_index + 1)[jnp.newaxis, ...]
+
+        def gather(values):
+            return jnp.take_along_axis(values, gather_index, axis=0)[0]
+
+        def gather_pair(values):
+            return jnp.take_along_axis(
+                values, final_interval_index, axis=0
+            )[0]
+
+        return (
+            gather(pressure_samples),
+            gather(density_samples),
+            gather(distances),
+            plateau_found,
+            gather_pair(pressure_change),
+            gather_pair(density_change),
+        )
+
+    (
+        pressure_post,
+        density_post,
+        post_distance,
+        post_plateau,
+        post_pressure_change,
+        post_density_change,
+    ) = select_first_plateau(post_profiles)
+    (
+        pressure_pre,
+        density_pre,
+        pre_distance,
+        pre_plateau,
+        pre_pressure_change,
+        pre_density_change,
+    ) = select_first_plateau(pre_profiles)
+
+    valid = (
+        post_plateau
+        & pre_plateau
+        & (pressure_post >= pressure_pre)
+        & (density_post > 0.0)
+        & (density_pre > 0.0)
+    )
+    return (
+        pressure_post,
+        pressure_pre,
+        density_post,
+        density_pre,
+        valid,
+        post_distance,
+        pre_distance,
+        post_pressure_change,
+        pre_pressure_change,
+        post_density_change,
+        pre_density_change,
+    )
+
+
+def get_post_pre_sample_relative_changes(
+    shock_direction,
+    pressure,
+    density,
+    post_distance,
+    pre_distance,
+    center_offsets=None,
+    farther_step=0.25,
+):
+    """Measure how much selected states change one step farther from a shock.
+
+    This diagnostic can be applied to any sampler that returns downstream and
+    upstream distances.  A selected state is locally flat when its pressure
+    and density change little between the selected position and a point
+    ``farther_step`` cells farther away from the shock.
+    """
+    ndim = pressure.ndim
+    if shock_direction.shape[0] != ndim:
+        raise ValueError(
+            "shock_direction must have one component per spatial dimension."
+        )
+    if density.shape != pressure.shape:
+        raise ValueError("pressure and density must have equal shape.")
+    if post_distance.shape != pressure.shape or pre_distance.shape != pressure.shape:
+        raise ValueError("sampling-distance fields must match the fluid fields.")
+    if farther_step <= 0.0:
+        raise ValueError("farther_step must be positive.")
+
+    coordinate_dtype = jnp.result_type(pressure.dtype, jnp.float32)
+    coordinates = jnp.stack(
+        jnp.meshgrid(
+            *[
+                jnp.arange(size, dtype=coordinate_dtype)
+                for size in pressure.shape
+            ],
+            indexing="ij",
+        ),
+        axis=0,
+    )
+    direction = shock_direction.astype(coordinate_dtype)
+    if center_offsets is not None:
+        if center_offsets.shape != shock_direction.shape:
+            raise ValueError(
+                "center_offsets must have the same shape as shock_direction."
+            )
+        coordinates = coordinates + center_offsets.astype(coordinate_dtype)
+    upper_bounds = jnp.asarray(
+        pressure.shape, dtype=coordinate_dtype
+    ).reshape((ndim,) + (1,) * ndim)
+
+    def side_changes(sign, distance):
+        selected_coordinates = (
+            coordinates + sign * distance[jnp.newaxis, ...] * direction
+        )
+        farther_coordinates = (
+            coordinates
+            + sign
+            * (distance + farther_step)[jnp.newaxis, ...]
+            * direction
+        )
+        in_bounds = jnp.all(
+            (selected_coordinates >= 0.0)
+            & (selected_coordinates <= upper_bounds - 1.0)
+            & (farther_coordinates >= 0.0)
+            & (farther_coordinates <= upper_bounds - 1.0),
+            axis=0,
+        )
+
+        def relative_change(field):
+            selected = map_coordinates(
+                field, selected_coordinates, order=1, mode="nearest"
+            )
+            farther = map_coordinates(
+                field, farther_coordinates, order=1, mode="nearest"
+            )
+            denominator = jnp.maximum(
+                jnp.maximum(jnp.abs(selected), jnp.abs(farther)),
+                jnp.asarray(1.0e-30, dtype=coordinate_dtype),
+            )
+            return jnp.abs(farther - selected) / denominator
+
+        pressure_change = relative_change(pressure)
+        density_change = relative_change(density)
+        valid = (
+            in_bounds
+            & jnp.isfinite(pressure_change)
+            & jnp.isfinite(density_change)
+        )
+        return pressure_change, density_change, valid
+
+    post_pressure_change, post_density_change, post_valid = side_changes(
+        -1.0, post_distance
+    )
+    pre_pressure_change, pre_density_change, pre_valid = side_changes(
+        1.0, pre_distance
+    )
+    return (
+        post_pressure_change,
+        pre_pressure_change,
+        post_density_change,
+        pre_density_change,
+        post_valid & pre_valid,
+    )
+
 def _make_interior_mask(spatial_shape):
     """
     Build a boolean mask that is True for interior cells (not on any boundary).

@@ -58,6 +58,12 @@ from astronomix._physics_modules._shock_finder._gradients import (
 )
 from astronomix._physics_modules._shock_finder._shock_mach import (
     _calculate_mach_at_surface,
+    _calculate_plateau_mach_at_surface,
+)
+from astronomix._physics_modules._shock_finder._shock_zones import (
+    get_plateau_aware_post_pre_shock_values,
+    get_post_pre_sample_relative_changes,
+    get_profile_aware_post_pre_shock_values,
 )
 from astronomix._physics_modules._shock_finder._energy_dissipation import (
     calculate_thermal_energy_flux,
@@ -605,6 +611,77 @@ def analyze_shocks_3d(
             registered_variables,
             profile_aware=True,
         )
+        plateau_mach_numbers = _calculate_plateau_mach_at_surface(
+            jnp.asarray(state),
+            result.shock_surface_cells,
+            result.shock_zones,
+            result.shock_direction,
+            result.shock_surface_offsets,
+            config,
+            registered_variables,
+        )
+        pressure = jnp.asarray(state)[registered_variables.pressure_index]
+        density = jnp.asarray(state)[registered_variables.density_index]
+        (
+            _,
+            _,
+            _,
+            _,
+            profile_sampling_valid,
+            profile_post_distance,
+            profile_pre_distance,
+        ) = get_profile_aware_post_pre_shock_values(
+            result.shock_direction,
+            result.shock_zones,
+            pressure,
+            density,
+            max_steps=8,
+            center_offsets=(
+                result.shock_direction
+                * result.shock_surface_offsets[jnp.newaxis, ...]
+            ),
+        )
+        (
+            profile_post_pressure_change,
+            profile_pre_pressure_change,
+            profile_post_density_change,
+            profile_pre_density_change,
+            profile_flatness_valid,
+        ) = get_post_pre_sample_relative_changes(
+            result.shock_direction,
+            pressure,
+            density,
+            profile_post_distance,
+            profile_pre_distance,
+            center_offsets=(
+                result.shock_direction
+                * result.shock_surface_offsets[jnp.newaxis, ...]
+            ),
+        )
+        profile_flatness_valid = profile_sampling_valid & profile_flatness_valid
+        (
+            _,
+            _,
+            _,
+            _,
+            plateau_sampling_valid,
+            plateau_post_distance,
+            plateau_pre_distance,
+            plateau_post_pressure_change,
+            plateau_pre_pressure_change,
+            plateau_post_density_change,
+            plateau_pre_density_change,
+        ) = get_plateau_aware_post_pre_shock_values(
+            result.shock_direction,
+            result.shock_zones,
+            pressure,
+            density,
+            max_steps=8,
+            center_offsets=(
+                result.shock_direction
+                * result.shock_surface_offsets[jnp.newaxis, ...]
+            ),
+        )
         profile_thermal_energy_flux = calculate_thermal_energy_flux(
             primitive_state=jnp.asarray(state),
             shock_surface=result.shock_surface_cells,
@@ -640,6 +717,43 @@ def analyze_shocks_3d(
                 "thermal_energy_flux": np.asarray(result.thermal_energy_flux),
                 "profile_aware_mach_numbers": np.asarray(
                     profile_mach_numbers
+                ),
+                "plateau_aware_mach_numbers": np.asarray(
+                    plateau_mach_numbers
+                ),
+                "profile_sampling_valid": np.asarray(
+                    profile_flatness_valid, dtype=bool
+                ),
+                "profile_post_distance": np.asarray(profile_post_distance),
+                "profile_pre_distance": np.asarray(profile_pre_distance),
+                "profile_post_pressure_change": np.asarray(
+                    profile_post_pressure_change
+                ),
+                "profile_pre_pressure_change": np.asarray(
+                    profile_pre_pressure_change
+                ),
+                "profile_post_density_change": np.asarray(
+                    profile_post_density_change
+                ),
+                "profile_pre_density_change": np.asarray(
+                    profile_pre_density_change
+                ),
+                "plateau_sampling_valid": np.asarray(
+                    plateau_sampling_valid, dtype=bool
+                ),
+                "plateau_post_distance": np.asarray(plateau_post_distance),
+                "plateau_pre_distance": np.asarray(plateau_pre_distance),
+                "plateau_post_pressure_change": np.asarray(
+                    plateau_post_pressure_change
+                ),
+                "plateau_pre_pressure_change": np.asarray(
+                    plateau_pre_pressure_change
+                ),
+                "plateau_post_density_change": np.asarray(
+                    plateau_post_density_change
+                ),
+                "plateau_pre_density_change": np.asarray(
+                    plateau_pre_density_change
                 ),
                 "profile_aware_thermal_energy_flux": np.asarray(
                     profile_thermal_energy_flux
@@ -1129,6 +1243,112 @@ def _radial_band_statistics(
     return statistics
 
 
+def _radial_band_plateau_statistics(
+    band_radii: np.ndarray,
+    all_surface_radii: np.ndarray,
+    sampling_valid: np.ndarray,
+    post_distance: np.ndarray,
+    pre_distance: np.ndarray,
+    post_pressure_change: np.ndarray,
+    pre_pressure_change: np.ndarray,
+    post_density_change: np.ndarray,
+    pre_density_change: np.ndarray,
+) -> dict[str, float]:
+    """Summarize whether a radial shock band reaches flat sample states."""
+    names = (
+        "post_distance_median",
+        "pre_distance_median",
+        "post_pressure_change_median",
+        "pre_pressure_change_median",
+        "post_density_change_median",
+        "pre_density_change_median",
+    )
+    if band_radii.size == 0:
+        return {"valid_sampling_fraction": np.nan, **{name: np.nan for name in names}}
+
+    lower = float(np.min(band_radii))
+    upper = float(np.max(band_radii))
+    band_mask = (all_surface_radii >= lower) & (all_surface_radii <= upper)
+    valid = band_mask & sampling_valid
+    result = {
+        "valid_sampling_fraction": float(
+            np.count_nonzero(valid) / np.count_nonzero(band_mask)
+        )
+    }
+    fields = (
+        post_distance,
+        pre_distance,
+        post_pressure_change,
+        pre_pressure_change,
+        post_density_change,
+        pre_density_change,
+    )
+    for name, values in zip(names, fields):
+        selected = values[valid]
+        selected = selected[np.isfinite(selected)]
+        result[name] = (
+            float(np.median(selected)) if selected.size else np.nan
+        )
+    return result
+
+
+def _radial_band_sample_flatness_statistics(
+    band_radii: np.ndarray,
+    all_surface_radii: np.ndarray,
+    sampling_valid: np.ndarray,
+    post_distance: np.ndarray,
+    pre_distance: np.ndarray,
+    post_pressure_change: np.ndarray,
+    pre_pressure_change: np.ndarray,
+    post_density_change: np.ndarray,
+    pre_density_change: np.ndarray,
+    tolerance: float = 0.01,
+) -> dict[str, float]:
+    """Diagnose whether an existing sampler selected locally flat states."""
+    if band_radii.size == 0:
+        return {
+            "valid_sampling_fraction": np.nan,
+            "flat_sampling_fraction": np.nan,
+            "post_distance_median": np.nan,
+            "pre_distance_median": np.nan,
+            "post_pressure_change_median": np.nan,
+            "pre_pressure_change_median": np.nan,
+            "post_density_change_median": np.nan,
+            "pre_density_change_median": np.nan,
+        }
+    lower = float(np.min(band_radii))
+    upper = float(np.max(band_radii))
+    band_mask = (all_surface_radii >= lower) & (all_surface_radii <= upper)
+    valid = band_mask & sampling_valid
+    flat = (
+        valid
+        & (post_pressure_change <= tolerance)
+        & (pre_pressure_change <= tolerance)
+        & (post_density_change <= tolerance)
+        & (pre_density_change <= tolerance)
+    )
+    count = np.count_nonzero(band_mask)
+    result = {
+        "valid_sampling_fraction": float(np.count_nonzero(valid) / count),
+        "flat_sampling_fraction": float(np.count_nonzero(flat) / count),
+    }
+    fields = {
+        "post_distance_median": post_distance,
+        "pre_distance_median": pre_distance,
+        "post_pressure_change_median": post_pressure_change,
+        "pre_pressure_change_median": pre_pressure_change,
+        "post_density_change_median": post_density_change,
+        "pre_density_change_median": pre_density_change,
+    }
+    for name, values in fields.items():
+        selected = values[valid]
+        selected = selected[np.isfinite(selected)]
+        result[name] = (
+            float(np.median(selected)) if selected.size else np.nan
+        )
+    return result
+
+
 def _weaver_forward_shock_mach(
     radius: float,
     time: float,
@@ -1186,6 +1406,7 @@ def _forward_mach_diagnostic_values(
     current_mach: float,
     profile_aware_mach: float,
     weaver_mach: float,
+    plateau_aware_mach: float = np.nan,
 ) -> dict[str, float]:
     """Build the forward-shock Mach and pressure-jump comparison fields."""
     kinematic_mach = _kinematic_forward_shock_mach(
@@ -1202,6 +1423,9 @@ def _forward_mach_diagnostic_values(
         "forward_profile_aware_sampled_pressure_ratio": (
             _normal_shock_pressure_ratio(profile_aware_mach, GAMMA)
         ),
+        "forward_plateau_aware_sampled_pressure_ratio": (
+            _normal_shock_pressure_ratio(plateau_aware_mach, GAMMA)
+        ),
         "forward_kinematic_expected_pressure_ratio": (
             _normal_shock_pressure_ratio(kinematic_mach, GAMMA)
         ),
@@ -1211,11 +1435,17 @@ def _forward_mach_diagnostic_values(
         "forward_profile_aware_mach_relative_error_vs_kinematic": (
             _finite_relative_difference(profile_aware_mach, kinematic_mach)
         ),
+        "forward_plateau_aware_mach_relative_error_vs_kinematic": (
+            _finite_relative_difference(plateau_aware_mach, kinematic_mach)
+        ),
         "forward_kinematic_mach_relative_error_vs_weaver": (
             _finite_relative_difference(kinematic_mach, weaver_mach)
         ),
         "forward_profile_aware_mach_relative_error_vs_weaver": (
             _finite_relative_difference(profile_aware_mach, weaver_mach)
+        ),
+        "forward_plateau_aware_mach_relative_error_vs_weaver": (
+            _finite_relative_difference(plateau_aware_mach, weaver_mach)
         ),
     }
 
@@ -1853,6 +2083,37 @@ def measure_shock_histories(
         profile_aware_surface_mach = shock_results[snapshot_index][
             "profile_aware_mach_numbers"
         ][surface_mask]
+        plateau_aware_surface_mach = shock_results[snapshot_index][
+            "plateau_aware_mach_numbers"
+        ][surface_mask]
+        profile_sampling_valid = shock_results[snapshot_index][
+            "profile_sampling_valid"
+        ][surface_mask]
+        profile_diagnostic_fields = {
+            name: shock_results[snapshot_index][name][surface_mask]
+            for name in (
+                "profile_post_distance",
+                "profile_pre_distance",
+                "profile_post_pressure_change",
+                "profile_pre_pressure_change",
+                "profile_post_density_change",
+                "profile_pre_density_change",
+            )
+        }
+        plateau_sampling_valid = shock_results[snapshot_index][
+            "plateau_sampling_valid"
+        ][surface_mask]
+        plateau_diagnostic_fields = {
+            name: shock_results[snapshot_index][name][surface_mask]
+            for name in (
+                "plateau_post_distance",
+                "plateau_pre_distance",
+                "plateau_post_pressure_change",
+                "plateau_pre_pressure_change",
+                "plateau_post_density_change",
+                "plateau_pre_density_change",
+            )
+        }
         surface_centers = shock_results[snapshot_index]["refined_centers"][surface_mask]
         surface_direction = shock_results[snapshot_index]["shock_direction"][
             surface_mask
@@ -1865,6 +2126,17 @@ def measure_shock_histories(
         outside_radii = surface_radii[outside_mask]
         outside_mach = surface_mach[outside_mask]
         outside_profile_aware_mach = profile_aware_surface_mach[outside_mask]
+        outside_plateau_aware_mach = plateau_aware_surface_mach[outside_mask]
+        outside_profile_sampling_valid = profile_sampling_valid[outside_mask]
+        outside_profile_diagnostics = {
+            name: values[outside_mask]
+            for name, values in profile_diagnostic_fields.items()
+        }
+        outside_plateau_sampling_valid = plateau_sampling_valid[outside_mask]
+        outside_plateau_diagnostics = {
+            name: values[outside_mask]
+            for name, values in plateau_diagnostic_fields.items()
+        }
         outside_alignment = radial_alignment[outside_mask]
 
         reverse_radii, forward_radii, separation_radius = split_radial_shock_candidates(
@@ -1895,6 +2167,62 @@ def measure_shock_histories(
             outside_radii,
             outside_profile_aware_mach,
             outside_alignment,
+        )
+        reverse_plateau_aware = _radial_band_statistics(
+            reverse_radii,
+            outside_radii,
+            outside_plateau_aware_mach,
+            outside_alignment,
+        )
+        forward_plateau_aware = _radial_band_statistics(
+            forward_radii,
+            outside_radii,
+            outside_plateau_aware_mach,
+            outside_alignment,
+        )
+        reverse_profile_sampling = _radial_band_sample_flatness_statistics(
+            reverse_radii,
+            outside_radii,
+            outside_profile_sampling_valid,
+            outside_profile_diagnostics["profile_post_distance"],
+            outside_profile_diagnostics["profile_pre_distance"],
+            outside_profile_diagnostics["profile_post_pressure_change"],
+            outside_profile_diagnostics["profile_pre_pressure_change"],
+            outside_profile_diagnostics["profile_post_density_change"],
+            outside_profile_diagnostics["profile_pre_density_change"],
+        )
+        forward_profile_sampling = _radial_band_sample_flatness_statistics(
+            forward_radii,
+            outside_radii,
+            outside_profile_sampling_valid,
+            outside_profile_diagnostics["profile_post_distance"],
+            outside_profile_diagnostics["profile_pre_distance"],
+            outside_profile_diagnostics["profile_post_pressure_change"],
+            outside_profile_diagnostics["profile_pre_pressure_change"],
+            outside_profile_diagnostics["profile_post_density_change"],
+            outside_profile_diagnostics["profile_pre_density_change"],
+        )
+        reverse_plateau_sampling = _radial_band_plateau_statistics(
+            reverse_radii,
+            outside_radii,
+            outside_plateau_sampling_valid,
+            outside_plateau_diagnostics["plateau_post_distance"],
+            outside_plateau_diagnostics["plateau_pre_distance"],
+            outside_plateau_diagnostics["plateau_post_pressure_change"],
+            outside_plateau_diagnostics["plateau_pre_pressure_change"],
+            outside_plateau_diagnostics["plateau_post_density_change"],
+            outside_plateau_diagnostics["plateau_pre_density_change"],
+        )
+        forward_plateau_sampling = _radial_band_plateau_statistics(
+            forward_radii,
+            outside_radii,
+            outside_plateau_sampling_valid,
+            outside_plateau_diagnostics["plateau_post_distance"],
+            outside_plateau_diagnostics["plateau_pre_distance"],
+            outside_plateau_diagnostics["plateau_post_pressure_change"],
+            outside_plateau_diagnostics["plateau_pre_pressure_change"],
+            outside_plateau_diagnostics["plateau_post_density_change"],
+            outside_plateau_diagnostics["plateau_pre_density_change"],
         )
         ordering_ok = not (
             np.isfinite(float(reverse["radius_median"]))
@@ -1976,6 +2304,9 @@ def measure_shock_histories(
                 forward_profile_aware["mach_median"]
             ),
             weaver_mach=weaver_forward_mach,
+            plateau_aware_mach=float(
+                forward_plateau_aware["mach_median"]
+            ),
         )
         forward_kinematic_mach = forward_diagnostic[
             "forward_kinematic_mach"
@@ -2028,6 +2359,29 @@ def measure_shock_histories(
             "reverse_profile_aware_mach_coefficient_of_variation": (
                 reverse_profile_aware["mach_coefficient_of_variation"]
             ),
+            **{
+                f"reverse_profile_{name}": value
+                for name, value in reverse_profile_sampling.items()
+            },
+            "reverse_plateau_aware_valid_mach_fraction": (
+                reverse_plateau_aware["valid_mach_fraction"]
+            ),
+            "reverse_plateau_aware_mach_median": reverse_plateau_aware[
+                "mach_median"
+            ],
+            "reverse_plateau_aware_mach_p16": reverse_plateau_aware[
+                "mach_p16"
+            ],
+            "reverse_plateau_aware_mach_p84": reverse_plateau_aware[
+                "mach_p84"
+            ],
+            "reverse_plateau_aware_mach_coefficient_of_variation": (
+                reverse_plateau_aware["mach_coefficient_of_variation"]
+            ),
+            **{
+                f"reverse_plateau_{name}": value
+                for name, value in reverse_plateau_sampling.items()
+            },
             "reverse_confidence_score": confidence["reverse"]["confidence_score"],
             "reverse_confidence_label": confidence["reverse"]["confidence_label"],
             "forward_track_id": "forward_shock",
@@ -2072,6 +2426,29 @@ def measure_shock_histories(
             "forward_profile_aware_mach_coefficient_of_variation": (
                 forward_profile_aware["mach_coefficient_of_variation"]
             ),
+            **{
+                f"forward_profile_{name}": value
+                for name, value in forward_profile_sampling.items()
+            },
+            "forward_plateau_aware_valid_mach_fraction": (
+                forward_plateau_aware["valid_mach_fraction"]
+            ),
+            "forward_plateau_aware_mach_median": forward_plateau_aware[
+                "mach_median"
+            ],
+            "forward_plateau_aware_mach_p16": forward_plateau_aware[
+                "mach_p16"
+            ],
+            "forward_plateau_aware_mach_p84": forward_plateau_aware[
+                "mach_p84"
+            ],
+            "forward_plateau_aware_mach_coefficient_of_variation": (
+                forward_plateau_aware["mach_coefficient_of_variation"]
+            ),
+            **{
+                f"forward_plateau_{name}": value
+                for name, value in forward_plateau_sampling.items()
+            },
             **forward_diagnostic,
             "forward_confidence_score": confidence["forward"]["confidence_score"],
             "forward_confidence_label": confidence["forward"]["confidence_label"],
@@ -2103,6 +2480,32 @@ def measure_shock_histories(
                         if name.startswith("mach_")
                         or name == "valid_mach_fraction"
                     },
+                    **{
+                        f"plateau_aware_{name}": value
+                        for name, value in (
+                            reverse_plateau_aware
+                            if shock_kind == "reverse"
+                            else forward_plateau_aware
+                        ).items()
+                        if name.startswith("mach_")
+                        or name == "valid_mach_fraction"
+                    },
+                    **{
+                        f"profile_{name}": value
+                        for name, value in (
+                            reverse_profile_sampling
+                            if shock_kind == "reverse"
+                            else forward_profile_sampling
+                        ).items()
+                    },
+                    **{
+                        f"plateau_{name}": value
+                        for name, value in (
+                            reverse_plateau_sampling
+                            if shock_kind == "reverse"
+                            else forward_plateau_sampling
+                        ).items()
+                    },
                     **confidence[shock_kind],
                     "weaver_outer_radius": (
                         weaver_radius if shock_kind == "forward" else np.nan
@@ -2133,11 +2536,13 @@ def measure_shock_histories(
             f"Weaver={weaver_radius:.6f}, "
             f"relative error={relative_error:.3f}, "
             f"two bands={row['two_bands_detected']}; "
-            f"Mach current/profile: "
+            f"Mach current/profile/plateau: "
             f"reverse={row['reverse_mach_median']:.3f}/"
-            f"{row['reverse_profile_aware_mach_median']:.3f}, "
+            f"{row['reverse_profile_aware_mach_median']:.3f}/"
+            f"{row['reverse_plateau_aware_mach_median']:.3f}, "
             f"forward={row['forward_mach_median']:.3f}/"
-            f"{row['forward_profile_aware_mach_median']:.3f}"
+            f"{row['forward_profile_aware_mach_median']:.3f}/"
+            f"{row['forward_plateau_aware_mach_median']:.3f}"
         )
 
     csv_path.parent.mkdir(parents=True, exist_ok=True)
@@ -2286,6 +2691,29 @@ def measure_shock_histories(
             color=color,
             alpha=0.1,
         )
+        plateau_median = np.array(
+            [row[f"{prefix}_plateau_aware_mach_median"] for row in rows]
+        )
+        plateau_p16 = np.array(
+            [row[f"{prefix}_plateau_aware_mach_p16"] for row in rows]
+        )
+        plateau_p84 = np.array(
+            [row[f"{prefix}_plateau_aware_mach_p84"] for row in rows]
+        )
+        valid_plateau = (
+            valid
+            & np.isfinite(plateau_median)
+            & np.isfinite(plateau_p16)
+            & np.isfinite(plateau_p84)
+        )
+        mach_axis.plot(
+            history_times[valid_plateau],
+            plateau_median[valid_plateau],
+            marker="D",
+            color=color,
+            linestyle=":",
+            label=f"{label}: plateau-aware",
+        )
     mach_axis.axhline(1.0, color="grey", linestyle=":", linewidth=1.0)
     valid_weaver_mach = resolved & np.isfinite(weaver_forward_mach)
     mach_axis.plot(
@@ -2381,17 +2809,39 @@ def write_forward_mach_diagnostics(
         "relative_error_vs_weaver",
         "forward_mach_median",
         "forward_profile_aware_mach_median",
+        "forward_plateau_aware_mach_median",
         "forward_kinematic_mach",
         "weaver_forward_mach",
         "forward_current_sampled_pressure_ratio",
         "forward_profile_aware_sampled_pressure_ratio",
+        "forward_plateau_aware_sampled_pressure_ratio",
         "forward_kinematic_expected_pressure_ratio",
         "weaver_expected_pressure_ratio",
         "forward_profile_aware_mach_relative_error_vs_kinematic",
+        "forward_plateau_aware_mach_relative_error_vs_kinematic",
         "forward_kinematic_mach_relative_error_vs_weaver",
         "forward_profile_aware_mach_relative_error_vs_weaver",
+        "forward_plateau_aware_mach_relative_error_vs_weaver",
+        "forward_profile_valid_sampling_fraction",
+        "forward_profile_flat_sampling_fraction",
+        "forward_profile_post_distance_median",
+        "forward_profile_pre_distance_median",
+        "forward_profile_post_pressure_change_median",
+        "forward_profile_pre_pressure_change_median",
+        "forward_profile_post_density_change_median",
+        "forward_profile_pre_density_change_median",
+        "forward_plateau_valid_sampling_fraction",
+        "forward_plateau_post_distance_median",
+        "forward_plateau_pre_distance_median",
+        "forward_plateau_post_pressure_change_median",
+        "forward_plateau_pre_pressure_change_median",
+        "forward_plateau_post_density_change_median",
+        "forward_plateau_pre_density_change_median",
     ]
-    rows = [{name: row[name] for name in fieldnames} for row in history_rows]
+    rows = [
+        {name: row.get(name, np.nan) for name in fieldnames}
+        for row in history_rows
+    ]
     csv_path.parent.mkdir(parents=True, exist_ok=True)
     with csv_path.open("w", newline="", encoding="utf-8") as csv_file:
         writer = csv.DictWriter(
@@ -2406,8 +2856,8 @@ def write_forward_mach_diagnostics(
     resolved = np.asarray(
         [row["resolved_for_weaver"] for row in rows], dtype=bool
     )
-    figure, (mach_axis, pressure_axis) = plt.subplots(
-        2, 1, figsize=(9, 8), sharex=True, constrained_layout=True
+    figure, (mach_axis, pressure_axis, sampling_axis) = plt.subplots(
+        3, 1, figsize=(9, 11), sharex=True, constrained_layout=True
     )
     mach_series = (
         ("forward_mach_median", "current pressure jump", "tab:blue", "--", "o"),
@@ -2417,6 +2867,13 @@ def write_forward_mach_diagnostics(
             "tab:orange",
             "-",
             "s",
+        ),
+        (
+            "forward_plateau_aware_mach_median",
+            "plateau-aware pressure jump",
+            "tab:purple",
+            "-",
+            "D",
         ),
         (
             "forward_kinematic_mach",
@@ -2458,6 +2915,13 @@ def write_forward_mach_diagnostics(
             "s",
         ),
         (
+            "forward_plateau_aware_sampled_pressure_ratio",
+            "plateau-aware sampled jump",
+            "tab:purple",
+            "-",
+            "D",
+        ),
+        (
             "forward_kinematic_expected_pressure_ratio",
             "jump expected from tracked speed",
             "tab:green",
@@ -2491,6 +2955,39 @@ def write_forward_mach_diagnostics(
     )
     pressure_axis.grid(alpha=0.25)
     pressure_axis.legend(fontsize=8)
+
+    sampling_series = (
+        (
+            "forward_profile_flat_sampling_fraction",
+            "profile-aware samples flat",
+            "tab:orange",
+            "s",
+        ),
+        (
+            "forward_plateau_valid_sampling_fraction",
+            "plateau found",
+            "tab:purple",
+            "D",
+        ),
+    )
+    for key, label, color, marker in sampling_series:
+        values = np.asarray([row[key] for row in rows], dtype=float)
+        valid = resolved & np.isfinite(values)
+        sampling_axis.plot(
+            times[valid],
+            values[valid],
+            color=color,
+            marker=marker,
+            label=label,
+        )
+    sampling_axis.set(
+        xlabel="time [code units]",
+        ylabel="surface-cell fraction",
+        title="Sampling-state validity",
+        ylim=(-0.03, 1.03),
+    )
+    sampling_axis.grid(alpha=0.25)
+    sampling_axis.legend(fontsize=8)
     figure.suptitle("Forward-shock Mach-estimator diagnostic")
     plot_path.parent.mkdir(parents=True, exist_ok=True)
     figure.savefig(plot_path, dpi=180)

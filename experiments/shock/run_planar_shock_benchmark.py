@@ -41,10 +41,13 @@ from astronomix._physics_modules._shock_finder.pfrommer_shock_finder import (  #
 )
 from astronomix._physics_modules._shock_finder._shock_zones import (  # noqa: E402
     get_adaptive_post_pre_shock_values,
+    get_plateau_aware_post_pre_shock_values,
+    get_post_pre_sample_relative_changes,
     get_profile_aware_post_pre_shock_values,
 )
 from astronomix._physics_modules._shock_finder._shock_mach import (  # noqa: E402
     _calculate_mach_at_surface,
+    _calculate_plateau_mach_at_surface,
 )
 
 
@@ -235,6 +238,15 @@ def benchmark_resolution(
         variables,
         profile_aware=True,
     )
+    plateau_mach_field = _calculate_plateau_mach_at_surface(
+        state,
+        result.shock_surface_cells,
+        result.shock_zones,
+        result.shock_direction,
+        result.shock_surface_offsets,
+        config,
+        variables,
+    )
 
     surface = np.asarray(result.shock_surface_cells, dtype=bool)
     if not surface.any():
@@ -256,6 +268,15 @@ def benchmark_resolution(
             "No valid profile-aware Mach samples were produced at "
             f"resolution {resolution}."
         )
+    plateau_mach_values = np.asarray(plateau_mach_field)[surface]
+    valid_plateau_mach = plateau_mach_values[
+        np.isfinite(plateau_mach_values) & (plateau_mach_values > 0.0)
+    ]
+    if valid_plateau_mach.size == 0:
+        raise RuntimeError(
+            "No valid plateau-aware Mach samples were produced at "
+            f"resolution {resolution}."
+        )
 
     centers = np.asarray(helper_data.geometric_centers)
     direction = np.moveaxis(np.asarray(result.shock_direction), 0, -1)
@@ -273,6 +294,9 @@ def benchmark_resolution(
     p16, median, p84 = np.percentile(valid_mach, [16.0, 50.0, 84.0])
     profile_p16, profile_median, profile_p84 = np.percentile(
         valid_profile_mach, [16.0, 50.0, 84.0]
+    )
+    plateau_p16, plateau_median, plateau_p84 = np.percentile(
+        valid_plateau_mach, [16.0, 50.0, 84.0]
     )
 
     pressure = state[variables.pressure_index]
@@ -348,6 +372,66 @@ def benchmark_resolution(
     sampled_profile_pre_distance = np.asarray(profile_pre_distance)[
         profile_sample_surface
     ]
+    (
+        profile_post_pressure_change,
+        profile_pre_pressure_change,
+        profile_post_density_change,
+        profile_pre_density_change,
+        profile_flatness_valid,
+    ) = get_post_pre_sample_relative_changes(
+        result.shock_direction,
+        pressure,
+        density,
+        profile_post_distance,
+        profile_pre_distance,
+        center_offsets=(
+            result.shock_direction
+            * result.shock_surface_offsets[jnp.newaxis, ...]
+        ),
+    )
+    profile_flatness_mask = (
+        profile_sample_surface
+        & np.asarray(profile_flatness_valid, dtype=bool)
+    )
+    profile_flat_mask = (
+        profile_flatness_mask
+        & (np.asarray(profile_post_pressure_change) <= 0.01)
+        & (np.asarray(profile_pre_pressure_change) <= 0.01)
+        & (np.asarray(profile_post_density_change) <= 0.01)
+        & (np.asarray(profile_pre_density_change) <= 0.01)
+    )
+
+    def profile_flatness_values(field):
+        return np.asarray(field)[profile_flatness_mask]
+    (
+        _,
+        _,
+        _,
+        _,
+        plateau_samples_valid,
+        plateau_post_distance,
+        plateau_pre_distance,
+        plateau_post_pressure_change,
+        plateau_pre_pressure_change,
+        plateau_post_density_change,
+        plateau_pre_density_change,
+    ) = get_plateau_aware_post_pre_shock_values(
+        result.shock_direction,
+        result.shock_zones,
+        pressure,
+        density,
+        max_steps=8,
+        center_offsets=(
+            result.shock_direction
+            * result.shock_surface_offsets[jnp.newaxis, ...]
+        ),
+    )
+    plateau_sample_surface = surface & np.asarray(
+        plateau_samples_valid, dtype=bool
+    )
+
+    def plateau_values(field):
+        return np.asarray(field)[plateau_sample_surface]
 
     return {
         "resolution": int(resolution),
@@ -374,6 +458,34 @@ def benchmark_resolution(
         "profile_mach_relative_scatter": float(
             (profile_p84 - profile_p16) / (2.0 * mach)
         ),
+        "plateau_valid_mach_fraction": float(
+            valid_plateau_mach.size / plateau_mach_values.size
+        ),
+        "plateau_mach_median": float(plateau_median),
+        "plateau_mach_p16": float(plateau_p16),
+        "plateau_mach_p84": float(plateau_p84),
+        "plateau_mach_relative_bias": float(plateau_median / mach - 1.0),
+        "plateau_mach_relative_scatter": float(
+            (plateau_p84 - plateau_p16) / (2.0 * mach)
+        ),
+        "plateau_post_sample_distance_cells_median": float(
+            np.median(plateau_values(plateau_post_distance))
+        ),
+        "plateau_pre_sample_distance_cells_median": float(
+            np.median(plateau_values(plateau_pre_distance))
+        ),
+        "plateau_post_pressure_change_median": float(
+            np.median(plateau_values(plateau_post_pressure_change))
+        ),
+        "plateau_pre_pressure_change_median": float(
+            np.median(plateau_values(plateau_pre_pressure_change))
+        ),
+        "plateau_post_density_change_median": float(
+            np.median(plateau_values(plateau_post_density_change))
+        ),
+        "plateau_pre_density_change_median": float(
+            np.median(plateau_values(plateau_pre_density_change))
+        ),
         "profile_sampled_pressure_ratio_median": float(
             np.median(sampled_profile_pressure_ratio)
         ),
@@ -390,6 +502,21 @@ def benchmark_resolution(
         ),
         "profile_pre_sample_distance_cells_median": float(
             np.median(sampled_profile_pre_distance)
+        ),
+        "profile_flat_sampling_fraction": float(
+            np.count_nonzero(profile_flat_mask) / surface.sum()
+        ),
+        "profile_post_pressure_change_median": float(
+            np.median(profile_flatness_values(profile_post_pressure_change))
+        ),
+        "profile_pre_pressure_change_median": float(
+            np.median(profile_flatness_values(profile_pre_pressure_change))
+        ),
+        "profile_post_density_change_median": float(
+            np.median(profile_flatness_values(profile_post_density_change))
+        ),
+        "profile_pre_density_change_median": float(
+            np.median(profile_flatness_values(profile_pre_density_change))
         ),
         "diagnostic_outside_offset": float(diagnostic_outside_offset),
         "diagnostic_mach_median": float(np.median(diagnostic_mach)),
@@ -447,6 +574,11 @@ def write_outputs(rows: list[dict], output_dir: Path) -> None:
     )
     profile_p16 = np.asarray([row["profile_mach_p16"] for row in rows])
     profile_p84 = np.asarray([row["profile_mach_p84"] for row in rows])
+    plateau_median = np.asarray(
+        [row["plateau_mach_median"] for row in rows]
+    )
+    plateau_p16 = np.asarray([row["plateau_mach_p16"] for row in rows])
+    plateau_p84 = np.asarray([row["plateau_mach_p84"] for row in rows])
     unit_normal = np.asarray(
         [rows[0]["normal_x"], rows[0]["normal_y"], rows[0]["normal_z"]]
     )
@@ -479,6 +611,17 @@ def write_outputs(rows: list[dict], output_dir: Path) -> None:
         marker="s",
         capsize=4,
         label="profile-aware estimator",
+    )
+    axes[0].errorbar(
+        resolution,
+        plateau_median,
+        yerr=(
+            plateau_median - plateau_p16,
+            plateau_p84 - plateau_median,
+        ),
+        marker="^",
+        capsize=4,
+        label="plateau-aware estimator",
     )
     axes[0].set(
         xlabel="cells per axis",
@@ -559,7 +702,9 @@ def main() -> None:
             f"(bias={100.0 * row['mach_relative_bias']:+.3f}%, "
             f"p16-p84={row['mach_p16']:.6f}-{row['mach_p84']:.6f}); "
             f"profile={row['profile_mach_median']:.6f} "
-            f"(bias={100.0 * row['profile_mach_relative_bias']:+.3f}%)"
+            f"(bias={100.0 * row['profile_mach_relative_bias']:+.3f}%); "
+            f"plateau={row['plateau_mach_median']:.6f} "
+            f"(bias={100.0 * row['plateau_mach_relative_bias']:+.3f}%)"
         )
     write_outputs(rows, args.output_dir)
 

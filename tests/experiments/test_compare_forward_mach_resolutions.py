@@ -29,6 +29,7 @@ class ForwardMachResolutionComparisonTests(unittest.TestCase):
                 weaver = 10.0 / (1.0 + time)
                 kinematic = scale * weaver
                 profile = 0.9 * kinematic
+                plateau = 0.95 * kinematic
                 current = 0.8 * kinematic
                 writer.writerow(
                     {
@@ -37,11 +38,23 @@ class ForwardMachResolutionComparisonTests(unittest.TestCase):
                         "relative_error_vs_weaver": scale - 1.0,
                         "forward_mach_median": current,
                         "forward_profile_aware_mach_median": profile,
+                        "forward_plateau_aware_mach_median": plateau,
                         "forward_kinematic_mach": kinematic,
                         "weaver_forward_mach": weaver,
                         "forward_current_sampled_pressure_ratio": 0.7,
                         "forward_profile_aware_sampled_pressure_ratio": 0.8,
+                        "forward_plateau_aware_sampled_pressure_ratio": 0.9,
                         "forward_kinematic_expected_pressure_ratio": 1.0,
+                        "forward_profile_flat_sampling_fraction": 0.5,
+                        "forward_profile_post_pressure_change_median": 0.03,
+                        "forward_profile_pre_pressure_change_median": 0.03,
+                        "forward_profile_post_density_change_median": 0.03,
+                        "forward_profile_pre_density_change_median": 0.03,
+                        "forward_plateau_valid_sampling_fraction": 0.95,
+                        "forward_plateau_post_pressure_change_median": 0.01,
+                        "forward_plateau_pre_pressure_change_median": 0.01,
+                        "forward_plateau_post_density_change_median": 0.01,
+                        "forward_plateau_pre_density_change_median": 0.01,
                     }
                 )
 
@@ -71,6 +84,12 @@ class ForwardMachResolutionComparisonTests(unittest.TestCase):
                     "mean_profile_aware_mach_relative_error_vs_kinematic"
                 ],
                 -0.1,
+            )
+            self.assertAlmostEqual(
+                summaries[1][
+                    "mean_plateau_aware_mach_relative_error_vs_kinematic"
+                ],
+                -0.05,
             )
 
             summary_path = directory / "summary.csv"

@@ -17,6 +17,8 @@ from experiments.wind_bubble.run_single_bubble import (
     _mhd_pressure_weighted_extents,
     _kinematic_forward_shock_mach,
     _normal_shock_pressure_ratio,
+    _radial_band_plateau_statistics,
+    _radial_band_sample_flatness_statistics,
     _radial_band_statistics,
     _shock_tracking_confidence,
     _surface_area_weights,
@@ -241,6 +243,46 @@ class TemporalShockTrackingTests(unittest.TestCase):
         self.assertAlmostEqual(result["mach_median"], 1.9)
         self.assertLess(result["median_radial_alignment"], -0.95)
         self.assertGreater(result["normalized_radial_spread"], 0.0)
+
+    def test_sampling_statistics_distinguish_valid_from_flat_samples(self):
+        radii = np.array([0.28, 0.29, 0.30, 0.10])
+        band = radii[:3]
+        valid = np.array([True, True, False, True])
+        distances = np.array([2.0, 2.5, 8.0, 1.0])
+        flat_change = np.array([0.005, 0.02, np.nan, 0.0])
+
+        profile = _radial_band_sample_flatness_statistics(
+            band,
+            radii,
+            valid,
+            distances,
+            distances,
+            flat_change,
+            flat_change,
+            flat_change,
+            flat_change,
+        )
+        plateau = _radial_band_plateau_statistics(
+            band,
+            radii,
+            valid,
+            distances,
+            distances,
+            flat_change,
+            flat_change,
+            flat_change,
+            flat_change,
+        )
+
+        self.assertAlmostEqual(
+            profile["valid_sampling_fraction"], 2.0 / 3.0
+        )
+        self.assertAlmostEqual(
+            profile["flat_sampling_fraction"], 1.0 / 3.0
+        )
+        self.assertAlmostEqual(
+            plateau["valid_sampling_fraction"], 2.0 / 3.0
+        )
 
     def test_missing_track_is_reacquired_without_changing_identity(self):
         initialized = _temporal_tracking_diagnostics(
