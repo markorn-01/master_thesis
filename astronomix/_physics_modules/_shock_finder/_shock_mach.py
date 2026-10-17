@@ -12,6 +12,7 @@ from astronomix.option_classes.simulation_config import (
 )
 from astronomix._physics_modules._shock_finder._shock_zones import (
     get_adaptive_post_pre_shock_values,
+    get_extrapolated_post_pre_shock_values,
     get_plateau_aware_post_pre_shock_values,
     get_profile_aware_post_pre_shock_values,
     get_ramp_exit_aware_post_pre_shock_values,
@@ -165,6 +166,59 @@ def _calculate_ramp_exit_mach_at_surface(
         _,
         _,
     ) = get_ramp_exit_aware_post_pre_shock_values(
+        shock_direction,
+        shock_zones,
+        pressure,
+        density,
+        max_steps=8,
+        center_offsets=(
+            shock_direction * surface_offsets[jnp.newaxis, ...]
+        ),
+    )
+    pressure_ratio = jnp.maximum(
+        pressure_post / jnp.maximum(pressure_pre, 1.0e-30),
+        1.0,
+    )
+    mach = jnp.sqrt(
+        (
+            pressure_ratio * (gamma_gas + 1.0)
+            + (gamma_gas - 1.0)
+        )
+        / (2.0 * gamma_gas)
+    )
+    return jnp.where(shock_surface & valid_samples, mach, 0.0)
+
+
+@partial(
+    jax.jit,
+    static_argnames=["registered_variables", "config"],
+)
+def _calculate_extrapolated_mach_at_surface(
+    primitive_state: STATE_TYPE,
+    shock_surface: BOOL_FIELD_TYPE,
+    shock_zones: BOOL_FIELD_TYPE,
+    shock_direction: FIELD_TYPE,
+    surface_offsets: FIELD_TYPE,
+    config: SimulationConfig,
+    registered_variables: RegisteredVariables,
+) -> FIELD_TYPE:
+    """Calculate Mach numbers from shock-front-extrapolated states."""
+    gamma_gas = 5.0 / 3.0
+    pressure = primitive_state[registered_variables.pressure_index]
+    density = primitive_state[registered_variables.density_index]
+    (
+        pressure_post,
+        pressure_pre,
+        _,
+        _,
+        valid_samples,
+        _,
+        _,
+        _,
+        _,
+        _,
+        _,
+    ) = get_extrapolated_post_pre_shock_values(
         shock_direction,
         shock_zones,
         pressure,

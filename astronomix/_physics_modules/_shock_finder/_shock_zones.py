@@ -510,6 +510,7 @@ def get_plateau_aware_post_pre_shock_values(
     ),
     relative_tolerance=0.01,
     require_flat_plateau=True,
+    extrapolate_smooth_profile=False,
     slope_stability_absolute_tolerance=0.002,
     slope_stability_relative_tolerance=0.25,
 ):
@@ -570,6 +571,10 @@ def get_plateau_aware_post_pre_shock_values(
     if slope_stability_relative_tolerance < 0.0:
         raise ValueError(
             "slope_stability_relative_tolerance must be non-negative."
+        )
+    if extrapolate_smooth_profile and require_flat_plateau:
+        raise ValueError(
+            "extrapolate_smooth_profile requires smooth-profile selection."
         )
 
     (
@@ -665,7 +670,11 @@ def get_plateau_aware_post_pre_shock_values(
     post_profiles = sample_candidates(-1.0, post_exit_distance)
     pre_profiles = sample_candidates(1.0, pre_exit_distance)
 
-    def select_first_plateau(profiles):
+    outside_offset_array = jnp.asarray(
+        outside_offsets, dtype=coordinate_dtype
+    ).reshape((len(outside_offsets),) + (1,) * ndim)
+
+    def select_first_plateau(profiles, exit_distance):
         pressure_samples, density_samples, valid_samples, distances = profiles
         pair_valid = valid_samples[:-1] & valid_samples[1:]
         numerical_floor = jnp.asarray(1.0e-30, dtype=coordinate_dtype)
@@ -727,10 +736,45 @@ def get_plateau_aware_post_pre_shock_values(
                 values, final_interval_index, axis=0
             )[0]
 
+        def extrapolate_four_point_run(values):
+            fit_indices = (
+                run_index[jnp.newaxis, ...]
+                + jnp.arange(4).reshape((4,) + (1,) * ndim)
+            )
+            fit_values = jnp.take_along_axis(
+                values, fit_indices, axis=0
+            )
+            fit_offsets = jnp.take_along_axis(
+                jnp.broadcast_to(outside_offset_array, values.shape),
+                fit_indices,
+                axis=0,
+            )
+            mean_offset = jnp.mean(fit_offsets, axis=0)
+            mean_value = jnp.mean(fit_values, axis=0)
+            centered_offset = fit_offsets - mean_offset[jnp.newaxis, ...]
+            denominator = jnp.sum(centered_offset**2, axis=0)
+            slope = jnp.sum(
+                centered_offset
+                * (fit_values - mean_value[jnp.newaxis, ...]),
+                axis=0,
+            ) / jnp.maximum(denominator, numerical_floor)
+            return mean_value - slope * mean_offset
+
+        if extrapolate_smooth_profile:
+            selected_pressure = extrapolate_four_point_run(
+                pressure_samples
+            )
+            selected_density = extrapolate_four_point_run(density_samples)
+            selected_distance = exit_distance
+        else:
+            selected_pressure = gather(pressure_samples)
+            selected_density = gather(density_samples)
+            selected_distance = gather(distances)
+
         return (
-            gather(pressure_samples),
-            gather(density_samples),
-            gather(distances),
+            selected_pressure,
+            selected_density,
+            selected_distance,
             plateau_found,
             gather_pair(pressure_change),
             gather_pair(density_change),
@@ -743,7 +787,7 @@ def get_plateau_aware_post_pre_shock_values(
         post_plateau,
         post_pressure_change,
         post_density_change,
-    ) = select_first_plateau(post_profiles)
+    ) = select_first_plateau(post_profiles, post_exit_distance)
     (
         pressure_pre,
         density_pre,
@@ -751,11 +795,13 @@ def get_plateau_aware_post_pre_shock_values(
         pre_plateau,
         pre_pressure_change,
         pre_density_change,
-    ) = select_first_plateau(pre_profiles)
+    ) = select_first_plateau(pre_profiles, pre_exit_distance)
 
     valid = (
         post_plateau
         & pre_plateau
+        & (pressure_post > 0.0)
+        & (pressure_pre > 0.0)
         & (pressure_post >= pressure_pre)
         & (density_post > 0.0)
         & (density_pre > 0.0)
@@ -821,6 +867,66 @@ def get_ramp_exit_aware_post_pre_shock_values(
         step_size=step_size,
         outside_offsets=outside_offsets,
         require_flat_plateau=False,
+        slope_stability_absolute_tolerance=(
+            slope_stability_absolute_tolerance
+        ),
+        slope_stability_relative_tolerance=(
+            slope_stability_relative_tolerance
+        ),
+    )
+
+
+def get_extrapolated_post_pre_shock_values(
+    shock_direction,
+    shock_zones,
+    pressure,
+    density,
+    max_steps=8,
+    center_offsets=None,
+    step_size=0.25,
+    outside_offsets=(
+        0.25,
+        0.5,
+        0.75,
+        1.0,
+        1.25,
+        1.5,
+        1.75,
+        2.0,
+        2.25,
+        2.5,
+        2.75,
+        3.0,
+        3.25,
+        3.5,
+        3.75,
+    ),
+    slope_stability_absolute_tolerance=0.002,
+    slope_stability_relative_tolerance=0.25,
+):
+    """Extrapolate smooth exterior profiles back to each shock-zone exit.
+
+    The first four-point run with stable fractional pressure and density
+    slopes is fitted linearly as a function of distance beyond the detected
+    shock-zone boundary.  The fit is evaluated at zero exterior offset.  This
+    estimates a shock-adjacent state without mistaking a smoothly varying
+    downstream solution for a constant plateau.
+
+    This is an experimental diagnostic.  Its validity mask and reported local
+    changes retain the same meaning as the ramp-exit-aware sampler, while the
+    returned distances identify the zone exits where the fits are evaluated.
+    """
+    return get_plateau_aware_post_pre_shock_values(
+        shock_direction,
+        shock_zones,
+        pressure,
+        density,
+        max_steps=max_steps,
+        center_offsets=center_offsets,
+        step_size=step_size,
+        outside_offsets=outside_offsets,
+        require_flat_plateau=False,
+        extrapolate_smooth_profile=True,
         slope_stability_absolute_tolerance=(
             slope_stability_absolute_tolerance
         ),

@@ -41,12 +41,14 @@ from astronomix._physics_modules._shock_finder.pfrommer_shock_finder import (  #
 )
 from astronomix._physics_modules._shock_finder._shock_zones import (  # noqa: E402
     get_adaptive_post_pre_shock_values,
+    get_extrapolated_post_pre_shock_values,
     get_plateau_aware_post_pre_shock_values,
     get_post_pre_sample_relative_changes,
     get_profile_aware_post_pre_shock_values,
     get_ramp_exit_aware_post_pre_shock_values,
 )
 from astronomix._physics_modules._shock_finder._shock_mach import (  # noqa: E402
+    _calculate_extrapolated_mach_at_surface,
     _calculate_mach_at_surface,
     _calculate_plateau_mach_at_surface,
     _calculate_ramp_exit_mach_at_surface,
@@ -258,6 +260,15 @@ def benchmark_resolution(
         config,
         variables,
     )
+    extrapolated_mach_field = _calculate_extrapolated_mach_at_surface(
+        state,
+        result.shock_surface_cells,
+        result.shock_zones,
+        result.shock_direction,
+        result.shock_surface_offsets,
+        config,
+        variables,
+    )
 
     surface = np.asarray(result.shock_surface_cells, dtype=bool)
     if not surface.any():
@@ -297,6 +308,16 @@ def benchmark_resolution(
             "No valid ramp-exit-aware Mach samples were produced at "
             f"resolution {resolution}."
         )
+    extrapolated_mach_values = np.asarray(extrapolated_mach_field)[surface]
+    valid_extrapolated_mach = extrapolated_mach_values[
+        np.isfinite(extrapolated_mach_values)
+        & (extrapolated_mach_values > 0.0)
+    ]
+    if valid_extrapolated_mach.size == 0:
+        raise RuntimeError(
+            "No valid extrapolated Mach samples were produced at "
+            f"resolution {resolution}."
+        )
 
     centers = np.asarray(helper_data.geometric_centers)
     direction = np.moveaxis(np.asarray(result.shock_direction), 0, -1)
@@ -320,6 +341,9 @@ def benchmark_resolution(
     )
     ramp_p16, ramp_median, ramp_p84 = np.percentile(
         valid_ramp_exit_mach, [16.0, 50.0, 84.0]
+    )
+    extrapolated_p16, extrapolated_median, extrapolated_p84 = np.percentile(
+        valid_extrapolated_mach, [16.0, 50.0, 84.0]
     )
 
     pressure = state[variables.pressure_index]
@@ -486,6 +510,36 @@ def benchmark_resolution(
     def ramp_values(field):
         return np.asarray(field)[ramp_sample_surface]
 
+    (
+        _,
+        _,
+        _,
+        _,
+        extrapolated_samples_valid,
+        extrapolated_post_distance,
+        extrapolated_pre_distance,
+        extrapolated_post_pressure_change,
+        extrapolated_pre_pressure_change,
+        extrapolated_post_density_change,
+        extrapolated_pre_density_change,
+    ) = get_extrapolated_post_pre_shock_values(
+        result.shock_direction,
+        result.shock_zones,
+        pressure,
+        density,
+        max_steps=8,
+        center_offsets=(
+            result.shock_direction
+            * result.shock_surface_offsets[jnp.newaxis, ...]
+        ),
+    )
+    extrapolated_sample_surface = surface & np.asarray(
+        extrapolated_samples_valid, dtype=bool
+    )
+
+    def extrapolated_values(field):
+        return np.asarray(field)[extrapolated_sample_surface]
+
     return {
         "resolution": int(resolution),
         "grid_spacing": float(config.grid_spacing),
@@ -566,6 +620,38 @@ def benchmark_resolution(
         ),
         "ramp_exit_pre_density_change_median": float(
             np.median(ramp_values(ramp_pre_density_change))
+        ),
+        "extrapolated_valid_mach_fraction": float(
+            valid_extrapolated_mach.size / extrapolated_mach_values.size
+        ),
+        "extrapolated_mach_median": float(extrapolated_median),
+        "extrapolated_mach_p16": float(extrapolated_p16),
+        "extrapolated_mach_p84": float(extrapolated_p84),
+        "extrapolated_mach_relative_bias": float(
+            extrapolated_median / mach - 1.0
+        ),
+        "extrapolated_mach_relative_scatter": float(
+            (extrapolated_p84 - extrapolated_p16) / (2.0 * mach)
+        ),
+        "extrapolated_post_sample_distance_cells_median": float(
+            np.median(extrapolated_values(extrapolated_post_distance))
+        ),
+        "extrapolated_pre_sample_distance_cells_median": float(
+            np.median(extrapolated_values(extrapolated_pre_distance))
+        ),
+        "extrapolated_post_pressure_change_median": float(
+            np.median(
+                extrapolated_values(extrapolated_post_pressure_change)
+            )
+        ),
+        "extrapolated_pre_pressure_change_median": float(
+            np.median(extrapolated_values(extrapolated_pre_pressure_change))
+        ),
+        "extrapolated_post_density_change_median": float(
+            np.median(extrapolated_values(extrapolated_post_density_change))
+        ),
+        "extrapolated_pre_density_change_median": float(
+            np.median(extrapolated_values(extrapolated_pre_density_change))
         ),
         "profile_sampled_pressure_ratio_median": float(
             np.median(sampled_profile_pressure_ratio)
@@ -665,6 +751,15 @@ def write_outputs(rows: list[dict], output_dir: Path) -> None:
     )
     ramp_p16 = np.asarray([row["ramp_exit_mach_p16"] for row in rows])
     ramp_p84 = np.asarray([row["ramp_exit_mach_p84"] for row in rows])
+    extrapolated_median = np.asarray(
+        [row["extrapolated_mach_median"] for row in rows]
+    )
+    extrapolated_p16 = np.asarray(
+        [row["extrapolated_mach_p16"] for row in rows]
+    )
+    extrapolated_p84 = np.asarray(
+        [row["extrapolated_mach_p84"] for row in rows]
+    )
     unit_normal = np.asarray(
         [rows[0]["normal_x"], rows[0]["normal_y"], rows[0]["normal_z"]]
     )
@@ -716,6 +811,17 @@ def write_outputs(rows: list[dict], output_dir: Path) -> None:
         marker="D",
         capsize=4,
         label="ramp-exit-aware estimator",
+    )
+    axes[0].errorbar(
+        resolution,
+        extrapolated_median,
+        yerr=(
+            extrapolated_median - extrapolated_p16,
+            extrapolated_p84 - extrapolated_median,
+        ),
+        marker="X",
+        capsize=4,
+        label="shock-front-extrapolated estimator",
     )
     axes[0].set(
         xlabel="cells per axis",
@@ -800,7 +906,9 @@ def main() -> None:
             f"plateau={row['plateau_mach_median']:.6f} "
             f"(bias={100.0 * row['plateau_mach_relative_bias']:+.3f}%); "
             f"ramp-exit={row['ramp_exit_mach_median']:.6f} "
-            f"(bias={100.0 * row['ramp_exit_mach_relative_bias']:+.3f}%)"
+            f"(bias={100.0 * row['ramp_exit_mach_relative_bias']:+.3f}%); "
+            f"extrapolated={row['extrapolated_mach_median']:.6f} "
+            f"(bias={100.0 * row['extrapolated_mach_relative_bias']:+.3f}%)"
         )
     write_outputs(rows, args.output_dir)
 

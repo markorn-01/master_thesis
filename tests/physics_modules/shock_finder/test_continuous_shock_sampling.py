@@ -7,6 +7,7 @@ import jax.numpy as jnp
 import numpy as np
 
 from astronomix._physics_modules._shock_finder._shock_zones import (
+    get_extrapolated_post_pre_shock_values,
     get_adaptive_post_pre_shock_values,
     get_plateau_aware_post_pre_shock_values,
     get_post_pre_sample_relative_changes,
@@ -364,6 +365,46 @@ class ContinuousShockSamplingTests(unittest.TestCase):
         self.assertGreater(float(ramp_exit[9][7]), 0.01)
         self.assertAlmostEqual(float(ramp_exit[8][7]), 0.0)
         self.assertAlmostEqual(float(ramp_exit[10][7]), 0.0)
+
+    def test_smooth_profile_is_extrapolated_back_to_zone_exit(self):
+        pressure = jnp.array(
+            [12.0, 11.5, 11.0, 10.5, 10.0, 9.5, 7.0, 5.0,
+             3.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+        )
+        density = jnp.array(
+            [7.5, 7.0, 6.5, 6.0, 5.5, 5.0, 4.0, 3.0,
+             2.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+        )
+        direction = jnp.ones((1, pressure.size))
+        shock_zones = jnp.zeros(pressure.size, dtype=jnp.bool_).at[6:9].set(
+            True
+        )
+
+        ramp_exit = get_ramp_exit_aware_post_pre_shock_values(
+            direction,
+            shock_zones,
+            pressure,
+            density,
+            max_steps=6,
+        )
+        extrapolated = get_extrapolated_post_pre_shock_values(
+            direction,
+            shock_zones,
+            pressure,
+            density,
+            max_steps=6,
+        )
+
+        self.assertTrue(bool(extrapolated[4][7]))
+        self.assertGreater(
+            float(extrapolated[0][7]), float(ramp_exit[0][7])
+        )
+        self.assertLess(
+            float(extrapolated[5][7]), float(ramp_exit[5][7])
+        )
+        self.assertAlmostEqual(
+            float(extrapolated[1][7]), float(ramp_exit[1][7]), places=5
+        )
 
 
 if __name__ == "__main__":

@@ -93,6 +93,11 @@ class PlanarShockBenchmarkTests(unittest.TestCase):
             0.005,
         )
         self.assertGreater(metrics["ramp_exit_valid_mach_fraction"], 0.6)
+        self.assertLess(
+            abs(metrics["extrapolated_mach_relative_bias"]),
+            0.005,
+        )
+        self.assertGreater(metrics["extrapolated_valid_mach_fraction"], 0.6)
         self.assertLessEqual(
             metrics["plateau_post_pressure_change_median"],
             0.02,
@@ -120,6 +125,10 @@ class PlanarShockBenchmarkTests(unittest.TestCase):
         )
         self.assertLess(
             abs(metrics["ramp_exit_mach_relative_bias"]),
+            0.005,
+        )
+        self.assertLess(
+            abs(metrics["extrapolated_mach_relative_bias"]),
             0.005,
         )
 

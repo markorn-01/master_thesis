@@ -42,12 +42,14 @@ from astronomix._physics_modules._shock_finder.pfrommer_shock_finder import (  #
 )
 from astronomix._physics_modules._shock_finder._shock_zones import (  # noqa: E402
     get_adaptive_post_pre_shock_values,
+    get_extrapolated_post_pre_shock_values,
     get_plateau_aware_post_pre_shock_values,
     get_post_pre_sample_relative_changes,
     get_profile_aware_post_pre_shock_values,
     get_ramp_exit_aware_post_pre_shock_values,
 )
 from astronomix._physics_modules._shock_finder._shock_mach import (  # noqa: E402
+    _calculate_extrapolated_mach_at_surface,
     _calculate_mach_at_surface,
     _calculate_plateau_mach_at_surface,
     _calculate_ramp_exit_mach_at_surface,
@@ -110,14 +112,18 @@ def save_mach_surface_comparison(
     profile_mach: np.ndarray,
     plateau_mach: np.ndarray,
     ramp_exit_mach: np.ndarray,
+    extrapolated_mach: np.ndarray,
     resolution: int,
     output_path: Path,
 ) -> None:
-    """Save matched 3D surface views for all three Mach estimators."""
+    """Save matched 3D surface views for all Mach estimators."""
     current_valid = np.isfinite(current_mach) & (current_mach > 0.0)
     profile_valid = np.isfinite(profile_mach) & (profile_mach > 0.0)
     plateau_valid = np.isfinite(plateau_mach) & (plateau_mach > 0.0)
     ramp_exit_valid = np.isfinite(ramp_exit_mach) & (ramp_exit_mach > 0.0)
+    extrapolated_valid = (
+        np.isfinite(extrapolated_mach) & (extrapolated_mach > 0.0)
+    )
     if not np.any(current_valid) or not np.any(profile_valid):
         raise RuntimeError(
             "Current and profile-aware estimators need valid surface samples."
@@ -131,6 +137,7 @@ def save_mach_surface_comparison(
                 (profile_mach, profile_valid),
                 (plateau_mach, plateau_valid),
                 (ramp_exit_mach, ramp_exit_valid),
+                (extrapolated_mach, extrapolated_valid),
             )
             if np.any(valid)
         ]
@@ -139,16 +146,21 @@ def save_mach_surface_comparison(
     color_max = float(np.max(combined))
     marker_size = max(0.5, min(8.0, 12000.0 / len(surface_points)))
 
-    figure = plt.figure(figsize=(24, 5), constrained_layout=True)
+    figure = plt.figure(figsize=(30, 5), constrained_layout=True)
     panels = (
         (current_mach, current_valid, "Current estimator"),
         (profile_mach, profile_valid, "Profile-aware estimator"),
         (plateau_mach, plateau_valid, "Plateau-aware estimator"),
         (ramp_exit_mach, ramp_exit_valid, "Ramp-exit-aware estimator"),
+        (
+            extrapolated_mach,
+            extrapolated_valid,
+            "Shock-front-extrapolated estimator",
+        ),
     )
     scatter = None
     for panel_index, (mach, valid, title) in enumerate(panels, start=1):
-        axis = figure.add_subplot(1, 4, panel_index, projection="3d")
+        axis = figure.add_subplot(1, 5, panel_index, projection="3d")
         if not np.any(valid):
             axis.text2D(
                 0.5,
@@ -306,6 +318,15 @@ def run_one_resolution(
         config,
         registered_variables,
     )
+    extrapolated_mach_field = _calculate_extrapolated_mach_at_surface(
+        final_state,
+        result.shock_surface_cells,
+        result.shock_zones,
+        result.shock_direction,
+        result.shock_surface_offsets,
+        config,
+        registered_variables,
+    )
     elapsed_seconds = time.perf_counter() - start_time
 
     surface = np.asarray(result.shock_surface_cells, dtype=bool)
@@ -348,6 +369,11 @@ def run_one_resolution(
     valid_ramp_exit_surface_mach = ramp_exit_surface_mach[
         np.isfinite(ramp_exit_surface_mach) & (ramp_exit_surface_mach > 0.0)
     ]
+    extrapolated_surface_mach = np.asarray(extrapolated_mach_field)[surface]
+    valid_extrapolated_surface_mach = extrapolated_surface_mach[
+        np.isfinite(extrapolated_surface_mach)
+        & (extrapolated_surface_mach > 0.0)
+    ]
     resolution_dir = output_dir / f"n{resolution:03d}"
     resolution_dir.mkdir(parents=True, exist_ok=True)
     surface_points = refined_centers[surface]
@@ -357,6 +383,7 @@ def run_one_resolution(
         profile_surface_mach,
         plateau_surface_mach,
         ramp_exit_surface_mach,
+        extrapolated_surface_mach,
         resolution,
         resolution_dir / "mach_surface_comparison.png",
     )
@@ -521,6 +548,36 @@ def run_one_resolution(
     def ramp_exit_values(field):
         return np.asarray(field)[ramp_exit_sample_mask]
 
+    (
+        _,
+        _,
+        _,
+        _,
+        extrapolated_samples_valid,
+        extrapolated_post_distance,
+        extrapolated_pre_distance,
+        extrapolated_post_pressure_change,
+        extrapolated_pre_pressure_change,
+        extrapolated_post_density_change,
+        extrapolated_pre_density_change,
+    ) = get_extrapolated_post_pre_shock_values(
+        result.shock_direction,
+        result.shock_zones,
+        pressure,
+        density,
+        max_steps=8,
+        center_offsets=(
+            result.shock_direction
+            * result.shock_surface_offsets[jnp.newaxis, ...]
+        ),
+    )
+    extrapolated_sample_mask = surface & np.asarray(
+        extrapolated_samples_valid, dtype=bool
+    )
+
+    def extrapolated_values(field):
+        return np.asarray(field)[extrapolated_sample_mask]
+
     def finite_distribution_statistics(values):
         values = np.asarray(values)
         values = values[np.isfinite(values)]
@@ -550,6 +607,9 @@ def run_one_resolution(
     )
     ramp_exit_mach_statistics = finite_distribution_statistics(
         valid_ramp_exit_surface_mach
+    )
+    extrapolated_mach_statistics = finite_distribution_statistics(
+        valid_extrapolated_surface_mach
     )
 
     radius_p16, radius_median, radius_p84 = np.percentile(
@@ -688,6 +748,43 @@ def run_one_resolution(
         "ramp_exit_pre_density_change_median": float(
             finite_median(ramp_exit_values(ramp_exit_pre_density_change))
         ),
+        "extrapolated_valid_mach_fraction": float(
+            valid_extrapolated_surface_mach.size / surface_mach.size
+        ),
+        "extrapolated_mach_median": extrapolated_mach_statistics["median"],
+        "extrapolated_mach_p16": extrapolated_mach_statistics["p16"],
+        "extrapolated_mach_p84": extrapolated_mach_statistics["p84"],
+        "extrapolated_mach_coefficient_of_variation": (
+            extrapolated_mach_statistics["coefficient_of_variation"]
+        ),
+        "extrapolated_post_distance_cells_median": float(
+            finite_median(
+                extrapolated_values(extrapolated_post_distance)
+            )
+        ),
+        "extrapolated_pre_distance_cells_median": float(
+            finite_median(extrapolated_values(extrapolated_pre_distance))
+        ),
+        "extrapolated_post_pressure_change_median": float(
+            finite_median(
+                extrapolated_values(extrapolated_post_pressure_change)
+            )
+        ),
+        "extrapolated_pre_pressure_change_median": float(
+            finite_median(
+                extrapolated_values(extrapolated_pre_pressure_change)
+            )
+        ),
+        "extrapolated_post_density_change_median": float(
+            finite_median(
+                extrapolated_values(extrapolated_post_density_change)
+            )
+        ),
+        "extrapolated_pre_density_change_median": float(
+            finite_median(
+                extrapolated_values(extrapolated_pre_density_change)
+            )
+        ),
         "analytic_kinematic_mach": float(analytic_mach),
         "diagnostic_outside_offset": float(diagnostic_outside_offset),
         "diagnostic_valid_mach_fraction": float(
@@ -792,6 +889,9 @@ def write_summary(metrics: list[dict], output_dir: Path) -> None:
     ramp_exit_mach_median = np.array(
         [row["ramp_exit_mach_median"] for row in metrics]
     )
+    extrapolated_mach_median = np.array(
+        [row["extrapolated_mach_median"] for row in metrics]
+    )
     analytic_mach = np.array(
         [row["analytic_kinematic_mach"] for row in metrics]
     )
@@ -836,6 +936,12 @@ def write_summary(metrics: list[dict], output_dir: Path) -> None:
         ramp_exit_mach_median,
         "D-",
         label="ramp-exit-aware estimator",
+    )
+    axes[3].plot(
+        resolution,
+        extrapolated_mach_median,
+        "X-",
+        label="shock-front-extrapolated estimator",
     )
     axes[3].plot(
         resolution,
