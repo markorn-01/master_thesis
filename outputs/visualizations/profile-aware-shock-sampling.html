@@ -1,0 +1,134 @@
+<div id="profile-aware-shock-sampling">
+  <style>
+    #profile-aware-shock-sampling {
+      color: var(--foreground);
+      background: transparent;
+      font-family: inherit;
+      width: 100%;
+    }
+    #profile-aware-shock-sampling h2 {
+      margin: 0 0 10px;
+      font-weight: 500;
+    }
+    #profile-aware-shock-sampling .plot {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    #profile-aware-shock-sampling text {
+      fill: var(--foreground);
+      font-family: inherit;
+      font-size: 12px;
+    }
+    #profile-aware-shock-sampling .muted {
+      fill: var(--muted-foreground);
+    }
+    #profile-aware-shock-sampling .axis,
+    #profile-aware-shock-sampling .tick {
+      stroke: var(--border);
+      stroke-width: 1.5;
+    }
+    #profile-aware-shock-sampling .pressure {
+      fill: none;
+      stroke: var(--viz-series-1);
+      stroke-width: 4;
+    }
+    #profile-aware-shock-sampling .zone {
+      fill: var(--muted);
+      opacity: 0.8;
+    }
+    #profile-aware-shock-sampling .candidate {
+      fill: var(--background);
+      stroke: var(--viz-series-1);
+      stroke-width: 2;
+    }
+    #profile-aware-shock-sampling .current {
+      fill: var(--background);
+      stroke: var(--orange);
+      stroke-width: 3;
+    }
+    #profile-aware-shock-sampling .selected {
+      fill: var(--green);
+      stroke: var(--background);
+      stroke-width: 2;
+    }
+    #profile-aware-shock-sampling .guide {
+      stroke: var(--green);
+      stroke-width: 1.5;
+      stroke-dasharray: 5 4;
+    }
+    #profile-aware-shock-sampling .normal {
+      stroke: var(--purple);
+      stroke-width: 2.5;
+    }
+    #profile-aware-shock-sampling .legend-current {
+      fill: var(--background);
+      stroke: var(--orange);
+      stroke-width: 3;
+    }
+    #profile-aware-shock-sampling .legend-selected {
+      fill: var(--green);
+      stroke: var(--background);
+      stroke-width: 2;
+    }
+  </style>
+
+  <h2>Profile-aware sampling across a numerical shock</h2>
+  <svg class="plot" viewBox="0 0 900 470" role="img" aria-labelledby="pas-title pas-desc">
+    <title id="pas-title">Profile-aware shock sampling diagram</title>
+    <desc id="pas-desc">Pressure is high in the downstream gas, decreases through a broadened shock zone, and is low in the upstream gas. The original estimator samples close to the shock-zone exits. The profile-aware estimator evaluates several candidate points and selects the highest valid downstream pressure and lowest valid upstream pressure.</desc>
+
+    <defs>
+      <marker id="pas-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--purple)"></path>
+      </marker>
+    </defs>
+
+    <rect class="zone" x="390" y="72" width="150" height="288" rx="4"></rect>
+    <text x="465" y="96" text-anchor="middle">detected shock zone</text>
+
+    <line class="axis" x1="90" y1="360" x2="830" y2="360"></line>
+    <line class="axis" x1="90" y1="55" x2="90" y2="360"></line>
+    <text x="460" y="445" text-anchor="middle">distance along the local shock normal</text>
+    <text x="28" y="210" text-anchor="middle" transform="rotate(-90 28 210)">pressure</text>
+
+    <path class="pressure" d="M110 128 C190 125, 280 130, 360 140 C400 150, 425 178, 452 225 C480 275, 510 315, 560 327 C640 339, 735 337, 810 338"></path>
+
+    <text x="225" y="78" text-anchor="middle">downstream: hot, compressed gas</text>
+    <text x="690" y="78" text-anchor="middle">upstream: undisturbed gas</text>
+    <text x="225" y="105" text-anchor="middle" class="muted">choose the highest valid pressure</text>
+    <text x="690" y="105" text-anchor="middle" class="muted">choose the lowest valid pressure</text>
+
+    <circle class="candidate" cx="335" cy="137" r="6"></circle>
+    <circle class="candidate" cx="305" cy="132" r="6"></circle>
+    <circle class="candidate" cx="275" cy="129" r="6"></circle>
+    <circle class="candidate" cx="245" cy="127" r="6"></circle>
+    <circle class="candidate" cx="215" cy="126" r="6"></circle>
+
+    <circle class="candidate" cx="585" cy="332" r="6"></circle>
+    <circle class="candidate" cx="620" cy="336" r="6"></circle>
+    <circle class="candidate" cx="655" cy="338" r="6"></circle>
+    <circle class="candidate" cx="690" cy="338" r="6"></circle>
+    <circle class="candidate" cx="725" cy="337" r="6"></circle>
+
+    <circle class="current" cx="370" cy="144" r="8"></circle>
+    <circle class="current" cx="555" cy="329" r="8"></circle>
+
+    <line class="guide" x1="215" y1="126" x2="215" y2="360"></line>
+    <line class="guide" x1="690" y1="338" x2="690" y2="360"></line>
+    <circle class="selected" cx="215" cy="126" r="9"></circle>
+    <circle class="selected" cx="690" cy="338" r="9"></circle>
+    <text x="215" y="392" text-anchor="middle">selected P₂</text>
+    <text x="690" y="392" text-anchor="middle">selected P₁</text>
+
+    <line class="normal" x1="390" y1="40" x2="540" y2="40" marker-end="url(#pas-arrow)"></line>
+    <text x="465" y="27" text-anchor="middle">shock normal points toward upstream</text>
+
+    <circle class="legend-current" cx="122" cy="420" r="7"></circle>
+    <text x="138" y="424">original fixed-distance sample</text>
+    <circle class="candidate" cx="400" cy="420" r="6"></circle>
+    <text x="416" y="424">profile candidate</text>
+    <circle class="legend-selected" cx="575" cy="420" r="8"></circle>
+    <text x="592" y="424">selected profile-aware state</text>
+  </svg>
+</div>

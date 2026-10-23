@@ -47,28 +47,13 @@ from astronomix._modules._stellar_wind.stellar_wind_options import (
     WindParams,
 )
 from astronomix._modules._stellar_wind.weaver import Weaver
-from astronomix._physics_modules._shock_finder.pfrommer_shock_finder import (
-    find_shocks_pfrommer,
-)
 from astronomix._physics_modules._shock_finder.mhd_shock_finder import (
     find_fast_mhd_shocks,
 )
 from astronomix._physics_modules._shock_finder._gradients import (
     _calculate_velocity_divergence,
 )
-from astronomix._physics_modules._shock_finder._shock_mach import (
-    _calculate_extrapolated_mach_at_surface,
-    _calculate_mach_at_surface,
-    _calculate_plateau_mach_at_surface,
-)
-from astronomix._physics_modules._shock_finder._shock_zones import (
-    get_plateau_aware_post_pre_shock_values,
-    get_post_pre_sample_relative_changes,
-    get_profile_aware_post_pre_shock_values,
-)
-from astronomix._physics_modules._shock_finder._energy_dissipation import (
-    calculate_thermal_energy_flux,
-)
+from experiments.shock.analyze_state import analyze_shock_state
 from astronomix.option_classes.simulation_config import SnapshotSettings
 
 
@@ -592,189 +577,18 @@ def analyze_shocks_3d(
     registered_variables,
     helper_data,
 ):
-    """Run the full 3D Pfrommer finder once for every saved snapshot."""
+    """Analyze saved snapshots with the shared single-state analyzer."""
     shock_results = []
     print("\n=== Full 3D shock finding ===")
     for snapshot_index, state in enumerate(states):
-        result = find_shocks_pfrommer(
-            jnp.asarray(state),
-            config,
-            registered_variables,
-            helper_data,
+        result = analyze_shock_state(
+            state, config, registered_variables, helper_data,
+            center=np.full(3, BOX_SIZE / 2.0),
         )
-        profile_mach_numbers = _calculate_mach_at_surface(
-            jnp.asarray(state),
-            result.shock_surface_cells,
-            result.shock_zones,
-            result.shock_direction,
-            result.shock_surface_offsets,
-            config,
-            registered_variables,
-            profile_aware=True,
-        )
-        plateau_mach_numbers = _calculate_plateau_mach_at_surface(
-            jnp.asarray(state),
-            result.shock_surface_cells,
-            result.shock_zones,
-            result.shock_direction,
-            result.shock_surface_offsets,
-            config,
-            registered_variables,
-        )
-        extrapolated_mach_numbers = _calculate_extrapolated_mach_at_surface(
-            jnp.asarray(state),
-            result.shock_surface_cells,
-            result.shock_zones,
-            result.shock_direction,
-            result.shock_surface_offsets,
-            config,
-            registered_variables,
-        )
-        pressure = jnp.asarray(state)[registered_variables.pressure_index]
-        density = jnp.asarray(state)[registered_variables.density_index]
-        (
-            _,
-            _,
-            _,
-            _,
-            profile_sampling_valid,
-            profile_post_distance,
-            profile_pre_distance,
-        ) = get_profile_aware_post_pre_shock_values(
-            result.shock_direction,
-            result.shock_zones,
-            pressure,
-            density,
-            max_steps=8,
-            center_offsets=(
-                result.shock_direction
-                * result.shock_surface_offsets[jnp.newaxis, ...]
-            ),
-        )
-        (
-            profile_post_pressure_change,
-            profile_pre_pressure_change,
-            profile_post_density_change,
-            profile_pre_density_change,
-            profile_flatness_valid,
-        ) = get_post_pre_sample_relative_changes(
-            result.shock_direction,
-            pressure,
-            density,
-            profile_post_distance,
-            profile_pre_distance,
-            center_offsets=(
-                result.shock_direction
-                * result.shock_surface_offsets[jnp.newaxis, ...]
-            ),
-        )
-        profile_flatness_valid = profile_sampling_valid & profile_flatness_valid
-        (
-            _,
-            _,
-            _,
-            _,
-            plateau_sampling_valid,
-            plateau_post_distance,
-            plateau_pre_distance,
-            plateau_post_pressure_change,
-            plateau_pre_pressure_change,
-            plateau_post_density_change,
-            plateau_pre_density_change,
-        ) = get_plateau_aware_post_pre_shock_values(
-            result.shock_direction,
-            result.shock_zones,
-            pressure,
-            density,
-            max_steps=8,
-            center_offsets=(
-                result.shock_direction
-                * result.shock_surface_offsets[jnp.newaxis, ...]
-            ),
-        )
-        profile_thermal_energy_flux = calculate_thermal_energy_flux(
-            primitive_state=jnp.asarray(state),
-            shock_surface=result.shock_surface_cells,
-            shock_zones=result.shock_zones,
-            shock_direction=result.shock_direction,
-            surface_offsets=result.shock_surface_offsets,
-            mach_numbers=profile_mach_numbers,
-            config=config,
-            registered_variables=registered_variables,
-            profile_aware_sampling=True,
-        )
-        surface_mask = np.asarray(result.shock_surface_cells, dtype=bool)
-        surface_offsets = np.asarray(result.shock_surface_offsets)
-        shock_direction = np.moveaxis(np.asarray(result.shock_direction), 0, -1)
-        centers = np.asarray(helper_data.geometric_centers)
-        refined_centers = centers + (
-            float(config.grid_spacing)
-            * surface_offsets[..., np.newaxis]
-            * shock_direction
-        )
-        star_position = np.full(3, BOX_SIZE / 2.0)
-        refined_radii = np.linalg.norm(
-            refined_centers - star_position,
-            axis=-1,
-        )
-        shock_results.append(
-            {
-                "surface_mask": surface_mask,
-                "refined_centers": refined_centers,
-                "refined_radii": refined_radii,
-                "shock_direction": shock_direction,
-                "mach_numbers": np.asarray(result.mach_numbers),
-                "thermal_energy_flux": np.asarray(result.thermal_energy_flux),
-                "profile_aware_mach_numbers": np.asarray(
-                    profile_mach_numbers
-                ),
-                "plateau_aware_mach_numbers": np.asarray(
-                    plateau_mach_numbers
-                ),
-                "extrapolated_mach_numbers": np.asarray(
-                    extrapolated_mach_numbers
-                ),
-                "profile_sampling_valid": np.asarray(
-                    profile_flatness_valid, dtype=bool
-                ),
-                "profile_post_distance": np.asarray(profile_post_distance),
-                "profile_pre_distance": np.asarray(profile_pre_distance),
-                "profile_post_pressure_change": np.asarray(
-                    profile_post_pressure_change
-                ),
-                "profile_pre_pressure_change": np.asarray(
-                    profile_pre_pressure_change
-                ),
-                "profile_post_density_change": np.asarray(
-                    profile_post_density_change
-                ),
-                "profile_pre_density_change": np.asarray(
-                    profile_pre_density_change
-                ),
-                "plateau_sampling_valid": np.asarray(
-                    plateau_sampling_valid, dtype=bool
-                ),
-                "plateau_post_distance": np.asarray(plateau_post_distance),
-                "plateau_pre_distance": np.asarray(plateau_pre_distance),
-                "plateau_post_pressure_change": np.asarray(
-                    plateau_post_pressure_change
-                ),
-                "plateau_pre_pressure_change": np.asarray(
-                    plateau_pre_pressure_change
-                ),
-                "plateau_post_density_change": np.asarray(
-                    plateau_post_density_change
-                ),
-                "plateau_pre_density_change": np.asarray(
-                    plateau_pre_density_change
-                ),
-                "profile_aware_thermal_energy_flux": np.asarray(
-                    profile_thermal_energy_flux
-                ),
-            }
-        )
+        shock_results.append(result)
         print(
-            f"snapshot {snapshot_index:02d}: {surface_mask.sum()} shock-surface cells"
+            f"snapshot {snapshot_index:02d}: "
+            f"{result['surface_mask'].sum()} shock-surface cells"
         )
     return shock_results
 

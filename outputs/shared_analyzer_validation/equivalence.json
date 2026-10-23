@@ -1,0 +1,55 @@
+{
+  "baseline_commit": "c6cda81c189d7d8c2fb9e8349664741681272aae",
+  "python": "3.10.11 (v3.10.11:7d4cc5aa85, Apr  4 2023, 19:05:19) [Clang 13.0.0 (clang-1300.0.29.30)]",
+  "jax": "0.6.2",
+  "equinox": "0.12.2",
+  "backend": "cpu",
+  "comparison": "Exact equality of every returned array, baseline vs shared and offline wrapper",
+  "scope": "Small-state extraction regression; not production convergence or online validation",
+  "bubble": {
+    "num_cells": 32,
+    "t_end": 0.2,
+    "injection_radius": 0.0625
+  },
+  "cases": [
+    {
+      "case": "oblique_planar",
+      "checked_fields": 24,
+      "exact_match": true,
+      "surface_cells": 837,
+      "valid_profile_mach": 837,
+      "profile_mach_median": 4.999467849731445
+    },
+    {
+      "case": "uniform",
+      "checked_fields": 24,
+      "exact_match": true,
+      "surface_cells": 0,
+      "valid_profile_mach": 0,
+      "profile_mach_median": null
+    },
+    {
+      "case": "wind_bubble_32",
+      "checked_fields": 24,
+      "exact_match": true,
+      "surface_cells": 872,
+      "valid_profile_mach": 872,
+      "profile_mach_median": 4.768252372741699
+    }
+  ],
+  "local_regression_suite": {
+    "tests_run": 72,
+    "failures": 0,
+    "errors": 0,
+    "runtime_seconds": 72.509,
+    "modules": [
+      "tests.experiments.test_shared_shock_analyzer",
+      "tests.physics_modules.shock_finder.test_continuous_shock_sampling",
+      "tests.physics_modules.shock_finder.test_energy_dissipation",
+      "tests.physics_modules.shock_finder.test_planar_shock_benchmark",
+      "tests.physics_modules.shock_finder.test_shock_surface_3d",
+      "tests.experiments.test_wind_bubble_radial_tracking",
+      "tests.experiments.test_compare_forward_mach_resolutions"
+    ]
+  }
+}
