@@ -341,10 +341,10 @@ def main():
     parser.add_argument('--worker', action='store_true', help=argparse.SUPPRESS)
     parser.add_argument('--mode', choices=MODES, help=argparse.SUPPRESS)
     args = parser.parse_args()
-    if (args.num_cells < 16 or args.num_cells % 16 or args.num_cells > 64 or args.num_analysis < 3
+    if (args.num_cells < 16 or args.num_cells % 16 or args.num_cells > 128 or args.num_analysis < 3
             or args.repeats < 1 or not math.isfinite(args.t_end) or args.t_end <= 0
             or not math.isfinite(args.sample_interval) or args.sample_interval <= 0):
-        parser.error('Require grid multiple of 16 in [16,64], >=3 analysis times, >=1 repeat and finite positive times/interval.')
+        parser.error('Require grid multiple of 16 in [16,128], >=3 analysis times, >=1 repeat and finite positive times/interval.')
     if args.worker:
         if args.mode is None:
             parser.error('--worker requires --mode')

@@ -116,7 +116,7 @@ python -m experiments.wind_bubble.benchmark_online_analysis \
 ```
 
 Use a new output directory. This short CPU case tests the harness and artifact
-accounting, not production GPU performance. Grid size is limited to 64³ here
+accounting, not production GPU performance. Grid size is limited to 128³ here
 because the storage baseline deliberately retains full snapshot histories.
 Raw benchmark snapshots are ignored by Git; compact products and reports can
 be reviewed without committing duplicate dense state files.
@@ -131,6 +131,22 @@ python -m experiments.wind_bubble.benchmark_online_analysis \
   --num-cells 64 --num-analysis 20 --t-end 0.20 --repeats 3 \
   --require-gpu --output-dir outputs/online_benchmark_iwr_n064
 ```
+
+After validating the 64³ run, increase only the resolution to compare scaling:
+
+```bash
+python -m experiments.wind_bubble.benchmark_online_analysis \
+  --num-cells 128 --num-analysis 20 --t-end 0.20 --repeats 3 \
+  --require-gpu --output-dir outputs/online_benchmark_iwr_n128
+```
+
+The injection radius remains fixed at 0.0625 in domain units. With five
+float32 state variables and 20 events, raw physical snapshots at 128³ occupy
+approximately 0.84 GB per trial (2.52 GB for three retained trials). The
+warm-up also writes snapshots temporarily. Device and host working memory
+require additional space; check GPU availability and disk space before running.
+This is a benchmark resolution limit; the separate online runner's
+`--verify-offline` guard remains at 64³.
 
 The controller writes `summary.csv`, `benchmark.json`, and per-mode logs,
 metrics, sampled memory traces and measured trial products. Failures preserve
