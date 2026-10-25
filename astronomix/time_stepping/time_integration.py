@@ -19,6 +19,7 @@ from types import NoneType
 # jax
 import jax
 import jax.numpy as jnp
+import numpy as np
 from jax.sharding import PartitionSpec
 from jax.experimental import checkify
 
@@ -138,6 +139,16 @@ def time_integration(
             To avoid moving large amounts of data to the host, only pass
             the necessary data to the function in the jax.debug.callback call,
             e.g. only the slice or summary statistics you need.
+            The callback receives the padded state (including ghost cells).
+            Stored snapshots take precedence when return_snapshots is True.
+            In callback-only mode, regular scheduling uses num_snapshots
+            intervals plus a final callback at t_end. Explicit times must be
+            strictly increasing within [t_start, t_end]; the final state is
+            also emitted if t_end is not listed. Adaptive steps land on these
+            times. Fixed-step runs require targets on the fixed timestep grid.
+            These callback semantics apply to in-memory integration, not the
+            separate TO_DISK checkpoint driver. Schedule parameters must be
+            concrete at this public entry point for validation.
         sharding: The sharding to use for the padded helper data. If None,
                   no sharding is applied.
         restart_state: An optional :class:`LoopState` providing the PRNG key
@@ -153,6 +164,38 @@ def time_integration(
         integration of snapshots of the time evolution.
 
     """
+
+    # Validate callback-only schedules before entering a compiled loop. Keep
+    # the established stored-snapshot path and its precedence unchanged.
+    if (config.activate_snapshot_callback and not config.return_snapshots
+            and config.snapshot_storage_mode != TO_DISK):
+        if snapshot_callable is None:
+            raise ValueError("An active snapshot callback requires snapshot_callable.")
+        if config.num_snapshots <= 0:
+            raise ValueError("Callback scheduling requires num_snapshots > 0.")
+        start, end = float(params.t_start), float(params.t_end)
+        if not np.isfinite([start, end]).all() or end <= start:
+            raise ValueError("Callback scheduling requires finite t_start < t_end.")
+        if config.use_specific_snapshot_timepoints:
+            targets = np.asarray(params.snapshot_timepoints)
+            if (targets.ndim != 1 or targets.size == 0
+                    or not np.isfinite(targets).all()
+                    or np.any(np.diff(targets) <= 0)):
+                raise ValueError("Callback timepoints must be a finite, nonempty, strictly increasing vector.")
+            # Accommodate float32 representations of endpoint times.
+            tol = 8 * np.finfo(targets.dtype if np.issubdtype(targets.dtype, np.floating)
+                               else np.float64).eps * max(abs(start), abs(end), 1.0)
+            if targets[0] < start - tol or targets[-1] > end + tol:
+                raise ValueError("Callback timepoints must lie in [t_start, t_end].")
+        else:
+            targets = np.linspace(start, end, config.num_snapshots + 1)
+        if config.fixed_timestep:
+            if config.num_timesteps <= 0:
+                raise ValueError("Fixed callback runs require num_timesteps > 0.")
+            step = (end - start) / config.num_timesteps
+            steps = (targets - start) / step
+            if not np.allclose(steps, np.rint(steps), rtol=0, atol=1e-5):
+                raise ValueError("Callback times must align with fixed timesteps; use adaptive timestepping otherwise.")
 
     # Here we prepare everything for the actual time integration function,
     # _time_integration, which is jitted below. This includes setting up
@@ -535,16 +578,34 @@ def _integrate_core(
         else:
             dt = params.t_end / config.num_timesteps
 
-        # make sure we exactly hit the snapshot time points
-        if config.use_specific_snapshot_timepoints and (
-            config.return_snapshots or config.activate_snapshot_callback
-        ):
+        callback_only = config.activate_snapshot_callback and not config.return_snapshots
+        if callback_only:
+            if config.fixed_timestep:
+                # Fixed runs preserve their iteration count and step size;
+                # schedule validation ensures every event is on that grid.
+                dt = (params.t_end - params.t_start) / config.num_timesteps
+            else:
+                if config.use_specific_snapshot_timepoints:
+                    count = params.snapshot_timepoints.shape[0]
+                    next_time = jnp.where(
+                        snapshot_index < count,
+                        params.snapshot_timepoints[jnp.minimum(snapshot_index, count - 1)],
+                        params.t_end,
+                    )
+                else:
+                    next_time = params.t_start + snapshot_index * (
+                        params.t_end - params.t_start
+                    ) / config.num_snapshots
+                    next_time = jnp.minimum(next_time, params.t_end)
+                dt = jnp.minimum(dt, jnp.maximum(next_time - time, 0.0))
+        # Preserve the established stored-snapshot timepoint handling.
+        elif config.use_specific_snapshot_timepoints and config.return_snapshots:
             dt = jnp.minimum(
                 dt, params.snapshot_timepoints[snapshot_index] - time
             )
 
         # make sure we exactly hit the end time
-        if config.exact_end_time and not config.use_specific_snapshot_timepoints:
+        if callback_only or (config.exact_end_time and not config.use_specific_snapshot_timepoints):
             dt = jnp.minimum(dt, params.t_end - time)
 
         # modules that run every time step
@@ -611,9 +672,16 @@ def _integrate_core(
         return store
 
     def _should_record_callback(time, idx):
-        return time >= params.t_start + idx * (
+        if config.use_specific_snapshot_timepoints:
+            count = params.snapshot_timepoints.shape[0]
+            target = params.snapshot_timepoints[jnp.minimum(idx, count - 1)]
+            # Do not record a near-final target here: the final recorder
+            # emits the endpoint exactly once after integration finishes.
+            return (idx < count) & (target < params.t_end) & times_close(time, target)
+        target = params.t_start + idx * (
             params.t_end - params.t_start
         ) / config.num_snapshots
+        return (idx < config.num_snapshots) & times_close(time, target)
 
     # -------------------------------------------------------------
     # ================ ↑ step / record closures ↑ =================

@@ -1,0 +1,245 @@
+{
+  "purpose": "Behavior audit, not a passing regression-suite declaration",
+  "commit": "6bd0e4ed3af886f25c1561eabe92cc8d6ad10295",
+  "python": "3.10.11",
+  "jax": "0.6.2",
+  "device_backend": "cpu",
+  "regular_schedule_convention": "num_snapshots intervals plus a final callback; proposed exact-time contract",
+  "bounded_probe_note": "Fixed steps deliberately bound a possible zero-dt stall; no adaptive early-time probe is run",
+  "cases": [
+    {
+      "case": "regular_adaptive_large_step",
+      "backend": "adaptive_while",
+      "requested_times": [
+        0.0,
+        0.125,
+        0.25,
+        0.375,
+        0.5
+      ],
+      "observed_callbacks": [
+        {
+          "time": 0.0,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.5,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        }
+      ],
+      "callback_times_match": false,
+      "callback_final_at_t_end": true,
+      "callback_state_is_unpadded": false,
+      "final_state_shape": [
+        3,
+        16
+      ]
+    },
+    {
+      "case": "regular_adaptive_smaller_steps",
+      "backend": "adaptive_while",
+      "requested_times": [
+        0.0,
+        0.125,
+        0.25,
+        0.375,
+        0.5
+      ],
+      "observed_callbacks": [
+        {
+          "time": 0.0,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.19364917278289795,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.3872983455657959,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.5,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        }
+      ],
+      "callback_times_match": false,
+      "callback_final_at_t_end": true,
+      "callback_state_is_unpadded": false,
+      "final_state_shape": [
+        3,
+        16
+      ]
+    },
+    {
+      "case": "specific_late_adaptive",
+      "backend": "adaptive_while",
+      "requested_times": [
+        0.0,
+        0.2,
+        0.35,
+        0.5
+      ],
+      "observed_callbacks": [
+        {
+          "time": 0.0,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.20000000298023224,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.3499999940395355,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.5,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        }
+      ],
+      "callback_times_match": true,
+      "callback_final_at_t_end": true,
+      "callback_state_is_unpadded": false,
+      "final_state_shape": [
+        3,
+        16
+      ]
+    },
+    {
+      "case": "specific_early_bounded",
+      "backend": "fixed_step",
+      "requested_times": [
+        0.0,
+        0.05,
+        0.31,
+        0.5
+      ],
+      "observed_callbacks": [
+        {
+          "time": 0.0,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.05000000074505806,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        }
+      ],
+      "callback_times_match": false,
+      "callback_final_at_t_end": false,
+      "callback_state_is_unpadded": false,
+      "final_state_shape": [
+        3,
+        16
+      ]
+    },
+    {
+      "case": "stored_and_callback",
+      "backend": "adaptive_while",
+      "requested_times": [
+        0.0,
+        0.2,
+        0.35,
+        0.5
+      ],
+      "observed_callbacks": [],
+      "callback_times_match": false,
+      "callback_final_at_t_end": false,
+      "callback_state_is_unpadded": false,
+      "final_state_shape": [
+        3,
+        16
+      ],
+      "stored_times": [
+        0.0,
+        0.20000000298023224,
+        0.3499999940395355,
+        0.5
+      ]
+    },
+    {
+      "case": "regular_nonzero_start",
+      "backend": "adaptive_while",
+      "requested_times": [
+        0.2,
+        0.325,
+        0.44999999999999996,
+        0.575,
+        0.7
+      ],
+      "observed_callbacks": [
+        {
+          "time": 0.20000000298023224,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.699999988079071,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        }
+      ],
+      "callback_times_match": false,
+      "callback_final_at_t_end": true,
+      "callback_state_is_unpadded": false,
+      "final_state_shape": [
+        3,
+        16
+      ]
+    }
+  ]
+}

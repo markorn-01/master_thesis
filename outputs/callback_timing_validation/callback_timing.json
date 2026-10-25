@@ -1,0 +1,491 @@
+{
+  "purpose": "Behavior audit, not a passing regression-suite declaration",
+  "commit": "6bd0e4ed3af886f25c1561eabe92cc8d6ad10295",
+  "integrator_sha256": "4f31a18944a6b4aefc0333ac48498d13b5f5793d4dcf4406456072d00efd3c47",
+  "python": "3.10.11",
+  "jax": "0.6.2",
+  "device_backend": "cpu",
+  "regular_schedule_convention": "num_snapshots intervals plus a final callback; proposed exact-time contract",
+  "scope": "Post-correction timing checks; padding and stored-snapshot precedence are retained",
+  "cases": [
+    {
+      "case": "regular_adaptive_large_step",
+      "backend": "adaptive_while",
+      "requested_times": [
+        0.0,
+        0.125,
+        0.25,
+        0.375,
+        0.5
+      ],
+      "observed_callbacks": [
+        {
+          "time": 0.0,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.125,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.25,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.375,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.5,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        }
+      ],
+      "callback_times_match": true,
+      "callback_final_at_t_end": true,
+      "callback_state_is_unpadded": false,
+      "final_state_shape": [
+        3,
+        16
+      ]
+    },
+    {
+      "case": "regular_adaptive_smaller_steps",
+      "backend": "adaptive_while",
+      "requested_times": [
+        0.0,
+        0.125,
+        0.25,
+        0.375,
+        0.5
+      ],
+      "observed_callbacks": [
+        {
+          "time": 0.0,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.125,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.25,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.375,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.5,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        }
+      ],
+      "callback_times_match": true,
+      "callback_final_at_t_end": true,
+      "callback_state_is_unpadded": false,
+      "final_state_shape": [
+        3,
+        16
+      ]
+    },
+    {
+      "case": "specific_late_adaptive",
+      "backend": "adaptive_while",
+      "requested_times": [
+        0.0,
+        0.2,
+        0.35,
+        0.5
+      ],
+      "observed_callbacks": [
+        {
+          "time": 0.0,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.20000000298023224,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.3499999940395355,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.5,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        }
+      ],
+      "callback_times_match": true,
+      "callback_final_at_t_end": true,
+      "callback_state_is_unpadded": false,
+      "final_state_shape": [
+        3,
+        16
+      ]
+    },
+    {
+      "case": "specific_early_adaptive",
+      "backend": "adaptive_while",
+      "requested_times": [
+        0.0,
+        0.05,
+        0.31,
+        0.5
+      ],
+      "observed_callbacks": [
+        {
+          "time": 0.0,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.05000000074505806,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.3100000023841858,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.5,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        }
+      ],
+      "callback_times_match": true,
+      "callback_final_at_t_end": true,
+      "callback_state_is_unpadded": false,
+      "final_state_shape": [
+        3,
+        16
+      ]
+    },
+    {
+      "case": "specific_without_initial",
+      "backend": "adaptive_while",
+      "requested_times": [
+        0.1,
+        0.2,
+        0.35,
+        0.5
+      ],
+      "observed_callbacks": [
+        {
+          "time": 0.10000000149011612,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.20000000298023224,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.3499999940395355,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.5,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        }
+      ],
+      "callback_times_match": true,
+      "callback_final_at_t_end": true,
+      "callback_state_is_unpadded": false,
+      "final_state_shape": [
+        3,
+        16
+      ]
+    },
+    {
+      "case": "specific_without_final",
+      "backend": "adaptive_while",
+      "requested_times": [
+        0.0,
+        0.05,
+        0.31,
+        0.5
+      ],
+      "observed_callbacks": [
+        {
+          "time": 0.0,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.05000000074505806,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.3100000023841858,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.5,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        }
+      ],
+      "callback_times_match": true,
+      "callback_final_at_t_end": true,
+      "callback_state_is_unpadded": false,
+      "final_state_shape": [
+        3,
+        16
+      ]
+    },
+    {
+      "case": "regular_fixed_aligned",
+      "backend": "fixed_step",
+      "requested_times": [
+        0.0,
+        0.125,
+        0.25,
+        0.375,
+        0.5
+      ],
+      "observed_callbacks": [
+        {
+          "time": 0.0,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.125,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.2500000298023224,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.3750000596046448,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.5,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        }
+      ],
+      "callback_times_match": true,
+      "callback_final_at_t_end": true,
+      "callback_state_is_unpadded": false,
+      "final_state_shape": [
+        3,
+        16
+      ]
+    },
+    {
+      "case": "stored_and_callback",
+      "backend": "adaptive_while",
+      "requested_times": [
+        0.0,
+        0.2,
+        0.35,
+        0.5
+      ],
+      "observed_callbacks": [],
+      "callback_times_match": false,
+      "callback_final_at_t_end": false,
+      "callback_state_is_unpadded": false,
+      "final_state_shape": [
+        3,
+        16
+      ],
+      "stored_times": [
+        0.0,
+        0.20000000298023224,
+        0.3499999940395355,
+        0.5
+      ]
+    },
+    {
+      "case": "regular_nonzero_start",
+      "backend": "adaptive_while",
+      "requested_times": [
+        0.2,
+        0.325,
+        0.44999999999999996,
+        0.575,
+        0.7
+      ],
+      "observed_callbacks": [
+        {
+          "time": 0.20000000298023224,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.32499998807907104,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.44999998807907104,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.574999988079071,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        },
+        {
+          "time": 0.699999988079071,
+          "shape": [
+            3,
+            20
+          ],
+          "density_mean": 1.0
+        }
+      ],
+      "callback_times_match": true,
+      "callback_final_at_t_end": true,
+      "callback_state_is_unpadded": false,
+      "final_state_shape": [
+        3,
+        16
+      ]
+    }
+  ],
+  "local_tests": {
+    "focused_callback_tests": {
+      "passed": 14,
+      "runtime_seconds": 4.281
+    },
+    "existing_regression_tests": {
+      "passed": 72,
+      "runtime_seconds": 114.201
+    },
+    "remote_validation": "not yet run for callback correction"
+  }
+}
