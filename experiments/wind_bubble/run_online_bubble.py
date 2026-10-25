@@ -159,6 +159,23 @@ def verify_products(online, offline):
                 scalar_rtol=1e-6, scalar_atol=1e-8)
 
 
+def diagnostic_payload(physical, config, registry, helper):
+    """Shared fixed-shape primary fields for online and benchmark workflows."""
+    result, mach, flux, samples = analyze_shock_state_device(physical, config, registry, helper)
+    _, _, rho2, rho1, valid, _, _ = samples
+    return (result.shock_surface_cells, result.shock_surface_offsets,
+            result.shock_direction, mach, flux, rho2, rho1, valid)
+
+
+def make_online_callback(receive, online_config, analysis_config, helper):
+    """Build the callback without binding it to a particular output directory."""
+    def callback(time, padded, registry):
+        physical = _unpad(padded, online_config)
+        payload = diagnostic_payload(physical, analysis_config, registry, helper)
+        jax.debug.callback(receive, time, *payload, ordered=True)
+    return callback
+
+
 def run(args):
     if args.num_cells < 16 or args.num_cells % 16:
         raise ValueError('num-cells must be a multiple of 16, preserving injection radius 0.0625.')
@@ -206,13 +223,7 @@ def run(args):
     meta_path = args.output_dir/'metadata.json'
     meta_path.write_text(json.dumps(metadata, indent=2)+'\n')
 
-    def callback(time, padded, registry):
-        physical = _unpad(padded, online_config)
-        result, mach, flux, samples = analyze_shock_state_device(physical, analysis_config, registry, helper)
-        _, _, rho2, rho1, valid, _, _ = samples
-        jax.debug.callback(online.receive, time, result.shock_surface_cells,
-                           result.shock_surface_offsets, result.shock_direction, mach, flux,
-                           rho2, rho1, valid, ordered=True)
+    callback = make_online_callback(online.receive, online_config, analysis_config, helper)
 
     try:
         final = time_integration(state, online_config, params, variables, snapshot_callable=callback)

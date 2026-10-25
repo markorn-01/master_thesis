@@ -88,7 +88,7 @@ python -m experiments.wind_bubble.run_online_bubble --num-cells 32 --num-analysi
 ```
 
 The GPU must be checked and selected before this command using the existing IWR
-workflow. Local CPU agreement does not establish GPU agreement.
+workflow. GPU verification has now passed at both 32³ and 64³ on IWR, as recorded below.
 
 ## Tests and next milestone
 
@@ -101,6 +101,25 @@ separate area integration for two radial bands sharing projected coordinates.
 The shared analyzer is also checked against the original pre-refactor Git
 implementation. The simulation comparison above is the integration check.
 
-Next: validate the small run on GPU, then test a resolved 64³ single bubble.
-Measure runtime, peak memory and output size with and without analysis before
-making efficiency claims or generalizing to multiple bubbles.
+## Completed IWR validation
+
+Both 32³ and 64³ runs completed on the H100 selected as physical GPU 3 on
+compgpu11, using JAX 0.6.2 and commit
+`bbc48664b0aacfde9c1e798cffd3513a75713958`. Each used five analysis times
+through t=0.20 and fixed injection radius 0.0625. All 41 scalar fields matched
+exactly between online and offline runs, as did histogram counts. Final gas
+states agreed within rtol=1e-6 and atol=1e-8. The six compact-product and shared
+analyzer tests also passed remotely.
+
+Copied results are in `outputs/online_single_bubble_iwr_n032/` and
+`outputs/online_single_bubble_iwr_n064/`. Their histories, histogram arrays and
+recorded source hashes were verified after transfer. This establishes
+online/offline correctness for these experiments, not physical convergence.
+
+Next: measure runtime, peak memory and output size with and without analysis
+before making efficiency claims or generalizing to multiple bubbles.
+
+
+The controlled three-workflow benchmarking harness is now implemented; see
+`ONLINE_BENCHMARK.md`. Its small CPU engineering validation passed, while the
+64³ GPU performance measurements remain outstanding.

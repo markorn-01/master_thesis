@@ -1,0 +1,11 @@
+Automatically setting open boundaries for Cartesian geometry.
+For stellar wind simulations, we need source term aware timesteps, turning on.
+analysis t=0.00000: 0 surface cells; Mach median=nan
+analysis t=0.01000: 56 surface cells; Mach median=12.847
+analysis t=0.02000: 104 surface cells; Mach median=13.153
+analysis t=0.00000: 0 surface cells; Mach median=nan
+analysis t=0.01000: 56 surface cells; Mach median=12.847
+analysis t=0.02000: 104 surface cells; Mach median=13.153
+analysis t=0.00000: 0 surface cells; Mach median=nan
+analysis t=0.01000: 56 surface cells; Mach median=12.847
+analysis t=0.02000: 104 surface cells; Mach median=13.153

@@ -1,0 +1,2 @@
+Automatically setting open boundaries for Cartesian geometry.
+For stellar wind simulations, we need source term aware timesteps, turning on.

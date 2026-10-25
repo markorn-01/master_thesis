@@ -1,0 +1,46 @@
+{
+  "status": "complete",
+  "schema_version": 1,
+  "commit": "bbc48664b0aacfde9c1e798cffd3513a75713958",
+  "source_sha256": {
+    "experiments/wind_bubble/run_online_bubble.py": "0b3816930cfa0e3f37878c7a480770411d44eac7318483b310bd8c598e2e7d1f",
+    "experiments/shock/analyze_state.py": "6aa8dff9ab5bca380deb23f9d5c02a9d3cdc1b337e30c795aa2b400da8b2ff55"
+  },
+  "python": "3.12.3",
+  "jax": "0.6.2",
+  "backend": "gpu",
+  "num_cells": 64,
+  "injection_radius": 0.0625,
+  "t_end": 0.2,
+  "requested_times": [
+    0.0,
+    0.05000000074505806,
+    0.10000000149011612,
+    0.15000000596046448,
+    0.20000000298023224
+  ],
+  "mach_estimator": "profile-aware",
+  "density_jump": "rho2/rho1 from the same pressure-selected profile samples",
+  "units": "dimensionless baseline code units",
+  "gamma": 1.6666666666666667,
+  "ambient_density": 1.0,
+  "ambient_pressure": 0.01,
+  "wind_mass_loss_rate": 0.01,
+  "wind_terminal_velocity": 10.0,
+  "wind_luminosity": 0.5,
+  "num_injection_cells": 4,
+  "density_jump_validity": "finite positive samples; not a guarantee of physical compression",
+  "online_retains_gas_snapshots": false,
+  "verify_offline": true,
+  "transfer": "fixed-shape diagnostic grids; CPU compression, no dense fields saved",
+  "histogram_weighting": "surface-cell counts, outside injection region",
+  "area_method": "existing projected-patch deduplication separately per radial band",
+  "radial_labels": "single-bubble validation layer, not general shock identities",
+  "actual_times": [
+    0.0,
+    0.05000000074505806,
+    0.10000000149011612,
+    0.15000000596046448,
+    0.20000000298023224
+  ]
+}

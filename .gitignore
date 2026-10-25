@@ -23,3 +23,6 @@ experiments/fuzzycat/Clusters/
 # Local/HPC runtime artifacts
 outputs/**/checkpoints/
 slurm-*.out
+
+# Raw snapshots written only by the online/offline benchmark storage baseline
+outputs/**/trial_*/snapshots/*.npy
