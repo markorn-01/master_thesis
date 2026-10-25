@@ -1,0 +1,35 @@
+{
+  "status": "complete",
+  "schema_version": 1,
+  "commit": "ae4e9282bd1ea61adfd39e2facecb23a8a7d3c75",
+  "python": "3.10.11",
+  "jax": "0.6.2",
+  "backend": "cpu",
+  "num_cells": 32,
+  "injection_radius": 0.0625,
+  "t_end": 0.2,
+  "requested_times": [
+    0.0,
+    0.05000000074505806,
+    0.10000000149011612,
+    0.15000000596046448,
+    0.20000000298023224
+  ],
+  "mach_estimator": "profile-aware",
+  "density_jump": "rho2/rho1 from the same pressure-selected profile samples",
+  "units": "dimensionless baseline code units",
+  "gamma": 1.6666666666666667,
+  "online_retains_gas_snapshots": false,
+  "verify_offline": true,
+  "transfer": "fixed-shape diagnostic grids; CPU compression, no dense fields saved",
+  "histogram_weighting": "surface-cell counts, outside injection region",
+  "area_method": "existing projected-patch deduplication separately per radial band",
+  "radial_labels": "single-bubble validation layer, not general shock identities",
+  "actual_times": [
+    0.0,
+    0.05000000074505806,
+    0.10000000149011612,
+    0.15000000596046448,
+    0.20000000298023224
+  ]
+}

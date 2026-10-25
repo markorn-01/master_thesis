@@ -13,11 +13,12 @@ The extraction preserves both estimator families explicitly:
   profile-aware estimator, with consistent upstream sampling;
 - plateau, extrapolation and sampling-quality fields: retained for compatibility.
 
-This first extraction still constructs dense arrays and evaluates diagnostic
-alternatives. It is a host-side API, **not yet a JAX-traceable online callback**.
+The host adapter still constructs dense arrays and evaluates diagnostic
+alternatives. `analyze_shock_state_device` exposes the shared JAX-only core
+for online callbacks; CPU conversion and reduction occur separately.
 No changes are made to detection, sampling, thermalization, solver timing,
-tracking, or output cadence. Streaming, sparse export and runtime optimization
-are later work.
+tracking, or output cadence. The online single-bubble runner now streams compact histories and histograms.
+Sparse export and transfer/runtime optimization remain later work.
 
 ## Reproducible extraction check
 

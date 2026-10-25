@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "compared_events": 5,
+  "fields_per_event": 41,
+  "max_absolute_scalar_difference": 3.8743019104003906e-07,
+  "histogram_counts_exact": true,
+  "scalar_rtol": 1e-06,
+  "scalar_atol": 1e-08,
+  "final_gas_state_matches": true,
+  "local_regression_suite": {
+    "passed": 89,
+    "runtime_seconds": 123.189
+  },
+  "gpu_validation": "outstanding"
+}

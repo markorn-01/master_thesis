@@ -1,8 +1,8 @@
 """Single-state hydrodynamic shock analysis shared by experiment runners.
 
 Accepts an unpadded 3D state and returns the established offline diagnostic
-fields as NumPy arrays. This host-side adapter is not a JIT callback: a future
-online integration must separate device computations from host conversion.
+fields as NumPy arrays. The device helper can run during integration; the host
+adapter retains the established offline NumPy outputs.
 Alternative estimators are retained here for exact offline compatibility.
 """
 from __future__ import annotations
@@ -25,19 +25,14 @@ from astronomix._physics_modules._shock_finder._shock_zones import (
 from astronomix._physics_modules._shock_finder._energy_dissipation import calculate_thermal_energy_flux
 
 
-def analyze_shock_state(state, config, registered_variables, helper_data, *, center=None):
-    """Analyze one unpadded Cartesian hydrodynamic state.
+def analyze_shock_state_device(state, config, registered_variables, helper_data):
+    """JAX-only shared computations; safe to call inside a solver callback.
 
-    ``center`` defines only the radial diagnostic origin; it does not affect
-    shock detection. By default it is the center of the configured box.
-    ``mach_numbers`` preserves the original estimator; the primary improved
-    estimate is explicitly named ``profile_aware_mach_numbers``.
+    Returns the baseline finder result, profile-aware Mach and flux, and the
+    full profile samples (P2, P1, rho2, rho1, valid, distances). No host transfer
+    or data-dependent array packing occurs here. Diagnostic alternatives remain
+    in the host adapter below for backwards compatibility.
     """
-    if config.mhd or config.dimensionality != 3 or config.geometry != CARTESIAN:
-        raise ValueError("Single-state analysis requires Cartesian 3D hydrodynamics.")
-    expected_shape = tuple(helper_data.geometric_centers.shape[:-1])
-    if tuple(state.shape[1:]) != expected_shape:
-        raise ValueError("State must be unpadded and match the helper-data grid.")
     result = find_shocks_pfrommer(
         jnp.asarray(state),
         config,
@@ -53,6 +48,49 @@ def analyze_shock_state(state, config, registered_variables, helper_data, *, cen
         config,
         registered_variables,
         profile_aware=True,
+    )
+    profile_thermal_energy_flux = calculate_thermal_energy_flux(
+        primitive_state=jnp.asarray(state),
+        shock_surface=result.shock_surface_cells,
+        shock_zones=result.shock_zones,
+        shock_direction=result.shock_direction,
+        surface_offsets=result.shock_surface_offsets,
+        mach_numbers=profile_mach_numbers,
+        config=config,
+        registered_variables=registered_variables,
+        profile_aware_sampling=True,
+    )
+    pressure = jnp.asarray(state)[registered_variables.pressure_index]
+    density = jnp.asarray(state)[registered_variables.density_index]
+    profile_samples = get_profile_aware_post_pre_shock_values(
+        result.shock_direction,
+        result.shock_zones,
+        pressure,
+        density,
+        max_steps=8,
+        center_offsets=(
+            result.shock_direction
+            * result.shock_surface_offsets[jnp.newaxis, ...]
+        ),
+    )
+    return result, profile_mach_numbers, profile_thermal_energy_flux, profile_samples
+
+
+def analyze_shock_state(state, config, registered_variables, helper_data, *, center=None):
+    """Analyze one unpadded Cartesian hydrodynamic state.
+
+    ``center`` defines only the radial diagnostic origin; it does not affect
+    shock detection. By default it is the center of the configured box.
+    ``mach_numbers`` preserves the original estimator; the primary improved
+    estimate is explicitly named ``profile_aware_mach_numbers``.
+    """
+    if config.mhd or config.dimensionality != 3 or config.geometry != CARTESIAN:
+        raise ValueError("Single-state analysis requires Cartesian 3D hydrodynamics.")
+    expected_shape = tuple(helper_data.geometric_centers.shape[:-1])
+    if tuple(state.shape[1:]) != expected_shape:
+        raise ValueError("State must be unpadded and match the helper-data grid.")
+    result, profile_mach_numbers, profile_thermal_energy_flux, profile_samples = (
+        analyze_shock_state_device(state, config, registered_variables, helper_data)
     )
     plateau_mach_numbers = _calculate_plateau_mach_at_surface(
         jnp.asarray(state),
@@ -82,17 +120,7 @@ def analyze_shock_state(state, config, registered_variables, helper_data, *, cen
         profile_sampling_valid,
         profile_post_distance,
         profile_pre_distance,
-    ) = get_profile_aware_post_pre_shock_values(
-        result.shock_direction,
-        result.shock_zones,
-        pressure,
-        density,
-        max_steps=8,
-        center_offsets=(
-            result.shock_direction
-            * result.shock_surface_offsets[jnp.newaxis, ...]
-        ),
-    )
+    ) = profile_samples
     (
         profile_post_pressure_change,
         profile_pre_pressure_change,
@@ -133,17 +161,6 @@ def analyze_shock_state(state, config, registered_variables, helper_data, *, cen
             result.shock_direction
             * result.shock_surface_offsets[jnp.newaxis, ...]
         ),
-    )
-    profile_thermal_energy_flux = calculate_thermal_energy_flux(
-        primitive_state=jnp.asarray(state),
-        shock_surface=result.shock_surface_cells,
-        shock_zones=result.shock_zones,
-        shock_direction=result.shock_direction,
-        surface_offsets=result.shock_surface_offsets,
-        mach_numbers=profile_mach_numbers,
-        config=config,
-        registered_variables=registered_variables,
-        profile_aware_sampling=True,
     )
     surface_mask = np.asarray(result.shock_surface_cells, dtype=bool)
     surface_offsets = np.asarray(result.shock_surface_offsets)
