@@ -57,7 +57,8 @@ def planned_memory(executable):
 def source_info():
     paths = ['experiments/wind_bubble/benchmark_online_analysis.py',
              'experiments/wind_bubble/run_online_bubble.py',
-             'experiments/shock/analyze_state.py', 'astronomix/time_stepping/time_integration.py']
+             'experiments/shock/analyze_state.py', 'experiments/wind_bubble/sparse_surfaces.py',
+             'astronomix/time_stepping/time_integration.py']
     try:
         commit = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
     except (OSError, subprocess.CalledProcessError):

@@ -14,7 +14,9 @@ an ordered CPU callback. That callback reduces them immediately and writes:
   and the event time;
 - `metadata.json`: physical setup, requested/actual times, source revision and
   source hashes, estimator, units, and run status;
-- `online_histories.png`: basic scalar-history visualization.
+- `online_histories.png`: basic scalar-history visualization;
+- optionally, `online/surfaces_XXXX.npz` with `--save-surfaces`: detected
+  point positions, normals, primary properties and validity flags outside injection.
 
 The online run does not allocate or retain the full gas snapshot series. It
 returns a final gas state. The host reducer retains only static grid geometry
@@ -26,8 +28,13 @@ The callback currently transfers **fixed-shape diagnostic grids**, including
 masks, normals, offsets, Mach, flux and sampled densities. These are compressed
 on the CPU; no dense diagnostic fields or gas snapshots are written to disk.
 Device-to-host transfer still scales with grid volume. No peak-memory saving,
-runtime overhead or performance improvement has been measured. Optional sparse
-surface catalogs and device-side packing are future work.
+runtime overhead or performance improvement is established by this initial
+demonstration. Subsequent compact-only benchmarks are documented in
+`outputs/online_benchmark_iwr_comparison/README.md`. Optional CPU-written sparse
+catalogs and a standalone 3D plotter are now implemented; see
+[SPARSE_SURFACES.md](SPARSE_SURFACES.md) for their schema and validation workflow.
+Device-side packing remains future work. No dense grids are saved, even when
+the sparse-output option is enabled.
 
 The improved profile-aware Mach and matching thermalization flux are the
 primary online fields. Plateau and extrapolation alternatives are omitted from

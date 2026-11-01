@@ -1,9 +1,13 @@
 """Accounting and surface-integration checks for compact online products."""
 import unittest
+import tempfile
+from pathlib import Path
 
 import numpy as np
 
-from experiments.wind_bubble.run_online_bubble import distribution, summarize
+from experiments.wind_bubble.run_online_bubble import (
+    distribution, summarize, DiagnosticWriter, verify_products, MACH_EDGES, DENSITY_EDGES,
+)
 
 
 class OnlineBubbleTests(unittest.TestCase):
@@ -53,6 +57,64 @@ class OnlineBubbleTests(unittest.TestCase):
         self.assertTrue(np.isnan(row['total_tracked_dissipation_rate']))
         self.assertTrue(np.isnan(row['mach_median']))
         self.assertEqual(mh.sum()+rh.sum(), 0)
+
+    def test_sparse_output_preserves_history_and_reproduces_histograms(self):
+        centers, mask, normals = self.make_fields()
+        shape = mask.shape
+        mach = np.full(shape, 5.)
+        mach[9, 6, 7] = np.nan  # Keep this geometric sample in the catalog.
+        payload = (.2, mask, np.zeros(shape), normals, mach, np.full(shape, 2.),
+                   np.full(shape, .8), np.ones(shape), np.ones(shape, bool))
+        with tempfile.TemporaryDirectory() as directory:
+            writers = [DiagnosticWriter(Path(directory)/name, centers, 1/16, .0625,
+                                         save_surfaces=enabled)
+                       for name, enabled in [('plain', False), ('sparse', True)]]
+            try:
+                for writer in writers:
+                    writer.receive(*payload)
+                for key in writers[0].rows[0]:
+                    np.testing.assert_equal(writers[0].rows[0][key], writers[1].rows[0][key])
+                self.assertFalse((writers[0].directory/'surfaces_0000.npz').exists())
+                with np.load(writers[1].directory/'surfaces_0000.npz') as catalog:
+                    self.assertEqual(len(catalog['positions']), writers[1].rows[0]['surface_cells_outside_injection'])
+                    self.assertEqual(int((~catalog['mach_valid']).sum()), 1)
+                    self.assertTrue(np.all(catalog['density_jump'] < 1))
+                    with np.load(writers[1].directory/'histograms_0000.npz') as hist:
+                        for field, valid_key, edges, count_key in [
+                                ('mach', 'mach_valid', MACH_EDGES, 'mach_counts'),
+                                ('density_jump', 'density_jump_valid', DENSITY_EDGES, 'density_jump_counts')]:
+                            reconstructed, _ = np.histogram(catalog[field][catalog[valid_key]], bins=edges)
+                            np.testing.assert_array_equal(reconstructed, hist[count_key])
+                for writer in writers:
+                    with np.load(writer.directory/'histograms_0000.npz') as hist:
+                        np.testing.assert_array_equal(hist['mach_counts'].sum(), 15)
+            finally:
+                for writer in writers:
+                    writer.close()
+
+    def test_equivalence_checks_sparse_properties_not_only_summaries(self):
+        centers, mask, normals = self.make_fields()
+        shape = mask.shape
+        payload = (.2, mask, np.zeros(shape), normals, np.full(shape, 5.),
+                   np.full(shape, 2.), np.full(shape, 4.), np.ones(shape), np.ones(shape, bool))
+        with tempfile.TemporaryDirectory() as directory:
+            writers = [DiagnosticWriter(Path(directory)/name, centers, 1/16, .0625,
+                                         save_surfaces=True) for name in ['online', 'offline']]
+            try:
+                for writer in writers:
+                    writer.receive(*payload)
+                result = verify_products(*writers)
+                self.assertTrue(result['sparse_surfaces_match'])
+                target = writers[1].directory/'surfaces_0000.npz'
+                with np.load(target) as archive:
+                    modified = {key: archive[key] for key in archive.files}
+                modified['positions'][0, 0] += .1
+                np.savez_compressed(target, **modified)
+                with self.assertRaises(AssertionError):
+                    verify_products(*writers)
+            finally:
+                for writer in writers:
+                    writer.close()
 
 
 if __name__ == '__main__':
