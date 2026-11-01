@@ -1,0 +1,6 @@
+time,event_index,reverse_dissipation_rate,reverse_integration_interval_valid,reverse_cumulative_dissipated_energy,reverse_first_power_detection_time,reverse_integrated_duration,forward_dissipation_rate,forward_integration_interval_valid,forward_cumulative_dissipated_energy,forward_first_power_detection_time,forward_integrated_duration,combined_cumulative_dissipated_energy
+0.0,0,nan,False,nan,nan,0.0,nan,False,nan,nan,0.0,nan
+0.05000000074505806,1,nan,False,nan,nan,0.0,0.06479805640031946,False,0.0,0.05000000074505806,0.0,0.0
+0.10000000149011612,2,nan,False,nan,nan,0.0,0.04999036699122324,True,0.0028697106275505876,0.05000000074505806,0.05000000074505806,0.0028697106275505876
+0.15000000596046448,3,nan,False,nan,nan,0.0,0.043571010244418375,True,0.0052087452675676025,0.05000000074505806,0.10000000521540642,0.0052087452675676025
+0.20000000298023224,4,nan,False,nan,nan,0.0,0.04044445078483133,True,0.007309131668106052,0.05000000074505806,0.15000000223517418,0.007309131668106052

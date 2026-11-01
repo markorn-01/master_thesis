@@ -115,6 +115,13 @@ tests and 19 existing offline tracking/energy tests passed locally. A 32³,
 five-event CPU comparison also passed, including the offline batch energy
 reference. Evidence is in
 [`outputs/online_temporal_cpu_validation_n032/README.md`](../../outputs/online_temporal_cpu_validation_n032/README.md).
-GPU validation remains outstanding. CPU and GPU evidence should be recorded
-separately before updating thesis claims. Revisit Sections 5.4, 5.5 and 5.7
-after accepting the implementation.
+The corresponding 32³, five-event GPU validation passed on compgpu3, physical
+GPU 0, with JAX 0.6.2 at revision `34642eb`. All 43 focused/regression tests
+passed remotely. After transfer, histories, 10 track rows, five energy rows,
+histograms and sparse arrays matched exactly between the execution paths.
+Energy recomputed from the saved history also matched. Evidence and limits are in
+[`outputs/online_temporal_iwr_compgpu3_n032/README.md`](../../outputs/online_temporal_iwr_compgpu3_n032/README.md).
+This real case detects only the forward candidate; reverse/two-band behavior
+is covered by synthetic tests. CPU and GPU evidence remain separate and do
+not establish general physical convergence. Sections 5.4, 5.5 and 5.7 can now
+describe these validated capabilities with that scope.

@@ -149,3 +149,17 @@ readback. Final gas-state agreement was checked remotely within rtol=1e-6 and
 atol=1e-8; full gas arrays were not saved for local rechecking. Evidence is in
 `outputs/online_sparse_iwr_compgpu1_n032/`. The optional catalog writes are not
 included in the earlier compact-only performance results.
+
+## Temporal-output GPU validation
+
+The optional `--track-shocks --integrate-energy` path passed the 32³, five-event
+comparison on compgpu3, physical GPU 0, using JAX 0.6.2 at revision `34642eb`.
+All 43 focused/regression tests passed. Copied histories, tracking and energy
+rows, histograms and catalog arrays matched exactly between online and offline
+execution. Energy also matched the original batch integrator and a local
+recalculation from saved powers. Final gas-state agreement was checked remotely
+within the established tolerances. See `ONLINE_TEMPORAL.md` and
+`outputs/online_temporal_iwr_compgpu3_n032/README.md` for evidence and limits.
+The simulation detected only the forward candidate; the reverse candidate
+remains unmeasured, not a zero-energy surface. These options do not extend the
+radial method to general interacting-shock identities.

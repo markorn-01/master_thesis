@@ -1,0 +1,47 @@
+{
+  "passed": true,
+  "source_hashes_match": {
+    "experiments/wind_bubble/run_online_bubble.py": true,
+    "experiments/shock/analyze_state.py": true,
+    "experiments/wind_bubble/sparse_surfaces.py": true,
+    "experiments/wind_bubble/online_temporal.py": true,
+    "experiments/wind_bubble/run_single_bubble.py": true
+  },
+  "online_offline_csv_values_exact": {
+    "history": true,
+    "tracks": true,
+    "energy": true
+  },
+  "catalog_arrays_exact": true,
+  "histogram_arrays_exact": true,
+  "histograms_reconstructed_from_catalogs_exact": true,
+  "energy_recomputed_from_history_matches": true,
+  "compared_events": 5,
+  "track_rows": 10,
+  "surface_samples": [
+    0,
+    200,
+    392,
+    560,
+    872
+  ],
+  "forward_statuses": [
+    "not_yet_detected",
+    "initialized",
+    "continued",
+    "continued",
+    "continued"
+  ],
+  "reverse_statuses": [
+    "not_yet_detected",
+    "not_yet_detected",
+    "not_yet_detected",
+    "not_yet_detected",
+    "not_yet_detected"
+  ],
+  "final_forward_cumulative_energy": 0.007309131668106052,
+  "forward_first_power_time": 0.05000000074505806,
+  "forward_integrated_duration": 0.15000000223517418,
+  "remote_final_gas_state_matches": true,
+  "final_state_rechecked_locally": false
+}
