@@ -121,7 +121,20 @@ passed remotely. After transfer, histories, 10 track rows, five energy rows,
 histograms and sparse arrays matched exactly between the execution paths.
 Energy recomputed from the saved history also matched. Evidence and limits are in
 [`outputs/online_temporal_iwr_compgpu3_n032/README.md`](../../outputs/online_temporal_iwr_compgpu3_n032/README.md).
-This real case detects only the forward candidate; reverse/two-band behavior
-is covered by synthetic tests. CPU and GPU evidence remain separate and do
-not establish general physical convergence. Sections 5.4, 5.5 and 5.7 can now
-describe these validated capabilities with that scope.
+This 32³ case detects only the forward candidate. Subsequent 64³ GPU runs
+with five and 21 events also passed online/offline comparisons and independent
+local checks of histories, tracking, energy, histograms and sparse arrays.
+The reverse candidate first appears at t approximately 0.15 with five events
+and 0.12 with 21 events; the latter supplies nine consecutive detections with
+passing continuity flags and inward normals. This exercises both radial
+populations in a simulated wind bubble, alongside the synthetic tests.
+
+Evidence, a reproducible comparison figure and interpretation limits are in
+[`outputs/online_temporal_iwr_n064_comparison/README.md`](../../outputs/online_temporal_iwr_n064_comparison/README.md).
+The energy curves start at different first finite power times. Moreover,
+changing the event schedule changes solver step boundaries and the runner's
+maximum timestep. This comparison therefore does not isolate quadrature
+error or establish cadence/spatial convergence. Candidate identification
+does not independently validate resolved thermodynamic sampling or accurate
+radial velocities. CPU and GPU evidence remain separate. Sections 5.4, 5.5
+and 5.7 can describe these validated capabilities with that scope.

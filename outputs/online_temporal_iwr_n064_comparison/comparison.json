@@ -1,0 +1,18 @@
+{
+  "5 events": {
+    "first_detection_time": 0.15000000596046448,
+    "detected_events": 2,
+    "final_radius": 0.09979690280351655,
+    "final_cumulative_energy": 0.0011597191421048117,
+    "energy_from_015_to_020": 0.0011597191421048117,
+    "integrated_duration": 0.04999999701976776
+  },
+  "21 events": {
+    "first_detection_time": 0.12000000476837158,
+    "detected_events": 9,
+    "final_radius": 0.09979685977619283,
+    "final_cumulative_energy": 0.0013297692390437602,
+    "energy_from_015_to_020": 0.0011567101136598372,
+    "integrated_duration": 0.07999999821186066
+  }
+}
