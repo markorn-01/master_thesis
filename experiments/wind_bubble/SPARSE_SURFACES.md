@@ -99,6 +99,14 @@ The tests cover refined positions, injection exclusion, invalid-property
 retention, empty catalogs, agreement with histograms, unchanged compact products
 when enabling exports, and detection of mismatched sparse properties.
 
+The first IWR GPU validation passed on compgpu1, physical GPU 0, with JAX 0.6.2
+at revision `49734c9`. All 15 focused tests passed. The 32³, five-event run
+passed online/offline comparison and the final catalog plotted all 872 samples.
+After transfer, catalog arrays, histories and histograms were independently
+rechecked locally and matched exactly. See
+[`outputs/online_sparse_iwr_compgpu1_n032/README.md`](../../outputs/online_sparse_iwr_compgpu1_n032/README.md)
+for evidence, source-hash checks and the scope of the final-state check.
+
 After reviewing a real bubble catalog and its online/offline comparison, the
 next separate steps are continuity-based temporal tracking and cumulative
 energy integration. They can consume the online results directly and need not

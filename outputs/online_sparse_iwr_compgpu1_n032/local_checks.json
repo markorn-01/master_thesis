@@ -1,0 +1,66 @@
+{
+  "passed": true,
+  "recorded_source_hashes_match": {
+    "experiments/wind_bubble/run_online_bubble.py": true,
+    "experiments/shock/analyze_state.py": true,
+    "experiments/wind_bubble/sparse_surfaces.py": true
+  },
+  "history_rows_exact": true,
+  "histogram_arrays_exact": true,
+  "histograms_reconstructed_from_catalogs_exact": true,
+  "catalog_arrays_exact": true,
+  "max_absolute_catalog_differences": {
+    "positions": 0.0,
+    "normals": 0.0,
+    "radii": 0.0,
+    "mach": 0.0,
+    "thermalization_flux": 0.0,
+    "rho_upstream": 0.0,
+    "rho_downstream": 0.0,
+    "density_jump": 0.0,
+    "time": 0.0,
+    "grid_spacing": 0.0,
+    "injection_radius": 0.0,
+    "domain_center": 0.0
+  },
+  "remote_final_gas_state_matches": true,
+  "final_state_rechecked_locally": false,
+  "events": [
+    {
+      "event": 0,
+      "time": 0.0,
+      "surface_samples": 0,
+      "invalid_mach": 0,
+      "online_catalog_bytes": 4514
+    },
+    {
+      "event": 1,
+      "time": 0.05000000074505806,
+      "surface_samples": 200,
+      "invalid_mach": 0,
+      "online_catalog_bytes": 8075
+    },
+    {
+      "event": 2,
+      "time": 0.10000000149011612,
+      "surface_samples": 392,
+      "invalid_mach": 0,
+      "online_catalog_bytes": 11576
+    },
+    {
+      "event": 3,
+      "time": 0.15000000596046448,
+      "surface_samples": 560,
+      "invalid_mach": 0,
+      "online_catalog_bytes": 14978
+    },
+    {
+      "event": 4,
+      "time": 0.20000000298023224,
+      "surface_samples": 872,
+      "invalid_mach": 0,
+      "online_catalog_bytes": 21035
+    }
+  ],
+  "online_catalog_total_bytes": 60178
+}

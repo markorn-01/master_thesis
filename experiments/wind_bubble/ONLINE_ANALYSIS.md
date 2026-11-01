@@ -127,6 +127,17 @@ Next: measure runtime, peak memory and output size with and without analysis
 before making efficiency claims or generalizing to multiple bubbles.
 
 
-The controlled three-workflow benchmarking harness is now implemented; see
-`ONLINE_BENCHMARK.md`. Its small CPU engineering validation passed, while the
-64³ GPU performance measurements remain outstanding.
+The controlled three-workflow benchmarking harness is implemented; see
+`ONLINE_BENCHMARK.md`. Completed compact-only GPU measurements at 64³ and 128³
+are documented in `outputs/online_benchmark_iwr_comparison/README.md`.
+
+## Sparse-output GPU validation
+
+The optional `--save-surfaces` path passed the 32³, five-event comparison on
+compgpu1, physical GPU 0, with JAX 0.6.2 at revision `49734c9`. All 15 focused
+tests passed, and the standalone plotter displayed all 872 final surface samples.
+Copied histories, histograms and sparse catalog arrays matched exactly on local
+readback. Final gas-state agreement was checked remotely within rtol=1e-6 and
+atol=1e-8; full gas arrays were not saved for local rechecking. Evidence is in
+`outputs/online_sparse_iwr_compgpu1_n032/`. The optional catalog writes are not
+included in the earlier compact-only performance results.
