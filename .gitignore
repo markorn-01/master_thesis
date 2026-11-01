@@ -17,6 +17,10 @@ env/
 *.env
 .vscode/
 .idea/
+
+# Local presentation builds and temporary chart workbooks
+/.codex-build/
+/.chart-data-*/
 # FuzzyCat generated cluster files
 experiments/fuzzycat/Clusters/
 

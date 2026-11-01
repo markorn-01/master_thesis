@@ -1,0 +1,19 @@
+{
+  "provenance": "Transcribed from user-pasted remote verification output; original remote reports not yet imported.",
+  "64": {
+    "passed": true,
+    "compared_trials": 3,
+    "histogram_counts_exact": true,
+    "scalar_rtol": 1e-06,
+    "scalar_atol": 1e-08,
+    "all_final_state_hashes_exact": true
+  },
+  "128": {
+    "passed": true,
+    "compared_trials": 3,
+    "histogram_counts_exact": true,
+    "scalar_rtol": 1e-06,
+    "scalar_atol": 1e-08,
+    "all_final_state_hashes_exact": true
+  }
+}

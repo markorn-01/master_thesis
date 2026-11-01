@@ -1,0 +1,34 @@
+[
+  {
+    "event": 1,
+    "identical_input": true,
+    "field": "rho_downstream",
+    "max_absolute_difference": 7.450580596923828e-07,
+    "max_relative_difference": 1.5119327372303815e-06,
+    "strict_mismatches": 1
+  },
+  {
+    "event": 2,
+    "identical_input": true,
+    "field": "rho_downstream",
+    "max_absolute_difference": 2.6226043701171875e-06,
+    "max_relative_difference": 3.5223004033468897e-06,
+    "strict_mismatches": 15
+  },
+  {
+    "event": 3,
+    "identical_input": true,
+    "field": "rho_downstream",
+    "max_absolute_difference": 1.3709068298339844e-06,
+    "max_relative_difference": 2.5845354230114026e-06,
+    "strict_mismatches": 13
+  },
+  {
+    "event": 4,
+    "identical_input": true,
+    "field": "rho_downstream",
+    "max_absolute_difference": 1.5497207641601562e-06,
+    "max_relative_difference": 1.732968144096958e-06,
+    "strict_mismatches": 14
+  }
+]

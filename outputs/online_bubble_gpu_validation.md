@@ -28,5 +28,7 @@ only compact histories and histograms are written to disk.
 These checks establish online/offline agreement, not physical convergence or
 performance improvement. Sampled density contrasts can be below one at low
 resolution, and positive finite samples alone do not establish a resolved
-compressive density jump. Runtime overhead and peak-memory usage remain to be
-measured with controlled baselines.
+compressive density jump. Subsequent controlled 64³ and 128³ benchmark
+measurements are documented separately in
+[`online_benchmark_iwr_comparison/README.md`](online_benchmark_iwr_comparison/README.md),
+with explicit timing definitions and memory qualifications.
