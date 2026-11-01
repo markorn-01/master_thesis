@@ -1,0 +1,75 @@
+{
+  "passed": true,
+  "reference_directory": "outputs/online_temporal_iwr_compgpu3_n064_cadence21/online",
+  "rtol": 1e-06,
+  "atol": 1e-08,
+  "events": [
+    {
+      "event_index": 12,
+      "samples": 2336,
+      "fields": {
+        "radius": {
+          "max_absolute_difference": 1.9274905227462114e-08,
+          "exact": false
+        },
+        "mach": {
+          "max_absolute_difference": 0.0,
+          "exact": true
+        },
+        "rho1": {
+          "max_absolute_difference": 0.0,
+          "exact": true
+        },
+        "rho2": {
+          "max_absolute_difference": 0.0,
+          "exact": true
+        }
+      }
+    },
+    {
+      "event_index": 15,
+      "samples": 3416,
+      "fields": {
+        "radius": {
+          "max_absolute_difference": 1.4267017900415624e-08,
+          "exact": false
+        },
+        "mach": {
+          "max_absolute_difference": 0.0,
+          "exact": true
+        },
+        "rho1": {
+          "max_absolute_difference": 0.0,
+          "exact": true
+        },
+        "rho2": {
+          "max_absolute_difference": 0.0,
+          "exact": true
+        }
+      }
+    },
+    {
+      "event_index": 20,
+      "samples": 5128,
+      "fields": {
+        "radius": {
+          "max_absolute_difference": 4.160606481562468e-08,
+          "exact": false
+        },
+        "mach": {
+          "max_absolute_difference": 0.0,
+          "exact": true
+        },
+        "rho1": {
+          "max_absolute_difference": 0.0,
+          "exact": true
+        },
+        "rho2": {
+          "max_absolute_difference": 0.0,
+          "exact": true
+        }
+      }
+    }
+  ],
+  "full_gas_states_compared": false
+}

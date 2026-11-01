@@ -70,3 +70,16 @@ pressure-Mach RH prediction at the first two times. This motivates checking
 source proximity and resolution before interpreting early reverse-shock power.
 Repeat on the GPU before attributing these findings to the preserved GPU run.
 Two focused geometry tests and independent NumPy readback checks passed.
+
+## GPU confirmation
+
+The corresponding 64³ GPU inspection on compgpu3, physical GPU 0, also
+completed. Imported source hashes, times and sample counts passed independent
+readback checks. It confirms 48/48 upstream endpoints inside injection at
+t=0.12, with no inside-source endpoints at t=0.15 or 0.20. Median fractional
+density-jump residuals relative to the pressure-Mach RH prediction are +49.8%,
++36.0% and -2.8%, respectively. These are diagnostic discrepancies, not errors
+relative to known exact states. Avoid treating early reverse-candidate power
+or cumulative energy as quantitatively validated solely by online/offline agreement.
+See [`outputs/reverse_profiles_iwr_compgpu3_n064/README.md`](../../outputs/reverse_profiles_iwr_compgpu3_n064/README.md)
+for the figure, checks and interpretation limits. No physics or filtering was changed.

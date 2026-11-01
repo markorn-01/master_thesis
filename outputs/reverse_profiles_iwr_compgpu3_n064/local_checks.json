@@ -1,0 +1,78 @@
+{
+  "passed": true,
+  "backend": "gpu",
+  "source_hashes_match": {
+    "experiments/wind_bubble/check_reverse_profiles.py": true,
+    "experiments/shock/analyze_state.py": true,
+    "experiments/wind_bubble/run_single_bubble.py": true
+  },
+  "requested_times_equal_actual": true,
+  "saved_sample_counts_recomputed": true,
+  "pressure_mach_relation_matches_by_construction": true,
+  "events": [
+    {
+      "time": 0.12000000476837158,
+      "reverse_samples": 48,
+      "valid_samples": 48,
+      "compressive_density_samples": 48,
+      "pressure_increase_samples": 48,
+      "upstream_inside_injection": 48,
+      "downstream_inside_injection": 0,
+      "median_density_jump": 2.3265891210796896,
+      "median_rh_density_jump_from_pressure_mach": 1.5532275252502763,
+      "density_rh_fractional_residual_p16_median_p84": [
+        0.4979057837492995,
+        0.49790618776528006,
+        0.4979067397938439
+      ],
+      "upstream_radius_min_median_max": [
+        0.059492822736501694,
+        0.05949283018708229,
+        0.05949283391237259
+      ]
+    },
+    {
+      "time": 0.15000000596046448,
+      "reverse_samples": 336,
+      "valid_samples": 336,
+      "compressive_density_samples": 336,
+      "pressure_increase_samples": 336,
+      "upstream_inside_injection": 0,
+      "downstream_inside_injection": 0,
+      "median_density_jump": 2.5780593536643677,
+      "median_rh_density_jump_from_pressure_mach": 1.8390109221039257,
+      "density_rh_fractional_residual_p16_median_p84": [
+        0.18738085299459661,
+        0.3603693728247179,
+        0.42505118187398283
+      ],
+      "upstream_radius_min_median_max": [
+        0.06406427174806595,
+        0.06929632276296616,
+        0.0741414800286293
+      ]
+    },
+    {
+      "time": 0.20000000298023224,
+      "reverse_samples": 608,
+      "valid_samples": 608,
+      "compressive_density_samples": 608,
+      "pressure_increase_samples": 608,
+      "upstream_inside_injection": 0,
+      "downstream_inside_injection": 0,
+      "median_density_jump": 2.0024161168243895,
+      "median_rh_density_jump_from_pressure_mach": 2.076565427797335,
+      "density_rh_fractional_residual_p16_median_p84": [
+        -0.09383237470062995,
+        -0.02822837247035831,
+        0.060104088506578265
+      ],
+      "upstream_radius_min_median_max": [
+        0.06935353577136993,
+        0.07700145244598389,
+        0.0844040960073471
+      ]
+    }
+  ],
+  "full_states_rechecked": false
+}
