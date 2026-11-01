@@ -1,8 +1,9 @@
 """Geometry checks for the inspection output, independent of a solver run."""
 import unittest
+from unittest.mock import patch
 from types import SimpleNamespace
 import numpy as np
-from experiments.wind_bubble.check_reverse_profiles import extract
+from experiments.wind_bubble.check_reverse_profiles import extract, plot
 
 
 class ReverseProfileGeometryTests(unittest.TestCase):
@@ -40,6 +41,15 @@ class ReverseProfileGeometryTests(unittest.TestCase):
         self.assertEqual(surface,[])
         self.assertEqual(len(profile),2)
         self.assertTrue(all(np.isfinite(r['density']) for r in profile))
+
+    def test_plot_uses_requested_resolution_in_title(self):
+        import matplotlib.pyplot as plt
+        profile, surface = extract(*self.setup_case(False))
+        with patch('matplotlib.figure.Figure.savefig'), patch.object(plt, 'close') as close:
+            plot([(t, profile, surface) for t in (.12, .15, .20)], 'unused.png', num_cells=128)
+            figure = close.call_args.args[0]
+            self.assertIn('128^3', figure._suptitle.get_text())
+        plt.close(figure)
 
 
 if __name__=='__main__': unittest.main()

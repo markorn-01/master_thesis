@@ -73,7 +73,7 @@ def extract(state, analysis, registry, helper, config):
     return profile, surface
 
 
-def plot(events, path):
+def plot(events, path, *, num_cells=64):
     fig,axes=plt.subplots(4,3,figsize=(13,11),sharex=True)
     for col,(time,profile,surface) in enumerate(events):
         radius=np.array([r['radius'] for r in profile])
@@ -109,7 +109,7 @@ def plot(events, path):
     handles2,labels2=axes[3,0].get_legend_handles_labels()
     unique=dict(zip(labels+labels2,handles+handles2))
     fig.legend(unique.values(),unique.keys(),loc='upper center',bbox_to_anchor=(.5,.965),ncol=4,frameon=False)
-    fig.suptitle(r'Reverse-candidate inspection: $64^3$, 21-event schedule',fontsize=15)
+    fig.suptitle(rf'Reverse-candidate inspection: ${num_cells}^3$, 21-event schedule',fontsize=15)
     fig.text(.5,.015,'Sample markers show one actual valid surface sample per time; curves are spherical shell medians.\nRadial flow Mach is measured in the simulation frame and differs from reconstructed shock Mach.',ha='center',fontsize=10)
     fig.tight_layout(rect=(0,.06,1,.90))
     fig.savefig(path,dpi=180)
@@ -154,7 +154,7 @@ def main():
             downstream_inside_injection=sum(r['downstream_inside_injection'] for r in valid))
         summary.append(row);events.append((time,profile,surface))
         print(row,flush=True)
-    plot(events,args.output_dir/'reverse_profiles.png')
+    plot(events,args.output_dir/'reverse_profiles.png',num_cells=args.num_cells)
     write_csv(args.output_dir/'sample_checks.csv',summary)
     metadata.update(status='complete',actual_times=np.asarray(snapshots.time_points).tolist(),
                     full_gas_snapshots_saved=False,interpretation='Inspection only; no shock physics or estimator changed.')

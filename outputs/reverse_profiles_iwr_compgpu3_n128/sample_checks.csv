@@ -1,0 +1,4 @@
+time,reverse_samples,valid_samples,compressive_density_samples,pressure_increase_samples,upstream_inside_injection,downstream_inside_injection
+0.12000000476837158,1664,1664,1664,1664,0,0
+0.15000000596046448,2072,2072,2072,2072,0,0
+0.20000000298023224,2624,2624,2624,2624,0,0

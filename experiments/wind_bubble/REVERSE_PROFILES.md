@@ -83,3 +83,16 @@ relative to known exact states. Avoid treating early reverse-candidate power
 or cumulative energy as quantitatively validated solely by online/offline agreement.
 See [`outputs/reverse_profiles_iwr_compgpu3_n064/README.md`](../../outputs/reverse_profiles_iwr_compgpu3_n064/README.md)
 for the figure, checks and interpretation limits. No physics or filtering was changed.
+
+## 128³ comparison
+
+The 128³ GPU inspection also passed independent readback checks. All endpoints
+are outside injection at the three inspected times. Median density-RH residuals
+are -5.82%, -7.55% and -8.66%; the early discrepancy improves relative to 64³,
+but the late absolute median discrepancy does not. This is not a convergence
+claim. See the [comparison figure and interpretation](../../outputs/reverse_profiles_iwr_resolution_comparison/README.md)
+and [128³ evidence](../../outputs/reverse_profiles_iwr_compgpu3_n128/README.md).
+
+The plot title now uses the supplied resolution. The originally imported 128³
+image had a 64³ title and is preserved alongside a corrected CSV-based replot.
+Only plotting changed. Three focused geometry/title tests passed locally.

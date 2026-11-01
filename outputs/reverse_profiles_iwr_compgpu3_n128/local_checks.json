@@ -1,0 +1,83 @@
+{
+  "passed": true,
+  "backend": "gpu",
+  "current_source_hashes_match": {
+    "experiments/wind_bubble/check_reverse_profiles.py": false,
+    "experiments/shock/analyze_state.py": true,
+    "experiments/wind_bubble/run_single_bubble.py": true
+  },
+  "recorded_revision_source_hashes_match": {
+    "experiments/wind_bubble/check_reverse_profiles.py": true,
+    "experiments/shock/analyze_state.py": true,
+    "experiments/wind_bubble/run_single_bubble.py": true
+  },
+  "requested_times_equal_actual": true,
+  "saved_sample_counts_recomputed": true,
+  "pressure_mach_relation_matches_by_construction": true,
+  "events": [
+    {
+      "time": 0.12000000476837158,
+      "reverse_samples": 1664,
+      "valid_samples": 1664,
+      "compressive_density_samples": 1664,
+      "pressure_increase_samples": 1664,
+      "upstream_inside_injection": 0,
+      "downstream_inside_injection": 0,
+      "median_density_jump": 1.9636529286596944,
+      "median_rh_density_jump_from_pressure_mach": 2.0779979104925257,
+      "density_rh_fractional_residual_p16_median_p84": [
+        -0.08541428693616,
+        -0.058201362716793825,
+        -0.033355957515145335
+      ],
+      "upstream_radius_min_median_max": [
+        0.07026711851358414,
+        0.07316837459802628,
+        0.07615254074335098
+      ]
+    },
+    {
+      "time": 0.15000000596046448,
+      "reverse_samples": 2072,
+      "valid_samples": 2072,
+      "compressive_density_samples": 2072,
+      "pressure_increase_samples": 2072,
+      "upstream_inside_injection": 0,
+      "downstream_inside_injection": 0,
+      "median_density_jump": 2.1796017792392934,
+      "median_rh_density_jump_from_pressure_mach": 2.359122033803708,
+      "density_rh_fractional_residual_p16_median_p84": [
+        -0.09923092159874698,
+        -0.07547886480192906,
+        -0.04117980418662797
+      ],
+      "upstream_radius_min_median_max": [
+        0.07854078710079193,
+        0.08230135589838028,
+        0.08554142713546753
+      ]
+    },
+    {
+      "time": 0.20000000298023224,
+      "reverse_samples": 2624,
+      "valid_samples": 2624,
+      "compressive_density_samples": 2624,
+      "pressure_increase_samples": 2624,
+      "upstream_inside_injection": 0,
+      "downstream_inside_injection": 0,
+      "median_density_jump": 2.429692696584869,
+      "median_rh_density_jump_from_pressure_mach": 2.655355203733255,
+      "density_rh_fractional_residual_p16_median_p84": [
+        -0.10750466620477253,
+        -0.08657732226312786,
+        -0.05819054707239939
+      ],
+      "upstream_radius_min_median_max": [
+        0.08926896750926971,
+        0.0947333350777626,
+        0.0997108593583107
+      ]
+    }
+  ],
+  "full_states_rechecked": false
+}
