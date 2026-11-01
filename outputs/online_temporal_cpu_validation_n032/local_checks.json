@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "source_hashes_match": {
+    "experiments/wind_bubble/run_online_bubble.py": true,
+    "experiments/shock/analyze_state.py": true,
+    "experiments/wind_bubble/sparse_surfaces.py": true,
+    "experiments/wind_bubble/online_temporal.py": true,
+    "experiments/wind_bubble/run_single_bubble.py": true
+  },
+  "online_offline_csv_text_exact": {
+    "history": true,
+    "tracks": true,
+    "energy": true
+  },
+  "primary_products_match_previous_sparse_run_exactly": true,
+  "track_rows": 10,
+  "energy_events": 5,
+  "forward_statuses": [
+    "not_yet_detected",
+    "initialized",
+    "continued",
+    "continued",
+    "continued"
+  ],
+  "reverse_statuses": [
+    "not_yet_detected",
+    "not_yet_detected",
+    "not_yet_detected",
+    "not_yet_detected",
+    "not_yet_detected"
+  ],
+  "final_forward_cumulative_energy": 0.007315374872956007,
+  "final_reverse_cumulative_energy": null,
+  "first_forward_power_time": 0.05000000074505806,
+  "forward_integrated_duration": 0.15000000223517418
+}

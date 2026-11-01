@@ -17,6 +17,11 @@ an ordered CPU callback. That callback reduces them immediately and writes:
 - `online_histories.png`: basic scalar-history visualization;
 - optionally, `online/surfaces_XXXX.npz` with `--save-surfaces`: detected
   point positions, normals, primary properties and validity flags outside injection.
+- optionally, `online/tracks.csv` with `--track-shocks`: single-bubble candidate
+  motion, continuity statuses and quality checks;
+- optionally, `online/energy.csv` with `--integrate-energy`: finite-interval
+  cumulative thermalization and time-coverage flags. See
+  [ONLINE_TEMPORAL.md](ONLINE_TEMPORAL.md) for the implementation and validation scope.
 
 The online run does not allocate or retain the full gas snapshot series. It
 returns a final gas state. The host reducer retains only static grid geometry
@@ -52,8 +57,10 @@ Forward/reverse labels are a radial validation layer, using the existing split
 rule. Surface-area deduplication is performed separately per band. Totals sum
 available measured bands, and do not imply complete shock coverage. These labels
 and deduplication rules must not be applied globally to many interacting bubbles
-without a separate instance definition. No temporal identity tracking or
-cumulative energy integration is added here.
+without a separate instance definition. Optional single-bubble temporal
+diagnostics now extend these radial candidates using the established offline
+continuity and energy rules; see `ONLINE_TEMPORAL.md`. They do not provide
+general identity matching for interacting shocks.
 
 Density contrast is the **sampled** `rho2/rho1` at the pressure-selected positions,
 not the theoretical Rankine-Hugoniot density ratio inferred from Mach. A valid
@@ -123,8 +130,9 @@ Copied results are in `outputs/online_single_bubble_iwr_n032/` and
 recorded source hashes were verified after transfer. This establishes
 online/offline correctness for these experiments, not physical convergence.
 
-Next: measure runtime, peak memory and output size with and without analysis
-before making efficiency claims or generalizing to multiple bubbles.
+These correctness checks do not establish efficiency or generalize the radial
+classification to multiple bubbles. Compact-only cost measurements are
+documented separately below; additional optional-product costs remain unmeasured.
 
 
 The controlled three-workflow benchmarking harness is implemented; see

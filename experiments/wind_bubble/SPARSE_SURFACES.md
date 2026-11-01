@@ -111,6 +111,8 @@ After reviewing a real bubble catalog and its online/offline comparison, the
 next separate steps are continuity-based temporal tracking and cumulative
 energy integration. They can consume the online results directly and need not
 read these catalogs back from disk. Neither capability is added by this change.
+These subsequent optional temporal products are now implemented separately;
+see [ONLINE_TEMPORAL.md](ONLINE_TEMPORAL.md) for their current validation status.
 
 Thesis sections to revisit after validation: 5.4 output schema and storage scope,
 5.5 new sparse-equivalence checks, and 5.7 point-cloud visualization. Keep the

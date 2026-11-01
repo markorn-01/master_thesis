@@ -116,6 +116,49 @@ class OnlineBubbleTests(unittest.TestCase):
                 for writer in writers:
                     writer.close()
 
+    def test_temporal_products_preserve_primary_diagnostics_and_are_verified(self):
+        centers, mask, normals = self.make_fields()
+        shape = mask.shape
+        fields = (mask, np.zeros(shape), normals, np.full(shape, 5.),
+                  np.full(shape, 2.), np.full(shape, 4.), np.ones(shape), np.ones(shape, bool))
+        with tempfile.TemporaryDirectory() as directory:
+            writers = [DiagnosticWriter(Path(directory)/name, centers, 1/16, .0625,
+                                         track_shocks=enabled, integrate_energy=enabled)
+                       for name, enabled in [('plain', False), ('online', True), ('offline', True)]]
+            try:
+                for writer in writers:
+                    for time in (.1, .3):
+                        writer.receive(time, *fields)
+                for a, b in zip(writers[0].rows, writers[1].rows):
+                    self.assertEqual(len(a), 41)
+                    for key in a:
+                        np.testing.assert_equal(a[key], b[key])
+                for i in range(2):
+                    with np.load(writers[0].directory/f'histograms_{i:04d}.npz') as a, np.load(writers[1].directory/f'histograms_{i:04d}.npz') as b:
+                        for key in a.files:
+                            np.testing.assert_array_equal(a[key], b[key])
+                self.assertFalse((writers[0].directory/'tracks.csv').exists())
+                self.assertFalse((writers[0].directory/'energy.csv').exists())
+                online, offline = writers[1:]
+                self.assertTrue((online.directory/'tracks.csv').exists())
+                self.assertTrue((online.directory/'energy.csv').exists())
+                self.assertEqual(len(online.temporal.track_rows), 4)
+                self.assertAlmostEqual(online.temporal.energy_rows[-1]['combined_cumulative_dissipated_energy'], .025)
+                verified = verify_products(online, offline)
+                self.assertTrue(verified['tracking_matches'])
+                self.assertTrue(verified['energy_matches'])
+                self.assertTrue(verified['offline_batch_energy_matches'])
+                offline.temporal.track_rows[-1]['track_status'] = 'discontinuous'
+                with self.assertRaises(AssertionError):
+                    verify_products(online, offline)
+                offline.temporal.track_rows[-1]['track_status'] = online.temporal.track_rows[-1]['track_status']
+                offline.temporal.energy_rows[-1]['combined_cumulative_dissipated_energy'] += 1.
+                with self.assertRaises(AssertionError):
+                    verify_products(online, offline)
+            finally:
+                for writer in writers:
+                    writer.close()
+
 
 if __name__ == '__main__':
     unittest.main()

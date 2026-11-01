@@ -28,9 +28,13 @@ from astronomix.time_stepping._utils import _unpad
 from experiments.shock.analyze_state import analyze_shock_state, analyze_shock_state_device
 from experiments.wind_bubble.run_single_bubble import (
     build_problem, split_radial_shock_candidates, _surface_dissipation_statistics,
+    _cumulative_trapezoid_over_detections,
 )
 from experiments.wind_bubble.sparse_surfaces import (
     SCHEMA_VERSION, surface_sample_arrays, sparse_surface_catalog,
+)
+from experiments.wind_bubble.online_temporal import (
+    TemporalDiagnostics, compare_records, plot_temporal_histories,
 )
 
 MACH_EDGES = np.linspace(0., 30., 61)
@@ -51,7 +55,7 @@ def distribution(values, edges):
 
 
 def summarize(time, mask, offsets, direction, mach, flux, rho2, rho1, sampling_valid,
-              centers, grid_spacing, injection_radius):
+              centers, grid_spacing, injection_radius, *, return_samples=False):
     """CPU-only reduction; safe inside a host callback (no JAX dispatch)."""
     mask = np.asarray(mask, dtype=bool)
     samples = surface_sample_arrays(mask, offsets, direction, mach, flux, rho2, rho1,
@@ -82,24 +86,30 @@ def summarize(time, mask, offsets, direction, mach, flux, rho2, rho1, sampling_v
     for key in ('surface_area', 'dissipation_rate'):
         values = np.asarray([row[f'{name}_{key}'] for name in bands])
         row[f'total_tracked_{key}'] = float(np.nansum(values)) if np.isfinite(values).any() else np.nan
+    if return_samples:
+        return row, mach_hist, rho_hist, samples
     return row, mach_hist, rho_hist
 
 
 class DiagnosticWriter:
     """Stream CSV and per-event histograms; retain only scalar rows in memory."""
-    def __init__(self, directory, centers, grid_spacing, injection_radius, *, save_surfaces=False):
+    def __init__(self, directory, centers, grid_spacing, injection_radius, *, save_surfaces=False,
+                 track_shocks=False, integrate_energy=False):
         self.directory = Path(directory)
         self.directory.mkdir(parents=True, exist_ok=False)
         self.centers = np.asarray(centers)
         self.grid_spacing = grid_spacing
         self.injection_radius = injection_radius
         self.save_surfaces = save_surfaces
+        self.temporal = TemporalDiagnostics(self.directory, grid_spacing, injection_radius,
+                                            track_shocks=track_shocks, integrate_energy=integrate_energy)
         self.rows = []
         self.stream = (self.directory/'history.csv').open('x', newline='')
         self.writer = None
 
     def receive(self, *payload):
-        row, mach, rho = summarize(*payload, self.centers, self.grid_spacing, self.injection_radius)
+        row, mach, rho, samples = summarize(*payload, self.centers, self.grid_spacing,
+                                            self.injection_radius, return_samples=True)
         if self.rows and row['time'] <= self.rows[-1]['time']:
             raise ValueError('Analysis times must advance strictly; duplicate callback detected.')
         if self.writer is None:
@@ -115,12 +125,14 @@ class DiagnosticWriter:
             catalog = sparse_surface_catalog(*payload, self.centers, self.grid_spacing,
                                              self.injection_radius)
             np.savez_compressed(self.directory/f'surfaces_{index:04d}.npz', **catalog)
+        self.temporal.receive(row['time'], samples, row)
         self.rows.append(row)
         print(f"analysis t={row['time']:.5f}: {row['surface_cells_outside_injection']} surface cells; "
               f"Mach median={row['mach_median']:.5g}", flush=True)
 
     def close(self):
         self.stream.close()
+        self.temporal.close()
 
 
 def plot_histories(rows, path):
@@ -143,6 +155,9 @@ def verify_products(online, offline):
         raise AssertionError('Online/offline analysis counts differ.')
     if online.save_surfaces != offline.save_surfaces:
         raise AssertionError('Online/offline sparse-output settings differ.')
+    for setting in ('track_shocks', 'integrate_energy'):
+        if getattr(online.temporal, setting) != getattr(offline.temporal, setting):
+            raise AssertionError(f'Online/offline {setting} settings differ.')
     max_abs = 0.
     for index, (actual, expected) in enumerate(zip(online.rows, offline.rows)):
         if actual.keys() != expected.keys():
@@ -174,6 +189,23 @@ def verify_products(online, offline):
                 scalar_rtol=1e-6, scalar_atol=1e-8)
     if online.save_surfaces:
         verification.update(sparse_surfaces_match=True, sparse_surface_events=len(online.rows))
+    if online.temporal.track_shocks:
+        compare_records(online.temporal.track_rows, offline.temporal.track_rows, 'tracking')
+        verification.update(tracking_matches=True, compared_track_rows=len(online.temporal.track_rows))
+    if online.temporal.integrate_energy:
+        compare_records(online.temporal.energy_rows, offline.temporal.energy_rows, 'energy')
+        for kind in ('reverse', 'forward'):
+            expected_energy, expected_intervals = _cumulative_trapezoid_over_detections(
+                np.asarray([r['time'] for r in offline.rows]),
+                np.asarray([r[f'{kind}_dissipation_rate'] for r in offline.rows]))
+            np.testing.assert_allclose(
+                [r[f'{kind}_cumulative_dissipated_energy'] for r in online.temporal.energy_rows],
+                expected_energy, rtol=1e-6, atol=1e-8, equal_nan=True)
+            np.testing.assert_array_equal(
+                [r[f'{kind}_integration_interval_valid'] for r in online.temporal.energy_rows],
+                expected_intervals)
+        verification.update(energy_matches=True, compared_energy_events=len(online.temporal.energy_rows),
+                            offline_batch_energy_matches=True)
     return verification
 
 
@@ -216,14 +248,19 @@ def run(args):
     centers = np.asarray(helper.geometric_centers)
     dx = float(base.grid_spacing)
     save_surfaces = getattr(args, 'save_surfaces', False)
+    track_shocks = getattr(args, 'track_shocks', False)
+    integrate_energy = getattr(args, 'integrate_energy', False)
     online = DiagnosticWriter(args.output_dir/'online', centers, dx, .0625,
-                              save_surfaces=save_surfaces)
+                              save_surfaces=save_surfaces, track_shocks=track_shocks,
+                              integrate_energy=integrate_energy)
     try:
         revision = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()
     except (OSError, subprocess.CalledProcessError):
         revision = None
     source_files = [Path(__file__), Path('experiments/shock/analyze_state.py'),
-                    Path('experiments/wind_bubble/sparse_surfaces.py')]
+                    Path('experiments/wind_bubble/sparse_surfaces.py'),
+                    Path('experiments/wind_bubble/online_temporal.py'),
+                    Path('experiments/wind_bubble/run_single_bubble.py')]
     source_hashes = {str(p.relative_to(Path.cwd()) if p.is_absolute() else p):
                      hashlib.sha256(p.read_bytes()).hexdigest() for p in source_files}
     metadata = dict(status='running', schema_version=1, commit=revision, source_sha256=source_hashes,
@@ -245,6 +282,13 @@ def run(args):
                     sparse_surface_schema_version=SCHEMA_VERSION if save_surfaces else None,
                     sparse_surface_selection='detected surface cells outside injection; invalid properties retained',
                     sparse_surface_geometry='refined point samples, no mesh or persistent shock IDs')
+    metadata.update(temporal_tracking=track_shocks, cumulative_energy=integrate_energy,
+                    temporal_schema_version=1 if (track_shocks or integrate_energy) else None,
+                    tracking_method='single-bubble radial candidates with offline continuity and quality flags',
+                    tracking_state_update='every detected band, including flagged discontinuities; no reassignment',
+                    tracking_mach_estimator='profile-aware',
+                    energy_integration='trapezoids over consecutive finite per-band powers; gaps not bridged',
+                    energy_continuity_policy='advisory flags, no continuity-based energy filtering')
     meta_path = args.output_dir/'metadata.json'
     meta_path.write_text(json.dumps(metadata, indent=2)+'\n')
 
@@ -259,12 +303,15 @@ def run(args):
         if not np.isfinite(np.asarray(final)).all():
             raise AssertionError('Non-finite final gas state.')
         plot_histories(online.rows, args.output_dir/'online_histories.png')
+        if track_shocks or integrate_energy:
+            plot_temporal_histories(online.temporal, args.output_dir/'online_temporal_histories.png')
         if args.verify_offline:
             # Validation-only run: it intentionally retains complete snapshots.
             snapshots = time_integration(state, base._replace(activate_snapshot_callback=False), params, variables)
             jax.block_until_ready(snapshots)
             offline = DiagnosticWriter(args.output_dir/'offline_reference', centers, dx, .0625,
-                                       save_surfaces=save_surfaces)
+                                       save_surfaces=save_surfaces, track_shocks=track_shocks,
+                                       integrate_energy=integrate_energy)
             # Match the online compilation of the primary sampling calculations.
             # Eager and fused float32 interpolation can differ at individual cells.
             reference_payload = jax.jit(
@@ -303,6 +350,10 @@ def main():
     parser.add_argument('--verify-offline', action='store_true')
     parser.add_argument('--save-surfaces', action='store_true',
                         help='Write sparse surface point catalogs at every analysis event.')
+    parser.add_argument('--track-shocks', action='store_true',
+                        help='Write single-bubble candidate continuity and quality diagnostics.')
+    parser.add_argument('--integrate-energy', action='store_true',
+                        help='Write cumulative energy from consecutive finite per-band power measurements.')
     parser.add_argument('--require-gpu', action='store_true')
     run(parser.parse_args())
 
