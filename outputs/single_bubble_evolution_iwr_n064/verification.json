@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "decoded_frames": 21,
+  "total_duration_ms": 6930,
+  "frame_durations_ms": [
+    330,
+    330,
+    330,
+    330,
+    330,
+    330,
+    330,
+    330,
+    330,
+    330,
+    330,
+    330,
+    330,
+    330,
+    330,
+    330,
+    330,
+    330,
+    330,
+    330,
+    330
+  ],
+  "all_source_hashes_match": true,
+  "renderer_hash_matches": true
+}
