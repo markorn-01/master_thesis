@@ -149,3 +149,15 @@ see [ONLINE_TEMPORAL.md](ONLINE_TEMPORAL.md) for their current validation status
 Thesis sections to revisit after validation: 5.4 output schema and storage scope,
 5.5 new sparse-equivalence checks, and 5.7 point-cloud visualization. Keep the
 existing benchmark figures labeled as compact-only results.
+
+## GPU confirmation of schema-2 quality output
+
+The extended callback and quality output passed a 64³, 21-event GPU
+online/offline comparison on compgpu9, physical GPU 3. Independent local
+readback reproduced the catalog geometry, flags and per-band counts. Existing
+histories, histograms, tracking and energy CSV contents also matched the earlier
+21-event GPU run exactly. The t=0.12 reverse population contains 48 upstream
+endpoints inside injection, with no unknown positions. Evidence and scope:
+[`outputs/sampling_quality_iwr_compgpu9_n064/README.md`](../../outputs/sampling_quality_iwr_compgpu9_n064/README.md).
+This establishes the tested implementation's consistency, not accurate physical
+state reconstruction or new performance measurements.

@@ -173,3 +173,9 @@ within the established tolerances. See `ONLINE_TEMPORAL.md` and
 The simulation detected only the forward candidate; the reverse candidate
 remains unmeasured, not a zero-energy surface. These options do not extend the
 radial method to general interacting-shock identities.
+
+The extended sampling-quality callback now also has a 64³, 21-event live GPU
+check on compgpu9, physical GPU 3. All online/offline products passed; local
+readback confirmed exactly unchanged legacy history, histograms, tracking and
+energy outputs relative to the earlier 21-event GPU run. Evidence is in
+[`outputs/sampling_quality_iwr_compgpu9_n064/README.md`](../../outputs/sampling_quality_iwr_compgpu9_n064/README.md).

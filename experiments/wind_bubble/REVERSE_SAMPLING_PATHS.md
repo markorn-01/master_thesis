@@ -73,3 +73,17 @@ The original selected candidate's residual is checked against the saved output.
 Use `verify_paths.py` in that result directory for NumPy-only readback checks.
 Six focused geometry/plot/interpolation tests passed locally. See the result
 README for the completed cases, findings and limitations.
+
+## GPU confirmation completed
+
+Both 64³ and 128³ normal-path inspections passed on compgpu9, physical GPU 3,
+with JAX 0.6.2 at revision edc0b93. Endpoint interpolation matched exactly and
+pressure-candidate selection was reproduced in both cases. Local source-hash,
+timing and path readback checks passed after transfer. The population analysis
+confirms the CPU investigation's main interpretation: leaving the Boolean
+zone does not guarantee flat sampled states, and density-RH consistency is
+sensitive to downstream candidate positions. No estimator or filtering change
+was introduced. See
+[`outputs/reverse_path_diagnostics_iwr_compgpu9/README.md`](../../outputs/reverse_path_diagnostics_iwr_compgpu9/README.md)
+for the GPU comparison figure and physical limitations. This does not establish
+exact CPU/GPU equality or a new online/offline equivalence check at 128³.
