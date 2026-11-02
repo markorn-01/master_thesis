@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "decoded_frames": 21,
+  "input_hashes_match": true,
+  "renderer_hash_matches": true,
+  "finite_endpoint_energy_recomputed": true
+}

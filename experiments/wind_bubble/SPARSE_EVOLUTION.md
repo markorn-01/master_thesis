@@ -63,3 +63,34 @@ python -m unittest tests.experiments.test_sparse_evolution tests.experiments.tes
 See [`outputs/single_bubble_distributions_iwr_n064/README.md`](../../outputs/single_bubble_distributions_iwr_n064/README.md)
 for the GIF, previews, verification and interpretation limits. The original
 Mach-history animation and simulation outputs remain unchanged.
+
+## Separate measured-area and heating-history view
+
+A third view plots the forward/reverse radial populations' measured surface
+area, estimated thermalization rate and accumulated thermalized energy, with a
+synchronized cursor and cards showing origins, covered duration and source
+sample overlaps:
+
+```bash
+python -m experiments.wind_bubble.animate_shock_histories \
+  outputs/sampling_quality_iwr_compgpu9_n064/online \
+  --output-dir outputs/single_bubble_histories_iwr_n064_repeat
+```
+
+This reads saved scalar tables only. It does not recompute shock surfaces or
+alter energy integration. The loader independently verifies finite-endpoint
+trapezoids and the stored time coverage. Missing measurements remain undefined;
+energy curves only join explicitly valid intervals. A stored energy value
+carried through missing power is not plotted as a new measurement. Each radial
+population's different energy origin is visible, and no combined-total curve
+is added. These are estimated shock-heating histories, not total stored bubble
+energy or complete domain coverage.
+
+Nine visualization tests passed:
+
+```bash
+python -m unittest tests.experiments.test_sparse_evolution tests.experiments.test_shock_distributions tests.experiments.test_shock_history_animation
+```
+
+See [`outputs/single_bubble_histories_iwr_n064/README.md`](../../outputs/single_bubble_histories_iwr_n064/README.md)
+for the GIF, previews, metadata, validation and physical interpretation limits.
