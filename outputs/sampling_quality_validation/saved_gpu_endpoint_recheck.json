@@ -1,0 +1,60 @@
+{
+  "passed": true,
+  "scope": "classification from saved endpoint radii; not a live GPU payload test",
+  "source_sha256": {
+    "experiments/wind_bubble/sparse_surfaces.py": "0ad8795e477eab7863aecef14f37c261624336e63f31536d2010c91d44d84cc4",
+    "experiments/wind_bubble/check_sampling_quality.py": "d84299a0dc73fbc5a8ae46eea36414032eaf297193a692ed670c6780650187a9"
+  },
+  "cases": [
+    {
+      "directory": "outputs/reverse_profiles_iwr_compgpu3_n064",
+      "num_cells": 64,
+      "backend": "gpu",
+      "events": [
+        {
+          "time": 0.12000000476837158,
+          "valid_reverse_samples": 48,
+          "upstream_inside_injection": 48,
+          "downstream_inside_injection": 0
+        },
+        {
+          "time": 0.15000000596046448,
+          "valid_reverse_samples": 336,
+          "upstream_inside_injection": 0,
+          "downstream_inside_injection": 0
+        },
+        {
+          "time": 0.20000000298023224,
+          "valid_reverse_samples": 608,
+          "upstream_inside_injection": 0,
+          "downstream_inside_injection": 0
+        }
+      ]
+    },
+    {
+      "directory": "outputs/reverse_profiles_iwr_compgpu3_n128",
+      "num_cells": 128,
+      "backend": "gpu",
+      "events": [
+        {
+          "time": 0.12000000476837158,
+          "valid_reverse_samples": 1664,
+          "upstream_inside_injection": 0,
+          "downstream_inside_injection": 0
+        },
+        {
+          "time": 0.15000000596046448,
+          "valid_reverse_samples": 2072,
+          "upstream_inside_injection": 0,
+          "downstream_inside_injection": 0
+        },
+        {
+          "time": 0.20000000298023224,
+          "valid_reverse_samples": 2624,
+          "upstream_inside_injection": 0,
+          "downstream_inside_injection": 0
+        }
+      ]
+    }
+  ]
+}

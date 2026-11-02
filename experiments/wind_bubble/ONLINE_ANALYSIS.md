@@ -12,6 +12,9 @@ an ordered CPU callback. That callback reduces them immediately and writes:
   and forward/reverse radial-band geometry and thermalization statistics;
 - `online/histograms_XXXX.npz`: Mach and density-jump counts with fixed bin edges
   and the event time;
+- `online/sampling_quality.csv`: counts of known/unknown endpoint geometry and
+  samples entering injection, for all surfaces and each radial band; flags are
+  advisory and do not filter the primary measurements;
 - `metadata.json`: physical setup, requested/actual times, source revision and
   source hashes, estimator, units, and run status;
 - `online_histories.png`: basic scalar-history visualization;
@@ -30,7 +33,8 @@ and scalar rows; each event's full diagnostic grids are discarded after use.
 ## First correctness implementation, not a transfer optimization
 
 The callback currently transfers **fixed-shape diagnostic grids**, including
-masks, normals, offsets, Mach, flux and sampled densities. These are compressed
+masks, normals, offsets, Mach, flux, sampled densities and, in the current runner,
+the two selected sampling-distance grids. These are compressed
 on the CPU; no dense diagnostic fields or gas snapshots are written to disk.
 Device-to-host transfer still scales with grid volume. No peak-memory saving,
 runtime overhead or performance improvement is established by this initial
@@ -40,6 +44,12 @@ catalogs and a standalone 3D plotter are now implemented; see
 [SPARSE_SURFACES.md](SPARSE_SURFACES.md) for their schema and validation workflow.
 Device-side packing remains future work. No dense grids are saved, even when
 the sparse-output option is enabled.
+
+Source-overlap flags were added after the original benchmarks. The current
+runner's added transfers and quality table have not been benchmarked. Sparse
+catalogs now use schema 2; older preserved schema-1 files remain unchanged.
+See [the sampling-quality validation](../../outputs/sampling_quality_validation/README.md)
+for the CPU end-to-end check and reclassification of saved GPU endpoints.
 
 The improved profile-aware Mach and matching thermalization flux are the
 primary online fields. Plateau and extrapolation alternatives are omitted from

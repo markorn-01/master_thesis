@@ -1,0 +1,31 @@
+% Suggested placement: physical-validation limits in Online--Offline Equivalence.
+% These results concern reverse-candidate sampling, not execution-path agreement.
+\subsection{Physical Interpretation of the Reverse-Shock Diagnostics}
+\label{subsec:reverse_sampling_limits}
+
+Agreement between online and offline outputs establishes consistency of the
+execution paths for the tested configurations. Because both paths use the
+same shock-finding calculations, this agreement does not independently
+establish the physical accuracy of the reconstructed shock properties.
+
+A separate inspection compared the reverse-shock candidates at $64^3$ and
+$128^3$ at $t=0.12$, $0.15$, and $0.20$, with a fixed physical injection
+radius of $0.0625$ and the same requested analysis schedule. At $64^3$,
+all 48 upstream samples at $t=0.12$ lay inside the injection region, although
+the detected surface cells lay outside. No selected endpoints lay inside
+that region at the later inspected times or at any inspected time at $128^3$.
+Excluding surface cells within the source therefore does not ensure that
+the reconstructed states are sampled outside it.
+
+For $\gamma=5/3$, the directly sampled density ratio was compared with
+$J_{\rho,\mathrm{RH}}=4\mathcal{M}^2/(\mathcal{M}^2+3)$, using the
+pressure-derived Mach number of each sample. The median fractional residual
+$J_\rho/J_{\rho,\mathrm{RH}}-1$ was approximately $+49.8\%$, $+36.0\%$,
+and $-2.8\%$ at $64^3$, compared with $-5.8\%$, $-7.5\%$, and $-8.7\%$
+at $128^3$. These residuals measure internal jump consistency rather than
+error against known exact states. The finer run reduced the early discrepancy,
+but the later absolute median discrepancy increased. The two resolutions
+do not establish convergence. Early reverse-shock thermalization rates and
+accumulated energies must therefore be interpreted with these sampling
+limitations. Source-overlap flags report this limitation without changing
+sample selection or the energy-integration rule.

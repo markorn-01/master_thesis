@@ -5,7 +5,7 @@ import unittest
 
 import numpy as np
 
-from experiments.wind_bubble.sparse_surfaces import sparse_surface_catalog
+from experiments.wind_bubble.sparse_surfaces import sparse_surface_catalog, sampling_position_flags
 
 
 class SparseSurfaceTests(unittest.TestCase):
@@ -63,6 +63,38 @@ class SparseSurfaceTests(unittest.TestCase):
             with np.load(target, allow_pickle=False) as loaded:
                 for key, value in result.items():
                     np.testing.assert_array_equal(loaded[key], value)
+
+    def test_source_overlap_uses_endpoint_not_surface_and_includes_boundary(self):
+        flags = sampling_position_flags(np.array([[.6875, .5, .5]]),
+            np.array([[-1., 0., 0.]]), np.array([.5]), np.array([1.]), .125, .0625)
+        self.assertTrue(flags['sample_positions_valid'][0])
+        self.assertTrue(flags['upstream_inside_injection'][0])  # r=0.0625 exactly
+        self.assertFalse(flags['downstream_inside_injection'][0])
+        np.testing.assert_allclose(flags['upstream_positions'][0], [.5625, .5, .5])
+        np.testing.assert_allclose(flags['downstream_positions'][0], [.75, .5, .5])
+
+    def test_missing_or_invalid_distances_are_unknown_not_clean_samples(self):
+        pos = np.array([[.7, .5, .5], [.8, .5, .5]])
+        normals = np.array([[-1., 0., 0.], [-1., 0., 0.]])
+        for post, pre in [(None, None), (np.array([np.nan, -1.]), np.ones(2))]:
+            flags = sampling_position_flags(pos, normals, post, pre, .125, .0625)
+            self.assertFalse(flags['sample_positions_valid'].any())
+            self.assertTrue(np.isnan(flags['upstream_radii']).all())
+            self.assertFalse(flags['upstream_inside_injection'].any())
+        with self.assertRaises(ValueError):
+            sampling_position_flags(pos, normals, np.ones(2), None, .125, .0625)
+
+    def test_endpoint_flags_do_not_filter_or_change_catalog_measurements(self):
+        payload = self.make_payload()
+        before = sparse_surface_catalog(*payload)
+        shape = payload[1].shape
+        after = sparse_surface_catalog(*payload, post_distance=np.ones(shape), pre_distance=np.ones(shape))
+        for key in ('positions', 'grid_indices', 'mach', 'thermalization_flux', 'density_jump',
+                    'sampling_valid', 'density_jump_valid'):
+            np.testing.assert_equal(before[key], after[key])
+        self.assertTrue(after['sample_positions_valid'].all())
+        self.assertFalse(after['sampling_valid'][-1])  # Geometric and thermodynamic validity differ.
+        self.assertFalse(before['sample_positions_valid'].any())
 
 
 if __name__ == '__main__':

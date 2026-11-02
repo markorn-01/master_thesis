@@ -55,11 +55,13 @@ def distribution(values, edges):
 
 
 def summarize(time, mask, offsets, direction, mach, flux, rho2, rho1, sampling_valid,
-              centers, grid_spacing, injection_radius, *, return_samples=False):
+              centers, grid_spacing, injection_radius, *, return_samples=False,
+              post_distance=None, pre_distance=None):
     """CPU-only reduction; safe inside a host callback (no JAX dispatch)."""
     mask = np.asarray(mask, dtype=bool)
     samples = surface_sample_arrays(mask, offsets, direction, mach, flux, rho2, rho1,
-                                    sampling_valid, centers, grid_spacing, injection_radius)
+                                    sampling_valid, centers, grid_spacing, injection_radius,
+                                    post_distance=post_distance, pre_distance=pre_distance)
     indices, normals = samples['grid_indices'], samples['normals']
     radii, selection = samples['radii'], samples['outside_injection']
     mach_values, flux_values = samples['mach'], samples['thermalization_flux']
@@ -104,12 +106,19 @@ class DiagnosticWriter:
         self.temporal = TemporalDiagnostics(self.directory, grid_spacing, injection_radius,
                                             track_shocks=track_shocks, integrate_energy=integrate_energy)
         self.rows = []
+        self.quality_rows = []
+        self.quality_stream = None
         self.stream = (self.directory/'history.csv').open('x', newline='')
         self.writer = None
 
-    def receive(self, *payload):
+    def receive(self, time, *fields):
+        if len(fields) not in (8, 10):
+            raise ValueError('Expected eight primary grids, optionally followed by two sampling distances.')
+        payload = (time, *fields[:8])
+        geometry = (dict(post_distance=fields[8], pre_distance=fields[9])
+                    if len(fields) == 10 else {})
         row, mach, rho, samples = summarize(*payload, self.centers, self.grid_spacing,
-                                            self.injection_radius, return_samples=True)
+                                            self.injection_radius, return_samples=True, **geometry)
         if self.rows and row['time'] <= self.rows[-1]['time']:
             raise ValueError('Analysis times must advance strictly; duplicate callback detected.')
         if self.writer is None:
@@ -123,8 +132,18 @@ class DiagnosticWriter:
                             density_jump_edges=DENSITY_EDGES, density_jump_counts=rho)
         if self.save_surfaces:
             catalog = sparse_surface_catalog(*payload, self.centers, self.grid_spacing,
-                                             self.injection_radius)
+                                             self.injection_radius, **geometry)
             np.savez_compressed(self.directory/f'surfaces_{index:04d}.npz', **catalog)
+        if geometry:
+            quality = sampling_quality_row(row['time'], index, samples,
+                                           self.grid_spacing, self.injection_radius)
+            if self.quality_stream is None:
+                self.quality_stream = (self.directory/'sampling_quality.csv').open('x', newline='')
+                self.quality_writer = csv.DictWriter(self.quality_stream, fieldnames=list(quality))
+                self.quality_writer.writeheader()
+            self.quality_writer.writerow(quality)
+            self.quality_stream.flush()
+            self.quality_rows.append(quality)
         self.temporal.receive(row['time'], samples, row)
         self.rows.append(row)
         print(f"analysis t={row['time']:.5f}: {row['surface_cells_outside_injection']} surface cells; "
@@ -132,7 +151,28 @@ class DiagnosticWriter:
 
     def close(self):
         self.stream.close()
+        if self.quality_stream is not None:
+            self.quality_stream.close()
         self.temporal.close()
+
+
+def sampling_quality_row(time, event_index, samples, grid_spacing, injection_radius):
+    """Counts over the unchanged outside-source surface population, per band."""
+    selected = samples['outside_injection']
+    radii = samples['radii']
+    _, _, separation = split_radial_shock_candidates(radii, injection_radius, grid_spacing)
+    reverse = selected & (radii <= separation) if np.isfinite(separation) else np.zeros_like(selected)
+    forward = selected & ~reverse
+    row = dict(time=float(time), event_index=event_index)
+    for name, band in [('all', selected), ('reverse', reverse), ('forward', forward)]:
+        known = band & samples['sample_positions_valid']
+        row.update({f'{name}_surface_samples': int(band.sum()),
+                    f'{name}_sample_positions_known': int(known.sum()),
+                    f'{name}_sample_positions_unknown': int((band & ~known).sum()),
+                    f'{name}_sampling_valid': int((band & samples['sampling_valid']).sum()),
+                    f'{name}_upstream_inside_injection': int((known & samples['upstream_inside_injection']).sum()),
+                    f'{name}_downstream_inside_injection': int((known & samples['downstream_inside_injection']).sum())})
+    return row
 
 
 def plot_histories(rows, path):
@@ -189,6 +229,9 @@ def verify_products(online, offline):
                 scalar_rtol=1e-6, scalar_atol=1e-8)
     if online.save_surfaces:
         verification.update(sparse_surfaces_match=True, sparse_surface_events=len(online.rows))
+    compare_records(online.quality_rows, offline.quality_rows, 'sampling quality')
+    if online.quality_rows:
+        verification.update(sampling_quality_matches=True, compared_quality_events=len(online.quality_rows))
     if online.temporal.track_shocks:
         compare_records(online.temporal.track_rows, offline.temporal.track_rows, 'tracking')
         verification.update(tracking_matches=True, compared_track_rows=len(online.temporal.track_rows))
@@ -209,19 +252,21 @@ def verify_products(online, offline):
     return verification
 
 
-def diagnostic_payload(physical, config, registry, helper):
+def diagnostic_payload(physical, config, registry, helper, *, sampling_quality=False):
     """Shared fixed-shape primary fields for online and benchmark workflows."""
     result, mach, flux, samples = analyze_shock_state_device(physical, config, registry, helper)
-    _, _, rho2, rho1, valid, _, _ = samples
-    return (result.shock_surface_cells, result.shock_surface_offsets,
+    _, _, rho2, rho1, valid, post, pre = samples
+    payload = (result.shock_surface_cells, result.shock_surface_offsets,
             result.shock_direction, mach, flux, rho2, rho1, valid)
+    return (*payload, post, pre) if sampling_quality else payload
 
 
-def make_online_callback(receive, online_config, analysis_config, helper):
+def make_online_callback(receive, online_config, analysis_config, helper, *, sampling_quality=False):
     """Build the callback without binding it to a particular output directory."""
     def callback(time, padded, registry):
         physical = _unpad(padded, online_config)
-        payload = diagnostic_payload(physical, analysis_config, registry, helper)
+        payload = diagnostic_payload(physical, analysis_config, registry, helper,
+                                     sampling_quality=sampling_quality)
         jax.debug.callback(receive, time, *payload, ordered=True)
     return callback
 
@@ -292,7 +337,12 @@ def run(args):
     meta_path = args.output_dir/'metadata.json'
     meta_path.write_text(json.dumps(metadata, indent=2)+'\n')
 
-    callback = make_online_callback(online.receive, online_config, analysis_config, helper)
+    metadata.update(sampling_quality=True, sampling_quality_schema_version=1,
+                    sampling_quality_policy='advisory source-endpoint flags; no filtering or energy changes',
+                    sampling_quality_transfer='two additional fixed-shape distance grids')
+    meta_path.write_text(json.dumps(metadata, indent=2)+'\n')
+    callback = make_online_callback(online.receive, online_config, analysis_config, helper,
+                                    sampling_quality=True)
 
     try:
         final = time_integration(state, online_config, params, variables, snapshot_callable=callback)
@@ -315,16 +365,18 @@ def run(args):
             # Match the online compilation of the primary sampling calculations.
             # Eager and fused float32 interpolation can differ at individual cells.
             reference_payload = jax.jit(
-                lambda physical, h: diagnostic_payload(physical, analysis_config, variables, h))
+                lambda physical, h: diagnostic_payload(physical, analysis_config, variables, h,
+                                                       sampling_quality=True))
             try:
                 for time, physical in zip(np.asarray(snapshots.time_points), np.asarray(snapshots.states)):
                     result = analyze_shock_state(physical, analysis_config, variables, helper)
-                    _, offsets, _, _, _, rho2, rho1, valid = reference_payload(
+                    _, offsets, _, _, _, rho2, rho1, valid, post, pre = reference_payload(
                         jnp.asarray(physical), helper)
                     offline.receive(time, result['surface_mask'], np.asarray(offsets),
                                     np.moveaxis(result['shock_direction'], -1, 0),
                                     result['profile_aware_mach_numbers'], result['profile_aware_thermal_energy_flux'],
-                                    np.asarray(rho2), np.asarray(rho1), np.asarray(valid))
+                                    np.asarray(rho2), np.asarray(rho1), np.asarray(valid),
+                                    np.asarray(post), np.asarray(pre))
             finally:
                 offline.close()
             verification = verify_products(online, offline)

@@ -6,8 +6,10 @@ region and saves their geometry and properties in one compressed NumPy archive
 per event. No gas snapshot sequence is stored. The catalog is a point cloud,
 not a mesh, a list of identified shock objects, or a temporal track.
 
-This step does not change the detector, Mach estimator, thermalization formula,
-callback schedule or device payload. It does not reduce device-to-host transfer.
+This step does not change the detector, Mach estimator, thermalization formula
+or callback schedule. Schema version 2 adds source-endpoint quality information:
+the online runner transfers two additional distance grids for CPU geometry checks.
+It does not reduce device-to-host transfer.
 Sparse catalog output is optional and off by default. Previous compact-only
 storage/runtime measurements do not include this new optional output.
 
@@ -50,7 +52,7 @@ the displayed points only (default 100000), selected deterministically in file
 order; it never removes records from the archive. A subsampled view should not
 be used to infer sampling-uniformity or quantitative distributions.
 
-## Catalog schema, version 1
+## Catalog schema, version 2
 
 Files are `online/surfaces_0000.npz`, etc. The reference writer uses the same
 names in `offline_reference/` when verification is enabled. Load with
@@ -73,11 +75,41 @@ density and flux values. There is no thinning in the stored output.
 | `sampling_valid` | M | Profile-sampling validity flag |
 | `density_jump_valid` | M | Sampling valid and both densities finite and positive |
 | `mach_valid`, `thermalization_flux_valid` | M | Corresponding value finite and positive |
+| `upstream_positions`, `downstream_positions` | M × 3 | Actual pressure-selected endpoints, from the refined center and local normal |
+| `upstream_radii`, `downstream_radii` | M | Distance of each endpoint from the source center |
+| `sample_positions_valid` | M | Endpoint geometry is known; independent of thermodynamic sampling validity |
+| `upstream_inside_injection`, `downstream_inside_injection` | M | Known endpoint radius is less than or equal to the injection radius |
 
 Scalar/static fields: `schema_version`, `time`, `grid_spacing`,
 `injection_radius`, `grid_shape`, `domain_center`, `selection`, `units`, and
 `mach_estimator`. Every event, including an empty initial detection, has a file
 with the same schema; empty vector fields have shape (0, 3).
+
+Older version-1 catalogs remain unchanged and lack endpoint geometry. The
+low-level writer still accepts the legacy eight-grid payload: new geometry
+fields are NaN and `sample_positions_valid` is false when distances are absent.
+False overlap flags without valid positions do not establish clean sampling.
+The current online runner supplies both distances by default, including in
+the offline verification path. These flags do not remove samples or modify
+Mach values, histograms, tracking, power or cumulative energy.
+
+## Sampling-quality history
+
+The current runner writes `sampling_quality.csv` even without `--save-surfaces`.
+Each event records time and event index, then six integer counts for each of
+`all`, `reverse` and `forward`: `surface_samples`, `sample_positions_known`,
+`sample_positions_unknown`, `sampling_valid`, `upstream_inside_injection`, and
+`downstream_inside_injection`. The selected population and radial split are
+the same as the primary diagnostics. Empty populations have zero counts.
+Overlap counts include every sample with known endpoint geometry; consult the
+separate thermodynamic-validity count as well. Known plus unknown counts equal
+the surface-sample count. Upstream/downstream overlap counts can refer to the
+same sample and should not be added to obtain a unique-sample count.
+
+The existing 41-column `history.csv` is unchanged. Online/offline checks now
+also compare quality rows and the new sparse fields. The benchmark entrypoint
+keeps its legacy distance-free payload by default; earlier published timings
+do not measure the new runner's additional transfers and quality output.
 
 Validity flags indicate numerical usability, not resolved physical accuracy.
 Positive density ratios below one remain present, as in the existing histograms.

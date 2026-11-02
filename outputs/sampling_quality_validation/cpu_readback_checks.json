@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "backend": "cpu",
+  "quality_rows_exact_online_offline": true,
+  "quality_events": 5,
+  "sparse_arrays_exact_online_offline": true,
+  "geometry_and_quality_counts_recomputed": true,
+  "existing_history_tracks_energy_csv_exact": {
+    "history": true,
+    "tracks": true,
+    "energy": true
+  },
+  "existing_histograms_exact": true,
+  "source_hashes_match_current": true,
+  "full_states_rechecked": false
+}

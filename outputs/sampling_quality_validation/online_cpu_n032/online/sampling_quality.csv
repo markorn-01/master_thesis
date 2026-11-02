@@ -1,0 +1,6 @@
+time,event_index,all_surface_samples,all_sample_positions_known,all_sample_positions_unknown,all_sampling_valid,all_upstream_inside_injection,all_downstream_inside_injection,reverse_surface_samples,reverse_sample_positions_known,reverse_sample_positions_unknown,reverse_sampling_valid,reverse_upstream_inside_injection,reverse_downstream_inside_injection,forward_surface_samples,forward_sample_positions_known,forward_sample_positions_unknown,forward_sampling_valid,forward_upstream_inside_injection,forward_downstream_inside_injection
+0.0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0.05000000074505806,1,200,200,0,200,0,200,0,0,0,0,0,0,200,200,0,200,0,200
+0.10000000149011612,2,392,392,0,392,0,0,0,0,0,0,0,0,392,392,0,392,0,0
+0.15000000596046448,3,560,560,0,560,0,0,0,0,0,0,0,0,560,560,0,560,0,0
+0.20000000298023224,4,872,872,0,872,0,0,0,0,0,0,0,0,872,872,0,872,0,0

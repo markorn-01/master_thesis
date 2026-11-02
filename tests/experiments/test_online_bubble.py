@@ -159,6 +159,34 @@ class OnlineBubbleTests(unittest.TestCase):
                 for writer in writers:
                     writer.close()
 
+    def test_quality_output_preserves_primary_tracking_energy_and_is_verified(self):
+        centers, mask, normals = self.make_fields()
+        shape = mask.shape
+        fields = (mask, np.zeros(shape), normals, np.full(shape, 5.),
+                  np.full(shape, 2.), np.full(shape, 4.), np.ones(shape), np.ones(shape, bool))
+        with tempfile.TemporaryDirectory() as directory:
+            writers = [DiagnosticWriter(Path(directory)/name, centers, 1/16, .0625,
+                track_shocks=True, integrate_energy=True) for name in ('legacy', 'online', 'offline')]
+            try:
+                for i, writer in enumerate(writers):
+                    for time in (.1, .2):
+                        writer.receive(time, *fields, *((np.ones(shape), np.ones(shape)) if i else ()))
+                for writer in writers[1:]:
+                    np.testing.assert_equal(writer.rows, writers[0].rows)
+                    np.testing.assert_equal(writer.temporal.track_rows, writers[0].temporal.track_rows)
+                    np.testing.assert_equal(writer.temporal.energy_rows, writers[0].temporal.energy_rows)
+                    for index in range(2):
+                        with np.load(writer.directory/f'histograms_{index:04d}.npz') as a, np.load(writers[0].directory/f'histograms_{index:04d}.npz') as b:
+                            for key in a.files: np.testing.assert_array_equal(a[key], b[key])
+                self.assertFalse((writers[0].directory/'sampling_quality.csv').exists())
+                self.assertTrue((writers[1].directory/'sampling_quality.csv').exists())
+                self.assertEqual(writers[1].quality_rows[0]['all_sample_positions_known'], 16)
+                self.assertTrue(verify_products(*writers[1:])['sampling_quality_matches'])
+                writers[2].quality_rows[0]['all_upstream_inside_injection'] += 1
+                with self.assertRaises(AssertionError): verify_products(*writers[1:])
+            finally:
+                for writer in writers: writer.close()
+
 
 if __name__ == '__main__':
     unittest.main()
