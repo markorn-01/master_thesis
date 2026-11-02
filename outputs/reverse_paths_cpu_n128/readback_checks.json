@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "directory": "outputs/reverse_paths_cpu_n128",
+  "backend": "cpu",
+  "samples": 2624,
+  "source_hashes_match": {
+    "experiments/wind_bubble/inspect_reverse_sampling_paths.py": true,
+    "experiments/shock/analyze_state.py": true,
+    "experiments/wind_bubble/run_single_bubble.py": true,
+    "astronomix/_physics_modules/_shock_finder/_shock_zones.py": true
+  },
+  "requested_actual_times_match": true,
+  "recorded_path_endpoints_match_selected_values": true,
+  "saved_endpoint_radii_and_zone_flags_match": true,
+  "pressure_mach_relation_matches_by_construction": true,
+  "full_gas_states_rechecked": false
+}

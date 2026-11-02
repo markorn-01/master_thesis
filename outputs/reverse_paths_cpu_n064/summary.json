@@ -1,0 +1,52 @@
+{
+  "reverse_samples": 608,
+  "endpoint_interpolation_matches": true,
+  "endpoint_max_absolute_difference": 2.9802322387695312e-08,
+  "pressure_candidate_selection_matches": true,
+  "upstream_in_zone_count": 0,
+  "downstream_in_zone_count": 0,
+  "upstream_inside_injection_count": 0,
+  "downstream_inside_injection_count": 0,
+  "rh_density_residual_p16_median_p84": [
+    -0.09384875774383544,
+    -0.028252363204956055,
+    0.06011603832244873
+  ],
+  "upstream_pressure_one_cell_change_p16_median_p84": [
+    0.07664391547441482,
+    0.30042368173599243,
+    0.6988284397125244
+  ],
+  "downstream_pressure_one_cell_change_p16_median_p84": [
+    0.022824184969067574,
+    0.026826673187315464,
+    0.03479894056916237
+  ],
+  "upstream_density_one_cell_change_p16_median_p84": [
+    0.22090486228466033,
+    0.3037644177675247,
+    0.43985395193099974
+  ],
+  "downstream_density_one_cell_change_p16_median_p84": [
+    0.1661842483282089,
+    0.18613215535879135,
+    0.2237701255083084
+  ],
+  "upstream_candidate_index_counts": [
+    272,
+    264,
+    72,
+    0,
+    0,
+    0
+  ],
+  "downstream_candidate_index_counts": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    608
+  ],
+  "illustrative_path_index": 24
+}
