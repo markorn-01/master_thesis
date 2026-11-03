@@ -1,0 +1,29 @@
+% Upload preview_0020.png from this directory to the Overleaf figures folder.
+% Requires \usepackage{graphicx} in the preamble.
+% Insert at the end of Section 5.4.5, Storage Scope and Visualization.
+
+Figure~\ref{fig:online_surface_distributions} illustrates the
+combined spatial and statistical view at $t=0.20$ for the
+$64^3$ wind-bubble run. The corresponding animation advances
+through 21 saved analysis events over $0 \leq t \leq 0.20$,
+using fixed spatial bounds, camera orientation, color limits,
+histogram bins, and count axes to support comparison over time.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/preview_0020.png}
+    \caption{Detected shock surfaces and distributions at
+    $t=0.20$ in the $64^3$ single-wind-bubble simulation.
+    Left: all 5128 selected surface samples outside the
+    injection region, colored by the reconstructed Mach
+    number. The points represent sampled surface positions,
+    rather than a connected mesh; the star marks the wind
+    source. Right: Mach-number and sampled density-ratio
+    distributions for the same population, with one count
+    per surface cell and no area weighting. Orange lines
+    mark the medians, and the dotted line marks a density
+    ratio of one. The displayed distributions describe the
+    reconstructed samples and do not independently establish
+    the accuracy of the sampled upstream and downstream states.}
+    \label{fig:online_surface_distributions}
+\end{figure}

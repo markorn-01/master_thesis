@@ -24,36 +24,36 @@
     0.1900000125169754,
     0.20000000298023224
   ],
-  "fps": 3,
+  "fps": 2,
   "decoded_frames": 21,
   "frame_size": [
     1430,
     825
   ],
   "frame_durations_ms": [
-    330,
-    330,
-    330,
-    330,
-    330,
-    330,
-    330,
-    330,
-    330,
-    330,
-    330,
-    330,
-    330,
-    330,
-    330,
-    330,
-    330,
-    330,
-    330,
-    330,
-    330
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500
   ],
-  "total_duration_ms": 6930,
+  "total_duration_ms": 10500,
   "saved_histograms_reconstructed_exact": true,
   "history_range_accounting_matches": true,
   "original_bins_preserved": true,
@@ -277,5 +277,11 @@
   "source_sha256": {
     "/Users/minhn/Documents/Heidelberg University/fifth_semester/Thesis/master_thesis/experiments/wind_bubble/animate_shock_distributions.py": "e87e35a6a18f482b3a318f54fac65a49894b1bc4cf995d54afb8ae19ff98f555",
     "/Users/minhn/Documents/Heidelberg University/fifth_semester/Thesis/master_thesis/experiments/wind_bubble/animate_sparse_evolution.py": "6cd9be29fbb55d57fa07390502c41bcb795e2befa974d8756e95bca5b5f1cdc2"
+  },
+  "playback_adjustment": {
+    "method": "GIF frame-delay metadata changed without recompressing images",
+    "previous_gif_sha256": "93d93b6df3ac50d49fcd4cd7088713c03dff63ba71332a07dfcba157fabebc70",
+    "decoded_frame_pixels_unchanged": true,
+    "fps": 2
   }
 }

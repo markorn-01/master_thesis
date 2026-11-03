@@ -33,8 +33,8 @@ not a changing zoom. Coordinates are baseline code units.
 ## Playback and previews
 
 There is one frame per event, with no interpolation between saved states.
-The requested playback is 3 frames/s; GIF timing is quantized to 330 ms/frame,
-for 6.93 s per 21-frame loop. This is illustrative playback speed, not wall-clock
+The requested playback is 2 frames/s; GIF timing is quantized to 500 ms/frame,
+for 10.5 s per 21-frame loop. This is illustrative playback speed, not wall-clock
 simulation execution time. These data have uniform requested physical cadence;
 for irregularly spaced events the renderer still assigns one frame per event.
 It does not claim playback duration proportional to arbitrary time intervals.
@@ -51,6 +51,7 @@ With NumPy, Matplotlib and Pillow, from the repository root:
 ```bash
 python -m experiments.wind_bubble.animate_sparse_evolution \
   outputs/sampling_quality_iwr_compgpu9_n064/online \
+  --fps 2 \
   --output-dir outputs/single_bubble_evolution_iwr_n064_repeat
 ```
 
@@ -74,3 +75,7 @@ preservation manifest. No runtime or memory comparison is claimed.
 This is the first offline visualization of the validated online outputs.
 An interactive timeline, additional power/energy panels and multiple-bubble
 visualization remain further steps, rather than features of this GIF.
+
+Playback was slowed to 2 frames/s by changing GIF frame-delay metadata only.
+All 21 decoded frames were verified pixel-identical to the previous animation;
+simulation times, diagnostics, and static previews are unchanged.

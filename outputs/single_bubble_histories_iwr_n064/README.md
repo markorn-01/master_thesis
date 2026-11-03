@@ -61,12 +61,13 @@ root, use a fresh output directory:
 ```bash
 python -m experiments.wind_bubble.animate_shock_histories \
   outputs/sampling_quality_iwr_compgpu9_n064/online \
+  --fps 2 \
   --output-dir outputs/single_bubble_histories_iwr_n064_repeat
 ```
 
 --fps controls illustrative playback only. There is one frame per saved event,
-with no interpolation of states. The requested playback is 3 frames/s; actual
-GIF timing is 330 ms/frame (6.93 s total), not simulation execution speed.
+with no interpolation of states. The requested playback is 2 frames/s; actual
+GIF timing is 500 ms/frame (10.5 s total), not simulation execution speed.
 
 Before rendering, the loader checks event alignment, numbering, power values,
 finite-endpoint energy accumulation, origins, covered durations and interval
@@ -85,3 +86,7 @@ and no new runtime, memory or physical-convergence claim is made.
 This provides the separate heating-history view requested for the first
 single-bubble demonstration. Interactive controls, general many-bubble area
 integration and cross-bubble identity tracking remain separate development.
+
+Playback was slowed to 2 frames/s by changing GIF frame-delay metadata only.
+All 21 decoded frames were verified pixel-identical to the previous animation;
+simulation times, diagnostics, and static previews are unchanged.

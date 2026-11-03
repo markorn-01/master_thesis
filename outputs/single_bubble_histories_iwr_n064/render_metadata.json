@@ -25,35 +25,35 @@
     0.1900000125169754,
     0.20000000298023224
   ],
-  "fps": 3,
+  "fps": 2,
   "frame_size": [
     1320,
     990
   ],
   "frame_durations_ms": [
-    330,
-    330,
-    330,
-    330,
-    330,
-    330,
-    330,
-    330,
-    330,
-    330,
-    330,
-    330,
-    330,
-    330,
-    330,
-    330,
-    330,
-    330,
-    330,
-    330,
-    330
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500
   ],
-  "total_duration_ms": 6930,
+  "total_duration_ms": 10500,
   "energy_recomputed_from_finite_power_endpoints": true,
   "invalid_energy_intervals_not_joined": true,
   "missing_measurements_not_zeroed": true,
@@ -77,5 +77,11 @@
     "outputs/sampling_quality_iwr_compgpu9_n064/online/sampling_quality.csv": "2385888e2bd1cf9972a44bc57036c2d43ad06696dabcc07f968413de9129e04f",
     "outputs/sampling_quality_iwr_compgpu9_n064/metadata.json": "f48e23f184a27877b3fc5569a3429a7dae483a7b2cad7a6dc4fffaae61dc070b"
   },
-  "source_sha256": "1cec8a4111817abb03dfc4ec0e41e87d8684da5638dfeee93099f4e5db26fac0"
+  "source_sha256": "1cec8a4111817abb03dfc4ec0e41e87d8684da5638dfeee93099f4e5db26fac0",
+  "playback_adjustment": {
+    "method": "GIF frame-delay metadata changed without recompressing images",
+    "previous_gif_sha256": "75b354bbde2f8c7266dcea42bd51aaf12618d901e2bc23e218f0531619bf494c",
+    "decoded_frame_pixels_unchanged": true,
+    "fps": 2
+  }
 }

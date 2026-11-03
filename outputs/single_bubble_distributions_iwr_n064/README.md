@@ -49,6 +49,7 @@ use a new output directory:
 ```bash
 python -m experiments.wind_bubble.animate_shock_distributions \
   outputs/sampling_quality_iwr_compgpu9_n064/online \
+  --fps 2 \
   --output-dir outputs/single_bubble_distributions_iwr_n064_repeat
 ```
 
@@ -65,10 +66,14 @@ empty initial data, shifted times, missing events, changed counts, a positive
 subunity density ratio, a sample exactly at the final bin edge, invalid values,
 and overflow accounting. All 21 GIF frames decode. The initial, early and final
 previews were visually inspected. Three frames per second are requested; GIF
-duration is quantized to 330 ms per frame (6.93 s total). One saved event maps
+duration is quantized to 500 ms per frame (10.5 s total). One saved event maps
 to one frame, without temporal interpolation; playback is not wall-clock speed.
 
 render_metadata.json records event times, fixed scales, bins, count axes,
 source/input hashes and successful validation. preview_0000.png, preview_0001.png,
 preview_0010.png and preview_0020.png provide static views. SHA256SUMS is a local
 preservation manifest. No new runtime, memory or physical-accuracy claim is made.
+
+Playback was slowed to 2 frames/s by changing GIF frame-delay metadata only.
+All 21 decoded frames were verified pixel-identical to the previous animation;
+simulation times, diagnostics, and static previews are unchanged.

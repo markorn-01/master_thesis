@@ -23,7 +23,7 @@
     0.1900000125169754,
     0.20000000298023224
   ],
-  "fps": 3,
+  "fps": 2,
   "frame_size": [
     1320,
     704
@@ -112,5 +112,35 @@
     "outputs/sampling_quality_iwr_compgpu9_n064/online/surfaces_0020.npz": "7b1f37fe945afb3c6bcb18da82ec5625236fddbcc462a9017689382b924509ea",
     "outputs/sampling_quality_iwr_compgpu9_n064/metadata.json": "f48e23f184a27877b3fc5569a3429a7dae483a7b2cad7a6dc4fffaae61dc070b"
   },
-  "renderer_sha256": "6cd9be29fbb55d57fa07390502c41bcb795e2befa974d8756e95bca5b5f1cdc2"
+  "renderer_sha256": "6cd9be29fbb55d57fa07390502c41bcb795e2befa974d8756e95bca5b5f1cdc2",
+  "frame_durations_ms": [
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500
+  ],
+  "total_duration_ms": 10500,
+  "playback_adjustment": {
+    "method": "GIF frame-delay metadata changed without recompressing images",
+    "previous_gif_sha256": "7ad44799375f25349d0e0c897312a8c096636c9bfadfef56c0e53b47d8c55ec2",
+    "decoded_frame_pixels_unchanged": true,
+    "fps": 2
+  }
 }

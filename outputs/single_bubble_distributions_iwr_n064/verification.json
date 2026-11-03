@@ -3,5 +3,31 @@
   "input_hashes_match": true,
   "source_hashes_match": true,
   "all_21_frames_decode": true,
-  "saved_histograms_reconstructed_exact": true
+  "saved_histograms_reconstructed_exact": true,
+  "decoded_frames": 21,
+  "frame_durations_ms": [
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500
+  ],
+  "total_duration_ms": 10500,
+  "decoded_frame_pixels_unchanged": true
 }
