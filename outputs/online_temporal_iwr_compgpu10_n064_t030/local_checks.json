@@ -1,0 +1,61 @@
+{
+  "passed": true,
+  "source_hashes_match": true,
+  "saved_online_offline_products_exact": true,
+  "histogram_reconstruction_and_energy_checks_passed": true,
+  "minimum_surface_boundary_clearance": 0.14379701018333435,
+  "minimum_surface_boundary_clearance_cells": 9.203008651733398,
+  "tracking_status_counts": {
+    "forward": {
+      "not_yet_detected": 1,
+      "initialized": 1,
+      "continued": 29
+    },
+    "reverse": {
+      "not_yet_detected": 12,
+      "initialized": 1,
+      "continued": 18
+    }
+  },
+  "final_sampling_quality": {
+    "time": "0.30000001192092896",
+    "event_index": "30",
+    "all_surface_samples": "8160",
+    "all_sample_positions_known": "8160",
+    "all_sample_positions_unknown": "0",
+    "all_sampling_valid": "8160",
+    "all_upstream_inside_injection": "0",
+    "all_downstream_inside_injection": "0",
+    "reverse_surface_samples": "792",
+    "reverse_sample_positions_known": "792",
+    "reverse_sample_positions_unknown": "0",
+    "reverse_sampling_valid": "792",
+    "reverse_upstream_inside_injection": "0",
+    "reverse_downstream_inside_injection": "0",
+    "forward_surface_samples": "7368",
+    "forward_sample_positions_known": "7368",
+    "forward_sample_positions_unknown": "0",
+    "forward_sampling_valid": "7368",
+    "forward_upstream_inside_injection": "0",
+    "forward_downstream_inside_injection": "0"
+  },
+  "animations": {
+    "distributions": {
+      "decoded_frames": 31,
+      "total_duration_ms": 15500,
+      "input_hashes_match": true
+    },
+    "histories": {
+      "decoded_frames": 31,
+      "total_duration_ms": 15500,
+      "input_hashes_match": true
+    },
+    "evolution": {
+      "decoded_frames": 31,
+      "total_duration_ms": 15500,
+      "input_hashes_match": true
+    }
+  },
+  "remote_final_gas_state_matches": true,
+  "full_states_rechecked_locally": false
+}

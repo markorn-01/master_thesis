@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "compared_events": 31,
+  "fields_per_event": 41,
+  "max_absolute_scalar_difference": 0.0,
+  "histogram_counts_exact": true,
+  "scalar_rtol": 1e-06,
+  "scalar_atol": 1e-08,
+  "sparse_surfaces_match": true,
+  "sparse_surface_events": 31,
+  "sampling_quality_matches": true,
+  "compared_quality_events": 31,
+  "tracking_matches": true,
+  "compared_track_rows": 62,
+  "energy_matches": true,
+  "compared_energy_events": 31,
+  "offline_batch_energy_matches": true,
+  "final_gas_state_matches": true
+}
