@@ -13,6 +13,7 @@ from experiments.wind_bubble.run_single_bubble import build_problem
 from experiments.wind_bubble.run_two_bubbles import (
     SOURCES, INJECTION_RADIUS, make_catalog, CollisionWriter, compare_outputs,
 )
+from experiments.wind_bubble.two_bubble_source_budget import budget_plan
 
 
 class TwoSourceInjectionTests(unittest.TestCase):
@@ -60,6 +61,35 @@ class TwoSourceInjectionTests(unittest.TestCase):
         c = self.configuration(SOURCES)._replace(solver_mode=FINITE_DIFFERENCE)
         with self.assertRaisesRegex(ValueError, 'finite-volume EI'):
             finalize_config(c, self.state.shape)
+
+    def test_budget_matched_parameters_drive_actual_ei_mass_and_energy(self):
+        ref_plan=budget_plan(64)
+        ref=dict(status='complete',source_positions=SOURCES,injection_radius=INJECTION_RADIUS,
+                 injection_prescription='existing EI analytic-volume normalization and radius-minus-half-cell mask',
+                 **{k:ref_plan[k] for k in ['num_cells','injection_cell_counts','wind_terminal_velocity',
+                                          'wind_mass_loss_rate_per_source','discrete_mass_rates','discrete_energy_rates']})
+        plan=budget_plan(32,ref)
+        params=self.params._replace(wind_params=self.params.wind_params._replace(
+            wind_mass_loss_rate=plan['wind_mass_loss_rate_per_source']))
+        dt=.001
+        result=np.asarray(_wind_injection(self.state,jnp.asarray(dt),self.configuration(SOURCES),params,self.helper,self.registry))
+        increment=result-np.asarray(self.state);dx=float(self.config.grid_spacing)
+        mass=increment[self.registry.density_index].sum()*dx**3/dt
+        energy=increment[self.registry.pressure_index].sum()*dx**3/(float(params.gamma)-1)/dt
+        np.testing.assert_allclose(mass,sum(ref['discrete_mass_rates']),rtol=1e-4)
+        np.testing.assert_allclose(energy,sum(ref['discrete_energy_rates']),rtol=1e-5)
+
+    def test_prescribed_energy_rate_is_not_state_independent_net_deposition(self):
+        before=self.state.at[self.registry.velocity_index.x].set(1.)
+        dt=.001;config=self.configuration(SOURCES)
+        after=_wind_injection(before,jnp.asarray(dt),config,self.params,self.helper,self.registry)
+        def energy(state):
+            a=np.asarray(state,dtype=float)
+            speed2=sum(a[k]**2 for k in [self.registry.velocity_index.x,self.registry.velocity_index.y,self.registry.velocity_index.z])
+            return a[self.registry.pressure_index]/(float(self.params.gamma)-1)+.5*a[self.registry.density_index]*speed2
+        net=float((energy(after)-energy(before)).sum()*float(config.grid_spacing)**3/dt)
+        prescribed=sum(budget_plan(32)['discrete_energy_rates'])
+        self.assertGreater(abs(net-prescribed),1e-4)
 
 
 class CollisionProductTests(unittest.TestCase):

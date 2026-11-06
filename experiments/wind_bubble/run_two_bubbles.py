@@ -25,9 +25,7 @@ from experiments.wind_bubble.run_online_bubble import (
     diagnostic_payload, distribution, MACH_EDGES, DENSITY_EDGES,
 )
 from experiments.wind_bubble.sparse_surfaces import surface_sample_arrays
-
-SOURCES = ((.35, .5, .5), (.65, .5, .5))
-INJECTION_RADIUS = .0625
+from experiments.wind_bubble.two_bubble_source_budget import SOURCES, INJECTION_RADIUS, budget_plan
 
 
 def source_distances(positions, sources):
@@ -159,6 +157,15 @@ def run(args):
     injection_counts = [int((np.linalg.norm(centers-np.asarray(s), axis=-1) <= INJECTION_RADIUS-dx/2).sum()) for s in SOURCES]
     if not all(injection_counts):
         raise ValueError('Resolution leaves an empty injection mask.')
+    reference_path=getattr(args,'match_source_budget',None)
+    reference=json.loads(Path(reference_path).read_text()) if reference_path is not None else None
+    budget=budget_plan(args.num_cells,reference,float(params.wind_params.wind_mass_loss_rate),
+                       float(params.wind_params.wind_final_velocity),actual_counts=injection_counts)
+    if reference is not None:
+        params=params._replace(wind_params=params.wind_params._replace(
+            wind_mass_loss_rate=budget['wind_mass_loss_rate_per_source']))
+        print(f"Matching reference discrete source budget: mass-parameter scale={budget['parameter_scale']:.9g}; "
+              f"prescribed energy rates={budget['discrete_energy_rates']}",flush=True)
     args.output_dir.mkdir(parents=True, exist_ok=False)
     try:
         revision = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()
@@ -169,17 +176,19 @@ def run(args):
                     Path('experiments/wind_bubble/run_online_bubble.py'),
                     Path('astronomix/_modules/_stellar_wind/stellar_wind.py'),
                     Path('astronomix/_modules/_stellar_wind/stellar_wind_options.py'),
+                    Path('experiments/wind_bubble/two_bubble_source_budget.py'),
                     Path('astronomix/option_classes/simulation_config.py')]
-    volume = 4*np.pi*INJECTION_RADIUS**3/3
     metadata = dict(status='running', commit=revision, backend=jax.default_backend(),
                     python=platform.python_version(), jax=jax.__version__, num_cells=args.num_cells,
                     t_end=args.t_end, requested_times=np.asarray(times).tolist(),
                     source_positions=SOURCES, injection_radius=INJECTION_RADIUS,
-                    wind_mass_loss_rate_per_source=.01, wind_terminal_velocity=10.,
-                    nominal_wind_luminosity_per_source=.5, nominal_total_wind_luminosity=1.,
+                    wind_mass_loss_rate_per_source=budget['wind_mass_loss_rate_per_source'], wind_terminal_velocity=budget['wind_terminal_velocity'],
+                    nominal_wind_luminosity_per_source=budget['nominal_wind_luminosity_per_source'],
+                    nominal_total_wind_luminosity=budget['nominal_total_wind_luminosity'],
                     injection_cell_counts=injection_counts,
-                    discrete_mass_rates=[.01*n*dx**3/volume for n in injection_counts],
-                    discrete_energy_rates=[.5*n*dx**3/volume for n in injection_counts],
+                    discrete_mass_rates=budget['discrete_mass_rates'],discrete_energy_rates=budget['discrete_energy_rates'],
+                    source_budget_plan=budget,
+                    source_budget_reference=dict(path=str(reference_path),sha256=hashlib.sha256(Path(reference_path).read_bytes()).hexdigest()) if reference is not None else None,
                     injection_prescription='existing EI analytic-volume normalization and radius-minus-half-cell mask',
                     ambient_density=1., ambient_pressure=.01, gamma=5/3, domain=[0., 1.],
                     units='dimensionless baseline code units', surface_catalog_schema_version=3,
@@ -242,6 +251,8 @@ def main():
     parser.add_argument('--t-end', type=float, default=.16)
     parser.add_argument('--verify-offline', action='store_true')
     parser.add_argument('--require-gpu', action='store_true')
+    parser.add_argument('--match-source-budget',type=Path,default=None,
+                        help='Explicitly adjust the shared mass-rate parameter to match this completed run metadata\'s discrete mass and energy rates.')
     parser.add_argument('--output-dir', type=Path, default=Path('outputs/two_bubbles_n064'))
     run(parser.parse_args())
 

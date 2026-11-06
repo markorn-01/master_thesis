@@ -1,0 +1,157 @@
+{
+  "status": "ready_for_remote_run",
+  "target_run_complete": false,
+  "reference_num_cells": 64,
+  "target_num_cells": 128,
+  "reference_budget": {
+    "num_cells": 64,
+    "injection_cell_counts": [
+      176,
+      176
+    ],
+    "parameter_scale": 1.0,
+    "energy_rate_definition": "Integrated prescribed mechanical-energy source coefficient before the state-dependent EI pressure conversion; not measured net gas-energy deposition.",
+    "requested_mass_loss_rate_per_source": 0.01,
+    "wind_mass_loss_rate_per_source": 0.01,
+    "wind_terminal_velocity": 10.0,
+    "nominal_wind_luminosity_per_source": 0.5,
+    "nominal_total_wind_luminosity": 1.0,
+    "discrete_mass_rates": [
+      0.006565141402540683,
+      0.006565141402540683
+    ],
+    "discrete_energy_rates": [
+      0.32825707012703415,
+      0.32825707012703415
+    ],
+    "unmatched_discrete_mass_rates": [
+      0.006565141402540683,
+      0.006565141402540683
+    ],
+    "unmatched_discrete_energy_rates": [
+      0.32825707012703415,
+      0.32825707012703415
+    ],
+    "budget_matched": true,
+    "target_discrete_mass_rates": [
+      0.006565141402540683,
+      0.006565141402540683
+    ],
+    "target_discrete_energy_rates": [
+      0.32825707012703415,
+      0.32825707012703415
+    ]
+  },
+  "target_unmatched": {
+    "num_cells": 128,
+    "injection_cell_counts": [
+      1780,
+      1780
+    ],
+    "parameter_scale": 1.0,
+    "energy_rate_definition": "Integrated prescribed mechanical-energy source coefficient before the state-dependent EI pressure conversion; not measured net gas-energy deposition.",
+    "requested_mass_loss_rate_per_source": 0.01,
+    "wind_mass_loss_rate_per_source": 0.01,
+    "wind_terminal_velocity": 10.0,
+    "nominal_wind_luminosity_per_source": 0.5,
+    "nominal_total_wind_luminosity": 1.0,
+    "discrete_mass_rates": [
+      0.008299681602643761,
+      0.008299681602643761
+    ],
+    "discrete_energy_rates": [
+      0.41498408013218807,
+      0.41498408013218807
+    ],
+    "unmatched_discrete_mass_rates": [
+      0.008299681602643761,
+      0.008299681602643761
+    ],
+    "unmatched_discrete_energy_rates": [
+      0.41498408013218807,
+      0.41498408013218807
+    ],
+    "budget_matched": false,
+    "target_discrete_mass_rates": null,
+    "target_discrete_energy_rates": null
+  },
+  "target_matched": {
+    "num_cells": 128,
+    "injection_cell_counts": [
+      1780,
+      1780
+    ],
+    "parameter_scale": 0.7910112359550562,
+    "energy_rate_definition": "Integrated prescribed mechanical-energy source coefficient before the state-dependent EI pressure conversion; not measured net gas-energy deposition.",
+    "requested_mass_loss_rate_per_source": 0.01,
+    "wind_mass_loss_rate_per_source": 0.007910112359550562,
+    "wind_terminal_velocity": 10.0,
+    "nominal_wind_luminosity_per_source": 0.3955056179775281,
+    "nominal_total_wind_luminosity": 0.7910112359550562,
+    "discrete_mass_rates": [
+      0.006565141402540683,
+      0.006565141402540683
+    ],
+    "discrete_energy_rates": [
+      0.32825707012703415,
+      0.32825707012703415
+    ],
+    "unmatched_discrete_mass_rates": [
+      0.008299681602643761,
+      0.008299681602643761
+    ],
+    "unmatched_discrete_energy_rates": [
+      0.41498408013218807,
+      0.41498408013218807
+    ],
+    "budget_matched": true,
+    "target_discrete_mass_rates": [
+      0.006565141402540683,
+      0.006565141402540683
+    ],
+    "target_discrete_energy_rates": [
+      0.32825707012703415,
+      0.32825707012703415
+    ]
+  },
+  "unmatched_energy_increase_percent": 26.42045454545454,
+  "analysis_events": 17,
+  "t_end": 0.16,
+  "requested_times": [
+    0.0,
+    0.009999999776482582,
+    0.019999999552965164,
+    0.029999999329447746,
+    0.03999999910593033,
+    0.04999999701976776,
+    0.05999999865889549,
+    0.07000000029802322,
+    0.07999999821186066,
+    0.08999999612569809,
+    0.09999999403953552,
+    0.10999999940395355,
+    0.11999999731779099,
+    0.12999999523162842,
+    0.14000000059604645,
+    0.14999999105930328,
+    0.1599999964237213
+  ],
+  "inspection_times": [
+    0.04,
+    0.08,
+    0.12,
+    0.13,
+    0.14,
+    0.16
+  ],
+  "physics_source_hashes": {
+    "astronomix/_modules/_stellar_wind/stellar_wind.py": "28ab5305fa9ee4e0f66031a9d7ae0de654e69126d409c9ed59f106934a2a69a4",
+    "astronomix/_modules/_stellar_wind/stellar_wind_options.py": "3127be1c92e9847e802d3c50cbcbcb586c0ed1f55b4bbcb31b380d47d3805dd8",
+    "astronomix/option_classes/simulation_config.py": "07a599138c450e4c294901efc6837b808827895ebe474e0226758960b7472527"
+  },
+  "reference_sha256": {
+    "outputs/two_bubbles_iwr_compgpu9_n064/metadata.json": "0de3101bb4106541ae5edce2ce21596d0e64d9fbbe066532612c7ccd2766392a",
+    "outputs/two_bubbles_iwr_compgpu9_n064/online/history.csv": "1bc79c3a8bb377fb4e3ddbdb97e7e49cde40e4456ad5ccb800586b97a4e1b285"
+  },
+  "interpretation": "Matched discrete total mass/energy rates; injection geometry and numerical source profile still differ. Not proof of convergence."
+}

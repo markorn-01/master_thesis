@@ -1,0 +1,29 @@
+{
+  "focused_tests_passed": 15,
+  "source_budget_tests": 5,
+  "two_bubble_jax_tests": 10,
+  "cpu_workflow": {
+    "num_cells": 32,
+    "events": 3,
+    "t_end": 0.01,
+    "online_offline": {
+      "passed": true,
+      "compared_events": 3,
+      "fields_per_event": 21,
+      "max_absolute_scalar_difference": 0.0,
+      "histogram_counts_exact": true,
+      "sparse_surfaces_match": true,
+      "background_slices_match": true,
+      "scalar_rtol": 1e-06,
+      "scalar_atol": 1e-08,
+      "final_gas_state_matches": true
+    }
+  },
+  "target_128_gpu_run_complete": false,
+  "energy_budget_scope": "Prescribed mechanical-energy coefficient, not guaranteed net deposited energy.",
+  "source_sha256": {
+    "experiments/wind_bubble/run_two_bubbles.py": "9df0a3243a9f27c13e9eeb7e852981c3b12bd00f7190f640c3fd524899a2f27d",
+    "experiments/wind_bubble/two_bubble_source_budget.py": "4dfd054ade9d2c7f651bb56b443cc80b8f91eacd87f56e574445349b648afbb3",
+    "experiments/wind_bubble/prepare_two_bubble_resolution_check.py": "eb20243180559df28a8289ade7d1f4486fe86d319ec3654f2e065469debf3f16"
+  }
+}
