@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "configurations": 12,
+  "nodes": 80,
+  "pair_scores": 570,
+  "candidate_states": 480,
+  "independently_recomputed_pair_scores": 150,
+  "inputs_and_sources_unchanged": true,
+  "scope": "Geometry/accounting consistency, not validated physical tracking."
+}
