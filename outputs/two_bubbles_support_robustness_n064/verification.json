@@ -1,0 +1,11 @@
+{
+  "software_and_readback_checks_passed": true,
+  "cutoff_partitions_checked": 170,
+  "adjacent_configurations": 320,
+  "independently_checked_link_overlap_counts": 50,
+  "inputs_and_sources_unchanged": true,
+  "near_parallel_false_link_control_passed": false,
+  "known_counterexample_recorded": true,
+  "ready_for_physical_identity_assignment": false,
+  "scope": "Checks verify recorded behavior, including a known false link; they do not make the method physically valid."
+}

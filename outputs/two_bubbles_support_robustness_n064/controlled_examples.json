@@ -1,0 +1,55 @@
+[
+  {
+    "case": "near_parallel_distractor",
+    "expected_parent_groups": [
+      0
+    ],
+    "accepted_parent_groups": [
+      0,
+      1
+    ],
+    "unexpected_parent_groups": [
+      1
+    ],
+    "missed_parent_groups": [],
+    "redundant_accepted_parents": 2
+  },
+  {
+    "case": "far_parallel_distractor",
+    "expected_parent_groups": [
+      0
+    ],
+    "accepted_parent_groups": [
+      0
+    ],
+    "unexpected_parent_groups": [],
+    "missed_parent_groups": [],
+    "redundant_accepted_parents": 0
+  },
+  {
+    "case": "opposite_normal_distractor",
+    "expected_parent_groups": [
+      0
+    ],
+    "accepted_parent_groups": [
+      0
+    ],
+    "unexpected_parent_groups": [],
+    "missed_parent_groups": [],
+    "redundant_accepted_parents": 0
+  },
+  {
+    "case": "complementary_patch_support",
+    "expected_parent_groups": [
+      0,
+      1
+    ],
+    "accepted_parent_groups": [
+      0,
+      1
+    ],
+    "unexpected_parent_groups": [],
+    "missed_parent_groups": [],
+    "redundant_accepted_parents": 0
+  }
+]
