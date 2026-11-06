@@ -1,0 +1,48 @@
+{
+  "input_sha256": {
+    "outputs/two_bubbles_iwr_compgpu9_n064/online/surfaces_0007.npz": "99757aea2db45506f3dae452a1e51a3e41e6739b9ab689d827fab15042be18ee",
+    "outputs/two_bubbles_iwr_compgpu9_n064/online/surfaces_0008.npz": "4b73dd226080bfcccbfc7c903d7bfcf7dfc378b01b7f1a12304038f0e14997a5",
+    "outputs/two_bubbles_iwr_compgpu9_n064/online/surfaces_0009.npz": "7aa96fd6b7fedacf5d61de69d8b6e8631e5a5485212c9fd790b2008735dd2c62",
+    "outputs/two_bubbles_iwr_compgpu9_n064/online/surfaces_0010.npz": "e099e4a3f47bbda9062d3c3a2f77d2ef1e4ae8921b7d048732fef7931127a790",
+    "outputs/two_bubbles_iwr_compgpu9_n064/online/surfaces_0012.npz": "ef66a3662ba867a325dbf711abb258ef0b1a89241aa4f6416cadd17752df5c3f",
+    "outputs/two_bubbles_iwr_compgpu9_n064/online/surfaces_0013.npz": "1a449655e856a1cc4ff24e0b317329ac8752cc26d9a491e55c5cd693958f859c",
+    "outputs/two_bubbles_iwr_compgpu9_n064/online/surfaces_0014.npz": "1cf6518c373f0c0359dfc13ac08b975b15d0c3bec6c50ae810d4fcd694d7e896",
+    "outputs/two_bubbles_iwr_compgpu9_n064/online/surfaces_0015.npz": "e44dbf8f0c38a9bfedea7a705fb530f4f93c349af0def1a6dd15196f51e62d5c"
+  },
+  "input_hashes_unchanged": true,
+  "transitions": [
+    7,
+    9,
+    12,
+    13,
+    14
+  ],
+  "configurations": 60,
+  "source_sha256": {
+    "/Users/minhn/Documents/Heidelberg University/fifth_semester/Thesis/master_thesis/experiments/astrolink/check_patch_support.py": "c9ad46357d967b0572a42add294ee362170416e56fe0bef6ed354188e4ef02cc",
+    "experiments/astrolink/patch_support.py": "8ed9454ba810afaa14cc3327029f9a54ea75c3ed8d6b628f633c760e1f06b39d",
+    "experiments/astrolink/shock_connectivity.py": "6125812b67844ed5fbbedd637b18df291069744dab057b282b9419e3522dac7c"
+  },
+  "numpy": "2.4.6",
+  "scipy": "1.17.1",
+  "min_parent_coverage": 0.5,
+  "min_child_coverage": 0.5,
+  "association_normal_angle": 60.0,
+  "segmentation_radius_cells": 1.5,
+  "segmentation_angles": [
+    30,
+    60
+  ],
+  "association_distance_cells": [
+    1.5,
+    2.5,
+    3.5
+  ],
+  "dominance_margins": [
+    0.1,
+    0.25
+  ],
+  "minimum_group_size": 20,
+  "scope": "Asymmetric pooled geometric support, not persistent physical tracking or automatic physical mergers",
+  "source_overlap": "Recorded for inspection, not used to select associations or infer ownership"
+}

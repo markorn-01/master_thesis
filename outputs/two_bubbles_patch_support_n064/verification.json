@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "configurations": 60,
+  "independently_checked_parent_choices": 222,
+  "independently_checked_child_unions": 234,
+  "inputs_and_sources_unchanged": true,
+  "scope": "Geometry and saved accounting; not physical identity validation."
+}
