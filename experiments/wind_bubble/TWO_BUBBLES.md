@@ -95,8 +95,17 @@ The local CPU 32³ trial used nine events to t=0.16. Online/offline verification
 passed for all events, all 21 history fields, exact histogram counts, sparse
 catalogs, background slices and final gas states. Finite scalar differences were
 zero. Representative separate and interacting stages were rendered and inspected.
-This is low-resolution workflow validation, not physical convergence. GPU validation
-and the full compatible remote regression suite remain outstanding.
+This is low-resolution workflow validation, not physical convergence.
+
+The subsequent 64³ GPU run on compgpu9 (user-selected physical GPU 5) passed
+all 17 events to t=0.16. Remote equivalence includes 21 history fields with zero
+finite scalar differences, exact histogram counts, matching catalogs and slices,
+and final gas-state agreement. Local readback of the imported dataset found
+exact saved CSV/NPZ matches and independently checked histograms, percentiles,
+both-source selection and endpoint flags. Minimum detected-surface clearance
+over saved events is 6.42 cells. See outputs/two_bubbles_iwr_compgpu9_n064/README.md.
+The eight focused tests also passed remotely. The full compatible remote
+regression suite remains outstanding.
 
 ## Next after GPU verification
 

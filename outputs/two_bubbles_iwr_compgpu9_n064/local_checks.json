@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "source_hashes_match": true,
+  "events": 17,
+  "history_fields": 21,
+  "saved_online_offline_csv_and_npz_exact": true,
+  "histograms_percentiles_source_selection_and_endpoint_flags_recomputed": true,
+  "minimum_surface_boundary_clearance": 0.10031813383102417,
+  "minimum_surface_boundary_clearance_cells": 6.420360565185547,
+  "final_surface_samples": 6168,
+  "remote_final_gas_state_matches": true,
+  "full_states_rechecked_locally": false,
+  "validation_scope": "GPU workflow equivalence and local readback, not physical convergence"
+}

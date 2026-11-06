@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "compared_events": 17,
+  "fields_per_event": 21,
+  "max_absolute_scalar_difference": 0.0,
+  "histogram_counts_exact": true,
+  "sparse_surfaces_match": true,
+  "background_slices_match": true,
+  "scalar_rtol": 1e-06,
+  "scalar_atol": 1e-08,
+  "final_gas_state_matches": true
+}

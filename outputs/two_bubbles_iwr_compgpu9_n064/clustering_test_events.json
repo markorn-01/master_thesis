@@ -1,0 +1,26 @@
+{
+  "purpose": "first per-event clustering comparisons, no labels yet",
+  "events": [
+    {
+      "index": 4,
+      "time": 0.04,
+      "stage": "separated"
+    },
+    {
+      "index": 8,
+      "time": 0.08,
+      "stage": "near_contact"
+    },
+    {
+      "index": 16,
+      "time": 0.16,
+      "stage": "interacting"
+    }
+  ],
+  "comparisons": [
+    "positions only",
+    "positions plus normals"
+  ],
+  "source_positions_are_not_cluster_labels": true,
+  "expected_cluster_count": null
+}
