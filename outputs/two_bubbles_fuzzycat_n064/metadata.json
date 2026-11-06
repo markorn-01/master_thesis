@@ -1,0 +1,62 @@
+{
+  "events": [
+    4,
+    8,
+    16
+  ],
+  "ensemble_realizations": 12,
+  "astrolink_parameter_settings": [
+    "al_w0_k20_sauto",
+    "al_w0_k20_s2",
+    "al_w0_k40_sauto",
+    "al_w0_k40_s2",
+    "al_w1_k20_sauto",
+    "al_w1_k20_s2",
+    "al_w1_k40_sauto",
+    "al_w1_k40_s2",
+    "al_w4_k20_sauto",
+    "al_w4_k20_s2",
+    "al_w4_k40_sauto",
+    "al_w4_k40_s2"
+  ],
+  "order_seeds": [
+    0,
+    42,
+    7
+  ],
+  "encodings": [
+    "partition",
+    "hierarchy"
+  ],
+  "primary_root_included": false,
+  "root_control": "event8, original order, hierarchy",
+  "min_stabilities": [
+    0.5,
+    0.75
+  ],
+  "min_intra_jaccard": 0.5,
+  "max_inter_jaccard": 0.5,
+  "window_size": null,
+  "n_ensembles": 19,
+  "n_selections": 38,
+  "empty_realizations": "retained in nSamples denominator",
+  "python": "3.11.14",
+  "numpy": "2.4.6",
+  "fuzzycategories": "0.3.2",
+  "numba": "0.65.1",
+  "implementation_sha256": "c4c358167aae8c6185b9fee81b01b66844bab9f2b1e7ffa0ac91e9a00aa47322",
+  "input_sha256": {
+    "outputs/two_bubbles_contact_sensitivity_n064/event_0004.npz": "3d6ac04caba1c27843424a6d0bebfd089380c0af305255a1370700ccd9ba51ef",
+    "outputs/two_bubbles_contact_sensitivity_n064/event_0008.npz": "d51dee260a548eee57d2ff9861d6aed4f41275a72eba98f78cf90ff62d183d24",
+    "outputs/two_bubbles_contact_sensitivity_n064/event_0016.npz": "6a8a87757c78130da33d404ceca9e8d29dcbd40290d92021cea6828a83adb8c5"
+  },
+  "input_hashes_unchanged": true,
+  "source_sha256": {
+    "/Users/minhn/Documents/Heidelberg University/fifth_semester/Thesis/master_thesis/experiments/astrolink/check_fuzzycat_ensemble.py": "cf2e3f9945215e7188c1ba2e528fee49d8acee63ba5ef4d50ac3650d30063a0f",
+    "experiments/astrolink/fuzzycat_inputs.py": "e3771a78120b8945661e25975f3fe2781cd88aca06d29ec7cda65ebac4fae294"
+  },
+  "execution": "unmodified FuzzyCat; optional package installed in temporary directory; no JAX/GPU simulation",
+  "reciprocal_weight_truncation_detected": true,
+  "membership_interpretation": "Library integer-weight truncation affects some memberships; float references are diagnostics, not corrected memberships.",
+  "scope": "Same-event grouping robustness to declared parameter choices; not temporal tracking or physical identity validation"
+}

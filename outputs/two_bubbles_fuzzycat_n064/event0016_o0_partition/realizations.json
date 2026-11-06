@@ -1,0 +1,86 @@
+[
+  {
+    "sample": 0,
+    "config": "al_w0_k20_sauto",
+    "order_seed": 0,
+    "clusters": 3,
+    "empty": false
+  },
+  {
+    "sample": 1,
+    "config": "al_w0_k20_s2",
+    "order_seed": 0,
+    "clusters": 12,
+    "empty": false
+  },
+  {
+    "sample": 2,
+    "config": "al_w0_k40_sauto",
+    "order_seed": 0,
+    "clusters": 3,
+    "empty": false
+  },
+  {
+    "sample": 3,
+    "config": "al_w0_k40_s2",
+    "order_seed": 0,
+    "clusters": 11,
+    "empty": false
+  },
+  {
+    "sample": 4,
+    "config": "al_w1_k20_sauto",
+    "order_seed": 0,
+    "clusters": 3,
+    "empty": false
+  },
+  {
+    "sample": 5,
+    "config": "al_w1_k20_s2",
+    "order_seed": 0,
+    "clusters": 3,
+    "empty": false
+  },
+  {
+    "sample": 6,
+    "config": "al_w1_k40_sauto",
+    "order_seed": 0,
+    "clusters": 20,
+    "empty": false
+  },
+  {
+    "sample": 7,
+    "config": "al_w1_k40_s2",
+    "order_seed": 0,
+    "clusters": 27,
+    "empty": false
+  },
+  {
+    "sample": 8,
+    "config": "al_w4_k20_sauto",
+    "order_seed": 0,
+    "clusters": 3,
+    "empty": false
+  },
+  {
+    "sample": 9,
+    "config": "al_w4_k20_s2",
+    "order_seed": 0,
+    "clusters": 4,
+    "empty": false
+  },
+  {
+    "sample": 10,
+    "config": "al_w4_k40_sauto",
+    "order_seed": 0,
+    "clusters": 3,
+    "empty": false
+  },
+  {
+    "sample": 11,
+    "config": "al_w4_k40_s2",
+    "order_seed": 0,
+    "clusters": 3,
+    "empty": false
+  }
+]

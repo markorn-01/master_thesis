@@ -1,0 +1,20 @@
+{
+  "input_and_mapping_checks_passed": true,
+  "jaccard_pairs_checked": 40184,
+  "selections_checked": 38,
+  "memberships_reconstructed_from_saved_library_weights": true,
+  "reciprocal_weight_control_passed": false,
+  "affected_selections": [
+    {
+      "result_directory": "event0008_o7_hierarchy",
+      "min_stability": 0.5,
+      "truncated_weight_cases": 4,
+      "max_absolute_flat_membership_difference": 0.1875,
+      "interpretation": "Counterfactual floating-weight reconstruction with fixed selected clusters; library untouched."
+    }
+  ],
+  "library_modified": false,
+  "physical_identity_validation": false,
+  "audit_source_sha256": "546189e6b115039b14c7e64e9e9928cde4541c24a606ed1fd5ed232388c3e042",
+  "scope": "Reproduces saved library behavior, including known integer-weight truncation; not a physical validation."
+}

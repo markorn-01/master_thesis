@@ -1,0 +1,29 @@
+{
+  "package_version": "0.3.2",
+  "description": "Two input clusters per sample contribute to one selected fuzzy group.",
+  "sample_numbers": [
+    0,
+    0,
+    1,
+    1
+  ],
+  "expected_reciprocal_weights": [
+    [
+      0.5
+    ],
+    [
+      0.5
+    ]
+  ],
+  "actual_weights": [
+    [
+      0
+    ],
+    [
+      0
+    ]
+  ],
+  "actual_dtype": "int32",
+  "reciprocal_weight_check_passed": false,
+  "library_modified": false
+}

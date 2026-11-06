@@ -1,0 +1,2 @@
+# Optional CPU postprocessing dependency. Keep separate from the JAX environment.
+fuzzycategories==0.3.2
