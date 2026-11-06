@@ -1,0 +1,33 @@
+{
+  "events": [
+    6,
+    8,
+    9,
+    10
+  ],
+  "input_sha256": {
+    "outputs/two_bubbles_iwr_compgpu9_n064/online/surfaces_0006.npz": "2c2e8e501bc842cabcdbf85340e9ff55d177e3fad0e7019dbae5ae5124da4565",
+    "outputs/two_bubbles_iwr_compgpu9_n064/online/slice_0006.npz": "e47f49456204d0cdfb335202431780857654674d473e5a4ccc5740508aba3b39",
+    "outputs/two_bubbles_iwr_compgpu9_n064/online/surfaces_0008.npz": "4b73dd226080bfcccbfc7c903d7bfcf7dfc378b01b7f1a12304038f0e14997a5",
+    "outputs/two_bubbles_iwr_compgpu9_n064/online/slice_0008.npz": "94da776c78a1eb9ae94ebe61cdbdf5ed4698a6796fb66fab8c276e2dfd5e3bc9",
+    "outputs/two_bubbles_iwr_compgpu9_n064/online/surfaces_0009.npz": "7aa96fd6b7fedacf5d61de69d8b6e8631e5a5485212c9fd790b2008735dd2c62",
+    "outputs/two_bubbles_iwr_compgpu9_n064/online/slice_0009.npz": "3d5230c4611cf9bce064f53c4fee833ee345d7905b44d16e5a7af7ee39afb09e",
+    "outputs/two_bubbles_iwr_compgpu9_n064/online/surfaces_0010.npz": "e099e4a3f47bbda9062d3c3a2f77d2ef1e4ae8921b7d048732fef7931127a790",
+    "outputs/two_bubbles_iwr_compgpu9_n064/online/slice_0010.npz": "6f802398cf3d6657045c8efc5b20afd06469b707fdc2f0179a3b496d3fb31660"
+  },
+  "input_hashes_unchanged": true,
+  "reference": "raw components at r=1.5 cells, signed normal angle <=30 degrees",
+  "comparison_radius_cells": [
+    1.5,
+    2.5
+  ],
+  "comparison_angle_degrees": [
+    30,
+    60
+  ],
+  "interpretation": "relative graph connections, not physical shock truth labels",
+  "source_sha256": {
+    "/Users/minhn/Documents/Heidelberg University/fifth_semester/Thesis/master_thesis/experiments/astrolink/inspect_contact_connections.py": "99ce852e6beaaaf36e9b5abbc402c9bc7f4ff1c0a4a91c29a79df385529fda8e",
+    "experiments/astrolink/shock_connectivity.py": "6125812b67844ed5fbbedd637b18df291069744dab057b282b9419e3522dac7c"
+  }
+}

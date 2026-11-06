@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "events": 4,
+  "graph_settings_checked": 16,
+  "joining_edge_rows_checked": 904,
+  "input_and_source_hashes_match": true,
+  "partitions_match_prior_study": true,
+  "scope": "Saved geometry and bookkeeping; not independent physical validation."
+}
