@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "checked_runs": 336,
+  "checked_order_comparisons": 336,
+  "inputs_and_analysis_sources_unchanged": true,
+  "graph_partitions_recomputed": true,
+  "astrolink_display_mappings_reconstructed": true,
+  "model_fit_warnings": [
+    {
+      "event": 9,
+      "config": "al_w0_k20_sauto",
+      "order_seed": 7
+    },
+    {
+      "event": 9,
+      "config": "al_w0_k20_s2",
+      "order_seed": 7
+    },
+    {
+      "event": 10,
+      "config": "al_w0_k20_sauto",
+      "order_seed": 42
+    },
+    {
+      "event": 10,
+      "config": "al_w0_k20_s2",
+      "order_seed": 42
+    }
+  ],
+  "scope": "Data integrity and partition bookkeeping; not physical validation or a fresh AstroLink rerun."
+}

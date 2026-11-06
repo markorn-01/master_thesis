@@ -1,0 +1,68 @@
+{
+  "status": "complete",
+  "events": [
+    4,
+    6,
+    7,
+    8,
+    9,
+    10,
+    16
+  ],
+  "order_seeds": [
+    0,
+    42,
+    7
+  ],
+  "astrolink_runs": 252,
+  "graph_runs": 84,
+  "python": "3.11.14",
+  "astrolink": "0.5.4",
+  "numpy": "2.4.6",
+  "scipy": "1.17.1",
+  "al_normal_weights": [
+    0,
+    1,
+    4
+  ],
+  "al_k_den": [
+    20,
+    40
+  ],
+  "al_S": [
+    "auto",
+    2.0
+  ],
+  "adaptive": 0,
+  "intrinsic_dimension": 2,
+  "h_style": 1,
+  "workers": 1,
+  "graph_radius_cells": [
+    1.5,
+    2.5
+  ],
+  "graph_max_angle_degrees": [
+    30,
+    60
+  ],
+  "graph_min_display_size": 20,
+  "graph_rule": "undirected proximity edges with signed normal compatibility; no curvature or tangent-plane check",
+  "excluded_features": "no source positions or ownership, Mach, density or time in either clustering metric",
+  "input_sha256": {
+    "outputs/two_bubbles_iwr_compgpu9_n064/online/surfaces_0004.npz": "f8fb0610953737995c3809b2894cd59a34170db09d68ac880b57cea6461a0c09",
+    "outputs/two_bubbles_iwr_compgpu9_n064/online/surfaces_0006.npz": "2c2e8e501bc842cabcdbf85340e9ff55d177e3fad0e7019dbae5ae5124da4565",
+    "outputs/two_bubbles_iwr_compgpu9_n064/online/surfaces_0007.npz": "99757aea2db45506f3dae452a1e51a3e41e6739b9ab689d827fab15042be18ee",
+    "outputs/two_bubbles_iwr_compgpu9_n064/online/surfaces_0008.npz": "4b73dd226080bfcccbfc7c903d7bfcf7dfc378b01b7f1a12304038f0e14997a5",
+    "outputs/two_bubbles_iwr_compgpu9_n064/online/surfaces_0009.npz": "7aa96fd6b7fedacf5d61de69d8b6e8631e5a5485212c9fd790b2008735dd2c62",
+    "outputs/two_bubbles_iwr_compgpu9_n064/online/surfaces_0010.npz": "e099e4a3f47bbda9062d3c3a2f77d2ef1e4ae8921b7d048732fef7931127a790",
+    "outputs/two_bubbles_iwr_compgpu9_n064/online/surfaces_0016.npz": "a41dceb5308be44e571ca722037ac4f87ca10cdb9126db17c8fcb65d2339911f"
+  },
+  "input_hashes_unchanged": true,
+  "library_messages_captured": true,
+  "source_sha256": {
+    "/Users/minhn/Documents/Heidelberg University/fifth_semester/Thesis/master_thesis/experiments/astrolink/check_contact_stage.py": "262e44307965472c7731502c26665d1163fa8ecf26ac324b95edcc3163ee96ba",
+    "experiments/astrolink/shock_connectivity.py": "6125812b67844ed5fbbedd637b18df291069744dab057b282b9419e3522dac7c",
+    "experiments/astrolink/check_two_bubble_clustering.py": "124afdb31494619313c216e795ea91ce0c6f00597ea40ade7ceb1d8632d05cec"
+  },
+  "interpretation": "local surface segmentation candidates, not physical or temporal identity validation"
+}
