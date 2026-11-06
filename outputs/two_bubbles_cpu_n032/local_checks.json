@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "source_hashes_match": true,
+  "events": 9,
+  "minimum_surface_boundary_clearance": 0.13184130191802979,
+  "final_upstream_inside_any_source": 0,
+  "final_downstream_inside_any_source": 0,
+  "focused_tests_passed": 8,
+  "existing_regression_tests_passed": 16,
+  "validation_scope": "CPU workflow trial; GPU and full remote suite outstanding"
+}

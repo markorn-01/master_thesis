@@ -1,0 +1,89 @@
+{
+  "status": "complete",
+  "commit": "5f94e3a1f3bde8ddc2e5abf74dbf886cc256a0af",
+  "backend": "cpu",
+  "python": "3.12.4",
+  "jax": "0.6.2",
+  "num_cells": 32,
+  "t_end": 0.16,
+  "requested_times": [
+    0.0,
+    0.019999999552965164,
+    0.03999999910593033,
+    0.05999999865889549,
+    0.07999999821186066,
+    0.09999999403953552,
+    0.11999999731779099,
+    0.14000000059604645,
+    0.1599999964237213
+  ],
+  "source_positions": [
+    [
+      0.35,
+      0.5,
+      0.5
+    ],
+    [
+      0.65,
+      0.5,
+      0.5
+    ]
+  ],
+  "injection_radius": 0.0625,
+  "wind_mass_loss_rate_per_source": 0.01,
+  "wind_terminal_velocity": 10.0,
+  "nominal_wind_luminosity_per_source": 0.5,
+  "nominal_total_wind_luminosity": 1.0,
+  "injection_cell_counts": [
+    12,
+    12
+  ],
+  "discrete_mass_rates": [
+    0.0035809862195676453,
+    0.0035809862195676453
+  ],
+  "discrete_energy_rates": [
+    0.17904931097838228,
+    0.17904931097838228
+  ],
+  "injection_prescription": "existing EI analytic-volume normalization and radius-minus-half-cell mask",
+  "ambient_density": 1.0,
+  "ambient_pressure": 0.01,
+  "gamma": 1.6666666666666667,
+  "domain": [
+    0.0,
+    1.0
+  ],
+  "units": "dimensionless baseline code units",
+  "surface_catalog_schema_version": 3,
+  "surface_selection": "outside both injection spheres using refined positions",
+  "source_endpoint_flags": "per-source and union, advisory only",
+  "source_distances": "geometric descriptors, not shock ownership or physical labels",
+  "histogram_weighting": "one count per selected surface cell",
+  "radial_classification": false,
+  "temporal_tracking": false,
+  "surface_integrated_power": false,
+  "online_retains_gas_snapshots": false,
+  "verify_offline": true,
+  "transfer": "ten fixed-shape diagnostic grids plus two 2D slices",
+  "source_sha256": {
+    "/Users/minhn/Documents/Heidelberg University/fifth_semester/Thesis/master_thesis/experiments/wind_bubble/run_two_bubbles.py": "0ee04270448f8034595c7fbdb71180adda41c7a82cb11c2578234fb44609cb4c",
+    "experiments/shock/analyze_state.py": "6aa8dff9ab5bca380deb23f9d5c02a9d3cdc1b337e30c795aa2b400da8b2ff55",
+    "experiments/wind_bubble/sparse_surfaces.py": "0ad8795e477eab7863aecef14f37c261624336e63f31536d2010c91d44d84cc4",
+    "experiments/wind_bubble/run_online_bubble.py": "69d283bdc29ba2c087cebd5e593c59a8b66d3e5ee7d4035dffc9201e3351d975",
+    "astronomix/_modules/_stellar_wind/stellar_wind.py": "28ab5305fa9ee4e0f66031a9d7ae0de654e69126d409c9ed59f106934a2a69a4",
+    "astronomix/_modules/_stellar_wind/stellar_wind_options.py": "3127be1c92e9847e802d3c50cbcbcb586c0ed1f55b4bbcb31b380d47d3805dd8",
+    "astronomix/option_classes/simulation_config.py": "07a599138c450e4c294901efc6837b808827895ebe474e0226758960b7472527"
+  },
+  "actual_times": [
+    0.0,
+    0.019999999552965164,
+    0.03999999910593033,
+    0.05999999865889549,
+    0.07999999821186066,
+    0.09999999403953552,
+    0.11999999731779099,
+    0.14000000059604645,
+    0.1599999964237213
+  ]
+}

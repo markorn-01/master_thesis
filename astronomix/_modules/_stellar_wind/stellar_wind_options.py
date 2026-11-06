@@ -21,6 +21,10 @@ class WindConfig(NamedTuple):
     num_injection_cells: int = 10
     wind_injection_scheme: int = EI
     trace_wind_density: bool = False
+    # Optional stationary sources in physical coordinates. Empty keeps the
+    # original centered source. Currently supported for 3D Cartesian FV EI.
+    # WindParams describes EACH source, rather than their combined luminosity.
+    source_positions: tuple[tuple[float, float, float], ...] = ()
 
 
 class WindParams(NamedTuple):

@@ -31,7 +31,7 @@ from astronomix._modules._neural_net_force._neural_net_force_options import (
 )
 
 from jaxtyping import Array, Float, Bool, Int
-from astronomix._modules._stellar_wind.stellar_wind_options import WindConfig
+from astronomix._modules._stellar_wind.stellar_wind_options import EI, WindConfig
 from astronomix._modules._turbulent_forcing._turbulent_forcing_options import TurbulentForcingConfig
 
 # ===================== constant definition =====================
@@ -824,6 +824,23 @@ def finalize_config(config: SimulationConfig, state_shape) -> SimulationConfig:
                     left_boundary=REFLECTIVE_BOUNDARY, right_boundary=OPEN_BOUNDARY
                 )
             )
+
+    if config.wind_config.source_positions:
+        if (not config.wind_config.stellar_wind or config.dimensionality != 3
+                or config.geometry != CARTESIAN or config.solver_mode != FINITE_VOLUME
+                or config.wind_config.wind_injection_scheme != EI):
+            raise ValueError('Explicit wind sources require active 3D Cartesian finite-volume EI.')
+        positions = config.wind_config.source_positions
+        radius = config.wind_config.num_injection_cells * config.grid_spacing
+        lengths = (config.box_size.x, config.box_size.y, config.box_size.z)
+        if not isinstance(positions, tuple) or any(
+                not isinstance(p, tuple) or len(p) != 3
+                or not all(math.isfinite(x) for x in p) for p in positions):
+            raise ValueError('Wind source positions must be finite coordinate triples in a tuple.')
+        if any(not radius < x < length-radius for p in positions for x, length in zip(p, lengths)):
+            raise ValueError('Wind injection spheres must lie strictly within the domain.')
+        if any(math.dist(p, q) <= 2*radius for i, p in enumerate(positions) for q in positions[i+1:]):
+            raise ValueError('Explicit wind injection spheres must not overlap or touch.')
 
     if config.wind_config.stellar_wind:
         print(

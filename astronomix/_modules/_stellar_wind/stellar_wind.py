@@ -480,8 +480,20 @@ def _wind_ei3D(
     injection_radius = num_injection_cells * config.grid_spacing
     injection_volume = 4 / 3 * jnp.pi * injection_radius**3
 
-    # Inject only inside the spherical injection region at the box centre.
-    injection_mask = helper_data.r <= injection_radius - config.grid_spacing / 2
+    # Preserve the original centered calculation exactly unless explicit
+    # source positions were requested. Disjoint masks receive identical
+    # per-source rates, using the same analytic-volume EI prescription.
+    if config.wind_config.source_positions:
+        injection_mask = jnp.zeros_like(helper_data.r)
+        for position in config.wind_config.source_positions:
+            radius = jnp.linalg.norm(
+                helper_data.geometric_centers - jnp.asarray(position), axis=-1
+            )
+            injection_mask = injection_mask + (
+                radius <= injection_radius - config.grid_spacing / 2
+            )
+    else:
+        injection_mask = helper_data.r <= injection_radius - config.grid_spacing / 2
 
     # Mass injection: a uniform density source rate inside the mask.
     density_rate = wind_params.wind_mass_loss_rate / injection_volume
