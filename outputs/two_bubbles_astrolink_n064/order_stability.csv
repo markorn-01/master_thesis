@@ -1,0 +1,10 @@
+event_index,mode,reference_order_seed,other_order_seed,deepest_partition_adjusted_rand
+4,positions,0,42,1.0
+4,positions_normals_w1,0,42,1.0
+4,positions_normals_w4,0,42,0.0
+8,positions,0,42,1.0
+8,positions_normals_w1,0,42,1.0
+8,positions_normals_w4,0,42,0.5870679713464013
+16,positions,0,42,1.0
+16,positions_normals_w1,0,42,1.0
+16,positions_normals_w4,0,42,1.0

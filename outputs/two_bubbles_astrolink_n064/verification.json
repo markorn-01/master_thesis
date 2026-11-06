@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "runs": 18,
+  "input_hashes_unchanged": true,
+  "features_permutations_hierarchy_mappings_and_labels_reconstructed": true,
+  "geometry_mapping_tests_passed": 5,
+  "interpretation": "Internal accounting only; no physical shock labels validated"
+}

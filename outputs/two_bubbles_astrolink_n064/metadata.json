@@ -1,0 +1,52 @@
+{
+  "status": "complete",
+  "astrolink": "0.5.4",
+  "numpy": "2.4.6",
+  "python": "3.11.14",
+  "events": [
+    {
+      "index": 4,
+      "time": 0.03999999910593033,
+      "surface_samples": 1328
+    },
+    {
+      "index": 8,
+      "time": 0.07999999821186066,
+      "surface_samples": 3096
+    },
+    {
+      "index": 16,
+      "time": 0.1599999964237213,
+      "surface_samples": 6168
+    }
+  ],
+  "normal_weights": [
+    0.0,
+    1.0,
+    4.0
+  ],
+  "order_seeds": [
+    0,
+    42
+  ],
+  "k_den": 20,
+  "metric": "squared distance = |delta position / dx|^2 + w^2 |delta unit normal|^2",
+  "adaptive": 0,
+  "intrinsic_dimension": 2,
+  "S": "auto",
+  "h_style": 1,
+  "workers": 1,
+  "selection": "common finite positions and finite nonzero normals; no Mach filtering or subsampling",
+  "labels": "deepest non-root hierarchy entry for display; -1 no non-root group, -2 invalid geometry",
+  "temporal_tracking": false,
+  "source_ownership": false,
+  "input_hashes_unchanged": true,
+  "input_sha256": {
+    "outputs/two_bubbles_iwr_compgpu9_n064/online/surfaces_0004.npz": "f8fb0610953737995c3809b2894cd59a34170db09d68ac880b57cea6461a0c09",
+    "outputs/two_bubbles_iwr_compgpu9_n064/online/surfaces_0008.npz": "4b73dd226080bfcccbfc7c903d7bfcf7dfc378b01b7f1a12304038f0e14997a5",
+    "outputs/two_bubbles_iwr_compgpu9_n064/online/surfaces_0016.npz": "a41dceb5308be44e571ca722037ac4f87ca10cdb9126db17c8fcb65d2339911f"
+  },
+  "source_sha256": "124afdb31494619313c216e795ea91ce0c6f00597ea40ade7ceb1d8632d05cec",
+  "timing_scope": "exploratory wall times include first-call JIT and are not performance benchmarks",
+  "interpretation": "point-density clusters are hypotheses, not independently validated shock identities"
+}
