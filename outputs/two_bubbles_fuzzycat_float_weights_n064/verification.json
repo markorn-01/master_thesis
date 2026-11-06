@@ -1,0 +1,12 @@
+{
+  "readback_checks_passed": true,
+  "selections": 38,
+  "group_selection_and_orderings_unchanged": true,
+  "independent_float_membership_reference_matches": true,
+  "changed_selections": [
+    "event0008_o7_hierarchy"
+  ],
+  "corrected_reciprocal_control_passed": true,
+  "physical_identity_validation": false,
+  "scope": "Validates the isolated numerical correction on saved cases; does not validate temporal tracking."
+}

@@ -1,0 +1,28 @@
+{
+  "original_weights": [
+    [
+      0
+    ],
+    [
+      0
+    ]
+  ],
+  "experimental_weights": [
+    [
+      0.5
+    ],
+    [
+      0.5
+    ]
+  ],
+  "expected_weights": [
+    [
+      0.5
+    ],
+    [
+      0.5
+    ]
+  ],
+  "corrected_reciprocal_control_passed": true,
+  "base_class_still_unchanged": true
+}

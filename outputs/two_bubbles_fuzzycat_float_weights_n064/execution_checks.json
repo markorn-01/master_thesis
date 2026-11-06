@@ -1,0 +1,30 @@
+{
+  "execution_checks_passed": true,
+  "selections_compared": 38,
+  "selected_groups_exact": true,
+  "all_baselines_reproduced": true,
+  "floating_reference_matches": true,
+  "changed_selections": [
+    {
+      "event_index": 8,
+      "result_directory": "event0008_o7_hierarchy",
+      "min_stability": 0.5,
+      "fuzzy_groups": 1,
+      "selected_groups_exact": true,
+      "baseline_reproduced": true,
+      "raw_max_absolute_difference": 0.1875,
+      "flat_max_absolute_difference": 0.1875,
+      "changed_samples": 3096,
+      "old_nonzero_samples": 498,
+      "new_nonzero_samples": 3096,
+      "old_display_assigned": 296,
+      "new_display_assigned": 296,
+      "display_labels_exact": true,
+      "reference_matches": true,
+      "max_flat_membership_sum": 0.625
+    }
+  ],
+  "corrected_reciprocal_control_passed": true,
+  "installed_package_unchanged": true,
+  "physical_validation": false
+}
