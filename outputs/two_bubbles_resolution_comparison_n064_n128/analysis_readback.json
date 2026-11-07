@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "saved_partitions_checked": 204,
+  "selected_order_checks": [
+    {
+      "event_index": 12,
+      "mode": "native_cells",
+      "order_seed": 42,
+      "raw_partition_ARI": 1.0
+    },
+    {
+      "event_index": 12,
+      "mode": "common_physical_radius",
+      "order_seed": 42,
+      "raw_partition_ARI": 1.0
+    },
+    {
+      "event_index": 14,
+      "mode": "native_cells",
+      "order_seed": 42,
+      "raw_partition_ARI": 1.0
+    },
+    {
+      "event_index": 14,
+      "mode": "common_physical_radius",
+      "order_seed": 42,
+      "raw_partition_ARI": 1.0
+    }
+  ],
+  "input_hashes_unchanged": true,
+  "scope": "Saved graph accounting and order invariance, not physical identity validation."
+}

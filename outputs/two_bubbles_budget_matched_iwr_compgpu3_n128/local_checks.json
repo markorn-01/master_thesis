@@ -1,0 +1,21 @@
+{
+  "num_cells": 128,
+  "events": 17,
+  "readback_passed": true,
+  "source_hash_mismatches": [],
+  "expected_historical_runner_change": false,
+  "minimum_boundary_clearance": 0.10402768850326538,
+  "minimum_boundary_clearance_cells": 13.315544128417969,
+  "max_unknown_sample_positions": 0,
+  "offline_equivalence_repeated": false,
+  "full_gas_states_rechecked": false,
+  "status": "complete",
+  "backend": "gpu",
+  "paired_reference": "outputs/two_bubbles_iwr_compgpu9_n064",
+  "source_budget_reference_hash_checked": true,
+  "prescribed_budgets_match": true,
+  "saved_histograms_and_percentiles_recomputed": true,
+  "source_selection_and_endpoint_flags_recomputed": true,
+  "remote_tests_user_reported": 15,
+  "scope": "Imported GPU saved-product checks; no local full gas-state or 128\u00b3 online\u2013offline comparison."
+}
