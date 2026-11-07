@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "geometry_baselines_reproduced": 60,
+  "bootstrap_records_reproduced": 60,
+  "prediction_and_distance_summaries_checked": 180,
+  "independent_geometric_comparisons": 36,
+  "brute_force_nearest_distance_checks": 180,
+  "configurations_with_changed_accepted_links": 0,
+  "physical_identity_validated": false
+}
