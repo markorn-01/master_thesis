@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "independent_dense_bootstrap_checks": 13,
+  "pair_distance_moment_checks": 13,
+  "independent_final_comparisons": 117,
+  "known_failures_preserved": true,
+  "physical_tracker_validated": false
+}

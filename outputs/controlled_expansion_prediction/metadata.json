@@ -1,0 +1,25 @@
+{
+  "cases": 13,
+  "configurations": 117,
+  "bootstrap_gate": 0.2,
+  "gates": [
+    0.08,
+    0.2,
+    0.35
+  ],
+  "shuffle_checks": 117,
+  "max_shuffle_moment_absolute_difference": 2.7755575615628914e-17,
+  "motion_model": "Centroid plus scalar RMS-extent extrapolation; no future observations or truth initialization.",
+  "production_tracker_changed": false,
+  "physical_tracker_validated": false,
+  "source_sha256": {
+    "/Users/minhn/Documents/Heidelberg University/fifth_semester/Thesis/master_thesis/experiments/astrolink/check_expansion_prediction.py": "b45b40ad7a4596feec2b1456ae0ec48db39e130a534a3e7e9e36b1bfe1a63621",
+    "experiments/astrolink/controlled_expansion_cases.py": "ccbde010eb339a0ff5410509a4d9e8554c62254952b9afda064e9ec46e160c4f",
+    "experiments/astrolink/controlled_motion_cases.py": "f4cc275724d284c49c1be501b40c45d82481615025c45944ae93dded01d16fc6",
+    "experiments/astrolink/controlled_tracking_cases.py": "362d4f1af35765bd063653a6813e8e1b7e1a215a328431b6b4db4bc75d345cfc",
+    "experiments/astrolink/motion_prediction.py": "2ecf7c8448bea290e68c47b744d4fc69e54a8a0fe3ba376555b97dabc03bb7b6",
+    "experiments/astrolink/expansion_prediction.py": "f0a513be16e4e421c1b5b4416e1906749132d9d12da7fe9b0ed04eb3234d924a",
+    "experiments/astrolink/support_evidence.py": "4ad2c3776a069feddfb053438799e826e7b57b5835679da16a404e7b154063f5",
+    "experiments/astrolink/patch_support.py": "8ed9454ba810afaa14cc3327029f9a54ea75c3ed8d6b628f633c760e1f06b39d"
+  }
+}
