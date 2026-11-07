@@ -1,0 +1,5450 @@
+[
+  {
+    "case": "constant_translation",
+    "method": "geometry",
+    "gate": 0.08,
+    "accepted_links": [],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [],
+    "missed_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "exact_correspondence": false,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.3000000000000001
+        ],
+        "predecessor_group": 0
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 0.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 0.0,
+        "status": "insufficient_parent_support"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [],
+    "initialized_groups": 1,
+    "fallback_groups": 0
+  },
+  {
+    "case": "constant_translation",
+    "method": "centroid_prediction",
+    "gate": 0.08,
+    "accepted_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.3000000000000001
+        ],
+        "predecessor_group": 0
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          10
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 10,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      }
+    ],
+    "initialized_groups": 1,
+    "fallback_groups": 0
+  },
+  {
+    "case": "constant_translation",
+    "method": "geometry",
+    "gate": 0.2,
+    "accepted_links": [],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [],
+    "missed_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "exact_correspondence": false,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.3000000000000001
+        ],
+        "predecessor_group": 0
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 0.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 0.0,
+        "status": "insufficient_parent_support"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [],
+    "initialized_groups": 1,
+    "fallback_groups": 0
+  },
+  {
+    "case": "constant_translation",
+    "method": "centroid_prediction",
+    "gate": 0.2,
+    "accepted_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.3000000000000001
+        ],
+        "predecessor_group": 0
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          10
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 10,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      }
+    ],
+    "initialized_groups": 1,
+    "fallback_groups": 0
+  },
+  {
+    "case": "constant_translation",
+    "method": "geometry",
+    "gate": 0.35,
+    "accepted_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.3000000000000001
+        ],
+        "predecessor_group": 0
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          10
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 10,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      }
+    ],
+    "initialized_groups": 1,
+    "fallback_groups": 0
+  },
+  {
+    "case": "constant_translation",
+    "method": "centroid_prediction",
+    "gate": 0.35,
+    "accepted_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.3000000000000001
+        ],
+        "predecessor_group": 0
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          10
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 10,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      }
+    ],
+    "initialized_groups": 1,
+    "fallback_groups": 0
+  },
+  {
+    "case": "passing_sheets",
+    "method": "geometry",
+    "gate": 0.08,
+    "accepted_links": [
+      [
+        10,
+        21
+      ],
+      [
+        11,
+        20
+      ]
+    ],
+    "expected_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        21
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [
+      [
+        10,
+        21
+      ],
+      [
+        11,
+        20
+      ]
+    ],
+    "missed_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        21
+      ]
+    ],
+    "exact_correspondence": false,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.2999999999999998
+        ],
+        "predecessor_group": 0
+      },
+      {
+        "group": 11,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          -0.2999999999999998
+        ],
+        "predecessor_group": 1
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 21,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      },
+      {
+        "parent_group": 11,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          11
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      },
+      {
+        "child_group": 21,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          10
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 11,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      },
+      {
+        "parent_group": 10,
+        "child_group": 21,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      }
+    ],
+    "initialized_groups": 2,
+    "fallback_groups": 0
+  },
+  {
+    "case": "passing_sheets",
+    "method": "centroid_prediction",
+    "gate": 0.08,
+    "accepted_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        21
+      ]
+    ],
+    "expected_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        21
+      ]
+    ],
+    "correct_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        21
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.2999999999999998
+        ],
+        "predecessor_group": 0
+      },
+      {
+        "group": 11,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          -0.2999999999999998
+        ],
+        "predecessor_group": 1
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      },
+      {
+        "parent_group": 11,
+        "parent_samples": 16,
+        "best_child_group": 21,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          10
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      },
+      {
+        "child_group": 21,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          11
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 10,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      },
+      {
+        "parent_group": 11,
+        "child_group": 21,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      }
+    ],
+    "initialized_groups": 2,
+    "fallback_groups": 0
+  },
+  {
+    "case": "passing_sheets",
+    "method": "geometry",
+    "gate": 0.2,
+    "accepted_links": [
+      [
+        10,
+        21
+      ],
+      [
+        11,
+        20
+      ]
+    ],
+    "expected_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        21
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [
+      [
+        10,
+        21
+      ],
+      [
+        11,
+        20
+      ]
+    ],
+    "missed_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        21
+      ]
+    ],
+    "exact_correspondence": false,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.2999999999999998
+        ],
+        "predecessor_group": 0
+      },
+      {
+        "group": 11,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          -0.2999999999999998
+        ],
+        "predecessor_group": 1
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 21,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      },
+      {
+        "parent_group": 11,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          11
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      },
+      {
+        "child_group": 21,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          10
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 11,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      },
+      {
+        "parent_group": 10,
+        "child_group": 21,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      }
+    ],
+    "initialized_groups": 2,
+    "fallback_groups": 0
+  },
+  {
+    "case": "passing_sheets",
+    "method": "centroid_prediction",
+    "gate": 0.2,
+    "accepted_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        21
+      ]
+    ],
+    "expected_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        21
+      ]
+    ],
+    "correct_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        21
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.2999999999999998
+        ],
+        "predecessor_group": 0
+      },
+      {
+        "group": 11,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          -0.2999999999999998
+        ],
+        "predecessor_group": 1
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      },
+      {
+        "parent_group": 11,
+        "parent_samples": 16,
+        "best_child_group": 21,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          10
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      },
+      {
+        "child_group": 21,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          11
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 10,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      },
+      {
+        "parent_group": 11,
+        "child_group": 21,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      }
+    ],
+    "initialized_groups": 2,
+    "fallback_groups": 0
+  },
+  {
+    "case": "passing_sheets",
+    "method": "geometry",
+    "gate": 0.35,
+    "accepted_links": [],
+    "expected_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        21
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [],
+    "missed_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        21
+      ]
+    ],
+    "exact_correspondence": false,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.2999999999999998
+        ],
+        "predecessor_group": 0
+      },
+      {
+        "group": 11,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          -0.2999999999999998
+        ],
+        "predecessor_group": 1
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 1.0,
+        "dominance_gap": 0.0,
+        "status": "ambiguous_target"
+      },
+      {
+        "parent_group": 11,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 1.0,
+        "dominance_gap": 0.0,
+        "status": "ambiguous_target"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      },
+      {
+        "child_group": 21,
+        "child_samples": 16,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [],
+    "initialized_groups": 2,
+    "fallback_groups": 0
+  },
+  {
+    "case": "passing_sheets",
+    "method": "centroid_prediction",
+    "gate": 0.35,
+    "accepted_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        21
+      ]
+    ],
+    "expected_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        21
+      ]
+    ],
+    "correct_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        21
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.2999999999999998
+        ],
+        "predecessor_group": 0
+      },
+      {
+        "group": 11,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          -0.2999999999999998
+        ],
+        "predecessor_group": 1
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      },
+      {
+        "parent_group": 11,
+        "parent_samples": 16,
+        "best_child_group": 21,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          10
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      },
+      {
+        "child_group": 21,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          11
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 10,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      },
+      {
+        "parent_group": 11,
+        "child_group": 21,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      }
+    ],
+    "initialized_groups": 2,
+    "fallback_groups": 0
+  },
+  {
+    "case": "approaching_sheets",
+    "method": "geometry",
+    "gate": 0.08,
+    "accepted_links": [],
+    "expected_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        21
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [],
+    "missed_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        21
+      ]
+    ],
+    "exact_correspondence": false,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.2999999999999997
+        ],
+        "predecessor_group": 0
+      },
+      {
+        "group": 11,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          -0.2999999999999997
+        ],
+        "predecessor_group": 1
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 0.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 0.0,
+        "status": "insufficient_parent_support"
+      },
+      {
+        "parent_group": 11,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 0.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 0.0,
+        "status": "insufficient_parent_support"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      },
+      {
+        "child_group": 21,
+        "child_samples": 16,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [],
+    "initialized_groups": 2,
+    "fallback_groups": 0
+  },
+  {
+    "case": "approaching_sheets",
+    "method": "centroid_prediction",
+    "gate": 0.08,
+    "accepted_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        21
+      ]
+    ],
+    "expected_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        21
+      ]
+    ],
+    "correct_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        21
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.2999999999999997
+        ],
+        "predecessor_group": 0
+      },
+      {
+        "group": 11,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          -0.2999999999999997
+        ],
+        "predecessor_group": 1
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      },
+      {
+        "parent_group": 11,
+        "parent_samples": 16,
+        "best_child_group": 21,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          10
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      },
+      {
+        "child_group": 21,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          11
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 10,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      },
+      {
+        "parent_group": 11,
+        "child_group": 21,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      }
+    ],
+    "initialized_groups": 2,
+    "fallback_groups": 0
+  },
+  {
+    "case": "approaching_sheets",
+    "method": "geometry",
+    "gate": 0.2,
+    "accepted_links": [],
+    "expected_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        21
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [],
+    "missed_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        21
+      ]
+    ],
+    "exact_correspondence": false,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.2999999999999997
+        ],
+        "predecessor_group": 0
+      },
+      {
+        "group": 11,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          -0.2999999999999997
+        ],
+        "predecessor_group": 1
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 0.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 0.0,
+        "status": "insufficient_parent_support"
+      },
+      {
+        "parent_group": 11,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 0.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 0.0,
+        "status": "insufficient_parent_support"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      },
+      {
+        "child_group": 21,
+        "child_samples": 16,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [],
+    "initialized_groups": 2,
+    "fallback_groups": 0
+  },
+  {
+    "case": "approaching_sheets",
+    "method": "centroid_prediction",
+    "gate": 0.2,
+    "accepted_links": [],
+    "expected_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        21
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [],
+    "missed_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        21
+      ]
+    ],
+    "exact_correspondence": false,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.2999999999999997
+        ],
+        "predecessor_group": 0
+      },
+      {
+        "group": 11,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          -0.2999999999999997
+        ],
+        "predecessor_group": 1
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 1.0,
+        "dominance_gap": 0.0,
+        "status": "ambiguous_target"
+      },
+      {
+        "parent_group": 11,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 1.0,
+        "dominance_gap": 0.0,
+        "status": "ambiguous_target"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      },
+      {
+        "child_group": 21,
+        "child_samples": 16,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [],
+    "initialized_groups": 2,
+    "fallback_groups": 0
+  },
+  {
+    "case": "approaching_sheets",
+    "method": "geometry",
+    "gate": 0.35,
+    "accepted_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        21
+      ]
+    ],
+    "expected_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        21
+      ]
+    ],
+    "correct_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        21
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.2999999999999997
+        ],
+        "predecessor_group": 0
+      },
+      {
+        "group": 11,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          -0.2999999999999997
+        ],
+        "predecessor_group": 1
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      },
+      {
+        "parent_group": 11,
+        "parent_samples": 16,
+        "best_child_group": 21,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          10
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      },
+      {
+        "child_group": 21,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          11
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 10,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      },
+      {
+        "parent_group": 11,
+        "child_group": 21,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      }
+    ],
+    "initialized_groups": 2,
+    "fallback_groups": 0
+  },
+  {
+    "case": "approaching_sheets",
+    "method": "centroid_prediction",
+    "gate": 0.35,
+    "accepted_links": [],
+    "expected_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        21
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [],
+    "missed_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        21
+      ]
+    ],
+    "exact_correspondence": false,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.2999999999999997
+        ],
+        "predecessor_group": 0
+      },
+      {
+        "group": 11,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          -0.2999999999999997
+        ],
+        "predecessor_group": 1
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 1.0,
+        "dominance_gap": 0.0,
+        "status": "ambiguous_target"
+      },
+      {
+        "parent_group": 11,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 1.0,
+        "dominance_gap": 0.0,
+        "status": "ambiguous_target"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      },
+      {
+        "child_group": 21,
+        "child_samples": 16,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [],
+    "initialized_groups": 2,
+    "fallback_groups": 0
+  },
+  {
+    "case": "abrupt_stop",
+    "method": "geometry",
+    "gate": 0.08,
+    "accepted_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.3000000000000001
+        ],
+        "predecessor_group": 0
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          10
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 10,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      }
+    ],
+    "initialized_groups": 1,
+    "fallback_groups": 0
+  },
+  {
+    "case": "abrupt_stop",
+    "method": "centroid_prediction",
+    "gate": 0.08,
+    "accepted_links": [],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [],
+    "missed_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "exact_correspondence": false,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.3000000000000001
+        ],
+        "predecessor_group": 0
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 0.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 0.0,
+        "status": "insufficient_parent_support"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [],
+    "initialized_groups": 1,
+    "fallback_groups": 0
+  },
+  {
+    "case": "abrupt_stop",
+    "method": "geometry",
+    "gate": 0.2,
+    "accepted_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.3000000000000001
+        ],
+        "predecessor_group": 0
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          10
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 10,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      }
+    ],
+    "initialized_groups": 1,
+    "fallback_groups": 0
+  },
+  {
+    "case": "abrupt_stop",
+    "method": "centroid_prediction",
+    "gate": 0.2,
+    "accepted_links": [],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [],
+    "missed_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "exact_correspondence": false,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.3000000000000001
+        ],
+        "predecessor_group": 0
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 0.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 0.0,
+        "status": "insufficient_parent_support"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [],
+    "initialized_groups": 1,
+    "fallback_groups": 0
+  },
+  {
+    "case": "abrupt_stop",
+    "method": "geometry",
+    "gate": 0.35,
+    "accepted_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.3000000000000001
+        ],
+        "predecessor_group": 0
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          10
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 10,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      }
+    ],
+    "initialized_groups": 1,
+    "fallback_groups": 0
+  },
+  {
+    "case": "abrupt_stop",
+    "method": "centroid_prediction",
+    "gate": 0.35,
+    "accepted_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.3000000000000001
+        ],
+        "predecessor_group": 0
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          10
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 10,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      }
+    ],
+    "initialized_groups": 1,
+    "fallback_groups": 0
+  },
+  {
+    "case": "group_split",
+    "method": "geometry",
+    "gate": 0.08,
+    "accepted_links": [],
+    "expected_links": [
+      [
+        10,
+        20
+      ],
+      [
+        10,
+        21
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [],
+    "missed_links": [
+      [
+        10,
+        20
+      ],
+      [
+        10,
+        21
+      ]
+    ],
+    "exact_correspondence": false,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "predecessor_group": 0
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 0.5,
+        "runner_up_parent_coverage": 0.5,
+        "dominance_gap": 0.0,
+        "status": "ambiguous_target"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 8,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      },
+      {
+        "child_group": 21,
+        "child_samples": 8,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [],
+    "initialized_groups": 1,
+    "fallback_groups": 0
+  },
+  {
+    "case": "group_split",
+    "method": "centroid_prediction",
+    "gate": 0.08,
+    "accepted_links": [],
+    "expected_links": [
+      [
+        10,
+        20
+      ],
+      [
+        10,
+        21
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [],
+    "missed_links": [
+      [
+        10,
+        20
+      ],
+      [
+        10,
+        21
+      ]
+    ],
+    "exact_correspondence": false,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "predecessor_group": 0
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 0.5,
+        "runner_up_parent_coverage": 0.5,
+        "dominance_gap": 0.0,
+        "status": "ambiguous_target"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 8,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      },
+      {
+        "child_group": 21,
+        "child_samples": 8,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [],
+    "initialized_groups": 1,
+    "fallback_groups": 0
+  },
+  {
+    "case": "group_split",
+    "method": "geometry",
+    "gate": 0.2,
+    "accepted_links": [],
+    "expected_links": [
+      [
+        10,
+        20
+      ],
+      [
+        10,
+        21
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [],
+    "missed_links": [
+      [
+        10,
+        20
+      ],
+      [
+        10,
+        21
+      ]
+    ],
+    "exact_correspondence": false,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "predecessor_group": 0
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 0.5,
+        "runner_up_parent_coverage": 0.5,
+        "dominance_gap": 0.0,
+        "status": "ambiguous_target"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 8,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      },
+      {
+        "child_group": 21,
+        "child_samples": 8,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [],
+    "initialized_groups": 1,
+    "fallback_groups": 0
+  },
+  {
+    "case": "group_split",
+    "method": "centroid_prediction",
+    "gate": 0.2,
+    "accepted_links": [],
+    "expected_links": [
+      [
+        10,
+        20
+      ],
+      [
+        10,
+        21
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [],
+    "missed_links": [
+      [
+        10,
+        20
+      ],
+      [
+        10,
+        21
+      ]
+    ],
+    "exact_correspondence": false,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "predecessor_group": 0
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 0.5,
+        "runner_up_parent_coverage": 0.5,
+        "dominance_gap": 0.0,
+        "status": "ambiguous_target"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 8,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      },
+      {
+        "child_group": 21,
+        "child_samples": 8,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [],
+    "initialized_groups": 1,
+    "fallback_groups": 0
+  },
+  {
+    "case": "group_split",
+    "method": "geometry",
+    "gate": 0.35,
+    "accepted_links": [],
+    "expected_links": [
+      [
+        10,
+        20
+      ],
+      [
+        10,
+        21
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [],
+    "missed_links": [
+      [
+        10,
+        20
+      ],
+      [
+        10,
+        21
+      ]
+    ],
+    "exact_correspondence": false,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "predecessor_group": 0
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 0.5,
+        "runner_up_parent_coverage": 0.5,
+        "dominance_gap": 0.0,
+        "status": "ambiguous_target"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 8,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      },
+      {
+        "child_group": 21,
+        "child_samples": 8,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [],
+    "initialized_groups": 1,
+    "fallback_groups": 0
+  },
+  {
+    "case": "group_split",
+    "method": "centroid_prediction",
+    "gate": 0.35,
+    "accepted_links": [],
+    "expected_links": [
+      [
+        10,
+        20
+      ],
+      [
+        10,
+        21
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [],
+    "missed_links": [
+      [
+        10,
+        20
+      ],
+      [
+        10,
+        21
+      ]
+    ],
+    "exact_correspondence": false,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "predecessor_group": 0
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 0.5,
+        "runner_up_parent_coverage": 0.5,
+        "dominance_gap": 0.0,
+        "status": "ambiguous_target"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 8,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      },
+      {
+        "child_group": 21,
+        "child_samples": 8,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [],
+    "initialized_groups": 1,
+    "fallback_groups": 0
+  },
+  {
+    "case": "fragment_pooling",
+    "method": "geometry",
+    "gate": 0.08,
+    "accepted_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        20
+      ]
+    ],
+    "expected_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        20
+      ]
+    ],
+    "correct_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        20
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "predecessor_group": 0
+      },
+      {
+        "group": 11,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "predecessor_group": 1
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 8,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      },
+      {
+        "parent_group": 11,
+        "parent_samples": 8,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 2,
+        "parent_groups": [
+          10,
+          11
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 0.5,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 10,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 0.5,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 8,
+        "exclusive_child_support_fraction": 0.5,
+        "redundant_support": false
+      },
+      {
+        "parent_group": 11,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 0.5,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 8,
+        "exclusive_child_support_fraction": 0.5,
+        "redundant_support": false
+      }
+    ],
+    "initialized_groups": 2,
+    "fallback_groups": 0
+  },
+  {
+    "case": "fragment_pooling",
+    "method": "centroid_prediction",
+    "gate": 0.08,
+    "accepted_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        20
+      ]
+    ],
+    "expected_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        20
+      ]
+    ],
+    "correct_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        20
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "predecessor_group": 0
+      },
+      {
+        "group": 11,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "predecessor_group": 1
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 8,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      },
+      {
+        "parent_group": 11,
+        "parent_samples": 8,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 2,
+        "parent_groups": [
+          10,
+          11
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 0.5,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 10,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 0.5,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 8,
+        "exclusive_child_support_fraction": 0.5,
+        "redundant_support": false
+      },
+      {
+        "parent_group": 11,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 0.5,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 8,
+        "exclusive_child_support_fraction": 0.5,
+        "redundant_support": false
+      }
+    ],
+    "initialized_groups": 2,
+    "fallback_groups": 0
+  },
+  {
+    "case": "fragment_pooling",
+    "method": "geometry",
+    "gate": 0.2,
+    "accepted_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        20
+      ]
+    ],
+    "expected_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        20
+      ]
+    ],
+    "correct_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        20
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "predecessor_group": 0
+      },
+      {
+        "group": 11,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "predecessor_group": 1
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 8,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      },
+      {
+        "parent_group": 11,
+        "parent_samples": 8,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 2,
+        "parent_groups": [
+          10,
+          11
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 0.5,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 10,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 0.5,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 8,
+        "exclusive_child_support_fraction": 0.5,
+        "redundant_support": false
+      },
+      {
+        "parent_group": 11,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 0.5,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 8,
+        "exclusive_child_support_fraction": 0.5,
+        "redundant_support": false
+      }
+    ],
+    "initialized_groups": 2,
+    "fallback_groups": 0
+  },
+  {
+    "case": "fragment_pooling",
+    "method": "centroid_prediction",
+    "gate": 0.2,
+    "accepted_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        20
+      ]
+    ],
+    "expected_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        20
+      ]
+    ],
+    "correct_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        20
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "predecessor_group": 0
+      },
+      {
+        "group": 11,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "predecessor_group": 1
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 8,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      },
+      {
+        "parent_group": 11,
+        "parent_samples": 8,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 2,
+        "parent_groups": [
+          10,
+          11
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 0.5,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 10,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 0.5,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 8,
+        "exclusive_child_support_fraction": 0.5,
+        "redundant_support": false
+      },
+      {
+        "parent_group": 11,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 0.5,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 8,
+        "exclusive_child_support_fraction": 0.5,
+        "redundant_support": false
+      }
+    ],
+    "initialized_groups": 2,
+    "fallback_groups": 0
+  },
+  {
+    "case": "fragment_pooling",
+    "method": "geometry",
+    "gate": 0.35,
+    "accepted_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        20
+      ]
+    ],
+    "expected_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        20
+      ]
+    ],
+    "correct_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        20
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "predecessor_group": 0
+      },
+      {
+        "group": 11,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "predecessor_group": 1
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 8,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      },
+      {
+        "parent_group": 11,
+        "parent_samples": 8,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 2,
+        "parent_groups": [
+          10,
+          11
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 0.5,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 10,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 0.5,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 8,
+        "exclusive_child_support_fraction": 0.5,
+        "redundant_support": false
+      },
+      {
+        "parent_group": 11,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 0.5,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 8,
+        "exclusive_child_support_fraction": 0.5,
+        "redundant_support": false
+      }
+    ],
+    "initialized_groups": 2,
+    "fallback_groups": 0
+  },
+  {
+    "case": "fragment_pooling",
+    "method": "centroid_prediction",
+    "gate": 0.35,
+    "accepted_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        20
+      ]
+    ],
+    "expected_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        20
+      ]
+    ],
+    "correct_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        20
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "predecessor_group": 0
+      },
+      {
+        "group": 11,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "predecessor_group": 1
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 8,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      },
+      {
+        "parent_group": 11,
+        "parent_samples": 8,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 2,
+        "parent_groups": [
+          10,
+          11
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 0.5,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 10,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 0.5,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 8,
+        "exclusive_child_support_fraction": 0.5,
+        "redundant_support": false
+      },
+      {
+        "parent_group": 11,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 0.5,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 8,
+        "exclusive_child_support_fraction": 0.5,
+        "redundant_support": false
+      }
+    ],
+    "initialized_groups": 2,
+    "fallback_groups": 0
+  },
+  {
+    "case": "unresolved_nearby_disappearance",
+    "method": "geometry",
+    "gate": 0.08,
+    "accepted_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": false,
+        "reason": "no_unique_nonredundant_initial_link",
+        "velocity": null,
+        "predecessor_group": null
+      },
+      {
+        "group": 11,
+        "initialized": false,
+        "reason": "no_unique_nonredundant_initial_link",
+        "velocity": null,
+        "predecessor_group": null
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      },
+      {
+        "parent_group": 11,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 0.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 0.0,
+        "status": "insufficient_parent_support"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          10
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 10,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      }
+    ],
+    "initialized_groups": 0,
+    "fallback_groups": 2
+  },
+  {
+    "case": "unresolved_nearby_disappearance",
+    "method": "centroid_prediction",
+    "gate": 0.08,
+    "accepted_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": false,
+        "reason": "no_unique_nonredundant_initial_link",
+        "velocity": null,
+        "predecessor_group": null
+      },
+      {
+        "group": 11,
+        "initialized": false,
+        "reason": "no_unique_nonredundant_initial_link",
+        "velocity": null,
+        "predecessor_group": null
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      },
+      {
+        "parent_group": 11,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 0.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 0.0,
+        "status": "insufficient_parent_support"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          10
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 10,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      }
+    ],
+    "initialized_groups": 0,
+    "fallback_groups": 2
+  },
+  {
+    "case": "unresolved_nearby_disappearance",
+    "method": "geometry",
+    "gate": 0.2,
+    "accepted_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        20
+      ]
+    ],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "false_links": [
+      [
+        11,
+        20
+      ]
+    ],
+    "missed_links": [],
+    "exact_correspondence": false,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": false,
+        "reason": "no_unique_nonredundant_initial_link",
+        "velocity": null,
+        "predecessor_group": null
+      },
+      {
+        "group": 11,
+        "initialized": false,
+        "reason": "no_unique_nonredundant_initial_link",
+        "velocity": null,
+        "predecessor_group": null
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      },
+      {
+        "parent_group": 11,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 2,
+        "parent_groups": [
+          10,
+          11
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 32,
+        "accepted": true,
+        "redundant_candidate_parents": 2
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 10,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 0,
+        "exclusive_child_support_fraction": 0.0,
+        "redundant_support": true
+      },
+      {
+        "parent_group": 11,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 0,
+        "exclusive_child_support_fraction": 0.0,
+        "redundant_support": true
+      }
+    ],
+    "initialized_groups": 0,
+    "fallback_groups": 2
+  },
+  {
+    "case": "unresolved_nearby_disappearance",
+    "method": "centroid_prediction",
+    "gate": 0.2,
+    "accepted_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        20
+      ]
+    ],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "false_links": [
+      [
+        11,
+        20
+      ]
+    ],
+    "missed_links": [],
+    "exact_correspondence": false,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": false,
+        "reason": "no_unique_nonredundant_initial_link",
+        "velocity": null,
+        "predecessor_group": null
+      },
+      {
+        "group": 11,
+        "initialized": false,
+        "reason": "no_unique_nonredundant_initial_link",
+        "velocity": null,
+        "predecessor_group": null
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      },
+      {
+        "parent_group": 11,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 2,
+        "parent_groups": [
+          10,
+          11
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 32,
+        "accepted": true,
+        "redundant_candidate_parents": 2
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 10,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 0,
+        "exclusive_child_support_fraction": 0.0,
+        "redundant_support": true
+      },
+      {
+        "parent_group": 11,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 0,
+        "exclusive_child_support_fraction": 0.0,
+        "redundant_support": true
+      }
+    ],
+    "initialized_groups": 0,
+    "fallback_groups": 2
+  },
+  {
+    "case": "unresolved_nearby_disappearance",
+    "method": "geometry",
+    "gate": 0.35,
+    "accepted_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        20
+      ]
+    ],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "false_links": [
+      [
+        11,
+        20
+      ]
+    ],
+    "missed_links": [],
+    "exact_correspondence": false,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": false,
+        "reason": "no_unique_nonredundant_initial_link",
+        "velocity": null,
+        "predecessor_group": null
+      },
+      {
+        "group": 11,
+        "initialized": false,
+        "reason": "no_unique_nonredundant_initial_link",
+        "velocity": null,
+        "predecessor_group": null
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      },
+      {
+        "parent_group": 11,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 2,
+        "parent_groups": [
+          10,
+          11
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 32,
+        "accepted": true,
+        "redundant_candidate_parents": 2
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 10,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 0,
+        "exclusive_child_support_fraction": 0.0,
+        "redundant_support": true
+      },
+      {
+        "parent_group": 11,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 0,
+        "exclusive_child_support_fraction": 0.0,
+        "redundant_support": true
+      }
+    ],
+    "initialized_groups": 0,
+    "fallback_groups": 2
+  },
+  {
+    "case": "unresolved_nearby_disappearance",
+    "method": "centroid_prediction",
+    "gate": 0.35,
+    "accepted_links": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        20
+      ]
+    ],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "false_links": [
+      [
+        11,
+        20
+      ]
+    ],
+    "missed_links": [],
+    "exact_correspondence": false,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": false,
+        "reason": "no_unique_nonredundant_initial_link",
+        "velocity": null,
+        "predecessor_group": null
+      },
+      {
+        "group": 11,
+        "initialized": false,
+        "reason": "no_unique_nonredundant_initial_link",
+        "velocity": null,
+        "predecessor_group": null
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      },
+      {
+        "parent_group": 11,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 2,
+        "parent_groups": [
+          10,
+          11
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 32,
+        "accepted": true,
+        "redundant_candidate_parents": 2
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 10,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 0,
+        "exclusive_child_support_fraction": 0.0,
+        "redundant_support": true
+      },
+      {
+        "parent_group": 11,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 0,
+        "exclusive_child_support_fraction": 0.0,
+        "redundant_support": true
+      }
+    ],
+    "initialized_groups": 0,
+    "fallback_groups": 2
+  },
+  {
+    "case": "changing_sample_coverage",
+    "method": "geometry",
+    "gate": 0.08,
+    "accepted_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          5.0,
+          0.0,
+          0.0
+        ],
+        "predecessor_group": 0
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 8,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          10
+        ],
+        "union_covered_child_samples": 8,
+        "union_child_coverage": 0.5,
+        "largest_single_child_coverage": 0.5,
+        "summed_child_support_counts": 8,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 10,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 0.5,
+        "union_child_coverage": 0.5,
+        "exclusive_child_support_samples": 8,
+        "exclusive_child_support_fraction": 0.5,
+        "redundant_support": false
+      }
+    ],
+    "initialized_groups": 1,
+    "fallback_groups": 0
+  },
+  {
+    "case": "changing_sample_coverage",
+    "method": "centroid_prediction",
+    "gate": 0.08,
+    "accepted_links": [],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [],
+    "missed_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "exact_correspondence": false,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          5.0,
+          0.0,
+          0.0
+        ],
+        "predecessor_group": 0
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 8,
+        "best_child_group": 20,
+        "parent_coverage": 0.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 0.0,
+        "status": "insufficient_parent_support"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [],
+    "initialized_groups": 1,
+    "fallback_groups": 0
+  },
+  {
+    "case": "changing_sample_coverage",
+    "method": "geometry",
+    "gate": 0.2,
+    "accepted_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          5.0,
+          0.0,
+          0.0
+        ],
+        "predecessor_group": 0
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 8,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          10
+        ],
+        "union_covered_child_samples": 8,
+        "union_child_coverage": 0.5,
+        "largest_single_child_coverage": 0.5,
+        "summed_child_support_counts": 8,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 10,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 0.5,
+        "union_child_coverage": 0.5,
+        "exclusive_child_support_samples": 8,
+        "exclusive_child_support_fraction": 0.5,
+        "redundant_support": false
+      }
+    ],
+    "initialized_groups": 1,
+    "fallback_groups": 0
+  },
+  {
+    "case": "changing_sample_coverage",
+    "method": "centroid_prediction",
+    "gate": 0.2,
+    "accepted_links": [],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [],
+    "missed_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "exact_correspondence": false,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          5.0,
+          0.0,
+          0.0
+        ],
+        "predecessor_group": 0
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 8,
+        "best_child_group": 20,
+        "parent_coverage": 0.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 0.0,
+        "status": "insufficient_parent_support"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [],
+    "initialized_groups": 1,
+    "fallback_groups": 0
+  },
+  {
+    "case": "changing_sample_coverage",
+    "method": "geometry",
+    "gate": 0.35,
+    "accepted_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          5.0,
+          0.0,
+          0.0
+        ],
+        "predecessor_group": 0
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 8,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          10
+        ],
+        "union_covered_child_samples": 8,
+        "union_child_coverage": 0.5,
+        "largest_single_child_coverage": 0.5,
+        "summed_child_support_counts": 8,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 10,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 0.5,
+        "union_child_coverage": 0.5,
+        "exclusive_child_support_samples": 8,
+        "exclusive_child_support_fraction": 0.5,
+        "redundant_support": false
+      }
+    ],
+    "initialized_groups": 1,
+    "fallback_groups": 0
+  },
+  {
+    "case": "changing_sample_coverage",
+    "method": "centroid_prediction",
+    "gate": 0.35,
+    "accepted_links": [],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [],
+    "missed_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "exact_correspondence": false,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          5.0,
+          0.0,
+          0.0
+        ],
+        "predecessor_group": 0
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 8,
+        "best_child_group": 20,
+        "parent_coverage": 0.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 0.0,
+        "status": "insufficient_parent_support"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [],
+    "initialized_groups": 1,
+    "fallback_groups": 0
+  },
+  {
+    "case": "no_motion_initialization",
+    "method": "geometry",
+    "gate": 0.08,
+    "accepted_links": [],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [],
+    "missed_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "exact_correspondence": false,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": false,
+        "reason": "no_unique_nonredundant_initial_link",
+        "velocity": null,
+        "predecessor_group": null
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 0.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 0.0,
+        "status": "insufficient_parent_support"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [],
+    "initialized_groups": 0,
+    "fallback_groups": 1
+  },
+  {
+    "case": "no_motion_initialization",
+    "method": "centroid_prediction",
+    "gate": 0.08,
+    "accepted_links": [],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [],
+    "missed_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "exact_correspondence": false,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": false,
+        "reason": "no_unique_nonredundant_initial_link",
+        "velocity": null,
+        "predecessor_group": null
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 0.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 0.0,
+        "status": "insufficient_parent_support"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [],
+    "initialized_groups": 0,
+    "fallback_groups": 1
+  },
+  {
+    "case": "no_motion_initialization",
+    "method": "geometry",
+    "gate": 0.2,
+    "accepted_links": [],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [],
+    "missed_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "exact_correspondence": false,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": false,
+        "reason": "no_unique_nonredundant_initial_link",
+        "velocity": null,
+        "predecessor_group": null
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 0.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 0.0,
+        "status": "insufficient_parent_support"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [],
+    "initialized_groups": 0,
+    "fallback_groups": 1
+  },
+  {
+    "case": "no_motion_initialization",
+    "method": "centroid_prediction",
+    "gate": 0.2,
+    "accepted_links": [],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [],
+    "missed_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "exact_correspondence": false,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": false,
+        "reason": "no_unique_nonredundant_initial_link",
+        "velocity": null,
+        "predecessor_group": null
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 0.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 0.0,
+        "status": "insufficient_parent_support"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [],
+    "initialized_groups": 0,
+    "fallback_groups": 1
+  },
+  {
+    "case": "no_motion_initialization",
+    "method": "geometry",
+    "gate": 0.35,
+    "accepted_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": false,
+        "reason": "no_unique_nonredundant_initial_link",
+        "velocity": null,
+        "predecessor_group": null
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          10
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 10,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      }
+    ],
+    "initialized_groups": 0,
+    "fallback_groups": 1
+  },
+  {
+    "case": "no_motion_initialization",
+    "method": "centroid_prediction",
+    "gate": 0.35,
+    "accepted_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": false,
+        "reason": "no_unique_nonredundant_initial_link",
+        "velocity": null,
+        "predecessor_group": null
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 16,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          10
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 10,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      }
+    ],
+    "initialized_groups": 0,
+    "fallback_groups": 1
+  },
+  {
+    "case": "symmetric_expansion",
+    "method": "geometry",
+    "gate": 0.08,
+    "accepted_links": [],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [],
+    "missed_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "exact_correspondence": false,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "predecessor_group": 0
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 6,
+        "best_child_group": 20,
+        "parent_coverage": 0.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 0.0,
+        "status": "insufficient_parent_support"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 6,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [],
+    "initialized_groups": 1,
+    "fallback_groups": 0
+  },
+  {
+    "case": "symmetric_expansion",
+    "method": "centroid_prediction",
+    "gate": 0.08,
+    "accepted_links": [],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [],
+    "missed_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "exact_correspondence": false,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "predecessor_group": 0
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 6,
+        "best_child_group": 20,
+        "parent_coverage": 0.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 0.0,
+        "status": "insufficient_parent_support"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 6,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [],
+    "initialized_groups": 1,
+    "fallback_groups": 0
+  },
+  {
+    "case": "symmetric_expansion",
+    "method": "geometry",
+    "gate": 0.2,
+    "accepted_links": [],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [],
+    "missed_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "exact_correspondence": false,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "predecessor_group": 0
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 6,
+        "best_child_group": 20,
+        "parent_coverage": 0.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 0.0,
+        "status": "insufficient_parent_support"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 6,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [],
+    "initialized_groups": 1,
+    "fallback_groups": 0
+  },
+  {
+    "case": "symmetric_expansion",
+    "method": "centroid_prediction",
+    "gate": 0.2,
+    "accepted_links": [],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [],
+    "missed_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "exact_correspondence": false,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "predecessor_group": 0
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 6,
+        "best_child_group": 20,
+        "parent_coverage": 0.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 0.0,
+        "status": "insufficient_parent_support"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 6,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [],
+    "initialized_groups": 1,
+    "fallback_groups": 0
+  },
+  {
+    "case": "symmetric_expansion",
+    "method": "geometry",
+    "gate": 0.35,
+    "accepted_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "predecessor_group": 0
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 6,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 6,
+        "eligible_parents": 1,
+        "parent_groups": [
+          10
+        ],
+        "union_covered_child_samples": 6,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 6,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 10,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 6,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      }
+    ],
+    "initialized_groups": 1,
+    "fallback_groups": 0
+  },
+  {
+    "case": "symmetric_expansion",
+    "method": "centroid_prediction",
+    "gate": 0.35,
+    "accepted_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "expected_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "correct_links": [
+      [
+        10,
+        20
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "estimates": [
+      {
+        "group": 10,
+        "initialized": true,
+        "reason": "observed_one_to_one_centroid_difference",
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "predecessor_group": 0
+      }
+    ],
+    "parents": [
+      {
+        "parent_group": 10,
+        "parent_samples": 6,
+        "best_child_group": 20,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 20,
+        "child_samples": 6,
+        "eligible_parents": 1,
+        "parent_groups": [
+          10
+        ],
+        "union_covered_child_samples": 6,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 6,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 10,
+        "child_group": 20,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 6,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      }
+    ],
+    "initialized_groups": 1,
+    "fallback_groups": 0
+  }
+]

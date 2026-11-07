@@ -1,0 +1,23 @@
+{
+  "cases": 10,
+  "configurations": 60,
+  "bootstrap_gate": 0.2,
+  "residual_gates": [
+    0.08,
+    0.2,
+    0.35
+  ],
+  "shuffle_checks": 60,
+  "model": "Group centroid constant-velocity translation; normals unchanged; uninitialized groups use geometry fallback.",
+  "truth_used_for_prediction": false,
+  "production_tracker_changed": false,
+  "physical_tracker_validated": false,
+  "source_sha256": {
+    "/Users/minhn/Documents/Heidelberg University/fifth_semester/Thesis/master_thesis/experiments/astrolink/check_motion_prediction.py": "16d4a452989ab8aab2cebb450172270c10e7103445d735d99e898426fc83d487",
+    "experiments/astrolink/motion_prediction.py": "2ecf7c8448bea290e68c47b744d4fc69e54a8a0fe3ba376555b97dabc03bb7b6",
+    "experiments/astrolink/controlled_motion_cases.py": "f4cc275724d284c49c1be501b40c45d82481615025c45944ae93dded01d16fc6",
+    "experiments/astrolink/controlled_tracking_cases.py": "362d4f1af35765bd063653a6813e8e1b7e1a215a328431b6b4db4bc75d345cfc",
+    "experiments/astrolink/support_evidence.py": "4ad2c3776a069feddfb053438799e826e7b57b5835679da16a404e7b154063f5",
+    "experiments/astrolink/patch_support.py": "8ed9454ba810afaa14cc3327029f9a54ea75c3ed8d6b628f633c760e1f06b39d"
+  }
+}
