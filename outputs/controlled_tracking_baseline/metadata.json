@@ -1,0 +1,25 @@
+{
+  "cases": 9,
+  "configurations": 27,
+  "shuffle_checks": 27,
+  "gates": [
+    0.1,
+    0.2,
+    0.35
+  ],
+  "baseline_gate": 0.2,
+  "min_parent_coverage": 0.5,
+  "min_child_coverage": 0.5,
+  "dominance_margin": 0.25,
+  "normal_limit_degrees": 60,
+  "truth": "Stipulated group correspondences in constructed point catalogs; no hydrodynamic truth claim.",
+  "known_failures_preserved": true,
+  "physical_tracker_validated": false,
+  "production_tracker_changed": false,
+  "source_sha256": {
+    "/Users/minhn/Documents/Heidelberg University/fifth_semester/Thesis/master_thesis/experiments/astrolink/check_controlled_tracking.py": "d52deb0488d49edc6135cd4fc01bd01672252d1dd8dbaf28c2fd3373bf0a80ca",
+    "experiments/astrolink/controlled_tracking_cases.py": "362d4f1af35765bd063653a6813e8e1b7e1a215a328431b6b4db4bc75d345cfc",
+    "experiments/astrolink/support_evidence.py": "4ad2c3776a069feddfb053438799e826e7b57b5835679da16a404e7b154063f5",
+    "experiments/astrolink/patch_support.py": "8ed9454ba810afaa14cc3327029f9a54ea75c3ed8d6b628f633c760e1f06b39d"
+  }
+}

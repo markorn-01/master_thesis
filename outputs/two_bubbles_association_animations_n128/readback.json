@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "source_configurations_checked": 32,
+  "nodes_checked": 170,
+  "displayed_edges_checked": 84,
+  "status_counts_match": true,
+  "input_hashes_unchanged": true,
+  "physical_identity_validated": false
+}

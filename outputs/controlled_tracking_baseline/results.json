@@ -1,0 +1,2132 @@
+[
+  {
+    "case": "translation_within_gate",
+    "meaning": "One sheet translates normally by .08; its stipulated identity is retained.",
+    "gate": 0.1,
+    "accepted_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "expected_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "correct_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "parents": [
+      {
+        "parent_group": 0,
+        "parent_samples": 16,
+        "best_child_group": 10,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 10,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          0
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 0,
+        "child_group": 10,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      }
+    ],
+    "shuffle_matches": true
+  },
+  {
+    "case": "translation_within_gate",
+    "meaning": "One sheet translates normally by .08; its stipulated identity is retained.",
+    "gate": 0.2,
+    "accepted_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "expected_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "correct_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "parents": [
+      {
+        "parent_group": 0,
+        "parent_samples": 16,
+        "best_child_group": 10,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 10,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          0
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 0,
+        "child_group": 10,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      }
+    ],
+    "shuffle_matches": true
+  },
+  {
+    "case": "translation_within_gate",
+    "meaning": "One sheet translates normally by .08; its stipulated identity is retained.",
+    "gate": 0.35,
+    "accepted_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "expected_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "correct_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "parents": [
+      {
+        "parent_group": 0,
+        "parent_samples": 16,
+        "best_child_group": 10,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 10,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          0
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 0,
+        "child_group": 10,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      }
+    ],
+    "shuffle_matches": true
+  },
+  {
+    "case": "translation_beyond_gate",
+    "meaning": "The same sheet moves .30, beyond the .20 baseline gate; a missed link is expected.",
+    "gate": 0.1,
+    "accepted_links": [],
+    "expected_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [],
+    "missed_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "exact_correspondence": false,
+    "parents": [
+      {
+        "parent_group": 0,
+        "parent_samples": 16,
+        "best_child_group": 10,
+        "parent_coverage": 0.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 0.0,
+        "status": "insufficient_parent_support"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 10,
+        "child_samples": 16,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [],
+    "shuffle_matches": true
+  },
+  {
+    "case": "translation_beyond_gate",
+    "meaning": "The same sheet moves .30, beyond the .20 baseline gate; a missed link is expected.",
+    "gate": 0.2,
+    "accepted_links": [],
+    "expected_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [],
+    "missed_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "exact_correspondence": false,
+    "parents": [
+      {
+        "parent_group": 0,
+        "parent_samples": 16,
+        "best_child_group": 10,
+        "parent_coverage": 0.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 0.0,
+        "status": "insufficient_parent_support"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 10,
+        "child_samples": 16,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [],
+    "shuffle_matches": true
+  },
+  {
+    "case": "translation_beyond_gate",
+    "meaning": "The same sheet moves .30, beyond the .20 baseline gate; a missed link is expected.",
+    "gate": 0.35,
+    "accepted_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "expected_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "correct_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "parents": [
+      {
+        "parent_group": 0,
+        "parent_samples": 16,
+        "best_child_group": 10,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 10,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          0
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 0,
+        "child_group": 10,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      }
+    ],
+    "shuffle_matches": true
+  },
+  {
+    "case": "fresh_sampling",
+    "meaning": "The sheet persists but is sampled at different positions; catalog row identity is irrelevant.",
+    "gate": 0.1,
+    "accepted_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "expected_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "correct_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "parents": [
+      {
+        "parent_group": 0,
+        "parent_samples": 16,
+        "best_child_group": 10,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 10,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          0
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 0,
+        "child_group": 10,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      }
+    ],
+    "shuffle_matches": true
+  },
+  {
+    "case": "fresh_sampling",
+    "meaning": "The sheet persists but is sampled at different positions; catalog row identity is irrelevant.",
+    "gate": 0.2,
+    "accepted_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "expected_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "correct_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "parents": [
+      {
+        "parent_group": 0,
+        "parent_samples": 16,
+        "best_child_group": 10,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 10,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          0
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 0,
+        "child_group": 10,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      }
+    ],
+    "shuffle_matches": true
+  },
+  {
+    "case": "fresh_sampling",
+    "meaning": "The sheet persists but is sampled at different positions; catalog row identity is irrelevant.",
+    "gate": 0.35,
+    "accepted_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "expected_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "correct_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "parents": [
+      {
+        "parent_group": 0,
+        "parent_samples": 16,
+        "best_child_group": 10,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 10,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          0
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 0,
+        "child_group": 10,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      }
+    ],
+    "shuffle_matches": true
+  },
+  {
+    "case": "approaching_aligned_sheets",
+    "meaning": "Two sheets approach without crossing or merging. Their ancestry is stipulated by construction.",
+    "gate": 0.1,
+    "accepted_links": [],
+    "expected_links": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        11
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [],
+    "missed_links": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        11
+      ]
+    ],
+    "exact_correspondence": false,
+    "parents": [
+      {
+        "parent_group": 0,
+        "parent_samples": 16,
+        "best_child_group": 10,
+        "parent_coverage": 0.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 0.0,
+        "status": "insufficient_parent_support"
+      },
+      {
+        "parent_group": 1,
+        "parent_samples": 16,
+        "best_child_group": 10,
+        "parent_coverage": 0.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 0.0,
+        "status": "insufficient_parent_support"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 10,
+        "child_samples": 16,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      },
+      {
+        "child_group": 11,
+        "child_samples": 16,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [],
+    "shuffle_matches": true
+  },
+  {
+    "case": "approaching_aligned_sheets",
+    "meaning": "Two sheets approach without crossing or merging. Their ancestry is stipulated by construction.",
+    "gate": 0.2,
+    "accepted_links": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        11
+      ]
+    ],
+    "expected_links": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        11
+      ]
+    ],
+    "correct_links": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        11
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "parents": [
+      {
+        "parent_group": 0,
+        "parent_samples": 16,
+        "best_child_group": 10,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      },
+      {
+        "parent_group": 1,
+        "parent_samples": 16,
+        "best_child_group": 11,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 10,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          0
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      },
+      {
+        "child_group": 11,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          1
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 0,
+        "child_group": 10,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      },
+      {
+        "parent_group": 1,
+        "child_group": 11,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      }
+    ],
+    "shuffle_matches": true
+  },
+  {
+    "case": "approaching_aligned_sheets",
+    "meaning": "Two sheets approach without crossing or merging. Their ancestry is stipulated by construction.",
+    "gate": 0.35,
+    "accepted_links": [],
+    "expected_links": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        11
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [],
+    "missed_links": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        11
+      ]
+    ],
+    "exact_correspondence": false,
+    "parents": [
+      {
+        "parent_group": 0,
+        "parent_samples": 16,
+        "best_child_group": 10,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 1.0,
+        "dominance_gap": 0.0,
+        "status": "ambiguous_target"
+      },
+      {
+        "parent_group": 1,
+        "parent_samples": 16,
+        "best_child_group": 10,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 1.0,
+        "dominance_gap": 0.0,
+        "status": "ambiguous_target"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 10,
+        "child_samples": 16,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      },
+      {
+        "child_group": 11,
+        "child_samples": 16,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [],
+    "shuffle_matches": true
+  },
+  {
+    "case": "approaching_opposite_normals",
+    "meaning": "Same approach, but opposite signed normals distinguish the sheets.",
+    "gate": 0.1,
+    "accepted_links": [],
+    "expected_links": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        11
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [],
+    "missed_links": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        11
+      ]
+    ],
+    "exact_correspondence": false,
+    "parents": [
+      {
+        "parent_group": 0,
+        "parent_samples": 16,
+        "best_child_group": 10,
+        "parent_coverage": 0.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 0.0,
+        "status": "insufficient_parent_support"
+      },
+      {
+        "parent_group": 1,
+        "parent_samples": 16,
+        "best_child_group": 10,
+        "parent_coverage": 0.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 0.0,
+        "status": "insufficient_parent_support"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 10,
+        "child_samples": 16,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      },
+      {
+        "child_group": 11,
+        "child_samples": 16,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [],
+    "shuffle_matches": true
+  },
+  {
+    "case": "approaching_opposite_normals",
+    "meaning": "Same approach, but opposite signed normals distinguish the sheets.",
+    "gate": 0.2,
+    "accepted_links": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        11
+      ]
+    ],
+    "expected_links": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        11
+      ]
+    ],
+    "correct_links": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        11
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "parents": [
+      {
+        "parent_group": 0,
+        "parent_samples": 16,
+        "best_child_group": 10,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      },
+      {
+        "parent_group": 1,
+        "parent_samples": 16,
+        "best_child_group": 11,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 10,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          0
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      },
+      {
+        "child_group": 11,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          1
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 0,
+        "child_group": 10,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      },
+      {
+        "parent_group": 1,
+        "child_group": 11,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      }
+    ],
+    "shuffle_matches": true
+  },
+  {
+    "case": "approaching_opposite_normals",
+    "meaning": "Same approach, but opposite signed normals distinguish the sheets.",
+    "gate": 0.35,
+    "accepted_links": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        11
+      ]
+    ],
+    "expected_links": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        11
+      ]
+    ],
+    "correct_links": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        11
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "parents": [
+      {
+        "parent_group": 0,
+        "parent_samples": 16,
+        "best_child_group": 10,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      },
+      {
+        "parent_group": 1,
+        "parent_samples": 16,
+        "best_child_group": 11,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 10,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          0
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      },
+      {
+        "child_group": 11,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          1
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 0,
+        "child_group": 10,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      },
+      {
+        "parent_group": 1,
+        "child_group": 11,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      }
+    ],
+    "shuffle_matches": true
+  },
+  {
+    "case": "one_group_splits_into_two",
+    "meaning": "One catalog group becomes two groups covering its two halves; not a physical shock-splitting model.",
+    "gate": 0.1,
+    "accepted_links": [],
+    "expected_links": [
+      [
+        0,
+        10
+      ],
+      [
+        0,
+        11
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [],
+    "missed_links": [
+      [
+        0,
+        10
+      ],
+      [
+        0,
+        11
+      ]
+    ],
+    "exact_correspondence": false,
+    "parents": [
+      {
+        "parent_group": 0,
+        "parent_samples": 16,
+        "best_child_group": 10,
+        "parent_coverage": 0.5,
+        "runner_up_parent_coverage": 0.5,
+        "dominance_gap": 0.0,
+        "status": "ambiguous_target"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 10,
+        "child_samples": 8,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      },
+      {
+        "child_group": 11,
+        "child_samples": 8,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [],
+    "shuffle_matches": true
+  },
+  {
+    "case": "one_group_splits_into_two",
+    "meaning": "One catalog group becomes two groups covering its two halves; not a physical shock-splitting model.",
+    "gate": 0.2,
+    "accepted_links": [],
+    "expected_links": [
+      [
+        0,
+        10
+      ],
+      [
+        0,
+        11
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [],
+    "missed_links": [
+      [
+        0,
+        10
+      ],
+      [
+        0,
+        11
+      ]
+    ],
+    "exact_correspondence": false,
+    "parents": [
+      {
+        "parent_group": 0,
+        "parent_samples": 16,
+        "best_child_group": 10,
+        "parent_coverage": 0.5,
+        "runner_up_parent_coverage": 0.5,
+        "dominance_gap": 0.0,
+        "status": "ambiguous_target"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 10,
+        "child_samples": 8,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      },
+      {
+        "child_group": 11,
+        "child_samples": 8,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [],
+    "shuffle_matches": true
+  },
+  {
+    "case": "one_group_splits_into_two",
+    "meaning": "One catalog group becomes two groups covering its two halves; not a physical shock-splitting model.",
+    "gate": 0.35,
+    "accepted_links": [],
+    "expected_links": [
+      [
+        0,
+        10
+      ],
+      [
+        0,
+        11
+      ]
+    ],
+    "correct_links": [],
+    "false_links": [],
+    "missed_links": [
+      [
+        0,
+        10
+      ],
+      [
+        0,
+        11
+      ]
+    ],
+    "exact_correspondence": false,
+    "parents": [
+      {
+        "parent_group": 0,
+        "parent_samples": 16,
+        "best_child_group": 10,
+        "parent_coverage": 0.5,
+        "runner_up_parent_coverage": 0.5,
+        "dominance_gap": 0.0,
+        "status": "ambiguous_target"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 10,
+        "child_samples": 8,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      },
+      {
+        "child_group": 11,
+        "child_samples": 8,
+        "eligible_parents": 0,
+        "parent_groups": [],
+        "union_covered_child_samples": 0,
+        "union_child_coverage": 0.0,
+        "largest_single_child_coverage": 0.0,
+        "summed_child_support_counts": 0,
+        "accepted": false,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [],
+    "shuffle_matches": true
+  },
+  {
+    "case": "two_fragments_form_one_group",
+    "meaning": "Two catalog fragments become one group; tests representation changes, not physical merger dynamics.",
+    "gate": 0.1,
+    "accepted_links": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        10
+      ]
+    ],
+    "expected_links": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        10
+      ]
+    ],
+    "correct_links": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        10
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "parents": [
+      {
+        "parent_group": 0,
+        "parent_samples": 8,
+        "best_child_group": 10,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      },
+      {
+        "parent_group": 1,
+        "parent_samples": 8,
+        "best_child_group": 10,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 10,
+        "child_samples": 16,
+        "eligible_parents": 2,
+        "parent_groups": [
+          0,
+          1
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 0.5,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 0,
+        "child_group": 10,
+        "accepted": true,
+        "individual_child_coverage": 0.5,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 8,
+        "exclusive_child_support_fraction": 0.5,
+        "redundant_support": false
+      },
+      {
+        "parent_group": 1,
+        "child_group": 10,
+        "accepted": true,
+        "individual_child_coverage": 0.5,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 8,
+        "exclusive_child_support_fraction": 0.5,
+        "redundant_support": false
+      }
+    ],
+    "shuffle_matches": true
+  },
+  {
+    "case": "two_fragments_form_one_group",
+    "meaning": "Two catalog fragments become one group; tests representation changes, not physical merger dynamics.",
+    "gate": 0.2,
+    "accepted_links": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        10
+      ]
+    ],
+    "expected_links": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        10
+      ]
+    ],
+    "correct_links": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        10
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "parents": [
+      {
+        "parent_group": 0,
+        "parent_samples": 8,
+        "best_child_group": 10,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      },
+      {
+        "parent_group": 1,
+        "parent_samples": 8,
+        "best_child_group": 10,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 10,
+        "child_samples": 16,
+        "eligible_parents": 2,
+        "parent_groups": [
+          0,
+          1
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 0.5,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 0,
+        "child_group": 10,
+        "accepted": true,
+        "individual_child_coverage": 0.5,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 8,
+        "exclusive_child_support_fraction": 0.5,
+        "redundant_support": false
+      },
+      {
+        "parent_group": 1,
+        "child_group": 10,
+        "accepted": true,
+        "individual_child_coverage": 0.5,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 8,
+        "exclusive_child_support_fraction": 0.5,
+        "redundant_support": false
+      }
+    ],
+    "shuffle_matches": true
+  },
+  {
+    "case": "two_fragments_form_one_group",
+    "meaning": "Two catalog fragments become one group; tests representation changes, not physical merger dynamics.",
+    "gate": 0.35,
+    "accepted_links": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        10
+      ]
+    ],
+    "expected_links": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        10
+      ]
+    ],
+    "correct_links": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        10
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "parents": [
+      {
+        "parent_group": 0,
+        "parent_samples": 8,
+        "best_child_group": 10,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      },
+      {
+        "parent_group": 1,
+        "parent_samples": 8,
+        "best_child_group": 10,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 10,
+        "child_samples": 16,
+        "eligible_parents": 2,
+        "parent_groups": [
+          0,
+          1
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 0.5,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 0,
+        "child_group": 10,
+        "accepted": true,
+        "individual_child_coverage": 0.5,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 8,
+        "exclusive_child_support_fraction": 0.5,
+        "redundant_support": false
+      },
+      {
+        "parent_group": 1,
+        "child_group": 10,
+        "accepted": true,
+        "individual_child_coverage": 0.5,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 8,
+        "exclusive_child_support_fraction": 0.5,
+        "redundant_support": false
+      }
+    ],
+    "shuffle_matches": true
+  },
+  {
+    "case": "nearby_sheet_disappears",
+    "meaning": "Parent 0 persists and parent 1 disappears. Parent 1 must not be attached to the surviving child.",
+    "gate": 0.1,
+    "accepted_links": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        10
+      ]
+    ],
+    "expected_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "correct_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "false_links": [
+      [
+        1,
+        10
+      ]
+    ],
+    "missed_links": [],
+    "exact_correspondence": false,
+    "parents": [
+      {
+        "parent_group": 0,
+        "parent_samples": 16,
+        "best_child_group": 10,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      },
+      {
+        "parent_group": 1,
+        "parent_samples": 16,
+        "best_child_group": 10,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 10,
+        "child_samples": 16,
+        "eligible_parents": 2,
+        "parent_groups": [
+          0,
+          1
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 32,
+        "accepted": true,
+        "redundant_candidate_parents": 2
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 0,
+        "child_group": 10,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 0,
+        "exclusive_child_support_fraction": 0.0,
+        "redundant_support": true
+      },
+      {
+        "parent_group": 1,
+        "child_group": 10,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 0,
+        "exclusive_child_support_fraction": 0.0,
+        "redundant_support": true
+      }
+    ],
+    "shuffle_matches": true
+  },
+  {
+    "case": "nearby_sheet_disappears",
+    "meaning": "Parent 0 persists and parent 1 disappears. Parent 1 must not be attached to the surviving child.",
+    "gate": 0.2,
+    "accepted_links": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        10
+      ]
+    ],
+    "expected_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "correct_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "false_links": [
+      [
+        1,
+        10
+      ]
+    ],
+    "missed_links": [],
+    "exact_correspondence": false,
+    "parents": [
+      {
+        "parent_group": 0,
+        "parent_samples": 16,
+        "best_child_group": 10,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      },
+      {
+        "parent_group": 1,
+        "parent_samples": 16,
+        "best_child_group": 10,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 10,
+        "child_samples": 16,
+        "eligible_parents": 2,
+        "parent_groups": [
+          0,
+          1
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 32,
+        "accepted": true,
+        "redundant_candidate_parents": 2
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 0,
+        "child_group": 10,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 0,
+        "exclusive_child_support_fraction": 0.0,
+        "redundant_support": true
+      },
+      {
+        "parent_group": 1,
+        "child_group": 10,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 0,
+        "exclusive_child_support_fraction": 0.0,
+        "redundant_support": true
+      }
+    ],
+    "shuffle_matches": true
+  },
+  {
+    "case": "nearby_sheet_disappears",
+    "meaning": "Parent 0 persists and parent 1 disappears. Parent 1 must not be attached to the surviving child.",
+    "gate": 0.35,
+    "accepted_links": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        10
+      ]
+    ],
+    "expected_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "correct_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "false_links": [
+      [
+        1,
+        10
+      ]
+    ],
+    "missed_links": [],
+    "exact_correspondence": false,
+    "parents": [
+      {
+        "parent_group": 0,
+        "parent_samples": 16,
+        "best_child_group": 10,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      },
+      {
+        "parent_group": 1,
+        "parent_samples": 16,
+        "best_child_group": 10,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 10,
+        "child_samples": 16,
+        "eligible_parents": 2,
+        "parent_groups": [
+          0,
+          1
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 32,
+        "accepted": true,
+        "redundant_candidate_parents": 2
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 0,
+        "child_group": 10,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 0,
+        "exclusive_child_support_fraction": 0.0,
+        "redundant_support": true
+      },
+      {
+        "parent_group": 1,
+        "child_group": 10,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 0,
+        "exclusive_child_support_fraction": 0.0,
+        "redundant_support": true
+      }
+    ],
+    "shuffle_matches": true
+  },
+  {
+    "case": "distant_sheet_disappears",
+    "meaning": "Parent 0 persists and parent 1 disappears. Parent 1 must not be attached to the surviving child.",
+    "gate": 0.1,
+    "accepted_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "expected_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "correct_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "parents": [
+      {
+        "parent_group": 0,
+        "parent_samples": 16,
+        "best_child_group": 10,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      },
+      {
+        "parent_group": 1,
+        "parent_samples": 16,
+        "best_child_group": 10,
+        "parent_coverage": 0.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 0.0,
+        "status": "insufficient_parent_support"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 10,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          0
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 0,
+        "child_group": 10,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      }
+    ],
+    "shuffle_matches": true
+  },
+  {
+    "case": "distant_sheet_disappears",
+    "meaning": "Parent 0 persists and parent 1 disappears. Parent 1 must not be attached to the surviving child.",
+    "gate": 0.2,
+    "accepted_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "expected_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "correct_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "parents": [
+      {
+        "parent_group": 0,
+        "parent_samples": 16,
+        "best_child_group": 10,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      },
+      {
+        "parent_group": 1,
+        "parent_samples": 16,
+        "best_child_group": 10,
+        "parent_coverage": 0.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 0.0,
+        "status": "insufficient_parent_support"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 10,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          0
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 0,
+        "child_group": 10,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      }
+    ],
+    "shuffle_matches": true
+  },
+  {
+    "case": "distant_sheet_disappears",
+    "meaning": "Parent 0 persists and parent 1 disappears. Parent 1 must not be attached to the surviving child.",
+    "gate": 0.35,
+    "accepted_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "expected_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "correct_links": [
+      [
+        0,
+        10
+      ]
+    ],
+    "false_links": [],
+    "missed_links": [],
+    "exact_correspondence": true,
+    "parents": [
+      {
+        "parent_group": 0,
+        "parent_samples": 16,
+        "best_child_group": 10,
+        "parent_coverage": 1.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 1.0,
+        "status": "eligible"
+      },
+      {
+        "parent_group": 1,
+        "parent_samples": 16,
+        "best_child_group": 10,
+        "parent_coverage": 0.0,
+        "runner_up_parent_coverage": 0.0,
+        "dominance_gap": 0.0,
+        "status": "insufficient_parent_support"
+      }
+    ],
+    "children": [
+      {
+        "child_group": 10,
+        "child_samples": 16,
+        "eligible_parents": 1,
+        "parent_groups": [
+          0
+        ],
+        "union_covered_child_samples": 16,
+        "union_child_coverage": 1.0,
+        "largest_single_child_coverage": 1.0,
+        "summed_child_support_counts": 16,
+        "accepted": true,
+        "redundant_candidate_parents": 0
+      }
+    ],
+    "links": [
+      {
+        "parent_group": 0,
+        "child_group": 10,
+        "accepted": true,
+        "individual_child_coverage": 1.0,
+        "union_child_coverage": 1.0,
+        "exclusive_child_support_samples": 16,
+        "exclusive_child_support_fraction": 1.0,
+        "redundant_support": false
+      }
+    ],
+    "shuffle_matches": true
+  }
+]
