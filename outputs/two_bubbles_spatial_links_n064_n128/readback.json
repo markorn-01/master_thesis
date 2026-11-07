@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "figures_checked": 5,
+  "nodes_checked": 48,
+  "displayed_edges_checked": 31,
+  "reconstructed_pair_score_records": 107,
+  "images_decoded": true,
+  "input_hashes_unchanged": true,
+  "physical_identities_validated": false
+}

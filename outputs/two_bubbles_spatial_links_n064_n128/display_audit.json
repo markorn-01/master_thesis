@@ -1,0 +1,1646 @@
+[
+  {
+    "config": {
+      "num_cells": 64,
+      "parent_event": 13,
+      "child_event": 14,
+      "parent_time": 0.12999999523162842,
+      "child_time": 0.14000000059604645,
+      "mode": "native_cells",
+      "segmentation_angle": 60,
+      "segmentation_radius_cells": 1.5,
+      "min_samples": 20,
+      "gate_reference_cells": 1.5,
+      "gate_code_units": 0.0234375,
+      "gate_native_cells": 1.5
+    },
+    "edges": [
+      {
+        "parent_group": 0,
+        "child_group": 0,
+        "kind": "accepted"
+      },
+      {
+        "parent_group": 1,
+        "child_group": 1,
+        "kind": "accepted"
+      },
+      {
+        "parent_group": 2,
+        "child_group": 1,
+        "kind": "accepted"
+      },
+      {
+        "parent_group": 3,
+        "child_group": 1,
+        "kind": "accepted"
+      },
+      {
+        "parent_group": 4,
+        "child_group": 1,
+        "kind": "accepted"
+      },
+      {
+        "parent_group": 5,
+        "child_group": 1,
+        "kind": "accepted"
+      },
+      {
+        "parent_group": 6,
+        "child_group": 6,
+        "kind": "accepted"
+      },
+      {
+        "parent_group": 7,
+        "child_group": 6,
+        "kind": "accepted"
+      },
+      {
+        "parent_group": 8,
+        "child_group": 6,
+        "kind": "accepted"
+      },
+      {
+        "parent_group": 9,
+        "child_group": 6,
+        "kind": "accepted"
+      },
+      {
+        "parent_group": 10,
+        "child_group": 6,
+        "kind": "accepted"
+      }
+    ],
+    "reconstructed_pair_scores": [
+      {
+        "parent_group": 0,
+        "child_group": 0,
+        "parent_samples": 4480,
+        "child_samples": 4880,
+        "covered_parent_samples": 4480,
+        "covered_child_samples": 4880,
+        "parent_coverage": 1.0,
+        "child_coverage": 1.0
+      },
+      {
+        "parent_group": 0,
+        "child_group": 1,
+        "parent_samples": 4480,
+        "child_samples": 152,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 0,
+        "child_group": 6,
+        "parent_samples": 4480,
+        "child_samples": 152,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 1,
+        "child_group": 0,
+        "parent_samples": 20,
+        "child_samples": 4880,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 1,
+        "child_group": 1,
+        "parent_samples": 20,
+        "child_samples": 152,
+        "covered_parent_samples": 20,
+        "covered_child_samples": 32,
+        "parent_coverage": 1.0,
+        "child_coverage": 0.21052631578947367
+      },
+      {
+        "parent_group": 1,
+        "child_group": 6,
+        "parent_samples": 20,
+        "child_samples": 152,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 2,
+        "child_group": 0,
+        "parent_samples": 20,
+        "child_samples": 4880,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 2,
+        "child_group": 1,
+        "parent_samples": 20,
+        "child_samples": 152,
+        "covered_parent_samples": 20,
+        "covered_child_samples": 26,
+        "parent_coverage": 1.0,
+        "child_coverage": 0.17105263157894737
+      },
+      {
+        "parent_group": 2,
+        "child_group": 6,
+        "parent_samples": 20,
+        "child_samples": 152,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 3,
+        "child_group": 0,
+        "parent_samples": 20,
+        "child_samples": 4880,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 3,
+        "child_group": 1,
+        "parent_samples": 20,
+        "child_samples": 152,
+        "covered_parent_samples": 20,
+        "covered_child_samples": 26,
+        "parent_coverage": 1.0,
+        "child_coverage": 0.17105263157894737
+      },
+      {
+        "parent_group": 3,
+        "child_group": 6,
+        "parent_samples": 20,
+        "child_samples": 152,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 4,
+        "child_group": 0,
+        "parent_samples": 20,
+        "child_samples": 4880,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 4,
+        "child_group": 1,
+        "parent_samples": 20,
+        "child_samples": 152,
+        "covered_parent_samples": 20,
+        "covered_child_samples": 26,
+        "parent_coverage": 1.0,
+        "child_coverage": 0.17105263157894737
+      },
+      {
+        "parent_group": 4,
+        "child_group": 6,
+        "parent_samples": 20,
+        "child_samples": 152,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 5,
+        "child_group": 0,
+        "parent_samples": 20,
+        "child_samples": 4880,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 5,
+        "child_group": 1,
+        "parent_samples": 20,
+        "child_samples": 152,
+        "covered_parent_samples": 20,
+        "covered_child_samples": 26,
+        "parent_coverage": 1.0,
+        "child_coverage": 0.17105263157894737
+      },
+      {
+        "parent_group": 5,
+        "child_group": 6,
+        "parent_samples": 20,
+        "child_samples": 152,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 6,
+        "child_group": 0,
+        "parent_samples": 20,
+        "child_samples": 4880,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 6,
+        "child_group": 1,
+        "parent_samples": 20,
+        "child_samples": 152,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 6,
+        "child_group": 6,
+        "parent_samples": 20,
+        "child_samples": 152,
+        "covered_parent_samples": 20,
+        "covered_child_samples": 26,
+        "parent_coverage": 1.0,
+        "child_coverage": 0.17105263157894737
+      },
+      {
+        "parent_group": 7,
+        "child_group": 0,
+        "parent_samples": 20,
+        "child_samples": 4880,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 7,
+        "child_group": 1,
+        "parent_samples": 20,
+        "child_samples": 152,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 7,
+        "child_group": 6,
+        "parent_samples": 20,
+        "child_samples": 152,
+        "covered_parent_samples": 20,
+        "covered_child_samples": 26,
+        "parent_coverage": 1.0,
+        "child_coverage": 0.17105263157894737
+      },
+      {
+        "parent_group": 8,
+        "child_group": 0,
+        "parent_samples": 20,
+        "child_samples": 4880,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 8,
+        "child_group": 1,
+        "parent_samples": 20,
+        "child_samples": 152,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 8,
+        "child_group": 6,
+        "parent_samples": 20,
+        "child_samples": 152,
+        "covered_parent_samples": 20,
+        "covered_child_samples": 26,
+        "parent_coverage": 1.0,
+        "child_coverage": 0.17105263157894737
+      },
+      {
+        "parent_group": 9,
+        "child_group": 0,
+        "parent_samples": 20,
+        "child_samples": 4880,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 9,
+        "child_group": 1,
+        "parent_samples": 20,
+        "child_samples": 152,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 9,
+        "child_group": 6,
+        "parent_samples": 20,
+        "child_samples": 152,
+        "covered_parent_samples": 20,
+        "covered_child_samples": 26,
+        "parent_coverage": 1.0,
+        "child_coverage": 0.17105263157894737
+      },
+      {
+        "parent_group": 10,
+        "child_group": 0,
+        "parent_samples": 20,
+        "child_samples": 4880,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 10,
+        "child_group": 1,
+        "parent_samples": 20,
+        "child_samples": 152,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 10,
+        "child_group": 6,
+        "parent_samples": 20,
+        "child_samples": 152,
+        "covered_parent_samples": 20,
+        "covered_child_samples": 32,
+        "parent_coverage": 1.0,
+        "child_coverage": 0.21052631578947367
+      }
+    ],
+    "parent_nodes": [
+      {
+        "group": 0,
+        "samples": 4480,
+        "network_y": 0.94
+      },
+      {
+        "group": 1,
+        "samples": 20,
+        "network_y": 0.852
+      },
+      {
+        "group": 2,
+        "samples": 20,
+        "network_y": 0.764
+      },
+      {
+        "group": 3,
+        "samples": 20,
+        "network_y": 0.6759999999999999
+      },
+      {
+        "group": 4,
+        "samples": 20,
+        "network_y": 0.588
+      },
+      {
+        "group": 5,
+        "samples": 20,
+        "network_y": 0.5
+      },
+      {
+        "group": 6,
+        "samples": 20,
+        "network_y": 0.4119999999999999
+      },
+      {
+        "group": 9,
+        "samples": 20,
+        "network_y": 0.32399999999999995
+      },
+      {
+        "group": 7,
+        "samples": 20,
+        "network_y": 0.236
+      },
+      {
+        "group": 8,
+        "samples": 20,
+        "network_y": 0.14800000000000002
+      },
+      {
+        "group": 10,
+        "samples": 20,
+        "network_y": 0.06
+      }
+    ],
+    "child_nodes": [
+      {
+        "group": 0,
+        "samples": 4880,
+        "network_y": 0.94
+      },
+      {
+        "group": 1,
+        "samples": 152,
+        "network_y": 0.5
+      },
+      {
+        "group": 6,
+        "samples": 152,
+        "network_y": 0.06
+      }
+    ],
+    "displayed_samples": [
+      {
+        "xy": 904,
+        "xz": 904
+      },
+      {
+        "xy": 1000,
+        "xz": 1000
+      }
+    ],
+    "figure": "n064_fragments.png"
+  },
+  {
+    "config": {
+      "num_cells": 128,
+      "parent_event": 13,
+      "child_event": 14,
+      "parent_time": 0.12999999523162842,
+      "child_time": 0.14000000059604645,
+      "mode": "native_cells_scaled_count",
+      "segmentation_angle": 60,
+      "segmentation_radius_cells": 1.5,
+      "min_samples": 80,
+      "gate_reference_cells": 1.5,
+      "gate_code_units": 0.0234375,
+      "gate_native_cells": 3.0
+    },
+    "edges": [
+      {
+        "parent_group": 0,
+        "child_group": 0,
+        "kind": "accepted"
+      },
+      {
+        "parent_group": 1,
+        "child_group": 1,
+        "kind": "accepted"
+      },
+      {
+        "parent_group": 20,
+        "child_group": 4,
+        "kind": "accepted"
+      }
+    ],
+    "reconstructed_pair_scores": [
+      {
+        "parent_group": 0,
+        "child_group": 0,
+        "parent_samples": 18328,
+        "child_samples": 19152,
+        "covered_parent_samples": 18256,
+        "covered_child_samples": 19152,
+        "parent_coverage": 0.9960715844609341,
+        "child_coverage": 1.0
+      },
+      {
+        "parent_group": 0,
+        "child_group": 1,
+        "parent_samples": 18328,
+        "child_samples": 1364,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 0,
+        "child_group": 4,
+        "parent_samples": 18328,
+        "child_samples": 1364,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 1,
+        "child_group": 0,
+        "parent_samples": 1164,
+        "child_samples": 19152,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 1,
+        "child_group": 1,
+        "parent_samples": 1164,
+        "child_samples": 1364,
+        "covered_parent_samples": 1164,
+        "covered_child_samples": 1332,
+        "parent_coverage": 1.0,
+        "child_coverage": 0.9765395894428153
+      },
+      {
+        "parent_group": 1,
+        "child_group": 4,
+        "parent_samples": 1164,
+        "child_samples": 1364,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 20,
+        "child_group": 0,
+        "parent_samples": 1164,
+        "child_samples": 19152,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 20,
+        "child_group": 1,
+        "parent_samples": 1164,
+        "child_samples": 1364,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 20,
+        "child_group": 4,
+        "parent_samples": 1164,
+        "child_samples": 1364,
+        "covered_parent_samples": 1164,
+        "covered_child_samples": 1332,
+        "parent_coverage": 1.0,
+        "child_coverage": 0.9765395894428153
+      }
+    ],
+    "parent_nodes": [
+      {
+        "group": 0,
+        "samples": 18328,
+        "network_y": 0.94
+      },
+      {
+        "group": 1,
+        "samples": 1164,
+        "network_y": 0.5
+      },
+      {
+        "group": 20,
+        "samples": 1164,
+        "network_y": 0.06
+      }
+    ],
+    "child_nodes": [
+      {
+        "group": 0,
+        "samples": 19152,
+        "network_y": 0.94
+      },
+      {
+        "group": 1,
+        "samples": 1364,
+        "network_y": 0.5
+      },
+      {
+        "group": 4,
+        "samples": 1364,
+        "network_y": 0.06
+      }
+    ],
+    "displayed_samples": [
+      {
+        "xy": 3944,
+        "xz": 3944
+      },
+      {
+        "xy": 4216,
+        "xz": 4216
+      }
+    ],
+    "figure": "n128_large_groups.png"
+  },
+  {
+    "config": {
+      "num_cells": 128,
+      "parent_event": 13,
+      "child_event": 14,
+      "parent_time": 0.12999999523162842,
+      "child_time": 0.14000000059604645,
+      "mode": "native_cells",
+      "segmentation_angle": 60,
+      "segmentation_radius_cells": 1.5,
+      "min_samples": 20,
+      "gate_reference_cells": 1.5,
+      "gate_code_units": 0.0234375,
+      "gate_native_cells": 3.0
+    },
+    "edges": [
+      {
+        "parent_group": 0,
+        "child_group": 0,
+        "kind": "accepted"
+      },
+      {
+        "parent_group": 1,
+        "child_group": 1,
+        "kind": "accepted"
+      },
+      {
+        "parent_group": 10,
+        "child_group": 2,
+        "kind": "accepted"
+      },
+      {
+        "parent_group": 11,
+        "child_group": 3,
+        "kind": "accepted"
+      },
+      {
+        "parent_group": 20,
+        "child_group": 4,
+        "kind": "accepted"
+      }
+    ],
+    "reconstructed_pair_scores": [
+      {
+        "parent_group": 0,
+        "child_group": 0,
+        "parent_samples": 18328,
+        "child_samples": 19152,
+        "covered_parent_samples": 18256,
+        "covered_child_samples": 19152,
+        "parent_coverage": 0.9960715844609341,
+        "child_coverage": 1.0
+      },
+      {
+        "parent_group": 0,
+        "child_group": 1,
+        "parent_samples": 18328,
+        "child_samples": 1364,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 0,
+        "child_group": 2,
+        "parent_samples": 18328,
+        "child_samples": 52,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 0,
+        "child_group": 3,
+        "parent_samples": 18328,
+        "child_samples": 52,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 0,
+        "child_group": 4,
+        "parent_samples": 18328,
+        "child_samples": 1364,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 1,
+        "child_group": 0,
+        "parent_samples": 1164,
+        "child_samples": 19152,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 1,
+        "child_group": 1,
+        "parent_samples": 1164,
+        "child_samples": 1364,
+        "covered_parent_samples": 1164,
+        "covered_child_samples": 1332,
+        "parent_coverage": 1.0,
+        "child_coverage": 0.9765395894428153
+      },
+      {
+        "parent_group": 1,
+        "child_group": 2,
+        "parent_samples": 1164,
+        "child_samples": 52,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 1,
+        "child_group": 3,
+        "parent_samples": 1164,
+        "child_samples": 52,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 1,
+        "child_group": 4,
+        "parent_samples": 1164,
+        "child_samples": 1364,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 10,
+        "child_group": 0,
+        "parent_samples": 32,
+        "child_samples": 19152,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 10,
+        "child_group": 1,
+        "parent_samples": 32,
+        "child_samples": 1364,
+        "covered_parent_samples": 8,
+        "covered_child_samples": 12,
+        "parent_coverage": 0.25,
+        "child_coverage": 0.008797653958944282
+      },
+      {
+        "parent_group": 10,
+        "child_group": 2,
+        "parent_samples": 32,
+        "child_samples": 52,
+        "covered_parent_samples": 32,
+        "covered_child_samples": 52,
+        "parent_coverage": 1.0,
+        "child_coverage": 1.0
+      },
+      {
+        "parent_group": 10,
+        "child_group": 3,
+        "parent_samples": 32,
+        "child_samples": 52,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 10,
+        "child_group": 4,
+        "parent_samples": 32,
+        "child_samples": 1364,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 11,
+        "child_group": 0,
+        "parent_samples": 32,
+        "child_samples": 19152,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 11,
+        "child_group": 1,
+        "parent_samples": 32,
+        "child_samples": 1364,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 11,
+        "child_group": 2,
+        "parent_samples": 32,
+        "child_samples": 52,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 11,
+        "child_group": 3,
+        "parent_samples": 32,
+        "child_samples": 52,
+        "covered_parent_samples": 32,
+        "covered_child_samples": 52,
+        "parent_coverage": 1.0,
+        "child_coverage": 1.0
+      },
+      {
+        "parent_group": 11,
+        "child_group": 4,
+        "parent_samples": 32,
+        "child_samples": 1364,
+        "covered_parent_samples": 8,
+        "covered_child_samples": 12,
+        "parent_coverage": 0.25,
+        "child_coverage": 0.008797653958944282
+      },
+      {
+        "parent_group": 20,
+        "child_group": 0,
+        "parent_samples": 1164,
+        "child_samples": 19152,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 20,
+        "child_group": 1,
+        "parent_samples": 1164,
+        "child_samples": 1364,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 20,
+        "child_group": 2,
+        "parent_samples": 1164,
+        "child_samples": 52,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 20,
+        "child_group": 3,
+        "parent_samples": 1164,
+        "child_samples": 52,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 20,
+        "child_group": 4,
+        "parent_samples": 1164,
+        "child_samples": 1364,
+        "covered_parent_samples": 1164,
+        "covered_child_samples": 1332,
+        "parent_coverage": 1.0,
+        "child_coverage": 0.9765395894428153
+      }
+    ],
+    "parent_nodes": [
+      {
+        "group": 0,
+        "samples": 18328,
+        "network_y": 0.94
+      },
+      {
+        "group": 1,
+        "samples": 1164,
+        "network_y": 0.72
+      },
+      {
+        "group": 20,
+        "samples": 1164,
+        "network_y": 0.5
+      },
+      {
+        "group": 10,
+        "samples": 32,
+        "network_y": 0.28
+      },
+      {
+        "group": 11,
+        "samples": 32,
+        "network_y": 0.06
+      }
+    ],
+    "child_nodes": [
+      {
+        "group": 0,
+        "samples": 19152,
+        "network_y": 0.94
+      },
+      {
+        "group": 1,
+        "samples": 1364,
+        "network_y": 0.72
+      },
+      {
+        "group": 4,
+        "samples": 1364,
+        "network_y": 0.5
+      },
+      {
+        "group": 2,
+        "samples": 52,
+        "network_y": 0.28
+      },
+      {
+        "group": 3,
+        "samples": 52,
+        "network_y": 0.06
+      }
+    ],
+    "displayed_samples": [
+      {
+        "xy": 3944,
+        "xz": 3944
+      },
+      {
+        "xy": 4216,
+        "xz": 4216
+      }
+    ],
+    "figure": "n128_fragments_narrow.png"
+  },
+  {
+    "config": {
+      "num_cells": 128,
+      "parent_event": 13,
+      "child_event": 14,
+      "parent_time": 0.12999999523162842,
+      "child_time": 0.14000000059604645,
+      "mode": "native_cells",
+      "segmentation_angle": 60,
+      "segmentation_radius_cells": 1.5,
+      "min_samples": 20,
+      "gate_reference_cells": 2.5,
+      "gate_code_units": 0.0390625,
+      "gate_native_cells": 5.0
+    },
+    "edges": [
+      {
+        "parent_group": 0,
+        "child_group": 0,
+        "kind": "accepted"
+      },
+      {
+        "parent_group": 1,
+        "child_group": 1,
+        "kind": "accepted"
+      },
+      {
+        "parent_group": 20,
+        "child_group": 4,
+        "kind": "accepted"
+      },
+      {
+        "parent_group": 10,
+        "child_group": 1,
+        "kind": "ambiguous_best",
+        "parent_coverage": 1.0
+      },
+      {
+        "parent_group": 10,
+        "child_group": 2,
+        "kind": "ambiguous_runner_up",
+        "parent_coverage": 1.0
+      },
+      {
+        "parent_group": 11,
+        "child_group": 3,
+        "kind": "ambiguous_best",
+        "parent_coverage": 1.0
+      },
+      {
+        "parent_group": 11,
+        "child_group": 4,
+        "kind": "ambiguous_runner_up",
+        "parent_coverage": 1.0
+      }
+    ],
+    "reconstructed_pair_scores": [
+      {
+        "parent_group": 0,
+        "child_group": 0,
+        "parent_samples": 18328,
+        "child_samples": 19152,
+        "covered_parent_samples": 18328,
+        "covered_child_samples": 19152,
+        "parent_coverage": 1.0,
+        "child_coverage": 1.0
+      },
+      {
+        "parent_group": 0,
+        "child_group": 1,
+        "parent_samples": 18328,
+        "child_samples": 1364,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 0,
+        "child_group": 2,
+        "parent_samples": 18328,
+        "child_samples": 52,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 0,
+        "child_group": 3,
+        "parent_samples": 18328,
+        "child_samples": 52,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 0,
+        "child_group": 4,
+        "parent_samples": 18328,
+        "child_samples": 1364,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 1,
+        "child_group": 0,
+        "parent_samples": 1164,
+        "child_samples": 19152,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 1,
+        "child_group": 1,
+        "parent_samples": 1164,
+        "child_samples": 1364,
+        "covered_parent_samples": 1164,
+        "covered_child_samples": 1364,
+        "parent_coverage": 1.0,
+        "child_coverage": 1.0
+      },
+      {
+        "parent_group": 1,
+        "child_group": 2,
+        "parent_samples": 1164,
+        "child_samples": 52,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 1,
+        "child_group": 3,
+        "parent_samples": 1164,
+        "child_samples": 52,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 1,
+        "child_group": 4,
+        "parent_samples": 1164,
+        "child_samples": 1364,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 10,
+        "child_group": 0,
+        "parent_samples": 32,
+        "child_samples": 19152,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 10,
+        "child_group": 1,
+        "parent_samples": 32,
+        "child_samples": 1364,
+        "covered_parent_samples": 32,
+        "covered_child_samples": 88,
+        "parent_coverage": 1.0,
+        "child_coverage": 0.06451612903225806
+      },
+      {
+        "parent_group": 10,
+        "child_group": 2,
+        "parent_samples": 32,
+        "child_samples": 52,
+        "covered_parent_samples": 32,
+        "covered_child_samples": 52,
+        "parent_coverage": 1.0,
+        "child_coverage": 1.0
+      },
+      {
+        "parent_group": 10,
+        "child_group": 3,
+        "parent_samples": 32,
+        "child_samples": 52,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 10,
+        "child_group": 4,
+        "parent_samples": 32,
+        "child_samples": 1364,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 11,
+        "child_group": 0,
+        "parent_samples": 32,
+        "child_samples": 19152,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 11,
+        "child_group": 1,
+        "parent_samples": 32,
+        "child_samples": 1364,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 11,
+        "child_group": 2,
+        "parent_samples": 32,
+        "child_samples": 52,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 11,
+        "child_group": 3,
+        "parent_samples": 32,
+        "child_samples": 52,
+        "covered_parent_samples": 32,
+        "covered_child_samples": 52,
+        "parent_coverage": 1.0,
+        "child_coverage": 1.0
+      },
+      {
+        "parent_group": 11,
+        "child_group": 4,
+        "parent_samples": 32,
+        "child_samples": 1364,
+        "covered_parent_samples": 32,
+        "covered_child_samples": 88,
+        "parent_coverage": 1.0,
+        "child_coverage": 0.06451612903225806
+      },
+      {
+        "parent_group": 20,
+        "child_group": 0,
+        "parent_samples": 1164,
+        "child_samples": 19152,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 20,
+        "child_group": 1,
+        "parent_samples": 1164,
+        "child_samples": 1364,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 20,
+        "child_group": 2,
+        "parent_samples": 1164,
+        "child_samples": 52,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 20,
+        "child_group": 3,
+        "parent_samples": 1164,
+        "child_samples": 52,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 20,
+        "child_group": 4,
+        "parent_samples": 1164,
+        "child_samples": 1364,
+        "covered_parent_samples": 1164,
+        "covered_child_samples": 1364,
+        "parent_coverage": 1.0,
+        "child_coverage": 1.0
+      }
+    ],
+    "parent_nodes": [
+      {
+        "group": 0,
+        "samples": 18328,
+        "network_y": 0.94
+      },
+      {
+        "group": 1,
+        "samples": 1164,
+        "network_y": 0.72
+      },
+      {
+        "group": 20,
+        "samples": 1164,
+        "network_y": 0.5
+      },
+      {
+        "group": 10,
+        "samples": 32,
+        "network_y": 0.28
+      },
+      {
+        "group": 11,
+        "samples": 32,
+        "network_y": 0.06
+      }
+    ],
+    "child_nodes": [
+      {
+        "group": 0,
+        "samples": 19152,
+        "network_y": 0.94
+      },
+      {
+        "group": 1,
+        "samples": 1364,
+        "network_y": 0.72
+      },
+      {
+        "group": 4,
+        "samples": 1364,
+        "network_y": 0.5
+      },
+      {
+        "group": 2,
+        "samples": 52,
+        "network_y": 0.28
+      },
+      {
+        "group": 3,
+        "samples": 52,
+        "network_y": 0.06
+      }
+    ],
+    "displayed_samples": [
+      {
+        "xy": 3944,
+        "xz": 3944
+      },
+      {
+        "xy": 4216,
+        "xz": 4216
+      }
+    ],
+    "figure": "n128_fragments_wide.png"
+  },
+  {
+    "config": {
+      "num_cells": 128,
+      "parent_event": 14,
+      "child_event": 15,
+      "parent_time": 0.14000000059604645,
+      "child_time": 0.14999999105930328,
+      "mode": "native_cells",
+      "segmentation_angle": 60,
+      "segmentation_radius_cells": 1.5,
+      "min_samples": 20,
+      "gate_reference_cells": 2.5,
+      "gate_code_units": 0.0390625,
+      "gate_native_cells": 5.0
+    },
+    "edges": [
+      {
+        "parent_group": 0,
+        "child_group": 0,
+        "kind": "accepted"
+      },
+      {
+        "parent_group": 1,
+        "child_group": 1,
+        "kind": "accepted"
+      },
+      {
+        "parent_group": 2,
+        "child_group": 1,
+        "kind": "redundant"
+      },
+      {
+        "parent_group": 3,
+        "child_group": 2,
+        "kind": "redundant"
+      },
+      {
+        "parent_group": 4,
+        "child_group": 2,
+        "kind": "accepted"
+      }
+    ],
+    "reconstructed_pair_scores": [
+      {
+        "parent_group": 0,
+        "child_group": 0,
+        "parent_samples": 19152,
+        "child_samples": 20480,
+        "covered_parent_samples": 19152,
+        "covered_child_samples": 20480,
+        "parent_coverage": 1.0,
+        "child_coverage": 1.0
+      },
+      {
+        "parent_group": 0,
+        "child_group": 1,
+        "parent_samples": 19152,
+        "child_samples": 1576,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 0,
+        "child_group": 2,
+        "parent_samples": 19152,
+        "child_samples": 1576,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 1,
+        "child_group": 0,
+        "parent_samples": 1364,
+        "child_samples": 20480,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 1,
+        "child_group": 1,
+        "parent_samples": 1364,
+        "child_samples": 1576,
+        "covered_parent_samples": 1364,
+        "covered_child_samples": 1576,
+        "parent_coverage": 1.0,
+        "child_coverage": 1.0
+      },
+      {
+        "parent_group": 1,
+        "child_group": 2,
+        "parent_samples": 1364,
+        "child_samples": 1576,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 2,
+        "child_group": 0,
+        "parent_samples": 52,
+        "child_samples": 20480,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 2,
+        "child_group": 1,
+        "parent_samples": 52,
+        "child_samples": 1576,
+        "covered_parent_samples": 52,
+        "covered_child_samples": 240,
+        "parent_coverage": 1.0,
+        "child_coverage": 0.15228426395939088
+      },
+      {
+        "parent_group": 2,
+        "child_group": 2,
+        "parent_samples": 52,
+        "child_samples": 1576,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 3,
+        "child_group": 0,
+        "parent_samples": 52,
+        "child_samples": 20480,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 3,
+        "child_group": 1,
+        "parent_samples": 52,
+        "child_samples": 1576,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 3,
+        "child_group": 2,
+        "parent_samples": 52,
+        "child_samples": 1576,
+        "covered_parent_samples": 52,
+        "covered_child_samples": 240,
+        "parent_coverage": 1.0,
+        "child_coverage": 0.15228426395939088
+      },
+      {
+        "parent_group": 4,
+        "child_group": 0,
+        "parent_samples": 1364,
+        "child_samples": 20480,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 4,
+        "child_group": 1,
+        "parent_samples": 1364,
+        "child_samples": 1576,
+        "covered_parent_samples": 0,
+        "covered_child_samples": 0,
+        "parent_coverage": 0.0,
+        "child_coverage": 0.0
+      },
+      {
+        "parent_group": 4,
+        "child_group": 2,
+        "parent_samples": 1364,
+        "child_samples": 1576,
+        "covered_parent_samples": 1364,
+        "covered_child_samples": 1576,
+        "parent_coverage": 1.0,
+        "child_coverage": 1.0
+      }
+    ],
+    "parent_nodes": [
+      {
+        "group": 0,
+        "samples": 19152,
+        "network_y": 0.94
+      },
+      {
+        "group": 1,
+        "samples": 1364,
+        "network_y": 0.72
+      },
+      {
+        "group": 4,
+        "samples": 1364,
+        "network_y": 0.5
+      },
+      {
+        "group": 2,
+        "samples": 52,
+        "network_y": 0.28
+      },
+      {
+        "group": 3,
+        "samples": 52,
+        "network_y": 0.06
+      }
+    ],
+    "child_nodes": [
+      {
+        "group": 0,
+        "samples": 20480,
+        "network_y": 0.94
+      },
+      {
+        "group": 1,
+        "samples": 1576,
+        "network_y": 0.5
+      },
+      {
+        "group": 2,
+        "samples": 1576,
+        "network_y": 0.06
+      }
+    ],
+    "displayed_samples": [
+      {
+        "xy": 4216,
+        "xz": 4216
+      },
+      {
+        "xy": 4360,
+        "xz": 4360
+      }
+    ],
+    "figure": "n128_redundant_links.png"
+  }
+]
