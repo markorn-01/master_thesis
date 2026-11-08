@@ -1,0 +1,4 @@
+mode,raw_faces,invalid_fits,samples,faces,used_vertices,unused_samples,edges,boundary_edges,nonmanifold_edges,inconsistent_shared_edge_winding,edge_connected_components,largest_component_faces,singleton_face_components
+saved,49949,,25136,35408,22915,2221,61991,17758,0,0,830,12738,583
+plane_2cells,49968,0,25136,36497,23389,1747,63772,18053,0,0,688,28179,572
+plane_3cells,49968,0,25136,36641,23460,1676,63950,17977,0,0,749,28307,547

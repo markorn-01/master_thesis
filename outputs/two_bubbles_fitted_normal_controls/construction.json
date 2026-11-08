@@ -1,0 +1,392 @@
+[
+  {
+    "case": "sphere",
+    "mode": "saved",
+    "rebuilt": {
+      "method": "Open3D ball pivoting plus original-prototype geometric guards",
+      "open3d_version": "0.19.0",
+      "radius_factors": [
+        1.0
+      ],
+      "raw_faces": 3196,
+      "faces": 3196,
+      "rejected": {
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 4794,
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "vertices_moved": false
+    },
+    "fixed_guard_rejections": {
+      "nonmanifold_edge_faces": 0
+    }
+  },
+  {
+    "case": "sphere",
+    "mode": "plane_2cells",
+    "rebuilt": {
+      "method": "Open3D ball pivoting plus original-prototype geometric guards",
+      "open3d_version": "0.19.0",
+      "radius_factors": [
+        1.0
+      ],
+      "raw_faces": 3196,
+      "faces": 3196,
+      "rejected": {
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 4794,
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "vertices_moved": false
+    },
+    "fixed_guard_rejections": {
+      "nonmanifold_edge_faces": 0
+    }
+  },
+  {
+    "case": "sphere",
+    "mode": "plane_3cells",
+    "rebuilt": {
+      "method": "Open3D ball pivoting plus original-prototype geometric guards",
+      "open3d_version": "0.19.0",
+      "radius_factors": [
+        1.0
+      ],
+      "raw_faces": 3196,
+      "faces": 3196,
+      "rejected": {
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 4794,
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "vertices_moved": false
+    },
+    "fixed_guard_rejections": {
+      "nonmanifold_edge_faces": 0
+    }
+  },
+  {
+    "case": "sphere_cap_hole",
+    "mode": "saved",
+    "rebuilt": {
+      "method": "Open3D ball pivoting plus original-prototype geometric guards",
+      "open3d_version": "0.19.0",
+      "radius_factors": [
+        1.0
+      ],
+      "raw_faces": 2503,
+      "faces": 2503,
+      "rejected": {
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 3782,
+        "boundary_edges": 55,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "vertices_moved": false
+    },
+    "fixed_guard_rejections": {
+      "nonmanifold_edge_faces": 0
+    }
+  },
+  {
+    "case": "sphere_cap_hole",
+    "mode": "plane_2cells",
+    "rebuilt": {
+      "method": "Open3D ball pivoting plus original-prototype geometric guards",
+      "open3d_version": "0.19.0",
+      "radius_factors": [
+        1.0
+      ],
+      "raw_faces": 2503,
+      "faces": 2503,
+      "rejected": {
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 3782,
+        "boundary_edges": 55,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "vertices_moved": false
+    },
+    "fixed_guard_rejections": {
+      "nonmanifold_edge_faces": 0
+    }
+  },
+  {
+    "case": "sphere_cap_hole",
+    "mode": "plane_3cells",
+    "rebuilt": {
+      "method": "Open3D ball pivoting plus original-prototype geometric guards",
+      "open3d_version": "0.19.0",
+      "radius_factors": [
+        1.0
+      ],
+      "raw_faces": 2503,
+      "faces": 2503,
+      "rejected": {
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 3782,
+        "boundary_edges": 55,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "vertices_moved": false
+    },
+    "fixed_guard_rejections": {
+      "nonmanifold_edge_faces": 0
+    }
+  },
+  {
+    "case": "planar_hole",
+    "mode": "saved",
+    "rebuilt": {
+      "method": "Open3D ball pivoting plus original-prototype geometric guards",
+      "open3d_version": "0.19.0",
+      "radius_factors": [
+        1.0
+      ],
+      "raw_faces": 444,
+      "faces": 444,
+      "rejected": {
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 708,
+        "boundary_edges": 84,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "vertices_moved": false
+    },
+    "fixed_guard_rejections": {
+      "nonmanifold_edge_faces": 0
+    }
+  },
+  {
+    "case": "planar_hole",
+    "mode": "plane_2cells",
+    "rebuilt": {
+      "method": "Open3D ball pivoting plus original-prototype geometric guards",
+      "open3d_version": "0.19.0",
+      "radius_factors": [
+        1.0
+      ],
+      "raw_faces": 444,
+      "faces": 444,
+      "rejected": {
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 708,
+        "boundary_edges": 84,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "vertices_moved": false
+    },
+    "fixed_guard_rejections": {
+      "nonmanifold_edge_faces": 0
+    }
+  },
+  {
+    "case": "planar_hole",
+    "mode": "plane_3cells",
+    "rebuilt": {
+      "method": "Open3D ball pivoting plus original-prototype geometric guards",
+      "open3d_version": "0.19.0",
+      "radius_factors": [
+        1.0
+      ],
+      "raw_faces": 444,
+      "faces": 444,
+      "rejected": {
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 708,
+        "boundary_edges": 84,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "vertices_moved": false
+    },
+    "fixed_guard_rejections": {
+      "nonmanifold_edge_faces": 0
+    }
+  },
+  {
+    "case": "near_sheets_separate_groups",
+    "mode": "saved",
+    "rebuilt": {
+      "method": "Open3D ball pivoting plus original-prototype geometric guards",
+      "open3d_version": "0.19.0",
+      "radius_factors": [
+        1.0
+      ],
+      "raw_faces": 255,
+      "faces": 255,
+      "rejected": {
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 416,
+        "boundary_edges": 67,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "vertices_moved": false
+    },
+    "fixed_guard_rejections": {
+      "nonmanifold_edge_faces": 0
+    }
+  },
+  {
+    "case": "near_sheets_separate_groups",
+    "mode": "plane_2cells",
+    "rebuilt": {
+      "method": "Open3D ball pivoting plus original-prototype geometric guards",
+      "open3d_version": "0.19.0",
+      "radius_factors": [
+        1.0
+      ],
+      "raw_faces": 255,
+      "faces": 255,
+      "rejected": {
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 416,
+        "boundary_edges": 67,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "vertices_moved": false
+    },
+    "fixed_guard_rejections": {
+      "nonmanifold_edge_faces": 0
+    }
+  },
+  {
+    "case": "near_sheets_separate_groups",
+    "mode": "plane_3cells",
+    "rebuilt": {
+      "method": "Open3D ball pivoting plus original-prototype geometric guards",
+      "open3d_version": "0.19.0",
+      "radius_factors": [
+        1.0
+      ],
+      "raw_faces": 255,
+      "faces": 255,
+      "rejected": {
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 416,
+        "boundary_edges": 67,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "vertices_moved": false
+    },
+    "fixed_guard_rejections": {
+      "nonmanifold_edge_faces": 0
+    }
+  },
+  {
+    "case": "near_sheets_same_group_counterexample",
+    "mode": "saved",
+    "rebuilt": {
+      "method": "Open3D ball pivoting plus original-prototype geometric guards",
+      "open3d_version": "0.19.0",
+      "radius_factors": [
+        1.0
+      ],
+      "raw_faces": 288,
+      "faces": 288,
+      "rejected": {
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 449,
+        "boundary_edges": 34,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "vertices_moved": false
+    },
+    "fixed_guard_rejections": {
+      "nonmanifold_edge_faces": 0
+    }
+  },
+  {
+    "case": "near_sheets_same_group_counterexample",
+    "mode": "plane_2cells",
+    "rebuilt": {
+      "method": "Open3D ball pivoting plus original-prototype geometric guards",
+      "open3d_version": "0.19.0",
+      "radius_factors": [
+        1.0
+      ],
+      "raw_faces": 288,
+      "faces": 288,
+      "rejected": {
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 449,
+        "boundary_edges": 34,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "vertices_moved": false
+    },
+    "fixed_guard_rejections": {
+      "nonmanifold_edge_faces": 0
+    }
+  },
+  {
+    "case": "near_sheets_same_group_counterexample",
+    "mode": "plane_3cells",
+    "rebuilt": {
+      "method": "Open3D ball pivoting plus original-prototype geometric guards",
+      "open3d_version": "0.19.0",
+      "radius_factors": [
+        1.0
+      ],
+      "raw_faces": 288,
+      "faces": 288,
+      "rejected": {
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 449,
+        "boundary_edges": 34,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "vertices_moved": false
+    },
+    "fixed_guard_rejections": {
+      "nonmanifold_edge_faces": 0
+    }
+  }
+]

@@ -1,0 +1,219 @@
+{
+  "input": "outputs/two_bubbles_temporal_mesh_n128/mesh_0016.npz",
+  "input_sha256": "743a1d3f18f4245d14dbb5419549f416ddcdefb580761dec03927117adbe5104",
+  "source_sha256": {
+    "/Users/minhn/Documents/Heidelberg University/fifth_semester/Thesis/master_thesis/experiments/wind_bubble/compare_event_normals.py": "061086991ea8ae843b211dfbcf553f9318233fbe0cf509707d2c152e9f48b6a4",
+    "experiments/wind_bubble/compare_patch_normals.py": "c575c4e1abac69c8e3b8b31de0f88f626cb298194f29d2320db207ec21bfe38f",
+    "experiments/wind_bubble/ball_pivot_mesh.py": "7d043f64a271e9a63b4289a42197477048e237748a99ea8d2844f7c86c11ec15",
+    "experiments/wind_bubble/surface_mesh.py": "e391cd14eae9d058ff40f049bec4a2a720f189f14c80d9e2a65ad2f6d6f9040c",
+    "experiments/wind_bubble/check_temporal_mesh.py": "10d7b96eb548ea1d758ce7116c5b2e88d82645fd000cdf4c15aa281dccda9c7b",
+    "experiments/wind_bubble/verify_temporal_mesh.py": "8f39f2864b9b25a19fb99f98ce3fa985d568cf9948e070043773716ebb9d0d28",
+    "experiments/wind_bubble/verify_mesh_comparison.py": "21714f7ab435d593e72bb105ec831cb71f24c2f007c8deec3ea72c247a2834b0"
+  },
+  "open3d_version": "0.19.0",
+  "records": [
+    {
+      "mode": "saved",
+      "raw_faces": 49949,
+      "invalid_fits": null,
+      "samples": 25136,
+      "faces": 35408,
+      "used_vertices": 22915,
+      "unused_samples": 2221,
+      "edges": 61991,
+      "boundary_edges": 17758,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 830,
+      "largest_component_faces": 12738,
+      "singleton_face_components": 583,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 49949,
+        "faces": 35408,
+        "rejected": {
+          "tangent": 13281,
+          "face_normal": 928,
+          "minimum_angle": 92,
+          "normal": 240,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 61991,
+          "boundary_edges": 17758,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "cross_group_separation": [
+        {
+          "group_a": 0,
+          "group_b": 1,
+          "minimum_vertex_distance": 0.14759628554568227,
+          "sum_maximum_triangle_edges": 0.027186369772564438,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 2,
+          "minimum_vertex_distance": 0.14759628554568227,
+          "sum_maximum_triangle_edges": 0.027186388247029958,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 2,
+          "minimum_vertex_distance": 0.14778980612754822,
+          "sum_maximum_triangle_edges": 0.027227121931043548,
+          "separation_bound_passed": true
+        }
+      ],
+      "central_segments": 650,
+      "coplanar_skipped": 0
+    },
+    {
+      "mode": "plane_2cells",
+      "raw_faces": 49968,
+      "invalid_fits": 0,
+      "samples": 25136,
+      "faces": 36497,
+      "used_vertices": 23389,
+      "unused_samples": 1747,
+      "edges": 63772,
+      "boundary_edges": 18053,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 688,
+      "largest_component_faces": 28179,
+      "singleton_face_components": 572,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 49968,
+        "faces": 36497,
+        "rejected": {
+          "tangent": 12755,
+          "face_normal": 624,
+          "minimum_angle": 92,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 63772,
+          "boundary_edges": 18053,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "cross_group_separation": [
+        {
+          "group_a": 0,
+          "group_b": 1,
+          "minimum_vertex_distance": 0.14759628554568227,
+          "sum_maximum_triangle_edges": 0.027186369772564438,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 2,
+          "minimum_vertex_distance": 0.14759628554568227,
+          "sum_maximum_triangle_edges": 0.027186388247029958,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 2,
+          "minimum_vertex_distance": 0.14778980612754822,
+          "sum_maximum_triangle_edges": 0.027227121931043548,
+          "separation_bound_passed": true
+        }
+      ],
+      "central_segments": 687,
+      "coplanar_skipped": 0
+    },
+    {
+      "mode": "plane_3cells",
+      "raw_faces": 49968,
+      "invalid_fits": 0,
+      "samples": 25136,
+      "faces": 36641,
+      "used_vertices": 23460,
+      "unused_samples": 1676,
+      "edges": 63950,
+      "boundary_edges": 17977,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 749,
+      "largest_component_faces": 28307,
+      "singleton_face_components": 547,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 49968,
+        "faces": 36641,
+        "rejected": {
+          "tangent": 12515,
+          "face_normal": 720,
+          "minimum_angle": 92,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 63950,
+          "boundary_edges": 17977,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "cross_group_separation": [
+        {
+          "group_a": 0,
+          "group_b": 1,
+          "minimum_vertex_distance": 0.14759628554568227,
+          "sum_maximum_triangle_edges": 0.027186369772564438,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 2,
+          "minimum_vertex_distance": 0.14759628554568227,
+          "sum_maximum_triangle_edges": 0.027186388247029958,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 2,
+          "minimum_vertex_distance": 0.14778980612754822,
+          "sum_maximum_triangle_edges": 0.027227121931043548,
+          "separation_bound_passed": true
+        }
+      ],
+      "central_segments": 679,
+      "coplanar_skipped": 0
+    }
+  ],
+  "independent_sampled_svd_checks": 600,
+  "original_arrays_exact": true,
+  "baseline_faces_exact": true,
+  "physical_diagnostics_changed": false,
+  "production_method_changed": false,
+  "guard_thresholds_changed": false,
+  "ball_radius_cells": 1.0,
+  "limitations": [
+    "Within-group false bridges and global self-intersections are not excluded.",
+    "Connected mesh pieces are not physical shocks or persistent identities.",
+    "Boundary-edge counts measure open mesh edges, not physical shock openings.",
+    "Single-event comparison does not validate temporal stability."
+  ]
+}

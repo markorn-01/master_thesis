@@ -1,0 +1,156 @@
+{
+  "records": [
+    {
+      "patch": "axis",
+      "mode": "saved",
+      "proposals": 59,
+      "accepted": 59,
+      "core_samples": 26,
+      "normal_deviation_p16_p50_p84": [
+        0.0,
+        0.0,
+        8.537736462515939e-07
+      ],
+      "tangent_departure_p16_p50_p84": [
+        7.915868285207531,
+        10.692289002336606,
+        11.627262835576426
+      ],
+      "normal_spread_p16_p50_p84": [
+        6.3256643542121855,
+        8.316379083147778,
+        14.041081413959606
+      ],
+      "core_fit_invalid": 0
+    },
+    {
+      "patch": "axis",
+      "mode": "plane_2cells",
+      "proposals": 59,
+      "accepted": 59,
+      "core_samples": 26,
+      "normal_deviation_p16_p50_p84": [
+        1.9764297283188021,
+        6.330028283002218,
+        7.756042005009102
+      ],
+      "tangent_departure_p16_p50_p84": [
+        4.883961021849311,
+        7.549063800087151,
+        11.166934882205672
+      ],
+      "normal_spread_p16_p50_p84": [
+        7.794343745568657,
+        9.45857942242713,
+        12.81412665375022
+      ],
+      "core_fit_invalid": 0
+    },
+    {
+      "patch": "axis",
+      "mode": "plane_3cells",
+      "proposals": 59,
+      "accepted": 59,
+      "core_samples": 26,
+      "normal_deviation_p16_p50_p84": [
+        3.6526278815283177,
+        6.005109164066683,
+        7.387738358353975
+      ],
+      "tangent_departure_p16_p50_p84": [
+        5.402941818367995,
+        6.721631463581356,
+        9.146430116060248
+      ],
+      "normal_spread_p16_p50_p84": [
+        6.696947016570146,
+        8.018312011107087,
+        9.914281609026476
+      ],
+      "core_fit_invalid": 0
+    },
+    {
+      "patch": "diagonal",
+      "mode": "saved",
+      "proposals": 59,
+      "accepted": 18,
+      "core_samples": 28,
+      "normal_deviation_p16_p50_p84": [
+        0.0,
+        0.0,
+        8.537736462515939e-07
+      ],
+      "tangent_departure_p16_p50_p84": [
+        15.355423103550072,
+        21.080727836627958,
+        26.745352291054427
+      ],
+      "normal_spread_p16_p50_p84": [
+        5.863887467456565,
+        8.628145512640687,
+        10.09337739531152
+      ],
+      "core_fit_invalid": 0
+    },
+    {
+      "patch": "diagonal",
+      "mode": "plane_2cells",
+      "proposals": 59,
+      "accepted": 32,
+      "core_samples": 28,
+      "normal_deviation_p16_p50_p84": [
+        3.02802534690116,
+        4.495037824427383,
+        6.310343666488171
+      ],
+      "tangent_departure_p16_p50_p84": [
+        12.63273575525916,
+        19.02246465138117,
+        27.146793011418026
+      ],
+      "normal_spread_p16_p50_p84": [
+        5.691320795962878,
+        7.9043412736673355,
+        12.230946101896
+      ],
+      "core_fit_invalid": 0
+    },
+    {
+      "patch": "diagonal",
+      "mode": "plane_3cells",
+      "proposals": 59,
+      "accepted": 26,
+      "core_samples": 28,
+      "normal_deviation_p16_p50_p84": [
+        2.0018748975747664,
+        3.416649539447583,
+        5.042334761715504
+      ],
+      "tangent_departure_p16_p50_p84": [
+        13.01034988000453,
+        19.609113101541165,
+        25.65515222025001
+      ],
+      "normal_spread_p16_p50_p84": [
+        5.952930697985065,
+        6.886993617541935,
+        7.5047074287762365
+      ],
+      "core_fit_invalid": 0
+    }
+  ],
+  "independent_svd_checks": 3296,
+  "original_arrays_exact": true,
+  "input": "outputs/two_bubbles_temporal_mesh_n128/mesh_0016.npz",
+  "input_sha256": "743a1d3f18f4245d14dbb5419549f416ddcdefb580761dec03927117adbe5104",
+  "source_sha256": "c575c4e1abac69c8e3b8b31de0f88f626cb298194f29d2320db207ec21bfe38f",
+  "proposal_triangles_fixed": true,
+  "guard_thresholds_fixed": true,
+  "physical_diagnostics_changed": false,
+  "production_method_changed": false,
+  "limitations": [
+    "Local plane fitting can mix nearby sheets within one group.",
+    "This compares fixed raw triangles; it does not rerun ball pivoting with fitted normals.",
+    "More accepted triangles do not establish correct physical topology."
+  ]
+}

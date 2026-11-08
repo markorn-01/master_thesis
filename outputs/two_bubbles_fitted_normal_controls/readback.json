@@ -1,0 +1,30 @@
+{
+  "checked_case_mode_stage_combinations": 30,
+  "original_arrays_exact": true,
+  "original_baseline_faces_reproduced": true,
+  "open3d_version": "0.19.0",
+  "source_sha256": {
+    "/Users/minhn/Documents/Heidelberg University/fifth_semester/Thesis/master_thesis/experiments/wind_bubble/check_fitted_normal_controls.py": "c7952373e07a08302c40bb3f69cc48056f1430a64cbd038d6b93a38d91c0c5d1",
+    "experiments/wind_bubble/compare_patch_normals.py": "c575c4e1abac69c8e3b8b31de0f88f626cb298194f29d2320db207ec21bfe38f",
+    "experiments/wind_bubble/ball_pivot_mesh.py": "7d043f64a271e9a63b4289a42197477048e237748a99ea8d2844f7c86c11ec15",
+    "experiments/wind_bubble/mesh_benchmark_cases.py": "123b741b03d3e0ddc3896ad68645c4bb858fc5a99562c8cfd2b61aa1e3e8eee6",
+    "experiments/wind_bubble/surface_mesh.py": "e391cd14eae9d058ff40f049bec4a2a720f189f14c80d9e2a65ad2f6d6f9040c"
+  },
+  "reference_sha256": {
+    "outputs/two_bubbles_mesh_method_comparison/sphere_ball_single.npz": "6ecacc3ce284770da97c2be3b5b36a230e9a434159e255f7874b9c4916a617f7",
+    "outputs/two_bubbles_mesh_method_comparison/sphere_cap_hole_ball_single.npz": "2bccf4b5f0743f3d9f185c2a766e6e6ce080246b9f11e4892650cfd7ec9617eb",
+    "outputs/two_bubbles_mesh_method_comparison/planar_hole_ball_single.npz": "f0b94206bd312717dfe9a36aeddb48794db22fe3ff58f61b09ee722d88000f02",
+    "outputs/two_bubbles_mesh_method_comparison/near_sheets_separate_groups_ball_single.npz": "eb246fda23571cfc69eec6da0931b82b54df5408a2e082be79692aee72af31c2",
+    "outputs/two_bubbles_mesh_method_comparison/near_sheets_same_group_counterexample_ball_single.npz": "aa645a3913054d1f1253c4135997047b70cc5b1b9cb0cc5d02a7d42f6d124648"
+  },
+  "ball_radius_cells": 1.0,
+  "thresholds_changed": false,
+  "production_method_changed": false,
+  "physical_diagnostics_changed": false,
+  "limits": [
+    "Hole intrusion uses sampled barycentric probes, not exact continuous intersections.",
+    "Same-group nearby sheets are an explicit known failure control.",
+    "Analytic area error applies only to sphere and spherical cap.",
+    "No global self-intersection or vertex-manifold proof."
+  ]
+}
