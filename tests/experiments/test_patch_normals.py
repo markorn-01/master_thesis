@@ -42,3 +42,15 @@ class GeometricNormals(unittest.TestCase):
         normals, valid, counts, _ = plane_normals(self.p, saved, labels, .1)
         self.assertFalse(valid.any()); self.assertEqual(counts[0], 0)
         np.testing.assert_array_equal(normals, saved)
+
+    def test_empty_initial_event(self):
+        normals, valid, counts, values = plane_normals(np.empty((0, 3)), np.empty((0, 3)), np.empty(0, int), 1.)
+        self.assertEqual(normals.shape, (0, 3))
+        self.assertEqual(values.shape, (0, 3))
+        self.assertEqual(len(valid), 0); self.assertEqual(len(counts), 0)
+
+    def test_all_excluded_samples_keep_saved_normals(self):
+        saved = np.tile([0., 0, 1], (25, 1))
+        normals, valid, counts, _ = plane_normals(self.p, saved, np.full(25, -1), 4.)
+        np.testing.assert_array_equal(normals, saved)
+        self.assertFalse(valid.any()); self.assertFalse(counts.any())

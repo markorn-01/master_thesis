@@ -1,0 +1,3527 @@
+{
+  "events": 17,
+  "decoded_frames": 17,
+  "frame_size": [
+    1430,
+    770
+  ],
+  "fps": 2,
+  "frame_durations_ms": [
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500,
+    500
+  ],
+  "header_frame_order_verified": true,
+  "records": [
+    {
+      "event": 0,
+      "time": 0.0,
+      "mode": "saved",
+      "excluded_samples": 0,
+      "invalid_fits": null,
+      "samples": 0,
+      "faces": 0,
+      "used_vertices": 0,
+      "unused_samples": 0,
+      "edges": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 0,
+      "largest_component_faces": 0,
+      "singleton_face_components": 0,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 0,
+        "faces": 0,
+        "rejected": {
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 0,
+          "boundary_edges": 0,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "separation": []
+    },
+    {
+      "event": 0,
+      "time": 0.0,
+      "mode": "plane_2cells",
+      "excluded_samples": 0,
+      "invalid_fits": 0,
+      "samples": 0,
+      "faces": 0,
+      "used_vertices": 0,
+      "unused_samples": 0,
+      "edges": 0,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 0,
+      "largest_component_faces": 0,
+      "singleton_face_components": 0,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 0,
+        "faces": 0,
+        "rejected": {
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 0,
+          "boundary_edges": 0,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "separation": []
+    },
+    {
+      "event": 1,
+      "time": 0.009999999776482582,
+      "mode": "saved",
+      "excluded_samples": 0,
+      "invalid_fits": null,
+      "samples": 2176,
+      "faces": 2165,
+      "used_vertices": 1856,
+      "unused_samples": 320,
+      "edges": 3955,
+      "boundary_edges": 1415,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 103,
+      "largest_component_faces": 168,
+      "singleton_face_components": 31,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 3933,
+        "faces": 2165,
+        "rejected": {
+          "tangent": 1768,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 3955,
+          "boundary_edges": 1415,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "separation": [
+        {
+          "group_a": 0,
+          "group_b": 1,
+          "minimum_vertex_distance": 0.1484375,
+          "sum_maximum_triangle_edges": 0.027063293868263706,
+          "separation_bound_passed": true
+        }
+      ]
+    },
+    {
+      "event": 1,
+      "time": 0.009999999776482582,
+      "mode": "plane_2cells",
+      "excluded_samples": 0,
+      "invalid_fits": 0,
+      "samples": 2176,
+      "faces": 1868,
+      "used_vertices": 1516,
+      "unused_samples": 660,
+      "edges": 3376,
+      "boundary_edges": 1148,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 34,
+      "largest_component_faces": 180,
+      "singleton_face_components": 2,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 3920,
+        "faces": 1868,
+        "rejected": {
+          "normal": 210,
+          "tangent": 1842,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 3376,
+          "boundary_edges": 1148,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "separation": [
+        {
+          "group_a": 0,
+          "group_b": 1,
+          "minimum_vertex_distance": 0.1484375,
+          "sum_maximum_triangle_edges": 0.025654321716190018,
+          "separation_bound_passed": true
+        }
+      ]
+    },
+    {
+      "event": 2,
+      "time": 0.019999999552965164,
+      "mode": "saved",
+      "excluded_samples": 0,
+      "invalid_fits": null,
+      "samples": 2736,
+      "faces": 3510,
+      "used_vertices": 2248,
+      "unused_samples": 488,
+      "edges": 5751,
+      "boundary_edges": 972,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 41,
+      "largest_component_faces": 840,
+      "singleton_face_components": 16,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 5107,
+        "faces": 3510,
+        "rejected": {
+          "tangent": 1597,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 5751,
+          "boundary_edges": 972,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "separation": [
+        {
+          "group_a": 0,
+          "group_b": 1,
+          "minimum_vertex_distance": 0.14547887444496155,
+          "sum_maximum_triangle_edges": 0.027063293868263706,
+          "separation_bound_passed": true
+        }
+      ]
+    },
+    {
+      "event": 2,
+      "time": 0.019999999552965164,
+      "mode": "plane_2cells",
+      "excluded_samples": 0,
+      "invalid_fits": 0,
+      "samples": 2736,
+      "faces": 3534,
+      "used_vertices": 2288,
+      "unused_samples": 448,
+      "edges": 5807,
+      "boundary_edges": 1012,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 49,
+      "largest_component_faces": 856,
+      "singleton_face_components": 24,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 5107,
+        "faces": 3534,
+        "rejected": {
+          "tangent": 1573,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 5807,
+          "boundary_edges": 1012,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "separation": [
+        {
+          "group_a": 0,
+          "group_b": 1,
+          "minimum_vertex_distance": 0.14547887444496155,
+          "sum_maximum_triangle_edges": 0.026353450153013838,
+          "separation_bound_passed": true
+        }
+      ]
+    },
+    {
+      "event": 3,
+      "time": 0.029999999329447746,
+      "mode": "saved",
+      "excluded_samples": 0,
+      "invalid_fits": null,
+      "samples": 4200,
+      "faces": 5096,
+      "used_vertices": 3691,
+      "unused_samples": 509,
+      "edges": 9316,
+      "boundary_edges": 3344,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 314,
+      "largest_component_faces": 367,
+      "singleton_face_components": 198,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 8196,
+        "faces": 5096,
+        "rejected": {
+          "tangent": 3092,
+          "face_normal": 8,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 9316,
+          "boundary_edges": 3344,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "separation": [
+        {
+          "group_a": 0,
+          "group_b": 1,
+          "minimum_vertex_distance": 0.11533638834953308,
+          "sum_maximum_triangle_edges": 0.02679189748702581,
+          "separation_bound_passed": true
+        }
+      ]
+    },
+    {
+      "event": 3,
+      "time": 0.029999999329447746,
+      "mode": "plane_2cells",
+      "excluded_samples": 0,
+      "invalid_fits": 0,
+      "samples": 4200,
+      "faces": 5112,
+      "used_vertices": 3633,
+      "unused_samples": 567,
+      "edges": 9244,
+      "boundary_edges": 3152,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 290,
+      "largest_component_faces": 381,
+      "singleton_face_components": 166,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 8196,
+        "faces": 5112,
+        "rejected": {
+          "tangent": 3076,
+          "face_normal": 8,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 9244,
+          "boundary_edges": 3152,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "separation": [
+        {
+          "group_a": 0,
+          "group_b": 1,
+          "minimum_vertex_distance": 0.11533638834953308,
+          "sum_maximum_triangle_edges": 0.02679189748702581,
+          "separation_bound_passed": true
+        }
+      ]
+    },
+    {
+      "event": 4,
+      "time": 0.03999999910593033,
+      "mode": "saved",
+      "excluded_samples": 0,
+      "invalid_fits": null,
+      "samples": 5432,
+      "faces": 8219,
+      "used_vertices": 5160,
+      "unused_samples": 272,
+      "edges": 14262,
+      "boundary_edges": 3867,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 133,
+      "largest_component_faces": 3126,
+      "singleton_face_components": 65,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 10801,
+        "faces": 8219,
+        "rejected": {
+          "tangent": 2486,
+          "face_normal": 96,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 14262,
+          "boundary_edges": 3867,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "separation": [
+        {
+          "group_a": 0,
+          "group_b": 1,
+          "minimum_vertex_distance": 0.0856224000453949,
+          "sum_maximum_triangle_edges": 0.026995883270265395,
+          "separation_bound_passed": true
+        }
+      ]
+    },
+    {
+      "event": 4,
+      "time": 0.03999999910593033,
+      "mode": "plane_2cells",
+      "excluded_samples": 0,
+      "invalid_fits": 0,
+      "samples": 5432,
+      "faces": 8065,
+      "used_vertices": 5144,
+      "unused_samples": 288,
+      "edges": 14083,
+      "boundary_edges": 3971,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 142,
+      "largest_component_faces": 3067,
+      "singleton_face_components": 81,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 10801,
+        "faces": 8065,
+        "rejected": {
+          "tangent": 2640,
+          "face_normal": 96,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 14083,
+          "boundary_edges": 3971,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "separation": [
+        {
+          "group_a": 0,
+          "group_b": 1,
+          "minimum_vertex_distance": 0.0856224000453949,
+          "sum_maximum_triangle_edges": 0.026995883270265395,
+          "separation_bound_passed": true
+        }
+      ]
+    },
+    {
+      "event": 5,
+      "time": 0.04999999701976776,
+      "mode": "saved",
+      "excluded_samples": 0,
+      "invalid_fits": null,
+      "samples": 6816,
+      "faces": 9805,
+      "used_vertices": 6157,
+      "unused_samples": 659,
+      "edges": 16925,
+      "boundary_edges": 4435,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 239,
+      "largest_component_faces": 4113,
+      "singleton_face_components": 197,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 13508,
+        "faces": 9805,
+        "rejected": {
+          "tangent": 3535,
+          "face_normal": 136,
+          "minimum_angle": 32,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 16925,
+          "boundary_edges": 4435,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "separation": [
+        {
+          "group_a": 0,
+          "group_b": 1,
+          "minimum_vertex_distance": 0.055737584829330444,
+          "sum_maximum_triangle_edges": 0.027042523515139225,
+          "separation_bound_passed": true
+        }
+      ]
+    },
+    {
+      "event": 5,
+      "time": 0.04999999701976776,
+      "mode": "plane_2cells",
+      "excluded_samples": 0,
+      "invalid_fits": 0,
+      "samples": 6816,
+      "faces": 9747,
+      "used_vertices": 6147,
+      "unused_samples": 669,
+      "edges": 16969,
+      "boundary_edges": 4697,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 207,
+      "largest_component_faces": 4081,
+      "singleton_face_components": 157,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 13508,
+        "faces": 9747,
+        "rejected": {
+          "tangent": 3681,
+          "face_normal": 48,
+          "minimum_angle": 32,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 16969,
+          "boundary_edges": 4697,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "separation": [
+        {
+          "group_a": 0,
+          "group_b": 1,
+          "minimum_vertex_distance": 0.055737584829330444,
+          "sum_maximum_triangle_edges": 0.027042523515139225,
+          "separation_bound_passed": true
+        }
+      ]
+    },
+    {
+      "event": 6,
+      "time": 0.05999999865889549,
+      "mode": "saved",
+      "excluded_samples": 0,
+      "invalid_fits": null,
+      "samples": 8320,
+      "faces": 12432,
+      "used_vertices": 7766,
+      "unused_samples": 554,
+      "edges": 21381,
+      "boundary_edges": 5466,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 139,
+      "largest_component_faces": 3885,
+      "singleton_face_components": 78,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 16496,
+        "faces": 12432,
+        "rejected": {
+          "tangent": 3824,
+          "face_normal": 176,
+          "minimum_angle": 64,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 21381,
+          "boundary_edges": 5466,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "separation": [
+        {
+          "group_a": 0,
+          "group_b": 1,
+          "minimum_vertex_distance": 0.02688896656036377,
+          "sum_maximum_triangle_edges": 0.02709894059699996,
+          "separation_bound_passed": false
+        }
+      ]
+    },
+    {
+      "event": 6,
+      "time": 0.05999999865889549,
+      "mode": "plane_2cells",
+      "excluded_samples": 0,
+      "invalid_fits": 0,
+      "samples": 8320,
+      "faces": 12411,
+      "used_vertices": 7824,
+      "unused_samples": 496,
+      "edges": 21417,
+      "boundary_edges": 5601,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 117,
+      "largest_component_faces": 5763,
+      "singleton_face_components": 80,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 16496,
+        "faces": 12411,
+        "rejected": {
+          "tangent": 3925,
+          "face_normal": 96,
+          "minimum_angle": 64,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 21417,
+          "boundary_edges": 5601,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "separation": [
+        {
+          "group_a": 0,
+          "group_b": 1,
+          "minimum_vertex_distance": 0.02688896656036377,
+          "sum_maximum_triangle_edges": 0.02709894059699996,
+          "separation_bound_passed": false
+        }
+      ]
+    },
+    {
+      "event": 7,
+      "time": 0.07000000029802322,
+      "mode": "saved",
+      "excluded_samples": 0,
+      "invalid_fits": null,
+      "samples": 10128,
+      "faces": 14154,
+      "used_vertices": 9112,
+      "unused_samples": 1016,
+      "edges": 24756,
+      "boundary_edges": 7050,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 307,
+      "largest_component_faces": 6057,
+      "singleton_face_components": 249,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 20049,
+        "faces": 14154,
+        "rejected": {
+          "minimum_angle": 32,
+          "tangent": 5599,
+          "face_normal": 264,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 24756,
+          "boundary_edges": 7050,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "separation": [
+        {
+          "group_a": 0,
+          "group_b": 1,
+          "minimum_vertex_distance": 0.0013252198696136475,
+          "sum_maximum_triangle_edges": 0.027059134872849958,
+          "separation_bound_passed": false
+        }
+      ]
+    },
+    {
+      "event": 7,
+      "time": 0.07000000029802322,
+      "mode": "plane_2cells",
+      "excluded_samples": 0,
+      "invalid_fits": 0,
+      "samples": 10128,
+      "faces": 14300,
+      "used_vertices": 9256,
+      "unused_samples": 872,
+      "edges": 25095,
+      "boundary_edges": 7290,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 309,
+      "largest_component_faces": 6199,
+      "singleton_face_components": 257,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 20049,
+        "faces": 14300,
+        "rejected": {
+          "minimum_angle": 32,
+          "tangent": 5541,
+          "face_normal": 176,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 25095,
+          "boundary_edges": 7290,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "separation": [
+        {
+          "group_a": 0,
+          "group_b": 1,
+          "minimum_vertex_distance": 0.0013252198696136475,
+          "sum_maximum_triangle_edges": 0.027361417228475064,
+          "separation_bound_passed": false
+        }
+      ]
+    },
+    {
+      "event": 8,
+      "time": 0.07999999821186066,
+      "mode": "saved",
+      "excluded_samples": 0,
+      "invalid_fits": null,
+      "samples": 11424,
+      "faces": 15947,
+      "used_vertices": 10149,
+      "unused_samples": 1275,
+      "edges": 27901,
+      "boundary_edges": 7961,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 391,
+      "largest_component_faces": 6506,
+      "singleton_face_components": 333,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 22264,
+        "faces": 15947,
+        "rejected": {
+          "tangent": 5384,
+          "face_normal": 768,
+          "minimum_angle": 48,
+          "normal": 117,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 27901,
+          "boundary_edges": 7961,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "separation": []
+    },
+    {
+      "event": 8,
+      "time": 0.07999999821186066,
+      "mode": "plane_2cells",
+      "excluded_samples": 0,
+      "invalid_fits": 0,
+      "samples": 11424,
+      "faces": 15805,
+      "used_vertices": 10181,
+      "unused_samples": 1243,
+      "edges": 27843,
+      "boundary_edges": 8271,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 375,
+      "largest_component_faces": 6419,
+      "singleton_face_components": 269,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 22264,
+        "faces": 15805,
+        "rejected": {
+          "tangent": 5950,
+          "face_normal": 344,
+          "minimum_angle": 48,
+          "normal": 117,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 27843,
+          "boundary_edges": 8271,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "separation": []
+    },
+    {
+      "event": 9,
+      "time": 0.08999999612569809,
+      "mode": "saved",
+      "excluded_samples": 40,
+      "invalid_fits": null,
+      "samples": 12752,
+      "faces": 18130,
+      "used_vertices": 11641,
+      "unused_samples": 1111,
+      "edges": 31727,
+      "boundary_edges": 9064,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 422,
+      "largest_component_faces": 7573,
+      "singleton_face_components": 346,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 24987,
+        "faces": 18130,
+        "rejected": {
+          "minimum_angle": 16,
+          "tangent": 6022,
+          "face_normal": 688,
+          "normal": 131,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 31727,
+          "boundary_edges": 9064,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "separation": []
+    },
+    {
+      "event": 9,
+      "time": 0.08999999612569809,
+      "mode": "plane_2cells",
+      "excluded_samples": 40,
+      "invalid_fits": 0,
+      "samples": 12752,
+      "faces": 18367,
+      "used_vertices": 11877,
+      "unused_samples": 875,
+      "edges": 32264,
+      "boundary_edges": 9427,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 455,
+      "largest_component_faces": 7608,
+      "singleton_face_components": 322,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 24987,
+        "faces": 18367,
+        "rejected": {
+          "minimum_angle": 16,
+          "tangent": 6049,
+          "face_normal": 424,
+          "normal": 131,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 32264,
+          "boundary_edges": 9427,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "separation": []
+    },
+    {
+      "event": 10,
+      "time": 0.09999999403953552,
+      "mode": "saved",
+      "excluded_samples": 0,
+      "invalid_fits": null,
+      "samples": 14872,
+      "faces": 21028,
+      "used_vertices": 13668,
+      "unused_samples": 1204,
+      "edges": 36910,
+      "boundary_edges": 10736,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 488,
+      "largest_component_faces": 8154,
+      "singleton_face_components": 437,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 28692,
+        "faces": 21028,
+        "rejected": {
+          "tangent": 6760,
+          "face_normal": 680,
+          "minimum_angle": 64,
+          "normal": 160,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 36910,
+          "boundary_edges": 10736,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "separation": [
+        {
+          "group_a": 0,
+          "group_b": 1,
+          "minimum_vertex_distance": 0.10795726236513,
+          "sum_maximum_triangle_edges": 0.02525427617922279,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 2,
+          "minimum_vertex_distance": 0.10581032162091007,
+          "sum_maximum_triangle_edges": 0.025141786240547213,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 3,
+          "minimum_vertex_distance": 0.10546578130853024,
+          "sum_maximum_triangle_edges": 0.025483874500763438,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 4,
+          "minimum_vertex_distance": 0.10546578130853024,
+          "sum_maximum_triangle_edges": 0.02548385367112889,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 5,
+          "minimum_vertex_distance": 0.10546578130853024,
+          "sum_maximum_triangle_edges": 0.025483853857894066,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 6,
+          "minimum_vertex_distance": 0.10546573709561058,
+          "sum_maximum_triangle_edges": 0.02548387487421877,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 7,
+          "minimum_vertex_distance": 0.10467025602203121,
+          "sum_maximum_triangle_edges": 0.025614168118657313,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 8,
+          "minimum_vertex_distance": 0.1046702106532922,
+          "sum_maximum_triangle_edges": 0.025614168118657313,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 9,
+          "minimum_vertex_distance": 0.10546578130853024,
+          "sum_maximum_triangle_edges": 0.025483895630307785,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 10,
+          "minimum_vertex_distance": 0.10546578130853024,
+          "sum_maximum_triangle_edges": 0.02548387480071009,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 11,
+          "minimum_vertex_distance": 0.10546578130853024,
+          "sum_maximum_triangle_edges": 0.025483874987474932,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 12,
+          "minimum_vertex_distance": 0.10546573709561058,
+          "sum_maximum_triangle_edges": 0.025483896003762455,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 13,
+          "minimum_vertex_distance": 0.10581033375995617,
+          "sum_maximum_triangle_edges": 0.025141786240547213,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 14,
+          "minimum_vertex_distance": 0.10795726236513,
+          "sum_maximum_triangle_edges": 0.02525427617922279,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 2,
+          "minimum_vertex_distance": 0.01369951756870042,
+          "sum_maximum_triangle_edges": 0.023315678743075087,
+          "separation_bound_passed": false
+        },
+        {
+          "group_a": 1,
+          "group_b": 3,
+          "minimum_vertex_distance": 0.06174488383112241,
+          "sum_maximum_triangle_edges": 0.023657767003291315,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 4,
+          "minimum_vertex_distance": 0.06174488383112241,
+          "sum_maximum_triangle_edges": 0.02365774617365677,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 5,
+          "minimum_vertex_distance": 0.06174488383112241,
+          "sum_maximum_triangle_edges": 0.023657746360421943,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 6,
+          "minimum_vertex_distance": 0.06174488383112241,
+          "sum_maximum_triangle_edges": 0.023657767376746644,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 7,
+          "minimum_vertex_distance": 0.14202090563502204,
+          "sum_maximum_triangle_edges": 0.02378806062118519,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 8,
+          "minimum_vertex_distance": 0.29756272455229993,
+          "sum_maximum_triangle_edges": 0.02378806062118519,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 9,
+          "minimum_vertex_distance": 0.33936973950573673,
+          "sum_maximum_triangle_edges": 0.023657788132835665,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 10,
+          "minimum_vertex_distance": 0.33936973950573673,
+          "sum_maximum_triangle_edges": 0.023657767303237966,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 11,
+          "minimum_vertex_distance": 0.3393697437017817,
+          "sum_maximum_triangle_edges": 0.023657767490002812,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 12,
+          "minimum_vertex_distance": 0.3393697437017817,
+          "sum_maximum_triangle_edges": 0.023657788506290335,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 13,
+          "minimum_vertex_distance": 0.4389851120234181,
+          "sum_maximum_triangle_edges": 0.023315678743075087,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 14,
+          "minimum_vertex_distance": 0.4462200105190277,
+          "sum_maximum_triangle_edges": 0.023428168681750666,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 2,
+          "group_b": 3,
+          "minimum_vertex_distance": 0.04495253359160335,
+          "sum_maximum_triangle_edges": 0.02354527706461574,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 2,
+          "group_b": 4,
+          "minimum_vertex_distance": 0.04495253359160335,
+          "sum_maximum_triangle_edges": 0.02354525623498119,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 2,
+          "group_b": 5,
+          "minimum_vertex_distance": 0.044952554539009794,
+          "sum_maximum_triangle_edges": 0.023545256421746368,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 2,
+          "group_b": 6,
+          "minimum_vertex_distance": 0.044952554539009794,
+          "sum_maximum_triangle_edges": 0.02354527743807107,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 2,
+          "group_b": 7,
+          "minimum_vertex_distance": 0.13422740806316338,
+          "sum_maximum_triangle_edges": 0.02367557068250961,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 2,
+          "group_b": 8,
+          "minimum_vertex_distance": 0.2913862426551123,
+          "sum_maximum_triangle_edges": 0.02367557068250961,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 2,
+          "group_b": 9,
+          "minimum_vertex_distance": 0.33046500103859466,
+          "sum_maximum_triangle_edges": 0.023545298194160087,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 2,
+          "group_b": 10,
+          "minimum_vertex_distance": 0.33046500103859466,
+          "sum_maximum_triangle_edges": 0.02354527736456239,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 2,
+          "group_b": 11,
+          "minimum_vertex_distance": 0.33046500672352236,
+          "sum_maximum_triangle_edges": 0.023545277551327234,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 2,
+          "group_b": 12,
+          "minimum_vertex_distance": 0.33046500672352236,
+          "sum_maximum_triangle_edges": 0.023545298567614757,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 2,
+          "group_b": 13,
+          "minimum_vertex_distance": 0.43102991580963135,
+          "sum_maximum_triangle_edges": 0.023203188804399512,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 2,
+          "group_b": 14,
+          "minimum_vertex_distance": 0.4389851418012893,
+          "sum_maximum_triangle_edges": 0.023315678743075087,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 3,
+          "group_b": 4,
+          "minimum_vertex_distance": 0.044422272568300177,
+          "sum_maximum_triangle_edges": 0.023887344495197416,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 3,
+          "group_b": 5,
+          "minimum_vertex_distance": 0.044422272568300177,
+          "sum_maximum_triangle_edges": 0.023887344681962592,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 3,
+          "group_b": 6,
+          "minimum_vertex_distance": 0.13339734077453613,
+          "sum_maximum_triangle_edges": 0.023887365698287297,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 3,
+          "group_b": 7,
+          "minimum_vertex_distance": 0.05106137477563679,
+          "sum_maximum_triangle_edges": 0.02401765894272584,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 3,
+          "group_b": 8,
+          "minimum_vertex_distance": 0.19702600406384374,
+          "sum_maximum_triangle_edges": 0.02401765894272584,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 3,
+          "group_b": 9,
+          "minimum_vertex_distance": 0.22557666897773743,
+          "sum_maximum_triangle_edges": 0.02388738645437631,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 3,
+          "group_b": 10,
+          "minimum_vertex_distance": 0.242769959961067,
+          "sum_maximum_triangle_edges": 0.023887365624778615,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 3,
+          "group_b": 11,
+          "minimum_vertex_distance": 0.242769975539851,
+          "sum_maximum_triangle_edges": 0.023887365811543458,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 3,
+          "group_b": 12,
+          "minimum_vertex_distance": 0.26279000349160764,
+          "sum_maximum_triangle_edges": 0.02388738682783098,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 3,
+          "group_b": 13,
+          "minimum_vertex_distance": 0.33046503069632777,
+          "sum_maximum_triangle_edges": 0.02354527706461574,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 3,
+          "group_b": 14,
+          "minimum_vertex_distance": 0.33936979850068283,
+          "sum_maximum_triangle_edges": 0.023657767003291315,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 4,
+          "group_b": 5,
+          "minimum_vertex_distance": 0.13339734077453613,
+          "sum_maximum_triangle_edges": 0.023887323852328043,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 4,
+          "group_b": 6,
+          "minimum_vertex_distance": 0.044422272568300177,
+          "sum_maximum_triangle_edges": 0.02388734486865275,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 4,
+          "group_b": 7,
+          "minimum_vertex_distance": 0.05106137474854512,
+          "sum_maximum_triangle_edges": 0.024017638113091294,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 4,
+          "group_b": 8,
+          "minimum_vertex_distance": 0.19702600406384374,
+          "sum_maximum_triangle_edges": 0.024017638113091294,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 4,
+          "group_b": 9,
+          "minimum_vertex_distance": 0.242769959961067,
+          "sum_maximum_triangle_edges": 0.023887365624741766,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 4,
+          "group_b": 10,
+          "minimum_vertex_distance": 0.22557666897773743,
+          "sum_maximum_triangle_edges": 0.023887344795144067,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 4,
+          "group_b": 11,
+          "minimum_vertex_distance": 0.26279000349160764,
+          "sum_maximum_triangle_edges": 0.023887344981908913,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 4,
+          "group_b": 12,
+          "minimum_vertex_distance": 0.242769975539851,
+          "sum_maximum_triangle_edges": 0.023887365998196436,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 4,
+          "group_b": 13,
+          "minimum_vertex_distance": 0.33046503069632777,
+          "sum_maximum_triangle_edges": 0.02354525623498119,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 4,
+          "group_b": 14,
+          "minimum_vertex_distance": 0.33936979850068283,
+          "sum_maximum_triangle_edges": 0.02365774617365677,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 5,
+          "group_b": 6,
+          "minimum_vertex_distance": 0.044422272568300177,
+          "sum_maximum_triangle_edges": 0.023887345055417925,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 5,
+          "group_b": 7,
+          "minimum_vertex_distance": 0.05106139772355417,
+          "sum_maximum_triangle_edges": 0.024017638299856467,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 5,
+          "group_b": 8,
+          "minimum_vertex_distance": 0.1970260100180618,
+          "sum_maximum_triangle_edges": 0.024017638299856467,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 5,
+          "group_b": 9,
+          "minimum_vertex_distance": 0.242769975539851,
+          "sum_maximum_triangle_edges": 0.02388736581150694,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 5,
+          "group_b": 10,
+          "minimum_vertex_distance": 0.26279000349160764,
+          "sum_maximum_triangle_edges": 0.023887344981909243,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 5,
+          "group_b": 11,
+          "minimum_vertex_distance": 0.22557666897773743,
+          "sum_maximum_triangle_edges": 0.023887345168674086,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 5,
+          "group_b": 12,
+          "minimum_vertex_distance": 0.24276999111863398,
+          "sum_maximum_triangle_edges": 0.02388736618496161,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 5,
+          "group_b": 13,
+          "minimum_vertex_distance": 0.330465036381255,
+          "sum_maximum_triangle_edges": 0.023545256421746368,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 5,
+          "group_b": 14,
+          "minimum_vertex_distance": 0.33936980269672706,
+          "sum_maximum_triangle_edges": 0.023657746360421943,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 6,
+          "group_b": 7,
+          "minimum_vertex_distance": 0.051061416705826944,
+          "sum_maximum_triangle_edges": 0.02401765931618117,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 6,
+          "group_b": 8,
+          "minimum_vertex_distance": 0.1970260100180618,
+          "sum_maximum_triangle_edges": 0.02401765931618117,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 6,
+          "group_b": 9,
+          "minimum_vertex_distance": 0.26279000349160764,
+          "sum_maximum_triangle_edges": 0.023887386827831644,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 6,
+          "group_b": 10,
+          "minimum_vertex_distance": 0.242769975539851,
+          "sum_maximum_triangle_edges": 0.023887365998233948,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 6,
+          "group_b": 11,
+          "minimum_vertex_distance": 0.24276999111863398,
+          "sum_maximum_triangle_edges": 0.02388736618499879,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 6,
+          "group_b": 12,
+          "minimum_vertex_distance": 0.22557666897773743,
+          "sum_maximum_triangle_edges": 0.023887387201286314,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 6,
+          "group_b": 13,
+          "minimum_vertex_distance": 0.330465036381255,
+          "sum_maximum_triangle_edges": 0.02354527743807107,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 6,
+          "group_b": 14,
+          "minimum_vertex_distance": 0.33936980269672706,
+          "sum_maximum_triangle_edges": 0.023657767376746644,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 7,
+          "group_b": 8,
+          "minimum_vertex_distance": 0.14786887168884277,
+          "sum_maximum_triangle_edges": 0.024147952560619714,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 7,
+          "group_b": 9,
+          "minimum_vertex_distance": 0.1970259456609098,
+          "sum_maximum_triangle_edges": 0.02401768007227019,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 7,
+          "group_b": 10,
+          "minimum_vertex_distance": 0.1970259748623767,
+          "sum_maximum_triangle_edges": 0.02401765924267249,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 7,
+          "group_b": 11,
+          "minimum_vertex_distance": 0.19702598081659564,
+          "sum_maximum_triangle_edges": 0.024017659429437337,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 7,
+          "group_b": 12,
+          "minimum_vertex_distance": 0.19702595161512965,
+          "sum_maximum_triangle_edges": 0.02401768044572486,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 7,
+          "group_b": 13,
+          "minimum_vertex_distance": 0.2913862426551123,
+          "sum_maximum_triangle_edges": 0.02367557068250961,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 7,
+          "group_b": 14,
+          "minimum_vertex_distance": 0.2975627543027123,
+          "sum_maximum_triangle_edges": 0.02378806062118519,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 8,
+          "group_b": 9,
+          "minimum_vertex_distance": 0.051061355766274144,
+          "sum_maximum_triangle_edges": 0.02401768007227019,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 8,
+          "group_b": 10,
+          "minimum_vertex_distance": 0.051061355766274144,
+          "sum_maximum_triangle_edges": 0.02401765924267249,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 8,
+          "group_b": 11,
+          "minimum_vertex_distance": 0.051061378741291734,
+          "sum_maximum_triangle_edges": 0.024017659429437337,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 8,
+          "group_b": 12,
+          "minimum_vertex_distance": 0.051061378741291734,
+          "sum_maximum_triangle_edges": 0.02401768044572486,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 8,
+          "group_b": 13,
+          "minimum_vertex_distance": 0.13422738009086263,
+          "sum_maximum_triangle_edges": 0.02367557068250961,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 8,
+          "group_b": 14,
+          "minimum_vertex_distance": 0.14202090563502204,
+          "sum_maximum_triangle_edges": 0.02378806062118519,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 9,
+          "group_b": 10,
+          "minimum_vertex_distance": 0.044422272568300177,
+          "sum_maximum_triangle_edges": 0.023887386754322962,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 9,
+          "group_b": 11,
+          "minimum_vertex_distance": 0.044422272568300177,
+          "sum_maximum_triangle_edges": 0.02388738694108781,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 9,
+          "group_b": 12,
+          "minimum_vertex_distance": 0.13339734077453613,
+          "sum_maximum_triangle_edges": 0.02388740795737533,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 9,
+          "group_b": 13,
+          "minimum_vertex_distance": 0.04495253359160335,
+          "sum_maximum_triangle_edges": 0.023545298194160087,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 9,
+          "group_b": 14,
+          "minimum_vertex_distance": 0.0617449026608755,
+          "sum_maximum_triangle_edges": 0.023657788132835665,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 10,
+          "group_b": 11,
+          "minimum_vertex_distance": 0.13339734077453613,
+          "sum_maximum_triangle_edges": 0.02388736611149011,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 10,
+          "group_b": 12,
+          "minimum_vertex_distance": 0.044422272568300177,
+          "sum_maximum_triangle_edges": 0.02388738712777763,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 10,
+          "group_b": 13,
+          "minimum_vertex_distance": 0.04495253359160335,
+          "sum_maximum_triangle_edges": 0.02354527736456239,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 10,
+          "group_b": 14,
+          "minimum_vertex_distance": 0.0617449026608755,
+          "sum_maximum_triangle_edges": 0.023657767303237966,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 11,
+          "group_b": 12,
+          "minimum_vertex_distance": 0.044422272568300177,
+          "sum_maximum_triangle_edges": 0.02388738731454248,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 11,
+          "group_b": 13,
+          "minimum_vertex_distance": 0.044952554539009794,
+          "sum_maximum_triangle_edges": 0.023545277551327234,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 11,
+          "group_b": 14,
+          "minimum_vertex_distance": 0.0617449026608755,
+          "sum_maximum_triangle_edges": 0.023657767490002812,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 12,
+          "group_b": 13,
+          "minimum_vertex_distance": 0.044952554539009794,
+          "sum_maximum_triangle_edges": 0.023545298567614757,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 12,
+          "group_b": 14,
+          "minimum_vertex_distance": 0.0617449026608755,
+          "sum_maximum_triangle_edges": 0.023657788506290335,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 13,
+          "group_b": 14,
+          "minimum_vertex_distance": 0.013699531870911311,
+          "sum_maximum_triangle_edges": 0.023315678743075087,
+          "separation_bound_passed": false
+        }
+      ]
+    },
+    {
+      "event": 10,
+      "time": 0.09999999403953552,
+      "mode": "plane_2cells",
+      "excluded_samples": 0,
+      "invalid_fits": 72,
+      "samples": 14872,
+      "faces": 21334,
+      "used_vertices": 13844,
+      "unused_samples": 1028,
+      "edges": 37516,
+      "boundary_edges": 11030,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 470,
+      "largest_component_faces": 8761,
+      "singleton_face_components": 365,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 28692,
+        "faces": 21334,
+        "rejected": {
+          "tangent": 6662,
+          "face_normal": 472,
+          "minimum_angle": 64,
+          "normal": 160,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 37516,
+          "boundary_edges": 11030,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "separation": [
+        {
+          "group_a": 0,
+          "group_b": 1,
+          "minimum_vertex_distance": 0.10795726236513,
+          "sum_maximum_triangle_edges": 0.025365498323270126,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 2,
+          "minimum_vertex_distance": 0.10581032162091007,
+          "sum_maximum_triangle_edges": 0.02525300838459455,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 3,
+          "minimum_vertex_distance": 0.10546578130853024,
+          "sum_maximum_triangle_edges": 0.025595096644810775,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 4,
+          "minimum_vertex_distance": 0.10546578130853024,
+          "sum_maximum_triangle_edges": 0.025595075815176227,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 5,
+          "minimum_vertex_distance": 0.10546578130853024,
+          "sum_maximum_triangle_edges": 0.025595076001941403,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 6,
+          "minimum_vertex_distance": 0.10546573709561058,
+          "sum_maximum_triangle_edges": 0.025595097018266108,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 7,
+          "minimum_vertex_distance": 0.10467025602203121,
+          "sum_maximum_triangle_edges": 0.02642249365222077,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 8,
+          "minimum_vertex_distance": 0.1046702106532922,
+          "sum_maximum_triangle_edges": 0.026422483517511162,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 9,
+          "minimum_vertex_distance": 0.10546578130853024,
+          "sum_maximum_triangle_edges": 0.025595117774355122,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 10,
+          "minimum_vertex_distance": 0.10546578130853024,
+          "sum_maximum_triangle_edges": 0.025595096944757426,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 11,
+          "minimum_vertex_distance": 0.10546578130853024,
+          "sum_maximum_triangle_edges": 0.02559509713152227,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 12,
+          "minimum_vertex_distance": 0.10546573709561058,
+          "sum_maximum_triangle_edges": 0.025595118147809792,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 13,
+          "minimum_vertex_distance": 0.10581033375995617,
+          "sum_maximum_triangle_edges": 0.02525300838459455,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 14,
+          "minimum_vertex_distance": 0.10795726236513,
+          "sum_maximum_triangle_edges": 0.025365498323270126,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 2,
+          "minimum_vertex_distance": 0.01369951756870042,
+          "sum_maximum_triangle_edges": 0.023315678743075087,
+          "separation_bound_passed": false
+        },
+        {
+          "group_a": 1,
+          "group_b": 3,
+          "minimum_vertex_distance": 0.06174488383112241,
+          "sum_maximum_triangle_edges": 0.023657767003291315,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 4,
+          "minimum_vertex_distance": 0.06174488383112241,
+          "sum_maximum_triangle_edges": 0.02365774617365677,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 5,
+          "minimum_vertex_distance": 0.06174488383112241,
+          "sum_maximum_triangle_edges": 0.023657746360421943,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 6,
+          "minimum_vertex_distance": 0.06174488383112241,
+          "sum_maximum_triangle_edges": 0.023657767376746644,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 7,
+          "minimum_vertex_distance": 0.14202090563502204,
+          "sum_maximum_triangle_edges": 0.024485164010701308,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 8,
+          "minimum_vertex_distance": 0.29756272455229993,
+          "sum_maximum_triangle_edges": 0.0244851538759917,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 9,
+          "minimum_vertex_distance": 0.33936973950573673,
+          "sum_maximum_triangle_edges": 0.023657788132835665,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 10,
+          "minimum_vertex_distance": 0.33936973950573673,
+          "sum_maximum_triangle_edges": 0.023657767303237966,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 11,
+          "minimum_vertex_distance": 0.3393697437017817,
+          "sum_maximum_triangle_edges": 0.023657767490002812,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 12,
+          "minimum_vertex_distance": 0.3393697437017817,
+          "sum_maximum_triangle_edges": 0.023657788506290335,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 13,
+          "minimum_vertex_distance": 0.4389851120234181,
+          "sum_maximum_triangle_edges": 0.023315678743075087,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 14,
+          "minimum_vertex_distance": 0.4462200105190277,
+          "sum_maximum_triangle_edges": 0.023428168681750666,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 2,
+          "group_b": 3,
+          "minimum_vertex_distance": 0.04495253359160335,
+          "sum_maximum_triangle_edges": 0.02354527706461574,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 2,
+          "group_b": 4,
+          "minimum_vertex_distance": 0.04495253359160335,
+          "sum_maximum_triangle_edges": 0.02354525623498119,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 2,
+          "group_b": 5,
+          "minimum_vertex_distance": 0.044952554539009794,
+          "sum_maximum_triangle_edges": 0.023545256421746368,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 2,
+          "group_b": 6,
+          "minimum_vertex_distance": 0.044952554539009794,
+          "sum_maximum_triangle_edges": 0.02354527743807107,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 2,
+          "group_b": 7,
+          "minimum_vertex_distance": 0.13422740806316338,
+          "sum_maximum_triangle_edges": 0.02437267407202573,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 2,
+          "group_b": 8,
+          "minimum_vertex_distance": 0.2913862426551123,
+          "sum_maximum_triangle_edges": 0.024372663937316123,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 2,
+          "group_b": 9,
+          "minimum_vertex_distance": 0.33046500103859466,
+          "sum_maximum_triangle_edges": 0.023545298194160087,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 2,
+          "group_b": 10,
+          "minimum_vertex_distance": 0.33046500103859466,
+          "sum_maximum_triangle_edges": 0.02354527736456239,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 2,
+          "group_b": 11,
+          "minimum_vertex_distance": 0.33046500672352236,
+          "sum_maximum_triangle_edges": 0.023545277551327234,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 2,
+          "group_b": 12,
+          "minimum_vertex_distance": 0.33046500672352236,
+          "sum_maximum_triangle_edges": 0.023545298567614757,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 2,
+          "group_b": 13,
+          "minimum_vertex_distance": 0.43102991580963135,
+          "sum_maximum_triangle_edges": 0.023203188804399512,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 2,
+          "group_b": 14,
+          "minimum_vertex_distance": 0.4389851418012893,
+          "sum_maximum_triangle_edges": 0.023315678743075087,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 3,
+          "group_b": 4,
+          "minimum_vertex_distance": 0.044422272568300177,
+          "sum_maximum_triangle_edges": 0.023887344495197416,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 3,
+          "group_b": 5,
+          "minimum_vertex_distance": 0.044422272568300177,
+          "sum_maximum_triangle_edges": 0.023887344681962592,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 3,
+          "group_b": 6,
+          "minimum_vertex_distance": 0.13339734077453613,
+          "sum_maximum_triangle_edges": 0.023887365698287297,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 3,
+          "group_b": 7,
+          "minimum_vertex_distance": 0.05106137477563679,
+          "sum_maximum_triangle_edges": 0.024714762332241957,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 3,
+          "group_b": 8,
+          "minimum_vertex_distance": 0.19702600406384374,
+          "sum_maximum_triangle_edges": 0.02471475219753235,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 3,
+          "group_b": 9,
+          "minimum_vertex_distance": 0.22557666897773743,
+          "sum_maximum_triangle_edges": 0.02388738645437631,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 3,
+          "group_b": 10,
+          "minimum_vertex_distance": 0.242769959961067,
+          "sum_maximum_triangle_edges": 0.023887365624778615,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 3,
+          "group_b": 11,
+          "minimum_vertex_distance": 0.242769975539851,
+          "sum_maximum_triangle_edges": 0.023887365811543458,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 3,
+          "group_b": 12,
+          "minimum_vertex_distance": 0.26279000349160764,
+          "sum_maximum_triangle_edges": 0.02388738682783098,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 3,
+          "group_b": 13,
+          "minimum_vertex_distance": 0.33046503069632777,
+          "sum_maximum_triangle_edges": 0.02354527706461574,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 3,
+          "group_b": 14,
+          "minimum_vertex_distance": 0.33936979850068283,
+          "sum_maximum_triangle_edges": 0.023657767003291315,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 4,
+          "group_b": 5,
+          "minimum_vertex_distance": 0.13339734077453613,
+          "sum_maximum_triangle_edges": 0.023887323852328043,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 4,
+          "group_b": 6,
+          "minimum_vertex_distance": 0.044422272568300177,
+          "sum_maximum_triangle_edges": 0.02388734486865275,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 4,
+          "group_b": 7,
+          "minimum_vertex_distance": 0.05106137474854512,
+          "sum_maximum_triangle_edges": 0.024714741502607412,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 4,
+          "group_b": 8,
+          "minimum_vertex_distance": 0.19702600406384374,
+          "sum_maximum_triangle_edges": 0.024714731367897803,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 4,
+          "group_b": 9,
+          "minimum_vertex_distance": 0.242769959961067,
+          "sum_maximum_triangle_edges": 0.023887365624741766,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 4,
+          "group_b": 10,
+          "minimum_vertex_distance": 0.22557666897773743,
+          "sum_maximum_triangle_edges": 0.023887344795144067,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 4,
+          "group_b": 11,
+          "minimum_vertex_distance": 0.26279000349160764,
+          "sum_maximum_triangle_edges": 0.023887344981908913,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 4,
+          "group_b": 12,
+          "minimum_vertex_distance": 0.242769975539851,
+          "sum_maximum_triangle_edges": 0.023887365998196436,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 4,
+          "group_b": 13,
+          "minimum_vertex_distance": 0.33046503069632777,
+          "sum_maximum_triangle_edges": 0.02354525623498119,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 4,
+          "group_b": 14,
+          "minimum_vertex_distance": 0.33936979850068283,
+          "sum_maximum_triangle_edges": 0.02365774617365677,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 5,
+          "group_b": 6,
+          "minimum_vertex_distance": 0.044422272568300177,
+          "sum_maximum_triangle_edges": 0.023887345055417925,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 5,
+          "group_b": 7,
+          "minimum_vertex_distance": 0.05106139772355417,
+          "sum_maximum_triangle_edges": 0.024714741689372585,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 5,
+          "group_b": 8,
+          "minimum_vertex_distance": 0.1970260100180618,
+          "sum_maximum_triangle_edges": 0.02471473155466298,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 5,
+          "group_b": 9,
+          "minimum_vertex_distance": 0.242769975539851,
+          "sum_maximum_triangle_edges": 0.02388736581150694,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 5,
+          "group_b": 10,
+          "minimum_vertex_distance": 0.26279000349160764,
+          "sum_maximum_triangle_edges": 0.023887344981909243,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 5,
+          "group_b": 11,
+          "minimum_vertex_distance": 0.22557666897773743,
+          "sum_maximum_triangle_edges": 0.023887345168674086,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 5,
+          "group_b": 12,
+          "minimum_vertex_distance": 0.24276999111863398,
+          "sum_maximum_triangle_edges": 0.02388736618496161,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 5,
+          "group_b": 13,
+          "minimum_vertex_distance": 0.330465036381255,
+          "sum_maximum_triangle_edges": 0.023545256421746368,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 5,
+          "group_b": 14,
+          "minimum_vertex_distance": 0.33936980269672706,
+          "sum_maximum_triangle_edges": 0.023657746360421943,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 6,
+          "group_b": 7,
+          "minimum_vertex_distance": 0.051061416705826944,
+          "sum_maximum_triangle_edges": 0.024714762705697287,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 6,
+          "group_b": 8,
+          "minimum_vertex_distance": 0.1970260100180618,
+          "sum_maximum_triangle_edges": 0.02471475257098768,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 6,
+          "group_b": 9,
+          "minimum_vertex_distance": 0.26279000349160764,
+          "sum_maximum_triangle_edges": 0.023887386827831644,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 6,
+          "group_b": 10,
+          "minimum_vertex_distance": 0.242769975539851,
+          "sum_maximum_triangle_edges": 0.023887365998233948,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 6,
+          "group_b": 11,
+          "minimum_vertex_distance": 0.24276999111863398,
+          "sum_maximum_triangle_edges": 0.02388736618499879,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 6,
+          "group_b": 12,
+          "minimum_vertex_distance": 0.22557666897773743,
+          "sum_maximum_triangle_edges": 0.023887387201286314,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 6,
+          "group_b": 13,
+          "minimum_vertex_distance": 0.330465036381255,
+          "sum_maximum_triangle_edges": 0.02354527743807107,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 6,
+          "group_b": 14,
+          "minimum_vertex_distance": 0.33936980269672706,
+          "sum_maximum_triangle_edges": 0.023657767376746644,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 7,
+          "group_b": 8,
+          "minimum_vertex_distance": 0.14786887168884277,
+          "sum_maximum_triangle_edges": 0.02554214920494234,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 7,
+          "group_b": 9,
+          "minimum_vertex_distance": 0.1970259456609098,
+          "sum_maximum_triangle_edges": 0.024714783461786308,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 7,
+          "group_b": 10,
+          "minimum_vertex_distance": 0.1970259748623767,
+          "sum_maximum_triangle_edges": 0.024714762632188608,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 7,
+          "group_b": 11,
+          "minimum_vertex_distance": 0.19702598081659564,
+          "sum_maximum_triangle_edges": 0.024714762818953455,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 7,
+          "group_b": 12,
+          "minimum_vertex_distance": 0.19702595161512965,
+          "sum_maximum_triangle_edges": 0.024714783835240978,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 7,
+          "group_b": 13,
+          "minimum_vertex_distance": 0.2913862426551123,
+          "sum_maximum_triangle_edges": 0.02437267407202573,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 7,
+          "group_b": 14,
+          "minimum_vertex_distance": 0.2975627543027123,
+          "sum_maximum_triangle_edges": 0.024485164010701308,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 8,
+          "group_b": 9,
+          "minimum_vertex_distance": 0.051061355766274144,
+          "sum_maximum_triangle_edges": 0.024714773327076698,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 8,
+          "group_b": 10,
+          "minimum_vertex_distance": 0.051061355766274144,
+          "sum_maximum_triangle_edges": 0.024714752497479002,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 8,
+          "group_b": 11,
+          "minimum_vertex_distance": 0.051061378741291734,
+          "sum_maximum_triangle_edges": 0.024714752684243845,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 8,
+          "group_b": 12,
+          "minimum_vertex_distance": 0.051061378741291734,
+          "sum_maximum_triangle_edges": 0.024714773700531368,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 8,
+          "group_b": 13,
+          "minimum_vertex_distance": 0.13422738009086263,
+          "sum_maximum_triangle_edges": 0.024372663937316123,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 8,
+          "group_b": 14,
+          "minimum_vertex_distance": 0.14202090563502204,
+          "sum_maximum_triangle_edges": 0.0244851538759917,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 9,
+          "group_b": 10,
+          "minimum_vertex_distance": 0.044422272568300177,
+          "sum_maximum_triangle_edges": 0.023887386754322962,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 9,
+          "group_b": 11,
+          "minimum_vertex_distance": 0.044422272568300177,
+          "sum_maximum_triangle_edges": 0.02388738694108781,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 9,
+          "group_b": 12,
+          "minimum_vertex_distance": 0.13339734077453613,
+          "sum_maximum_triangle_edges": 0.02388740795737533,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 9,
+          "group_b": 13,
+          "minimum_vertex_distance": 0.04495253359160335,
+          "sum_maximum_triangle_edges": 0.023545298194160087,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 9,
+          "group_b": 14,
+          "minimum_vertex_distance": 0.0617449026608755,
+          "sum_maximum_triangle_edges": 0.023657788132835665,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 10,
+          "group_b": 11,
+          "minimum_vertex_distance": 0.13339734077453613,
+          "sum_maximum_triangle_edges": 0.02388736611149011,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 10,
+          "group_b": 12,
+          "minimum_vertex_distance": 0.044422272568300177,
+          "sum_maximum_triangle_edges": 0.02388738712777763,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 10,
+          "group_b": 13,
+          "minimum_vertex_distance": 0.04495253359160335,
+          "sum_maximum_triangle_edges": 0.02354527736456239,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 10,
+          "group_b": 14,
+          "minimum_vertex_distance": 0.0617449026608755,
+          "sum_maximum_triangle_edges": 0.023657767303237966,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 11,
+          "group_b": 12,
+          "minimum_vertex_distance": 0.044422272568300177,
+          "sum_maximum_triangle_edges": 0.02388738731454248,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 11,
+          "group_b": 13,
+          "minimum_vertex_distance": 0.044952554539009794,
+          "sum_maximum_triangle_edges": 0.023545277551327234,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 11,
+          "group_b": 14,
+          "minimum_vertex_distance": 0.0617449026608755,
+          "sum_maximum_triangle_edges": 0.023657767490002812,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 12,
+          "group_b": 13,
+          "minimum_vertex_distance": 0.044952554539009794,
+          "sum_maximum_triangle_edges": 0.023545298567614757,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 12,
+          "group_b": 14,
+          "minimum_vertex_distance": 0.0617449026608755,
+          "sum_maximum_triangle_edges": 0.023657788506290335,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 13,
+          "group_b": 14,
+          "minimum_vertex_distance": 0.013699531870911311,
+          "sum_maximum_triangle_edges": 0.023315678743075087,
+          "separation_bound_passed": false
+        }
+      ]
+    },
+    {
+      "event": 11,
+      "time": 0.10999999940395355,
+      "mode": "saved",
+      "excluded_samples": 40,
+      "invalid_fits": null,
+      "samples": 17608,
+      "faces": 25315,
+      "used_vertices": 16188,
+      "unused_samples": 1420,
+      "edges": 43904,
+      "boundary_edges": 11863,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 447,
+      "largest_component_faces": 8636,
+      "singleton_face_components": 351,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 34610,
+        "faces": 25315,
+        "rejected": {
+          "minimum_angle": 16,
+          "tangent": 8595,
+          "face_normal": 560,
+          "normal": 124,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 43904,
+          "boundary_edges": 11863,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "separation": [
+        {
+          "group_a": 0,
+          "group_b": 1,
+          "minimum_vertex_distance": 0.11236968309315666,
+          "sum_maximum_triangle_edges": 0.027996190039104515,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 14,
+          "minimum_vertex_distance": 0.11236966622987035,
+          "sum_maximum_triangle_edges": 0.027996172697366047,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 14,
+          "minimum_vertex_distance": 0.1585521399974823,
+          "sum_maximum_triangle_edges": 0.028040525949080082,
+          "separation_bound_passed": true
+        }
+      ]
+    },
+    {
+      "event": 11,
+      "time": 0.10999999940395355,
+      "mode": "plane_2cells",
+      "excluded_samples": 40,
+      "invalid_fits": 0,
+      "samples": 17608,
+      "faces": 25873,
+      "used_vertices": 16259,
+      "unused_samples": 1349,
+      "edges": 44750,
+      "boundary_edges": 11881,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 366,
+      "largest_component_faces": 9018,
+      "singleton_face_components": 296,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 34610,
+        "faces": 25873,
+        "rejected": {
+          "minimum_angle": 16,
+          "tangent": 8077,
+          "face_normal": 432,
+          "normal": 212,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 44750,
+          "boundary_edges": 11881,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "separation": [
+        {
+          "group_a": 0,
+          "group_b": 1,
+          "minimum_vertex_distance": 0.11236968309315666,
+          "sum_maximum_triangle_edges": 0.027900681214659773,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 14,
+          "minimum_vertex_distance": 0.11236966622987035,
+          "sum_maximum_triangle_edges": 0.027900663872921304,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 14,
+          "minimum_vertex_distance": 0.1585521399974823,
+          "sum_maximum_triangle_edges": 0.028040525949080082,
+          "separation_bound_passed": true
+        }
+      ]
+    },
+    {
+      "event": 12,
+      "time": 0.11999999731779099,
+      "mode": "saved",
+      "excluded_samples": 40,
+      "invalid_fits": null,
+      "samples": 19368,
+      "faces": 26556,
+      "used_vertices": 17452,
+      "unused_samples": 1916,
+      "edges": 46803,
+      "boundary_edges": 13938,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 622,
+      "largest_component_faces": 9265,
+      "singleton_face_components": 402,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 37951,
+        "faces": 26556,
+        "rejected": {
+          "minimum_angle": 191,
+          "tangent": 10184,
+          "face_normal": 936,
+          "normal": 84,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 46803,
+          "boundary_edges": 13938,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "separation": [
+        {
+          "group_a": 0,
+          "group_b": 1,
+          "minimum_vertex_distance": 0.11223003316373889,
+          "sum_maximum_triangle_edges": 0.027284533634001497,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 12,
+          "minimum_vertex_distance": 0.11222998375944916,
+          "sum_maximum_triangle_edges": 0.027284569514548846,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 12,
+          "minimum_vertex_distance": 0.20814839005470276,
+          "sum_maximum_triangle_edges": 0.027527863194158057,
+          "separation_bound_passed": true
+        }
+      ]
+    },
+    {
+      "event": 12,
+      "time": 0.11999999731779099,
+      "mode": "plane_2cells",
+      "excluded_samples": 40,
+      "invalid_fits": 56,
+      "samples": 19368,
+      "faces": 26975,
+      "used_vertices": 17837,
+      "unused_samples": 1531,
+      "edges": 47786,
+      "boundary_edges": 14647,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 606,
+      "largest_component_faces": 10450,
+      "singleton_face_components": 482,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 37932,
+        "faces": 26975,
+        "rejected": {
+          "minimum_angle": 191,
+          "tangent": 9989,
+          "face_normal": 416,
+          "normal": 361,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 47786,
+          "boundary_edges": 14647,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "separation": [
+        {
+          "group_a": 0,
+          "group_b": 1,
+          "minimum_vertex_distance": 0.11223003316373889,
+          "sum_maximum_triangle_edges": 0.029111847561983265,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 12,
+          "minimum_vertex_distance": 0.11222998375944916,
+          "sum_maximum_triangle_edges": 0.029111883442530614,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 12,
+          "minimum_vertex_distance": 0.20814839005470276,
+          "sum_maximum_triangle_edges": 0.027527863194158057,
+          "separation_bound_passed": true
+        }
+      ]
+    },
+    {
+      "event": 13,
+      "time": 0.12999999523162842,
+      "mode": "saved",
+      "excluded_samples": 16,
+      "invalid_fits": null,
+      "samples": 20720,
+      "faces": 28330,
+      "used_vertices": 18333,
+      "unused_samples": 2387,
+      "edges": 49631,
+      "boundary_edges": 14272,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 683,
+      "largest_component_faces": 9333,
+      "singleton_face_components": 436,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 40647,
+        "faces": 28330,
+        "rejected": {
+          "tangent": 11381,
+          "face_normal": 856,
+          "minimum_angle": 48,
+          "normal": 32,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 49631,
+          "boundary_edges": 14272,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "separation": [
+        {
+          "group_a": 0,
+          "group_b": 1,
+          "minimum_vertex_distance": 0.1242191397240991,
+          "sum_maximum_triangle_edges": 0.027340325442945818,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 10,
+          "minimum_vertex_distance": 0.13731290778813254,
+          "sum_maximum_triangle_edges": 0.02474678462435649,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 11,
+          "minimum_vertex_distance": 0.1373129372270985,
+          "sum_maximum_triangle_edges": 0.024746784196685294,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 20,
+          "minimum_vertex_distance": 0.12421917159211023,
+          "sum_maximum_triangle_edges": 0.027340325442945818,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 10,
+          "minimum_vertex_distance": 0.04669210935484054,
+          "sum_maximum_triangle_edges": 0.02506636327031251,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 11,
+          "minimum_vertex_distance": 0.18858303624083605,
+          "sum_maximum_triangle_edges": 0.025066362842641313,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 20,
+          "minimum_vertex_distance": 0.208311527967453,
+          "sum_maximum_triangle_edges": 0.027659904088901836,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 10,
+          "group_b": 11,
+          "minimum_vertex_distance": 0.1591118574142456,
+          "sum_maximum_triangle_edges": 0.02247282202405199,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 10,
+          "group_b": 20,
+          "minimum_vertex_distance": 0.18858306533569016,
+          "sum_maximum_triangle_edges": 0.02506636327031251,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 11,
+          "group_b": 20,
+          "minimum_vertex_distance": 0.04669210935484054,
+          "sum_maximum_triangle_edges": 0.025066362842641313,
+          "separation_bound_passed": true
+        }
+      ]
+    },
+    {
+      "event": 13,
+      "time": 0.12999999523162842,
+      "mode": "plane_2cells",
+      "excluded_samples": 16,
+      "invalid_fits": 48,
+      "samples": 20720,
+      "faces": 28594,
+      "used_vertices": 18725,
+      "unused_samples": 1995,
+      "edges": 50543,
+      "boundary_edges": 15304,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 715,
+      "largest_component_faces": 10753,
+      "singleton_face_components": 502,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 40629,
+        "faces": 28594,
+        "rejected": {
+          "tangent": 11135,
+          "face_normal": 504,
+          "minimum_angle": 48,
+          "normal": 348,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 50543,
+          "boundary_edges": 15304,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "separation": [
+        {
+          "group_a": 0,
+          "group_b": 1,
+          "minimum_vertex_distance": 0.1242191397240991,
+          "sum_maximum_triangle_edges": 0.027340325442945818,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 10,
+          "minimum_vertex_distance": 0.13731290778813254,
+          "sum_maximum_triangle_edges": 0.02474678462435649,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 11,
+          "minimum_vertex_distance": 0.1373129372270985,
+          "sum_maximum_triangle_edges": 0.024746784196685294,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 20,
+          "minimum_vertex_distance": 0.12421917159211023,
+          "sum_maximum_triangle_edges": 0.027340325442945818,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 10,
+          "minimum_vertex_distance": 0.04669210935484054,
+          "sum_maximum_triangle_edges": 0.02506636327031251,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 11,
+          "minimum_vertex_distance": 0.18858303624083605,
+          "sum_maximum_triangle_edges": 0.025066362842641313,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 20,
+          "minimum_vertex_distance": 0.208311527967453,
+          "sum_maximum_triangle_edges": 0.027659904088901836,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 10,
+          "group_b": 11,
+          "minimum_vertex_distance": 0.1591118574142456,
+          "sum_maximum_triangle_edges": 0.02247282202405199,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 10,
+          "group_b": 20,
+          "minimum_vertex_distance": 0.18858306533569016,
+          "sum_maximum_triangle_edges": 0.02506636327031251,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 11,
+          "group_b": 20,
+          "minimum_vertex_distance": 0.04669210935484054,
+          "sum_maximum_triangle_edges": 0.025066362842641313,
+          "separation_bound_passed": true
+        }
+      ]
+    },
+    {
+      "event": 14,
+      "time": 0.14000000059604645,
+      "mode": "saved",
+      "excluded_samples": 0,
+      "invalid_fits": null,
+      "samples": 21984,
+      "faces": 30383,
+      "used_vertices": 19663,
+      "unused_samples": 2321,
+      "edges": 53406,
+      "boundary_edges": 15663,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 680,
+      "largest_component_faces": 10178,
+      "singleton_face_components": 427,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 43453,
+        "faces": 30383,
+        "rejected": {
+          "minimum_angle": 80,
+          "tangent": 12046,
+          "face_normal": 944,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 53406,
+          "boundary_edges": 15663,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "separation": [
+        {
+          "group_a": 0,
+          "group_b": 1,
+          "minimum_vertex_distance": 0.13644547458163947,
+          "sum_maximum_triangle_edges": 0.027331892700194274,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 2,
+          "minimum_vertex_distance": 0.15627771175148866,
+          "sum_maximum_triangle_edges": 0.02484091190681837,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 3,
+          "minimum_vertex_distance": 0.1562777250177279,
+          "sum_maximum_triangle_edges": 0.02484091080898897,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 4,
+          "minimum_vertex_distance": 0.1364454408823116,
+          "sum_maximum_triangle_edges": 0.027331892700194274,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 2,
+          "minimum_vertex_distance": 0.013593069161615548,
+          "sum_maximum_triangle_edges": 0.02512767952565905,
+          "separation_bound_passed": false
+        },
+        {
+          "group_a": 1,
+          "group_b": 3,
+          "minimum_vertex_distance": 0.16834047353772028,
+          "sum_maximum_triangle_edges": 0.02512767842782965,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 4,
+          "minimum_vertex_distance": 0.17484673857688904,
+          "sum_maximum_triangle_edges": 0.027618660319034954,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 2,
+          "group_b": 3,
+          "minimum_vertex_distance": 0.15850231051445007,
+          "sum_maximum_triangle_edges": 0.022636697634453747,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 2,
+          "group_b": 4,
+          "minimum_vertex_distance": 0.16834047353772028,
+          "sum_maximum_triangle_edges": 0.02512767952565905,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 3,
+          "group_b": 4,
+          "minimum_vertex_distance": 0.013593054317903936,
+          "sum_maximum_triangle_edges": 0.02512767842782965,
+          "separation_bound_passed": false
+        }
+      ]
+    },
+    {
+      "event": 14,
+      "time": 0.14000000059604645,
+      "mode": "plane_2cells",
+      "excluded_samples": 0,
+      "invalid_fits": 16,
+      "samples": 21984,
+      "faces": 31351,
+      "used_vertices": 20222,
+      "unused_samples": 1762,
+      "edges": 55281,
+      "boundary_edges": 16509,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 672,
+      "largest_component_faces": 11898,
+      "singleton_face_components": 452,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 43453,
+        "faces": 31351,
+        "rejected": {
+          "minimum_angle": 80,
+          "tangent": 11406,
+          "face_normal": 616,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 55281,
+          "boundary_edges": 16509,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "separation": [
+        {
+          "group_a": 0,
+          "group_b": 1,
+          "minimum_vertex_distance": 0.13644547458163947,
+          "sum_maximum_triangle_edges": 0.02732471251995176,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 2,
+          "minimum_vertex_distance": 0.15627771175148866,
+          "sum_maximum_triangle_edges": 0.024833731726575856,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 3,
+          "minimum_vertex_distance": 0.1562777250177279,
+          "sum_maximum_triangle_edges": 0.024833730628746456,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 4,
+          "minimum_vertex_distance": 0.1364454408823116,
+          "sum_maximum_triangle_edges": 0.02732471251995176,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 2,
+          "minimum_vertex_distance": 0.013593069161615548,
+          "sum_maximum_triangle_edges": 0.02512767952565905,
+          "separation_bound_passed": false
+        },
+        {
+          "group_a": 1,
+          "group_b": 3,
+          "minimum_vertex_distance": 0.16834047353772028,
+          "sum_maximum_triangle_edges": 0.02512767842782965,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 4,
+          "minimum_vertex_distance": 0.17484673857688904,
+          "sum_maximum_triangle_edges": 0.027618660319034954,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 2,
+          "group_b": 3,
+          "minimum_vertex_distance": 0.15850231051445007,
+          "sum_maximum_triangle_edges": 0.022636697634453747,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 2,
+          "group_b": 4,
+          "minimum_vertex_distance": 0.16834047353772028,
+          "sum_maximum_triangle_edges": 0.02512767952565905,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 3,
+          "group_b": 4,
+          "minimum_vertex_distance": 0.013593054317903936,
+          "sum_maximum_triangle_edges": 0.02512767842782965,
+          "separation_bound_passed": false
+        }
+      ]
+    },
+    {
+      "event": 15,
+      "time": 0.14999999105930328,
+      "mode": "saved",
+      "excluded_samples": 0,
+      "invalid_fits": null,
+      "samples": 23632,
+      "faces": 33738,
+      "used_vertices": 21656,
+      "unused_samples": 1976,
+      "edges": 58778,
+      "boundary_edges": 16342,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 837,
+      "largest_component_faces": 12233,
+      "singleton_face_components": 547,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 46871,
+        "faces": 33738,
+        "rejected": {
+          "minimum_angle": 80,
+          "tangent": 12165,
+          "face_normal": 888,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 58778,
+          "boundary_edges": 16342,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "separation": [
+        {
+          "group_a": 0,
+          "group_b": 1,
+          "minimum_vertex_distance": 0.13596072649914973,
+          "sum_maximum_triangle_edges": 0.02723731048950158,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 2,
+          "minimum_vertex_distance": 0.13596072649914973,
+          "sum_maximum_triangle_edges": 0.027237275506928928,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 2,
+          "minimum_vertex_distance": 0.15644598007202148,
+          "sum_maximum_triangle_edges": 0.027316409136781683,
+          "separation_bound_passed": true
+        }
+      ]
+    },
+    {
+      "event": 15,
+      "time": 0.14999999105930328,
+      "mode": "plane_2cells",
+      "excluded_samples": 0,
+      "invalid_fits": 0,
+      "samples": 23632,
+      "faces": 34429,
+      "used_vertices": 21853,
+      "unused_samples": 1779,
+      "edges": 60011,
+      "boundary_edges": 16735,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 733,
+      "largest_component_faces": 25944,
+      "singleton_face_components": 588,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 46903,
+        "faces": 34429,
+        "rejected": {
+          "minimum_angle": 80,
+          "tangent": 11682,
+          "face_normal": 704,
+          "normal": 8,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 60011,
+          "boundary_edges": 16735,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "separation": [
+        {
+          "group_a": 0,
+          "group_b": 1,
+          "minimum_vertex_distance": 0.13596072649914973,
+          "sum_maximum_triangle_edges": 0.02742218772664229,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 2,
+          "minimum_vertex_distance": 0.13596072649914973,
+          "sum_maximum_triangle_edges": 0.027422152744069637,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 2,
+          "minimum_vertex_distance": 0.15644598007202148,
+          "sum_maximum_triangle_edges": 0.027316409136781683,
+          "separation_bound_passed": true
+        }
+      ]
+    },
+    {
+      "event": 16,
+      "time": 0.1599999964237213,
+      "mode": "saved",
+      "excluded_samples": 0,
+      "invalid_fits": null,
+      "samples": 25136,
+      "faces": 35408,
+      "used_vertices": 22915,
+      "unused_samples": 2221,
+      "edges": 61991,
+      "boundary_edges": 17758,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 830,
+      "largest_component_faces": 12738,
+      "singleton_face_components": 583,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 49949,
+        "faces": 35408,
+        "rejected": {
+          "tangent": 13281,
+          "face_normal": 928,
+          "minimum_angle": 92,
+          "normal": 240,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 61991,
+          "boundary_edges": 17758,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "separation": [
+        {
+          "group_a": 0,
+          "group_b": 1,
+          "minimum_vertex_distance": 0.14759628554568227,
+          "sum_maximum_triangle_edges": 0.027186369772564438,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 2,
+          "minimum_vertex_distance": 0.14759628554568227,
+          "sum_maximum_triangle_edges": 0.027186388247029958,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 2,
+          "minimum_vertex_distance": 0.14778980612754822,
+          "sum_maximum_triangle_edges": 0.027227121931043548,
+          "separation_bound_passed": true
+        }
+      ]
+    },
+    {
+      "event": 16,
+      "time": 0.1599999964237213,
+      "mode": "plane_2cells",
+      "excluded_samples": 0,
+      "invalid_fits": 0,
+      "samples": 25136,
+      "faces": 36497,
+      "used_vertices": 23389,
+      "unused_samples": 1747,
+      "edges": 63772,
+      "boundary_edges": 18053,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0,
+      "edge_connected_components": 688,
+      "largest_component_faces": 28179,
+      "singleton_face_components": 572,
+      "construction": {
+        "method": "Open3D ball pivoting plus original-prototype geometric guards",
+        "open3d_version": "0.19.0",
+        "radius_factors": [
+          1.0
+        ],
+        "raw_faces": 49968,
+        "faces": 36497,
+        "rejected": {
+          "tangent": 12755,
+          "face_normal": 624,
+          "minimum_angle": 92,
+          "nonmanifold_edge_faces": 0
+        },
+        "topology": {
+          "edges": 63772,
+          "boundary_edges": 18053,
+          "nonmanifold_edges": 0,
+          "inconsistent_shared_edge_winding": 0
+        },
+        "vertices_moved": false
+      },
+      "separation": [
+        {
+          "group_a": 0,
+          "group_b": 1,
+          "minimum_vertex_distance": 0.14759628554568227,
+          "sum_maximum_triangle_edges": 0.027186369772564438,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 0,
+          "group_b": 2,
+          "minimum_vertex_distance": 0.14759628554568227,
+          "sum_maximum_triangle_edges": 0.027186388247029958,
+          "separation_bound_passed": true
+        },
+        {
+          "group_a": 1,
+          "group_b": 2,
+          "minimum_vertex_distance": 0.14778980612754822,
+          "sum_maximum_triangle_edges": 0.027227121931043548,
+          "separation_bound_passed": true
+        }
+      ]
+    }
+  ],
+  "original_arrays_exact": true,
+  "three_time_references_exact": true,
+  "input_sha256": {
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/metadata.json": "f869d16aa8fe3dbfe1946c3b72247fd469929dead2dd1d53d7314a4a6170d3ba",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0000.npz": "dceafd4c1002a3dd8a0ca878e511931072bea461373636897952bcaffd6c4e5c",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0000.npz": "536f0e7c34908e9725eb897696f9384ef421b8fc5d8a1733350fb914dfe82011",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0001.npz": "71e8e3a1813f21421dd4ba4c9040286511d14749cfb8f03cf5043f970ee16852",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0001.npz": "f28bd76002ab0631c53e5bdfd502a99706ab6016656aac872e70fc286d8b2ff8",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0002.npz": "e373ebee7471af3384ac8f784ff6846455939fb25bc39083ed39f6c161586a1f",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0002.npz": "2c5f225fca21c3abca94c0455e3e7d5c0260f49b23a60b3fd2b791187b5705cf",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0003.npz": "3834bf20c0df974ba0f7f3c650c4e8aa210983efa8f7f25a41b24bfc7113159b",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0003.npz": "58b40d103c41ff0f238177cf04aed4e8243644713a1a8cb555064dd17a362cc8",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0004.npz": "64454d91d48a8708c6dbbd38ad33f2fcf0eb0d3cdacb0876355a7729e90329b1",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0004.npz": "b7d01506e55660afb395e393acfa6b4ac3091154d063271e9bf827021753980d",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0005.npz": "75e2ec552832bade798b6b2388d68545551bd71d5cd1947235ae780e1c93e579",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0005.npz": "41081c6e5bfbdfaf602e8124a72949fb7196966a63d57fc9947384fc2262d007",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0006.npz": "13bf819d6a8da2195e89260ae329dcd2841781081b1fafb4f59f4d7bab531202",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0006.npz": "32210c5405dcb1c6574f6ad6f0a00bfc6f2a17ae07deafa0c6ecc8f574f37970",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0007.npz": "140a99072dd7a44e684dec80e7b39a1775deebf93fbdaa1c0b8c22d501bb9682",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0007.npz": "63f73688cc3269aa18ea3e2aab1b60c9facbfa48e16aa39d4a9e8e131951e9a6",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0008.npz": "2cdcbbbb778000775fef68bb4e126fb27b4c0cf30d2ab5c6b906e292a6c98a27",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0008.npz": "9bcee568d7a830a6792d8186a5f7c24fa2a1d4ddba7a9566fe7621dde58b03e9",
+    "outputs/two_bubbles_temporal_fitted_normals_n128/mesh_0008_saved.npz": "0548f2b832d7620741a5e88017fd9ae723fa106df2e718f09aa0e5dbc0628c6e",
+    "outputs/two_bubbles_temporal_fitted_normals_n128/mesh_0008_plane_2cells.npz": "5c5d4c922798291967146028aeb0afb28755ed898033e37b6616e5e573d5c5af",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0009.npz": "9ad6cc3a0d72ffd4a44d0d2e7e3a152d798d48d726180a94d227706a7df88440",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0009.npz": "c03abbe6ff5959ab5c0464290e7d599f661de189289ac360f79d66b0f8ff8c86",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0010.npz": "7d4e703d382d58e7f4aa7f02be233502eab3653096229020f60bb6033eef5ef8",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0010.npz": "bd64ad4327df15c26b54a415b46ccaf450d0973fa3972c6fb7afa65d66940d15",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0011.npz": "a78ac1eb296d3146b84ad4c7a4c14011dfd9dd005edc58937e6abf27b3afa823",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0011.npz": "6689c9e071aa9ded3bd2536a33a4ae4a6022d2a0097d3c8c8148ea2facaeae74",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0012.npz": "015d46039fa69df07f2e61ec18ab34a31be27f49c7d9cfab848ce86e0430d0c6",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0012.npz": "c9099c13f60c3d3093a2455e9e1929982c189e20b198077d0f95083501be0c78",
+    "outputs/two_bubbles_temporal_fitted_normals_n128/mesh_0012_saved.npz": "b1a4e7fd1ab9f1b3548ff4bdefbe53317c393b60c460aa09462d4fd53082b0cc",
+    "outputs/two_bubbles_temporal_fitted_normals_n128/mesh_0012_plane_2cells.npz": "d3fdcd4a5bdb79818684e4dc956dbbc85e1fce89c4831f81df3a52e61d97ffe6",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0013.npz": "0c87039fa47b74ad3ef90ca25b88c0fea23091c3080599d775b6c46dea690103",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0013.npz": "959263d273cc7eb241a402e3ca3e94f5862bfe90de7a7e13c09cab2356b3c688",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0014.npz": "161596f489fab004035daf5cb7bfa78c2561dc62a6b1a76222c1acacd0ab526b",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0014.npz": "e7b0dfc1b7954ff2bb636244d1e0ec09d4a222580d64ae50cee1ed06e206f163",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0015.npz": "2c79eca4f137c40a7eb081c6aaee3cb2313fa0bc079c709d77c33a90d4297f68",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0015.npz": "c47470acd98a9daa1eb58c6acc584b07cb774380b1e3761ffde981c1f095d341",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0016.npz": "1951062f72db210a1e718fd91ae3569ddc4d6f571e33e3f0b91225d7fc34d7e8",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0016.npz": "40138fe16d367f532b6bea13a1e28c136c21c8477732b899ab3c6ff40cbbf7ae",
+    "outputs/two_bubbles_temporal_fitted_normals_n128/mesh_0016_saved.npz": "b6cc144e9b79ece01dda1412a65fbcf707e1cb35f0c6c3591b55128c80550c8b",
+    "outputs/two_bubbles_temporal_fitted_normals_n128/mesh_0016_plane_2cells.npz": "f7904da2f11ad4a073d0ead5d49d0c687525d49b8e17b9980a38e6b4e0768c49"
+  },
+  "source_sha256": {
+    "/Users/minhn/Documents/Heidelberg University/fifth_semester/Thesis/master_thesis/experiments/wind_bubble/animate_mesh_normals.py": "b9342e59e668c4d8ecc1288612f90ccdbc4250a12d573672dc2008225945fc39",
+    "experiments/wind_bubble/compare_patch_normals.py": "c575c4e1abac69c8e3b8b31de0f88f626cb298194f29d2320db207ec21bfe38f",
+    "experiments/wind_bubble/ball_pivot_mesh.py": "7d043f64a271e9a63b4289a42197477048e237748a99ea8d2844f7c86c11ec15",
+    "experiments/wind_bubble/compare_event_normals.py": "061086991ea8ae843b211dfbcf553f9318233fbe0cf509707d2c152e9f48b6a4",
+    "experiments/wind_bubble/verify_mesh_comparison.py": "21714f7ab435d593e72bb105ec831cb71f24c2f007c8deec3ea72c247a2834b0",
+    "experiments/wind_bubble/check_temporal_mesh.py": "10d7b96eb548ea1d758ce7116c5b2e88d82645fd000cdf4c15aa281dccda9c7b",
+    "experiments/wind_bubble/verify_temporal_mesh.py": "8f39f2864b9b25a19fb99f98ce3fa985d568cf9948e070043773716ebb9d0d28"
+  },
+  "open3d_version": "0.19.0",
+  "physical_diagnostics_changed": false,
+  "production_method_changed": false,
+  "temporal_identity_tracking_added": false,
+  "temporal_interpolation_added": false,
+  "temporal_flicker_quantitatively_validated": false,
+  "within_group_topology_validated": false
+}
