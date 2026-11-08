@@ -1,0 +1,41 @@
+{
+  "time": 0.1599999964237213,
+  "group": 1,
+  "anchor_row": 7646,
+  "center": [
+    0.3479059934616089,
+    0.5856893658638,
+    0.4957784116268158
+  ],
+  "selection": "maximum projection in fixed direction; face centroids within 3 cell widths",
+  "anchor_direction": [
+    0.0,
+    1.0,
+    0.0
+  ],
+  "core_samples": 26,
+  "context_samples": 79,
+  "raw_patch_triangles": 59,
+  "first_rejection_counts": {
+    "accepted": 59
+  },
+  "core_samples_unused_by_any_raw_group_face": 0,
+  "core_samples_unused_by_any_accepted_group_face": 0,
+  "nearest_other_sample_distance_cells_p16_p50_p84": [
+    0.9507869214424796,
+    0.9739828958924446,
+    0.9950869278923966
+  ],
+  "whole_event_rejection_counts": {
+    "tangent": 13281,
+    "face_normal": 928,
+    "minimum_angle": 92,
+    "normal": 240,
+    "nonmanifold_edge_faces": 0
+  },
+  "saved_faces_reproduced": true,
+  "input": "outputs/two_bubbles_temporal_mesh_n128/mesh_0016.npz",
+  "input_sha256": "743a1d3f18f4245d14dbb5419549f416ddcdefb580761dec03927117adbe5104",
+  "vertices_moved": false,
+  "thresholds_changed": false
+}

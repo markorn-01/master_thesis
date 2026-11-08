@@ -1,0 +1,4 @@
+event,time,samples,retained_samples,excluded_samples,groups,raw_faces,faces,used_vertices,unused_retained_samples,edges,boundary_edges,nonmanifold_edges,inconsistent_shared_edge_winding
+8,0.07999999821186066,11424,11424,0,1,22264,15947,10149,1275,27901,7961,0,0
+12,0.11999999731779099,19408,19368,40,3,37951,26556,17452,1916,46803,13938,0,0
+16,0.1599999964237213,25136,25136,0,3,49949,35408,22915,2221,61991,17758,0,0

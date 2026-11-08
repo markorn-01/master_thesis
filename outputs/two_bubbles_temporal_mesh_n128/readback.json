@@ -1,0 +1,89 @@
+{
+  "passed": true,
+  "events_checked": 3,
+  "frozen_settings": true,
+  "meshes": [
+    {
+      "event": 8,
+      "faces": 15947,
+      "cross_group_faces": 0,
+      "boundary_edges": 7961,
+      "edge_connected_components": 391,
+      "largest_component_faces": 6506,
+      "singleton_face_components": 333,
+      "group_connectivity": [
+        {
+          "group": 0,
+          "edge_connected_components": 391,
+          "largest_component_faces": 6506,
+          "singleton_face_components": 333
+        }
+      ]
+    },
+    {
+      "event": 12,
+      "faces": 26556,
+      "cross_group_faces": 0,
+      "boundary_edges": 13938,
+      "edge_connected_components": 622,
+      "largest_component_faces": 9265,
+      "singleton_face_components": 402,
+      "group_connectivity": [
+        {
+          "group": 0,
+          "edge_connected_components": 508,
+          "largest_component_faces": 9265,
+          "singleton_face_components": 402
+        },
+        {
+          "group": 1,
+          "edge_connected_components": 57,
+          "largest_component_faces": 140,
+          "singleton_face_components": 0
+        },
+        {
+          "group": 12,
+          "edge_connected_components": 57,
+          "largest_component_faces": 138,
+          "singleton_face_components": 0
+        }
+      ]
+    },
+    {
+      "event": 16,
+      "faces": 35408,
+      "cross_group_faces": 0,
+      "boundary_edges": 17758,
+      "edge_connected_components": 830,
+      "largest_component_faces": 12738,
+      "singleton_face_components": 583,
+      "group_connectivity": [
+        {
+          "group": 0,
+          "edge_connected_components": 518,
+          "largest_component_faces": 12738,
+          "singleton_face_components": 431
+        },
+        {
+          "group": 1,
+          "edge_connected_components": 155,
+          "largest_component_faces": 236,
+          "singleton_face_components": 76
+        },
+        {
+          "group": 2,
+          "edge_connected_components": 157,
+          "largest_component_faces": 234,
+          "singleton_face_components": 76
+        }
+      ]
+    }
+  ],
+  "cross_group_separation_bounds_independently_checked": 6,
+  "mesh_plane_segments_checked": 1539,
+  "previous_event16_mesh_reproduced": true,
+  "original_vertices_and_values_unchanged": true,
+  "physical_openings_validated": false,
+  "within_group_topology_validated": false,
+  "temporal_flicker_validated": false
+}
