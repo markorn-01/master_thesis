@@ -1,0 +1,128 @@
+{
+  "input_sha256": {
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0016.npz": "1951062f72db210a1e718fd91ae3569ddc4d6f571e33e3f0b91225d7fc34d7e8",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0016.npz": "40138fe16d367f532b6bea13a1e28c136c21c8477732b899ab3c6ff40cbbf7ae"
+  },
+  "input_hashes_unchanged": true,
+  "source_sha256": {
+    "/Users/minhn/Documents/Heidelberg University/fifth_semester/Thesis/master_thesis/experiments/wind_bubble/prototype_surface_mesh.py": "b563fdbd6c7ee6bf0a1372b4a5f6ac2c35c33fbcec3f1adc94499ca49e497602",
+    "experiments/wind_bubble/surface_mesh.py": "e391cd14eae9d058ff40f049bec4a2a720f189f14c80d9e2a65ad2f6d6f9040c"
+  },
+  "reports": [
+    {
+      "input_samples": 25136,
+      "retained_samples": 25136,
+      "candidate_faces": 81720,
+      "faces": 29912,
+      "used_vertices": 22936,
+      "qhull_failures": 0,
+      "projected_duplicate_neighborhoods": 0,
+      "rejected": {
+        "incomplete_three_vertex_agreement": 51072,
+        "face_normal": 656,
+        "small_angle": 80,
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 55032,
+        "boundary_edges": 20328,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "max_edge_cells": 1.5,
+      "normal_angle": 45.0,
+      "tangent_angle": 20.0,
+      "face_angle": 30.0,
+      "min_angle": 12.0,
+      "vertices_moved": false,
+      "proposal_tie_perturbation_cells": 1e-07,
+      "physical_area_recomputed": false,
+      "groups": [
+        {
+          "group": 0,
+          "samples": 21840,
+          "used_vertices": 20040,
+          "faces": 26904
+        },
+        {
+          "group": 1,
+          "samples": 1648,
+          "used_vertices": 1448,
+          "faces": 1504
+        },
+        {
+          "group": 2,
+          "samples": 1648,
+          "used_vertices": 1448,
+          "faces": 1504
+        }
+      ]
+    },
+    {
+      "input_samples": 25136,
+      "retained_samples": 25136,
+      "candidate_faces": 85928,
+      "faces": 32856,
+      "used_vertices": 23432,
+      "qhull_failures": 0,
+      "projected_duplicate_neighborhoods": 0,
+      "rejected": {
+        "incomplete_three_vertex_agreement": 52368,
+        "face_normal": 624,
+        "small_angle": 80,
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 58256,
+        "boundary_edges": 17944,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "max_edge_cells": 2.0,
+      "normal_angle": 45.0,
+      "tangent_angle": 20.0,
+      "face_angle": 30.0,
+      "min_angle": 12.0,
+      "vertices_moved": false,
+      "proposal_tie_perturbation_cells": 1e-07,
+      "physical_area_recomputed": false,
+      "groups": [
+        {
+          "group": 0,
+          "samples": 21840,
+          "used_vertices": 20480,
+          "faces": 29704
+        },
+        {
+          "group": 1,
+          "samples": 1648,
+          "used_vertices": 1476,
+          "faces": 1576
+        },
+        {
+          "group": 2,
+          "samples": 1648,
+          "used_vertices": 1476,
+          "faces": 1576
+        }
+      ]
+    }
+  ],
+  "display_counts": [
+    {
+      "cutaway": false,
+      "points": 25136,
+      "faces": 32856
+    },
+    {
+      "cutaway": true,
+      "points": 12568,
+      "faces": 16428
+    }
+  ],
+  "vertex_positions_unchanged": true,
+  "physical_diagnostics_changed": false,
+  "physical_identities_assigned": false,
+  "algorithm": "Experimental local tangent-plane Delaunay, three-vertex agreement and geometric guards.",
+  "scipy_delaunay_reference": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.Delaunay.html"
+}

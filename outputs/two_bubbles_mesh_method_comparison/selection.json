@@ -1,0 +1,16 @@
+{
+  "chosen": "ball_single",
+  "eligible": [
+    [
+      -0.03538620563038408,
+      "local"
+    ],
+    [
+      -0.024920890333352985,
+      "ball_single"
+    ]
+  ],
+  "criterion": "No extra sampled known-hole intrusions versus local, no separately labeled sheet bridges or edge topology violations; then minimum sphere/cap area-fraction error. Same-group ambiguity remains a separate failure control.",
+  "truth_used_for_bubble_reconstruction": false,
+  "physical_reconstruction_validated": false
+}

@@ -1,0 +1,611 @@
+[
+  {
+    "case": "sphere",
+    "method": "local",
+    "construction": {
+      "input_samples": 1600,
+      "retained_samples": 1600,
+      "candidate_faces": 3212,
+      "faces": 3180,
+      "used_vertices": 1600,
+      "qhull_failures": 0,
+      "projected_duplicate_neighborhoods": 0,
+      "rejected": {
+        "incomplete_three_vertex_agreement": 32,
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 4786,
+        "boundary_edges": 32,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "max_edge_cells": 2.0,
+      "normal_angle": 45.0,
+      "tangent_angle": 20.0,
+      "face_angle": 30.0,
+      "min_angle": 12.0,
+      "vertices_moved": false,
+      "proposal_tie_perturbation_cells": 1e-07,
+      "physical_area_recomputed": false
+    },
+    "metrics": {
+      "faces": 3180,
+      "used_vertices": 1600,
+      "input_vertices": 1600,
+      "mesh_area": 12.479029583437647,
+      "area_fraction": 0.9930496215970486,
+      "sampled_hole_intrusion_faces": 0,
+      "cross_stipulated_sheet_faces": 0
+    },
+    "seconds": 0.4917729999870062
+  },
+  {
+    "case": "sphere",
+    "method": "ball_single",
+    "construction": {
+      "method": "Open3D ball pivoting plus original-prototype geometric guards",
+      "open3d_version": "0.19.0",
+      "radius_factors": [
+        1.0
+      ],
+      "raw_faces": 3196,
+      "faces": 3196,
+      "rejected": {
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 4794,
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "vertices_moved": false
+    },
+    "metrics": {
+      "faces": 3196,
+      "used_vertices": 1600,
+      "input_vertices": 1600,
+      "mesh_area": 12.541846246276634,
+      "area_fraction": 0.9980484127967295,
+      "sampled_hole_intrusion_faces": 0,
+      "cross_stipulated_sheet_faces": 0
+    },
+    "seconds": 1.7913959580473602
+  },
+  {
+    "case": "sphere",
+    "method": "ball_multi",
+    "construction": {
+      "method": "Open3D ball pivoting plus original-prototype geometric guards",
+      "open3d_version": "0.19.0",
+      "radius_factors": [
+        0.8,
+        1.0,
+        1.4
+      ],
+      "raw_faces": 3196,
+      "faces": 3196,
+      "rejected": {
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 4794,
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "vertices_moved": false
+    },
+    "metrics": {
+      "faces": 3196,
+      "used_vertices": 1600,
+      "input_vertices": 1600,
+      "mesh_area": 12.541846246276634,
+      "area_fraction": 0.9980484127967295,
+      "sampled_hole_intrusion_faces": 0,
+      "cross_stipulated_sheet_faces": 0
+    },
+    "seconds": 0.33705737499985844
+  },
+  {
+    "case": "sphere_cap_hole",
+    "method": "local",
+    "construction": {
+      "input_samples": 1280,
+      "retained_samples": 1280,
+      "candidate_faces": 2560,
+      "faces": 2489,
+      "used_vertices": 1280,
+      "qhull_failures": 0,
+      "projected_duplicate_neighborhoods": 0,
+      "rejected": {
+        "incomplete_three_vertex_agreement": 71,
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 3775,
+        "boundary_edges": 83,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "max_edge_cells": 2.0,
+      "normal_angle": 45.0,
+      "tangent_angle": 20.0,
+      "face_angle": 30.0,
+      "min_angle": 12.0,
+      "vertices_moved": false,
+      "proposal_tie_perturbation_cells": 1e-07,
+      "physical_area_recomputed": false
+    },
+    "metrics": {
+      "faces": 2489,
+      "used_vertices": 1280,
+      "input_vertices": 1280,
+      "mesh_area": 9.767228376554694,
+      "area_fraction": 0.9715641727725673,
+      "sampled_hole_intrusion_faces": 0,
+      "cross_stipulated_sheet_faces": 0
+    },
+    "seconds": 0.3886031670263037
+  },
+  {
+    "case": "sphere_cap_hole",
+    "method": "ball_single",
+    "construction": {
+      "method": "Open3D ball pivoting plus original-prototype geometric guards",
+      "open3d_version": "0.19.0",
+      "radius_factors": [
+        1.0
+      ],
+      "raw_faces": 2503,
+      "faces": 2503,
+      "rejected": {
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 3782,
+        "boundary_edges": 55,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "vertices_moved": false
+    },
+    "metrics": {
+      "faces": 2503,
+      "used_vertices": 1280,
+      "input_vertices": 1280,
+      "mesh_area": 9.822183870778396,
+      "area_fraction": 0.9770306968699175,
+      "sampled_hole_intrusion_faces": 0,
+      "cross_stipulated_sheet_faces": 0
+    },
+    "seconds": 0.26386091590393335
+  },
+  {
+    "case": "sphere_cap_hole",
+    "method": "ball_multi",
+    "construction": {
+      "method": "Open3D ball pivoting plus original-prototype geometric guards",
+      "open3d_version": "0.19.0",
+      "radius_factors": [
+        0.8,
+        1.0,
+        1.4
+      ],
+      "raw_faces": 2524,
+      "faces": 2503,
+      "rejected": {
+        "edge_length": 21,
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 3782,
+        "boundary_edges": 55,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "vertices_moved": false
+    },
+    "metrics": {
+      "faces": 2503,
+      "used_vertices": 1280,
+      "input_vertices": 1280,
+      "mesh_area": 9.822183870778396,
+      "area_fraction": 0.9770306968699175,
+      "sampled_hole_intrusion_faces": 0,
+      "cross_stipulated_sheet_faces": 0
+    },
+    "seconds": 0.26340804097708315
+  },
+  {
+    "case": "planar_hole",
+    "method": "local",
+    "construction": {
+      "input_samples": 264,
+      "retained_samples": 264,
+      "candidate_faces": 519,
+      "faces": 444,
+      "used_vertices": 264,
+      "qhull_failures": 0,
+      "projected_duplicate_neighborhoods": 0,
+      "rejected": {
+        "degenerate": 16,
+        "incomplete_three_vertex_agreement": 59,
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 708,
+        "boundary_edges": 84,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "max_edge_cells": 2.0,
+      "normal_angle": 45.0,
+      "tangent_angle": 20.0,
+      "face_angle": 30.0,
+      "min_angle": 12.0,
+      "vertices_moved": false,
+      "proposal_tie_perturbation_cells": 1e-07,
+      "physical_area_recomputed": false
+    },
+    "metrics": {
+      "faces": 444,
+      "used_vertices": 264,
+      "input_vertices": 264,
+      "mesh_area": 222.0,
+      "area_fraction": null,
+      "sampled_hole_intrusion_faces": 0,
+      "cross_stipulated_sheet_faces": 0
+    },
+    "seconds": 0.07623758306726813
+  },
+  {
+    "case": "planar_hole",
+    "method": "ball_single",
+    "construction": {
+      "method": "Open3D ball pivoting plus original-prototype geometric guards",
+      "open3d_version": "0.19.0",
+      "radius_factors": [
+        1.0
+      ],
+      "raw_faces": 444,
+      "faces": 444,
+      "rejected": {
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 708,
+        "boundary_edges": 84,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "vertices_moved": false
+    },
+    "metrics": {
+      "faces": 444,
+      "used_vertices": 264,
+      "input_vertices": 264,
+      "mesh_area": 222.0,
+      "area_fraction": null,
+      "sampled_hole_intrusion_faces": 0,
+      "cross_stipulated_sheet_faces": 0
+    },
+    "seconds": 0.04671308409888297
+  },
+  {
+    "case": "planar_hole",
+    "method": "ball_multi",
+    "construction": {
+      "method": "Open3D ball pivoting plus original-prototype geometric guards",
+      "open3d_version": "0.19.0",
+      "radius_factors": [
+        0.8,
+        1.0,
+        1.4
+      ],
+      "raw_faces": 444,
+      "faces": 444,
+      "rejected": {
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 708,
+        "boundary_edges": 84,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "vertices_moved": false
+    },
+    "metrics": {
+      "faces": 444,
+      "used_vertices": 264,
+      "input_vertices": 264,
+      "mesh_area": 222.0,
+      "area_fraction": null,
+      "sampled_hole_intrusion_faces": 0,
+      "cross_stipulated_sheet_faces": 0
+    },
+    "seconds": 0.04726799996569753
+  },
+  {
+    "case": "near_sheets_separate_groups",
+    "method": "local",
+    "construction": {
+      "input_samples": 162,
+      "retained_samples": 162,
+      "candidate_faces": 295,
+      "faces": 256,
+      "used_vertices": 162,
+      "qhull_failures": 0,
+      "projected_duplicate_neighborhoods": 0,
+      "rejected": {
+        "degenerate": 15,
+        "incomplete_three_vertex_agreement": 24,
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 416,
+        "boundary_edges": 64,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "max_edge_cells": 2.0,
+      "normal_angle": 45.0,
+      "tangent_angle": 20.0,
+      "face_angle": 30.0,
+      "min_angle": 12.0,
+      "vertices_moved": false,
+      "proposal_tie_perturbation_cells": 1e-07,
+      "physical_area_recomputed": false
+    },
+    "metrics": {
+      "faces": 256,
+      "used_vertices": 162,
+      "input_vertices": 162,
+      "mesh_area": 128.0,
+      "area_fraction": null,
+      "sampled_hole_intrusion_faces": 0,
+      "cross_stipulated_sheet_faces": 0
+    },
+    "seconds": 0.04535604105331004
+  },
+  {
+    "case": "near_sheets_separate_groups",
+    "method": "ball_single",
+    "construction": {
+      "method": "Open3D ball pivoting plus original-prototype geometric guards",
+      "open3d_version": "0.19.0",
+      "radius_factors": [
+        1.0
+      ],
+      "raw_faces": 255,
+      "faces": 255,
+      "rejected": {
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 416,
+        "boundary_edges": 67,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "vertices_moved": false
+    },
+    "metrics": {
+      "faces": 255,
+      "used_vertices": 162,
+      "input_vertices": 162,
+      "mesh_area": 127.5,
+      "area_fraction": null,
+      "sampled_hole_intrusion_faces": 0,
+      "cross_stipulated_sheet_faces": 0
+    },
+    "seconds": 0.027175292023457587
+  },
+  {
+    "case": "near_sheets_separate_groups",
+    "method": "ball_multi",
+    "construction": {
+      "method": "Open3D ball pivoting plus original-prototype geometric guards",
+      "open3d_version": "0.19.0",
+      "radius_factors": [
+        0.8,
+        1.0,
+        1.4
+      ],
+      "raw_faces": 251,
+      "faces": 251,
+      "rejected": {
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 416,
+        "boundary_edges": 79,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 1
+      },
+      "vertices_moved": false
+    },
+    "metrics": {
+      "faces": 251,
+      "used_vertices": 162,
+      "input_vertices": 162,
+      "mesh_area": 125.5,
+      "area_fraction": null,
+      "sampled_hole_intrusion_faces": 0,
+      "cross_stipulated_sheet_faces": 0
+    },
+    "seconds": 0.026675084023736417
+  },
+  {
+    "case": "near_sheets_same_group_counterexample",
+    "method": "local",
+    "construction": {
+      "input_samples": 162,
+      "retained_samples": 162,
+      "candidate_faces": 306,
+      "faces": 288,
+      "used_vertices": 162,
+      "qhull_failures": 0,
+      "projected_duplicate_neighborhoods": 0,
+      "rejected": {
+        "degenerate": 7,
+        "incomplete_three_vertex_agreement": 11,
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 449,
+        "boundary_edges": 34,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "max_edge_cells": 2.0,
+      "normal_angle": 45.0,
+      "tangent_angle": 20.0,
+      "face_angle": 30.0,
+      "min_angle": 12.0,
+      "vertices_moved": false,
+      "proposal_tie_perturbation_cells": 1e-07,
+      "physical_area_recomputed": false
+    },
+    "metrics": {
+      "faces": 288,
+      "used_vertices": 162,
+      "input_vertices": 162,
+      "mesh_area": 71.20986815861296,
+      "area_fraction": null,
+      "sampled_hole_intrusion_faces": 0,
+      "cross_stipulated_sheet_faces": 288
+    },
+    "seconds": 0.05650125001557171
+  },
+  {
+    "case": "near_sheets_same_group_counterexample",
+    "method": "ball_single",
+    "construction": {
+      "method": "Open3D ball pivoting plus original-prototype geometric guards",
+      "open3d_version": "0.19.0",
+      "radius_factors": [
+        1.0
+      ],
+      "raw_faces": 288,
+      "faces": 288,
+      "rejected": {
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 449,
+        "boundary_edges": 34,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "vertices_moved": false
+    },
+    "metrics": {
+      "faces": 288,
+      "used_vertices": 162,
+      "input_vertices": 162,
+      "mesh_area": 71.20986815861296,
+      "area_fraction": null,
+      "sampled_hole_intrusion_faces": 0,
+      "cross_stipulated_sheet_faces": 288
+    },
+    "seconds": 0.030700459028594196
+  },
+  {
+    "case": "near_sheets_same_group_counterexample",
+    "method": "ball_multi",
+    "construction": {
+      "method": "Open3D ball pivoting plus original-prototype geometric guards",
+      "open3d_version": "0.19.0",
+      "radius_factors": [
+        0.8,
+        1.0,
+        1.4
+      ],
+      "raw_faces": 288,
+      "faces": 288,
+      "rejected": {
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 449,
+        "boundary_edges": 34,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "vertices_moved": false
+    },
+    "metrics": {
+      "faces": 288,
+      "used_vertices": 162,
+      "input_vertices": 162,
+      "mesh_area": 71.20986815861296,
+      "area_fraction": null,
+      "sampled_hole_intrusion_faces": 0,
+      "cross_stipulated_sheet_faces": 288
+    },
+    "seconds": 0.030704166973009706
+  },
+  {
+    "case": "bubble_event0016",
+    "method": "local",
+    "construction": {
+      "input_samples": 25136,
+      "retained_samples": 25136,
+      "candidate_faces": 85928,
+      "faces": 32856,
+      "used_vertices": 23432,
+      "qhull_failures": 0,
+      "projected_duplicate_neighborhoods": 0,
+      "rejected": {
+        "incomplete_three_vertex_agreement": 52368,
+        "face_normal": 624,
+        "small_angle": 80,
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 58256,
+        "boundary_edges": 17944,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "max_edge_cells": 2.0,
+      "normal_angle": 45.0,
+      "tangent_angle": 20.0,
+      "face_angle": 30.0,
+      "min_angle": 12.0,
+      "vertices_moved": false,
+      "proposal_tie_perturbation_cells": 1e-07,
+      "physical_area_recomputed": false
+    }
+  },
+  {
+    "case": "bubble_event0016",
+    "method": "ball_single",
+    "construction": {
+      "method": "Open3D ball pivoting plus original-prototype geometric guards",
+      "open3d_version": "0.19.0",
+      "radius_factors": [
+        1.0
+      ],
+      "raw_faces": 49949,
+      "faces": 35408,
+      "rejected": {
+        "tangent": 13281,
+        "face_normal": 928,
+        "minimum_angle": 92,
+        "normal": 240,
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 61991,
+        "boundary_edges": 17758,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "vertices_moved": false
+    }
+  }
+]

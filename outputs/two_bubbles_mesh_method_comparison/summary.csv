@@ -1,0 +1,16 @@
+case,method,faces,used_vertices,input_vertices,mesh_area,area_fraction,sampled_hole_intrusion_faces,cross_stipulated_sheet_faces,edges,boundary_edges,nonmanifold_edges,inconsistent_shared_edge_winding
+sphere,local,3180,1600,1600,12.479029583437647,0.9930496215970486,0,0,4786,32,0,0
+sphere,ball_single,3196,1600,1600,12.541846246276634,0.9980484127967295,0,0,4794,0,0,0
+sphere,ball_multi,3196,1600,1600,12.541846246276634,0.9980484127967295,0,0,4794,0,0,0
+sphere_cap_hole,local,2489,1280,1280,9.767228376554694,0.9715641727725673,0,0,3775,83,0,0
+sphere_cap_hole,ball_single,2503,1280,1280,9.822183870778396,0.9770306968699175,0,0,3782,55,0,0
+sphere_cap_hole,ball_multi,2503,1280,1280,9.822183870778396,0.9770306968699175,0,0,3782,55,0,0
+planar_hole,local,444,264,264,222.0,,0,0,708,84,0,0
+planar_hole,ball_single,444,264,264,222.0,,0,0,708,84,0,0
+planar_hole,ball_multi,444,264,264,222.0,,0,0,708,84,0,0
+near_sheets_separate_groups,local,256,162,162,128.0,,0,0,416,64,0,0
+near_sheets_separate_groups,ball_single,255,162,162,127.5,,0,0,416,67,0,0
+near_sheets_separate_groups,ball_multi,251,162,162,125.5,,0,0,416,79,0,1
+near_sheets_same_group_counterexample,local,288,162,162,71.20986815861296,,0,288,449,34,0,0
+near_sheets_same_group_counterexample,ball_single,288,162,162,71.20986815861296,,0,288,449,34,0,0
+near_sheets_same_group_counterexample,ball_multi,288,162,162,71.20986815861296,,0,288,449,34,0,0

@@ -1,0 +1,26 @@
+{
+  "input_sha256": {
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0016.npz": "1951062f72db210a1e718fd91ae3569ddc4d6f571e33e3f0b91225d7fc34d7e8",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0016.npz": "40138fe16d367f532b6bea13a1e28c136c21c8477732b899ab3c6ff40cbbf7ae"
+  },
+  "input_hashes_unchanged": true,
+  "open3d": "0.19.0",
+  "runtime": {
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "matplotlib": "3.11.0",
+    "open3d": "0.19.0",
+    "dash": "2.18.2",
+    "plotly": "6.3.1",
+    "pandas": "2.3.3"
+  },
+  "source_sha256": {
+    "/Users/minhn/Documents/Heidelberg University/fifth_semester/Thesis/master_thesis/experiments/wind_bubble/compare_surface_meshes.py": "e67bc552577dc23a66e53c04201cec4edf22a3c995360c140037d9906e7f68f3",
+    "experiments/wind_bubble/ball_pivot_mesh.py": "7d043f64a271e9a63b4289a42197477048e237748a99ea8d2844f7c86c11ec15",
+    "experiments/wind_bubble/mesh_benchmark_cases.py": "123b741b03d3e0ddc3896ad68645c4bb858fc5a99562c8cfd2b61aa1e3e8eee6",
+    "experiments/wind_bubble/surface_mesh.py": "e391cd14eae9d058ff40f049bec4a2a720f189f14c80d9e2a65ad2f6d6f9040c"
+  },
+  "vertices_moved": false,
+  "physical_diagnostics_changed": false,
+  "physical_identities_assigned": false
+}

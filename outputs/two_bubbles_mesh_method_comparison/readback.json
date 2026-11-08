@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "controlled_meshes_checked": 15,
+  "bubble_meshes_checked": 2,
+  "original_bubble_vertices_preserved": true,
+  "chosen_from_controls": "ball_single",
+  "global_self_intersections_checked": false,
+  "physical_topology_validated": false
+}

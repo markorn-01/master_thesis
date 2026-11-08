@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "meshes": [
+    {
+      "file": "mesh_edge_1p5.npz",
+      "faces": 29912,
+      "vertices_unchanged": true,
+      "cross_group_faces": 0,
+      "maximum_edge_cells": 1.4997845365225995,
+      "minimum_triangle_angle": 13.595430164358103,
+      "boundary_edges": 20328,
+      "nonmanifold_edges": 0
+    },
+    {
+      "file": "mesh_edge_2p0.npz",
+      "faces": 32856,
+      "vertices_unchanged": true,
+      "cross_group_faces": 0,
+      "maximum_edge_cells": 1.7410963680750926,
+      "minimum_triangle_angle": 13.595430164358103,
+      "boundary_edges": 17944,
+      "nonmanifold_edges": 0
+    }
+  ],
+  "ply_vertices_and_faces_match": true,
+  "known_same_group_parallel_sheet_bridging_preserved": true,
+  "global_self_intersections_checked": false,
+  "physical_surface_topology_validated": false,
+  "physical_diagnostics_changed": false
+}

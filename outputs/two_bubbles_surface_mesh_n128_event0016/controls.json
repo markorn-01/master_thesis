@@ -1,0 +1,172 @@
+[
+  {
+    "case": "planar_grid",
+    "faces": 72,
+    "cross_stipulated_sheet_faces": 0,
+    "report": {
+      "input_samples": 49,
+      "retained_samples": 49,
+      "candidate_faces": 90,
+      "faces": 72,
+      "used_vertices": 49,
+      "qhull_failures": 0,
+      "projected_duplicate_neighborhoods": 0,
+      "rejected": {
+        "degenerate": 4,
+        "incomplete_three_vertex_agreement": 14,
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 120,
+        "boundary_edges": 24,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "max_edge_cells": 2.0,
+      "normal_angle": 45.0,
+      "tangent_angle": 20.0,
+      "face_angle": 30.0,
+      "min_angle": 12.0,
+      "vertices_moved": false,
+      "proposal_tie_perturbation_cells": 1e-07,
+      "physical_area_recomputed": false
+    },
+    "expected_limitation": null
+  },
+  {
+    "case": "wide_gap_same_group",
+    "faces": 24,
+    "cross_stipulated_sheet_faces": 0,
+    "report": {
+      "input_samples": 28,
+      "retained_samples": 28,
+      "candidate_faces": 38,
+      "faces": 24,
+      "used_vertices": 28,
+      "qhull_failures": 0,
+      "projected_duplicate_neighborhoods": 0,
+      "rejected": {
+        "degenerate": 8,
+        "incomplete_three_vertex_agreement": 6,
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 50,
+        "boundary_edges": 28,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "max_edge_cells": 2.0,
+      "normal_angle": 45.0,
+      "tangent_angle": 20.0,
+      "face_angle": 30.0,
+      "min_angle": 12.0,
+      "vertices_moved": false,
+      "proposal_tie_perturbation_cells": 1e-07,
+      "physical_area_recomputed": false
+    },
+    "expected_limitation": null
+  },
+  {
+    "case": "near_sheets_separate_groups",
+    "faces": 144,
+    "cross_stipulated_sheet_faces": 0,
+    "report": {
+      "input_samples": 98,
+      "retained_samples": 98,
+      "candidate_faces": 173,
+      "faces": 144,
+      "used_vertices": 98,
+      "qhull_failures": 0,
+      "projected_duplicate_neighborhoods": 0,
+      "rejected": {
+        "degenerate": 8,
+        "incomplete_three_vertex_agreement": 21,
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 240,
+        "boundary_edges": 48,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "max_edge_cells": 2.0,
+      "normal_angle": 45.0,
+      "tangent_angle": 20.0,
+      "face_angle": 30.0,
+      "min_angle": 12.0,
+      "vertices_moved": false,
+      "proposal_tie_perturbation_cells": 1e-07,
+      "physical_area_recomputed": false
+    },
+    "expected_limitation": null
+  },
+  {
+    "case": "near_sheets_same_group_counterexample",
+    "faces": 168,
+    "cross_stipulated_sheet_faces": 168,
+    "report": {
+      "input_samples": 98,
+      "retained_samples": 98,
+      "candidate_faces": 183,
+      "faces": 168,
+      "used_vertices": 98,
+      "qhull_failures": 0,
+      "projected_duplicate_neighborhoods": 0,
+      "rejected": {
+        "degenerate": 4,
+        "incomplete_three_vertex_agreement": 11,
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 265,
+        "boundary_edges": 26,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "max_edge_cells": 2.0,
+      "normal_angle": 45.0,
+      "tangent_angle": 20.0,
+      "face_angle": 30.0,
+      "min_angle": 12.0,
+      "vertices_moved": false,
+      "proposal_tie_perturbation_cells": 1e-07,
+      "physical_area_recomputed": false
+    },
+    "expected_limitation": "Aligned close sheets in one group may be bridged."
+  },
+  {
+    "case": "opposite_normals_same_group",
+    "faces": 144,
+    "cross_stipulated_sheet_faces": 0,
+    "report": {
+      "input_samples": 98,
+      "retained_samples": 98,
+      "candidate_faces": 173,
+      "faces": 144,
+      "used_vertices": 98,
+      "qhull_failures": 0,
+      "projected_duplicate_neighborhoods": 0,
+      "rejected": {
+        "degenerate": 8,
+        "incomplete_three_vertex_agreement": 21,
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 240,
+        "boundary_edges": 48,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "max_edge_cells": 2.0,
+      "normal_angle": 45.0,
+      "tangent_angle": 20.0,
+      "face_angle": 30.0,
+      "min_angle": 12.0,
+      "vertices_moved": false,
+      "proposal_tie_perturbation_cells": 1e-07,
+      "physical_area_recomputed": false
+    },
+    "expected_limitation": null
+  }
+]

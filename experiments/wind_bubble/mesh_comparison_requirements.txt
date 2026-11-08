@@ -1,0 +1,2 @@
+# Optional reconstruction comparison; install in a separate Python environment.
+open3d==0.19.0
