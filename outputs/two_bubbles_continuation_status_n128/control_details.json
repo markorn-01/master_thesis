@@ -1,0 +1,2022 @@
+[
+  {
+    "case": "translation_within_gate",
+    "gate": 0.1,
+    "table": {
+      "parents": [
+        {
+          "parent_group": 0,
+          "best_child_group": 10,
+          "selected_child_group": 10,
+          "matcher_parent_status": "eligible",
+          "matcher_accepted": true,
+          "advisory_status": "continuation_candidate",
+          "parent_coverage": 1.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 1,
+          "exclusive_child_support_samples": 16,
+          "redundant_support": false,
+          "physical_identity_established": false
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "advisory_status": "continuation_candidate",
+          "matcher_accepted": true,
+          "accepted_parent_groups": [
+            0
+          ],
+          "union_child_coverage": 1.0,
+          "physical_identity_established": false
+        }
+      ]
+    },
+    "distance_sensitivity": {
+      "0": false
+    },
+    "truth_comparison": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    }
+  },
+  {
+    "case": "translation_within_gate",
+    "gate": 0.2,
+    "table": {
+      "parents": [
+        {
+          "parent_group": 0,
+          "best_child_group": 10,
+          "selected_child_group": 10,
+          "matcher_parent_status": "eligible",
+          "matcher_accepted": true,
+          "advisory_status": "continuation_candidate",
+          "parent_coverage": 1.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 1,
+          "exclusive_child_support_samples": 16,
+          "redundant_support": false,
+          "physical_identity_established": false
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "advisory_status": "continuation_candidate",
+          "matcher_accepted": true,
+          "accepted_parent_groups": [
+            0
+          ],
+          "union_child_coverage": 1.0,
+          "physical_identity_established": false
+        }
+      ]
+    },
+    "distance_sensitivity": {
+      "0": false
+    },
+    "truth_comparison": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    }
+  },
+  {
+    "case": "translation_within_gate",
+    "gate": 0.35,
+    "table": {
+      "parents": [
+        {
+          "parent_group": 0,
+          "best_child_group": 10,
+          "selected_child_group": 10,
+          "matcher_parent_status": "eligible",
+          "matcher_accepted": true,
+          "advisory_status": "continuation_candidate",
+          "parent_coverage": 1.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 1,
+          "exclusive_child_support_samples": 16,
+          "redundant_support": false,
+          "physical_identity_established": false
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "advisory_status": "continuation_candidate",
+          "matcher_accepted": true,
+          "accepted_parent_groups": [
+            0
+          ],
+          "union_child_coverage": 1.0,
+          "physical_identity_established": false
+        }
+      ]
+    },
+    "distance_sensitivity": {
+      "0": false
+    },
+    "truth_comparison": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    }
+  },
+  {
+    "case": "translation_beyond_gate",
+    "gate": 0.1,
+    "table": {
+      "parents": [
+        {
+          "parent_group": 0,
+          "best_child_group": 10,
+          "selected_child_group": null,
+          "matcher_parent_status": "insufficient_parent_support",
+          "matcher_accepted": false,
+          "advisory_status": "unmatched",
+          "parent_coverage": 0.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 0,
+          "exclusive_child_support_samples": null,
+          "redundant_support": false,
+          "physical_identity_established": false
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "advisory_status": "unmatched",
+          "matcher_accepted": false,
+          "accepted_parent_groups": [],
+          "union_child_coverage": 0.0,
+          "physical_identity_established": false
+        }
+      ]
+    },
+    "distance_sensitivity": {
+      "0": true
+    },
+    "truth_comparison": {
+      "accepted_links": [],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "exact_correspondence": false
+    }
+  },
+  {
+    "case": "translation_beyond_gate",
+    "gate": 0.2,
+    "table": {
+      "parents": [
+        {
+          "parent_group": 0,
+          "best_child_group": 10,
+          "selected_child_group": null,
+          "matcher_parent_status": "insufficient_parent_support",
+          "matcher_accepted": false,
+          "advisory_status": "unmatched",
+          "parent_coverage": 0.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 0,
+          "exclusive_child_support_samples": null,
+          "redundant_support": false,
+          "physical_identity_established": false
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "advisory_status": "unmatched",
+          "matcher_accepted": false,
+          "accepted_parent_groups": [],
+          "union_child_coverage": 0.0,
+          "physical_identity_established": false
+        }
+      ]
+    },
+    "distance_sensitivity": {
+      "0": true
+    },
+    "truth_comparison": {
+      "accepted_links": [],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "exact_correspondence": false
+    }
+  },
+  {
+    "case": "translation_beyond_gate",
+    "gate": 0.35,
+    "table": {
+      "parents": [
+        {
+          "parent_group": 0,
+          "best_child_group": 10,
+          "selected_child_group": 10,
+          "matcher_parent_status": "eligible",
+          "matcher_accepted": true,
+          "advisory_status": "continuation_candidate",
+          "parent_coverage": 1.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 1,
+          "exclusive_child_support_samples": 16,
+          "redundant_support": false,
+          "physical_identity_established": false
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "advisory_status": "continuation_candidate",
+          "matcher_accepted": true,
+          "accepted_parent_groups": [
+            0
+          ],
+          "union_child_coverage": 1.0,
+          "physical_identity_established": false
+        }
+      ]
+    },
+    "distance_sensitivity": {
+      "0": true
+    },
+    "truth_comparison": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    }
+  },
+  {
+    "case": "fresh_sampling",
+    "gate": 0.1,
+    "table": {
+      "parents": [
+        {
+          "parent_group": 0,
+          "best_child_group": 10,
+          "selected_child_group": 10,
+          "matcher_parent_status": "eligible",
+          "matcher_accepted": true,
+          "advisory_status": "continuation_candidate",
+          "parent_coverage": 1.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 1,
+          "exclusive_child_support_samples": 16,
+          "redundant_support": false,
+          "physical_identity_established": false
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "advisory_status": "continuation_candidate",
+          "matcher_accepted": true,
+          "accepted_parent_groups": [
+            0
+          ],
+          "union_child_coverage": 1.0,
+          "physical_identity_established": false
+        }
+      ]
+    },
+    "distance_sensitivity": {
+      "0": false
+    },
+    "truth_comparison": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    }
+  },
+  {
+    "case": "fresh_sampling",
+    "gate": 0.2,
+    "table": {
+      "parents": [
+        {
+          "parent_group": 0,
+          "best_child_group": 10,
+          "selected_child_group": 10,
+          "matcher_parent_status": "eligible",
+          "matcher_accepted": true,
+          "advisory_status": "continuation_candidate",
+          "parent_coverage": 1.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 1,
+          "exclusive_child_support_samples": 16,
+          "redundant_support": false,
+          "physical_identity_established": false
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "advisory_status": "continuation_candidate",
+          "matcher_accepted": true,
+          "accepted_parent_groups": [
+            0
+          ],
+          "union_child_coverage": 1.0,
+          "physical_identity_established": false
+        }
+      ]
+    },
+    "distance_sensitivity": {
+      "0": false
+    },
+    "truth_comparison": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    }
+  },
+  {
+    "case": "fresh_sampling",
+    "gate": 0.35,
+    "table": {
+      "parents": [
+        {
+          "parent_group": 0,
+          "best_child_group": 10,
+          "selected_child_group": 10,
+          "matcher_parent_status": "eligible",
+          "matcher_accepted": true,
+          "advisory_status": "continuation_candidate",
+          "parent_coverage": 1.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 1,
+          "exclusive_child_support_samples": 16,
+          "redundant_support": false,
+          "physical_identity_established": false
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "advisory_status": "continuation_candidate",
+          "matcher_accepted": true,
+          "accepted_parent_groups": [
+            0
+          ],
+          "union_child_coverage": 1.0,
+          "physical_identity_established": false
+        }
+      ]
+    },
+    "distance_sensitivity": {
+      "0": false
+    },
+    "truth_comparison": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    }
+  },
+  {
+    "case": "approaching_aligned_sheets",
+    "gate": 0.1,
+    "table": {
+      "parents": [
+        {
+          "parent_group": 0,
+          "best_child_group": 10,
+          "selected_child_group": null,
+          "matcher_parent_status": "insufficient_parent_support",
+          "matcher_accepted": false,
+          "advisory_status": "unmatched",
+          "parent_coverage": 0.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 0,
+          "exclusive_child_support_samples": null,
+          "redundant_support": false,
+          "physical_identity_established": false
+        },
+        {
+          "parent_group": 1,
+          "best_child_group": 10,
+          "selected_child_group": null,
+          "matcher_parent_status": "insufficient_parent_support",
+          "matcher_accepted": false,
+          "advisory_status": "unmatched",
+          "parent_coverage": 0.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 0,
+          "exclusive_child_support_samples": null,
+          "redundant_support": false,
+          "physical_identity_established": false
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "advisory_status": "unmatched",
+          "matcher_accepted": false,
+          "accepted_parent_groups": [],
+          "union_child_coverage": 0.0,
+          "physical_identity_established": false
+        },
+        {
+          "child_group": 11,
+          "advisory_status": "unmatched",
+          "matcher_accepted": false,
+          "accepted_parent_groups": [],
+          "union_child_coverage": 0.0,
+          "physical_identity_established": false
+        }
+      ]
+    },
+    "distance_sensitivity": {
+      "0": true,
+      "1": true
+    },
+    "truth_comparison": {
+      "accepted_links": [],
+      "expected_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          11
+        ]
+      ],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          11
+        ]
+      ],
+      "exact_correspondence": false
+    }
+  },
+  {
+    "case": "approaching_aligned_sheets",
+    "gate": 0.2,
+    "table": {
+      "parents": [
+        {
+          "parent_group": 0,
+          "best_child_group": 10,
+          "selected_child_group": 10,
+          "matcher_parent_status": "eligible",
+          "matcher_accepted": true,
+          "advisory_status": "continuation_candidate",
+          "parent_coverage": 1.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 1,
+          "exclusive_child_support_samples": 16,
+          "redundant_support": false,
+          "physical_identity_established": false
+        },
+        {
+          "parent_group": 1,
+          "best_child_group": 11,
+          "selected_child_group": 11,
+          "matcher_parent_status": "eligible",
+          "matcher_accepted": true,
+          "advisory_status": "continuation_candidate",
+          "parent_coverage": 1.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 1,
+          "exclusive_child_support_samples": 16,
+          "redundant_support": false,
+          "physical_identity_established": false
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "advisory_status": "continuation_candidate",
+          "matcher_accepted": true,
+          "accepted_parent_groups": [
+            0
+          ],
+          "union_child_coverage": 1.0,
+          "physical_identity_established": false
+        },
+        {
+          "child_group": 11,
+          "advisory_status": "continuation_candidate",
+          "matcher_accepted": true,
+          "accepted_parent_groups": [
+            1
+          ],
+          "union_child_coverage": 1.0,
+          "physical_identity_established": false
+        }
+      ]
+    },
+    "distance_sensitivity": {
+      "0": true,
+      "1": true
+    },
+    "truth_comparison": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          11
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          11
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          11
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    }
+  },
+  {
+    "case": "approaching_aligned_sheets",
+    "gate": 0.35,
+    "table": {
+      "parents": [
+        {
+          "parent_group": 0,
+          "best_child_group": 10,
+          "selected_child_group": null,
+          "matcher_parent_status": "ambiguous_target",
+          "matcher_accepted": false,
+          "advisory_status": "ambiguous",
+          "parent_coverage": 1.0,
+          "runner_up_parent_coverage": 1.0,
+          "eligible_parents_of_target": 0,
+          "exclusive_child_support_samples": null,
+          "redundant_support": false,
+          "physical_identity_established": false
+        },
+        {
+          "parent_group": 1,
+          "best_child_group": 10,
+          "selected_child_group": null,
+          "matcher_parent_status": "ambiguous_target",
+          "matcher_accepted": false,
+          "advisory_status": "ambiguous",
+          "parent_coverage": 1.0,
+          "runner_up_parent_coverage": 1.0,
+          "eligible_parents_of_target": 0,
+          "exclusive_child_support_samples": null,
+          "redundant_support": false,
+          "physical_identity_established": false
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "advisory_status": "unmatched",
+          "matcher_accepted": false,
+          "accepted_parent_groups": [],
+          "union_child_coverage": 0.0,
+          "physical_identity_established": false
+        },
+        {
+          "child_group": 11,
+          "advisory_status": "unmatched",
+          "matcher_accepted": false,
+          "accepted_parent_groups": [],
+          "union_child_coverage": 0.0,
+          "physical_identity_established": false
+        }
+      ]
+    },
+    "distance_sensitivity": {
+      "0": true,
+      "1": true
+    },
+    "truth_comparison": {
+      "accepted_links": [],
+      "expected_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          11
+        ]
+      ],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          11
+        ]
+      ],
+      "exact_correspondence": false
+    }
+  },
+  {
+    "case": "approaching_opposite_normals",
+    "gate": 0.1,
+    "table": {
+      "parents": [
+        {
+          "parent_group": 0,
+          "best_child_group": 10,
+          "selected_child_group": null,
+          "matcher_parent_status": "insufficient_parent_support",
+          "matcher_accepted": false,
+          "advisory_status": "unmatched",
+          "parent_coverage": 0.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 0,
+          "exclusive_child_support_samples": null,
+          "redundant_support": false,
+          "physical_identity_established": false
+        },
+        {
+          "parent_group": 1,
+          "best_child_group": 10,
+          "selected_child_group": null,
+          "matcher_parent_status": "insufficient_parent_support",
+          "matcher_accepted": false,
+          "advisory_status": "unmatched",
+          "parent_coverage": 0.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 0,
+          "exclusive_child_support_samples": null,
+          "redundant_support": false,
+          "physical_identity_established": false
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "advisory_status": "unmatched",
+          "matcher_accepted": false,
+          "accepted_parent_groups": [],
+          "union_child_coverage": 0.0,
+          "physical_identity_established": false
+        },
+        {
+          "child_group": 11,
+          "advisory_status": "unmatched",
+          "matcher_accepted": false,
+          "accepted_parent_groups": [],
+          "union_child_coverage": 0.0,
+          "physical_identity_established": false
+        }
+      ]
+    },
+    "distance_sensitivity": {
+      "0": true,
+      "1": true
+    },
+    "truth_comparison": {
+      "accepted_links": [],
+      "expected_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          11
+        ]
+      ],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          11
+        ]
+      ],
+      "exact_correspondence": false
+    }
+  },
+  {
+    "case": "approaching_opposite_normals",
+    "gate": 0.2,
+    "table": {
+      "parents": [
+        {
+          "parent_group": 0,
+          "best_child_group": 10,
+          "selected_child_group": 10,
+          "matcher_parent_status": "eligible",
+          "matcher_accepted": true,
+          "advisory_status": "continuation_candidate",
+          "parent_coverage": 1.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 1,
+          "exclusive_child_support_samples": 16,
+          "redundant_support": false,
+          "physical_identity_established": false
+        },
+        {
+          "parent_group": 1,
+          "best_child_group": 11,
+          "selected_child_group": 11,
+          "matcher_parent_status": "eligible",
+          "matcher_accepted": true,
+          "advisory_status": "continuation_candidate",
+          "parent_coverage": 1.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 1,
+          "exclusive_child_support_samples": 16,
+          "redundant_support": false,
+          "physical_identity_established": false
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "advisory_status": "continuation_candidate",
+          "matcher_accepted": true,
+          "accepted_parent_groups": [
+            0
+          ],
+          "union_child_coverage": 1.0,
+          "physical_identity_established": false
+        },
+        {
+          "child_group": 11,
+          "advisory_status": "continuation_candidate",
+          "matcher_accepted": true,
+          "accepted_parent_groups": [
+            1
+          ],
+          "union_child_coverage": 1.0,
+          "physical_identity_established": false
+        }
+      ]
+    },
+    "distance_sensitivity": {
+      "0": true,
+      "1": true
+    },
+    "truth_comparison": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          11
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          11
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          11
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    }
+  },
+  {
+    "case": "approaching_opposite_normals",
+    "gate": 0.35,
+    "table": {
+      "parents": [
+        {
+          "parent_group": 0,
+          "best_child_group": 10,
+          "selected_child_group": 10,
+          "matcher_parent_status": "eligible",
+          "matcher_accepted": true,
+          "advisory_status": "continuation_candidate",
+          "parent_coverage": 1.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 1,
+          "exclusive_child_support_samples": 16,
+          "redundant_support": false,
+          "physical_identity_established": false
+        },
+        {
+          "parent_group": 1,
+          "best_child_group": 11,
+          "selected_child_group": 11,
+          "matcher_parent_status": "eligible",
+          "matcher_accepted": true,
+          "advisory_status": "continuation_candidate",
+          "parent_coverage": 1.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 1,
+          "exclusive_child_support_samples": 16,
+          "redundant_support": false,
+          "physical_identity_established": false
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "advisory_status": "continuation_candidate",
+          "matcher_accepted": true,
+          "accepted_parent_groups": [
+            0
+          ],
+          "union_child_coverage": 1.0,
+          "physical_identity_established": false
+        },
+        {
+          "child_group": 11,
+          "advisory_status": "continuation_candidate",
+          "matcher_accepted": true,
+          "accepted_parent_groups": [
+            1
+          ],
+          "union_child_coverage": 1.0,
+          "physical_identity_established": false
+        }
+      ]
+    },
+    "distance_sensitivity": {
+      "0": true,
+      "1": true
+    },
+    "truth_comparison": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          11
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          11
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          11
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    }
+  },
+  {
+    "case": "one_group_splits_into_two",
+    "gate": 0.1,
+    "table": {
+      "parents": [
+        {
+          "parent_group": 0,
+          "best_child_group": 10,
+          "selected_child_group": null,
+          "matcher_parent_status": "ambiguous_target",
+          "matcher_accepted": false,
+          "advisory_status": "ambiguous",
+          "parent_coverage": 0.5,
+          "runner_up_parent_coverage": 0.5,
+          "eligible_parents_of_target": 0,
+          "exclusive_child_support_samples": null,
+          "redundant_support": false,
+          "physical_identity_established": false
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "advisory_status": "unmatched",
+          "matcher_accepted": false,
+          "accepted_parent_groups": [],
+          "union_child_coverage": 0.0,
+          "physical_identity_established": false
+        },
+        {
+          "child_group": 11,
+          "advisory_status": "unmatched",
+          "matcher_accepted": false,
+          "accepted_parent_groups": [],
+          "union_child_coverage": 0.0,
+          "physical_identity_established": false
+        }
+      ]
+    },
+    "distance_sensitivity": {
+      "0": false
+    },
+    "truth_comparison": {
+      "accepted_links": [],
+      "expected_links": [
+        [
+          0,
+          10
+        ],
+        [
+          0,
+          11
+        ]
+      ],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [
+        [
+          0,
+          10
+        ],
+        [
+          0,
+          11
+        ]
+      ],
+      "exact_correspondence": false
+    }
+  },
+  {
+    "case": "one_group_splits_into_two",
+    "gate": 0.2,
+    "table": {
+      "parents": [
+        {
+          "parent_group": 0,
+          "best_child_group": 10,
+          "selected_child_group": null,
+          "matcher_parent_status": "ambiguous_target",
+          "matcher_accepted": false,
+          "advisory_status": "ambiguous",
+          "parent_coverage": 0.5,
+          "runner_up_parent_coverage": 0.5,
+          "eligible_parents_of_target": 0,
+          "exclusive_child_support_samples": null,
+          "redundant_support": false,
+          "physical_identity_established": false
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "advisory_status": "unmatched",
+          "matcher_accepted": false,
+          "accepted_parent_groups": [],
+          "union_child_coverage": 0.0,
+          "physical_identity_established": false
+        },
+        {
+          "child_group": 11,
+          "advisory_status": "unmatched",
+          "matcher_accepted": false,
+          "accepted_parent_groups": [],
+          "union_child_coverage": 0.0,
+          "physical_identity_established": false
+        }
+      ]
+    },
+    "distance_sensitivity": {
+      "0": false
+    },
+    "truth_comparison": {
+      "accepted_links": [],
+      "expected_links": [
+        [
+          0,
+          10
+        ],
+        [
+          0,
+          11
+        ]
+      ],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [
+        [
+          0,
+          10
+        ],
+        [
+          0,
+          11
+        ]
+      ],
+      "exact_correspondence": false
+    }
+  },
+  {
+    "case": "one_group_splits_into_two",
+    "gate": 0.35,
+    "table": {
+      "parents": [
+        {
+          "parent_group": 0,
+          "best_child_group": 10,
+          "selected_child_group": null,
+          "matcher_parent_status": "ambiguous_target",
+          "matcher_accepted": false,
+          "advisory_status": "ambiguous",
+          "parent_coverage": 0.5,
+          "runner_up_parent_coverage": 0.5,
+          "eligible_parents_of_target": 0,
+          "exclusive_child_support_samples": null,
+          "redundant_support": false,
+          "physical_identity_established": false
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "advisory_status": "unmatched",
+          "matcher_accepted": false,
+          "accepted_parent_groups": [],
+          "union_child_coverage": 0.0,
+          "physical_identity_established": false
+        },
+        {
+          "child_group": 11,
+          "advisory_status": "unmatched",
+          "matcher_accepted": false,
+          "accepted_parent_groups": [],
+          "union_child_coverage": 0.0,
+          "physical_identity_established": false
+        }
+      ]
+    },
+    "distance_sensitivity": {
+      "0": false
+    },
+    "truth_comparison": {
+      "accepted_links": [],
+      "expected_links": [
+        [
+          0,
+          10
+        ],
+        [
+          0,
+          11
+        ]
+      ],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [
+        [
+          0,
+          10
+        ],
+        [
+          0,
+          11
+        ]
+      ],
+      "exact_correspondence": false
+    }
+  },
+  {
+    "case": "two_fragments_form_one_group",
+    "gate": 0.1,
+    "table": {
+      "parents": [
+        {
+          "parent_group": 0,
+          "best_child_group": 10,
+          "selected_child_group": 10,
+          "matcher_parent_status": "eligible",
+          "matcher_accepted": true,
+          "advisory_status": "multiple_parent_support",
+          "parent_coverage": 1.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 2,
+          "exclusive_child_support_samples": 8,
+          "redundant_support": false,
+          "physical_identity_established": false
+        },
+        {
+          "parent_group": 1,
+          "best_child_group": 10,
+          "selected_child_group": 10,
+          "matcher_parent_status": "eligible",
+          "matcher_accepted": true,
+          "advisory_status": "multiple_parent_support",
+          "parent_coverage": 1.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 2,
+          "exclusive_child_support_samples": 8,
+          "redundant_support": false,
+          "physical_identity_established": false
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "advisory_status": "multiple_parent_support",
+          "matcher_accepted": true,
+          "accepted_parent_groups": [
+            0,
+            1
+          ],
+          "union_child_coverage": 1.0,
+          "physical_identity_established": false
+        }
+      ]
+    },
+    "distance_sensitivity": {
+      "0": false,
+      "1": false
+    },
+    "truth_comparison": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    }
+  },
+  {
+    "case": "two_fragments_form_one_group",
+    "gate": 0.2,
+    "table": {
+      "parents": [
+        {
+          "parent_group": 0,
+          "best_child_group": 10,
+          "selected_child_group": 10,
+          "matcher_parent_status": "eligible",
+          "matcher_accepted": true,
+          "advisory_status": "multiple_parent_support",
+          "parent_coverage": 1.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 2,
+          "exclusive_child_support_samples": 8,
+          "redundant_support": false,
+          "physical_identity_established": false
+        },
+        {
+          "parent_group": 1,
+          "best_child_group": 10,
+          "selected_child_group": 10,
+          "matcher_parent_status": "eligible",
+          "matcher_accepted": true,
+          "advisory_status": "multiple_parent_support",
+          "parent_coverage": 1.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 2,
+          "exclusive_child_support_samples": 8,
+          "redundant_support": false,
+          "physical_identity_established": false
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "advisory_status": "multiple_parent_support",
+          "matcher_accepted": true,
+          "accepted_parent_groups": [
+            0,
+            1
+          ],
+          "union_child_coverage": 1.0,
+          "physical_identity_established": false
+        }
+      ]
+    },
+    "distance_sensitivity": {
+      "0": false,
+      "1": false
+    },
+    "truth_comparison": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    }
+  },
+  {
+    "case": "two_fragments_form_one_group",
+    "gate": 0.35,
+    "table": {
+      "parents": [
+        {
+          "parent_group": 0,
+          "best_child_group": 10,
+          "selected_child_group": 10,
+          "matcher_parent_status": "eligible",
+          "matcher_accepted": true,
+          "advisory_status": "multiple_parent_support",
+          "parent_coverage": 1.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 2,
+          "exclusive_child_support_samples": 8,
+          "redundant_support": false,
+          "physical_identity_established": false
+        },
+        {
+          "parent_group": 1,
+          "best_child_group": 10,
+          "selected_child_group": 10,
+          "matcher_parent_status": "eligible",
+          "matcher_accepted": true,
+          "advisory_status": "multiple_parent_support",
+          "parent_coverage": 1.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 2,
+          "exclusive_child_support_samples": 8,
+          "redundant_support": false,
+          "physical_identity_established": false
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "advisory_status": "multiple_parent_support",
+          "matcher_accepted": true,
+          "accepted_parent_groups": [
+            0,
+            1
+          ],
+          "union_child_coverage": 1.0,
+          "physical_identity_established": false
+        }
+      ]
+    },
+    "distance_sensitivity": {
+      "0": false,
+      "1": false
+    },
+    "truth_comparison": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    }
+  },
+  {
+    "case": "nearby_sheet_disappears",
+    "gate": 0.1,
+    "table": {
+      "parents": [
+        {
+          "parent_group": 0,
+          "best_child_group": 10,
+          "selected_child_group": 10,
+          "matcher_parent_status": "eligible",
+          "matcher_accepted": true,
+          "advisory_status": "multiple_parent_support",
+          "parent_coverage": 1.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 2,
+          "exclusive_child_support_samples": 0,
+          "redundant_support": true,
+          "physical_identity_established": false
+        },
+        {
+          "parent_group": 1,
+          "best_child_group": 10,
+          "selected_child_group": 10,
+          "matcher_parent_status": "eligible",
+          "matcher_accepted": true,
+          "advisory_status": "multiple_parent_support",
+          "parent_coverage": 1.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 2,
+          "exclusive_child_support_samples": 0,
+          "redundant_support": true,
+          "physical_identity_established": false
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "advisory_status": "multiple_parent_support",
+          "matcher_accepted": true,
+          "accepted_parent_groups": [
+            0,
+            1
+          ],
+          "union_child_coverage": 1.0,
+          "physical_identity_established": false
+        }
+      ]
+    },
+    "distance_sensitivity": {
+      "0": false,
+      "1": false
+    },
+    "truth_comparison": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "false_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "missed_links": [],
+      "exact_correspondence": false
+    }
+  },
+  {
+    "case": "nearby_sheet_disappears",
+    "gate": 0.2,
+    "table": {
+      "parents": [
+        {
+          "parent_group": 0,
+          "best_child_group": 10,
+          "selected_child_group": 10,
+          "matcher_parent_status": "eligible",
+          "matcher_accepted": true,
+          "advisory_status": "multiple_parent_support",
+          "parent_coverage": 1.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 2,
+          "exclusive_child_support_samples": 0,
+          "redundant_support": true,
+          "physical_identity_established": false
+        },
+        {
+          "parent_group": 1,
+          "best_child_group": 10,
+          "selected_child_group": 10,
+          "matcher_parent_status": "eligible",
+          "matcher_accepted": true,
+          "advisory_status": "multiple_parent_support",
+          "parent_coverage": 1.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 2,
+          "exclusive_child_support_samples": 0,
+          "redundant_support": true,
+          "physical_identity_established": false
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "advisory_status": "multiple_parent_support",
+          "matcher_accepted": true,
+          "accepted_parent_groups": [
+            0,
+            1
+          ],
+          "union_child_coverage": 1.0,
+          "physical_identity_established": false
+        }
+      ]
+    },
+    "distance_sensitivity": {
+      "0": false,
+      "1": false
+    },
+    "truth_comparison": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "false_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "missed_links": [],
+      "exact_correspondence": false
+    }
+  },
+  {
+    "case": "nearby_sheet_disappears",
+    "gate": 0.35,
+    "table": {
+      "parents": [
+        {
+          "parent_group": 0,
+          "best_child_group": 10,
+          "selected_child_group": 10,
+          "matcher_parent_status": "eligible",
+          "matcher_accepted": true,
+          "advisory_status": "multiple_parent_support",
+          "parent_coverage": 1.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 2,
+          "exclusive_child_support_samples": 0,
+          "redundant_support": true,
+          "physical_identity_established": false
+        },
+        {
+          "parent_group": 1,
+          "best_child_group": 10,
+          "selected_child_group": 10,
+          "matcher_parent_status": "eligible",
+          "matcher_accepted": true,
+          "advisory_status": "multiple_parent_support",
+          "parent_coverage": 1.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 2,
+          "exclusive_child_support_samples": 0,
+          "redundant_support": true,
+          "physical_identity_established": false
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "advisory_status": "multiple_parent_support",
+          "matcher_accepted": true,
+          "accepted_parent_groups": [
+            0,
+            1
+          ],
+          "union_child_coverage": 1.0,
+          "physical_identity_established": false
+        }
+      ]
+    },
+    "distance_sensitivity": {
+      "0": false,
+      "1": false
+    },
+    "truth_comparison": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "false_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "missed_links": [],
+      "exact_correspondence": false
+    }
+  },
+  {
+    "case": "distant_sheet_disappears",
+    "gate": 0.1,
+    "table": {
+      "parents": [
+        {
+          "parent_group": 0,
+          "best_child_group": 10,
+          "selected_child_group": 10,
+          "matcher_parent_status": "eligible",
+          "matcher_accepted": true,
+          "advisory_status": "continuation_candidate",
+          "parent_coverage": 1.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 1,
+          "exclusive_child_support_samples": 16,
+          "redundant_support": false,
+          "physical_identity_established": false
+        },
+        {
+          "parent_group": 1,
+          "best_child_group": 10,
+          "selected_child_group": null,
+          "matcher_parent_status": "insufficient_parent_support",
+          "matcher_accepted": false,
+          "advisory_status": "unmatched",
+          "parent_coverage": 0.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 0,
+          "exclusive_child_support_samples": null,
+          "redundant_support": false,
+          "physical_identity_established": false
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "advisory_status": "continuation_candidate",
+          "matcher_accepted": true,
+          "accepted_parent_groups": [
+            0
+          ],
+          "union_child_coverage": 1.0,
+          "physical_identity_established": false
+        }
+      ]
+    },
+    "distance_sensitivity": {
+      "0": false,
+      "1": false
+    },
+    "truth_comparison": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    }
+  },
+  {
+    "case": "distant_sheet_disappears",
+    "gate": 0.2,
+    "table": {
+      "parents": [
+        {
+          "parent_group": 0,
+          "best_child_group": 10,
+          "selected_child_group": 10,
+          "matcher_parent_status": "eligible",
+          "matcher_accepted": true,
+          "advisory_status": "continuation_candidate",
+          "parent_coverage": 1.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 1,
+          "exclusive_child_support_samples": 16,
+          "redundant_support": false,
+          "physical_identity_established": false
+        },
+        {
+          "parent_group": 1,
+          "best_child_group": 10,
+          "selected_child_group": null,
+          "matcher_parent_status": "insufficient_parent_support",
+          "matcher_accepted": false,
+          "advisory_status": "unmatched",
+          "parent_coverage": 0.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 0,
+          "exclusive_child_support_samples": null,
+          "redundant_support": false,
+          "physical_identity_established": false
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "advisory_status": "continuation_candidate",
+          "matcher_accepted": true,
+          "accepted_parent_groups": [
+            0
+          ],
+          "union_child_coverage": 1.0,
+          "physical_identity_established": false
+        }
+      ]
+    },
+    "distance_sensitivity": {
+      "0": false,
+      "1": false
+    },
+    "truth_comparison": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    }
+  },
+  {
+    "case": "distant_sheet_disappears",
+    "gate": 0.35,
+    "table": {
+      "parents": [
+        {
+          "parent_group": 0,
+          "best_child_group": 10,
+          "selected_child_group": 10,
+          "matcher_parent_status": "eligible",
+          "matcher_accepted": true,
+          "advisory_status": "continuation_candidate",
+          "parent_coverage": 1.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 1,
+          "exclusive_child_support_samples": 16,
+          "redundant_support": false,
+          "physical_identity_established": false
+        },
+        {
+          "parent_group": 1,
+          "best_child_group": 10,
+          "selected_child_group": null,
+          "matcher_parent_status": "insufficient_parent_support",
+          "matcher_accepted": false,
+          "advisory_status": "unmatched",
+          "parent_coverage": 0.0,
+          "runner_up_parent_coverage": 0.0,
+          "eligible_parents_of_target": 0,
+          "exclusive_child_support_samples": null,
+          "redundant_support": false,
+          "physical_identity_established": false
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "advisory_status": "continuation_candidate",
+          "matcher_accepted": true,
+          "accepted_parent_groups": [
+            0
+          ],
+          "union_child_coverage": 1.0,
+          "physical_identity_established": false
+        }
+      ]
+    },
+    "distance_sensitivity": {
+      "0": false,
+      "1": false
+    },
+    "truth_comparison": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    }
+  }
+]

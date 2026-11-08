@@ -1,0 +1,187 @@
+[
+  {
+    "case": "translation_within_gate",
+    "continued_pairs": [
+      [
+        0,
+        10
+      ]
+    ],
+    "stipulated_truth": [
+      [
+        0,
+        10
+      ]
+    ],
+    "false_continuations": [],
+    "missed_stipulated_links": []
+  },
+  {
+    "case": "translation_beyond_gate",
+    "continued_pairs": [],
+    "stipulated_truth": [
+      [
+        0,
+        10
+      ]
+    ],
+    "false_continuations": [],
+    "missed_stipulated_links": [
+      [
+        0,
+        10
+      ]
+    ]
+  },
+  {
+    "case": "fresh_sampling",
+    "continued_pairs": [
+      [
+        0,
+        10
+      ]
+    ],
+    "stipulated_truth": [
+      [
+        0,
+        10
+      ]
+    ],
+    "false_continuations": [],
+    "missed_stipulated_links": []
+  },
+  {
+    "case": "approaching_aligned_sheets",
+    "continued_pairs": [],
+    "stipulated_truth": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        11
+      ]
+    ],
+    "false_continuations": [],
+    "missed_stipulated_links": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        11
+      ]
+    ]
+  },
+  {
+    "case": "approaching_opposite_normals",
+    "continued_pairs": [],
+    "stipulated_truth": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        11
+      ]
+    ],
+    "false_continuations": [],
+    "missed_stipulated_links": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        11
+      ]
+    ]
+  },
+  {
+    "case": "one_group_splits_into_two",
+    "continued_pairs": [],
+    "stipulated_truth": [
+      [
+        0,
+        10
+      ],
+      [
+        0,
+        11
+      ]
+    ],
+    "false_continuations": [],
+    "missed_stipulated_links": [
+      [
+        0,
+        10
+      ],
+      [
+        0,
+        11
+      ]
+    ]
+  },
+  {
+    "case": "two_fragments_form_one_group",
+    "continued_pairs": [],
+    "stipulated_truth": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        10
+      ]
+    ],
+    "false_continuations": [],
+    "missed_stipulated_links": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        10
+      ]
+    ]
+  },
+  {
+    "case": "nearby_sheet_disappears",
+    "continued_pairs": [],
+    "stipulated_truth": [
+      [
+        0,
+        10
+      ]
+    ],
+    "false_continuations": [],
+    "missed_stipulated_links": [
+      [
+        0,
+        10
+      ]
+    ]
+  },
+  {
+    "case": "distant_sheet_disappears",
+    "continued_pairs": [
+      [
+        0,
+        10
+      ]
+    ],
+    "stipulated_truth": [
+      [
+        0,
+        10
+      ]
+    ],
+    "false_continuations": [],
+    "missed_stipulated_links": []
+  }
+]

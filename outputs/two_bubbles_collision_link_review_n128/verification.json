@@ -1,0 +1,31 @@
+{
+  "snapshots": [
+    13,
+    14,
+    15
+  ],
+  "comparisons": 4,
+  "parent_records_checked": 20,
+  "review_categories": {
+    "unique_local_candidate": 8,
+    "gate_sensitive": 8,
+    "multi_parent_support": 4
+  },
+  "input_sha256": {
+    "outputs/two_bubbles_temporal_comparison_n064_n128/support_records.json.gz": "704c7a6f245eb9b94e1484a204e75bf18da24888b8120c93491c93716239c56b",
+    "outputs/two_bubbles_temporal_comparison_n064_n128/metadata.json": "f0b304ea0c003c1015345e7837c9e58a4c61d1788a35036cefcff1072dc0668b",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0013.npz": "0c87039fa47b74ad3ef90ca25b88c0fea23091c3080599d775b6c46dea690103",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0013.npz": "959263d273cc7eb241a402e3ca3e94f5862bfe90de7a7e13c09cab2356b3c688",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0014.npz": "161596f489fab004035daf5cb7bfa78c2561dc62a6b1a76222c1acacd0ab526b",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0014.npz": "e7b0dfc1b7954ff2bb636244d1e0ec09d4a222580d64ae50cee1ed06e206f163",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0015.npz": "2c79eca4f137c40a7eb081c6aaee3cb2313fa0bc079c709d77c33a90d4297f68",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0015.npz": "c47470acd98a9daa1eb58c6acc584b07cb774380b1e3761ffde981c1f095d341"
+  },
+  "source_sha256": {
+    "/Users/minhn/Documents/Heidelberg University/fifth_semester/Thesis/master_thesis/experiments/wind_bubble/review_collision_links.py": "14977e3e17197b922d62a4680ed17716ae42374fd792f379109cbdea17834c6e",
+    "experiments/wind_bubble/verify_resolution_associations.py": "ff6a96526eaa3ac0009cb5ab82491096d85f925e216814264cbcd5c19c4714c1"
+  },
+  "original_links_changed": false,
+  "physical_truth_labels_available": false,
+  "physical_mergers_established": false
+}

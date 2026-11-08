@@ -1,0 +1,37 @@
+{
+  "control_configurations": 27,
+  "control_shuffle_checks": 27,
+  "reviewed_parent_rows": 20,
+  "reviewed_child_rows": 16,
+  "parent_status_counts": {
+    "continuation_candidate": 10,
+    "ambiguous": 2,
+    "multiple_parent_support": 8
+  },
+  "distance_sensitive_parent_rows": 8,
+  "bounded_review_reproduced": true,
+  "accepted_links_changed": false,
+  "persistent_ids_assigned": false,
+  "physical_mergers_inferred": false,
+  "known_false_link_fixed": false,
+  "input_sha256": {
+    "outputs/two_bubbles_temporal_comparison_n064_n128/support_records.json.gz": "704c7a6f245eb9b94e1484a204e75bf18da24888b8120c93491c93716239c56b",
+    "outputs/two_bubbles_collision_link_review_n128/link_review.csv": "a8f372e25caa268ccac057473c9b2d9f6d85f4dbb478338d7bd33fad07e560cd",
+    "outputs/two_bubbles_collision_link_review_n128/verification.json": "279efc1698d8693dfbea65f38fbff1e4a81d182b6ec41a599cfc5eb82458832f",
+    "outputs/two_bubbles_temporal_comparison_n064_n128/metadata.json": "f0b304ea0c003c1015345e7837c9e58a4c61d1788a35036cefcff1072dc0668b",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0013.npz": "0c87039fa47b74ad3ef90ca25b88c0fea23091c3080599d775b6c46dea690103",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0013.npz": "959263d273cc7eb241a402e3ca3e94f5862bfe90de7a7e13c09cab2356b3c688",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0014.npz": "161596f489fab004035daf5cb7bfa78c2561dc62a6b1a76222c1acacd0ab526b",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0014.npz": "e7b0dfc1b7954ff2bb636244d1e0ec09d4a222580d64ae50cee1ed06e206f163",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0015.npz": "2c79eca4f137c40a7eb081c6aaee3cb2313fa0bc079c709d77c33a90d4297f68",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0015.npz": "c47470acd98a9daa1eb58c6acc584b07cb774380b1e3761ffde981c1f095d341"
+  },
+  "source_sha256": {
+    "/Users/minhn/Documents/Heidelberg University/fifth_semester/Thesis/master_thesis/experiments/wind_bubble/check_continuation_status.py": "41b74dc0f181afb772c4eda266a8a7bf820a73ee892a859cdbe4e4bc25cfbd04",
+    "experiments/astrolink/continuation_status.py": "5c62f9434e95d228255c956f4da361f6932fe2bf5836494b4647676f2bf5d67f",
+    "experiments/astrolink/patch_support.py": "8ed9454ba810afaa14cc3327029f9a54ea75c3ed8d6b628f633c760e1f06b39d",
+    "experiments/astrolink/support_evidence.py": "4ad2c3776a069feddfb053438799e826e7b57b5835679da16a404e7b154063f5",
+    "experiments/astrolink/controlled_tracking_cases.py": "362d4f1af35765bd063653a6813e8e1b7e1a215a328431b6b4db4bc75d345cfc",
+    "experiments/astrolink/check_controlled_tracking.py": "d52deb0488d49edc6135cd4fc01bd01672252d1dd8dbaf28c2fd3373bf0a80ca"
+  }
+}

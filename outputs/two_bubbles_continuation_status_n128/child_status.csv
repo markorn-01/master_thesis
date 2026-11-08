@@ -1,0 +1,17 @@
+parent_event,child_event,gate_reference_cells,child_group,advisory_status,matcher_accepted,accepted_parent_groups,union_child_coverage,physical_identity_established
+13,14,1.5,0,continuation_candidate,True,0,1.0,False
+13,14,1.5,1,continuation_candidate,True,1,0.9765395894428153,False
+13,14,1.5,2,continuation_candidate,True,10,1.0,False
+13,14,1.5,3,continuation_candidate,True,11,1.0,False
+13,14,1.5,4,continuation_candidate,True,20,0.9765395894428153,False
+13,14,2.5,0,continuation_candidate,True,0,1.0,False
+13,14,2.5,1,continuation_candidate,True,1,1.0,False
+13,14,2.5,2,unmatched,False,,0.0,False
+13,14,2.5,3,unmatched,False,,0.0,False
+13,14,2.5,4,continuation_candidate,True,20,1.0,False
+14,15,1.5,0,continuation_candidate,True,0,1.0,False
+14,15,1.5,1,multiple_parent_support,True,"1,2",1.0,False
+14,15,1.5,2,multiple_parent_support,True,"3,4",1.0,False
+14,15,2.5,0,continuation_candidate,True,0,1.0,False
+14,15,2.5,1,multiple_parent_support,True,"1,2",1.0,False
+14,15,2.5,2,multiple_parent_support,True,"3,4",1.0,False
