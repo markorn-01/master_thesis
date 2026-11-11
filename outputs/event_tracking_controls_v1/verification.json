@@ -1,0 +1,60 @@
+{
+  "configurations": 36,
+  "methods": 2,
+  "independent_dense_and_bruteforce_checks": 36,
+  "independently_checked_hypotheses": 59,
+  "shuffle_checks": 36,
+  "parameters": {
+    "coverage": 0.5,
+    "exclusive_fraction": 0.1,
+    "distance_weight": 0.25,
+    "max_partners": 3,
+    "normal_angle": 60,
+    "tie_tolerance": 1e-08
+  },
+  "aggregate": [
+    {
+      "suite": "existing",
+      "method": "pooled_baseline",
+      "configurations": 27,
+      "exact_configurations": 16,
+      "false_links": 3,
+      "missed_links": 14
+    },
+    {
+      "suite": "existing",
+      "method": "event_prototype",
+      "configurations": 27,
+      "exact_configurations": 23,
+      "false_links": 0,
+      "missed_links": 6
+    },
+    {
+      "suite": "stress",
+      "method": "pooled_baseline",
+      "configurations": 9,
+      "exact_configurations": 3,
+      "false_links": 6,
+      "missed_links": 0
+    },
+    {
+      "suite": "stress",
+      "method": "event_prototype",
+      "configurations": 9,
+      "exact_configurations": 0,
+      "false_links": 3,
+      "missed_links": 9
+    }
+  ],
+  "source_sha256": {
+    "/Users/minhn/Documents/Heidelberg University/fifth_semester/Thesis/master_thesis/experiments/astrolink/check_event_tracking.py": "9db7fe865490ff92900c41432be24d65e37e2618ba1d4675879f0cd623daa239",
+    "experiments/astrolink/event_tracking.py": "be6f25b38fd4a73547a9e1edd466428eb43f8ac1bc8b7bc492ebceb9cd723366",
+    "experiments/astrolink/controlled_tracking_cases.py": "362d4f1af35765bd063653a6813e8e1b7e1a215a328431b6b4db4bc75d345cfc",
+    "experiments/astrolink/check_controlled_tracking.py": "d52deb0488d49edc6135cd4fc01bd01672252d1dd8dbaf28c2fd3373bf0a80ca",
+    "experiments/astrolink/patch_support.py": "8ed9454ba810afaa14cc3327029f9a54ea75c3ed8d6b628f633c760e1f06b39d",
+    "experiments/astrolink/support_evidence.py": "4ad2c3776a069feddfb053438799e826e7b57b5835679da16a404e7b154063f5"
+  },
+  "real_bubble_results_changed": false,
+  "validated_on_hydrodynamic_ancestry": false,
+  "literature_note": "Original one-stage set-packing prototype informed by feature-event conflict graphs; not a reproduction of Schnorr et al. two-step optimization."
+}
