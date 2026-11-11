@@ -1,0 +1,47 @@
+{
+  "event": 8,
+  "time": 0.07999999821186066,
+  "plane_z": 0.50390625,
+  "grid_spacing": 0.0078125,
+  "overlay_half_width": 0.00390625,
+  "total_catalog_samples": 11424,
+  "overlay_samples": 248,
+  "temperature_definition": "P/rho; temperature proxy in code units, not Kelvin",
+  "slice_array_order": "x,y; transposed only for display",
+  "image_origin": "lower",
+  "image_extent": [
+    0,
+    1,
+    0,
+    1
+  ],
+  "image_interpolation": "nearest",
+  "limits": {
+    "density": [
+      0.028353217989206314,
+      4.445469856262207
+    ],
+    "temperature_proxy": [
+      0.009999999776482582,
+      19.16488331594179
+    ],
+    "temperature_limits_identical": true
+  },
+  "image_size": [
+    2240,
+    840
+  ],
+  "input_sha256": {
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0008.npz": "2cdcbbbb778000775fef68bb4e126fb27b4c0cf30d2ab5c6b906e292a6c98a27",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/slice_0008.npz": "45640359e966ca42c903c399ed384dbf0326f884dbfc6746342b38d7736dd35e",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/metadata.json": "f869d16aa8fe3dbfe1946c3b72247fd469929dead2dd1d53d7314a4a6170d3ba"
+  },
+  "source_sha256": "23a48ef758b743d5159ea5c0b05cc63d4e602c8f002a11fa2a6ed365e957a97c",
+  "all_selected_points_displayed": true,
+  "positions_moved": false,
+  "gas_fields_smoothed": false,
+  "three_dimensional_volume_rendered": false,
+  "shock_detection_changed": false,
+  "tracking_changed": false,
+  "physical_merger_inferred": false
+}

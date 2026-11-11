@@ -1,0 +1,47 @@
+{
+  "nodes": [
+    {
+      "segment_id": 0,
+      "first_event": 1,
+      "last_event": 7,
+      "start_time": 0.009999999776482582,
+      "end_time": 0.07000000029802322
+    },
+    {
+      "segment_id": 2,
+      "first_event": 8,
+      "last_event": 16,
+      "start_time": 0.07999999821186066,
+      "end_time": 0.1599999964237213
+    },
+    {
+      "segment_id": 1,
+      "first_event": 1,
+      "last_event": 7,
+      "start_time": 0.009999999776482582,
+      "end_time": 0.07000000029802322
+    }
+  ],
+  "edges": [
+    {
+      "parent_segment": 0,
+      "child_segment": 2,
+      "parent_event": 7,
+      "child_event": 8,
+      "relationship": "candidate_predecessor",
+      "both_distances_agree": true,
+      "physical_merger_confirmed": false
+    },
+    {
+      "parent_segment": 1,
+      "child_segment": 2,
+      "parent_event": 7,
+      "child_event": 8,
+      "relationship": "candidate_predecessor",
+      "both_distances_agree": true,
+      "physical_merger_confirmed": false
+    }
+  ],
+  "scope": "One reviewed detected-group transition only",
+  "persistent_physical_identity_established": false
+}

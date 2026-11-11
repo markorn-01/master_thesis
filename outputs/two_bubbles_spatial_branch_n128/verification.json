@@ -1,0 +1,82 @@
+{
+  "displayed_groups": [
+    {
+      "event": 7,
+      "time": 0.07000000029802322,
+      "segment_id": 0,
+      "local_group": 0,
+      "displayed_points": 5064,
+      "total_group_points": 5064,
+      "coordinates_sha256": "c830751ddb3c82afd6a71b7045b251dae1e1b947319fe84f157ca90fa9546534"
+    },
+    {
+      "event": 7,
+      "time": 0.07000000029802322,
+      "segment_id": 1,
+      "local_group": 1,
+      "displayed_points": 5064,
+      "total_group_points": 5064,
+      "coordinates_sha256": "3970baeb56bc342bf0ce17d150a2e1efb5789cfb58c92bc33e42d4131606d81f"
+    },
+    {
+      "event": 8,
+      "time": 0.07999999821186066,
+      "segment_id": 2,
+      "local_group": 0,
+      "displayed_points": 11424,
+      "total_group_points": 11424,
+      "coordinates_sha256": "99b2f94c8397e1c2bd486bce0f24b5870553de9c3364c4696d4e6fda061a3686"
+    }
+  ],
+  "candidate_edges": [
+    {
+      "parent_segment": 0,
+      "child_segment": 2,
+      "parent_event": 7,
+      "child_event": 8,
+      "relationship": "candidate_predecessor",
+      "both_distances_agree": true,
+      "physical_merger_confirmed": false
+    },
+    {
+      "parent_segment": 1,
+      "child_segment": 2,
+      "parent_event": 7,
+      "child_event": 8,
+      "relationship": "candidate_predecessor",
+      "both_distances_agree": true,
+      "physical_merger_confirmed": false
+    }
+  ],
+  "image_size": [
+    2240,
+    910
+  ],
+  "input_sha256": {
+    "outputs/two_bubbles_branching_history_n128/candidate_graph.json": "860179d106fe5eb51f36af0afc8e5cfbb2d536e11dd82329dcf3ed77acb6ec08",
+    "outputs/two_bubbles_branching_history_n128/verification.json": "47500e44fa49f1ef079b8181a48c9bbbf7a91d9132687198940d6c2d1ab0449b",
+    "outputs/two_bubbles_provisional_histories_n128/group_histories.csv": "c4d7484c65c6a54cf51df3dd96de5b3b3885c479cea5a3e9a4472258c99c784c",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0007.npz": "140a99072dd7a44e684dec80e7b39a1775deebf93fbdaa1c0b8c22d501bb9682",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0007.npz": "63f73688cc3269aa18ea3e2aab1b60c9facbfa48e16aa39d4a9e8e131951e9a6",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0008.npz": "2cdcbbbb778000775fef68bb4e126fb27b4c0cf30d2ab5c6b906e292a6c98a27",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0008.npz": "9bcee568d7a830a6792d8186a5f7c24fa2a1d4ddba7a9566fe7621dde58b03e9"
+  },
+  "source_sha256": "e32508564646f9a3eb043777729a5e4ad22ab059886fb32433a098438cf94713",
+  "all_group_points_displayed": true,
+  "positions_moved": false,
+  "new_clustering_performed": false,
+  "tracking_decisions_changed": false,
+  "physical_merger_confirmed": false,
+  "view": {
+    "camera": [
+      25,
+      -65
+    ],
+    "bounds": [
+      0.1,
+      0.9
+    ],
+    "point_size": 3,
+    "depthshade": false
+  }
+}

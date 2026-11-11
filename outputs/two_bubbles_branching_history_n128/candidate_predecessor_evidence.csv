@@ -1,0 +1,5 @@
+parent_segment,child_segment,parent_group,child_group,gate_reference_cells,parent_samples,child_samples,parent_coverage,individual_child_support_samples,exclusive_child_support_samples,union_child_coverage
+0,2,0,0,1.5,5064,11424,0.9897314375987362,5712,5712,1.0
+1,2,1,0,1.5,5064,11424,0.9897314375987362,5712,5712,1.0
+0,2,0,0,2.5,5064,11424,1.0,5712,5712,1.0
+1,2,1,0,2.5,5064,11424,1.0,5712,5712,1.0

@@ -1,0 +1,22 @@
+{
+  "nodes": 3,
+  "candidate_edges": 2,
+  "distance_evidence_rows": 4,
+  "support_independently_recomputed": true,
+  "boundary_mach_medians_recomputed": true,
+  "original_histories_changed": false,
+  "physical_merger_confirmed": false,
+  "input_sha256": {
+    "outputs/two_bubbles_provisional_histories_n128/group_histories.csv": "c4d7484c65c6a54cf51df3dd96de5b3b3885c479cea5a3e9a4472258c99c784c",
+    "outputs/two_bubbles_temporal_comparison_n064_n128/support_records.json.gz": "704c7a6f245eb9b94e1484a204e75bf18da24888b8120c93491c93716239c56b",
+    "outputs/two_bubbles_temporal_comparison_n064_n128/metadata.json": "f0b304ea0c003c1015345e7837c9e58a4c61d1788a35036cefcff1072dc0668b",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0007.npz": "140a99072dd7a44e684dec80e7b39a1775deebf93fbdaa1c0b8c22d501bb9682",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0007.npz": "63f73688cc3269aa18ea3e2aab1b60c9facbfa48e16aa39d4a9e8e131951e9a6",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0008.npz": "2cdcbbbb778000775fef68bb4e126fb27b4c0cf30d2ab5c6b906e292a6c98a27",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0008.npz": "9bcee568d7a830a6792d8186a5f7c24fa2a1d4ddba7a9566fe7621dde58b03e9"
+  },
+  "source_sha256": {
+    "/Users/minhn/Documents/Heidelberg University/fifth_semester/Thesis/master_thesis/experiments/wind_bubble/plot_branching_history.py": "0793c01ad091d9e9b9827189774b9b9b09114db774d3b26ce6ac60431262ee1c",
+    "experiments/wind_bubble/verify_resolution_associations.py": "ff6a96526eaa3ac0009cb5ab82491096d85f925e216814264cbcd5c19c4714c1"
+  }
+}
