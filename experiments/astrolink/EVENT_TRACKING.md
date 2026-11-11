@@ -67,6 +67,16 @@ objective loss is at most 1e-8, the event is unresolved and not accepted.
 This is a numerical tie test, not statistical confidence. Exclusion gaps
 and ambiguous alternatives remain in the saved results.
 
+The real-data independent check subsequently exposed an absolute solver
+objective tolerance larger than the declared score-tie tolerance. The
+solver objective is now multiplied by 1e6 while model scores and scientific
+thresholds remain unchanged. A regression test checks gaps above/below the
+tie threshold. The complete controls were rerun into
+`outputs/event_tracking_controls_solver_validation/`; all 72 comparison
+metric rows reproduce the original control summary exactly. The original
+v1 outputs are retained as the earlier source snapshot. The application
+runner verifies hashes against the new solver-validation snapshot.
+
 This bounded prototype permits events with up to three partners, raises
 an error above 5,000 generated hypotheses, and excludes many-to-many events,
 multi-frame motion, gap recovery and physical propagation estimates.
@@ -123,9 +133,9 @@ pair distances and dot products: candidate event completeness, coverage
 rules and scores. Exhaustive feasible-subset enumeration checks the optimal
 objective and the events common to all near-optimal explanations. All 36
 are also repeated after deterministic input-row shuffling. Saved metrics
-are read back. Ten dedicated tests cover event types, three partners,
+are read back. Eleven dedicated tests cover event types, three partners,
 reverse separation, ambiguity, global conflicts, distance misses, empty
-catalogs, invalid parameters and unchanged input arrays.
+catalogs, invalid parameters, numerical solver precision and unchanged input arrays.
 
 Outputs: `outputs/event_tracking_controls_v1/`, with original synthetic
 inputs, per-case results, comparison and aggregate CSVs, a false/missed-link

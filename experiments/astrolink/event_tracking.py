@@ -27,7 +27,9 @@ def select_events(candidates, parents, children, tie_tolerance=1e-8):
     def solve(forbid=None):
         upper=np.ones(len(candidates))
         if forbid is not None:upper[forbid]=0
-        result=milp(-scores,integrality=np.ones(len(scores)),bounds=Bounds(np.zeros(len(scores)),upper),
+        # HiGHS absolute objective tolerances can otherwise exceed our 1e-8
+        # score-tie tolerance. Scale only the solver objective, not the model.
+        result=milp(-scores*1e6,integrality=np.ones(len(scores)),bounds=Bounds(np.zeros(len(scores)),upper),
                     constraints=LinearConstraint(matrix,np.zeros(len(nodes)),np.ones(len(nodes))),
                     options={'mip_rel_gap':0.,'time_limit':10.})
         if result.status!=0:raise RuntimeError(f'Event optimization did not finish exactly: {result.message}')

@@ -65,3 +65,10 @@ class EventTracking(unittest.TestCase):
         backward=event_tracking(p,n,one,p,n,groups,.2)
         self.assertEqual([(e['kind'],e['parents'],e['children']) for e in forward['events']],[('combination',[0,1,2],[10])])
         self.assertEqual([(e['kind'],e['parents'],e['children']) for e in backward['events']],[('separation',[10],[0,1,2])])
+
+    def test_solver_resolves_above_tie_tolerance_and_abstains_below(self):
+        for delta,expected in [(1e-7,[1]),(5e-9,[])]:
+            candidates=[dict(parents=[0],children=[10],score=1.),dict(parents=[0],children=[11],score=1.+delta)]
+            result=select_events(candidates,[0],[10,11])
+            self.assertEqual(result['accepted'],expected)
+            np.testing.assert_allclose(result['optimal_score'],1.+delta,rtol=0,atol=1e-14)
