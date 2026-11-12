@@ -1,0 +1,863 @@
+{
+  "nodes": [
+    {
+      "node_id": "e0001:g0",
+      "event": 1,
+      "time": 0.009999999776482582,
+      "group": 0,
+      "segment_id": 0,
+      "previous_group": null,
+      "inherited": false,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0001:g1",
+      "event": 1,
+      "time": 0.009999999776482582,
+      "group": 1,
+      "segment_id": 1,
+      "previous_group": null,
+      "inherited": false,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0002:g0",
+      "event": 2,
+      "time": 0.019999999552965164,
+      "group": 0,
+      "segment_id": 0,
+      "previous_group": 0,
+      "inherited": true,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0002:g1",
+      "event": 2,
+      "time": 0.019999999552965164,
+      "group": 1,
+      "segment_id": 1,
+      "previous_group": 1,
+      "inherited": true,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0003:g0",
+      "event": 3,
+      "time": 0.029999999329447746,
+      "group": 0,
+      "segment_id": 0,
+      "previous_group": 0,
+      "inherited": true,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0003:g1",
+      "event": 3,
+      "time": 0.029999999329447746,
+      "group": 1,
+      "segment_id": 1,
+      "previous_group": 1,
+      "inherited": true,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0004:g0",
+      "event": 4,
+      "time": 0.03999999910593033,
+      "group": 0,
+      "segment_id": 0,
+      "previous_group": 0,
+      "inherited": true,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0004:g1",
+      "event": 4,
+      "time": 0.03999999910593033,
+      "group": 1,
+      "segment_id": 1,
+      "previous_group": 1,
+      "inherited": true,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0005:g0",
+      "event": 5,
+      "time": 0.04999999701976776,
+      "group": 0,
+      "segment_id": 0,
+      "previous_group": 0,
+      "inherited": true,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0005:g1",
+      "event": 5,
+      "time": 0.04999999701976776,
+      "group": 1,
+      "segment_id": 1,
+      "previous_group": 1,
+      "inherited": true,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0006:g0",
+      "event": 6,
+      "time": 0.05999999865889549,
+      "group": 0,
+      "segment_id": 0,
+      "previous_group": 0,
+      "inherited": true,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0006:g1",
+      "event": 6,
+      "time": 0.05999999865889549,
+      "group": 1,
+      "segment_id": 1,
+      "previous_group": 1,
+      "inherited": true,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0007:g0",
+      "event": 7,
+      "time": 0.07000000029802322,
+      "group": 0,
+      "segment_id": 0,
+      "previous_group": 0,
+      "inherited": true,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0007:g1",
+      "event": 7,
+      "time": 0.07000000029802322,
+      "group": 1,
+      "segment_id": 1,
+      "previous_group": 1,
+      "inherited": true,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0008:g0",
+      "event": 8,
+      "time": 0.07999999821186066,
+      "group": 0,
+      "segment_id": 2,
+      "previous_group": null,
+      "inherited": false,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0009:g0",
+      "event": 9,
+      "time": 0.08999999612569809,
+      "group": 0,
+      "segment_id": 2,
+      "previous_group": 0,
+      "inherited": true,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0010:g0",
+      "event": 10,
+      "time": 0.09999999403953552,
+      "group": 0,
+      "segment_id": 2,
+      "previous_group": 0,
+      "inherited": true,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0011:g0",
+      "event": 11,
+      "time": 0.10999999940395355,
+      "group": 0,
+      "segment_id": 2,
+      "previous_group": 0,
+      "inherited": true,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0012:g0",
+      "event": 12,
+      "time": 0.11999999731779099,
+      "group": 0,
+      "segment_id": 2,
+      "previous_group": 0,
+      "inherited": true,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0013:g0",
+      "event": 13,
+      "time": 0.12999999523162842,
+      "group": 0,
+      "segment_id": 2,
+      "previous_group": 0,
+      "inherited": true,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0013:g1",
+      "event": 13,
+      "time": 0.12999999523162842,
+      "group": 1,
+      "segment_id": 3,
+      "previous_group": null,
+      "inherited": false,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0013:g2",
+      "event": 13,
+      "time": 0.12999999523162842,
+      "group": 2,
+      "segment_id": 4,
+      "previous_group": null,
+      "inherited": false,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0013:g3",
+      "event": 13,
+      "time": 0.12999999523162842,
+      "group": 3,
+      "segment_id": 5,
+      "previous_group": null,
+      "inherited": false,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0013:g4",
+      "event": 13,
+      "time": 0.12999999523162842,
+      "group": 4,
+      "segment_id": 6,
+      "previous_group": null,
+      "inherited": false,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0013:g5",
+      "event": 13,
+      "time": 0.12999999523162842,
+      "group": 5,
+      "segment_id": 7,
+      "previous_group": null,
+      "inherited": false,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0013:g6",
+      "event": 13,
+      "time": 0.12999999523162842,
+      "group": 6,
+      "segment_id": 8,
+      "previous_group": null,
+      "inherited": false,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0013:g7",
+      "event": 13,
+      "time": 0.12999999523162842,
+      "group": 7,
+      "segment_id": 9,
+      "previous_group": null,
+      "inherited": false,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0013:g8",
+      "event": 13,
+      "time": 0.12999999523162842,
+      "group": 8,
+      "segment_id": 10,
+      "previous_group": null,
+      "inherited": false,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0013:g9",
+      "event": 13,
+      "time": 0.12999999523162842,
+      "group": 9,
+      "segment_id": 11,
+      "previous_group": null,
+      "inherited": false,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0013:g10",
+      "event": 13,
+      "time": 0.12999999523162842,
+      "group": 10,
+      "segment_id": 12,
+      "previous_group": null,
+      "inherited": false,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0014:g0",
+      "event": 14,
+      "time": 0.14000000059604645,
+      "group": 0,
+      "segment_id": 2,
+      "previous_group": 0,
+      "inherited": true,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0014:g1",
+      "event": 14,
+      "time": 0.14000000059604645,
+      "group": 1,
+      "segment_id": 13,
+      "previous_group": null,
+      "inherited": false,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0014:g6",
+      "event": 14,
+      "time": 0.14000000059604645,
+      "group": 6,
+      "segment_id": 14,
+      "previous_group": null,
+      "inherited": false,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0015:g0",
+      "event": 15,
+      "time": 0.14999999105930328,
+      "group": 0,
+      "segment_id": 2,
+      "previous_group": 0,
+      "inherited": true,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0015:g1",
+      "event": 15,
+      "time": 0.14999999105930328,
+      "group": 1,
+      "segment_id": 13,
+      "previous_group": 1,
+      "inherited": true,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0015:g2",
+      "event": 15,
+      "time": 0.14999999105930328,
+      "group": 2,
+      "segment_id": 14,
+      "previous_group": 6,
+      "inherited": true,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0016:g0",
+      "event": 16,
+      "time": 0.1599999964237213,
+      "group": 0,
+      "segment_id": 2,
+      "previous_group": 0,
+      "inherited": true,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0016:g1",
+      "event": 16,
+      "time": 0.1599999964237213,
+      "group": 1,
+      "segment_id": 13,
+      "previous_group": 1,
+      "inherited": true,
+      "physical_identity_established": false
+    },
+    {
+      "node_id": "e0016:g2",
+      "event": 16,
+      "time": 0.1599999964237213,
+      "group": 2,
+      "segment_id": 14,
+      "previous_group": 2,
+      "inherited": true,
+      "physical_identity_established": false
+    }
+  ],
+  "events": [
+    {
+      "event_id": "h0000",
+      "parent_event": 1,
+      "child_event": 2,
+      "kind": "continuation",
+      "parents": [
+        "e0001:g0"
+      ],
+      "children": [
+        "e0002:g0"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0001",
+      "parent_event": 1,
+      "child_event": 2,
+      "kind": "continuation",
+      "parents": [
+        "e0001:g1"
+      ],
+      "children": [
+        "e0002:g1"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0002",
+      "parent_event": 2,
+      "child_event": 3,
+      "kind": "continuation",
+      "parents": [
+        "e0002:g0"
+      ],
+      "children": [
+        "e0003:g0"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0003",
+      "parent_event": 2,
+      "child_event": 3,
+      "kind": "continuation",
+      "parents": [
+        "e0002:g1"
+      ],
+      "children": [
+        "e0003:g1"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0004",
+      "parent_event": 3,
+      "child_event": 4,
+      "kind": "continuation",
+      "parents": [
+        "e0003:g0"
+      ],
+      "children": [
+        "e0004:g0"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0005",
+      "parent_event": 3,
+      "child_event": 4,
+      "kind": "continuation",
+      "parents": [
+        "e0003:g1"
+      ],
+      "children": [
+        "e0004:g1"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0006",
+      "parent_event": 4,
+      "child_event": 5,
+      "kind": "continuation",
+      "parents": [
+        "e0004:g0"
+      ],
+      "children": [
+        "e0005:g0"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0007",
+      "parent_event": 4,
+      "child_event": 5,
+      "kind": "continuation",
+      "parents": [
+        "e0004:g1"
+      ],
+      "children": [
+        "e0005:g1"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0008",
+      "parent_event": 5,
+      "child_event": 6,
+      "kind": "continuation",
+      "parents": [
+        "e0005:g0"
+      ],
+      "children": [
+        "e0006:g0"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0009",
+      "parent_event": 5,
+      "child_event": 6,
+      "kind": "continuation",
+      "parents": [
+        "e0005:g1"
+      ],
+      "children": [
+        "e0006:g1"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0010",
+      "parent_event": 6,
+      "child_event": 7,
+      "kind": "continuation",
+      "parents": [
+        "e0006:g0"
+      ],
+      "children": [
+        "e0007:g0"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0011",
+      "parent_event": 6,
+      "child_event": 7,
+      "kind": "continuation",
+      "parents": [
+        "e0006:g1"
+      ],
+      "children": [
+        "e0007:g1"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0012",
+      "parent_event": 7,
+      "child_event": 8,
+      "kind": "combination",
+      "parents": [
+        "e0007:g0",
+        "e0007:g1"
+      ],
+      "children": [
+        "e0008:g0"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0013",
+      "parent_event": 8,
+      "child_event": 9,
+      "kind": "continuation",
+      "parents": [
+        "e0008:g0"
+      ],
+      "children": [
+        "e0009:g0"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0014",
+      "parent_event": 9,
+      "child_event": 10,
+      "kind": "continuation",
+      "parents": [
+        "e0009:g0"
+      ],
+      "children": [
+        "e0010:g0"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0015",
+      "parent_event": 10,
+      "child_event": 11,
+      "kind": "continuation",
+      "parents": [
+        "e0010:g0"
+      ],
+      "children": [
+        "e0011:g0"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0016",
+      "parent_event": 11,
+      "child_event": 12,
+      "kind": "continuation",
+      "parents": [
+        "e0011:g0"
+      ],
+      "children": [
+        "e0012:g0"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0017",
+      "parent_event": 12,
+      "child_event": 13,
+      "kind": "continuation",
+      "parents": [
+        "e0012:g0"
+      ],
+      "children": [
+        "e0013:g0"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0018",
+      "parent_event": 13,
+      "child_event": 14,
+      "kind": "combination",
+      "parents": [
+        "e0013:g1",
+        "e0013:g2",
+        "e0013:g3"
+      ],
+      "children": [
+        "e0014:g1"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0019",
+      "parent_event": 13,
+      "child_event": 14,
+      "kind": "combination",
+      "parents": [
+        "e0013:g6",
+        "e0013:g7",
+        "e0013:g10"
+      ],
+      "children": [
+        "e0014:g6"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0020",
+      "parent_event": 13,
+      "child_event": 14,
+      "kind": "continuation",
+      "parents": [
+        "e0013:g0"
+      ],
+      "children": [
+        "e0014:g0"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0021",
+      "parent_event": 14,
+      "child_event": 15,
+      "kind": "continuation",
+      "parents": [
+        "e0014:g0"
+      ],
+      "children": [
+        "e0015:g0"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0022",
+      "parent_event": 14,
+      "child_event": 15,
+      "kind": "continuation",
+      "parents": [
+        "e0014:g1"
+      ],
+      "children": [
+        "e0015:g1"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0023",
+      "parent_event": 14,
+      "child_event": 15,
+      "kind": "continuation",
+      "parents": [
+        "e0014:g6"
+      ],
+      "children": [
+        "e0015:g2"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0024",
+      "parent_event": 15,
+      "child_event": 16,
+      "kind": "continuation",
+      "parents": [
+        "e0015:g0"
+      ],
+      "children": [
+        "e0016:g0"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0025",
+      "parent_event": 15,
+      "child_event": 16,
+      "kind": "continuation",
+      "parents": [
+        "e0015:g1"
+      ],
+      "children": [
+        "e0016:g1"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0026",
+      "parent_event": 15,
+      "child_event": 16,
+      "kind": "continuation",
+      "parents": [
+        "e0015:g2"
+      ],
+      "children": [
+        "e0016:g2"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    }
+  ],
+  "segment_count": 15,
+  "physical_identity_established": false,
+  "policy": "Only shared continuations inherit segment labels; branches stay explicit."
+}
