@@ -1,0 +1,82 @@
+{
+  "equal_64": {
+    "group_observations": 39,
+    "segments": 15,
+    "final_groups": 3,
+    "shared_combinations": [
+      {
+        "parent_time": 0.07000000029802322,
+        "child_time": 0.07999999821186066,
+        "parent_groups": [
+          0,
+          1
+        ],
+        "child_groups": [
+          0
+        ]
+      },
+      {
+        "parent_time": 0.12999999523162842,
+        "child_time": 0.14000000059604645,
+        "parent_groups": [
+          1,
+          2,
+          3
+        ],
+        "child_groups": [
+          1
+        ]
+      },
+      {
+        "parent_time": 0.12999999523162842,
+        "child_time": 0.14000000059604645,
+        "parent_groups": [
+          6,
+          7,
+          10
+        ],
+        "child_groups": [
+          6
+        ]
+      }
+    ]
+  },
+  "unequal_64": {
+    "group_observations": 28,
+    "segments": 5,
+    "final_groups": 2,
+    "shared_combinations": [
+      {
+        "parent_time": 0.07999999821186066,
+        "child_time": 0.08999999612569809,
+        "parent_groups": [
+          0,
+          1
+        ],
+        "child_groups": [
+          0
+        ]
+      }
+    ]
+  },
+  "unequal_first_inward_group_time": 0.12999999523162842,
+  "unequal_final_groups": [
+    {
+      "group": 0,
+      "segment_id": 2,
+      "surface_samples": 5084,
+      "median_mach": 6.468297958374023,
+      "median_nearest_source_alignment": 0.9975200568421054,
+      "upstream_inside_source": 0
+    },
+    {
+      "group": 1,
+      "segment_id": 4,
+      "surface_samples": 340,
+      "median_mach": 1.544080138206482,
+      "median_nearest_source_alignment": -0.9963447714807625,
+      "upstream_inside_source": 4
+    }
+  ],
+  "scope": "Same frozen pipeline; different source strengths and total prescribed injection. No physical truth labels."
+}
