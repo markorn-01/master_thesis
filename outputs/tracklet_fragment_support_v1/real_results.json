@@ -1,0 +1,1786 @@
+[
+  {
+    "num_cells": 64,
+    "first_event": 13,
+    "times": [
+      0.12999999523162842,
+      0.14000000059604645,
+      0.14999999105930328
+    ],
+    "gate": 0.0234375,
+    "method": "static_family",
+    "result": {
+      "models": [
+        {
+          "child_group": 1,
+          "later_group": 1,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 0.9818181818181818,
+          "median_normal_displacement": -0.000325033694875029,
+          "backward_time_ratio": 1.0000014901175405
+        },
+        {
+          "child_group": 6,
+          "later_group": 2,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 0.9818181818181818,
+          "median_normal_displacement": -0.0003250105878128836,
+          "backward_time_ratio": 1.0000014901175405
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 1,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9965005937419769,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 2,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9492487089903816,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 3,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9492487359123065,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 4,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9492487009556299,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 5,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9492486087480603,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 6,
+          "child_group": 6,
+          "status": "conditional_support",
+          "score_margin": 0.9492488340585484,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 7,
+          "child_group": 6,
+          "status": "conditional_support",
+          "score_margin": 0.9492487996315258,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 8,
+          "child_group": 6,
+          "status": "conditional_support",
+          "score_margin": 0.9492487646784147,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 9,
+          "child_group": 6,
+          "status": "conditional_support",
+          "score_margin": 0.9492487132030544,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 10,
+          "child_group": 6,
+          "status": "conditional_support",
+          "score_margin": 0.9965006738925354,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [
+        {
+          "child_group": 1,
+          "later_group": 1,
+          "parent_groups": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "child_union_coverage": 0.8947368421052632,
+          "accepted": true,
+          "physical_ancestry_established": false
+        },
+        {
+          "child_group": 6,
+          "later_group": 2,
+          "parent_groups": [
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "child_union_coverage": 0.8947368421052632,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 1,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 2,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 3,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 4,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 5,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 6,
+          "child_group": 6,
+          "accepted": true
+        },
+        {
+          "parent_group": 7,
+          "child_group": 6,
+          "accepted": true
+        },
+        {
+          "parent_group": 8,
+          "child_group": 6,
+          "accepted": true
+        },
+        {
+          "parent_group": 9,
+          "child_group": 6,
+          "accepted": true
+        },
+        {
+          "parent_group": 10,
+          "child_group": 6,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": false,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.0234375
+      }
+    }
+  },
+  {
+    "num_cells": 64,
+    "first_event": 13,
+    "times": [
+      0.12999999523162842,
+      0.14000000059604645,
+      0.14999999105930328
+    ],
+    "gate": 0.0234375,
+    "method": "delayed_family",
+    "result": {
+      "models": [
+        {
+          "child_group": 1,
+          "later_group": 1,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 0.9818181818181818,
+          "median_normal_displacement": -0.000325033694875029,
+          "backward_time_ratio": 1.0000014901175405
+        },
+        {
+          "child_group": 6,
+          "later_group": 2,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 0.9818181818181818,
+          "median_normal_displacement": -0.0003250105878128836,
+          "backward_time_ratio": 1.0000014901175405
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 1,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9964148462399224,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 2,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9505562131957718,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 3,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9505562530849415,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 4,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9505562190780681,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 5,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9505561471499938,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 6,
+          "child_group": 6,
+          "status": "conditional_support",
+          "score_margin": 0.950556280465138,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 7,
+          "child_group": 6,
+          "status": "conditional_support",
+          "score_margin": 0.9505562072212517,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 8,
+          "child_group": 6,
+          "status": "conditional_support",
+          "score_margin": 0.950556173211805,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 9,
+          "child_group": 6,
+          "status": "conditional_support",
+          "score_margin": 0.950556194293071,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 10,
+          "child_group": 6,
+          "status": "conditional_support",
+          "score_margin": 0.9964154712298364,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [
+        {
+          "child_group": 1,
+          "later_group": 1,
+          "parent_groups": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "child_union_coverage": 0.8947368421052632,
+          "accepted": true,
+          "physical_ancestry_established": false
+        },
+        {
+          "child_group": 6,
+          "later_group": 2,
+          "parent_groups": [
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "child_union_coverage": 0.8947368421052632,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 1,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 2,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 3,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 4,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 5,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 6,
+          "child_group": 6,
+          "accepted": true
+        },
+        {
+          "parent_group": 7,
+          "child_group": 6,
+          "accepted": true
+        },
+        {
+          "parent_group": 8,
+          "child_group": 6,
+          "accepted": true
+        },
+        {
+          "parent_group": 9,
+          "child_group": 6,
+          "accepted": true
+        },
+        {
+          "parent_group": 10,
+          "child_group": 6,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": true,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.0234375
+      }
+    }
+  },
+  {
+    "num_cells": 64,
+    "first_event": 13,
+    "times": [
+      0.12999999523162842,
+      0.14000000059604645,
+      0.14999999105930328
+    ],
+    "gate": 0.0390625,
+    "method": "static_family",
+    "result": {
+      "models": [
+        {
+          "child_group": 1,
+          "later_group": 1,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": -0.000325033694875029,
+          "backward_time_ratio": 1.0000014901175405
+        },
+        {
+          "child_group": 6,
+          "later_group": 2,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": -0.0003250105878128836,
+          "backward_time_ratio": 1.0000014901175405
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 1,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9979003562451861,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 2,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.969549225394229,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 3,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9695492415473839,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 4,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9695492205733779,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 5,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9695491652488362,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 6,
+          "child_group": 6,
+          "status": "conditional_support",
+          "score_margin": 0.969549300435129,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 7,
+          "child_group": 6,
+          "status": "conditional_support",
+          "score_margin": 0.9695492797789155,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 8,
+          "child_group": 6,
+          "status": "conditional_support",
+          "score_margin": 0.9695492588070488,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 9,
+          "child_group": 6,
+          "status": "conditional_support",
+          "score_margin": 0.9695492279218326,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 10,
+          "child_group": 6,
+          "status": "conditional_support",
+          "score_margin": 0.9979004043355213,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [
+        {
+          "child_group": 1,
+          "later_group": 1,
+          "parent_groups": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        },
+        {
+          "child_group": 6,
+          "later_group": 2,
+          "parent_groups": [
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 1,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 2,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 3,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 4,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 5,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 6,
+          "child_group": 6,
+          "accepted": true
+        },
+        {
+          "parent_group": 7,
+          "child_group": 6,
+          "accepted": true
+        },
+        {
+          "parent_group": 8,
+          "child_group": 6,
+          "accepted": true
+        },
+        {
+          "parent_group": 9,
+          "child_group": 6,
+          "accepted": true
+        },
+        {
+          "parent_group": 10,
+          "child_group": 6,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": false,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.0390625
+      }
+    }
+  },
+  {
+    "num_cells": 64,
+    "first_event": 13,
+    "times": [
+      0.12999999523162842,
+      0.14000000059604645,
+      0.14999999105930328
+    ],
+    "gate": 0.0390625,
+    "method": "delayed_family",
+    "result": {
+      "models": [
+        {
+          "child_group": 1,
+          "later_group": 1,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": -0.000325033694875029,
+          "backward_time_ratio": 1.0000014901175405
+        },
+        {
+          "child_group": 6,
+          "later_group": 2,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": -0.0003250105878128836,
+          "backward_time_ratio": 1.0000014901175405
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 1,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9978489077439534,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 2,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9703337279174631,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 3,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9703337518509649,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 4,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9703337314468409,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 5,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9703336882899963,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 6,
+          "child_group": 6,
+          "status": "conditional_support",
+          "score_margin": 0.9703337682790828,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 7,
+          "child_group": 6,
+          "status": "conditional_support",
+          "score_margin": 0.970333724332751,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 8,
+          "child_group": 6,
+          "status": "conditional_support",
+          "score_margin": 0.970333703927083,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 9,
+          "child_group": 6,
+          "status": "conditional_support",
+          "score_margin": 0.9703337165758427,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 10,
+          "child_group": 6,
+          "status": "conditional_support",
+          "score_margin": 0.9978492827379019,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [
+        {
+          "child_group": 1,
+          "later_group": 1,
+          "parent_groups": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        },
+        {
+          "child_group": 6,
+          "later_group": 2,
+          "parent_groups": [
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 1,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 2,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 3,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 4,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 5,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 6,
+          "child_group": 6,
+          "accepted": true
+        },
+        {
+          "parent_group": 7,
+          "child_group": 6,
+          "accepted": true
+        },
+        {
+          "parent_group": 8,
+          "child_group": 6,
+          "accepted": true
+        },
+        {
+          "parent_group": 9,
+          "child_group": 6,
+          "accepted": true
+        },
+        {
+          "parent_group": 10,
+          "child_group": 6,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": true,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.0390625
+      }
+    }
+  },
+  {
+    "num_cells": 128,
+    "first_event": 10,
+    "times": [
+      0.09999999403953552,
+      0.10999999940395355,
+      0.11999999731779099
+    ],
+    "gate": 0.0234375,
+    "method": "static_family",
+    "result": {
+      "models": [
+        {
+          "child_group": 1,
+          "later_group": 1,
+          "usable": true,
+          "future_parent_coverage": 0.9061371841155235,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": -0.0010653580920047794,
+          "backward_time_ratio": 1.0000007450582151
+        },
+        {
+          "child_group": 14,
+          "later_group": 12,
+          "usable": true,
+          "future_parent_coverage": 0.9061371841155235,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": -0.001065356157995561,
+          "backward_time_ratio": 1.0000007450582151
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 1,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9831289698503555,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 2,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9915247420411589,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 3,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9739580440439204,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 4,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9739579682277043,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 5,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9739580279898498,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 6,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9739580674831319,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 7,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9829916039200778,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 8,
+          "child_group": 14,
+          "status": "conditional_support",
+          "score_margin": 0.9829915645148146,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 9,
+          "child_group": 14,
+          "status": "conditional_support",
+          "score_margin": 0.9739580517202631,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 10,
+          "child_group": 14,
+          "status": "conditional_support",
+          "score_margin": 0.9739580053479635,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 11,
+          "child_group": 14,
+          "status": "conditional_support",
+          "score_margin": 0.9739580638388153,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 12,
+          "child_group": 14,
+          "status": "conditional_support",
+          "score_margin": 0.973958080367891,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 13,
+          "child_group": 14,
+          "status": "conditional_support",
+          "score_margin": 0.991524726961398,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 14,
+          "child_group": 14,
+          "status": "conditional_support",
+          "score_margin": 0.9831289752838016,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [
+        {
+          "child_group": 1,
+          "later_group": 1,
+          "parent_groups": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "child_union_coverage": 0.9169675090252708,
+          "accepted": true,
+          "physical_ancestry_established": false
+        },
+        {
+          "child_group": 14,
+          "later_group": 12,
+          "parent_groups": [
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "child_union_coverage": 0.9169675090252708,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 1,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 2,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 3,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 4,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 5,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 6,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 7,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 8,
+          "child_group": 14,
+          "accepted": true
+        },
+        {
+          "parent_group": 9,
+          "child_group": 14,
+          "accepted": true
+        },
+        {
+          "parent_group": 10,
+          "child_group": 14,
+          "accepted": true
+        },
+        {
+          "parent_group": 11,
+          "child_group": 14,
+          "accepted": true
+        },
+        {
+          "parent_group": 12,
+          "child_group": 14,
+          "accepted": true
+        },
+        {
+          "parent_group": 13,
+          "child_group": 14,
+          "accepted": true
+        },
+        {
+          "parent_group": 14,
+          "child_group": 14,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": false,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.0234375
+      }
+    }
+  },
+  {
+    "num_cells": 128,
+    "first_event": 10,
+    "times": [
+      0.09999999403953552,
+      0.10999999940395355,
+      0.11999999731779099
+    ],
+    "gate": 0.0234375,
+    "method": "delayed_family",
+    "result": {
+      "models": [
+        {
+          "child_group": 1,
+          "later_group": 1,
+          "usable": true,
+          "future_parent_coverage": 0.9061371841155235,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": -0.0010653580920047794,
+          "backward_time_ratio": 1.0000007450582151
+        },
+        {
+          "child_group": 14,
+          "later_group": 12,
+          "usable": true,
+          "future_parent_coverage": 0.9061371841155235,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": -0.001065356157995561,
+          "backward_time_ratio": 1.0000007450582151
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 1,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9933300018901068,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 2,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9963954788895456,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 3,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9815164947472734,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 4,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9815164825190797,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 5,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9815164219136323,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 6,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.981516458335886,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 7,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9720002078946075,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 8,
+          "child_group": 14,
+          "status": "conditional_support",
+          "score_margin": 0.9720001834416082,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 9,
+          "child_group": 14,
+          "status": "conditional_support",
+          "score_margin": 0.9815165198996361,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 10,
+          "child_group": 14,
+          "status": "conditional_support",
+          "score_margin": 0.9815164809443923,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 11,
+          "child_group": 14,
+          "status": "conditional_support",
+          "score_margin": 0.9815164392824852,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 12,
+          "child_group": 14,
+          "status": "conditional_support",
+          "score_margin": 0.981516483959745,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 13,
+          "child_group": 14,
+          "status": "conditional_support",
+          "score_margin": 0.9963955176297127,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 14,
+          "child_group": 14,
+          "status": "conditional_support",
+          "score_margin": 0.9933298929268402,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [
+        {
+          "child_group": 1,
+          "later_group": 1,
+          "parent_groups": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "child_union_coverage": 0.9169675090252708,
+          "accepted": true,
+          "physical_ancestry_established": false
+        },
+        {
+          "child_group": 14,
+          "later_group": 12,
+          "parent_groups": [
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "child_union_coverage": 0.9169675090252708,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 1,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 2,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 3,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 4,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 5,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 6,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 7,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 8,
+          "child_group": 14,
+          "accepted": true
+        },
+        {
+          "parent_group": 9,
+          "child_group": 14,
+          "accepted": true
+        },
+        {
+          "parent_group": 10,
+          "child_group": 14,
+          "accepted": true
+        },
+        {
+          "parent_group": 11,
+          "child_group": 14,
+          "accepted": true
+        },
+        {
+          "parent_group": 12,
+          "child_group": 14,
+          "accepted": true
+        },
+        {
+          "parent_group": 13,
+          "child_group": 14,
+          "accepted": true
+        },
+        {
+          "parent_group": 14,
+          "child_group": 14,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": true,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.0234375
+      }
+    }
+  },
+  {
+    "num_cells": 128,
+    "first_event": 10,
+    "times": [
+      0.09999999403953552,
+      0.10999999940395355,
+      0.11999999731779099
+    ],
+    "gate": 0.0390625,
+    "method": "static_family",
+    "result": {
+      "models": [
+        {
+          "child_group": 1,
+          "later_group": 1,
+          "usable": true,
+          "future_parent_coverage": 0.9530685920577617,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": -0.0010009881377966942,
+          "backward_time_ratio": 1.0000007450582151
+        },
+        {
+          "child_group": 14,
+          "later_group": 12,
+          "usable": true,
+          "future_parent_coverage": 0.9530685920577617,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": -0.0010010005945444965,
+          "backward_time_ratio": 1.0000007450582151
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 1,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9898773819102132,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 2,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9949148452246954,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 3,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9843748264263522,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 4,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9843747809366226,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 5,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9843748167939098,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 6,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9843748404898791,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 7,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9897949623520467,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 8,
+          "child_group": 14,
+          "status": "conditional_support",
+          "score_margin": 0.9897949387088888,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 9,
+          "child_group": 14,
+          "status": "conditional_support",
+          "score_margin": 0.9843748310321578,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 10,
+          "child_group": 14,
+          "status": "conditional_support",
+          "score_margin": 0.984374803208778,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 11,
+          "child_group": 14,
+          "status": "conditional_support",
+          "score_margin": 0.9843748383032892,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 12,
+          "child_group": 14,
+          "status": "conditional_support",
+          "score_margin": 0.9843748482207346,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 13,
+          "child_group": 14,
+          "status": "conditional_support",
+          "score_margin": 0.9949148361768388,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 14,
+          "child_group": 14,
+          "status": "conditional_support",
+          "score_margin": 0.989877385170281,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [
+        {
+          "child_group": 1,
+          "later_group": 1,
+          "parent_groups": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        },
+        {
+          "child_group": 14,
+          "later_group": 12,
+          "parent_groups": [
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 1,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 2,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 3,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 4,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 5,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 6,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 7,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 8,
+          "child_group": 14,
+          "accepted": true
+        },
+        {
+          "parent_group": 9,
+          "child_group": 14,
+          "accepted": true
+        },
+        {
+          "parent_group": 10,
+          "child_group": 14,
+          "accepted": true
+        },
+        {
+          "parent_group": 11,
+          "child_group": 14,
+          "accepted": true
+        },
+        {
+          "parent_group": 12,
+          "child_group": 14,
+          "accepted": true
+        },
+        {
+          "parent_group": 13,
+          "child_group": 14,
+          "accepted": true
+        },
+        {
+          "parent_group": 14,
+          "child_group": 14,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": false,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.0390625
+      }
+    }
+  },
+  {
+    "num_cells": 128,
+    "first_event": 10,
+    "times": [
+      0.09999999403953552,
+      0.10999999940395355,
+      0.11999999731779099
+    ],
+    "gate": 0.0390625,
+    "method": "delayed_family",
+    "result": {
+      "models": [
+        {
+          "child_group": 1,
+          "later_group": 1,
+          "usable": true,
+          "future_parent_coverage": 0.9530685920577617,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": -0.0010009881377966942,
+          "backward_time_ratio": 1.0000007450582151
+        },
+        {
+          "child_group": 14,
+          "later_group": 12,
+          "usable": true,
+          "future_parent_coverage": 0.9530685920577617,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": -0.0010010005945444965,
+          "backward_time_ratio": 1.0000007450582151
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 1,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9958105859441315,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 2,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9981461711487829,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 3,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.988870376307998,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 4,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9888703654067605,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 5,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9888703295148982,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 6,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9888703521753385,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 7,
+          "child_group": 1,
+          "status": "conditional_support",
+          "score_margin": 0.9836042763014818,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 8,
+          "child_group": 14,
+          "status": "conditional_support",
+          "score_margin": 0.9836041714054761,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 9,
+          "child_group": 14,
+          "status": "conditional_support",
+          "score_margin": 0.988870402604437,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 10,
+          "child_group": 14,
+          "status": "conditional_support",
+          "score_margin": 0.9888703777202845,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 11,
+          "child_group": 14,
+          "status": "conditional_support",
+          "score_margin": 0.9888703532257944,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 12,
+          "child_group": 14,
+          "status": "conditional_support",
+          "score_margin": 0.9888703784952872,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 13,
+          "child_group": 14,
+          "status": "conditional_support",
+          "score_margin": 0.9981461287237035,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 14,
+          "child_group": 14,
+          "status": "conditional_support",
+          "score_margin": 0.995810600672063,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [
+        {
+          "child_group": 1,
+          "later_group": 1,
+          "parent_groups": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        },
+        {
+          "child_group": 14,
+          "later_group": 12,
+          "parent_groups": [
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 1,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 2,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 3,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 4,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 5,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 6,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 7,
+          "child_group": 1,
+          "accepted": true
+        },
+        {
+          "parent_group": 8,
+          "child_group": 14,
+          "accepted": true
+        },
+        {
+          "parent_group": 9,
+          "child_group": 14,
+          "accepted": true
+        },
+        {
+          "parent_group": 10,
+          "child_group": 14,
+          "accepted": true
+        },
+        {
+          "parent_group": 11,
+          "child_group": 14,
+          "accepted": true
+        },
+        {
+          "parent_group": 12,
+          "child_group": 14,
+          "accepted": true
+        },
+        {
+          "parent_group": 13,
+          "child_group": 14,
+          "accepted": true
+        },
+        {
+          "parent_group": 14,
+          "child_group": 14,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": true,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.0390625
+      }
+    }
+  }
+]

@@ -825,6 +825,13 @@ def finalize_config(config: SimulationConfig, state_shape) -> SimulationConfig:
                 )
             )
 
+    strengths = config.wind_config.source_strengths
+    if not isinstance(strengths, tuple):
+        raise ValueError('Wind source strengths must be a tuple.')
+    if strengths and (not config.wind_config.source_positions
+                      or len(strengths) != len(config.wind_config.source_positions)
+                      or not all(math.isfinite(x) and x > 0 for x in strengths)):
+        raise ValueError('Wind source strengths require one finite positive weight per explicit source.')
     if config.wind_config.source_positions:
         if (not config.wind_config.stellar_wind or config.dimensionality != 3
                 or config.geometry != CARTESIAN or config.solver_mode != FINITE_VOLUME

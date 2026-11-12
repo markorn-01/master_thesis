@@ -1,0 +1,137 @@
+{
+  "status": "complete",
+  "commit": "b7cd39573f6476b93790022e06bc441d081acd7d",
+  "backend": "cpu",
+  "python": "3.11.15",
+  "jax": "0.10.2",
+  "num_cells": 32,
+  "t_end": 0.02,
+  "requested_times": [
+    0.0,
+    0.009999999776482582,
+    0.019999999552965164
+  ],
+  "source_positions": [
+    [
+      0.35,
+      0.5,
+      0.5
+    ],
+    [
+      0.65,
+      0.5,
+      0.5
+    ]
+  ],
+  "injection_radius": 0.0625,
+  "wind_mass_loss_rate_per_source": 0.01833333333333333,
+  "wind_terminal_velocity": 10.0,
+  "nominal_wind_luminosity_per_source": 0.9166666666666665,
+  "nominal_total_wind_luminosity": 1.3749999999999998,
+  "wind_parameter_convention": "Shared base mass parameter times source_strengths; velocity is shared.",
+  "injection_cell_counts": [
+    12,
+    12
+  ],
+  "source_strengths": [
+    1.0,
+    0.5
+  ],
+  "source_mass_loss_rates": [
+    0.01833333333333333,
+    0.009166666666666665
+  ],
+  "nominal_wind_luminosities": [
+    0.9166666666666665,
+    0.45833333333333326
+  ],
+  "discrete_mass_rates": [
+    0.006565141402540682,
+    0.003282570701270341
+  ],
+  "discrete_energy_rates": [
+    0.32825707012703415,
+    0.16412853506351707
+  ],
+  "equal_source_reference_preserved": false,
+  "source_budget_plan": {
+    "num_cells": 32,
+    "injection_cell_counts": [
+      12,
+      12
+    ],
+    "parameter_scale": 1.833333333333333,
+    "energy_rate_definition": "Integrated prescribed mechanical-energy source coefficient before the state-dependent EI pressure conversion; not measured net gas-energy deposition.",
+    "requested_mass_loss_rate_per_source": 0.01,
+    "wind_mass_loss_rate_per_source": 0.01833333333333333,
+    "wind_terminal_velocity": 10.0,
+    "nominal_wind_luminosity_per_source": 0.9166666666666665,
+    "nominal_total_wind_luminosity": 1.833333333333333,
+    "discrete_mass_rates": [
+      0.006565141402540682,
+      0.006565141402540682
+    ],
+    "discrete_energy_rates": [
+      0.32825707012703415,
+      0.32825707012703415
+    ],
+    "unmatched_discrete_mass_rates": [
+      0.0035809862195676457,
+      0.0035809862195676457
+    ],
+    "unmatched_discrete_energy_rates": [
+      0.17904931097838228,
+      0.17904931097838228
+    ],
+    "budget_matched": true,
+    "target_discrete_mass_rates": [
+      0.006565141402540683,
+      0.006565141402540683
+    ],
+    "target_discrete_energy_rates": [
+      0.32825707012703415,
+      0.32825707012703415
+    ]
+  },
+  "source_budget_plan_scope": "Equal-source base coefficient before source-strength weighting.",
+  "source_budget_reference": {
+    "path": "outputs/two_bubbles_iwr_compgpu9_n064/metadata.json",
+    "sha256": "0de3101bb4106541ae5edce2ce21596d0e64d9fbbe066532612c7ccd2766392a"
+  },
+  "injection_prescription": "existing EI analytic-volume normalization and radius-minus-half-cell mask",
+  "ambient_density": 1.0,
+  "ambient_pressure": 0.01,
+  "gamma": 1.6666666666666667,
+  "domain": [
+    0.0,
+    1.0
+  ],
+  "units": "dimensionless baseline code units",
+  "surface_catalog_schema_version": 3,
+  "surface_selection": "outside both injection spheres using refined positions",
+  "source_endpoint_flags": "per-source and union, advisory only",
+  "source_distances": "geometric descriptors, not shock ownership or physical labels",
+  "histogram_weighting": "one count per selected surface cell",
+  "radial_classification": false,
+  "temporal_tracking": false,
+  "surface_integrated_power": false,
+  "online_retains_gas_snapshots": false,
+  "verify_offline": true,
+  "transfer": "ten fixed-shape diagnostic grids plus two 2D slices",
+  "source_sha256": {
+    "/Users/minhn/Documents/Heidelberg University/fifth_semester/Thesis/master_thesis/experiments/wind_bubble/run_two_bubbles.py": "5d5b7067f18940c89ef52fc041f2dc9abc36221a14c25329d94ac6796a4834ce",
+    "experiments/shock/analyze_state.py": "6aa8dff9ab5bca380deb23f9d5c02a9d3cdc1b337e30c795aa2b400da8b2ff55",
+    "experiments/wind_bubble/sparse_surfaces.py": "0ad8795e477eab7863aecef14f37c261624336e63f31536d2010c91d44d84cc4",
+    "experiments/wind_bubble/run_online_bubble.py": "69d283bdc29ba2c087cebd5e593c59a8b66d3e5ee7d4035dffc9201e3351d975",
+    "astronomix/_modules/_stellar_wind/stellar_wind.py": "dc7a2f45447f77f21b36771b06b37aa35d7ad7eb072cbb2f7926f7ef4999dcf9",
+    "astronomix/_modules/_stellar_wind/stellar_wind_options.py": "97c06b916a4539b524dee614ad5f9faa1505fd8530948884522b2e3406bdb42a",
+    "experiments/wind_bubble/two_bubble_source_budget.py": "4dfd054ade9d2c7f651bb56b443cc80b8f91eacd87f56e574445349b648afbb3",
+    "experiments/wind_bubble/unequal_sources.py": "e3d42d750e5bdcf9c1f894ded68fd543ae5a467e0822a9b07b00a678a0a1ef95",
+    "astronomix/option_classes/simulation_config.py": "ad84e2b0cb48ae3f13c702e169e5284df78077400140b20389550369abce8e55"
+  },
+  "actual_times": [
+    0.0,
+    0.009999999776482582,
+    0.019999999552965164
+  ]
+}

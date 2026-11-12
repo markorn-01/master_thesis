@@ -1,0 +1,171 @@
+{
+  "panels": [
+    {
+      "num_cells": 64,
+      "event": 13,
+      "family_child": 1,
+      "groups": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "surface_samples": 100,
+      "coordinate_sha256": "82c27671fcbd7c52809fab6a13784077a6a225be87b3343705f0d8b703d55466"
+    },
+    {
+      "num_cells": 64,
+      "event": 13,
+      "family_child": 6,
+      "groups": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "surface_samples": 100,
+      "coordinate_sha256": "7232230f033d03840cf29b2f228c2eb7c42fe820e0c4f5795ee7e7d310dffbdd"
+    },
+    {
+      "num_cells": 64,
+      "event": 14,
+      "family_child": 1,
+      "groups": [
+        1
+      ],
+      "surface_samples": 152,
+      "coordinate_sha256": "4e311b1c990e629cd0aa16743adf507373800d328efe059387bae6c596255635"
+    },
+    {
+      "num_cells": 64,
+      "event": 14,
+      "family_child": 6,
+      "groups": [
+        6
+      ],
+      "surface_samples": 152,
+      "coordinate_sha256": "b2ee20bec3e9f8106c574e00eb5313a7789ee593f2e4545eb643cdd24156d105"
+    },
+    {
+      "num_cells": 64,
+      "event": 15,
+      "family_child": 1,
+      "groups": [
+        1
+      ],
+      "surface_samples": 220,
+      "coordinate_sha256": "772da6b1512c96cc5ad0345fc076d045dbb142e2c4401a7fca7042c05f0d9ae6"
+    },
+    {
+      "num_cells": 64,
+      "event": 15,
+      "family_child": 6,
+      "groups": [
+        2
+      ],
+      "surface_samples": 220,
+      "coordinate_sha256": "02bdc621a8b61f93a765562c6468279906ba3266e7f445ff1561d04be9fad3ab"
+    },
+    {
+      "num_cells": 128,
+      "event": 10,
+      "family_child": 1,
+      "groups": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "surface_samples": 368,
+      "coordinate_sha256": "94d058bfdffc22cea728ad8823f71b9175ff2668a1076224199ab4f849d01946"
+    },
+    {
+      "num_cells": 128,
+      "event": 10,
+      "family_child": 14,
+      "groups": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "surface_samples": 368,
+      "coordinate_sha256": "eb88b74f4a6bec1acfa106df4fd5cb68328a678085c1824fc5b17fd72e5706c8"
+    },
+    {
+      "num_cells": 128,
+      "event": 11,
+      "family_child": 1,
+      "groups": [
+        1
+      ],
+      "surface_samples": 1108,
+      "coordinate_sha256": "d579e4fbc1d9bf5f1fe23d5f9fed29545cef587fe89880b02752d9b646f767b5"
+    },
+    {
+      "num_cells": 128,
+      "event": 11,
+      "family_child": 14,
+      "groups": [
+        14
+      ],
+      "surface_samples": 1108,
+      "coordinate_sha256": "bf8a6f0316aecfa70ab175b9232468c5b9add6ef3cc80058de9da67d73b2c975"
+    },
+    {
+      "num_cells": 128,
+      "event": 12,
+      "family_child": 1,
+      "groups": [
+        1
+      ],
+      "surface_samples": 1108,
+      "coordinate_sha256": "96c2328e19333e956cc995843ad4698c88e02496673c0d4a70f1c19dfe47c6d6"
+    },
+    {
+      "num_cells": 128,
+      "event": 12,
+      "family_child": 14,
+      "groups": [
+        12
+      ],
+      "surface_samples": 1108,
+      "coordinate_sha256": "542334cebede907cc075f0bbece5eb4b5d7b40b5d6eb3a01de66e8daa30634e9"
+    }
+  ],
+  "input_sha256": {
+    "outputs/tracklet_fragment_support_v1/real_results.json": "59ed5344b78aae4a96e0ccd237ad2d797e60d948b4768b707ce368f088420d52",
+    "outputs/tracklet_fragment_support_v1/verification.json": "d09c58c596e253ce5f93c4df42ead904205026a7042320e3c965a6fd57e5ac33",
+    "outputs/two_bubbles_iwr_compgpu9_n064/online/surfaces_0013.npz": "1a449655e856a1cc4ff24e0b317329ac8752cc26d9a491e55c5cd693958f859c",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n064_event0013.npz": "036a81825528fcc8e31ce67335342101c25f5d0f4957ff7e28a713dc61c5e21e",
+    "outputs/two_bubbles_iwr_compgpu9_n064/online/surfaces_0014.npz": "1cf6518c373f0c0359dfc13ac08b975b15d0c3bec6c50ae810d4fcd694d7e896",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n064_event0014.npz": "e1581fe3259e1f31a0a31defe683ef2850c1178ddfbdcd7f20bb68ba0105a93d",
+    "outputs/two_bubbles_iwr_compgpu9_n064/online/surfaces_0015.npz": "e44dbf8f0c38a9bfedea7a705fb530f4f93c349af0def1a6dd15196f51e62d5c",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n064_event0015.npz": "6a16ba829aeae6682860b98745589934197dafc4e4dd681e49a7ee2a1dc83ca5",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0010.npz": "7d4e703d382d58e7f4aa7f02be233502eab3653096229020f60bb6033eef5ef8",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0010.npz": "bd64ad4327df15c26b54a415b46ccaf450d0973fa3972c6fb7afa65d66940d15",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0011.npz": "a78ac1eb296d3146b84ad4c7a4c14011dfd9dd005edc58937e6abf27b3afa823",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0011.npz": "6689c9e071aa9ded3bd2536a33a4ae4a6022d2a0097d3c8c8148ea2facaeae74",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0012.npz": "015d46039fa69df07f2e61ec18ab34a31be27f49c7d9cfab848ce86e0430d0c6",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0012.npz": "c9099c13f60c3d3093a2455e9e1929982c189e20b198077d0f95083501be0c78"
+  },
+  "source_sha256": {
+    "/Users/minhn/Documents/Heidelberg University/fifth_semester/Thesis/master_thesis/experiments/wind_bubble/plot_fragment_families.py": "1780d709a0313e6c86e94663fad2741c61e354d147e04070d7f7ffed3127d623",
+    "experiments/wind_bubble/surfel_display.py": "20a8924c1086529299c6025e668d007b7608c9432f85d22052e85bca6efe527f"
+  },
+  "positions_moved": false,
+  "normals_changed": false,
+  "connectivity_created": false,
+  "physical_ancestry_established": false,
+  "oriented_disk_radius_in_cells": 0.45,
+  "polygon_vertices_per_disk": 10,
+  "scope": "Only conditional inner families at the narrow gate; full family populations, no subsampling."
+}

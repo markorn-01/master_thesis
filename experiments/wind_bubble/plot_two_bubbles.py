@@ -53,7 +53,7 @@ def render(directory, index, output):
         axis.scatter(sources[:,0],sources[:,1],marker='*',c=['#dc6a22','#c52e62'],s=65,edgecolors='white')
         axis.set(xlabel='x',ylabel='y',title=f'{label} slice at z={z:.4f}')
         fig.colorbar(image,ax=axis,pad=.02)
-    fig.suptitle(f'Two identical wind sources: t={time:.3f}',fontsize=17)
+    fig.suptitle(f'Two wind sources: t={time:.3f}',fontsize=17)
     fig.text(.04,.045,f'{len(pos)} surface samples outside both injection spheres. Stars mark sources.\nUnlabeled point cloud; source positions do not assign shock ownership. Code units. Scales are event-specific.',fontsize=9)
     output.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(output,dpi=140)

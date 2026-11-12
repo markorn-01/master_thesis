@@ -25,6 +25,9 @@ class WindConfig(NamedTuple):
     # original centered source. Currently supported for 3D Cartesian FV EI.
     # WindParams describes EACH source, rather than their combined luminosity.
     source_positions: tuple[tuple[float, float, float], ...] = ()
+    # Optional positive per-source mass and mechanical-luminosity multipliers.
+    # Empty preserves identical-source behavior; currently 3D FV EI only.
+    source_strengths: tuple[float, ...] = ()
 
 
 class WindParams(NamedTuple):

@@ -1,0 +1,67 @@
+% Draft addition to the group-tracking methods/results discussion.
+% Merge tracking_references.bib into the Overleaf bibliography before use.
+% Unequal-bubble collision results are pending and intentionally not claimed.
+\subsection{Delayed Support for Fragmented Shock Surfaces}
+\label{subsec:delayed_fragment_support}
+
+An uncertain event may reflect a change in the representation of a surface:
+several small detected patches can be followed by one coherent group.
+Selecting only a few predecessor patches can then give an incomplete
+description. A bounded three-state experiment was therefore used to examine
+conditional fragment support. Delaying an association until later observations
+are available follows a general principle of multiple-hypothesis tracking
+\cite{Reid1979}. Linking already formed track segments provides a related
+strategy for handling incomplete observations and merge or split events
+\cite{Jaqaman2008}. The present surface-based procedure is an original
+adaptation of these ideas, rather than an implementation of either complete
+published algorithm.
+
+For three saved times $t_0<t_1<t_2$, the procedure first requires a shared
+one-to-one continuation from a group at $t_1$ to a group at $t_2$.
+The median normal displacement $s$ between compatible samples in these
+groups provides a short-window motion estimate. The earlier position of
+each sample in the group at $t_1$ is predicted as
+\begin{equation}
+    \widetilde{\boldsymbol{x}}(t_0)
+    =
+    \boldsymbol{x}(t_1)
+    - \frac{t_1-t_0}{t_2-t_1}\,s\,\hat{\boldsymbol{n}}(t_1).
+    \label{eq:backward_normal_prediction}
+\end{equation}
+This assumes approximately constant normal motion over the window and
+does not identify material-point trajectories. Earlier fragments are compared
+with the predicted group using distance and signed-normal compatibility.
+An attachment requires at least $50\%$ fragment coverage and a score margin
+of $0.1$ over competing eligible families or the unmatched alternative.
+The union of attached fragments must cover at least $50\%$ of the predicted
+group samples. The number of fragments per family is not limited to three.
+
+The experiment compared the adjacent-event prototype, a static family test,
+and the backward-predicted family test. The static test retained the later
+continuation requirement but omitted the displacement in
+Equation~\ref{eq:backward_normal_prediction}. Across seven targeted synthetic
+cases and three distance gates, the respective numbers of exact stipulated
+correspondences were $6/21$, $9/21$, and $13/21$. The predicted family method
+retained six false links when geometric support was evaluated as physical
+ancestry in deliberately indistinguishable-observation controls. These
+failures demonstrate that supported family membership must remain distinct
+from an established physical predecessor relationship.
+
+In the saved two-bubble windows, the method associated the ten inner patches
+at $64^3$ with two families of five, and the fourteen patches at $128^3$ with
+two families of seven. At the narrower distance gate, the unions covered
+approximately $89.5\%$ and $91.7\%$ of their respective predicted groups;
+coverage reached $100\%$ at the wider gate. Family membership was identical
+between the static and predicted methods at both gates. Thus, these windows
+support the unrestricted fragment-family description, but do not demonstrate
+an additional membership benefit from the normal-motion estimate. The
+conditional links were retained separately from the existing event graph.
+
+For spatial inspection, the same sample positions were also rendered as
+small disks perpendicular to their saved normals, inspired by surfel
+representations \cite{Pfister2000}. Each disk had radius $0.45\,\Delta x$.
+This display added no connectivity between samples and did not alter the
+physical normals, Mach numbers, or surface-integrated measurements. Gaps
+remained visible; the rendering did not constitute a closed-surface
+reconstruction. Validation with unequal wind strengths remains a subsequent
+experiment.

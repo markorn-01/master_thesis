@@ -1,0 +1,52 @@
+{
+  "controlled": [
+    {
+      "method": "adjacent_event",
+      "configurations": 21,
+      "exact": 6,
+      "false_links": 0,
+      "missed_links": 36
+    },
+    {
+      "method": "static_family",
+      "configurations": 21,
+      "exact": 9,
+      "false_links": 10,
+      "missed_links": 2
+    },
+    {
+      "method": "delayed_family",
+      "configurations": 21,
+      "exact": 13,
+      "false_links": 6,
+      "missed_links": 2
+    }
+  ],
+  "dense_checks": 42,
+  "shuffle_checks": 42,
+  "real_windows": 2,
+  "real_configurations": 8,
+  "real_dense_checks": 8,
+  "input_sha256": {
+    "outputs/two_bubbles_event_history_resolution_n064_n128/n064_graph.json": "8e65b88cf5c70921f37db29f10e50004e916b4830b6e4e1a761b2bba464f12ef",
+    "outputs/two_bubbles_iwr_compgpu9_n064/online/surfaces_0013.npz": "1a449655e856a1cc4ff24e0b317329ac8752cc26d9a491e55c5cd693958f859c",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n064_event0013.npz": "036a81825528fcc8e31ce67335342101c25f5d0f4957ff7e28a713dc61c5e21e",
+    "outputs/two_bubbles_iwr_compgpu9_n064/online/surfaces_0014.npz": "1cf6518c373f0c0359dfc13ac08b975b15d0c3bec6c50ae810d4fcd694d7e896",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n064_event0014.npz": "e1581fe3259e1f31a0a31defe683ef2850c1178ddfbdcd7f20bb68ba0105a93d",
+    "outputs/two_bubbles_iwr_compgpu9_n064/online/surfaces_0015.npz": "e44dbf8f0c38a9bfedea7a705fb530f4f93c349af0def1a6dd15196f51e62d5c",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n064_event0015.npz": "6a16ba829aeae6682860b98745589934197dafc4e4dd681e49a7ee2a1dc83ca5",
+    "outputs/two_bubbles_event_history_v1_n128/graph.json": "31eaf14cc9cca3943947c405e62f7766928bba2761f1022fdd5134c2008559d3",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0010.npz": "7d4e703d382d58e7f4aa7f02be233502eab3653096229020f60bb6033eef5ef8",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0010.npz": "bd64ad4327df15c26b54a415b46ccaf450d0973fa3972c6fb7afa65d66940d15",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0011.npz": "a78ac1eb296d3146b84ad4c7a4c14011dfd9dd005edc58937e6abf27b3afa823",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0011.npz": "6689c9e071aa9ded3bd2536a33a4ae4a6022d2a0097d3c8c8148ea2facaeae74",
+    "outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/online/surfaces_0012.npz": "015d46039fa69df07f2e61ec18ab34a31be27f49c7d9cfab848ce86e0430d0c6",
+    "outputs/two_bubbles_resolution_comparison_n064_n128/groups_n128_event0012.npz": "c9099c13f60c3d3093a2455e9e1929982c189e20b198077d0f95083501be0c78"
+  },
+  "source_sha256": {
+    "/Users/minhn/Documents/Heidelberg University/fifth_semester/Thesis/master_thesis/experiments/astrolink/check_tracklet_fragments.py": "102504c69248975b4e20b12574aa1f617e3a87915f978e4bc1d0666e2be73ce4",
+    "experiments/astrolink/tracklet_fragments.py": "28361eddee3b893f5ebf6f989c906f0420eff3da7b88488b46223751a011e963"
+  },
+  "original_tracking_outputs_changed": false,
+  "physical_ancestry_established": false
+}

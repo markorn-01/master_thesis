@@ -485,11 +485,12 @@ def _wind_ei3D(
     # per-source rates, using the same analytic-volume EI prescription.
     if config.wind_config.source_positions:
         injection_mask = jnp.zeros_like(helper_data.r)
-        for position in config.wind_config.source_positions:
+        strengths = config.wind_config.source_strengths or (1.,)*len(config.wind_config.source_positions)
+        for position, strength in zip(config.wind_config.source_positions, strengths):
             radius = jnp.linalg.norm(
                 helper_data.geometric_centers - jnp.asarray(position), axis=-1
             )
-            injection_mask = injection_mask + (
+            injection_mask = injection_mask + strength * (
                 radius <= injection_radius - config.grid_spacing / 2
             )
     else:
@@ -515,6 +516,10 @@ def _wind_ei3D(
         0.5 * wind_params.wind_final_velocity**2 * wind_params.wind_mass_loss_rate
         / injection_volume
     )
+    if config.wind_config.source_strengths:
+        # Apply the coefficient before state-dependent pressure conversion.
+        # This matches a disjoint single source with its mass parameter scaled.
+        energy_rate = energy_rate * injection_mask
     speed = jnp.sqrt(
         primitive_state[registered_variables.velocity_index.x] ** 2
         + primitive_state[registered_variables.velocity_index.y] ** 2
@@ -524,7 +529,7 @@ def _wind_ei3D(
     pressure_rate = pressure_from_energy(energy_rate, updated_density, speed, gamma)
 
     source_term = source_term.at[registered_variables.pressure_index].set(
-        pressure_rate * injection_mask
+        pressure_rate * ((injection_mask > 0) if config.wind_config.source_strengths else injection_mask)
     )
 
     primitive_state = primitive_state + source_term * dt

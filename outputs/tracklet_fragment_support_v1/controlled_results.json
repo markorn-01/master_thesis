@@ -1,0 +1,7015 @@
+[
+  {
+    "case": "eight_fragments",
+    "gate": 0.05,
+    "method": "adjacent_event",
+    "meaning": "Eight geometric fragments become one continued surface.",
+    "metrics": {
+      "accepted_links": [],
+      "expected_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          7,
+          10
+        ]
+      ],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          7,
+          10
+        ]
+      ],
+      "exact_correspondence": false
+    },
+    "result": {
+      "candidates": [],
+      "selection": {
+        "optimal_score": 0.0,
+        "solver_selected": [],
+        "accepted": [],
+        "ambiguous": [],
+        "exclusion_gaps": {}
+      },
+      "events": [],
+      "links": [],
+      "parents": [
+        {
+          "parent_group": 0,
+          "status": "unmatched"
+        },
+        {
+          "parent_group": 1,
+          "status": "unmatched"
+        },
+        {
+          "parent_group": 2,
+          "status": "unmatched"
+        },
+        {
+          "parent_group": 3,
+          "status": "unmatched"
+        },
+        {
+          "parent_group": 4,
+          "status": "unmatched"
+        },
+        {
+          "parent_group": 5,
+          "status": "unmatched"
+        },
+        {
+          "parent_group": 6,
+          "status": "unmatched"
+        },
+        {
+          "parent_group": 7,
+          "status": "unmatched"
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "status": "unmatched"
+        }
+      ],
+      "parameters": {
+        "gate": 0.05,
+        "coverage": 0.5,
+        "exclusive_fraction": 0.1,
+        "distance_weight": 0.25,
+        "max_partners": 3,
+        "normal_angle": 60.0,
+        "tie_tolerance": 1e-08
+      }
+    }
+  },
+  {
+    "case": "eight_fragments",
+    "gate": 0.05,
+    "method": "static_family",
+    "meaning": "Eight geometric fragments become one continued surface.",
+    "metrics": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          7,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          7,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          7,
+          10
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.01,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.95,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.95,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 2,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.95,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 3,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.95,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 4,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.95,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 5,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.95,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 6,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.95,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 7,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.95,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "parent_groups": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 2,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 3,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 4,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 5,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 6,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 7,
+          "child_group": 10,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": false,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.05
+      }
+    }
+  },
+  {
+    "case": "eight_fragments",
+    "gate": 0.05,
+    "method": "delayed_family",
+    "meaning": "Eight geometric fragments become one continued surface.",
+    "metrics": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          7,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          7,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          7,
+          10
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.01,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 1.0,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 1.0,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 2,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 1.0,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 3,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 1.0,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 4,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 1.0,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 5,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 1.0,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 6,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 1.0,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 7,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 1.0,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "parent_groups": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 2,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 3,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 4,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 5,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 6,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 7,
+          "child_group": 10,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": true,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.05
+      }
+    }
+  },
+  {
+    "case": "eight_fragments",
+    "gate": 0.07,
+    "method": "adjacent_event",
+    "meaning": "Eight geometric fragments become one continued surface.",
+    "metrics": {
+      "accepted_links": [],
+      "expected_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          7,
+          10
+        ]
+      ],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          7,
+          10
+        ]
+      ],
+      "exact_correspondence": false
+    },
+    "result": {
+      "candidates": [],
+      "selection": {
+        "optimal_score": 0.0,
+        "solver_selected": [],
+        "accepted": [],
+        "ambiguous": [],
+        "exclusion_gaps": {}
+      },
+      "events": [],
+      "links": [],
+      "parents": [
+        {
+          "parent_group": 0,
+          "status": "unmatched"
+        },
+        {
+          "parent_group": 1,
+          "status": "unmatched"
+        },
+        {
+          "parent_group": 2,
+          "status": "unmatched"
+        },
+        {
+          "parent_group": 3,
+          "status": "unmatched"
+        },
+        {
+          "parent_group": 4,
+          "status": "unmatched"
+        },
+        {
+          "parent_group": 5,
+          "status": "unmatched"
+        },
+        {
+          "parent_group": 6,
+          "status": "unmatched"
+        },
+        {
+          "parent_group": 7,
+          "status": "unmatched"
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "status": "unmatched"
+        }
+      ],
+      "parameters": {
+        "gate": 0.07,
+        "coverage": 0.5,
+        "exclusive_fraction": 0.1,
+        "distance_weight": 0.25,
+        "max_partners": 3,
+        "normal_angle": 60.0,
+        "tie_tolerance": 1e-08
+      }
+    }
+  },
+  {
+    "case": "eight_fragments",
+    "gate": 0.07,
+    "method": "static_family",
+    "meaning": "Eight geometric fragments become one continued surface.",
+    "metrics": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          7,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          7,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          7,
+          10
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.01,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9642857142857143,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9642857142857143,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 2,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9642857142857143,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 3,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9642857142857143,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 4,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9642857142857143,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 5,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9642857142857143,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 6,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9642857142857143,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 7,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9642857142857143,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "parent_groups": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 2,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 3,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 4,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 5,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 6,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 7,
+          "child_group": 10,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": false,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.07
+      }
+    }
+  },
+  {
+    "case": "eight_fragments",
+    "gate": 0.07,
+    "method": "delayed_family",
+    "meaning": "Eight geometric fragments become one continued surface.",
+    "metrics": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          7,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          7,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          7,
+          10
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.01,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 1.0,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 1.0,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 2,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 1.0,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 3,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 1.0,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 4,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 1.0,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 5,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 1.0,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 6,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 1.0,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 7,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 1.0,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "parent_groups": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 2,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 3,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 4,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 5,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 6,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 7,
+          "child_group": 10,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": true,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.07
+      }
+    }
+  },
+  {
+    "case": "eight_fragments",
+    "gate": 0.09,
+    "method": "adjacent_event",
+    "meaning": "Eight geometric fragments become one continued surface.",
+    "metrics": {
+      "accepted_links": [],
+      "expected_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          7,
+          10
+        ]
+      ],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          7,
+          10
+        ]
+      ],
+      "exact_correspondence": false
+    },
+    "result": {
+      "candidates": [],
+      "selection": {
+        "optimal_score": 0.0,
+        "solver_selected": [],
+        "accepted": [],
+        "ambiguous": [],
+        "exclusion_gaps": {}
+      },
+      "events": [],
+      "links": [],
+      "parents": [
+        {
+          "parent_group": 0,
+          "status": "unmatched"
+        },
+        {
+          "parent_group": 1,
+          "status": "unmatched"
+        },
+        {
+          "parent_group": 2,
+          "status": "unmatched"
+        },
+        {
+          "parent_group": 3,
+          "status": "unmatched"
+        },
+        {
+          "parent_group": 4,
+          "status": "unmatched"
+        },
+        {
+          "parent_group": 5,
+          "status": "unmatched"
+        },
+        {
+          "parent_group": 6,
+          "status": "unmatched"
+        },
+        {
+          "parent_group": 7,
+          "status": "unmatched"
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "status": "unmatched"
+        }
+      ],
+      "parameters": {
+        "gate": 0.09,
+        "coverage": 0.5,
+        "exclusive_fraction": 0.1,
+        "distance_weight": 0.25,
+        "max_partners": 3,
+        "normal_angle": 60.0,
+        "tie_tolerance": 1e-08
+      }
+    }
+  },
+  {
+    "case": "eight_fragments",
+    "gate": 0.09,
+    "method": "static_family",
+    "meaning": "Eight geometric fragments become one continued surface.",
+    "metrics": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          7,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          7,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          7,
+          10
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.01,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9722222222222222,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9722222222222222,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 2,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9722222222222222,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 3,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9722222222222222,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 4,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9722222222222222,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 5,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9722222222222222,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 6,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9722222222222222,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 7,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9722222222222222,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "parent_groups": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 2,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 3,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 4,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 5,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 6,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 7,
+          "child_group": 10,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": false,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.09
+      }
+    }
+  },
+  {
+    "case": "eight_fragments",
+    "gate": 0.09,
+    "method": "delayed_family",
+    "meaning": "Eight geometric fragments become one continued surface.",
+    "metrics": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          7,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          7,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          7,
+          10
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.01,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 1.0,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 1.0,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 2,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 1.0,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 3,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 1.0,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 4,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 1.0,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 5,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 1.0,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 6,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 1.0,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 7,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 1.0,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "parent_groups": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 2,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 3,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 4,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 5,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 6,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 7,
+          "child_group": 10,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": true,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.09
+      }
+    }
+  },
+  {
+    "case": "future_motion_positive",
+    "gate": 0.05,
+    "method": "adjacent_event",
+    "meaning": "Subsequent normal motion distinguishes two otherwise equal-distance parents under constant motion.",
+    "metrics": {
+      "accepted_links": [],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "exact_correspondence": false
+    },
+    "result": {
+      "candidates": [],
+      "selection": {
+        "optimal_score": 0.0,
+        "solver_selected": [],
+        "accepted": [],
+        "ambiguous": [],
+        "exclusion_gaps": {}
+      },
+      "events": [],
+      "links": [],
+      "parents": [
+        {
+          "parent_group": 0,
+          "status": "unmatched"
+        },
+        {
+          "parent_group": 1,
+          "status": "unmatched"
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "status": "unmatched"
+        }
+      ],
+      "parameters": {
+        "gate": 0.05,
+        "coverage": 0.5,
+        "exclusive_fraction": 0.1,
+        "distance_weight": 0.25,
+        "max_partners": 3,
+        "normal_angle": 60.0,
+        "tie_tolerance": 1e-08
+      }
+    }
+  },
+  {
+    "case": "future_motion_positive",
+    "gate": 0.05,
+    "method": "static_family",
+    "meaning": "Subsequent normal motion distinguishes two otherwise equal-distance parents under constant motion.",
+    "metrics": {
+      "accepted_links": [],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "exact_correspondence": false
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": false,
+          "future_parent_coverage": 0.0,
+          "future_child_coverage": 0.0,
+          "median_normal_displacement": 0.0,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": null,
+          "status": "no_support",
+          "score_margin": null
+        },
+        {
+          "parent_group": 1,
+          "child_group": null,
+          "status": "no_support",
+          "score_margin": null
+        }
+      ],
+      "families": [],
+      "links": [],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": false,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.05
+      }
+    }
+  },
+  {
+    "case": "future_motion_positive",
+    "gate": 0.05,
+    "method": "delayed_family",
+    "meaning": "Subsequent normal motion distinguishes two otherwise equal-distance parents under constant motion.",
+    "metrics": {
+      "accepted_links": [],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "exact_correspondence": false
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": false,
+          "future_parent_coverage": 0.0,
+          "future_child_coverage": 0.0,
+          "median_normal_displacement": 0.0,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": null,
+          "status": "no_support",
+          "score_margin": null
+        },
+        {
+          "parent_group": 1,
+          "child_group": null,
+          "status": "no_support",
+          "score_margin": null
+        }
+      ],
+      "families": [],
+      "links": [],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": true,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.05
+      }
+    }
+  },
+  {
+    "case": "future_motion_positive",
+    "gate": 0.07,
+    "method": "adjacent_event",
+    "meaning": "Subsequent normal motion distinguishes two otherwise equal-distance parents under constant motion.",
+    "metrics": {
+      "accepted_links": [],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "exact_correspondence": false
+    },
+    "result": {
+      "candidates": [
+        {
+          "kind": "continuation",
+          "parents": [
+            0
+          ],
+          "children": [
+            10
+          ],
+          "score": 1.5714285714285716,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 0,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 10,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        },
+        {
+          "kind": "continuation",
+          "parents": [
+            1
+          ],
+          "children": [
+            10
+          ],
+          "score": 1.5714285714285716,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 1,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 10,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        }
+      ],
+      "selection": {
+        "optimal_score": 1.5714285714285716,
+        "solver_selected": [
+          0
+        ],
+        "accepted": [],
+        "ambiguous": [
+          0,
+          1
+        ],
+        "exclusion_gaps": {
+          "0": 0.0
+        }
+      },
+      "events": [],
+      "links": [],
+      "parents": [
+        {
+          "parent_group": 0,
+          "status": "ambiguous"
+        },
+        {
+          "parent_group": 1,
+          "status": "ambiguous"
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "status": "ambiguous"
+        }
+      ],
+      "parameters": {
+        "gate": 0.07,
+        "coverage": 0.5,
+        "exclusive_fraction": 0.1,
+        "distance_weight": 0.25,
+        "max_partners": 3,
+        "normal_angle": 60.0,
+        "tie_tolerance": 1e-08
+      }
+    }
+  },
+  {
+    "case": "future_motion_positive",
+    "gate": 0.07,
+    "method": "static_family",
+    "meaning": "Subsequent normal motion distinguishes two otherwise equal-distance parents under constant motion.",
+    "metrics": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "false_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "missed_links": [],
+      "exact_correspondence": false
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.06,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.7857142857142858,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.7857142857142858,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "parent_groups": [
+            0,
+            1
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": false,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.07
+      }
+    }
+  },
+  {
+    "case": "future_motion_positive",
+    "gate": 0.07,
+    "method": "delayed_family",
+    "meaning": "Subsequent normal motion distinguishes two otherwise equal-distance parents under constant motion.",
+    "metrics": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.06,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 1.0,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 1,
+          "child_group": null,
+          "status": "no_support",
+          "score_margin": null
+        }
+      ],
+      "families": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "parent_groups": [
+            0
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": true,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.07
+      }
+    }
+  },
+  {
+    "case": "future_motion_positive",
+    "gate": 0.09,
+    "method": "adjacent_event",
+    "meaning": "Subsequent normal motion distinguishes two otherwise equal-distance parents under constant motion.",
+    "metrics": {
+      "accepted_links": [],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "exact_correspondence": false
+    },
+    "result": {
+      "candidates": [
+        {
+          "kind": "continuation",
+          "parents": [
+            0
+          ],
+          "children": [
+            10
+          ],
+          "score": 1.6666666666666667,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 0,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 10,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        },
+        {
+          "kind": "continuation",
+          "parents": [
+            1
+          ],
+          "children": [
+            10
+          ],
+          "score": 1.6666666666666667,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 1,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 10,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        }
+      ],
+      "selection": {
+        "optimal_score": 1.6666666666666667,
+        "solver_selected": [
+          0
+        ],
+        "accepted": [],
+        "ambiguous": [
+          0,
+          1
+        ],
+        "exclusion_gaps": {
+          "0": 0.0
+        }
+      },
+      "events": [],
+      "links": [],
+      "parents": [
+        {
+          "parent_group": 0,
+          "status": "ambiguous"
+        },
+        {
+          "parent_group": 1,
+          "status": "ambiguous"
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "status": "ambiguous"
+        }
+      ],
+      "parameters": {
+        "gate": 0.09,
+        "coverage": 0.5,
+        "exclusive_fraction": 0.1,
+        "distance_weight": 0.25,
+        "max_partners": 3,
+        "normal_angle": 60.0,
+        "tie_tolerance": 1e-08
+      }
+    }
+  },
+  {
+    "case": "future_motion_positive",
+    "gate": 0.09,
+    "method": "static_family",
+    "meaning": "Subsequent normal motion distinguishes two otherwise equal-distance parents under constant motion.",
+    "metrics": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "false_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "missed_links": [],
+      "exact_correspondence": false
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.06,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.8333333333333334,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.8333333333333334,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "parent_groups": [
+            0,
+            1
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": false,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.09
+      }
+    }
+  },
+  {
+    "case": "future_motion_positive",
+    "gate": 0.09,
+    "method": "delayed_family",
+    "meaning": "Subsequent normal motion distinguishes two otherwise equal-distance parents under constant motion.",
+    "metrics": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.06,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 1.0,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 1,
+          "child_group": null,
+          "status": "no_support",
+          "score_margin": null
+        }
+      ],
+      "families": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "parent_groups": [
+            0
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": true,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.09
+      }
+    }
+  },
+  {
+    "case": "future_motion_negative",
+    "gate": 0.05,
+    "method": "adjacent_event",
+    "meaning": "Subsequent normal motion distinguishes two otherwise equal-distance parents under constant motion.",
+    "metrics": {
+      "accepted_links": [],
+      "expected_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "exact_correspondence": false
+    },
+    "result": {
+      "candidates": [],
+      "selection": {
+        "optimal_score": 0.0,
+        "solver_selected": [],
+        "accepted": [],
+        "ambiguous": [],
+        "exclusion_gaps": {}
+      },
+      "events": [],
+      "links": [],
+      "parents": [
+        {
+          "parent_group": 0,
+          "status": "unmatched"
+        },
+        {
+          "parent_group": 1,
+          "status": "unmatched"
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "status": "unmatched"
+        }
+      ],
+      "parameters": {
+        "gate": 0.05,
+        "coverage": 0.5,
+        "exclusive_fraction": 0.1,
+        "distance_weight": 0.25,
+        "max_partners": 3,
+        "normal_angle": 60.0,
+        "tie_tolerance": 1e-08
+      }
+    }
+  },
+  {
+    "case": "future_motion_negative",
+    "gate": 0.05,
+    "method": "static_family",
+    "meaning": "Subsequent normal motion distinguishes two otherwise equal-distance parents under constant motion.",
+    "metrics": {
+      "accepted_links": [],
+      "expected_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "exact_correspondence": false
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": false,
+          "future_parent_coverage": 0.0,
+          "future_child_coverage": 0.0,
+          "median_normal_displacement": 0.0,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": null,
+          "status": "no_support",
+          "score_margin": null
+        },
+        {
+          "parent_group": 1,
+          "child_group": null,
+          "status": "no_support",
+          "score_margin": null
+        }
+      ],
+      "families": [],
+      "links": [],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": false,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.05
+      }
+    }
+  },
+  {
+    "case": "future_motion_negative",
+    "gate": 0.05,
+    "method": "delayed_family",
+    "meaning": "Subsequent normal motion distinguishes two otherwise equal-distance parents under constant motion.",
+    "metrics": {
+      "accepted_links": [],
+      "expected_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "exact_correspondence": false
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": false,
+          "future_parent_coverage": 0.0,
+          "future_child_coverage": 0.0,
+          "median_normal_displacement": 0.0,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": null,
+          "status": "no_support",
+          "score_margin": null
+        },
+        {
+          "parent_group": 1,
+          "child_group": null,
+          "status": "no_support",
+          "score_margin": null
+        }
+      ],
+      "families": [],
+      "links": [],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": true,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.05
+      }
+    }
+  },
+  {
+    "case": "future_motion_negative",
+    "gate": 0.07,
+    "method": "adjacent_event",
+    "meaning": "Subsequent normal motion distinguishes two otherwise equal-distance parents under constant motion.",
+    "metrics": {
+      "accepted_links": [],
+      "expected_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "exact_correspondence": false
+    },
+    "result": {
+      "candidates": [
+        {
+          "kind": "continuation",
+          "parents": [
+            0
+          ],
+          "children": [
+            10
+          ],
+          "score": 1.5714285714285716,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 0,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 10,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        },
+        {
+          "kind": "continuation",
+          "parents": [
+            1
+          ],
+          "children": [
+            10
+          ],
+          "score": 1.5714285714285716,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 1,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 10,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        }
+      ],
+      "selection": {
+        "optimal_score": 1.5714285714285716,
+        "solver_selected": [
+          0
+        ],
+        "accepted": [],
+        "ambiguous": [
+          0,
+          1
+        ],
+        "exclusion_gaps": {
+          "0": 0.0
+        }
+      },
+      "events": [],
+      "links": [],
+      "parents": [
+        {
+          "parent_group": 0,
+          "status": "ambiguous"
+        },
+        {
+          "parent_group": 1,
+          "status": "ambiguous"
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "status": "ambiguous"
+        }
+      ],
+      "parameters": {
+        "gate": 0.07,
+        "coverage": 0.5,
+        "exclusive_fraction": 0.1,
+        "distance_weight": 0.25,
+        "max_partners": 3,
+        "normal_angle": 60.0,
+        "tie_tolerance": 1e-08
+      }
+    }
+  },
+  {
+    "case": "future_motion_negative",
+    "gate": 0.07,
+    "method": "static_family",
+    "meaning": "Subsequent normal motion distinguishes two otherwise equal-distance parents under constant motion.",
+    "metrics": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "false_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "missed_links": [],
+      "exact_correspondence": false
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": -0.06,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.7857142857142858,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.7857142857142858,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "parent_groups": [
+            0,
+            1
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": false,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.07
+      }
+    }
+  },
+  {
+    "case": "future_motion_negative",
+    "gate": 0.07,
+    "method": "delayed_family",
+    "meaning": "Subsequent normal motion distinguishes two otherwise equal-distance parents under constant motion.",
+    "metrics": {
+      "accepted_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": -0.06,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": null,
+          "status": "no_support",
+          "score_margin": null
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 1.0,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "parent_groups": [
+            1
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": true,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.07
+      }
+    }
+  },
+  {
+    "case": "future_motion_negative",
+    "gate": 0.09,
+    "method": "adjacent_event",
+    "meaning": "Subsequent normal motion distinguishes two otherwise equal-distance parents under constant motion.",
+    "metrics": {
+      "accepted_links": [],
+      "expected_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "exact_correspondence": false
+    },
+    "result": {
+      "candidates": [
+        {
+          "kind": "continuation",
+          "parents": [
+            0
+          ],
+          "children": [
+            10
+          ],
+          "score": 1.6666666666666667,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 0,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 10,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        },
+        {
+          "kind": "continuation",
+          "parents": [
+            1
+          ],
+          "children": [
+            10
+          ],
+          "score": 1.6666666666666667,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 1,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 10,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        }
+      ],
+      "selection": {
+        "optimal_score": 1.6666666666666667,
+        "solver_selected": [
+          0
+        ],
+        "accepted": [],
+        "ambiguous": [
+          0,
+          1
+        ],
+        "exclusion_gaps": {
+          "0": 0.0
+        }
+      },
+      "events": [],
+      "links": [],
+      "parents": [
+        {
+          "parent_group": 0,
+          "status": "ambiguous"
+        },
+        {
+          "parent_group": 1,
+          "status": "ambiguous"
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "status": "ambiguous"
+        }
+      ],
+      "parameters": {
+        "gate": 0.09,
+        "coverage": 0.5,
+        "exclusive_fraction": 0.1,
+        "distance_weight": 0.25,
+        "max_partners": 3,
+        "normal_angle": 60.0,
+        "tie_tolerance": 1e-08
+      }
+    }
+  },
+  {
+    "case": "future_motion_negative",
+    "gate": 0.09,
+    "method": "static_family",
+    "meaning": "Subsequent normal motion distinguishes two otherwise equal-distance parents under constant motion.",
+    "metrics": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "false_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "missed_links": [],
+      "exact_correspondence": false
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": -0.06,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.8333333333333334,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.8333333333333334,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "parent_groups": [
+            0,
+            1
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": false,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.09
+      }
+    }
+  },
+  {
+    "case": "future_motion_negative",
+    "gate": 0.09,
+    "method": "delayed_family",
+    "meaning": "Subsequent normal motion distinguishes two otherwise equal-distance parents under constant motion.",
+    "metrics": {
+      "accepted_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": -0.06,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": null,
+          "status": "no_support",
+          "score_margin": null
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 1.0,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "parent_groups": [
+            1
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": true,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.09
+      }
+    }
+  },
+  {
+    "case": "unobservable_ancestry_0",
+    "gate": 0.05,
+    "method": "adjacent_event",
+    "meaning": "Identical three-frame geometry, different stipulated ancestry; not identifiable.",
+    "metrics": {
+      "accepted_links": [],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "exact_correspondence": false
+    },
+    "result": {
+      "candidates": [
+        {
+          "kind": "continuation",
+          "parents": [
+            0
+          ],
+          "children": [
+            10
+          ],
+          "score": 1.8,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 0,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 10,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        },
+        {
+          "kind": "continuation",
+          "parents": [
+            1
+          ],
+          "children": [
+            10
+          ],
+          "score": 1.8,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 1,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 10,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        }
+      ],
+      "selection": {
+        "optimal_score": 1.8,
+        "solver_selected": [
+          0
+        ],
+        "accepted": [],
+        "ambiguous": [
+          0,
+          1
+        ],
+        "exclusion_gaps": {
+          "0": 0.0
+        }
+      },
+      "events": [],
+      "links": [],
+      "parents": [
+        {
+          "parent_group": 0,
+          "status": "ambiguous"
+        },
+        {
+          "parent_group": 1,
+          "status": "ambiguous"
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "status": "ambiguous"
+        }
+      ],
+      "parameters": {
+        "gate": 0.05,
+        "coverage": 0.5,
+        "exclusive_fraction": 0.1,
+        "distance_weight": 0.25,
+        "max_partners": 3,
+        "normal_angle": 60.0,
+        "tie_tolerance": 1e-08
+      }
+    }
+  },
+  {
+    "case": "unobservable_ancestry_0",
+    "gate": 0.05,
+    "method": "static_family",
+    "meaning": "Identical three-frame geometry, different stipulated ancestry; not identifiable.",
+    "metrics": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "false_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "missed_links": [],
+      "exact_correspondence": false
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.0,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "parent_groups": [
+            0,
+            1
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": false,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.05
+      }
+    }
+  },
+  {
+    "case": "unobservable_ancestry_0",
+    "gate": 0.05,
+    "method": "delayed_family",
+    "meaning": "Identical three-frame geometry, different stipulated ancestry; not identifiable.",
+    "metrics": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "false_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "missed_links": [],
+      "exact_correspondence": false
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.0,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "parent_groups": [
+            0,
+            1
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": true,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.05
+      }
+    }
+  },
+  {
+    "case": "unobservable_ancestry_0",
+    "gate": 0.07,
+    "method": "adjacent_event",
+    "meaning": "Identical three-frame geometry, different stipulated ancestry; not identifiable.",
+    "metrics": {
+      "accepted_links": [],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "exact_correspondence": false
+    },
+    "result": {
+      "candidates": [
+        {
+          "kind": "continuation",
+          "parents": [
+            0
+          ],
+          "children": [
+            10
+          ],
+          "score": 1.8571428571428572,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 0,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 10,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        },
+        {
+          "kind": "continuation",
+          "parents": [
+            1
+          ],
+          "children": [
+            10
+          ],
+          "score": 1.8571428571428572,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 1,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 10,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        }
+      ],
+      "selection": {
+        "optimal_score": 1.8571428571428572,
+        "solver_selected": [
+          0
+        ],
+        "accepted": [],
+        "ambiguous": [
+          0,
+          1
+        ],
+        "exclusion_gaps": {
+          "0": 0.0
+        }
+      },
+      "events": [],
+      "links": [],
+      "parents": [
+        {
+          "parent_group": 0,
+          "status": "ambiguous"
+        },
+        {
+          "parent_group": 1,
+          "status": "ambiguous"
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "status": "ambiguous"
+        }
+      ],
+      "parameters": {
+        "gate": 0.07,
+        "coverage": 0.5,
+        "exclusive_fraction": 0.1,
+        "distance_weight": 0.25,
+        "max_partners": 3,
+        "normal_angle": 60.0,
+        "tie_tolerance": 1e-08
+      }
+    }
+  },
+  {
+    "case": "unobservable_ancestry_0",
+    "gate": 0.07,
+    "method": "static_family",
+    "meaning": "Identical three-frame geometry, different stipulated ancestry; not identifiable.",
+    "metrics": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "false_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "missed_links": [],
+      "exact_correspondence": false
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.0,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9285714285714286,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9285714285714286,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "parent_groups": [
+            0,
+            1
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": false,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.07
+      }
+    }
+  },
+  {
+    "case": "unobservable_ancestry_0",
+    "gate": 0.07,
+    "method": "delayed_family",
+    "meaning": "Identical three-frame geometry, different stipulated ancestry; not identifiable.",
+    "metrics": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "false_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "missed_links": [],
+      "exact_correspondence": false
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.0,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9285714285714286,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9285714285714286,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "parent_groups": [
+            0,
+            1
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": true,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.07
+      }
+    }
+  },
+  {
+    "case": "unobservable_ancestry_0",
+    "gate": 0.09,
+    "method": "adjacent_event",
+    "meaning": "Identical three-frame geometry, different stipulated ancestry; not identifiable.",
+    "metrics": {
+      "accepted_links": [],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "exact_correspondence": false
+    },
+    "result": {
+      "candidates": [
+        {
+          "kind": "continuation",
+          "parents": [
+            0
+          ],
+          "children": [
+            10
+          ],
+          "score": 1.8888888888888888,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 0,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 10,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        },
+        {
+          "kind": "continuation",
+          "parents": [
+            1
+          ],
+          "children": [
+            10
+          ],
+          "score": 1.8888888888888888,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 1,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 10,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        }
+      ],
+      "selection": {
+        "optimal_score": 1.8888888888888888,
+        "solver_selected": [
+          0
+        ],
+        "accepted": [],
+        "ambiguous": [
+          0,
+          1
+        ],
+        "exclusion_gaps": {
+          "0": 0.0
+        }
+      },
+      "events": [],
+      "links": [],
+      "parents": [
+        {
+          "parent_group": 0,
+          "status": "ambiguous"
+        },
+        {
+          "parent_group": 1,
+          "status": "ambiguous"
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "status": "ambiguous"
+        }
+      ],
+      "parameters": {
+        "gate": 0.09,
+        "coverage": 0.5,
+        "exclusive_fraction": 0.1,
+        "distance_weight": 0.25,
+        "max_partners": 3,
+        "normal_angle": 60.0,
+        "tie_tolerance": 1e-08
+      }
+    }
+  },
+  {
+    "case": "unobservable_ancestry_0",
+    "gate": 0.09,
+    "method": "static_family",
+    "meaning": "Identical three-frame geometry, different stipulated ancestry; not identifiable.",
+    "metrics": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "false_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "missed_links": [],
+      "exact_correspondence": false
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.0,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9444444444444444,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9444444444444444,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "parent_groups": [
+            0,
+            1
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": false,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.09
+      }
+    }
+  },
+  {
+    "case": "unobservable_ancestry_0",
+    "gate": 0.09,
+    "method": "delayed_family",
+    "meaning": "Identical three-frame geometry, different stipulated ancestry; not identifiable.",
+    "metrics": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "false_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "missed_links": [],
+      "exact_correspondence": false
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.0,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9444444444444444,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9444444444444444,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "parent_groups": [
+            0,
+            1
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": true,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.09
+      }
+    }
+  },
+  {
+    "case": "unobservable_ancestry_1",
+    "gate": 0.05,
+    "method": "adjacent_event",
+    "meaning": "Identical three-frame geometry, different stipulated ancestry; not identifiable.",
+    "metrics": {
+      "accepted_links": [],
+      "expected_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "exact_correspondence": false
+    },
+    "result": {
+      "candidates": [
+        {
+          "kind": "continuation",
+          "parents": [
+            0
+          ],
+          "children": [
+            10
+          ],
+          "score": 1.8,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 0,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 10,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        },
+        {
+          "kind": "continuation",
+          "parents": [
+            1
+          ],
+          "children": [
+            10
+          ],
+          "score": 1.8,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 1,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 10,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        }
+      ],
+      "selection": {
+        "optimal_score": 1.8,
+        "solver_selected": [
+          0
+        ],
+        "accepted": [],
+        "ambiguous": [
+          0,
+          1
+        ],
+        "exclusion_gaps": {
+          "0": 0.0
+        }
+      },
+      "events": [],
+      "links": [],
+      "parents": [
+        {
+          "parent_group": 0,
+          "status": "ambiguous"
+        },
+        {
+          "parent_group": 1,
+          "status": "ambiguous"
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "status": "ambiguous"
+        }
+      ],
+      "parameters": {
+        "gate": 0.05,
+        "coverage": 0.5,
+        "exclusive_fraction": 0.1,
+        "distance_weight": 0.25,
+        "max_partners": 3,
+        "normal_angle": 60.0,
+        "tie_tolerance": 1e-08
+      }
+    }
+  },
+  {
+    "case": "unobservable_ancestry_1",
+    "gate": 0.05,
+    "method": "static_family",
+    "meaning": "Identical three-frame geometry, different stipulated ancestry; not identifiable.",
+    "metrics": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "false_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "missed_links": [],
+      "exact_correspondence": false
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.0,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "parent_groups": [
+            0,
+            1
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": false,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.05
+      }
+    }
+  },
+  {
+    "case": "unobservable_ancestry_1",
+    "gate": 0.05,
+    "method": "delayed_family",
+    "meaning": "Identical three-frame geometry, different stipulated ancestry; not identifiable.",
+    "metrics": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "false_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "missed_links": [],
+      "exact_correspondence": false
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.0,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "parent_groups": [
+            0,
+            1
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": true,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.05
+      }
+    }
+  },
+  {
+    "case": "unobservable_ancestry_1",
+    "gate": 0.07,
+    "method": "adjacent_event",
+    "meaning": "Identical three-frame geometry, different stipulated ancestry; not identifiable.",
+    "metrics": {
+      "accepted_links": [],
+      "expected_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "exact_correspondence": false
+    },
+    "result": {
+      "candidates": [
+        {
+          "kind": "continuation",
+          "parents": [
+            0
+          ],
+          "children": [
+            10
+          ],
+          "score": 1.8571428571428572,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 0,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 10,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        },
+        {
+          "kind": "continuation",
+          "parents": [
+            1
+          ],
+          "children": [
+            10
+          ],
+          "score": 1.8571428571428572,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 1,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 10,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        }
+      ],
+      "selection": {
+        "optimal_score": 1.8571428571428572,
+        "solver_selected": [
+          0
+        ],
+        "accepted": [],
+        "ambiguous": [
+          0,
+          1
+        ],
+        "exclusion_gaps": {
+          "0": 0.0
+        }
+      },
+      "events": [],
+      "links": [],
+      "parents": [
+        {
+          "parent_group": 0,
+          "status": "ambiguous"
+        },
+        {
+          "parent_group": 1,
+          "status": "ambiguous"
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "status": "ambiguous"
+        }
+      ],
+      "parameters": {
+        "gate": 0.07,
+        "coverage": 0.5,
+        "exclusive_fraction": 0.1,
+        "distance_weight": 0.25,
+        "max_partners": 3,
+        "normal_angle": 60.0,
+        "tie_tolerance": 1e-08
+      }
+    }
+  },
+  {
+    "case": "unobservable_ancestry_1",
+    "gate": 0.07,
+    "method": "static_family",
+    "meaning": "Identical three-frame geometry, different stipulated ancestry; not identifiable.",
+    "metrics": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "false_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "missed_links": [],
+      "exact_correspondence": false
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.0,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9285714285714286,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9285714285714286,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "parent_groups": [
+            0,
+            1
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": false,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.07
+      }
+    }
+  },
+  {
+    "case": "unobservable_ancestry_1",
+    "gate": 0.07,
+    "method": "delayed_family",
+    "meaning": "Identical three-frame geometry, different stipulated ancestry; not identifiable.",
+    "metrics": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "false_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "missed_links": [],
+      "exact_correspondence": false
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.0,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9285714285714286,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9285714285714286,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "parent_groups": [
+            0,
+            1
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": true,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.07
+      }
+    }
+  },
+  {
+    "case": "unobservable_ancestry_1",
+    "gate": 0.09,
+    "method": "adjacent_event",
+    "meaning": "Identical three-frame geometry, different stipulated ancestry; not identifiable.",
+    "metrics": {
+      "accepted_links": [],
+      "expected_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "exact_correspondence": false
+    },
+    "result": {
+      "candidates": [
+        {
+          "kind": "continuation",
+          "parents": [
+            0
+          ],
+          "children": [
+            10
+          ],
+          "score": 1.8888888888888888,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 0,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 10,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        },
+        {
+          "kind": "continuation",
+          "parents": [
+            1
+          ],
+          "children": [
+            10
+          ],
+          "score": 1.8888888888888888,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 1,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 10,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        }
+      ],
+      "selection": {
+        "optimal_score": 1.8888888888888888,
+        "solver_selected": [
+          0
+        ],
+        "accepted": [],
+        "ambiguous": [
+          0,
+          1
+        ],
+        "exclusion_gaps": {
+          "0": 0.0
+        }
+      },
+      "events": [],
+      "links": [],
+      "parents": [
+        {
+          "parent_group": 0,
+          "status": "ambiguous"
+        },
+        {
+          "parent_group": 1,
+          "status": "ambiguous"
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "status": "ambiguous"
+        }
+      ],
+      "parameters": {
+        "gate": 0.09,
+        "coverage": 0.5,
+        "exclusive_fraction": 0.1,
+        "distance_weight": 0.25,
+        "max_partners": 3,
+        "normal_angle": 60.0,
+        "tie_tolerance": 1e-08
+      }
+    }
+  },
+  {
+    "case": "unobservable_ancestry_1",
+    "gate": 0.09,
+    "method": "static_family",
+    "meaning": "Identical three-frame geometry, different stipulated ancestry; not identifiable.",
+    "metrics": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "false_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "missed_links": [],
+      "exact_correspondence": false
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.0,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9444444444444444,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9444444444444444,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "parent_groups": [
+            0,
+            1
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": false,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.09
+      }
+    }
+  },
+  {
+    "case": "unobservable_ancestry_1",
+    "gate": 0.09,
+    "method": "delayed_family",
+    "meaning": "Identical three-frame geometry, different stipulated ancestry; not identifiable.",
+    "metrics": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          1,
+          10
+        ]
+      ],
+      "false_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "missed_links": [],
+      "exact_correspondence": false
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.0,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9444444444444444,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 0.9444444444444444,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "parent_groups": [
+            0,
+            1
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "accepted": true
+        },
+        {
+          "parent_group": 1,
+          "child_group": 10,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": true,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.09
+      }
+    }
+  },
+  {
+    "case": "coincident_child_families",
+    "gate": 0.05,
+    "method": "adjacent_event",
+    "meaning": "Two indistinguishable families must remain ambiguous.",
+    "metrics": {
+      "accepted_links": [],
+      "expected_links": [],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    },
+    "result": {
+      "candidates": [
+        {
+          "kind": "continuation",
+          "parents": [
+            0
+          ],
+          "children": [
+            10
+          ],
+          "score": 2.0,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 0,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 10,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        },
+        {
+          "kind": "continuation",
+          "parents": [
+            0
+          ],
+          "children": [
+            11
+          ],
+          "score": 2.0,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 0,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 11,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        }
+      ],
+      "selection": {
+        "optimal_score": 2.0,
+        "solver_selected": [
+          0
+        ],
+        "accepted": [],
+        "ambiguous": [
+          0,
+          1
+        ],
+        "exclusion_gaps": {
+          "0": 0.0
+        }
+      },
+      "events": [],
+      "links": [],
+      "parents": [
+        {
+          "parent_group": 0,
+          "status": "ambiguous"
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "status": "ambiguous"
+        },
+        {
+          "child_group": 11,
+          "status": "ambiguous"
+        }
+      ],
+      "parameters": {
+        "gate": 0.05,
+        "coverage": 0.5,
+        "exclusive_fraction": 0.1,
+        "distance_weight": 0.25,
+        "max_partners": 3,
+        "normal_angle": 60.0,
+        "tie_tolerance": 1e-08
+      }
+    }
+  },
+  {
+    "case": "coincident_child_families",
+    "gate": 0.05,
+    "method": "static_family",
+    "meaning": "Two indistinguishable families must remain ambiguous.",
+    "metrics": {
+      "accepted_links": [],
+      "expected_links": [],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.0,
+          "backward_time_ratio": 1.0
+        },
+        {
+          "child_group": 11,
+          "later_group": 21,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.0,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": null,
+          "status": "ambiguous_family",
+          "score_margin": 0.0,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [],
+      "links": [],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": false,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.05
+      }
+    }
+  },
+  {
+    "case": "coincident_child_families",
+    "gate": 0.05,
+    "method": "delayed_family",
+    "meaning": "Two indistinguishable families must remain ambiguous.",
+    "metrics": {
+      "accepted_links": [],
+      "expected_links": [],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.0,
+          "backward_time_ratio": 1.0
+        },
+        {
+          "child_group": 11,
+          "later_group": 21,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.0,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": null,
+          "status": "ambiguous_family",
+          "score_margin": 0.0,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [],
+      "links": [],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": true,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.05
+      }
+    }
+  },
+  {
+    "case": "coincident_child_families",
+    "gate": 0.07,
+    "method": "adjacent_event",
+    "meaning": "Two indistinguishable families must remain ambiguous.",
+    "metrics": {
+      "accepted_links": [],
+      "expected_links": [],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    },
+    "result": {
+      "candidates": [
+        {
+          "kind": "continuation",
+          "parents": [
+            0
+          ],
+          "children": [
+            10
+          ],
+          "score": 2.0,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 0,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 10,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        },
+        {
+          "kind": "continuation",
+          "parents": [
+            0
+          ],
+          "children": [
+            11
+          ],
+          "score": 2.0,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 0,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 11,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        }
+      ],
+      "selection": {
+        "optimal_score": 2.0,
+        "solver_selected": [
+          0
+        ],
+        "accepted": [],
+        "ambiguous": [
+          0,
+          1
+        ],
+        "exclusion_gaps": {
+          "0": 0.0
+        }
+      },
+      "events": [],
+      "links": [],
+      "parents": [
+        {
+          "parent_group": 0,
+          "status": "ambiguous"
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "status": "ambiguous"
+        },
+        {
+          "child_group": 11,
+          "status": "ambiguous"
+        }
+      ],
+      "parameters": {
+        "gate": 0.07,
+        "coverage": 0.5,
+        "exclusive_fraction": 0.1,
+        "distance_weight": 0.25,
+        "max_partners": 3,
+        "normal_angle": 60.0,
+        "tie_tolerance": 1e-08
+      }
+    }
+  },
+  {
+    "case": "coincident_child_families",
+    "gate": 0.07,
+    "method": "static_family",
+    "meaning": "Two indistinguishable families must remain ambiguous.",
+    "metrics": {
+      "accepted_links": [],
+      "expected_links": [],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.0,
+          "backward_time_ratio": 1.0
+        },
+        {
+          "child_group": 11,
+          "later_group": 21,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.0,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": null,
+          "status": "ambiguous_family",
+          "score_margin": 0.0,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [],
+      "links": [],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": false,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.07
+      }
+    }
+  },
+  {
+    "case": "coincident_child_families",
+    "gate": 0.07,
+    "method": "delayed_family",
+    "meaning": "Two indistinguishable families must remain ambiguous.",
+    "metrics": {
+      "accepted_links": [],
+      "expected_links": [],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.0,
+          "backward_time_ratio": 1.0
+        },
+        {
+          "child_group": 11,
+          "later_group": 21,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.0,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": null,
+          "status": "ambiguous_family",
+          "score_margin": 0.0,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [],
+      "links": [],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": true,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.07
+      }
+    }
+  },
+  {
+    "case": "coincident_child_families",
+    "gate": 0.09,
+    "method": "adjacent_event",
+    "meaning": "Two indistinguishable families must remain ambiguous.",
+    "metrics": {
+      "accepted_links": [],
+      "expected_links": [],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    },
+    "result": {
+      "candidates": [
+        {
+          "kind": "continuation",
+          "parents": [
+            0
+          ],
+          "children": [
+            10
+          ],
+          "score": 2.0,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 0,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 10,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        },
+        {
+          "kind": "continuation",
+          "parents": [
+            0
+          ],
+          "children": [
+            11
+          ],
+          "score": 2.0,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 0,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 11,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        }
+      ],
+      "selection": {
+        "optimal_score": 2.0,
+        "solver_selected": [
+          0
+        ],
+        "accepted": [],
+        "ambiguous": [
+          0,
+          1
+        ],
+        "exclusion_gaps": {
+          "0": 0.0
+        }
+      },
+      "events": [],
+      "links": [],
+      "parents": [
+        {
+          "parent_group": 0,
+          "status": "ambiguous"
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "status": "ambiguous"
+        },
+        {
+          "child_group": 11,
+          "status": "ambiguous"
+        }
+      ],
+      "parameters": {
+        "gate": 0.09,
+        "coverage": 0.5,
+        "exclusive_fraction": 0.1,
+        "distance_weight": 0.25,
+        "max_partners": 3,
+        "normal_angle": 60.0,
+        "tie_tolerance": 1e-08
+      }
+    }
+  },
+  {
+    "case": "coincident_child_families",
+    "gate": 0.09,
+    "method": "static_family",
+    "meaning": "Two indistinguishable families must remain ambiguous.",
+    "metrics": {
+      "accepted_links": [],
+      "expected_links": [],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.0,
+          "backward_time_ratio": 1.0
+        },
+        {
+          "child_group": 11,
+          "later_group": 21,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.0,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": null,
+          "status": "ambiguous_family",
+          "score_margin": 0.0,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [],
+      "links": [],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": false,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.09
+      }
+    }
+  },
+  {
+    "case": "coincident_child_families",
+    "gate": 0.09,
+    "method": "delayed_family",
+    "meaning": "Two indistinguishable families must remain ambiguous.",
+    "metrics": {
+      "accepted_links": [],
+      "expected_links": [],
+      "correct_links": [],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.0,
+          "backward_time_ratio": 1.0
+        },
+        {
+          "child_group": 11,
+          "later_group": 21,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.0,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": null,
+          "status": "ambiguous_family",
+          "score_margin": 0.0,
+          "best_coverage": 1.0
+        }
+      ],
+      "families": [],
+      "links": [],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": true,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.09
+      }
+    }
+  },
+  {
+    "case": "opposite_normal_distractor",
+    "gate": 0.05,
+    "method": "adjacent_event",
+    "meaning": "Opposite-normal sheet must not join the family.",
+    "metrics": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    },
+    "result": {
+      "candidates": [
+        {
+          "kind": "continuation",
+          "parents": [
+            0
+          ],
+          "children": [
+            10
+          ],
+          "score": 2.0,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 0,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 10,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        }
+      ],
+      "selection": {
+        "optimal_score": 2.0,
+        "solver_selected": [
+          0
+        ],
+        "accepted": [
+          0
+        ],
+        "ambiguous": [],
+        "exclusion_gaps": {
+          "0": 2.0
+        }
+      },
+      "events": [
+        {
+          "candidate_index": 0,
+          "kind": "continuation",
+          "parents": [
+            0
+          ],
+          "children": [
+            10
+          ],
+          "score": 2.0,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 0,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 10,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "accepted": true,
+          "event_index": 0,
+          "event_kind": "continuation"
+        }
+      ],
+      "parents": [
+        {
+          "parent_group": 0,
+          "status": "assigned"
+        },
+        {
+          "parent_group": 1,
+          "status": "unmatched"
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "status": "assigned"
+        }
+      ],
+      "parameters": {
+        "gate": 0.05,
+        "coverage": 0.5,
+        "exclusive_fraction": 0.1,
+        "distance_weight": 0.25,
+        "max_partners": 3,
+        "normal_angle": 60.0,
+        "tie_tolerance": 1e-08
+      }
+    }
+  },
+  {
+    "case": "opposite_normal_distractor",
+    "gate": 0.05,
+    "method": "static_family",
+    "meaning": "Opposite-normal sheet must not join the family.",
+    "metrics": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.0,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 1.0,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 1,
+          "child_group": null,
+          "status": "no_support",
+          "score_margin": null
+        }
+      ],
+      "families": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "parent_groups": [
+            0
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": false,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.05
+      }
+    }
+  },
+  {
+    "case": "opposite_normal_distractor",
+    "gate": 0.05,
+    "method": "delayed_family",
+    "meaning": "Opposite-normal sheet must not join the family.",
+    "metrics": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.0,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 1.0,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 1,
+          "child_group": null,
+          "status": "no_support",
+          "score_margin": null
+        }
+      ],
+      "families": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "parent_groups": [
+            0
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": true,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.05
+      }
+    }
+  },
+  {
+    "case": "opposite_normal_distractor",
+    "gate": 0.07,
+    "method": "adjacent_event",
+    "meaning": "Opposite-normal sheet must not join the family.",
+    "metrics": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    },
+    "result": {
+      "candidates": [
+        {
+          "kind": "continuation",
+          "parents": [
+            0
+          ],
+          "children": [
+            10
+          ],
+          "score": 2.0,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 0,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 10,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        }
+      ],
+      "selection": {
+        "optimal_score": 2.0,
+        "solver_selected": [
+          0
+        ],
+        "accepted": [
+          0
+        ],
+        "ambiguous": [],
+        "exclusion_gaps": {
+          "0": 2.0
+        }
+      },
+      "events": [
+        {
+          "candidate_index": 0,
+          "kind": "continuation",
+          "parents": [
+            0
+          ],
+          "children": [
+            10
+          ],
+          "score": 2.0,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 0,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 10,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "accepted": true,
+          "event_index": 0,
+          "event_kind": "continuation"
+        }
+      ],
+      "parents": [
+        {
+          "parent_group": 0,
+          "status": "assigned"
+        },
+        {
+          "parent_group": 1,
+          "status": "unmatched"
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "status": "assigned"
+        }
+      ],
+      "parameters": {
+        "gate": 0.07,
+        "coverage": 0.5,
+        "exclusive_fraction": 0.1,
+        "distance_weight": 0.25,
+        "max_partners": 3,
+        "normal_angle": 60.0,
+        "tie_tolerance": 1e-08
+      }
+    }
+  },
+  {
+    "case": "opposite_normal_distractor",
+    "gate": 0.07,
+    "method": "static_family",
+    "meaning": "Opposite-normal sheet must not join the family.",
+    "metrics": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.0,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 1.0,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 1,
+          "child_group": null,
+          "status": "no_support",
+          "score_margin": null
+        }
+      ],
+      "families": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "parent_groups": [
+            0
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": false,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.07
+      }
+    }
+  },
+  {
+    "case": "opposite_normal_distractor",
+    "gate": 0.07,
+    "method": "delayed_family",
+    "meaning": "Opposite-normal sheet must not join the family.",
+    "metrics": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.0,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 1.0,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 1,
+          "child_group": null,
+          "status": "no_support",
+          "score_margin": null
+        }
+      ],
+      "families": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "parent_groups": [
+            0
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": true,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.07
+      }
+    }
+  },
+  {
+    "case": "opposite_normal_distractor",
+    "gate": 0.09,
+    "method": "adjacent_event",
+    "meaning": "Opposite-normal sheet must not join the family.",
+    "metrics": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    },
+    "result": {
+      "candidates": [
+        {
+          "kind": "continuation",
+          "parents": [
+            0
+          ],
+          "children": [
+            10
+          ],
+          "score": 2.0,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 0,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 10,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        }
+      ],
+      "selection": {
+        "optimal_score": 2.0,
+        "solver_selected": [
+          0
+        ],
+        "accepted": [
+          0
+        ],
+        "ambiguous": [],
+        "exclusion_gaps": {
+          "0": 2.0
+        }
+      },
+      "events": [
+        {
+          "candidate_index": 0,
+          "kind": "continuation",
+          "parents": [
+            0
+          ],
+          "children": [
+            10
+          ],
+          "score": 2.0,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 0,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 10,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "accepted": true,
+          "event_index": 0,
+          "event_kind": "continuation"
+        }
+      ],
+      "parents": [
+        {
+          "parent_group": 0,
+          "status": "assigned"
+        },
+        {
+          "parent_group": 1,
+          "status": "unmatched"
+        }
+      ],
+      "children": [
+        {
+          "child_group": 10,
+          "status": "assigned"
+        }
+      ],
+      "parameters": {
+        "gate": 0.09,
+        "coverage": 0.5,
+        "exclusive_fraction": 0.1,
+        "distance_weight": 0.25,
+        "max_partners": 3,
+        "normal_angle": 60.0,
+        "tie_tolerance": 1e-08
+      }
+    }
+  },
+  {
+    "case": "opposite_normal_distractor",
+    "gate": 0.09,
+    "method": "static_family",
+    "meaning": "Opposite-normal sheet must not join the family.",
+    "metrics": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.0,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 1.0,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 1,
+          "child_group": null,
+          "status": "no_support",
+          "score_margin": null
+        }
+      ],
+      "families": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "parent_groups": [
+            0
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": false,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.09
+      }
+    }
+  },
+  {
+    "case": "opposite_normal_distractor",
+    "gate": 0.09,
+    "method": "delayed_family",
+    "meaning": "Opposite-normal sheet must not join the family.",
+    "metrics": {
+      "accepted_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "expected_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "correct_links": [
+        [
+          0,
+          10
+        ]
+      ],
+      "false_links": [],
+      "missed_links": [],
+      "exact_correspondence": true
+    },
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": 0.0,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "status": "conditional_support",
+          "score_margin": 1.0,
+          "best_coverage": 1.0
+        },
+        {
+          "parent_group": 1,
+          "child_group": null,
+          "status": "no_support",
+          "score_margin": null
+        }
+      ],
+      "families": [
+        {
+          "child_group": 10,
+          "later_group": 20,
+          "parent_groups": [
+            0
+          ],
+          "child_union_coverage": 1.0,
+          "accepted": true,
+          "physical_ancestry_established": false
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 0,
+          "child_group": 10,
+          "accepted": true
+        }
+      ],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": true,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.09
+      }
+    }
+  }
+]

@@ -1,4 +1,4 @@
-"""Controlled equal-wind collision: global diagnostics and unlabeled surfaces.
+"""Controlled two-wind collision: global diagnostics and unlabeled surfaces.
 
 No radial shock identities, surface-integrated power, or mesh reconstruction.
 The chosen geometry is a first experiment, not a guaranteed collision-time model.
@@ -26,6 +26,7 @@ from experiments.wind_bubble.run_online_bubble import (
 )
 from experiments.wind_bubble.sparse_surfaces import surface_sample_arrays
 from experiments.wind_bubble.two_bubble_source_budget import SOURCES, INJECTION_RADIUS, budget_plan
+from experiments.wind_bubble.unequal_sources import strength_plan
 
 
 def source_distances(positions, sources):
@@ -146,7 +147,9 @@ def run(args):
     setup = argparse.Namespace(num_cells=args.num_cells, num_snapshots=args.num_analysis,
                                t_end=args.t_end, num_injection_cells=args.num_cells//16, plasma_beta=None)
     state, base, params, variables, helper = build_problem(setup)
-    base = base._replace(wind_config=base.wind_config._replace(source_positions=SOURCES),
+    strengths=getattr(args,'source_strengths',None)
+    base = base._replace(wind_config=base.wind_config._replace(source_positions=SOURCES,
+                         source_strengths=tuple(strengths) if strengths is not None else ()),
                          use_specific_snapshot_timepoints=True, print_elapsed_time=False, progress_bar=False)
     base = finalize_config(base, state.shape)
     times = jnp.linspace(0., args.t_end, args.num_analysis)
@@ -161,11 +164,15 @@ def run(args):
     reference=json.loads(Path(reference_path).read_text()) if reference_path is not None else None
     budget=budget_plan(args.num_cells,reference,float(params.wind_params.wind_mass_loss_rate),
                        float(params.wind_params.wind_final_velocity),actual_counts=injection_counts)
+    weighted=strength_plan(budget,strengths)
     if reference is not None:
         params=params._replace(wind_params=params.wind_params._replace(
             wind_mass_loss_rate=budget['wind_mass_loss_rate_per_source']))
         print(f"Matching reference discrete source budget: mass-parameter scale={budget['parameter_scale']:.9g}; "
               f"prescribed energy rates={budget['discrete_energy_rates']}",flush=True)
+    if strengths is not None:
+        print(f"Applying source strengths {weighted['source_strengths']}; weighted prescribed energy rates="
+              f"{weighted['discrete_energy_rates']}",flush=True)
     args.output_dir.mkdir(parents=True, exist_ok=False)
     try:
         revision = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()
@@ -177,6 +184,7 @@ def run(args):
                     Path('astronomix/_modules/_stellar_wind/stellar_wind.py'),
                     Path('astronomix/_modules/_stellar_wind/stellar_wind_options.py'),
                     Path('experiments/wind_bubble/two_bubble_source_budget.py'),
+                    Path('experiments/wind_bubble/unequal_sources.py'),
                     Path('astronomix/option_classes/simulation_config.py')]
     metadata = dict(status='running', commit=revision, backend=jax.default_backend(),
                     python=platform.python_version(), jax=jax.__version__, num_cells=args.num_cells,
@@ -184,10 +192,12 @@ def run(args):
                     source_positions=SOURCES, injection_radius=INJECTION_RADIUS,
                     wind_mass_loss_rate_per_source=budget['wind_mass_loss_rate_per_source'], wind_terminal_velocity=budget['wind_terminal_velocity'],
                     nominal_wind_luminosity_per_source=budget['nominal_wind_luminosity_per_source'],
-                    nominal_total_wind_luminosity=budget['nominal_total_wind_luminosity'],
+                    nominal_total_wind_luminosity=sum(weighted['nominal_wind_luminosities']),
+                    wind_parameter_convention='Shared base mass parameter times source_strengths; velocity is shared.',
                     injection_cell_counts=injection_counts,
-                    discrete_mass_rates=budget['discrete_mass_rates'],discrete_energy_rates=budget['discrete_energy_rates'],
+                    **weighted,
                     source_budget_plan=budget,
+                    source_budget_plan_scope='Equal-source base coefficient before source-strength weighting.',
                     source_budget_reference=dict(path=str(reference_path),sha256=hashlib.sha256(Path(reference_path).read_bytes()).hexdigest()) if reference is not None else None,
                     injection_prescription='existing EI analytic-volume normalization and radius-minus-half-cell mask',
                     ambient_density=1., ambient_pressure=.01, gamma=5/3, domain=[0., 1.],
@@ -251,6 +261,8 @@ def main():
     parser.add_argument('--t-end', type=float, default=.16)
     parser.add_argument('--verify-offline', action='store_true')
     parser.add_argument('--require-gpu', action='store_true')
+    parser.add_argument('--source-strengths',type=float,nargs=2,default=None,
+                        help='Positive per-source mass/luminosity multipliers, e.g. 1 0.5. Default: identical winds.')
     parser.add_argument('--match-source-budget',type=Path,default=None,
                         help='Explicitly adjust the shared mass-rate parameter to match this completed run metadata\'s discrete mass and energy rates.')
     parser.add_argument('--output-dir', type=Path, default=Path('outputs/two_bubbles_n064'))
