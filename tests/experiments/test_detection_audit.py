@@ -1,15 +1,56 @@
 import argparse
+import json
 from pathlib import Path
 import tempfile
 import unittest
 import jax
 import jax.numpy as jnp
 import numpy as np
-from experiments.wind_bubble.audit_detection_stages import selected_indices,StateCapture,stage_fields
+from experiments.wind_bubble.audit_detection_stages import selected_indices,StateCapture,stage_fields,extension_schedule,compare_reference,run
 from experiments.wind_bubble.run_single_bubble import build_problem
 
 
 class DetectionAuditTests(unittest.TestCase):
+    def test_missing_reference_state_fails_before_simulation(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp)/'reference';(root/'audit').mkdir(parents=True)
+            (root/'metadata.json').write_text(json.dumps(dict(status='complete',num_cells=32,
+                source_strengths=[1.,.5],requested_times=[0.,.01,.02],t_end=.02)))
+            (root/'audit/verification.json').write_text(json.dumps(dict(passed=True,captured_events=[1])))
+            args=argparse.Namespace(capture_events=[1,2,3],num_analysis=4,extend_reference=True,
+                reference_run=root,t_end=.03,num_cells=32,source_strengths=[1.,.5],output_dir=Path(tmp)/'new')
+            with self.assertRaisesRegex(ValueError,'Reference full state missing'):run(args)
+            self.assertFalse(args.output_dir.exists())
+
+    def test_prefix_comparison_checks_prefix_and_reports_boolean_scope(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            roots=[Path(tmp)/name for name in ['long','short']]
+            for root,times in zip(roots,[[0.,.1,.2],[0.,.1]]):
+                (root/'online').mkdir(parents=True)
+                meta=dict(num_cells=32,source_strengths=[1.,.5],source_positions=[[.35,.5,.5],[.65,.5,.5]],
+                    discrete_mass_rates=[1.,.5],discrete_energy_rates=[1.,.5],injection_radius=.0625,
+                    wind_terminal_velocity=10.,ambient_density=1.,ambient_pressure=.01,actual_times=times)
+                (root/'metadata.json').write_text(json.dumps(meta))
+                for i in range(2):
+                    for prefix in ['surfaces','histograms','slice']:
+                        np.savez(root/'online'/f'{prefix}_{i:04d}.npz',time=times[i],count=i)
+            result=compare_reference(*roots,prefix=True)
+            self.assertIs(result['prefix_only'],True)
+            self.assertEqual(result['events'],2)
+            with self.assertRaises(AssertionError):compare_reference(*roots)
+
+    def test_extension_preserves_times_bitwise_and_original_dt_cap(self):
+        old=np.asarray(jnp.linspace(0,.16,17))
+        meta=dict(status='complete',requested_times=old.tolist(),t_end=.16)
+        times,dt=extension_schedule(meta,.20,21)
+        np.testing.assert_array_equal(times[:17],old)
+        self.assertEqual(dt,.16/17)
+        np.testing.assert_allclose(times[17:],[.17,.18,.19,.20],rtol=0,atol=1e-7)
+        meta['solver_dt_max']=.001
+        self.assertEqual(extension_schedule(meta,.20,21)[1],.001)
+        with self.assertRaises(ValueError):extension_schedule(meta,.20,20)
+        with self.assertRaises(ValueError):extension_schedule(meta,.16,17)
+
     def test_event_selection_does_not_add_schedule_entries(self):
         self.assertEqual(selected_indices([2,1,2],3),[1,2])
         for values in [[],[-1],[3]]:

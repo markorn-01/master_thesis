@@ -135,7 +135,7 @@ def compare_outputs(online, offline):
                 scalar_rtol=1e-6, scalar_atol=1e-8)
 
 
-def run(args, *, state_observer=None):
+def run(args, *, state_observer=None, analysis_times=None, solver_dt_max=None):
     if args.num_cells < 16 or args.num_cells % 16:
         raise ValueError('num-cells must be a multiple of 16 and at least 16.')
     if args.num_analysis < 3 or not np.isfinite(args.t_end) or args.t_end <= 0:
@@ -152,8 +152,14 @@ def run(args, *, state_observer=None):
                          source_strengths=tuple(strengths) if strengths is not None else ()),
                          use_specific_snapshot_timepoints=True, print_elapsed_time=False, progress_bar=False)
     base = finalize_config(base, state.shape)
-    times = jnp.linspace(0., args.t_end, args.num_analysis)
-    params = params._replace(snapshot_timepoints=times, dt_max=args.t_end/args.num_analysis)
+    times = jnp.linspace(0., args.t_end, args.num_analysis) if analysis_times is None else jnp.asarray(analysis_times)
+    schedule=np.asarray(times)
+    if (schedule.shape!=(args.num_analysis,) or not np.isfinite(schedule).all()
+            or not np.all(np.diff(schedule)>0) or abs(schedule[0])>1e-7 or abs(schedule[-1]-args.t_end)>1e-7):
+        raise ValueError('Analysis schedule must increase from zero to t-end and match num-analysis.')
+    dt_max=args.t_end/args.num_analysis if solver_dt_max is None else float(solver_dt_max)
+    if not np.isfinite(dt_max) or dt_max<=0:raise ValueError('solver_dt_max must be finite and positive.')
+    params = params._replace(snapshot_timepoints=times, dt_max=dt_max)
     analysis = base._replace(return_snapshots=False, activate_snapshot_callback=False)
     config = analysis._replace(activate_snapshot_callback=True)
     centers, dx = np.asarray(helper.geometric_centers), float(base.grid_spacing)
@@ -188,7 +194,7 @@ def run(args, *, state_observer=None):
                     Path('astronomix/option_classes/simulation_config.py')]
     metadata = dict(status='running', commit=revision, backend=jax.default_backend(),
                     python=platform.python_version(), jax=jax.__version__, num_cells=args.num_cells,
-                    t_end=args.t_end, requested_times=np.asarray(times).tolist(),
+                    t_end=args.t_end, requested_times=np.asarray(times).tolist(),solver_dt_max=dt_max,
                     source_positions=SOURCES, injection_radius=INJECTION_RADIUS,
                     wind_mass_loss_rate_per_source=budget['wind_mass_loss_rate_per_source'], wind_terminal_velocity=budget['wind_terminal_velocity'],
                     nominal_wind_luminosity_per_source=budget['nominal_wind_luminosity_per_source'],

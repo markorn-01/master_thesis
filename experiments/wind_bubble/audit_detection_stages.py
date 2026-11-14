@@ -134,38 +134,86 @@ def audit_states(args,indices):
     return hashes
 
 
-def compare_reference(root,reference):
+def compare_reference(root,reference, *, prefix=False):
     """Check replay products at all events, not only captured states."""
     a=json.loads((root/'metadata.json').read_text());b=json.loads((reference/'metadata.json').read_text())
-    for key in ['num_cells','actual_times','source_strengths','source_positions','discrete_mass_rates',
+    for key in ['num_cells','source_strengths','source_positions','discrete_mass_rates',
                 'discrete_energy_rates','injection_radius','wind_terminal_velocity','ambient_density','ambient_pressure']:
         np.testing.assert_allclose(a[key],b[key],rtol=1e-7,atol=1e-8,err_msg=key)
-    for index in range(len(a['actual_times'])):
-        for prefix in ['surfaces','histograms','slice']:
-            name=f'{prefix}_{index:04d}.npz'
+    count=len(b['actual_times'])
+    assert len(a['actual_times'])>=count if prefix else len(a['actual_times'])==count
+    np.testing.assert_allclose(a['actual_times'][:count],b['actual_times'],rtol=0,atol=1e-7)
+    for index in range(count):
+        for product in ['surfaces','histograms','slice']:
+            name=f'{product}_{index:04d}.npz'
             with np.load(root/'online'/name) as x,np.load(reference/'online'/name) as y:
                 assert set(x.files)==set(y.files)
                 for key in x.files:
                     if x[key].dtype.kind=='f':np.testing.assert_allclose(x[key],y[key],rtol=1e-6,atol=1e-8,equal_nan=True,err_msg=f'{name}:{key}')
                     else:np.testing.assert_array_equal(x[key],y[key])
-    return dict(passed=True,events=len(a['actual_times']),scope='Replay product agreement, not full-state online/offline equivalence.')
+    states=0
+    for old in sorted((reference/'audit').glob('state_*.npy')):
+        new=root/'audit'/old.name
+        if new.exists():
+            np.testing.assert_allclose(np.load(new),np.load(old),rtol=1e-6,atol=1e-8)
+            states+=1
+    return dict(passed=True,events=count,prefix_only=prefix,compared_captured_states=states,
+        scope='Replay product and available selected-state agreement, not complete online/offline equivalence.')
+
+
+def extension_schedule(meta,t_end,num_analysis):
+    """Append equally spaced events; preserve every original float32 time and dt cap."""
+    old=np.asarray(meta['requested_times'],dtype=np.float32)
+    if meta.get('status')!='complete' or len(old)<3 or not np.all(np.diff(old)>0):
+        raise ValueError('Require a complete reference with increasing scheduled times.')
+    step=float(meta['t_end'])/(len(old)-1)
+    if num_analysis<=len(old) or t_end<=meta['t_end']:
+        raise ValueError('Extension must add events and increase t-end.')
+    tail=np.asarray([float(meta['t_end'])+step*i for i in range(1,num_analysis-len(old)+1)],np.float32)
+    if abs(float(tail[-1])-t_end)>1e-7:raise ValueError('Extended event count must preserve reference cadence.')
+    np.testing.assert_allclose(old,np.linspace(0,meta['t_end'],len(old)),rtol=0,atol=1e-7)
+    dt_max=float(meta.get('solver_dt_max',float(meta['t_end'])/len(old)))
+    return np.concatenate([old,tail]),dt_max
 
 
 def run(args):
     indices=selected_indices(args.capture_events,args.num_analysis)
+    extension=getattr(args,'extend_reference',False)
+    times=np.asarray(jnp.linspace(0.,args.t_end,args.num_analysis));dt_max=None
+    if extension:
+        if args.reference_run is None:raise ValueError('Extension requires --reference-run.')
+        meta=json.loads((args.reference_run/'metadata.json').read_text())
+        if meta['num_cells']!=args.num_cells or meta['source_strengths']!=list(args.source_strengths):
+            raise ValueError('Reference resolution and source strengths must match.')
+        times,dt_max=extension_schedule(meta,args.t_end,args.num_analysis)
+        report=json.loads((args.reference_run/'audit/verification.json').read_text())
+        if not report['passed'] or not set(report['captured_events']).issubset(indices):
+            raise ValueError('Extension must recapture all validated reference states.')
+        for index in report['captured_events']:
+            path=args.reference_run/'audit'/f'state_{index:04d}.npy'
+            if not path.exists():raise ValueError(f'Reference full state missing: {path}')
+            expected=next(digest for name,digest in report['state_sha256'].items() if Path(name).name==path.name)
+            if hashlib.sha256(path.read_bytes()).hexdigest()!=expected:
+                raise ValueError(f'Reference full state changed: {path}')
     # Parent directory is created by the simulation before any callbacks run.
-    capture=StateCapture(args.output_dir/'audit',np.asarray(jnp.linspace(0.,args.t_end,args.num_analysis)))
-    run_simulation(args,state_observer=capture.observer(indices))
+    capture=StateCapture(args.output_dir/'audit',times)
+    run_simulation(args,state_observer=capture.observer(indices),analysis_times=times,solver_dt_max=dt_max)
     assert sorted(capture.saved)==indices
     hashes=audit_states(args,indices)
-    reference=compare_reference(args.output_dir,args.reference_run) if args.reference_run else None
+    reference=compare_reference(args.output_dir,args.reference_run,prefix=extension) if args.reference_run else None
+    history=list(csv.DictReader((args.output_dir/'online/history.csv').open()))
+    clearances=[float(row['minimum_surface_boundary_clearance']) for row in history
+                if np.isfinite(float(row['minimum_surface_boundary_clearance']))]
     sources=[Path(__file__),Path('experiments/wind_bubble/run_two_bubbles.py')]
     sources+=list(Path('astronomix/_physics_modules/_shock_finder').glob('*.py'))
     result=dict(passed=True,captured_events=indices,capture_times=capture.times[indices].tolist(),
         production_zone_masks_match=True,exported_indices_and_positions_match=True,reference_replay=reference,
         full_state_bytes=sum((args.output_dir/'audit'/f'state_{i:04d}.npy').stat().st_size for i in indices),
         state_sha256=hashes,source_sha256={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in sources},
-        physics_or_thresholds_changed=False,schedule_changed=False,
+        physics_or_thresholds_changed=False,schedule_changed=extension,original_schedule_prefix_preserved=extension,
+        extension_dt_max=dt_max,
+        minimum_surface_boundary_clearance=min(clearances) if clearances else None,
+        minimum_surface_boundary_clearance_cells=min(clearances)*args.num_cells if clearances else None,
         scope='Diagnostic replay; cell counts are not physical shock counts, source ownership, or causal proof.')
     (args.output_dir/'audit'/'verification.json').write_text(json.dumps(result,indent=2)+'\n')
 
@@ -179,6 +227,7 @@ if __name__=='__main__':
     parser.add_argument('--match-source-budget',type=Path,default=Path('outputs/two_bubbles_iwr_compgpu9_n064/metadata.json'))
     parser.add_argument('--capture-events',type=int,nargs='+',default=[10,12,14,15,16])
     parser.add_argument('--reference-run',type=Path)
+    parser.add_argument('--extend-reference',action='store_true',help='Append events while preserving the reference schedule prefix and dt cap.')
     parser.add_argument('--require-gpu',action='store_true')
     parser.add_argument('--verify-offline',action='store_true',help='Only supported up to 64³.')
     parser.add_argument('--output-dir',type=Path,required=True)

@@ -1,0 +1,2 @@
+# Captured full states remain on disk; their hashes are in verification.json.
+state_*.npy
