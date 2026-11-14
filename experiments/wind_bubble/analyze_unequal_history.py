@@ -42,11 +42,23 @@ def window_catalogs(data,labels,graph,start):
     return catalogs,pairs
 
 
+def validation_scope(root,meta):
+    """Record absent verification honestly; never imply a 128³ reference run."""
+    if meta.get('status')!='complete' or meta.get('source_strengths')!=[1.,.5] or meta['num_cells'] not in (64,128):
+        raise ValueError('Require a complete 64³ or 128³, 1:0.5 wind case.')
+    path=root/'equivalence.json'
+    if path.exists():
+        if not json.loads(path.read_text())['passed']:raise ValueError('Run equivalence failed.')
+        return dict(online_offline_verified=True)
+    if meta['num_cells']==64 or meta.get('verify_offline',False):
+        raise ValueError('Expected passed run equivalence is missing.')
+    return dict(online_offline_verified=False,reason='Stored-state verification is restricted to at most 64³.')
+
+
 def run(root,output):
     meta,data,hashes,readback=load_checked(root)
-    if meta.get('source_strengths')!=[1.,.5] or meta['num_cells']!=64:
-        raise ValueError('This frozen validation expects the prepared 64³, 1:0.5 wind case.')
-    if not json.loads((root/'equivalence.json').read_text())['passed']:raise ValueError('Require passed run equivalence.')
+    scope=validation_scope(root,meta)
+    n=meta['num_cells']
     control_path=Path('outputs/event_tracking_controls_solver_validation/verification.json')
     control=json.loads(control_path.read_text())
     for path,digest in control['source_sha256'].items():
@@ -126,17 +138,30 @@ def run(root,output):
         frames.append(dict(time=times[index],positions=surface['positions'],sources=surface['source_positions'],
             cutaway=cutaway_mask(surface['positions']),segments=segments,nodes=nodes))
     render(graph,frames,group_counts,output)
-    equal_graph_path=Path('outputs/two_bubbles_event_history_resolution_n064_n128/n064_graph.json')
-    equal_meta_path=Path('outputs/two_bubbles_iwr_compgpu9_n064/metadata.json')
+    equal_graph_path=Path('outputs/two_bubbles_event_history_resolution_n064_n128/n064_graph.json' if n==64 else 'outputs/two_bubbles_event_history_v1_n128/graph.json')
+    equal_meta_path=Path('outputs/two_bubbles_iwr_compgpu9_n064/metadata.json' if n==64 else 'outputs/two_bubbles_budget_matched_iwr_compgpu3_n128/metadata.json')
     equal_graph=json.loads(equal_graph_path.read_text());equal_meta=json.loads(equal_meta_path.read_text())
     for key in ['source_positions','injection_radius','wind_terminal_velocity','ambient_density','ambient_pressure','gamma','domain']:
         np.testing.assert_allclose(meta[key],equal_meta[key],atol=1e-12,rtol=0)
     np.testing.assert_allclose(times,equal_meta['actual_times'],atol=1e-7,rtol=0)
     np.testing.assert_allclose(meta['discrete_energy_rates'],np.asarray(equal_meta['discrete_energy_rates'])*[1,.5],rtol=1e-12)
-    comparison=compare_summary(graph,equal_graph,times,statistics)
+    comparison=compare_summary(graph,equal_graph,times,statistics,n)
     (output/'equal_comparison.json').write_text(json.dumps(comparison,indent=2)+'\n')
-    render_comparison(equal_graph,graph,output)
-    for p in [root/'equivalence.json',control_path,family_report_path,family_result_path,equal_graph_path,equal_meta_path]:hashes[str(p)]=hashlib.sha256(p.read_bytes()).hexdigest()
+    render_comparison(equal_graph,graph,output,n=n)
+    reference_paths=[control_path,family_report_path,family_result_path,equal_graph_path,equal_meta_path]
+    if (root/'equivalence.json').exists():reference_paths.append(root/'equivalence.json')
+    if n==128:
+        baseline=Path('outputs/two_bubbles_unequal_history_v1_n064/graph.json')
+        baseline_meta=Path('outputs/two_bubbles_unequal_iwr_compgpu9_n064/metadata.json')
+        prior=json.loads(baseline.read_text());prior_meta=json.loads(baseline_meta.read_text())
+        for key in ['source_positions','injection_radius','source_strengths','discrete_mass_rates','discrete_energy_rates','wind_terminal_velocity','ambient_density','ambient_pressure','gamma','domain','actual_times']:
+            np.testing.assert_allclose(meta[key],prior_meta[key],rtol=1e-7,atol=1e-9)
+        resolution=compare_summary(graph,prior,times,statistics,n,reference_name='unequal_64')
+        resolution['scope']='Budget-matched unequal winds; same physical association gates and grouping radius in native cells. Resolution changes both detection and physical grouping length; no physical ancestry truth.'
+        (output/'resolution_comparison.json').write_text(json.dumps(resolution,indent=2)+'\n')
+        render_comparison(prior,graph,output,n=n,resolution=True)
+        reference_paths.extend([baseline,baseline_meta])
+    for p in reference_paths:hashes[str(p)]=hashlib.sha256(p.read_bytes()).hexdigest()
     for path,digest in hashes.items():assert hashlib.sha256(Path(path).read_bytes()).hexdigest()==digest
     # Graph JSON readback checks every observation and adjacent-time edge.
     saved=json.loads((output/'graph.json').read_text());lookup={n['node_id']:n for n in saved['nodes']}
@@ -147,7 +172,7 @@ def run(root,output):
     with Image.open(output/'unequal_history.gif') as image:
         assert image.n_frames==len(times)
         for index in range(image.n_frames):image.seek(index);image.load()
-    summary=dict(readback=readback,events=len(times),group_observations=len(statistics),segments=graph['segment_count'],
+    summary=dict(readback=readback,run_validation=scope,num_cells=n,events=len(times),group_observations=len(statistics),segments=graph['segment_count'],
         event_counts=dict(Counter(e['status']+'_'+e['kind'] for e in graph['events'])),
         identical_intervals=sum(r['event_sets_identical'] for r in agreements),checks=checks,
         dense_family_checks=len(windows),accepted_family_configurations=sum(r['accepted'] for r in family_rows),
@@ -163,7 +188,7 @@ def run(root,output):
                          identical_intervals=summary['identical_intervals']),indent=2))
 
 
-def compare_summary(unequal,equal,times,statistics):
+def compare_summary(unequal,equal,times,statistics,n=64,reference_name=None):
     def describe(graph):
         lookup={n['node_id']:n for n in graph['nodes']}
         combinations=[dict(parent_time=times[e['parent_event']],child_time=times[e['child_event']],
@@ -172,7 +197,7 @@ def compare_summary(unequal,equal,times,statistics):
         return dict(group_observations=len(graph['nodes']),segments=graph['segment_count'],
                     final_groups=sum(n['event']==len(times)-1 for n in graph['nodes']),shared_combinations=combinations)
     final=[r for r in statistics if r['event']==len(times)-1]
-    return dict(equal_64=describe(equal),unequal_64=describe(unequal),
+    return dict({reference_name or f'equal_{n}':describe(equal),f'unequal_{n}':describe(unequal)},
         unequal_first_inward_group_time=next((r['time'] for r in statistics if r['median_nearest_source_alignment']<0),None),
         unequal_final_groups=[{k:r[k] for k in ['group','segment_id','surface_samples','median_mach',
             'median_nearest_source_alignment','upstream_inside_source']} for r in final],
@@ -225,16 +250,17 @@ def render(graph,frames,counts,output):
         return []
     movie=FuncAnimation(fig,update,frames=len(frames),interval=500,blit=False)
     movie.save(output/'unequal_history.gif',writer=PillowWriter(fps=2),dpi=95)
-    for index in [8,9,13,14,16]:update(index);fig.savefig(output/f'event_{index:04d}.png',dpi=130)
+    for index in [8,9,10,11,13,14,16]:update(index);fig.savefig(output/f'event_{index:04d}.png',dpi=130)
     plt.close(fig)
 
 
-def render_comparison(equal,unequal,output):
+def render_comparison(equal,unequal,output,n=64,resolution=False):
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
     fig,axes=plt.subplots(2,1,figsize=(12,9),sharex=True)
-    for ax,graph,title in zip(axes,[equal,unequal],['Equal winds (1 : 1)','Unequal winds (1 : 0.5)']):
+    titles=['Unequal winds, 64³','Unequal winds, 128³'] if resolution else [f'Equal winds (1 : 1), {n}³',f'Unequal winds (1 : 0.5), {n}³']
+    for ax,graph,title in zip(axes,[equal,unequal],titles):
         lookup={n['node_id']:n for n in graph['nodes']}
         for e in graph['events']:
             nodes=[lookup[n] for n in e['parents']+e['children']]
@@ -246,11 +272,11 @@ def render_comparison(equal,unequal,output):
         ax.set(title=title,ylabel='Local continuation segment',ylim=(graph['segment_count']-.3,-.7))
         ax.set_yticks(range(graph['segment_count']));ax.grid(axis='x',alpha=.2)
     axes[-1].set_xlabel('Simulation time (code units)')
-    fig.suptitle('64³ equal versus unequal winds: same grouping and tracking settings')
-    fig.text(.05,.02,'Green: shared continuation; purple: shared combination. Local segment numbers are independent between runs.\n'
-        'A blank connection means ancestry was not established. The unequal case has 75% of the equal case total prescribed injection.\n'
-        'Detected-group combination times are sampled events, not exact physical collision times. Inner parent subsets in the equal case have tiny score gaps.',fontsize=9)
-    fig.tight_layout(rect=(0,.12,1,.95));fig.savefig(output/'equal_unequal_comparison.png',dpi=140);plt.close(fig)
+    fig.suptitle('Unequal winds: 64³ versus 128³' if resolution else f'{n}³ equal versus unequal winds: same grouping and tracking settings')
+    detail=('Same prescribed source budgets and physical association gates; grouping radius remains 1.5 native cells.' if resolution else 'The unequal case has 75% of the equal case total prescribed injection; inner ancestry is not validated.')
+    fig.text(.05,.02,'Green: shared continuation; purple: shared combination. Dashed: distance-specific alternatives.\n'
+        'Local segment numbers are independent. A blank connection means ancestry was not established.\n'+detail+'\nDetected-group combination times are sampled events, not exact physical collision times.',fontsize=9)
+    fig.tight_layout(rect=(0,.14,1,.95));fig.savefig(output/('resolution_histories.png' if resolution else 'equal_unequal_comparison.png'),dpi=140);plt.close(fig)
 
 
 if __name__=='__main__':

@@ -113,3 +113,71 @@ python -m experiments.wind_bubble.analyze_unequal_history --output-dir outputs/t
 ```
 
 Use a new output directory. CPU postprocessing only; no new simulation needed.
+
+## Resolution check: completed 128³ unequal run
+
+The GPU input is `outputs/two_bubbles_unequal_iwr_compgpu1_n128/`.
+Its 17 events, source strengths and discrete source budgets match the 64³
+unequal experiment. The grid changes to 128³; the source mask contains 1,780
+cells per source and the shared base mass parameter is rescaled to preserve
+the prescribed discrete source rates. This run did **not** perform stored-state
+online/offline verification: the hydrodynamic runner limits that option to 64³.
+Readback of compact products is a separate check and does not replace it.
+
+The same analysis runner now accepts either reviewed resolution and explicitly
+records whether a passed equivalence report exists. It compares equal and
+unequal winds at the matching resolution; for 128³ it also compares unequal
+histories against the committed 64³ history. No grouping, event optimizer,
+family-support algorithm or acceptance threshold was changed.
+
+```sh
+python -m experiments.wind_bubble.analyze_unequal_history \
+  --directory outputs/two_bubbles_unequal_iwr_compgpu1_n128 \
+  --output-dir outputs/two_bubbles_unequal_history_v1_n128
+```
+
+| Unequal-wind observation | 64³ | 128³ |
+| --- | --- | --- |
+| Shared outer combination | 0.08→0.09 | 0.09→0.10 |
+| First retained inward-oriented group | 0.13 | 0.09 |
+| Sustained inner continuation segment | 0.14–0.16 | 0.11–0.16 |
+| Earlier inner family coverage at narrow / wide gate | 16.67% / 25% | 92.48% / 100% |
+| Inner conditional family accepted | No | Yes, seven earlier fragments |
+| Matching-distance agreement | 16/16 intervals | 15/16 intervals |
+
+At 128³, seven groups at 0.10 jointly support the inward-oriented group at
+0.11, whose continuation to 0.12 seeds the family test. Static and predicted
+variants accept the **same seven parents** at both gates. This shows sufficient
+geometric support under the frozen rule, not proof of physical ancestry or a
+demonstrated benefit from motion prediction. The earlier inner fragments also
+include source-overlapping upstream samples; numerical validity is not proof
+of fully resolved physical sampling.
+
+The adjacent-frame optimizer retains its three-parent cap. At 0.10→0.11 the
+narrow gate selects no inner event, while the wide gate selects a three-parent
+subset with exclusion gap about 3.52e-8. This distance-specific alternative is
+left dashed, and no shared inheritance is inserted into the main graph. The
+seven-fragment support remains a separate conditional relation. Thus the new
+test strengthens geometric evidence without concealing the original tracker
+limitation.
+
+At 0.16 the retained groups are an outer surface (19,928 samples), a substantial
+inner group near the stronger source (1,764 samples), and a small inward-oriented
+patch near the weaker source (24 samples). The last patch appears only at the
+final event and has no established temporal history. Another 32 samples are
+below the group cutoff; eight of these have upstream source overlap. All three
+retained groups have zero endpoint source overlap at the final event. This is
+not yet two complete inner-shock histories.
+
+Increasing resolution supplies earlier and more extensive inner detections,
+but this is not a clean convergence test of the tracker alone: grouping still
+uses 1.5 **native cells**, so its physical radius halves. Association gates stay
+fixed at 1.5/64 and 2.5/64 domain units. Outer combination times also shift by
+one saved interval; no exact collision-time convergence is claimed.
+
+The new output contains `unequal_history.gif`, additional review frames at
+0.10 and 0.11, `resolution_histories.png`, `resolution_comparison.json`, and
+the same full graph/partition/family audit products. All 32 independent
+optimization checks, 90 hypothesis-score checks, 16 dense family checks and
+17 decoded animation frames pass. Twenty-nine focused tests pass. These are
+implementation and saved-product checks, not physical-truth validation.

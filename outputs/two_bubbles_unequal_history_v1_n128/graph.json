@@ -1,0 +1,1218 @@
+{
+  "nodes": [
+    {
+      "node_id": "e0001:g0",
+      "event": 1,
+      "time": 0.009999999776482582,
+      "group": 0,
+      "segment_id": 0,
+      "previous_group": null,
+      "inherited": false,
+      "physical_identity_established": false,
+      "surface_samples": 1088,
+      "valid_mach_samples": 1088,
+      "median_mach": 10.888540267944336,
+      "median_nearest_source_radius": 0.07100416608456703,
+      "median_nearest_source_alignment": 0.990301813898677,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 1076
+    },
+    {
+      "node_id": "e0001:g1",
+      "event": 1,
+      "time": 0.009999999776482582,
+      "group": 1,
+      "segment_id": 1,
+      "previous_group": null,
+      "inherited": false,
+      "physical_identity_established": false,
+      "surface_samples": 1000,
+      "valid_mach_samples": 1000,
+      "median_mach": 8.233715057373047,
+      "median_nearest_source_radius": 0.07124962703116183,
+      "median_nearest_source_alignment": 0.9863158259944989,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 988
+    },
+    {
+      "node_id": "e0002:g0",
+      "event": 2,
+      "time": 0.019999999552965164,
+      "group": 0,
+      "segment_id": 0,
+      "previous_group": 0,
+      "inherited": true,
+      "physical_identity_established": false,
+      "surface_samples": 1368,
+      "valid_mach_samples": 1368,
+      "median_mach": 10.561927795410156,
+      "median_nearest_source_radius": 0.07840915474548198,
+      "median_nearest_source_alignment": 0.9989527491459531,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 488
+    },
+    {
+      "node_id": "e0002:g1",
+      "event": 2,
+      "time": 0.019999999552965164,
+      "group": 1,
+      "segment_id": 1,
+      "previous_group": 1,
+      "inherited": true,
+      "physical_identity_established": false,
+      "surface_samples": 1236,
+      "valid_mach_samples": 1236,
+      "median_mach": 8.74868106842041,
+      "median_nearest_source_radius": 0.07445189070243684,
+      "median_nearest_source_alignment": 0.9976077018408606,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 1064
+    },
+    {
+      "node_id": "e0003:g0",
+      "event": 3,
+      "time": 0.029999999329447746,
+      "group": 0,
+      "segment_id": 0,
+      "previous_group": 0,
+      "inherited": true,
+      "physical_identity_established": false,
+      "surface_samples": 2100,
+      "valid_mach_samples": 2100,
+      "median_mach": 11.164854049682617,
+      "median_nearest_source_radius": 0.09233622569986367,
+      "median_nearest_source_alignment": 0.9993955396987688,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0003:g1",
+      "event": 3,
+      "time": 0.029999999329447746,
+      "group": 1,
+      "segment_id": 1,
+      "previous_group": 1,
+      "inherited": true,
+      "physical_identity_established": false,
+      "surface_samples": 1600,
+      "valid_mach_samples": 1600,
+      "median_mach": 8.466859817504883,
+      "median_nearest_source_radius": 0.0834375341855973,
+      "median_nearest_source_alignment": 0.9993463758824694,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 32
+    },
+    {
+      "node_id": "e0004:g0",
+      "event": 4,
+      "time": 0.03999999910593033,
+      "group": 0,
+      "segment_id": 0,
+      "previous_group": 0,
+      "inherited": true,
+      "physical_identity_established": false,
+      "surface_samples": 2716,
+      "valid_mach_samples": 2716,
+      "median_mach": 10.869939804077148,
+      "median_nearest_source_radius": 0.10687494402789396,
+      "median_nearest_source_alignment": 0.9988201125006736,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0004:g1",
+      "event": 4,
+      "time": 0.03999999910593033,
+      "group": 1,
+      "segment_id": 1,
+      "previous_group": 1,
+      "inherited": true,
+      "physical_identity_established": false,
+      "surface_samples": 2212,
+      "valid_mach_samples": 2212,
+      "median_mach": 8.941008567810059,
+      "median_nearest_source_radius": 0.09497382698873365,
+      "median_nearest_source_alignment": 0.999141380870211,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0005:g0",
+      "event": 5,
+      "time": 0.04999999701976776,
+      "group": 0,
+      "segment_id": 0,
+      "previous_group": 0,
+      "inherited": true,
+      "physical_identity_established": false,
+      "surface_samples": 3408,
+      "valid_mach_samples": 3408,
+      "median_mach": 10.068988800048828,
+      "median_nearest_source_radius": 0.12157137436873966,
+      "median_nearest_source_alignment": 0.997760274696192,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0005:g1",
+      "event": 5,
+      "time": 0.04999999701976776,
+      "group": 1,
+      "segment_id": 1,
+      "previous_group": 1,
+      "inherited": true,
+      "physical_identity_established": false,
+      "surface_samples": 2728,
+      "valid_mach_samples": 2728,
+      "median_mach": 8.679306030273438,
+      "median_nearest_source_radius": 0.10664379582289284,
+      "median_nearest_source_alignment": 0.9988431665055857,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0006:g0",
+      "event": 6,
+      "time": 0.05999999865889549,
+      "group": 0,
+      "segment_id": 0,
+      "previous_group": 0,
+      "inherited": true,
+      "physical_identity_established": false,
+      "surface_samples": 4160,
+      "valid_mach_samples": 4160,
+      "median_mach": 9.369976043701172,
+      "median_nearest_source_radius": 0.13536577467126795,
+      "median_nearest_source_alignment": 0.9975171929576687,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0006:g1",
+      "event": 6,
+      "time": 0.05999999865889549,
+      "group": 1,
+      "segment_id": 1,
+      "previous_group": 1,
+      "inherited": true,
+      "physical_identity_established": false,
+      "surface_samples": 3152,
+      "valid_mach_samples": 3152,
+      "median_mach": 8.149965286254883,
+      "median_nearest_source_radius": 0.11833304919315765,
+      "median_nearest_source_alignment": 0.998068098000456,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0007:g0",
+      "event": 7,
+      "time": 0.07000000029802322,
+      "group": 0,
+      "segment_id": 0,
+      "previous_group": 0,
+      "inherited": true,
+      "physical_identity_established": false,
+      "surface_samples": 5084,
+      "valid_mach_samples": 5084,
+      "median_mach": 8.867301940917969,
+      "median_nearest_source_radius": 0.14832429601598354,
+      "median_nearest_source_alignment": 0.9975221005550826,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0007:g1",
+      "event": 7,
+      "time": 0.07000000029802322,
+      "group": 1,
+      "segment_id": 1,
+      "previous_group": 1,
+      "inherited": true,
+      "physical_identity_established": false,
+      "surface_samples": 3824,
+      "valid_mach_samples": 3748,
+      "median_mach": 7.648428440093994,
+      "median_nearest_source_radius": 0.12971061934477207,
+      "median_nearest_source_alignment": 0.9974877241235869,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0008:g0",
+      "event": 8,
+      "time": 0.07999999821186066,
+      "group": 0,
+      "segment_id": 0,
+      "previous_group": 0,
+      "inherited": true,
+      "physical_identity_established": false,
+      "surface_samples": 5768,
+      "valid_mach_samples": 5768,
+      "median_mach": 8.472747802734375,
+      "median_nearest_source_radius": 0.1603822253764931,
+      "median_nearest_source_alignment": 0.9972826445950945,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0008:g1",
+      "event": 8,
+      "time": 0.07999999821186066,
+      "group": 1,
+      "segment_id": 2,
+      "previous_group": null,
+      "inherited": false,
+      "physical_identity_established": false,
+      "surface_samples": 28,
+      "valid_mach_samples": 20,
+      "median_mach": 7.674367904663086,
+      "median_nearest_source_radius": 0.14138872444532266,
+      "median_nearest_source_alignment": 0.017791252676759885,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0008:g2",
+      "event": 8,
+      "time": 0.07999999821186066,
+      "group": 2,
+      "segment_id": 1,
+      "previous_group": 1,
+      "inherited": true,
+      "physical_identity_established": false,
+      "surface_samples": 4312,
+      "valid_mach_samples": 4216,
+      "median_mach": 7.277604103088379,
+      "median_nearest_source_radius": 0.1402564632580111,
+      "median_nearest_source_alignment": 0.99753302237736,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0009:g0",
+      "event": 9,
+      "time": 0.08999999612569809,
+      "group": 0,
+      "segment_id": 0,
+      "previous_group": 0,
+      "inherited": true,
+      "physical_identity_established": false,
+      "surface_samples": 6636,
+      "valid_mach_samples": 6532,
+      "median_mach": 8.130996704101562,
+      "median_nearest_source_radius": 0.17182577236856358,
+      "median_nearest_source_alignment": 0.9971202328360746,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0009:g2",
+      "event": 9,
+      "time": 0.08999999612569809,
+      "group": 2,
+      "segment_id": 3,
+      "previous_group": null,
+      "inherited": false,
+      "physical_identity_established": false,
+      "surface_samples": 24,
+      "valid_mach_samples": 24,
+      "median_mach": 1.3242101669311523,
+      "median_nearest_source_radius": 0.07226739895828077,
+      "median_nearest_source_alignment": -0.9999251923094878,
+      "upstream_inside_source": 12,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0009:g3",
+      "event": 9,
+      "time": 0.08999999612569809,
+      "group": 3,
+      "segment_id": 1,
+      "previous_group": 2,
+      "inherited": true,
+      "physical_identity_established": false,
+      "surface_samples": 4816,
+      "valid_mach_samples": 4724,
+      "median_mach": 6.983114242553711,
+      "median_nearest_source_radius": 0.15027871936563314,
+      "median_nearest_source_alignment": 0.997440739274895,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0010:g0",
+      "event": 10,
+      "time": 0.09999999403953552,
+      "group": 0,
+      "segment_id": 4,
+      "previous_group": null,
+      "inherited": false,
+      "physical_identity_established": false,
+      "surface_samples": 12940,
+      "valid_mach_samples": 12756,
+      "median_mach": 7.798709392547607,
+      "median_nearest_source_radius": 0.1809378529311685,
+      "median_nearest_source_alignment": 0.997276314862378,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0010:g1",
+      "event": 10,
+      "time": 0.09999999403953552,
+      "group": 1,
+      "segment_id": 5,
+      "previous_group": null,
+      "inherited": false,
+      "physical_identity_established": false,
+      "surface_samples": 32,
+      "valid_mach_samples": 32,
+      "median_mach": 1.4533777236938477,
+      "median_nearest_source_radius": 0.07638720499628504,
+      "median_nearest_source_alignment": -0.9991484544427447,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0010:g2",
+      "event": 10,
+      "time": 0.09999999403953552,
+      "group": 2,
+      "segment_id": 6,
+      "previous_group": null,
+      "inherited": false,
+      "physical_identity_established": false,
+      "surface_samples": 28,
+      "valid_mach_samples": 28,
+      "median_mach": 1.3776530027389526,
+      "median_nearest_source_radius": 0.07560918423082448,
+      "median_nearest_source_alignment": -0.9976641867414537,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0010:g3",
+      "event": 10,
+      "time": 0.09999999403953552,
+      "group": 3,
+      "segment_id": 7,
+      "previous_group": null,
+      "inherited": false,
+      "physical_identity_established": false,
+      "surface_samples": 62,
+      "valid_mach_samples": 62,
+      "median_mach": 1.4155137538909912,
+      "median_nearest_source_radius": 0.07484648094875421,
+      "median_nearest_source_alignment": -0.9980937588329654,
+      "upstream_inside_source": 22,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0010:g4",
+      "event": 10,
+      "time": 0.09999999403953552,
+      "group": 4,
+      "segment_id": 8,
+      "previous_group": null,
+      "inherited": false,
+      "physical_identity_established": false,
+      "surface_samples": 62,
+      "valid_mach_samples": 62,
+      "median_mach": 1.4155137538909912,
+      "median_nearest_source_radius": 0.07484646914212006,
+      "median_nearest_source_alignment": -0.9980937553030175,
+      "upstream_inside_source": 22,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0010:g5",
+      "event": 10,
+      "time": 0.09999999403953552,
+      "group": 5,
+      "segment_id": 9,
+      "previous_group": null,
+      "inherited": false,
+      "physical_identity_established": false,
+      "surface_samples": 62,
+      "valid_mach_samples": 62,
+      "median_mach": 1.4155136346817017,
+      "median_nearest_source_radius": 0.07484649640858616,
+      "median_nearest_source_alignment": -0.9980937649164701,
+      "upstream_inside_source": 22,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0010:g6",
+      "event": 10,
+      "time": 0.09999999403953552,
+      "group": 6,
+      "segment_id": 10,
+      "previous_group": null,
+      "inherited": false,
+      "physical_identity_established": false,
+      "surface_samples": 62,
+      "valid_mach_samples": 62,
+      "median_mach": 1.4155136346817017,
+      "median_nearest_source_radius": 0.07484648094875421,
+      "median_nearest_source_alignment": -0.9980937636396938,
+      "upstream_inside_source": 22,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0010:g7",
+      "event": 10,
+      "time": 0.09999999403953552,
+      "group": 7,
+      "segment_id": 3,
+      "previous_group": 2,
+      "inherited": true,
+      "physical_identity_established": false,
+      "surface_samples": 60,
+      "valid_mach_samples": 60,
+      "median_mach": 1.4483764171600342,
+      "median_nearest_source_radius": 0.07411971212431129,
+      "median_nearest_source_alignment": -0.9992027446120961,
+      "upstream_inside_source": 24,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0011:g0",
+      "event": 11,
+      "time": 0.10999999940395355,
+      "group": 0,
+      "segment_id": 4,
+      "previous_group": 0,
+      "inherited": true,
+      "physical_identity_established": false,
+      "surface_samples": 14112,
+      "valid_mach_samples": 14064,
+      "median_mach": 7.539322853088379,
+      "median_nearest_source_radius": 0.1916653944181992,
+      "median_nearest_source_alignment": 0.9971341108809073,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0011:g1",
+      "event": 11,
+      "time": 0.10999999940395355,
+      "group": 1,
+      "segment_id": 11,
+      "previous_group": null,
+      "inherited": false,
+      "physical_identity_established": false,
+      "surface_samples": 1064,
+      "valid_mach_samples": 1064,
+      "median_mach": 1.4784445762634277,
+      "median_nearest_source_radius": 0.0775908085938356,
+      "median_nearest_source_alignment": -0.9988096904333656,
+      "upstream_inside_source": 8,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0012:g0",
+      "event": 12,
+      "time": 0.11999999731779099,
+      "group": 0,
+      "segment_id": 4,
+      "previous_group": 0,
+      "inherited": true,
+      "physical_identity_established": false,
+      "surface_samples": 15324,
+      "valid_mach_samples": 15308,
+      "median_mach": 7.3141398429870605,
+      "median_nearest_source_radius": 0.20209833386919726,
+      "median_nearest_source_alignment": 0.9971268523466519,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0012:g1",
+      "event": 12,
+      "time": 0.11999999731779099,
+      "group": 1,
+      "segment_id": 11,
+      "previous_group": 1,
+      "inherited": true,
+      "physical_identity_established": false,
+      "surface_samples": 1432,
+      "valid_mach_samples": 1432,
+      "median_mach": 1.60652756690979,
+      "median_nearest_source_radius": 0.07958804687546997,
+      "median_nearest_source_alignment": -0.9979393928782848,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0013:g0",
+      "event": 13,
+      "time": 0.12999999523162842,
+      "group": 0,
+      "segment_id": 4,
+      "previous_group": 0,
+      "inherited": true,
+      "physical_identity_established": false,
+      "surface_samples": 16516,
+      "valid_mach_samples": 16516,
+      "median_mach": 7.1047186851501465,
+      "median_nearest_source_radius": 0.21211219714890295,
+      "median_nearest_source_alignment": 0.9970272111029121,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0013:g1",
+      "event": 13,
+      "time": 0.12999999523162842,
+      "group": 1,
+      "segment_id": 11,
+      "previous_group": 1,
+      "inherited": true,
+      "physical_identity_established": false,
+      "surface_samples": 1528,
+      "valid_mach_samples": 1528,
+      "median_mach": 1.6907613277435303,
+      "median_nearest_source_radius": 0.08168320630370268,
+      "median_nearest_source_alignment": -0.9967660609265678,
+      "upstream_inside_source": 4,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0014:g0",
+      "event": 14,
+      "time": 0.14000000059604645,
+      "group": 0,
+      "segment_id": 4,
+      "previous_group": 0,
+      "inherited": true,
+      "physical_identity_established": false,
+      "surface_samples": 17544,
+      "valid_mach_samples": 17544,
+      "median_mach": 6.920275688171387,
+      "median_nearest_source_radius": 0.22184678886809917,
+      "median_nearest_source_alignment": 0.9968281438721369,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0014:g1",
+      "event": 14,
+      "time": 0.14000000059604645,
+      "group": 1,
+      "segment_id": 11,
+      "previous_group": 1,
+      "inherited": true,
+      "physical_identity_established": false,
+      "surface_samples": 1560,
+      "valid_mach_samples": 1560,
+      "median_mach": 1.7192004919052124,
+      "median_nearest_source_radius": 0.08376861674614275,
+      "median_nearest_source_alignment": -0.9957993632400348,
+      "upstream_inside_source": 8,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0015:g0",
+      "event": 15,
+      "time": 0.14999999105930328,
+      "group": 0,
+      "segment_id": 4,
+      "previous_group": 0,
+      "inherited": true,
+      "physical_identity_established": false,
+      "surface_samples": 18848,
+      "valid_mach_samples": 18848,
+      "median_mach": 6.748357772827148,
+      "median_nearest_source_radius": 0.2314177279164054,
+      "median_nearest_source_alignment": 0.9969319438735094,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0015:g1",
+      "event": 15,
+      "time": 0.14999999105930328,
+      "group": 1,
+      "segment_id": 11,
+      "previous_group": 1,
+      "inherited": true,
+      "physical_identity_established": false,
+      "surface_samples": 1580,
+      "valid_mach_samples": 1580,
+      "median_mach": 1.7793093919754028,
+      "median_nearest_source_radius": 0.08524491572035944,
+      "median_nearest_source_alignment": -0.996021669979609,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0016:g0",
+      "event": 16,
+      "time": 0.1599999964237213,
+      "group": 0,
+      "segment_id": 4,
+      "previous_group": 0,
+      "inherited": true,
+      "physical_identity_established": false,
+      "surface_samples": 19928,
+      "valid_mach_samples": 19928,
+      "median_mach": 6.595285415649414,
+      "median_nearest_source_radius": 0.24067100771590194,
+      "median_nearest_source_alignment": 0.9967152601607632,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0016:g1",
+      "event": 16,
+      "time": 0.1599999964237213,
+      "group": 1,
+      "segment_id": 11,
+      "previous_group": 1,
+      "inherited": true,
+      "physical_identity_established": false,
+      "surface_samples": 1764,
+      "valid_mach_samples": 1764,
+      "median_mach": 1.8526886701583862,
+      "median_nearest_source_radius": 0.08699639877057375,
+      "median_nearest_source_alignment": -0.9969798149461614,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 0
+    },
+    {
+      "node_id": "e0016:g10",
+      "event": 16,
+      "time": 0.1599999964237213,
+      "group": 10,
+      "segment_id": 12,
+      "previous_group": null,
+      "inherited": false,
+      "physical_identity_established": false,
+      "surface_samples": 24,
+      "valid_mach_samples": 24,
+      "median_mach": 1.461963415145874,
+      "median_nearest_source_radius": 0.07570778951380569,
+      "median_nearest_source_alignment": -0.9990527954112474,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 0
+    }
+  ],
+  "events": [
+    {
+      "event_id": "h0000",
+      "parent_event": 1,
+      "child_event": 2,
+      "kind": "continuation",
+      "parents": [
+        "e0001:g0"
+      ],
+      "children": [
+        "e0002:g0"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0001",
+      "parent_event": 1,
+      "child_event": 2,
+      "kind": "continuation",
+      "parents": [
+        "e0001:g1"
+      ],
+      "children": [
+        "e0002:g1"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0002",
+      "parent_event": 2,
+      "child_event": 3,
+      "kind": "continuation",
+      "parents": [
+        "e0002:g0"
+      ],
+      "children": [
+        "e0003:g0"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0003",
+      "parent_event": 2,
+      "child_event": 3,
+      "kind": "continuation",
+      "parents": [
+        "e0002:g1"
+      ],
+      "children": [
+        "e0003:g1"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0004",
+      "parent_event": 3,
+      "child_event": 4,
+      "kind": "continuation",
+      "parents": [
+        "e0003:g0"
+      ],
+      "children": [
+        "e0004:g0"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0005",
+      "parent_event": 3,
+      "child_event": 4,
+      "kind": "continuation",
+      "parents": [
+        "e0003:g1"
+      ],
+      "children": [
+        "e0004:g1"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0006",
+      "parent_event": 4,
+      "child_event": 5,
+      "kind": "continuation",
+      "parents": [
+        "e0004:g0"
+      ],
+      "children": [
+        "e0005:g0"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0007",
+      "parent_event": 4,
+      "child_event": 5,
+      "kind": "continuation",
+      "parents": [
+        "e0004:g1"
+      ],
+      "children": [
+        "e0005:g1"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0008",
+      "parent_event": 5,
+      "child_event": 6,
+      "kind": "continuation",
+      "parents": [
+        "e0005:g0"
+      ],
+      "children": [
+        "e0006:g0"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0009",
+      "parent_event": 5,
+      "child_event": 6,
+      "kind": "continuation",
+      "parents": [
+        "e0005:g1"
+      ],
+      "children": [
+        "e0006:g1"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0010",
+      "parent_event": 6,
+      "child_event": 7,
+      "kind": "continuation",
+      "parents": [
+        "e0006:g0"
+      ],
+      "children": [
+        "e0007:g0"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0011",
+      "parent_event": 6,
+      "child_event": 7,
+      "kind": "continuation",
+      "parents": [
+        "e0006:g1"
+      ],
+      "children": [
+        "e0007:g1"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0012",
+      "parent_event": 7,
+      "child_event": 8,
+      "kind": "continuation",
+      "parents": [
+        "e0007:g0"
+      ],
+      "children": [
+        "e0008:g0"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0013",
+      "parent_event": 7,
+      "child_event": 8,
+      "kind": "continuation",
+      "parents": [
+        "e0007:g1"
+      ],
+      "children": [
+        "e0008:g2"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0014",
+      "parent_event": 8,
+      "child_event": 9,
+      "kind": "continuation",
+      "parents": [
+        "e0008:g0"
+      ],
+      "children": [
+        "e0009:g0"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0015",
+      "parent_event": 8,
+      "child_event": 9,
+      "kind": "continuation",
+      "parents": [
+        "e0008:g2"
+      ],
+      "children": [
+        "e0009:g3"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0016",
+      "parent_event": 9,
+      "child_event": 10,
+      "kind": "combination",
+      "parents": [
+        "e0009:g0",
+        "e0009:g3"
+      ],
+      "children": [
+        "e0010:g0"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0017",
+      "parent_event": 9,
+      "child_event": 10,
+      "kind": "continuation",
+      "parents": [
+        "e0009:g2"
+      ],
+      "children": [
+        "e0010:g7"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0018",
+      "parent_event": 10,
+      "child_event": 11,
+      "kind": "combination",
+      "parents": [
+        "e0010:g2",
+        "e0010:g3",
+        "e0010:g6"
+      ],
+      "children": [
+        "e0011:g1"
+      ],
+      "status": "distance_specific",
+      "selected_at_gates": [
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0019",
+      "parent_event": 10,
+      "child_event": 11,
+      "kind": "continuation",
+      "parents": [
+        "e0010:g0"
+      ],
+      "children": [
+        "e0011:g0"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0020",
+      "parent_event": 11,
+      "child_event": 12,
+      "kind": "continuation",
+      "parents": [
+        "e0011:g0"
+      ],
+      "children": [
+        "e0012:g0"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0021",
+      "parent_event": 11,
+      "child_event": 12,
+      "kind": "continuation",
+      "parents": [
+        "e0011:g1"
+      ],
+      "children": [
+        "e0012:g1"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0022",
+      "parent_event": 12,
+      "child_event": 13,
+      "kind": "continuation",
+      "parents": [
+        "e0012:g0"
+      ],
+      "children": [
+        "e0013:g0"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0023",
+      "parent_event": 12,
+      "child_event": 13,
+      "kind": "continuation",
+      "parents": [
+        "e0012:g1"
+      ],
+      "children": [
+        "e0013:g1"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0024",
+      "parent_event": 13,
+      "child_event": 14,
+      "kind": "continuation",
+      "parents": [
+        "e0013:g0"
+      ],
+      "children": [
+        "e0014:g0"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0025",
+      "parent_event": 13,
+      "child_event": 14,
+      "kind": "continuation",
+      "parents": [
+        "e0013:g1"
+      ],
+      "children": [
+        "e0014:g1"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0026",
+      "parent_event": 14,
+      "child_event": 15,
+      "kind": "continuation",
+      "parents": [
+        "e0014:g0"
+      ],
+      "children": [
+        "e0015:g0"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0027",
+      "parent_event": 14,
+      "child_event": 15,
+      "kind": "continuation",
+      "parents": [
+        "e0014:g1"
+      ],
+      "children": [
+        "e0015:g1"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0028",
+      "parent_event": 15,
+      "child_event": 16,
+      "kind": "continuation",
+      "parents": [
+        "e0015:g0"
+      ],
+      "children": [
+        "e0016:g0"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0029",
+      "parent_event": 15,
+      "child_event": 16,
+      "kind": "continuation",
+      "parents": [
+        "e0015:g1"
+      ],
+      "children": [
+        "e0016:g1"
+      ],
+      "status": "shared",
+      "selected_at_gates": [
+        1.5,
+        2.5
+      ]
+    }
+  ],
+  "segment_count": 13,
+  "physical_identity_established": false,
+  "policy": "Only shared continuations inherit segment labels; branches stay explicit."
+}

@@ -1,0 +1,9 @@
+first_event,first_time,gate_reference_cells,method,child_group,parents,fragments,coverage,accepted
+9,0.08999999612569809,1.5,static_family,0,"0,3",2,1.0,True
+9,0.08999999612569809,1.5,delayed_family,0,"0,3",2,1.0,True
+9,0.08999999612569809,2.5,static_family,0,"0,3",2,1.0,True
+9,0.08999999612569809,2.5,delayed_family,0,"0,3",2,1.0,True
+10,0.09999999403953552,1.5,static_family,1,"1,2,3,4,5,6,7",7,0.924812030075188,True
+10,0.09999999403953552,1.5,delayed_family,1,"1,2,3,4,5,6,7",7,0.924812030075188,True
+10,0.09999999403953552,2.5,static_family,1,"1,2,3,4,5,6,7",7,1.0,True
+10,0.09999999403953552,2.5,delayed_family,1,"1,2,3,4,5,6,7",7,1.0,True

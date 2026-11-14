@@ -1,6 +1,28 @@
 import unittest
+import json
+import tempfile
+from pathlib import Path
 import numpy as np
-from experiments.wind_bubble.analyze_unequal_history import window_catalogs
+from experiments.wind_bubble.analyze_unequal_history import window_catalogs, validation_scope
+
+
+class ValidationScope(unittest.TestCase):
+    def test_absent_128_reference_is_explicitly_unverified(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            meta=dict(status='complete',source_strengths=[1.,.5],num_cells=128,verify_offline=False)
+            self.assertFalse(validation_scope(Path(tmp),meta)['online_offline_verified'])
+            meta['verify_offline']=True
+            with self.assertRaises(ValueError):validation_scope(Path(tmp),meta)
+
+    def test_64_reference_is_required_and_failure_never_ignored(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp)
+            meta=dict(status='complete',source_strengths=[1.,.5],num_cells=64)
+            with self.assertRaises(ValueError):validation_scope(root,meta)
+            (root/'equivalence.json').write_text(json.dumps(dict(passed=False)))
+            with self.assertRaises(ValueError):validation_scope(root,meta)
+            (root/'equivalence.json').write_text(json.dumps(dict(passed=True)))
+            self.assertTrue(validation_scope(root,meta)['online_offline_verified'])
 
 
 class UnequalWindows(unittest.TestCase):
