@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "captured_events": [
+    1,
+    2
+  ],
+  "capture_times": [
+    0.009999999776482582,
+    0.019999999552965164
+  ],
+  "production_zone_masks_match": true,
+  "exported_indices_and_positions_match": true,
+  "reference_replay": {
+    "passed": true,
+    "events": 3,
+    "scope": "Replay product agreement, not full-state online/offline equivalence."
+  },
+  "full_state_bytes": 1310976,
+  "state_sha256": {
+    "outputs/detection_audit_validation_cpu_n032/audit/state_0001.npy": "2e1fc1d151cc09ede14ce683539dc85e828af92205b21b62324184d6593cf01a",
+    "outputs/detection_audit_validation_cpu_n032/audit/state_0002.npy": "44d5ae985856a0ba240875f46a22fe48479e82d50d1f341145bc814d4c8dea9e"
+  },
+  "source_sha256": {
+    "/Users/minhn/Documents/Heidelberg University/fifth_semester/Thesis/master_thesis/experiments/wind_bubble/audit_detection_stages.py": "bc75e7c1be6a81bd130dff004ee70685f245be2d56b1e45777b384cbab6f957f",
+    "experiments/wind_bubble/run_two_bubbles.py": "e9667890bcebda6e08c8729239044be0ca126f00dc83a90269bbcc948bb504de",
+    "astronomix/_physics_modules/_shock_finder/_gradients.py": "9dadaaa7192c5c49e8f0ff09d75f078ea62a1b2ed480374e8270c0d3059d030b",
+    "astronomix/_physics_modules/_shock_finder/pfrommer_shock_finder.py": "e5ba97a66257eb9edd98709fb2545127a75bb3baeb1dffb08c5ac31bd52687a0",
+    "astronomix/_physics_modules/_shock_finder/_shock_zones.py": "a5b599bae84e7dfa7bd1241b76bb533742a93e63d740ac7eba64858463a77c16",
+    "astronomix/_physics_modules/_shock_finder/_shock_surface.py": "134dca1b5346c104c41d6fbdc54c6ce4bd0d7cb3a4af18f3e1ce80111562b288",
+    "astronomix/_physics_modules/_shock_finder/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "astronomix/_physics_modules/_shock_finder/_energy_dissipation.py": "88585623f1c17f0e0fd68b30ca69039308f6e1500eedab83833c060818630c41",
+    "astronomix/_physics_modules/_shock_finder/mhd_shock_finder.py": "44d25a783ef7a23b26bf22f542a5f18268ef2454d676233c19758cd4af46e338",
+    "astronomix/_physics_modules/_shock_finder/_data_structures.py": "ada11fff7ecacae0ea3bc9521b064e67ff9674d97745890dafec467d6fb6d6c9",
+    "astronomix/_physics_modules/_shock_finder/_shock_mach.py": "e53742e8e9aaf278ce7392670c0f80c8bf7b3f1b0ea42dc3d42c6b3e5924cc2c",
+    "astronomix/_physics_modules/_shock_finder/_helpers.py": "e28efc81c11a3f17584e3c0c2ae15f234f73d6260a5e2e348c3e306115eaa1b4",
+    "astronomix/_physics_modules/_shock_finder/_mhd_shock.py": "08a125c3f9364311e9a3a44a2ebab6e7c5d7d0394dfc60759b6c00a95433d264"
+  },
+  "physics_or_thresholds_changed": false,
+  "schedule_changed": false,
+  "scope": "Diagnostic replay; cell counts are not physical shock counts, source ownership, or causal proof."
+}

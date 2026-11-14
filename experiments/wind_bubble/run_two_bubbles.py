@@ -135,7 +135,7 @@ def compare_outputs(online, offline):
                 scalar_rtol=1e-6, scalar_atol=1e-8)
 
 
-def run(args):
+def run(args, *, state_observer=None):
     if args.num_cells < 16 or args.num_cells % 16:
         raise ValueError('num-cells must be a multiple of 16 and at least 16.')
     if args.num_analysis < 3 or not np.isfinite(args.t_end) or args.t_end <= 0:
@@ -220,7 +220,10 @@ def run(args):
                 physical[variables.pressure_index, :, :, args.num_cells//2])
 
     def callback(time, padded, registry):
-        jax.debug.callback(writer.receive, time, *payload(_unpad(padded, config)), ordered=True)
+        physical = _unpad(padded, config)
+        jax.debug.callback(writer.receive, time, *payload(physical), ordered=True)
+        if state_observer is not None:
+            state_observer(time, physical)
 
     try:
         final = time_integration(state, config, params, variables, snapshot_callable=callback)
