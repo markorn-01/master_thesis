@@ -1,0 +1,2 @@
+# Full diagnostic states remain on local/remote disk; hashes are in verification.json.
+state_*.npy
