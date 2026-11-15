@@ -1,0 +1,132 @@
+{
+  "results": [
+    {
+      "gate_reference_cells": 1.5,
+      "parents": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "all_seven_child_coverage": 0.924812030075188,
+      "exclusive_child_fractions": [
+        0.018796992481203006,
+        0.06390977443609022,
+        0.15789473684210525,
+        0.15789473684210525,
+        0.15789473684210525,
+        0.15789473684210525,
+        0.12406015037593984
+      ],
+      "full_seven_would_pass_exclusivity": false,
+      "selected_five": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "omitted_patch_audit": [
+        {
+          "group": 1,
+          "samples": 32,
+          "admissible_candidates": 15,
+          "best_candidate_parents": [
+            1,
+            3,
+            4,
+            5,
+            6
+          ],
+          "score_deficit": 0.04827050383531617
+        },
+        {
+          "group": 7,
+          "samples": 60,
+          "admissible_candidates": 25,
+          "best_candidate_parents": [
+            2,
+            3,
+            5,
+            6,
+            7
+          ],
+          "score_deficit": 0.03803571936941097
+        }
+      ]
+    },
+    {
+      "gate_reference_cells": 2.5,
+      "parents": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "all_seven_child_coverage": 1.0,
+      "exclusive_child_fractions": [
+        0.0,
+        0.0,
+        0.12030075187969924,
+        0.12030075187969924,
+        0.12030075187969924,
+        0.12030075187969924,
+        0.10150375939849623
+      ],
+      "full_seven_would_pass_exclusivity": false,
+      "selected_five": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "omitted_patch_audit": [
+        {
+          "group": 1,
+          "samples": 32,
+          "admissible_candidates": 25,
+          "best_candidate_parents": [
+            1,
+            3,
+            4,
+            5,
+            6
+          ],
+          "score_deficit": 0.010285101900384674
+        },
+        {
+          "group": 7,
+          "samples": 60,
+          "admissible_candidates": 39,
+          "best_candidate_parents": [
+            2,
+            3,
+            5,
+            6,
+            7
+          ],
+          "score_deficit": 0.023574842731375334
+        }
+      ]
+    }
+  ],
+  "physical_ancestry_established": false,
+  "input_sha256": {
+    "outputs/two_bubbles_detection_extension_iwr_n128/online/surfaces_0010.npz": "d265a9356cb4456194d16c0b9e1a711d71776e64624ae50ff551d30599176d96",
+    "outputs/two_bubbles_detection_extension_iwr_n128/online/surfaces_0011.npz": "0f400a62e4edf5570656fdb01a4b70fce2bbc9b4a468cb2a3c482979e41ff67a",
+    "outputs/two_bubbles_detection_extension_review_n128/groups_0010.npz": "4a0d63ad185db480255e913369a2978c41df317e2c54b69ddac3eb5757fb2d79",
+    "outputs/two_bubbles_detection_extension_review_n128/groups_0011.npz": "01a22249bddcbf3aa1d7e23aa3f6c446ebd15025494f4627d682134fa7792df2",
+    "outputs/expanded_full_sequence_validation_n128/tracking_results.json.gz": "4b405e2dd713a96f6861d9cdaf542557d0a1b86799945e30451c16d9014855fa",
+    "outputs/expanded_full_sequence_validation_n128/verification.json": "0ee116f5f6b4d9779714e4cadff1b9d04fad2a16b9a58b54de2eb9536098e4f1"
+  },
+  "source_sha256": {
+    "/Users/minhn/Documents/Heidelberg University/fifth_semester/Thesis/master_thesis/experiments/wind_bubble/probe_earlier_fragment_support.py": "9b4f4e3251299fad6b68b1e4f38868cf8d9cb458369b4dadf13ef4624d4ec207"
+  }
+}
