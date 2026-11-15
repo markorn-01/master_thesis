@@ -1,0 +1,96 @@
+{
+  "passed": true,
+  "unique_events": 5,
+  "decoded_frames": 5,
+  "fps": 1,
+  "frames": [
+    {
+      "event": 16,
+      "time": 0.1599999964237213,
+      "samples": 56,
+      "unretained": 32,
+      "upstream_overlap": 8,
+      "coordinate_sha256": "f75bf662f2fca679f84d40b871127f523ece551cee58ab40e59c047ab8c15753"
+    },
+    {
+      "event": 17,
+      "time": 0.17000000178813934,
+      "samples": 180,
+      "unretained": 0,
+      "upstream_overlap": 48,
+      "coordinate_sha256": "467596a3672571d1fd2ea9ddd0a9fce29b63972acf4a9d99afc7faa751ca617e"
+    },
+    {
+      "event": 18,
+      "time": 0.18000000715255737,
+      "samples": 248,
+      "unretained": 0,
+      "upstream_overlap": 80,
+      "coordinate_sha256": "af7e97045301e1e668205054c60c34b501c1c747ee1ad51218292e9ee5532272"
+    },
+    {
+      "event": 19,
+      "time": 0.1899999976158142,
+      "samples": 308,
+      "unretained": 4,
+      "upstream_overlap": 80,
+      "coordinate_sha256": "fba67e43803307de844f71e994085de59009d62bea778e24e917eabbc996b13d"
+    },
+    {
+      "event": 20,
+      "time": 0.20000000298023224,
+      "samples": 488,
+      "unretained": 0,
+      "upstream_overlap": 72,
+      "coordinate_sha256": "ba8c4219f747af1041444e88a137ac78ff04562ead97bc66e7672a020ce701d1"
+    }
+  ],
+  "full_parent_relation": {
+    "event_id": "h0047",
+    "parent_event": 19,
+    "child_event": 20,
+    "kind": "combination",
+    "parents": [
+      "e0019:g2",
+      "e0019:g3",
+      "e0019:g4",
+      "e0019:g5",
+      "e0019:g6"
+    ],
+    "children": [
+      "e0020:g2"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ]
+  },
+  "original_positions_and_segment_ids_preserved": true,
+  "previous_events_unchanged": true,
+  "original_history_modified": false,
+  "graph_uses_full_saved_window": true,
+  "points_smoothed": false,
+  "physical_ancestry_established": false,
+  "input_sha256": {
+    "outputs/two_bubbles_detection_extension_review_n128/verification.json": "93b4536f4a12e131bce965714fc9d02c0282bd6e931a1875b1775074a49c4cb6",
+    "outputs/five_fragment_arity_review_n128/verification.json": "ae0cdb150a979bd0bf9e85a2aa79e1f6aa188553e0a443e458534a49c5a43220",
+    "outputs/two_bubbles_detection_extension_review_n128/graph.json": "a29ad7ff7ba44e5035f32e970124b1b26c4dd40006d54063a395c8aa365d2f86",
+    "outputs/five_fragment_arity_review_n128/experimental_graph.json": "a87638174eb5cb53177d714b8d3ad5445db8aeb8886a120ecdd5f9f686ee2832",
+    "outputs/two_bubbles_detection_extension_iwr_n128/online/surfaces_0016.npz": "972866e2237989c10149079de7d0652cdcfb301797db4dbb4d8d0104ae6475aa",
+    "outputs/two_bubbles_detection_extension_review_n128/groups_0016.npz": "3d366b676a6c9e898e62e50097e614956db0f1c00a4921af2ecf335bae64c640",
+    "outputs/two_bubbles_detection_extension_iwr_n128/online/surfaces_0017.npz": "e629ab515b3800653e48d12b06e55da64f847060d43126021d40aac372cff426",
+    "outputs/two_bubbles_detection_extension_review_n128/groups_0017.npz": "7c143b6a7a4685b92185d0ee84f7d2a31213ff95fc15f9d0d0f0bdf089f5985c",
+    "outputs/two_bubbles_detection_extension_iwr_n128/online/surfaces_0018.npz": "d0cd50144eb8bde4cb7fbd7a9fcf35beacf4a2a1ff098c7e1a049598201b0671",
+    "outputs/two_bubbles_detection_extension_review_n128/groups_0018.npz": "f40bf655696a0e66ba9aaeaa9bc7b6bcdbfcc0274941e978999180a7a1a58aef",
+    "outputs/two_bubbles_detection_extension_iwr_n128/online/surfaces_0019.npz": "57d9ab533f4b5440f1396a7f7894dbe6a893fbe16315396a2f6b682ab13bb9d7",
+    "outputs/two_bubbles_detection_extension_review_n128/groups_0019.npz": "88aee9d821d163de91ca7dacc789724c065a278269b345db58f862c5fee450ae",
+    "outputs/two_bubbles_detection_extension_iwr_n128/online/surfaces_0020.npz": "8103b0405c278aab9159a1566e9ad34e64ed1e0ec38761b7c91a4dad636b36ca",
+    "outputs/two_bubbles_detection_extension_review_n128/groups_0020.npz": "f3bb1f80865df1704e5130c70f35f75001bc061172c9f927be123028096ccc2d"
+  },
+  "source_sha256": {
+    "/Users/minhn/Documents/Heidelberg University/fifth_semester/Thesis/master_thesis/experiments/wind_bubble/animate_five_fragment_history.py": "00a481f559e333a133367b9b6989031211088f6e24eb6aadf07aa5732496fb66",
+    "experiments/wind_bubble/inspect_weak_source.py": "e628167c0e006e31cb45ee0708a082688c3a4d15cd02ae4b3e12998bbfb274f8",
+    "experiments/wind_bubble/review_detection_extension.py": "c35325b5e1c6c460a80e5c6059682bca1269463c34254259d3abd5caa4955553"
+  }
+}
