@@ -1,0 +1,5 @@
+gate_reference_cells,max_partners,candidates,accepted_weak_parents,five_parent_candidate_admitted
+1.5,3,16,,False
+1.5,5,22,"2,3,4,5,6",True
+2.5,3,17,"3,4,6",False
+2.5,5,23,"2,3,4,5,6",True

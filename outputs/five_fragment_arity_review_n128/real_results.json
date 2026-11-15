@@ -1,0 +1,4431 @@
+[
+  {
+    "gate_reference_cells": 1.5,
+    "max_partners": 3,
+    "result": {
+      "candidates": [
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            3,
+            4
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.4539625076647846,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.5163934426229508
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.1721311475409836,
+            0.1721311475409836,
+            0.1721311475409836
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            3,
+            5
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.453962479100718,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.5163934426229508
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.1721311475409836,
+            0.1721311475409836,
+            0.1721311475409836
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            3,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.6347663533843577,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.6967213114754098
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.14754098360655737,
+            0.14754098360655737,
+            0.3524590163934426
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            4,
+            5
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.4539625103700247,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.5163934426229508
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.1721311475409836,
+            0.1721311475409836,
+            0.1721311475409836
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            4,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.634766387322625,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.6967213114754098
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.14754098360655737,
+            0.14754098360655737,
+            0.3524590163934426
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            5,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.6347663627177327,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.6967213114754098
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.14754098360655737,
+            0.14754098360655737,
+            0.3524590163934426
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 2.503331452761223,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.5491803278688525
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.14754098360655737,
+            0.3770491803278688
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            3,
+            4,
+            5
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.4539625231478253,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.5163934426229508
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.1721311475409836,
+            0.1721311475409836,
+            0.1721311475409836
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            3,
+            4,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.6347663991136963,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.6967213114754098
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.14754098360655737,
+            0.14754098360655737,
+            0.3524590163934426
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            3,
+            5,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.6347663745088044,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.6967213114754098
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.14754098360655737,
+            0.14754098360655737,
+            0.3524590163934426
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            3,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 2.503331464552294,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.5491803278688525
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.14754098360655737,
+            0.3770491803278688
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            4,
+            5,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.6347664084470717,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.6967213114754098
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.14754098360655737,
+            0.14754098360655737,
+            0.3524590163934426
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            4,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 2.503331498490562,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.5491803278688525
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.14754098360655737,
+            0.3770491803278688
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            5,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 2.5033314738856696,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.5491803278688525
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.14754098360655737,
+            0.3770491803278688
+          ]
+        },
+        {
+          "kind": "continuation",
+          "parents": [
+            0
+          ],
+          "children": [
+            0
+          ],
+          "score": 1.8153571350845488,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 0,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 0,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        },
+        {
+          "kind": "continuation",
+          "parents": [
+            1
+          ],
+          "children": [
+            1
+          ],
+          "score": 1.9489212728492535,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 1,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 1,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        }
+      ],
+      "selection": {
+        "optimal_score": 7.399044816380874,
+        "solver_selected": [
+          11,
+          14,
+          15
+        ],
+        "accepted": [
+          14,
+          15
+        ],
+        "ambiguous": [
+          8,
+          11
+        ],
+        "exclusion_gaps": {
+          "11": 9.333374961784102e-09,
+          "14": 1.8153571350845485,
+          "15": 1.9489212728492538
+        }
+      },
+      "events": [
+        {
+          "candidate_index": 14,
+          "kind": "continuation",
+          "parents": [
+            0
+          ],
+          "children": [
+            0
+          ],
+          "score": 1.8153571350845488,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 0,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 0,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        },
+        {
+          "candidate_index": 15,
+          "kind": "continuation",
+          "parents": [
+            1
+          ],
+          "children": [
+            1
+          ],
+          "score": 1.9489212728492535,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 1,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 1,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 0,
+          "child_group": 0,
+          "accepted": true,
+          "event_index": 14,
+          "event_kind": "continuation"
+        },
+        {
+          "parent_group": 1,
+          "child_group": 1,
+          "accepted": true,
+          "event_index": 15,
+          "event_kind": "continuation"
+        }
+      ],
+      "parents": [
+        {
+          "parent_group": 0,
+          "status": "assigned"
+        },
+        {
+          "parent_group": 1,
+          "status": "assigned"
+        },
+        {
+          "parent_group": 2,
+          "status": "unmatched"
+        },
+        {
+          "parent_group": 3,
+          "status": "ambiguous"
+        },
+        {
+          "parent_group": 4,
+          "status": "ambiguous"
+        },
+        {
+          "parent_group": 5,
+          "status": "ambiguous"
+        },
+        {
+          "parent_group": 6,
+          "status": "ambiguous"
+        }
+      ],
+      "children": [
+        {
+          "child_group": 0,
+          "status": "assigned"
+        },
+        {
+          "child_group": 1,
+          "status": "assigned"
+        },
+        {
+          "child_group": 2,
+          "status": "ambiguous"
+        }
+      ],
+      "parameters": {
+        "gate": 0.0234375,
+        "coverage": 0.5,
+        "exclusive_fraction": 0.1,
+        "distance_weight": 0.25,
+        "max_partners": 3,
+        "normal_angle": 60.0,
+        "tie_tolerance": 1e-08
+      }
+    },
+    "five_parent_dense_audit": null,
+    "independent_check": {
+      "candidate_scores_checked": 16,
+      "exhaustive_conflict_check": true
+    }
+  },
+  {
+    "gate_reference_cells": 1.5,
+    "max_partners": 5,
+    "result": {
+      "candidates": [
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            3,
+            4
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.4539625076647846,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.5163934426229508
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.1721311475409836,
+            0.1721311475409836,
+            0.1721311475409836
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "children": [
+            2
+          ],
+          "score": 4.605283340094451,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.6885245901639344
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.1721311475409836,
+            0.1721311475409836,
+            0.1721311475409836,
+            0.1721311475409836
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 5.897636197902269,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.9918032786885246
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.14754098360655737,
+            0.14754098360655737,
+            0.14754098360655737,
+            0.14754098360655737,
+            0.30327868852459017
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            3,
+            4,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 4.766201287945759,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.8442622950819673
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.14754098360655737,
+            0.14754098360655737,
+            0.14754098360655737,
+            0.32786885245901637
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            3,
+            5
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.453962479100718,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.5163934426229508
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.1721311475409836,
+            0.1721311475409836,
+            0.1721311475409836
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            3,
+            5,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 4.766201263340867,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.8442622950819673
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.14754098360655737,
+            0.14754098360655737,
+            0.14754098360655737,
+            0.32786885245901637
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            3,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.6347663533843577,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.6967213114754098
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.14754098360655737,
+            0.14754098360655737,
+            0.3524590163934426
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            4,
+            5
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.4539625103700247,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.5163934426229508
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.1721311475409836,
+            0.1721311475409836,
+            0.1721311475409836
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            4,
+            5,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 4.766201297279135,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.8442622950819673
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.14754098360655737,
+            0.14754098360655737,
+            0.14754098360655737,
+            0.32786885245901637
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            4,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.634766387322625,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.6967213114754098
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.14754098360655737,
+            0.14754098360655737,
+            0.3524590163934426
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            5,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.6347663627177327,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.6967213114754098
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.14754098360655737,
+            0.14754098360655737,
+            0.3524590163934426
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 2.503331452761223,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.5491803278688525
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.14754098360655737,
+            0.3770491803278688
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            3,
+            4,
+            5
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.4539625231478253,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.5163934426229508
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.1721311475409836,
+            0.1721311475409836,
+            0.1721311475409836
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 4.7662013090702064,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.8442622950819673
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.14754098360655737,
+            0.14754098360655737,
+            0.14754098360655737,
+            0.32786885245901637
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            3,
+            4,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.6347663991136963,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.6967213114754098
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.14754098360655737,
+            0.14754098360655737,
+            0.3524590163934426
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            3,
+            5,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.6347663745088044,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.6967213114754098
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.14754098360655737,
+            0.14754098360655737,
+            0.3524590163934426
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            3,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 2.503331464552294,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.5491803278688525
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.14754098360655737,
+            0.3770491803278688
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            4,
+            5,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.6347664084470717,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.6967213114754098
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.14754098360655737,
+            0.14754098360655737,
+            0.3524590163934426
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            4,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 2.503331498490562,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.5491803278688525
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.14754098360655737,
+            0.3770491803278688
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            5,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 2.5033314738856696,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.5491803278688525
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.14754098360655737,
+            0.3770491803278688
+          ]
+        },
+        {
+          "kind": "continuation",
+          "parents": [
+            0
+          ],
+          "children": [
+            0
+          ],
+          "score": 1.8153571350845488,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 0,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 0,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        },
+        {
+          "kind": "continuation",
+          "parents": [
+            1
+          ],
+          "children": [
+            1
+          ],
+          "score": 1.9489212728492535,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 1,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 1,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        }
+      ],
+      "selection": {
+        "optimal_score": 9.66191460583607,
+        "solver_selected": [
+          2,
+          20,
+          21
+        ],
+        "accepted": [
+          2,
+          20,
+          21
+        ],
+        "ambiguous": [],
+        "exclusion_gaps": {
+          "2": 1.1314348888320627,
+          "20": 1.8153571350845477,
+          "21": 1.9489212728492529
+        }
+      },
+      "events": [
+        {
+          "candidate_index": 2,
+          "kind": "combination",
+          "parents": [
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 5.897636197902269,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.9918032786885246
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.14754098360655737,
+            0.14754098360655737,
+            0.14754098360655737,
+            0.14754098360655737,
+            0.30327868852459017
+          ]
+        },
+        {
+          "candidate_index": 20,
+          "kind": "continuation",
+          "parents": [
+            0
+          ],
+          "children": [
+            0
+          ],
+          "score": 1.8153571350845488,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 0,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 0,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        },
+        {
+          "candidate_index": 21,
+          "kind": "continuation",
+          "parents": [
+            1
+          ],
+          "children": [
+            1
+          ],
+          "score": 1.9489212728492535,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 1,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 1,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 2,
+          "child_group": 2,
+          "accepted": true,
+          "event_index": 2,
+          "event_kind": "combination"
+        },
+        {
+          "parent_group": 3,
+          "child_group": 2,
+          "accepted": true,
+          "event_index": 2,
+          "event_kind": "combination"
+        },
+        {
+          "parent_group": 4,
+          "child_group": 2,
+          "accepted": true,
+          "event_index": 2,
+          "event_kind": "combination"
+        },
+        {
+          "parent_group": 5,
+          "child_group": 2,
+          "accepted": true,
+          "event_index": 2,
+          "event_kind": "combination"
+        },
+        {
+          "parent_group": 6,
+          "child_group": 2,
+          "accepted": true,
+          "event_index": 2,
+          "event_kind": "combination"
+        },
+        {
+          "parent_group": 0,
+          "child_group": 0,
+          "accepted": true,
+          "event_index": 20,
+          "event_kind": "continuation"
+        },
+        {
+          "parent_group": 1,
+          "child_group": 1,
+          "accepted": true,
+          "event_index": 21,
+          "event_kind": "continuation"
+        }
+      ],
+      "parents": [
+        {
+          "parent_group": 0,
+          "status": "assigned"
+        },
+        {
+          "parent_group": 1,
+          "status": "assigned"
+        },
+        {
+          "parent_group": 2,
+          "status": "assigned"
+        },
+        {
+          "parent_group": 3,
+          "status": "assigned"
+        },
+        {
+          "parent_group": 4,
+          "status": "assigned"
+        },
+        {
+          "parent_group": 5,
+          "status": "assigned"
+        },
+        {
+          "parent_group": 6,
+          "status": "assigned"
+        }
+      ],
+      "children": [
+        {
+          "child_group": 0,
+          "status": "assigned"
+        },
+        {
+          "child_group": 1,
+          "status": "assigned"
+        },
+        {
+          "child_group": 2,
+          "status": "assigned"
+        }
+      ],
+      "parameters": {
+        "gate": 0.0234375,
+        "coverage": 0.5,
+        "exclusive_fraction": 0.1,
+        "distance_weight": 0.25,
+        "max_partners": 5,
+        "normal_angle": 60.0,
+        "tie_tolerance": 1e-08
+      },
+      "higher_arity_audit": [
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "children": [
+            2
+          ],
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.6885245901639344
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.1721311475409836,
+            0.1721311475409836,
+            0.1721311475409836,
+            0.1721311475409836
+          ],
+          "coverage_pass": true,
+          "exclusivity_pass": true,
+          "admitted": true,
+          "score": 4.605283340094451
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            3,
+            4,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.8442622950819673
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.14754098360655737,
+            0.14754098360655737,
+            0.14754098360655737,
+            0.32786885245901637
+          ],
+          "coverage_pass": true,
+          "exclusivity_pass": true,
+          "admitted": true,
+          "score": 4.766201287945759
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            3,
+            5,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.8442622950819673
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.14754098360655737,
+            0.14754098360655737,
+            0.14754098360655737,
+            0.32786885245901637
+          ],
+          "coverage_pass": true,
+          "exclusivity_pass": true,
+          "admitted": true,
+          "score": 4.766201263340867
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            4,
+            5,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.8442622950819673
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.14754098360655737,
+            0.14754098360655737,
+            0.14754098360655737,
+            0.32786885245901637
+          ],
+          "coverage_pass": true,
+          "exclusivity_pass": true,
+          "admitted": true,
+          "score": 4.766201297279135
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.8442622950819673
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.14754098360655737,
+            0.14754098360655737,
+            0.14754098360655737,
+            0.32786885245901637
+          ],
+          "coverage_pass": true,
+          "exclusivity_pass": true,
+          "admitted": true,
+          "score": 4.7662013090702064
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.9918032786885246
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.14754098360655737,
+            0.14754098360655737,
+            0.14754098360655737,
+            0.14754098360655737,
+            0.30327868852459017
+          ],
+          "coverage_pass": true,
+          "exclusivity_pass": true,
+          "admitted": true,
+          "score": 5.897636197902269
+        }
+      ]
+    },
+    "five_parent_dense_audit": {
+      "kind": "combination",
+      "parents": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "children": [
+        2
+      ],
+      "node_coverages": [
+        {
+          "side": "parent",
+          "group": 2,
+          "coverage": 1.0
+        },
+        {
+          "side": "parent",
+          "group": 3,
+          "coverage": 1.0
+        },
+        {
+          "side": "parent",
+          "group": 4,
+          "coverage": 1.0
+        },
+        {
+          "side": "parent",
+          "group": 5,
+          "coverage": 1.0
+        },
+        {
+          "side": "parent",
+          "group": 6,
+          "coverage": 1.0
+        },
+        {
+          "side": "child",
+          "group": 2,
+          "coverage": 0.9918032786885246
+        }
+      ],
+      "exclusive_central_fractions": [
+        0.14754098360655737,
+        0.14754098360655737,
+        0.14754098360655737,
+        0.14754098360655737,
+        0.30327868852459017
+      ],
+      "coverage_pass": true,
+      "exclusivity_pass": true,
+      "admitted": true,
+      "score": 5.897636197902269
+    },
+    "independent_check": {
+      "candidate_scores_checked": 22,
+      "exhaustive_conflict_check": false
+    }
+  },
+  {
+    "gate_reference_cells": 2.5,
+    "max_partners": 3,
+    "result": {
+      "candidates": [
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            3,
+            4
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.5882032803146804,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.6516393442622951
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.20081967213114754,
+            0.21311475409836064,
+            0.21311475409836064
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            3,
+            5
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.5882032619667132,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.6516393442622951
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.21311475409836064,
+            0.20081967213114754,
+            0.21311475409836064
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            3,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.7241581327143574,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.7766393442622951
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.1168032786885246,
+            0.1168032786885246,
+            0.33811475409836067
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            4,
+            5
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.588203282794084,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.6516393442622951
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.21311475409836064,
+            0.20081967213114754,
+            0.21311475409836064
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            4,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.724158157119336,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.7766393442622951
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.1168032786885246,
+            0.1168032786885246,
+            0.33811475409836067
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            5,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.7323266141335423,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.7868852459016393
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.12704918032786885,
+            0.12704918032786885,
+            0.3360655737704918
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 2.6110201527912666,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.6598360655737705
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.12704918032786885,
+            0.4344262295081967
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            3,
+            4,
+            5
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.5882032901300245,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.6516393442622951
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.21311475409836064,
+            0.21311475409836064,
+            0.20081967213114754
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            3,
+            4,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.732326637907572,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.7868852459016393
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.12704918032786885,
+            0.12704918032786885,
+            0.3360655737704918
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            3,
+            5,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.724158149555734,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.7766393442622951
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.1168032786885246,
+            0.1168032786885246,
+            0.33811475409836067
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            3,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 2.611020161052484,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.6598360655737705
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.12704918032786885,
+            0.4344262295081967
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            4,
+            5,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.724158173124028,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.7766393442622951
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.1168032786885246,
+            0.1168032786885246,
+            0.33811475409836067
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            4,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 2.6110201843071428,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.6598360655737705
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.12704918032786885,
+            0.4344262295081967
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            5,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 2.61102016879433,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.6598360655737705
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.12704918032786885,
+            0.4344262295081967
+          ]
+        },
+        {
+          "kind": "continuation",
+          "parents": [
+            0
+          ],
+          "children": [
+            0
+          ],
+          "score": 1.8892142810507293,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 0,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 0,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        },
+        {
+          "kind": "continuation",
+          "parents": [
+            1
+          ],
+          "children": [
+            1
+          ],
+          "score": 1.969352763709552,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 1,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 1,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        },
+        {
+          "kind": "continuation",
+          "parents": [
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 1.489713707452054,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.5327868852459017
+            }
+          ],
+          "exclusive_central_fractions": []
+        }
+      ],
+      "selection": {
+        "optimal_score": 7.590893682667853,
+        "solver_selected": [
+          8,
+          14,
+          15
+        ],
+        "accepted": [
+          8,
+          14,
+          15
+        ],
+        "ambiguous": [],
+        "exclusion_gaps": {
+          "8": 2.377402985587196e-08,
+          "14": 1.8892142810507293,
+          "15": 1.9693527637095523
+        }
+      },
+      "events": [
+        {
+          "candidate_index": 8,
+          "kind": "combination",
+          "parents": [
+            3,
+            4,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.732326637907572,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.7868852459016393
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.12704918032786885,
+            0.12704918032786885,
+            0.3360655737704918
+          ]
+        },
+        {
+          "candidate_index": 14,
+          "kind": "continuation",
+          "parents": [
+            0
+          ],
+          "children": [
+            0
+          ],
+          "score": 1.8892142810507293,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 0,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 0,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        },
+        {
+          "candidate_index": 15,
+          "kind": "continuation",
+          "parents": [
+            1
+          ],
+          "children": [
+            1
+          ],
+          "score": 1.969352763709552,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 1,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 1,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 3,
+          "child_group": 2,
+          "accepted": true,
+          "event_index": 8,
+          "event_kind": "combination"
+        },
+        {
+          "parent_group": 4,
+          "child_group": 2,
+          "accepted": true,
+          "event_index": 8,
+          "event_kind": "combination"
+        },
+        {
+          "parent_group": 6,
+          "child_group": 2,
+          "accepted": true,
+          "event_index": 8,
+          "event_kind": "combination"
+        },
+        {
+          "parent_group": 0,
+          "child_group": 0,
+          "accepted": true,
+          "event_index": 14,
+          "event_kind": "continuation"
+        },
+        {
+          "parent_group": 1,
+          "child_group": 1,
+          "accepted": true,
+          "event_index": 15,
+          "event_kind": "continuation"
+        }
+      ],
+      "parents": [
+        {
+          "parent_group": 0,
+          "status": "assigned"
+        },
+        {
+          "parent_group": 1,
+          "status": "assigned"
+        },
+        {
+          "parent_group": 2,
+          "status": "unmatched"
+        },
+        {
+          "parent_group": 3,
+          "status": "assigned"
+        },
+        {
+          "parent_group": 4,
+          "status": "assigned"
+        },
+        {
+          "parent_group": 5,
+          "status": "unmatched"
+        },
+        {
+          "parent_group": 6,
+          "status": "assigned"
+        }
+      ],
+      "children": [
+        {
+          "child_group": 0,
+          "status": "assigned"
+        },
+        {
+          "child_group": 1,
+          "status": "assigned"
+        },
+        {
+          "child_group": 2,
+          "status": "assigned"
+        }
+      ],
+      "parameters": {
+        "gate": 0.0390625,
+        "coverage": 0.5,
+        "exclusive_fraction": 0.1,
+        "distance_weight": 0.25,
+        "max_partners": 3,
+        "normal_angle": 60.0,
+        "tie_tolerance": 1e-08
+      }
+    },
+    "five_parent_dense_audit": null,
+    "independent_check": {
+      "candidate_scores_checked": 17,
+      "exhaustive_conflict_check": false
+    }
+  },
+  {
+    "gate_reference_cells": 2.5,
+    "max_partners": 5,
+    "result": {
+      "candidates": [
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            3,
+            4
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.5882032803146804,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.6516393442622951
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.20081967213114754,
+            0.21311475409836064,
+            0.21311475409836064
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "children": [
+            2
+          ],
+          "score": 4.771218850220267,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.8524590163934426
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.20081967213114754,
+            0.20081967213114754,
+            0.20081967213114754,
+            0.20081967213114754
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 5.9422656530202875,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.10655737704918032,
+            0.10655737704918032,
+            0.10655737704918032,
+            0.10655737704918032,
+            0.14754098360655737
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            3,
+            4,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 4.8372961370424274,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.8934426229508197
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.10655737704918032,
+            0.1168032786885246,
+            0.1168032786885246,
+            0.24180327868852458
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            3,
+            5
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.5882032619667132,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.6516393442622951
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.21311475409836064,
+            0.20081967213114754,
+            0.21311475409836064
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            3,
+            5,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 4.837296121217609,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.8934426229508197
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.1168032786885246,
+            0.10655737704918032,
+            0.1168032786885246,
+            0.24180327868852458
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            3,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.7241581327143574,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.7766393442622951
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.1168032786885246,
+            0.1168032786885246,
+            0.33811475409836067
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            4,
+            5
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.588203282794084,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.6516393442622951
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.21311475409836064,
+            0.20081967213114754,
+            0.21311475409836064
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            4,
+            5,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 4.8372961459362225,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.8934426229508197
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.1168032786885246,
+            0.10655737704918032,
+            0.1168032786885246,
+            0.24180327868852458
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            4,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.724158157119336,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.7766393442622951
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.1168032786885246,
+            0.1168032786885246,
+            0.33811475409836067
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            5,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.7323266141335423,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.7868852459016393
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.12704918032786885,
+            0.12704918032786885,
+            0.3360655737704918
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 2.6110201527912666,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.6598360655737705
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.12704918032786885,
+            0.4344262295081967
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            3,
+            4,
+            5
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.5882032901300245,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.6516393442622951
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.21311475409836064,
+            0.21311475409836064,
+            0.20081967213114754
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 4.8372961538854335,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.8934426229508197
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.1168032786885246,
+            0.1168032786885246,
+            0.10655737704918032,
+            0.24180327868852458
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            3,
+            4,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.732326637907572,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.7868852459016393
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.12704918032786885,
+            0.12704918032786885,
+            0.3360655737704918
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            3,
+            5,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.724158149555734,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.7766393442622951
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.1168032786885246,
+            0.1168032786885246,
+            0.33811475409836067
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            3,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 2.611020161052484,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.6598360655737705
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.12704918032786885,
+            0.4344262295081967
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            4,
+            5,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 3.724158173124028,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.7766393442622951
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.1168032786885246,
+            0.1168032786885246,
+            0.33811475409836067
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            4,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 2.6110201843071428,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.6598360655737705
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.12704918032786885,
+            0.4344262295081967
+          ]
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            5,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 2.61102016879433,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.6598360655737705
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.12704918032786885,
+            0.4344262295081967
+          ]
+        },
+        {
+          "kind": "continuation",
+          "parents": [
+            0
+          ],
+          "children": [
+            0
+          ],
+          "score": 1.8892142810507293,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 0,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 0,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        },
+        {
+          "kind": "continuation",
+          "parents": [
+            1
+          ],
+          "children": [
+            1
+          ],
+          "score": 1.969352763709552,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 1,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 1,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        },
+        {
+          "kind": "continuation",
+          "parents": [
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 1.489713707452054,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.5327868852459017
+            }
+          ],
+          "exclusive_central_fractions": []
+        }
+      ],
+      "selection": {
+        "optimal_score": 9.800832697780569,
+        "solver_selected": [
+          2,
+          20,
+          21
+        ],
+        "accepted": [
+          2,
+          20,
+          21
+        ],
+        "ambiguous": [],
+        "exclusion_gaps": {
+          "2": 1.1049694991348549,
+          "20": 1.8892142810507293,
+          "21": 1.9693527637095523
+        }
+      },
+      "events": [
+        {
+          "candidate_index": 2,
+          "kind": "combination",
+          "parents": [
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "score": 5.9422656530202875,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.10655737704918032,
+            0.10655737704918032,
+            0.10655737704918032,
+            0.10655737704918032,
+            0.14754098360655737
+          ]
+        },
+        {
+          "candidate_index": 20,
+          "kind": "continuation",
+          "parents": [
+            0
+          ],
+          "children": [
+            0
+          ],
+          "score": 1.8892142810507293,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 0,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 0,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        },
+        {
+          "candidate_index": 21,
+          "kind": "continuation",
+          "parents": [
+            1
+          ],
+          "children": [
+            1
+          ],
+          "score": 1.969352763709552,
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 1,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 1,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": []
+        }
+      ],
+      "links": [
+        {
+          "parent_group": 2,
+          "child_group": 2,
+          "accepted": true,
+          "event_index": 2,
+          "event_kind": "combination"
+        },
+        {
+          "parent_group": 3,
+          "child_group": 2,
+          "accepted": true,
+          "event_index": 2,
+          "event_kind": "combination"
+        },
+        {
+          "parent_group": 4,
+          "child_group": 2,
+          "accepted": true,
+          "event_index": 2,
+          "event_kind": "combination"
+        },
+        {
+          "parent_group": 5,
+          "child_group": 2,
+          "accepted": true,
+          "event_index": 2,
+          "event_kind": "combination"
+        },
+        {
+          "parent_group": 6,
+          "child_group": 2,
+          "accepted": true,
+          "event_index": 2,
+          "event_kind": "combination"
+        },
+        {
+          "parent_group": 0,
+          "child_group": 0,
+          "accepted": true,
+          "event_index": 20,
+          "event_kind": "continuation"
+        },
+        {
+          "parent_group": 1,
+          "child_group": 1,
+          "accepted": true,
+          "event_index": 21,
+          "event_kind": "continuation"
+        }
+      ],
+      "parents": [
+        {
+          "parent_group": 0,
+          "status": "assigned"
+        },
+        {
+          "parent_group": 1,
+          "status": "assigned"
+        },
+        {
+          "parent_group": 2,
+          "status": "assigned"
+        },
+        {
+          "parent_group": 3,
+          "status": "assigned"
+        },
+        {
+          "parent_group": 4,
+          "status": "assigned"
+        },
+        {
+          "parent_group": 5,
+          "status": "assigned"
+        },
+        {
+          "parent_group": 6,
+          "status": "assigned"
+        }
+      ],
+      "children": [
+        {
+          "child_group": 0,
+          "status": "assigned"
+        },
+        {
+          "child_group": 1,
+          "status": "assigned"
+        },
+        {
+          "child_group": 2,
+          "status": "assigned"
+        }
+      ],
+      "parameters": {
+        "gate": 0.0390625,
+        "coverage": 0.5,
+        "exclusive_fraction": 0.1,
+        "distance_weight": 0.25,
+        "max_partners": 5,
+        "normal_angle": 60.0,
+        "tie_tolerance": 1e-08
+      },
+      "higher_arity_audit": [
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "children": [
+            2
+          ],
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.8524590163934426
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.20081967213114754,
+            0.20081967213114754,
+            0.20081967213114754,
+            0.20081967213114754
+          ],
+          "coverage_pass": true,
+          "exclusivity_pass": true,
+          "admitted": true,
+          "score": 4.771218850220267
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            3,
+            4,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.8934426229508197
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.10655737704918032,
+            0.1168032786885246,
+            0.1168032786885246,
+            0.24180327868852458
+          ],
+          "coverage_pass": true,
+          "exclusivity_pass": true,
+          "admitted": true,
+          "score": 4.8372961370424274
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            3,
+            5,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.8934426229508197
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.1168032786885246,
+            0.10655737704918032,
+            0.1168032786885246,
+            0.24180327868852458
+          ],
+          "coverage_pass": true,
+          "exclusivity_pass": true,
+          "admitted": true,
+          "score": 4.837296121217609
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            4,
+            5,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.8934426229508197
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.1168032786885246,
+            0.10655737704918032,
+            0.1168032786885246,
+            0.24180327868852458
+          ],
+          "coverage_pass": true,
+          "exclusivity_pass": true,
+          "admitted": true,
+          "score": 4.8372961459362225
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 0.8934426229508197
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.1168032786885246,
+            0.1168032786885246,
+            0.10655737704918032,
+            0.24180327868852458
+          ],
+          "coverage_pass": true,
+          "exclusivity_pass": true,
+          "admitted": true,
+          "score": 4.8372961538854335
+        },
+        {
+          "kind": "combination",
+          "parents": [
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "children": [
+            2
+          ],
+          "node_coverages": [
+            {
+              "side": "parent",
+              "group": 2,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 3,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 4,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 5,
+              "coverage": 1.0
+            },
+            {
+              "side": "parent",
+              "group": 6,
+              "coverage": 1.0
+            },
+            {
+              "side": "child",
+              "group": 2,
+              "coverage": 1.0
+            }
+          ],
+          "exclusive_central_fractions": [
+            0.10655737704918032,
+            0.10655737704918032,
+            0.10655737704918032,
+            0.10655737704918032,
+            0.14754098360655737
+          ],
+          "coverage_pass": true,
+          "exclusivity_pass": true,
+          "admitted": true,
+          "score": 5.9422656530202875
+        }
+      ]
+    },
+    "five_parent_dense_audit": {
+      "kind": "combination",
+      "parents": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "children": [
+        2
+      ],
+      "node_coverages": [
+        {
+          "side": "parent",
+          "group": 2,
+          "coverage": 1.0
+        },
+        {
+          "side": "parent",
+          "group": 3,
+          "coverage": 1.0
+        },
+        {
+          "side": "parent",
+          "group": 4,
+          "coverage": 1.0
+        },
+        {
+          "side": "parent",
+          "group": 5,
+          "coverage": 1.0
+        },
+        {
+          "side": "parent",
+          "group": 6,
+          "coverage": 1.0
+        },
+        {
+          "side": "child",
+          "group": 2,
+          "coverage": 1.0
+        }
+      ],
+      "exclusive_central_fractions": [
+        0.10655737704918032,
+        0.10655737704918032,
+        0.10655737704918032,
+        0.10655737704918032,
+        0.14754098360655737
+      ],
+      "coverage_pass": true,
+      "exclusivity_pass": true,
+      "admitted": true,
+      "score": 5.9422656530202875
+    },
+    "independent_check": {
+      "candidate_scores_checked": 23,
+      "exhaustive_conflict_check": false
+    }
+  }
+]
