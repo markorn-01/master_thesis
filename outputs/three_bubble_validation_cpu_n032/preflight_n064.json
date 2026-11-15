@@ -1,0 +1,49 @@
+{
+  "num_cells": 64,
+  "injection_cell_counts": [
+    160,
+    160,
+    160
+  ],
+  "parameter_scale": 1.1,
+  "requested_mass_loss_rate_per_source": 0.01,
+  "wind_mass_loss_rate_per_source": 0.011000000000000001,
+  "wind_terminal_velocity": 10.0,
+  "nominal_wind_luminosity_per_source": 0.55,
+  "nominal_total_wind_luminosity": 1.6500000000000001,
+  "discrete_mass_rates": [
+    0.006565141402540684,
+    0.006565141402540684,
+    0.006565141402540684
+  ],
+  "discrete_energy_rates": [
+    0.3282570701270342,
+    0.3282570701270342,
+    0.3282570701270342
+  ],
+  "budget_matched": true,
+  "energy_rate_definition": "Prescribed mechanical source coefficient before state-dependent EI pressure conversion; not net gas-energy deposition.",
+  "reference_scope": "Each of three sources matches one source of the equal two-wind reference; total prescribed budget is 1.5 times its total.",
+  "source_positions": [
+    [
+      0.375,
+      0.375,
+      0.5
+    ],
+    [
+      0.625,
+      0.375,
+      0.5
+    ],
+    [
+      0.5,
+      0.625,
+      0.375
+    ]
+  ],
+  "injection_radius": 0.0625,
+  "num_analysis": 17,
+  "t_end": 0.16,
+  "reference_sha256": "0de3101bb4106541ae5edce2ce21596d0e64d9fbbe066532612c7ccd2766392a",
+  "physical_collision_time_predicted": false
+}

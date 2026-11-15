@@ -1,0 +1,88 @@
+{
+  "passed": true,
+  "mode": "experimental_five_partner",
+  "settings": {
+    "max_partners": 5,
+    "grouping_radius_cells": 1.5,
+    "min_group_samples": 20,
+    "normal_angle": 60.0,
+    "association_gates": [
+      0.0234375,
+      0.0390625
+    ]
+  },
+  "readback": {
+    "num_cells": 32,
+    "events": 3,
+    "readback_passed": true,
+    "source_hash_mismatches": [],
+    "expected_historical_runner_change": false,
+    "minimum_boundary_clearance": 0.265625,
+    "minimum_boundary_clearance_cells": 8.5,
+    "max_unknown_sample_positions": 0,
+    "offline_equivalence_repeated": false,
+    "full_gas_states_rechecked": false
+  },
+  "events": 3,
+  "independent_checks": [
+    {
+      "parent_event": 0,
+      "gate_reference_cells": 1.5,
+      "independent_dp_passed": true,
+      "candidate_scores_checked": 0,
+      "exhaustive_conflict_check": true
+    },
+    {
+      "parent_event": 0,
+      "gate_reference_cells": 2.5,
+      "independent_dp_passed": true,
+      "candidate_scores_checked": 0,
+      "exhaustive_conflict_check": true
+    },
+    {
+      "parent_event": 1,
+      "gate_reference_cells": 1.5,
+      "independent_dp_passed": true,
+      "candidate_scores_checked": 0,
+      "exhaustive_conflict_check": true
+    },
+    {
+      "parent_event": 1,
+      "gate_reference_cells": 2.5,
+      "independent_dp_passed": true,
+      "candidate_scores_checked": 3,
+      "exhaustive_conflict_check": true
+    }
+  ],
+  "comparison": null,
+  "identical_distance_intervals": 1,
+  "event_counts": {
+    "distance_specific_continuation": 3
+  },
+  "input_sha256": {
+    "outputs/three_bubble_validation_cpu_n032/metadata.json": "accfa6101c9c625e4bd32157200d6ae03d5c4ae89c081aed5e50fdcdfd0258de",
+    "outputs/three_bubble_validation_cpu_n032/online/history.csv": "5d188f93aa0809445dc0b9d9a975636cd437380e59b1cf950985f45a5ef6edb0",
+    "outputs/three_bubble_validation_cpu_n032/online/surfaces_0000.npz": "979d9fddd98f83bf5f061e42e933ab5c18e8a32db4367c991ad57c53fbefc450",
+    "outputs/three_bubble_validation_cpu_n032/online/histograms_0000.npz": "48b98002aff33c99e83f9e54c77e15e88be70d26baea58be215950d465421c88",
+    "outputs/three_bubble_validation_cpu_n032/online/slice_0000.npz": "92cff7235420752a841452de07bb6a7fc82765bc84e8d7967a42eef0ac8bd61d",
+    "outputs/three_bubble_validation_cpu_n032/online/surfaces_0001.npz": "ccd99488e2eb1d1844f10ae124e5b1a953a6c829b4d1b33cbbe6bfd4a9a2be92",
+    "outputs/three_bubble_validation_cpu_n032/online/histograms_0001.npz": "45e68235d89113f263d88e12fa1b454b64e5027ca8f932879fcf0c9486544998",
+    "outputs/three_bubble_validation_cpu_n032/online/slice_0001.npz": "a2f95fcee65a0cae37eb2bcdac7b9c758d231ad863afdf3024a041f17acf3ed6",
+    "outputs/three_bubble_validation_cpu_n032/online/surfaces_0002.npz": "eb25a83680c5741041cfe832f3f83215f40da7257919da1e2b162459ea1be129",
+    "outputs/three_bubble_validation_cpu_n032/online/histograms_0002.npz": "a39dc7184879125e97c5ecfdd17be2b6de9510af53d07c587c015b3548c38c4a",
+    "outputs/three_bubble_validation_cpu_n032/online/slice_0002.npz": "46c2867678575643ad1dec3c82dc101276c3b8a2c1a17e6bd229db04d6ca16c6"
+  },
+  "source_sha256": {
+    "/Users/minhn/Documents/Heidelberg University/fifth_semester/Thesis/master_thesis/experiments/wind_bubble/track_shock_history.py": "53621b5292f7ee5fd373df44bc8bf177a98bcfd285c4884e82702336b672910f",
+    "experiments/astrolink/surface_history.py": "3a4556dcdce09ba7bcbe02b0c524ff8f8d865cec3ef8fc6a6b8a68ec57ee592e",
+    "experiments/wind_bubble/plot_tracked_history.py": "4a68b281b0a799f1e6a777d3491b40e1b8c9f4b725c94fbe2f824c0edb0cf4a5",
+    "experiments/wind_bubble/compare_two_bubble_resolutions.py": "2ca5c3b5a8fbd133533f1940b4ff64e4837ef00cb1dcb2a63e8fc930a71705be",
+    "experiments/astrolink/shock_connectivity.py": "6125812b67844ed5fbbedd637b18df291069744dab057b282b9419e3522dac7c",
+    "experiments/astrolink/event_tracking.py": "0dc7a4086bfdc3c0e9358d8e1f4922ae1b67c8c929738d417c29c33d10b494c1",
+    "experiments/astrolink/expanded_event_tracking.py": "83892bd47bf0222f3e082824f7929571f7fd7e5bdb7b193c584131e92fb89567",
+    "experiments/astrolink/event_history.py": "63948d54a6b2c5ecfc1c3147cd395b94914aa6ae196992c45495ef60a3aa8f9e"
+  },
+  "original_results_modified": false,
+  "physical_ancestry_established": false,
+  "independent_check_scope": "Exact group-occupancy DP is limited to 22 total groups per interval."
+}

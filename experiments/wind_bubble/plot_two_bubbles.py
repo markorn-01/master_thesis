@@ -1,4 +1,4 @@
-"""Inspect one unlabeled two-source event with physical background slices."""
+"""Inspect one unlabeled multi-source event (legacy command name retained)."""
 from __future__ import annotations
 import argparse
 import json
@@ -42,7 +42,8 @@ def render(directory, index, output):
     scatter = ax.scatter(*pos[valid].T,c=mach[valid],cmap='viridis',norm=Normalize(0,high),s=3,alpha=.7,depthshade=False)
     if (~valid).any():
         ax.scatter(*pos[~valid].T,c='0.7',s=3)
-    ax.scatter(*sources.T, marker='*',c=['#dc6a22','#c52e62'],s=110,edgecolors='white')
+    source_colors=plt.get_cmap('tab10')(np.arange(len(sources))%10)
+    ax.scatter(*sources.T, marker='*',c=source_colors,s=110,edgecolors='white')
     ax.set(xlim=(0,1),ylim=(0,1),zlim=(0,1),xlabel='x',ylabel='y',zlabel='z',title='Detected surfaces, colored by Mach')
     ax.set_box_aspect((1,1,1)); ax.view_init(elev=24,azim=35)
     fig.colorbar(scatter,ax=ax,shrink=.55,pad=.03,label='Profile-aware Mach number')
@@ -50,11 +51,13 @@ def render(directory, index, output):
         axis=fig.add_subplot(grid[row,1])
         lo,hi=float(field.min()),float(field.max())
         image=axis.imshow(field.T,origin='lower',extent=(0,1,0,1),norm=LogNorm(lo,max(hi,lo*1.01)),cmap='magma')
-        axis.scatter(sources[:,0],sources[:,1],marker='*',c=['#dc6a22','#c52e62'],s=65,edgecolors='white')
+        on_slice=np.abs(sources[:,2]-z)<=dx/2+1e-12
+        axis.scatter(sources[on_slice,0],sources[on_slice,1],marker='*',c=source_colors[on_slice],s=65,edgecolors='white')
+        axis.scatter(sources[~on_slice,0],sources[~on_slice,1],marker='*',facecolors='none',edgecolors=source_colors[~on_slice],s=65)
         axis.set(xlabel='x',ylabel='y',title=f'{label} slice at z={z:.4f}')
         fig.colorbar(image,ax=axis,pad=.02)
-    fig.suptitle(f'Two wind sources: t={time:.3f}',fontsize=17)
-    fig.text(.04,.045,f'{len(pos)} surface samples outside both injection spheres. Stars mark sources.\nUnlabeled point cloud; source positions do not assign shock ownership. Code units. Scales are event-specific.',fontsize=9)
+    fig.suptitle(f'{len(sources)} wind sources: t={time:.3f}',fontsize=17)
+    fig.text(.04,.045,f'{len(pos)} surface samples outside every injection sphere. Stars mark sources; hollow slice stars are off-plane projections.\nUnlabeled point cloud; source positions do not assign shock ownership. Code units. Scales are event-specific.',fontsize=9)
     output.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(output,dpi=140)
     plt.close(fig)

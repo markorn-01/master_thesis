@@ -135,7 +135,8 @@ def compare_outputs(online, offline):
                 scalar_rtol=1e-6, scalar_atol=1e-8)
 
 
-def run(args, *, state_observer=None, analysis_times=None, solver_dt_max=None):
+def run(args, *, state_observer=None, analysis_times=None, solver_dt_max=None,
+        source_positions=None, budget_builder=None, strength_builder=None, extra_source_files=()):
     if args.num_cells < 16 or args.num_cells % 16:
         raise ValueError('num-cells must be a multiple of 16 and at least 16.')
     if args.num_analysis < 3 or not np.isfinite(args.t_end) or args.t_end <= 0:
@@ -148,7 +149,8 @@ def run(args, *, state_observer=None, analysis_times=None, solver_dt_max=None):
                                t_end=args.t_end, num_injection_cells=args.num_cells//16, plasma_beta=None)
     state, base, params, variables, helper = build_problem(setup)
     strengths=getattr(args,'source_strengths',None)
-    base = base._replace(wind_config=base.wind_config._replace(source_positions=SOURCES,
+    sources=SOURCES if source_positions is None else tuple(tuple(p) for p in source_positions)
+    base = base._replace(wind_config=base.wind_config._replace(source_positions=sources,
                          source_strengths=tuple(strengths) if strengths is not None else ()),
                          use_specific_snapshot_timepoints=True, print_elapsed_time=False, progress_bar=False)
     base = finalize_config(base, state.shape)
@@ -163,14 +165,14 @@ def run(args, *, state_observer=None, analysis_times=None, solver_dt_max=None):
     analysis = base._replace(return_snapshots=False, activate_snapshot_callback=False)
     config = analysis._replace(activate_snapshot_callback=True)
     centers, dx = np.asarray(helper.geometric_centers), float(base.grid_spacing)
-    injection_counts = [int((np.linalg.norm(centers-np.asarray(s), axis=-1) <= INJECTION_RADIUS-dx/2).sum()) for s in SOURCES]
+    injection_counts = [int((np.linalg.norm(centers-np.asarray(s), axis=-1) <= INJECTION_RADIUS-dx/2).sum()) for s in sources]
     if not all(injection_counts):
         raise ValueError('Resolution leaves an empty injection mask.')
     reference_path=getattr(args,'match_source_budget',None)
     reference=json.loads(Path(reference_path).read_text()) if reference_path is not None else None
-    budget=budget_plan(args.num_cells,reference,float(params.wind_params.wind_mass_loss_rate),
+    budget=(budget_plan if budget_builder is None else budget_builder)(args.num_cells,reference,float(params.wind_params.wind_mass_loss_rate),
                        float(params.wind_params.wind_final_velocity),actual_counts=injection_counts)
-    weighted=strength_plan(budget,strengths)
+    weighted=(strength_plan if strength_builder is None else strength_builder)(budget,strengths)
     if reference is not None:
         params=params._replace(wind_params=params.wind_params._replace(
             wind_mass_loss_rate=budget['wind_mass_loss_rate_per_source']))
@@ -192,10 +194,11 @@ def run(args, *, state_observer=None, analysis_times=None, solver_dt_max=None):
                     Path('experiments/wind_bubble/two_bubble_source_budget.py'),
                     Path('experiments/wind_bubble/unequal_sources.py'),
                     Path('astronomix/option_classes/simulation_config.py')]
+    source_files.extend(map(Path,extra_source_files))
     metadata = dict(status='running', commit=revision, backend=jax.default_backend(),
                     python=platform.python_version(), jax=jax.__version__, num_cells=args.num_cells,
                     t_end=args.t_end, requested_times=np.asarray(times).tolist(),solver_dt_max=dt_max,
-                    source_positions=SOURCES, injection_radius=INJECTION_RADIUS,
+                    source_positions=sources, num_sources=len(sources), injection_radius=INJECTION_RADIUS,
                     wind_mass_loss_rate_per_source=budget['wind_mass_loss_rate_per_source'], wind_terminal_velocity=budget['wind_terminal_velocity'],
                     nominal_wind_luminosity_per_source=budget['nominal_wind_luminosity_per_source'],
                     nominal_total_wind_luminosity=sum(weighted['nominal_wind_luminosities']),
@@ -208,7 +211,7 @@ def run(args, *, state_observer=None, analysis_times=None, solver_dt_max=None):
                     injection_prescription='existing EI analytic-volume normalization and radius-minus-half-cell mask',
                     ambient_density=1., ambient_pressure=.01, gamma=5/3, domain=[0., 1.],
                     units='dimensionless baseline code units', surface_catalog_schema_version=3,
-                    surface_selection='outside both injection spheres using refined positions',
+                    surface_selection=('outside both injection spheres using refined positions' if len(sources)==2 else 'outside every injection sphere using refined positions'),
                     source_endpoint_flags='per-source and union, advisory only',
                     source_distances='geometric descriptors, not shock ownership or physical labels',
                     histogram_weighting='one count per selected surface cell',
@@ -218,7 +221,7 @@ def run(args, *, state_observer=None, analysis_times=None, solver_dt_max=None):
                     source_sha256={str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in source_files})
     meta_path = args.output_dir/'metadata.json'
     meta_path.write_text(json.dumps(metadata, indent=2)+'\n')
-    writer = CollisionWriter(args.output_dir/'online', centers, dx)
+    writer = CollisionWriter(args.output_dir/'online', centers, dx,sources=sources)
 
     def payload(physical):
         return (*diagnostic_payload(physical, analysis, variables, helper, sampling_quality=True),
@@ -242,7 +245,7 @@ def run(args, *, state_observer=None, analysis_times=None, solver_dt_max=None):
         if args.verify_offline:
             stored = time_integration(state, base._replace(activate_snapshot_callback=False), params, variables)
             jax.block_until_ready(stored)
-            reference = CollisionWriter(args.output_dir/'offline_reference', centers, dx)
+            reference = CollisionWriter(args.output_dir/'offline_reference', centers, dx,sources=sources)
             compiled_payload = jax.jit(payload)
             try:
                 for time, physical in zip(np.asarray(stored.time_points), stored.states):

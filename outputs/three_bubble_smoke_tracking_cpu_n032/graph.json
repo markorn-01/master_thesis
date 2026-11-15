@@ -1,0 +1,159 @@
+{
+  "nodes": [
+    {
+      "node_id": "e0001:g0",
+      "event": 1,
+      "time": 0.009999999776482582,
+      "group": 0,
+      "segment_id": 0,
+      "previous_group": null,
+      "inherited": false,
+      "physical_identity_established": false,
+      "surface_samples": 104,
+      "valid_mach_samples": 104,
+      "median_mach": 19.340782165527344,
+      "median_nearest_source_radius": 0.08996127258914234,
+      "median_nearest_source_alignment": 0.9803768879641788,
+      "upstream_inside_source": 4,
+      "downstream_inside_source": 104
+    },
+    {
+      "node_id": "e0001:g1",
+      "event": 1,
+      "time": 0.009999999776482582,
+      "group": 1,
+      "segment_id": 1,
+      "previous_group": null,
+      "inherited": false,
+      "physical_identity_established": false,
+      "surface_samples": 104,
+      "valid_mach_samples": 104,
+      "median_mach": 19.340782165527344,
+      "median_nearest_source_radius": 0.08996127258914234,
+      "median_nearest_source_alignment": 0.9803768644906775,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 104
+    },
+    {
+      "node_id": "e0001:g2",
+      "event": 1,
+      "time": 0.009999999776482582,
+      "group": 2,
+      "segment_id": 2,
+      "previous_group": null,
+      "inherited": false,
+      "physical_identity_established": false,
+      "surface_samples": 104,
+      "valid_mach_samples": 104,
+      "median_mach": 19.340782165527344,
+      "median_nearest_source_radius": 0.08996127258914234,
+      "median_nearest_source_alignment": 0.9803768624183404,
+      "upstream_inside_source": 4,
+      "downstream_inside_source": 104
+    },
+    {
+      "node_id": "e0002:g0",
+      "event": 2,
+      "time": 0.019999999552965164,
+      "group": 0,
+      "segment_id": 3,
+      "previous_group": null,
+      "inherited": false,
+      "physical_identity_established": false,
+      "surface_samples": 151,
+      "valid_mach_samples": 151,
+      "median_mach": 14.872092247009277,
+      "median_nearest_source_radius": 0.11158481919598204,
+      "median_nearest_source_alignment": 0.9915919820265368,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 151
+    },
+    {
+      "node_id": "e0002:g1",
+      "event": 2,
+      "time": 0.019999999552965164,
+      "group": 1,
+      "segment_id": 4,
+      "previous_group": null,
+      "inherited": false,
+      "physical_identity_established": false,
+      "surface_samples": 150,
+      "valid_mach_samples": 150,
+      "median_mach": 14.872082710266113,
+      "median_nearest_source_radius": 0.11158481919598204,
+      "median_nearest_source_alignment": 0.9915922404819479,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 150
+    },
+    {
+      "node_id": "e0002:g2",
+      "event": 2,
+      "time": 0.019999999552965164,
+      "group": 2,
+      "segment_id": 5,
+      "previous_group": null,
+      "inherited": false,
+      "physical_identity_established": false,
+      "surface_samples": 151,
+      "valid_mach_samples": 151,
+      "median_mach": 14.872093200683594,
+      "median_nearest_source_radius": 0.11158481919598204,
+      "median_nearest_source_alignment": 0.9915919820265368,
+      "upstream_inside_source": 0,
+      "downstream_inside_source": 151
+    }
+  ],
+  "events": [
+    {
+      "event_id": "h0000",
+      "parent_event": 1,
+      "child_event": 2,
+      "kind": "continuation",
+      "parents": [
+        "e0001:g0"
+      ],
+      "children": [
+        "e0002:g0"
+      ],
+      "status": "distance_specific",
+      "selected_at_gates": [
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0001",
+      "parent_event": 1,
+      "child_event": 2,
+      "kind": "continuation",
+      "parents": [
+        "e0001:g1"
+      ],
+      "children": [
+        "e0002:g1"
+      ],
+      "status": "distance_specific",
+      "selected_at_gates": [
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0002",
+      "parent_event": 1,
+      "child_event": 2,
+      "kind": "continuation",
+      "parents": [
+        "e0001:g2"
+      ],
+      "children": [
+        "e0002:g2"
+      ],
+      "status": "distance_specific",
+      "selected_at_gates": [
+        2.5
+      ]
+    }
+  ],
+  "segment_count": 6,
+  "physical_identity_established": false,
+  "policy": "Only shared continuations inherit segment labels; branches stay explicit."
+}

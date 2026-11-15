@@ -1,0 +1,4 @@
+event,time,retained_groups,detected_samples,retained_samples,unretained_samples
+0,0.0,0,0,0,0
+1,0.009999999776482582,3,312,312,0
+2,0.019999999552965164,3,452,452,0

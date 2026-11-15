@@ -1,0 +1,4 @@
+time,surface_cells_all,surface_cells_outside_injection,mach_valid_count,mach_invalid_count,mach_underflow,mach_overflow,mach_p16,mach_median,mach_p84,density_jump_valid_count,density_jump_invalid_count,density_jump_underflow,density_jump_overflow,density_jump_p16,density_jump_median,density_jump_p84,sample_positions_unknown,upstream_inside_any_source,downstream_inside_any_source,minimum_surface_boundary_clearance
+0.0,0,0,0,0,0,0,nan,nan,nan,0,0,0,0,nan,nan,nan,0,0,0,nan
+0.009999999776482582,144,144,144,0,0,0,12.658013343811035,16.79771614074707,17.08088493347168,144,0,0,0,0.9966074228286743,1.0042664408683777,1.0120187997817993,0,0,144,0.2641058564186096
+0.019999999552965164,292,292,292,0,0,0,10.216470718383789,13.511777877807617,16.71462631225586,292,0,0,0,0.790311164855957,0.8566661775112152,0.930976390838623,0,0,256,0.234375

@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "events": 3,
+  "npz_fields_exact": 120,
+  "reference_directory": "outputs/detection_audit_baseline_cpu_n032",
+  "source_sha256": {
+    "experiments/wind_bubble/run_two_bubbles.py": "312cd5b4335809f52baad53c7090345494abba765b4f85529a46332c71369aea"
+  }
+}
