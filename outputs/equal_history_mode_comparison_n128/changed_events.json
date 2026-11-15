@@ -1,0 +1,335 @@
+[
+  {
+    "parent_event": 10,
+    "parent_time": 0.09999999403953552,
+    "child_time": 0.10999999940395355,
+    "gate_reference_cells": 1.5,
+    "added": [
+      {
+        "kind": "combination",
+        "parents": [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "children": [
+          1
+        ],
+        "child_coverages": [
+          0.779783393501805
+        ],
+        "exclusive_fractions": [
+          0.1444043321299639,
+          0.1588447653429603,
+          0.1588447653429603,
+          0.1588447653429603,
+          0.1588447653429603
+        ],
+        "score": 5.593382004112615,
+        "exclusion_gap": 0.026506905631434208,
+        "geometric_nearest_sources": {
+          "parents": [
+            {
+              "group": 2,
+              "nearest_source_indices": [
+                0
+              ]
+            },
+            {
+              "group": 3,
+              "nearest_source_indices": [
+                0
+              ]
+            },
+            {
+              "group": 4,
+              "nearest_source_indices": [
+                0
+              ]
+            },
+            {
+              "group": 5,
+              "nearest_source_indices": [
+                0
+              ]
+            },
+            {
+              "group": 6,
+              "nearest_source_indices": [
+                0
+              ]
+            }
+          ],
+          "children": [
+            {
+              "group": 1,
+              "nearest_source_indices": [
+                0
+              ]
+            }
+          ]
+        },
+        "source_descriptors_used_for_matching": false
+      },
+      {
+        "kind": "combination",
+        "parents": [
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        "children": [
+          14
+        ],
+        "child_coverages": [
+          0.779783393501805
+        ],
+        "exclusive_fractions": [
+          0.1588447653429603,
+          0.1588447653429603,
+          0.1588447653429603,
+          0.1588447653429603,
+          0.1444043321299639
+        ],
+        "score": 5.59338208920786,
+        "exclusion_gap": 0.026506987925653647,
+        "geometric_nearest_sources": {
+          "parents": [
+            {
+              "group": 9,
+              "nearest_source_indices": [
+                1
+              ]
+            },
+            {
+              "group": 10,
+              "nearest_source_indices": [
+                1
+              ]
+            },
+            {
+              "group": 11,
+              "nearest_source_indices": [
+                1
+              ]
+            },
+            {
+              "group": 12,
+              "nearest_source_indices": [
+                1
+              ]
+            },
+            {
+              "group": 13,
+              "nearest_source_indices": [
+                1
+              ]
+            }
+          ],
+          "children": [
+            {
+              "group": 14,
+              "nearest_source_indices": [
+                1
+              ]
+            }
+          ]
+        },
+        "source_descriptors_used_for_matching": false
+      }
+    ],
+    "removed": []
+  },
+  {
+    "parent_event": 10,
+    "parent_time": 0.09999999403953552,
+    "child_time": 0.10999999940395355,
+    "gate_reference_cells": 2.5,
+    "added": [
+      {
+        "kind": "combination",
+        "parents": [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "children": [
+          1
+        ],
+        "child_coverages": [
+          0.8989169675090253
+        ],
+        "exclusive_fractions": [
+          0.1263537906137184,
+          0.1444043321299639,
+          0.1444043321299639,
+          0.1444043321299639,
+          0.1444043321299639
+        ],
+        "score": 5.764256694957948,
+        "exclusion_gap": 0.01007672600293219,
+        "geometric_nearest_sources": {
+          "parents": [
+            {
+              "group": 2,
+              "nearest_source_indices": [
+                0
+              ]
+            },
+            {
+              "group": 3,
+              "nearest_source_indices": [
+                0
+              ]
+            },
+            {
+              "group": 4,
+              "nearest_source_indices": [
+                0
+              ]
+            },
+            {
+              "group": 5,
+              "nearest_source_indices": [
+                0
+              ]
+            },
+            {
+              "group": 6,
+              "nearest_source_indices": [
+                0
+              ]
+            }
+          ],
+          "children": [
+            {
+              "group": 1,
+              "nearest_source_indices": [
+                0
+              ]
+            }
+          ]
+        },
+        "source_descriptors_used_for_matching": false
+      },
+      {
+        "kind": "combination",
+        "parents": [
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        "children": [
+          14
+        ],
+        "child_coverages": [
+          0.8989169675090253
+        ],
+        "exclusive_fractions": [
+          0.1444043321299639,
+          0.1444043321299639,
+          0.1444043321299639,
+          0.1444043321299639,
+          0.1263537906137184
+        ],
+        "score": 5.7642567560022995,
+        "exclusion_gap": 0.010076717007430958,
+        "geometric_nearest_sources": {
+          "parents": [
+            {
+              "group": 9,
+              "nearest_source_indices": [
+                1
+              ]
+            },
+            {
+              "group": 10,
+              "nearest_source_indices": [
+                1
+              ]
+            },
+            {
+              "group": 11,
+              "nearest_source_indices": [
+                1
+              ]
+            },
+            {
+              "group": 12,
+              "nearest_source_indices": [
+                1
+              ]
+            },
+            {
+              "group": 13,
+              "nearest_source_indices": [
+                1
+              ]
+            }
+          ],
+          "children": [
+            {
+              "group": 14,
+              "nearest_source_indices": [
+                1
+              ]
+            }
+          ]
+        },
+        "source_descriptors_used_for_matching": false
+      }
+    ],
+    "removed": [
+      {
+        "kind": "combination",
+        "parents": [
+          2,
+          3,
+          6
+        ],
+        "children": [
+          1
+        ],
+        "child_coverages": [
+          0.6101083032490975
+        ],
+        "exclusive_fractions": [
+          0.16967509025270758,
+          0.19855595667870035,
+          0.19855595667870035
+        ],
+        "score": 3.517361706342559,
+        "exclusion_gap": 7.365097154377054e-08
+      },
+      {
+        "kind": "combination",
+        "parents": [
+          9,
+          12,
+          13
+        ],
+        "children": [
+          14
+        ],
+        "child_coverages": [
+          0.6101083032490975
+        ],
+        "exclusive_fractions": [
+          0.19855595667870035,
+          0.19855595667870035,
+          0.16967509025270758
+        ],
+        "score": 3.517361713634536,
+        "exclusion_gap": 3.7609408920502574e-08
+      }
+    ]
+  }
+]

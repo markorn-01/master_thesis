@@ -4,6 +4,8 @@ import argparse
 import csv
 import hashlib
 import json
+import re
+import subprocess
 from pathlib import Path
 import numpy as np
 from experiments.astrolink.shock_connectivity import connectivity_partition
@@ -40,7 +42,22 @@ def check_distribution(values,edges,counts,row,prefix):
     assert len(values)==expected['invalid_count']+expected['underflow']+expected['overflow']+int(counts.sum())
 
 
-def load_checked(root):
+def verify_historical_sources(source_hashes,revision):
+    """Verify exact archived bytes, never waive a mismatch against today's code."""
+    if not isinstance(revision,str) or re.fullmatch(r'[0-9a-f]{40}',revision) is None:
+        raise ValueError('Historical verification requires a full recorded Git commit hash.')
+    verified={}
+    for name,digest in source_hashes.items():
+        path=name.split('/master_thesis/',1)[-1]
+        if Path(path).is_absolute() or '..' in Path(path).parts:raise ValueError('Require repository-relative source paths.')
+        try:archived=subprocess.check_output(['git','show',f'{revision}:{path}'],stderr=subprocess.PIPE)
+        except subprocess.CalledProcessError as exc:raise ValueError(f'Historical source unavailable: {path}') from exc
+        if hashlib.sha256(archived).hexdigest()!=digest:raise ValueError(f'Historical source hash mismatch: {path}')
+        verified[path]=digest
+    return verified
+
+
+def load_checked(root,*,historical_revision=None):
     meta=json.loads((root/'metadata.json').read_text());n=meta['num_cells'];data=[];hashes={}
     def record(p):hashes[str(p)]=hashlib.sha256(p.read_bytes()).hexdigest()
     record(root/'metadata.json');record(root/'online/history.csv')
@@ -54,7 +71,8 @@ def load_checked(root):
         if hashlib.sha256(path.read_bytes()).hexdigest()!=h:mismatch.append(str(path))
     # The runner was extended for budget matching after the historical 64³ run.
     unexpected=[p for p in mismatch if p!='experiments/wind_bubble/run_two_bubbles.py']
-    if unexpected:raise ValueError(f'Unreviewed analysis/physics source mismatch: {unexpected}')
+    historical_sources=verify_historical_sources(meta['source_sha256'],historical_revision) if historical_revision is not None else None
+    if unexpected and historical_sources is None:raise ValueError(f'Unreviewed analysis/physics source mismatch: {unexpected}')
     minimum=1.;max_unknown=0
     for i,row in enumerate(rows):
         arrays=[]
@@ -96,6 +114,9 @@ def load_checked(root):
                 expected_historical_runner_change=bool(mismatch),minimum_boundary_clearance=minimum,
                 minimum_boundary_clearance_cells=minimum*n,max_unknown_sample_positions=max_unknown,
                 offline_equivalence_repeated=False,full_gas_states_rechecked=False)
+    if historical_sources is not None:
+        report.update(historical_source_revision=historical_revision,historical_sources_verified=historical_sources,
+            source_verification_scope='Recorded simulator source bytes match the archived commit; saved data are analyzed without rerunning historical physics.')
     return meta,data,hashes,report
 
 

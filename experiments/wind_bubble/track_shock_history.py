@@ -20,10 +20,12 @@ def graph_signature(graph):
     return nodes,events,graph['segment_count']
 
 
-def run(root,output,max_partners=3,compare_with=None):
+def run(root,output,max_partners=3,compare_with=None,verify_historical=False):
     settings=HistorySettings(max_partners=max_partners)
     if output.exists():raise ValueError('Use a new output directory; existing results are never overwritten.')
-    meta,data,hashes,readback=load_checked(root)
+    revision=json.loads((root/'metadata.json').read_text()).get('commit') if verify_historical else None
+    if verify_historical and revision is None:raise ValueError('Run metadata has no historical source revision.')
+    meta,data,hashes,readback=load_checked(root,historical_revision=revision)
     if meta.get('status')!='complete':raise ValueError('Require a completed simulation.')
     output.mkdir(parents=True)
     manifest=dict(status='running',input_directory=str(root),settings=settings.__dict__,
@@ -78,7 +80,8 @@ def run(root,output,max_partners=3,compare_with=None):
         csv_write(output/'distance_agreement.csv',agreement)
         plot_overview(result['graph'],counts,manifest['mode'],output/'history_overview.png')
         for name,digest in hashes.items():assert hashlib.sha256(Path(name).read_bytes()).hexdigest()==digest,name
-        sources=[Path(__file__),Path('experiments/astrolink/surface_history.py'),Path('experiments/wind_bubble/plot_tracked_history.py')]+[
+        sources=[Path(__file__),Path('experiments/astrolink/surface_history.py'),Path('experiments/wind_bubble/plot_tracked_history.py'),
+            Path('experiments/wind_bubble/compare_two_bubble_resolutions.py')]+[
             Path('experiments/astrolink')/(name+'.py') for name in ['shock_connectivity','event_tracking','expanded_event_tracking','event_history']]
         verification=dict(passed=True,mode=manifest['mode'],settings=result['settings'],readback=readback,
             events=len(data),independent_checks=checks,comparison=comparison,
@@ -102,4 +105,5 @@ if __name__=='__main__':
     parser.add_argument('--output-dir',type=Path,required=True)
     parser.add_argument('--max-partners',type=int,choices=[3,5],default=3,help='Default 3 preserves baseline; 5 explicitly selects the validated experimental option.')
     parser.add_argument('--compare-with',type=Path,help='Optional saved graph or history directory for exact structural regression.')
-    args=parser.parse_args();run(args.directory,args.output_dir,args.max_partners,args.compare_with)
+    parser.add_argument('--verify-historical-sources',action='store_true',help='Verify recorded simulator source hashes against its archived commit for older saved runs.')
+    args=parser.parse_args();run(args.directory,args.output_dir,args.max_partners,args.compare_with,args.verify_historical_sources)
