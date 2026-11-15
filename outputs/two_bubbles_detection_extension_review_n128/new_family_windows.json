@@ -1,0 +1,358 @@
+[
+  {
+    "first_event": 15,
+    "gate_reference_cells": 1.5,
+    "predict": false,
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 6,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 0.9411764705882353,
+          "median_normal_displacement": -0.00010945844373917581,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [],
+      "families": [],
+      "links": [],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": false,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.0234375
+      }
+    }
+  },
+  {
+    "first_event": 15,
+    "gate_reference_cells": 1.5,
+    "predict": true,
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 6,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 0.9411764705882353,
+          "median_normal_displacement": -0.00010945844373917581,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [],
+      "families": [],
+      "links": [],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": true,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.0234375
+      }
+    }
+  },
+  {
+    "first_event": 15,
+    "gate_reference_cells": 2.5,
+    "predict": false,
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 6,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": -0.00010945844373917581,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [],
+      "families": [],
+      "links": [],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": false,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.0390625
+      }
+    }
+  },
+  {
+    "first_event": 15,
+    "gate_reference_cells": 2.5,
+    "predict": true,
+    "result": {
+      "models": [
+        {
+          "child_group": 10,
+          "later_group": 6,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": -0.00010945844373917581,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [],
+      "families": [],
+      "links": [],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": true,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.0390625
+      }
+    }
+  },
+  {
+    "first_event": 16,
+    "gate_reference_cells": 1.5,
+    "predict": false,
+    "result": {
+      "models": [
+        {
+          "child_group": 2,
+          "later_group": 2,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": -0.00027618856304381255,
+          "backward_time_ratio": 1.0
+        },
+        {
+          "child_group": 3,
+          "later_group": 3,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": -0.00027618981044204695,
+          "backward_time_ratio": 1.0
+        },
+        {
+          "child_group": 4,
+          "later_group": 4,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": -0.00027616198872042875,
+          "backward_time_ratio": 1.0
+        },
+        {
+          "child_group": 5,
+          "later_group": 5,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": -0.00027616074137117724,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [],
+      "families": [],
+      "links": [],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": false,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.0234375
+      }
+    }
+  },
+  {
+    "first_event": 16,
+    "gate_reference_cells": 1.5,
+    "predict": true,
+    "result": {
+      "models": [
+        {
+          "child_group": 2,
+          "later_group": 2,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": -0.00027618856304381255,
+          "backward_time_ratio": 1.0
+        },
+        {
+          "child_group": 3,
+          "later_group": 3,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": -0.00027618981044204695,
+          "backward_time_ratio": 1.0
+        },
+        {
+          "child_group": 4,
+          "later_group": 4,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": -0.00027616198872042875,
+          "backward_time_ratio": 1.0
+        },
+        {
+          "child_group": 5,
+          "later_group": 5,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": -0.00027616074137117724,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [],
+      "families": [],
+      "links": [],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": true,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.0234375
+      }
+    }
+  },
+  {
+    "first_event": 16,
+    "gate_reference_cells": 2.5,
+    "predict": false,
+    "result": {
+      "models": [
+        {
+          "child_group": 2,
+          "later_group": 2,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": -0.00027618856304381255,
+          "backward_time_ratio": 1.0
+        },
+        {
+          "child_group": 3,
+          "later_group": 3,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": -0.00027618981044204695,
+          "backward_time_ratio": 1.0
+        },
+        {
+          "child_group": 4,
+          "later_group": 4,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": -0.00027616198872042875,
+          "backward_time_ratio": 1.0
+        },
+        {
+          "child_group": 5,
+          "later_group": 5,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": -0.00027616074137117724,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [],
+      "families": [],
+      "links": [],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": false,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.0390625
+      }
+    }
+  },
+  {
+    "first_event": 16,
+    "gate_reference_cells": 2.5,
+    "predict": true,
+    "result": {
+      "models": [
+        {
+          "child_group": 2,
+          "later_group": 2,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": -0.00027618856304381255,
+          "backward_time_ratio": 1.0
+        },
+        {
+          "child_group": 3,
+          "later_group": 3,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": -0.00027618981044204695,
+          "backward_time_ratio": 1.0
+        },
+        {
+          "child_group": 4,
+          "later_group": 4,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": -0.00027616198872042875,
+          "backward_time_ratio": 1.0
+        },
+        {
+          "child_group": 5,
+          "later_group": 5,
+          "usable": true,
+          "future_parent_coverage": 1.0,
+          "future_child_coverage": 1.0,
+          "median_normal_displacement": -0.00027616074137117724,
+          "backward_time_ratio": 1.0
+        }
+      ],
+      "assignments": [],
+      "families": [],
+      "links": [],
+      "physical_ancestry_established": false,
+      "delayed_decision": true,
+      "prediction_enabled": true,
+      "parameters": {
+        "coverage": 0.5,
+        "margin": 0.1,
+        "normal_angle": 60.0,
+        "distance_weight": 0.25,
+        "gate": 0.0390625
+      }
+    }
+  }
+]

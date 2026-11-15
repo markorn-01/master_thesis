@@ -1,0 +1,2 @@
+# Full diagnostic states retained on disk; hashes are recorded.
+state_*.npy

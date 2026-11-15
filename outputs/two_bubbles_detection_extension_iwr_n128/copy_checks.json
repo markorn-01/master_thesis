@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "full_states_checked": 7,
+  "crops_checked": 14,
+  "stage_count_regions_checked": 56,
+  "exact_prefix_events": 17,
+  "exact_prefix_npz_fields": 680
+}
