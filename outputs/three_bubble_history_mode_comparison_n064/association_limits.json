@@ -1,0 +1,203 @@
+{
+  "final_groups": [
+    {
+      "group": 0,
+      "samples": 6554,
+      "nearest_source_indices": [
+        0,
+        1,
+        2
+      ],
+      "median_radial_normal_alignment": 0.9971903089547264,
+      "upstream_source_overlaps": 0
+    },
+    {
+      "group": 1,
+      "samples": 177,
+      "nearest_source_indices": [
+        0
+      ],
+      "median_radial_normal_alignment": -0.9959792463943753,
+      "upstream_source_overlaps": 17
+    },
+    {
+      "group": 2,
+      "samples": 226,
+      "nearest_source_indices": [
+        2
+      ],
+      "median_radial_normal_alignment": -0.9963957433559256,
+      "upstream_source_overlaps": 8
+    },
+    {
+      "group": 3,
+      "samples": 177,
+      "nearest_source_indices": [
+        1
+      ],
+      "median_radial_normal_alignment": -0.9959792463943753,
+      "upstream_source_overlaps": 17
+    }
+  ],
+  "unresolved_events": [
+    {
+      "event_id": "h0025",
+      "parent_event": 13,
+      "child_event": 14,
+      "kind": "continuation",
+      "parents": [
+        "e0013:g2"
+      ],
+      "children": [
+        "e0014:g1"
+      ],
+      "status": "distance_specific",
+      "selected_at_gates": [
+        2.5
+      ]
+    },
+    {
+      "event_id": "h0026",
+      "parent_event": 13,
+      "child_event": 14,
+      "kind": "continuation",
+      "parents": [
+        "e0013:g18"
+      ],
+      "children": [
+        "e0014:g7"
+      ],
+      "status": "distance_specific",
+      "selected_at_gates": [
+        2.5
+      ]
+    }
+  ],
+  "rejected_full_five_events": [
+    {
+      "gate_reference_cells": 1.5,
+      "audit": {
+        "kind": "combination",
+        "parents": [
+          7,
+          8,
+          9,
+          10,
+          13
+        ],
+        "children": [
+          4
+        ],
+        "node_coverages": [
+          {
+            "side": "parent",
+            "group": 7,
+            "coverage": 1.0
+          },
+          {
+            "side": "parent",
+            "group": 8,
+            "coverage": 1.0
+          },
+          {
+            "side": "parent",
+            "group": 9,
+            "coverage": 1.0
+          },
+          {
+            "side": "parent",
+            "group": 10,
+            "coverage": 1.0
+          },
+          {
+            "side": "parent",
+            "group": 13,
+            "coverage": 1.0
+          },
+          {
+            "side": "child",
+            "group": 4,
+            "coverage": 0.8953488372093024
+          }
+        ],
+        "exclusive_central_fractions": [
+          0.1569767441860465,
+          0.20930232558139536,
+          0.09302325581395349,
+          0.2441860465116279,
+          0.1569767441860465
+        ],
+        "coverage_pass": true,
+        "exclusivity_pass": false,
+        "admitted": false,
+        "score": 5.690735619975603
+      }
+    },
+    {
+      "gate_reference_cells": 2.5,
+      "audit": {
+        "kind": "combination",
+        "parents": [
+          7,
+          8,
+          9,
+          10,
+          13
+        ],
+        "children": [
+          4
+        ],
+        "node_coverages": [
+          {
+            "side": "parent",
+            "group": 7,
+            "coverage": 1.0
+          },
+          {
+            "side": "parent",
+            "group": 8,
+            "coverage": 1.0
+          },
+          {
+            "side": "parent",
+            "group": 9,
+            "coverage": 1.0
+          },
+          {
+            "side": "parent",
+            "group": 10,
+            "coverage": 1.0
+          },
+          {
+            "side": "parent",
+            "group": 13,
+            "coverage": 1.0
+          },
+          {
+            "side": "child",
+            "group": 4,
+            "coverage": 1.0
+          }
+        ],
+        "exclusive_central_fractions": [
+          0.13953488372093023,
+          0.19767441860465115,
+          0.08139534883720931,
+          0.22093023255813954,
+          0.13953488372093023
+        ],
+        "coverage_pass": true,
+        "exclusivity_pass": false,
+        "admitted": false,
+        "score": 5.85811725420984
+      }
+    }
+  ],
+  "physical_ownership_established": false,
+  "input_sha256": {
+    "outputs/three_bubbles_iwr_compgpu7_n064/online/surfaces_0016.npz": "25a452e2cdc8ff7755a69ea1005720abd60c1b822b3cb6247b8af3f46b145dce",
+    "outputs/three_bubble_history_expanded_n064/groups_0016.npz": "c55e7f9cd4c37a0471213b1f4bcf1b3c4adf998029ca143c429808cebfceb3dc",
+    "outputs/three_bubble_history_expanded_n064/graph.json": "798fedf2d144b3a4861c8899108447cd801fb1ab5c957526d4c71b659a7870a5",
+    "outputs/three_bubble_history_expanded_n064/tracking_results.json.gz": "5797a093d1fb4b530f0e8afc8f5cc32f3cfd9448a866e14d6af91433c6503e6f"
+  }
+}

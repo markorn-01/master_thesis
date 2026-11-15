@@ -1,0 +1,27 @@
+{
+  "time": 0.1599999964237213,
+  "surface_samples": 7134,
+  "histograms_reconstructed_exact": true,
+  "unknown_endpoints": 0,
+  "upstream_inside_any_source": 42,
+  "downstream_inside_any_source": 0,
+  "minimum_surface_boundary_clearance": 0.12727272510528564,
+  "grid_spacing": 0.015625,
+  "source_positions": [
+    [
+      0.375,
+      0.375,
+      0.5
+    ],
+    [
+      0.625,
+      0.375,
+      0.5
+    ],
+    [
+      0.5,
+      0.625,
+      0.375
+    ]
+  ]
+}

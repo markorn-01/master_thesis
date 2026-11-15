@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "events": 17,
+  "scalar_fields_per_event": 21,
+  "npz_fields_exact": 680,
+  "timing_tolerance": 1e-06,
+  "maximum_actual_requested_time_difference": 1.4901161193847656e-07,
+  "minimum_surface_boundary_clearance": 0.12727272510528564,
+  "final_samples": 7134,
+  "final_upstream_source_overlaps": 42,
+  "final_downstream_source_overlaps": 0,
+  "source_sha256_match": true,
+  "source_counts": [
+    160,
+    160,
+    160
+  ],
+  "prescribed_energy_rates": [
+    0.3282570701270342,
+    0.3282570701270342,
+    0.3282570701270342
+  ]
+}

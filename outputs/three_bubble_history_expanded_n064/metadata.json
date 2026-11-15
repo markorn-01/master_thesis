@@ -1,0 +1,20 @@
+{
+  "status": "complete",
+  "input_directory": "outputs/three_bubbles_iwr_compgpu7_n064",
+  "settings": {
+    "max_partners": 5,
+    "grouping_radius_cells": 1.5,
+    "min_group_samples": 20,
+    "normal_angle": 60.0,
+    "association_gates": [
+      0.0234375,
+      0.0390625
+    ]
+  },
+  "mode": "experimental_five_partner",
+  "input_num_cells": 64,
+  "events": 17,
+  "analysis_during_simulation": false,
+  "scope": "Offline geometric tracking of existing catalogs, not physical source ownership.",
+  "comparison": null
+}
