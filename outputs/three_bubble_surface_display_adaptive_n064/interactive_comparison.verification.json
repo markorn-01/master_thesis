@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "default_method": "adaptive_imls",
+  "plotly_version": "7.1.0",
+  "javascript_embedded": true,
+  "external_libraries_requested": false,
+  "input_sha256": {
+    "outputs/three_bubble_surface_display_checked_n064/verification.json": "698ee30e7c2acae10276534456fec0794d21fcb908b4d145266e9eb18531d0b3",
+    "outputs/three_bubbles_iwr_compgpu7_n064/online/surfaces_0016.npz": "25a452e2cdc8ff7755a69ea1005720abd60c1b822b3cb6247b8af3f46b145dce",
+    "outputs/three_bubble_surface_display_adaptive_n064/bubble_adaptive_imls.npz": "681973654f2d50e78c1b4915eb57e88a1f892c4512a18d16466a4bddf6861888",
+    "outputs/three_bubble_surface_display_adaptive_n064/verification.json": "c82c75c2a3a0df10da1b496d46eb25b7894cb781c95d4862b053c723d9599ed5"
+  },
+  "output_sha256": "c18e4bb8c64c42c0dfc5c1021ef4ec865ee5ee5cc9d5511f7a84ebeb59af0ba6",
+  "source_sha256": "b22175764f6b35f6160503ee51fe01e62251867eeb4bbf490be8bb4dd728e7e8"
+}

@@ -1,0 +1,409 @@
+[
+  {
+    "case": "sphere",
+    "method": "ball_saved",
+    "passed": true,
+    "passes": [
+      {
+        "nonmanifold_vertices": 0,
+        "intersection_pairs": 0,
+        "removed_faces": 0
+      }
+    ],
+    "removed_faces": 0
+  },
+  {
+    "case": "sphere",
+    "method": "imls_saved",
+    "passed": true,
+    "passes": [
+      {
+        "nonmanifold_vertices": 0,
+        "intersection_pairs": 1,
+        "removed_faces": 2
+      },
+      {
+        "nonmanifold_vertices": 0,
+        "intersection_pairs": 0,
+        "removed_faces": 0
+      }
+    ],
+    "removed_faces": 2
+  },
+  {
+    "case": "sphere",
+    "method": "imls_fitted",
+    "passed": true,
+    "passes": [
+      {
+        "nonmanifold_vertices": 0,
+        "intersection_pairs": 2,
+        "removed_faces": 4
+      },
+      {
+        "nonmanifold_vertices": 2,
+        "intersection_pairs": 0,
+        "removed_faces": 7
+      },
+      {
+        "nonmanifold_vertices": 0,
+        "intersection_pairs": 0,
+        "removed_faces": 0
+      }
+    ],
+    "removed_faces": 11
+  },
+  {
+    "case": "sphere",
+    "method": "poisson_supported",
+    "passed": true,
+    "passes": [
+      {
+        "nonmanifold_vertices": 0,
+        "intersection_pairs": 0,
+        "removed_faces": 0
+      }
+    ],
+    "removed_faces": 0
+  },
+  {
+    "case": "sphere_cap_hole",
+    "method": "ball_saved",
+    "passed": true,
+    "passes": [
+      {
+        "nonmanifold_vertices": 0,
+        "intersection_pairs": 0,
+        "removed_faces": 0
+      }
+    ],
+    "removed_faces": 0
+  },
+  {
+    "case": "sphere_cap_hole",
+    "method": "imls_saved",
+    "passed": true,
+    "passes": [
+      {
+        "nonmanifold_vertices": 2,
+        "intersection_pairs": 0,
+        "removed_faces": 4
+      },
+      {
+        "nonmanifold_vertices": 0,
+        "intersection_pairs": 0,
+        "removed_faces": 0
+      }
+    ],
+    "removed_faces": 4
+  },
+  {
+    "case": "sphere_cap_hole",
+    "method": "imls_fitted",
+    "passed": true,
+    "passes": [
+      {
+        "nonmanifold_vertices": 1,
+        "intersection_pairs": 2,
+        "removed_faces": 6
+      },
+      {
+        "nonmanifold_vertices": 2,
+        "intersection_pairs": 0,
+        "removed_faces": 7
+      },
+      {
+        "nonmanifold_vertices": 0,
+        "intersection_pairs": 0,
+        "removed_faces": 0
+      }
+    ],
+    "removed_faces": 13
+  },
+  {
+    "case": "sphere_cap_hole",
+    "method": "poisson_supported",
+    "passed": true,
+    "passes": [
+      {
+        "nonmanifold_vertices": 0,
+        "intersection_pairs": 0,
+        "removed_faces": 0
+      }
+    ],
+    "removed_faces": 0
+  },
+  {
+    "case": "planar_hole",
+    "method": "ball_saved",
+    "passed": true,
+    "passes": [
+      {
+        "nonmanifold_vertices": 0,
+        "intersection_pairs": 0,
+        "removed_faces": 0
+      }
+    ],
+    "removed_faces": 0
+  },
+  {
+    "case": "planar_hole",
+    "method": "imls_saved",
+    "passed": true,
+    "passes": [
+      {
+        "nonmanifold_vertices": 0,
+        "intersection_pairs": 0,
+        "removed_faces": 0
+      }
+    ],
+    "removed_faces": 0
+  },
+  {
+    "case": "planar_hole",
+    "method": "imls_fitted",
+    "passed": true,
+    "passes": [
+      {
+        "nonmanifold_vertices": 0,
+        "intersection_pairs": 0,
+        "removed_faces": 0
+      }
+    ],
+    "removed_faces": 0
+  },
+  {
+    "case": "planar_hole",
+    "method": "poisson_supported",
+    "passed": true,
+    "passes": [
+      {
+        "nonmanifold_vertices": 0,
+        "intersection_pairs": 0,
+        "removed_faces": 0
+      }
+    ],
+    "removed_faces": 0
+  },
+  {
+    "case": "near_sheets_separate_groups",
+    "method": "ball_saved",
+    "passed": true,
+    "passes": [
+      {
+        "nonmanifold_vertices": 0,
+        "intersection_pairs": 0,
+        "removed_faces": 0
+      }
+    ],
+    "removed_faces": 0
+  },
+  {
+    "case": "near_sheets_separate_groups",
+    "method": "imls_saved",
+    "passed": true,
+    "passes": [
+      {
+        "nonmanifold_vertices": 0,
+        "intersection_pairs": 0,
+        "removed_faces": 0
+      }
+    ],
+    "removed_faces": 0
+  },
+  {
+    "case": "near_sheets_separate_groups",
+    "method": "imls_fitted",
+    "passed": true,
+    "passes": [
+      {
+        "nonmanifold_vertices": 0,
+        "intersection_pairs": 0,
+        "removed_faces": 0
+      }
+    ],
+    "removed_faces": 0
+  },
+  {
+    "case": "near_sheets_separate_groups",
+    "method": "poisson_supported",
+    "passed": true,
+    "passes": [
+      {
+        "nonmanifold_vertices": 0,
+        "intersection_pairs": 0,
+        "removed_faces": 0
+      }
+    ],
+    "removed_faces": 0
+  },
+  {
+    "case": "near_sheets_same_group_counterexample",
+    "method": "ball_saved",
+    "passed": true,
+    "passes": [
+      {
+        "nonmanifold_vertices": 0,
+        "intersection_pairs": 0,
+        "removed_faces": 0
+      }
+    ],
+    "removed_faces": 0
+  },
+  {
+    "case": "near_sheets_same_group_counterexample",
+    "method": "imls_saved",
+    "passed": true,
+    "passes": [
+      {
+        "nonmanifold_vertices": 0,
+        "intersection_pairs": 0,
+        "removed_faces": 0
+      }
+    ],
+    "removed_faces": 0
+  },
+  {
+    "case": "near_sheets_same_group_counterexample",
+    "method": "imls_fitted",
+    "passed": true,
+    "passes": [
+      {
+        "nonmanifold_vertices": 0,
+        "intersection_pairs": 0,
+        "removed_faces": 0
+      }
+    ],
+    "removed_faces": 0
+  },
+  {
+    "case": "near_sheets_same_group_counterexample",
+    "method": "poisson_supported",
+    "passed": true,
+    "passes": [
+      {
+        "nonmanifold_vertices": 0,
+        "intersection_pairs": 0,
+        "removed_faces": 0
+      }
+    ],
+    "removed_faces": 0
+  },
+  {
+    "case": "three_source_event_0016",
+    "method": "ball_saved",
+    "passed": true,
+    "passes": [
+      {
+        "nonmanifold_vertices": 770,
+        "intersection_pairs": 0,
+        "removed_faces": 2534
+      },
+      {
+        "nonmanifold_vertices": 225,
+        "intersection_pairs": 0,
+        "removed_faces": 587
+      },
+      {
+        "nonmanifold_vertices": 4,
+        "intersection_pairs": 0,
+        "removed_faces": 12
+      },
+      {
+        "nonmanifold_vertices": 4,
+        "intersection_pairs": 0,
+        "removed_faces": 12
+      },
+      {
+        "nonmanifold_vertices": 4,
+        "intersection_pairs": 0,
+        "removed_faces": 16
+      },
+      {
+        "nonmanifold_vertices": 0,
+        "intersection_pairs": 0,
+        "removed_faces": 0
+      }
+    ],
+    "removed_faces": 3161
+  },
+  {
+    "case": "three_source_event_0016",
+    "method": "imls_saved",
+    "passed": true,
+    "passes": [
+      {
+        "nonmanifold_vertices": 52,
+        "intersection_pairs": 2,
+        "removed_faces": 165
+      },
+      {
+        "nonmanifold_vertices": 3,
+        "intersection_pairs": 0,
+        "removed_faces": 14
+      },
+      {
+        "nonmanifold_vertices": 1,
+        "intersection_pairs": 0,
+        "removed_faces": 5
+      },
+      {
+        "nonmanifold_vertices": 0,
+        "intersection_pairs": 0,
+        "removed_faces": 0
+      }
+    ],
+    "removed_faces": 184
+  },
+  {
+    "case": "three_source_event_0016",
+    "method": "imls_fitted",
+    "passed": true,
+    "passes": [
+      {
+        "nonmanifold_vertices": 44,
+        "intersection_pairs": 1,
+        "removed_faces": 122
+      },
+      {
+        "nonmanifold_vertices": 2,
+        "intersection_pairs": 0,
+        "removed_faces": 10
+      },
+      {
+        "nonmanifold_vertices": 1,
+        "intersection_pairs": 0,
+        "removed_faces": 3
+      },
+      {
+        "nonmanifold_vertices": 0,
+        "intersection_pairs": 0,
+        "removed_faces": 0
+      }
+    ],
+    "removed_faces": 135
+  },
+  {
+    "case": "three_source_event_0016",
+    "method": "poisson_supported",
+    "passed": true,
+    "passes": [
+      {
+        "nonmanifold_vertices": 38,
+        "intersection_pairs": 2,
+        "removed_faces": 111
+      },
+      {
+        "nonmanifold_vertices": 4,
+        "intersection_pairs": 0,
+        "removed_faces": 12
+      },
+      {
+        "nonmanifold_vertices": 0,
+        "intersection_pairs": 0,
+        "removed_faces": 0
+      }
+    ],
+    "removed_faces": 123
+  }
+]

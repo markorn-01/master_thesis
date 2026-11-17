@@ -1,0 +1,35 @@
+[
+  {
+    "method": "ball_saved",
+    "conditional_display_eligible": false,
+    "failures": [
+      "three_source_event_0016: incomplete quarter-cell sample agreement"
+    ],
+    "universal_surface_reconstruction_validated": false
+  },
+  {
+    "method": "imls_saved",
+    "conditional_display_eligible": false,
+    "failures": [
+      "near_sheets_separate_groups: incomplete quarter-cell sample agreement"
+    ],
+    "universal_surface_reconstruction_validated": false
+  },
+  {
+    "method": "imls_fitted",
+    "conditional_display_eligible": false,
+    "failures": [
+      "near_sheets_separate_groups: incomplete quarter-cell sample agreement"
+    ],
+    "universal_surface_reconstruction_validated": false
+  },
+  {
+    "method": "poisson_supported",
+    "conditional_display_eligible": false,
+    "failures": [
+      "planar_hole: incomplete quarter-cell sample agreement",
+      "near_sheets_separate_groups: displaced separate sheets"
+    ],
+    "universal_surface_reconstruction_validated": false
+  }
+]

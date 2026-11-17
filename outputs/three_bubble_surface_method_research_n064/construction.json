@@ -1,0 +1,824 @@
+[
+  {
+    "case": "sphere",
+    "method": "ball_saved",
+    "construction": {
+      "method": "Open3D ball pivoting plus original-prototype geometric guards",
+      "open3d_version": "0.19.0",
+      "radius_factors": [
+        1.0
+      ],
+      "raw_faces": 3196,
+      "faces": 3196,
+      "rejected": {
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 4794,
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "vertices_moved": false
+    }
+  },
+  {
+    "case": "sphere",
+    "method": "imls_saved",
+    "construction": {
+      "method": "compact oriented-plane implicit MLS and masked marching cubes",
+      "settings": {
+        "step_cells": 0.5,
+        "support_cells": 2.0,
+        "kernel_cells": 0.8,
+        "max_nearest_cells": 0.85,
+        "max_plane_offset_cells": 0.3,
+        "min_neighbors": 3,
+        "normal_angle": 60.0,
+        "require_local_hull": true,
+        "max_grid_nodes": 3000000
+      },
+      "groups": [
+        {
+          "group": 0,
+          "grid_nodes": 148877,
+          "faces": 20661,
+          "proposed_faces": 20661,
+          "unsupported_faces": 0,
+          "supported_faces": 20661
+        }
+      ],
+      "new_display_vertices": true,
+      "physical_samples_modified": false,
+      "display_normals": "imls_saved"
+    }
+  },
+  {
+    "case": "sphere",
+    "method": "imls_fitted",
+    "construction": {
+      "method": "compact oriented-plane implicit MLS and masked marching cubes",
+      "settings": {
+        "step_cells": 0.5,
+        "support_cells": 2.0,
+        "kernel_cells": 0.8,
+        "max_nearest_cells": 0.85,
+        "max_plane_offset_cells": 0.3,
+        "min_neighbors": 3,
+        "normal_angle": 60.0,
+        "require_local_hull": true,
+        "max_grid_nodes": 3000000
+      },
+      "groups": [
+        {
+          "group": 0,
+          "grid_nodes": 148877,
+          "faces": 20660,
+          "proposed_faces": 20660,
+          "unsupported_faces": 0,
+          "supported_faces": 20660
+        }
+      ],
+      "new_display_vertices": true,
+      "physical_samples_modified": false,
+      "invalid_plane_fits": 0,
+      "display_normals": "imls_fitted"
+    }
+  },
+  {
+    "case": "sphere",
+    "method": "poisson_supported",
+    "construction": {
+      "groups": [
+        {
+          "group": 0,
+          "proposed_faces": 7976,
+          "unsupported_faces": 0,
+          "supported_faces": 7976
+        }
+      ],
+      "depth": 6,
+      "linear_fit": true
+    }
+  },
+  {
+    "case": "sphere",
+    "method": "poisson_raw",
+    "construction": {
+      "groups": [
+        {
+          "group": 0,
+          "proposed_faces": 7976,
+          "unsupported_faces": 0,
+          "supported_faces": 7976
+        }
+      ],
+      "depth": 6,
+      "linear_fit": true
+    }
+  },
+  {
+    "case": "sphere_cap_hole",
+    "method": "ball_saved",
+    "construction": {
+      "method": "Open3D ball pivoting plus original-prototype geometric guards",
+      "open3d_version": "0.19.0",
+      "radius_factors": [
+        1.0
+      ],
+      "raw_faces": 2503,
+      "faces": 2503,
+      "rejected": {
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 3782,
+        "boundary_edges": 55,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "vertices_moved": false
+    }
+  },
+  {
+    "case": "sphere_cap_hole",
+    "method": "imls_saved",
+    "construction": {
+      "method": "compact oriented-plane implicit MLS and masked marching cubes",
+      "settings": {
+        "step_cells": 0.5,
+        "support_cells": 2.0,
+        "kernel_cells": 0.8,
+        "max_nearest_cells": 0.85,
+        "max_plane_offset_cells": 0.3,
+        "min_neighbors": 3,
+        "normal_angle": 60.0,
+        "require_local_hull": true,
+        "max_grid_nodes": 3000000
+      },
+      "groups": [
+        {
+          "group": 0,
+          "grid_nodes": 120787,
+          "faces": 16137,
+          "proposed_faces": 16487,
+          "unsupported_faces": 350,
+          "supported_faces": 16137
+        }
+      ],
+      "new_display_vertices": true,
+      "physical_samples_modified": false,
+      "display_normals": "imls_saved"
+    }
+  },
+  {
+    "case": "sphere_cap_hole",
+    "method": "imls_fitted",
+    "construction": {
+      "method": "compact oriented-plane implicit MLS and masked marching cubes",
+      "settings": {
+        "step_cells": 0.5,
+        "support_cells": 2.0,
+        "kernel_cells": 0.8,
+        "max_nearest_cells": 0.85,
+        "max_plane_offset_cells": 0.3,
+        "min_neighbors": 3,
+        "normal_angle": 60.0,
+        "require_local_hull": true,
+        "max_grid_nodes": 3000000
+      },
+      "groups": [
+        {
+          "group": 0,
+          "grid_nodes": 120787,
+          "faces": 16133,
+          "proposed_faces": 16484,
+          "unsupported_faces": 351,
+          "supported_faces": 16133
+        }
+      ],
+      "new_display_vertices": true,
+      "physical_samples_modified": false,
+      "invalid_plane_fits": 12,
+      "display_normals": "imls_fitted"
+    }
+  },
+  {
+    "case": "sphere_cap_hole",
+    "method": "poisson_supported",
+    "construction": {
+      "groups": [
+        {
+          "group": 0,
+          "proposed_faces": 7358,
+          "unsupported_faces": 1113,
+          "supported_faces": 6245
+        }
+      ],
+      "depth": 6,
+      "linear_fit": true
+    }
+  },
+  {
+    "case": "sphere_cap_hole",
+    "method": "poisson_raw",
+    "construction": {
+      "groups": [
+        {
+          "group": 0,
+          "proposed_faces": 7358,
+          "unsupported_faces": 1113,
+          "supported_faces": 6245
+        }
+      ],
+      "depth": 6,
+      "linear_fit": true
+    }
+  },
+  {
+    "case": "planar_hole",
+    "method": "ball_saved",
+    "construction": {
+      "method": "Open3D ball pivoting plus original-prototype geometric guards",
+      "open3d_version": "0.19.0",
+      "radius_factors": [
+        1.0
+      ],
+      "raw_faces": 444,
+      "faces": 444,
+      "rejected": {
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 708,
+        "boundary_edges": 84,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "vertices_moved": false
+    }
+  },
+  {
+    "case": "planar_hole",
+    "method": "imls_saved",
+    "construction": {
+      "method": "compact oriented-plane implicit MLS and masked marching cubes",
+      "settings": {
+        "step_cells": 0.5,
+        "support_cells": 2.0,
+        "kernel_cells": 0.8,
+        "max_nearest_cells": 0.85,
+        "max_plane_offset_cells": 0.3,
+        "min_neighbors": 3,
+        "normal_angle": 60.0,
+        "require_local_hull": true,
+        "max_grid_nodes": 3000000
+      },
+      "groups": [
+        {
+          "group": 0,
+          "grid_nodes": 6845,
+          "faces": 1803,
+          "proposed_faces": 2134,
+          "unsupported_faces": 331,
+          "supported_faces": 1803
+        }
+      ],
+      "new_display_vertices": true,
+      "physical_samples_modified": false,
+      "display_normals": "imls_saved"
+    }
+  },
+  {
+    "case": "planar_hole",
+    "method": "imls_fitted",
+    "construction": {
+      "method": "compact oriented-plane implicit MLS and masked marching cubes",
+      "settings": {
+        "step_cells": 0.5,
+        "support_cells": 2.0,
+        "kernel_cells": 0.8,
+        "max_nearest_cells": 0.85,
+        "max_plane_offset_cells": 0.3,
+        "min_neighbors": 3,
+        "normal_angle": 60.0,
+        "require_local_hull": true,
+        "max_grid_nodes": 3000000
+      },
+      "groups": [
+        {
+          "group": 0,
+          "grid_nodes": 6845,
+          "faces": 1803,
+          "proposed_faces": 2134,
+          "unsupported_faces": 331,
+          "supported_faces": 1803
+        }
+      ],
+      "new_display_vertices": true,
+      "physical_samples_modified": false,
+      "invalid_plane_fits": 0,
+      "display_normals": "imls_fitted"
+    }
+  },
+  {
+    "case": "planar_hole",
+    "method": "poisson_supported",
+    "construction": {
+      "groups": [
+        {
+          "group": 0,
+          "proposed_faces": 3970,
+          "unsupported_faces": 1185,
+          "supported_faces": 2785
+        }
+      ],
+      "depth": 6,
+      "linear_fit": true
+    }
+  },
+  {
+    "case": "planar_hole",
+    "method": "poisson_raw",
+    "construction": {
+      "groups": [
+        {
+          "group": 0,
+          "proposed_faces": 3970,
+          "unsupported_faces": 1185,
+          "supported_faces": 2785
+        }
+      ],
+      "depth": 6,
+      "linear_fit": true
+    }
+  },
+  {
+    "case": "near_sheets_separate_groups",
+    "method": "ball_saved",
+    "construction": {
+      "method": "Open3D ball pivoting plus original-prototype geometric guards",
+      "open3d_version": "0.19.0",
+      "radius_factors": [
+        1.0
+      ],
+      "raw_faces": 255,
+      "faces": 255,
+      "rejected": {
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 416,
+        "boundary_edges": 67,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "vertices_moved": false
+    }
+  },
+  {
+    "case": "near_sheets_separate_groups",
+    "method": "imls_saved",
+    "construction": {
+      "method": "compact oriented-plane implicit MLS and masked marching cubes",
+      "settings": {
+        "step_cells": 0.5,
+        "support_cells": 2.0,
+        "kernel_cells": 0.8,
+        "max_nearest_cells": 0.85,
+        "max_plane_offset_cells": 0.3,
+        "min_neighbors": 3,
+        "normal_angle": 60.0,
+        "require_local_hull": true,
+        "max_grid_nodes": 3000000
+      },
+      "groups": [
+        {
+          "group": 0,
+          "grid_nodes": 2205,
+          "faces": 512,
+          "proposed_faces": 634,
+          "unsupported_faces": 122,
+          "supported_faces": 512
+        },
+        {
+          "group": 1,
+          "grid_nodes": 2904,
+          "faces": 450,
+          "proposed_faces": 746,
+          "unsupported_faces": 296,
+          "supported_faces": 450
+        }
+      ],
+      "new_display_vertices": true,
+      "physical_samples_modified": false,
+      "display_normals": "imls_saved"
+    }
+  },
+  {
+    "case": "near_sheets_separate_groups",
+    "method": "imls_fitted",
+    "construction": {
+      "method": "compact oriented-plane implicit MLS and masked marching cubes",
+      "settings": {
+        "step_cells": 0.5,
+        "support_cells": 2.0,
+        "kernel_cells": 0.8,
+        "max_nearest_cells": 0.85,
+        "max_plane_offset_cells": 0.3,
+        "min_neighbors": 3,
+        "normal_angle": 60.0,
+        "require_local_hull": true,
+        "max_grid_nodes": 3000000
+      },
+      "groups": [
+        {
+          "group": 0,
+          "grid_nodes": 2205,
+          "faces": 512,
+          "proposed_faces": 634,
+          "unsupported_faces": 122,
+          "supported_faces": 512
+        },
+        {
+          "group": 1,
+          "grid_nodes": 2904,
+          "faces": 450,
+          "proposed_faces": 746,
+          "unsupported_faces": 296,
+          "supported_faces": 450
+        }
+      ],
+      "new_display_vertices": true,
+      "physical_samples_modified": false,
+      "invalid_plane_fits": 0,
+      "display_normals": "imls_fitted"
+    }
+  },
+  {
+    "case": "near_sheets_separate_groups",
+    "method": "poisson_supported",
+    "construction": {
+      "groups": [
+        {
+          "group": 0,
+          "proposed_faces": 2742,
+          "unsupported_faces": 713,
+          "supported_faces": 2029
+        },
+        {
+          "group": 1,
+          "proposed_faces": 2742,
+          "unsupported_faces": 713,
+          "supported_faces": 2029
+        }
+      ],
+      "depth": 6,
+      "linear_fit": true
+    }
+  },
+  {
+    "case": "near_sheets_separate_groups",
+    "method": "poisson_raw",
+    "construction": {
+      "groups": [
+        {
+          "group": 0,
+          "proposed_faces": 2742,
+          "unsupported_faces": 713,
+          "supported_faces": 2029
+        },
+        {
+          "group": 1,
+          "proposed_faces": 2742,
+          "unsupported_faces": 713,
+          "supported_faces": 2029
+        }
+      ],
+      "depth": 6,
+      "linear_fit": true
+    }
+  },
+  {
+    "case": "near_sheets_same_group_counterexample",
+    "method": "ball_saved",
+    "construction": {
+      "method": "Open3D ball pivoting plus original-prototype geometric guards",
+      "open3d_version": "0.19.0",
+      "radius_factors": [
+        1.0
+      ],
+      "raw_faces": 288,
+      "faces": 288,
+      "rejected": {
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 449,
+        "boundary_edges": 34,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "vertices_moved": false
+    }
+  },
+  {
+    "case": "near_sheets_same_group_counterexample",
+    "method": "imls_saved",
+    "construction": {
+      "method": "compact oriented-plane implicit MLS and masked marching cubes",
+      "settings": {
+        "step_cells": 0.5,
+        "support_cells": 2.0,
+        "kernel_cells": 0.8,
+        "max_nearest_cells": 0.85,
+        "max_plane_offset_cells": 0.3,
+        "min_neighbors": 3,
+        "normal_angle": 60.0,
+        "require_local_hull": true,
+        "max_grid_nodes": 3000000
+      },
+      "groups": [
+        {
+          "group": 0,
+          "grid_nodes": 2904,
+          "faces": 512,
+          "proposed_faces": 784,
+          "unsupported_faces": 272,
+          "supported_faces": 512
+        }
+      ],
+      "new_display_vertices": true,
+      "physical_samples_modified": false,
+      "display_normals": "imls_saved"
+    }
+  },
+  {
+    "case": "near_sheets_same_group_counterexample",
+    "method": "imls_fitted",
+    "construction": {
+      "method": "compact oriented-plane implicit MLS and masked marching cubes",
+      "settings": {
+        "step_cells": 0.5,
+        "support_cells": 2.0,
+        "kernel_cells": 0.8,
+        "max_nearest_cells": 0.85,
+        "max_plane_offset_cells": 0.3,
+        "min_neighbors": 3,
+        "normal_angle": 60.0,
+        "require_local_hull": true,
+        "max_grid_nodes": 3000000
+      },
+      "groups": [
+        {
+          "group": 0,
+          "grid_nodes": 2904,
+          "faces": 508,
+          "proposed_faces": 850,
+          "unsupported_faces": 342,
+          "supported_faces": 508
+        }
+      ],
+      "new_display_vertices": true,
+      "physical_samples_modified": false,
+      "invalid_plane_fits": 0,
+      "display_normals": "imls_fitted"
+    }
+  },
+  {
+    "case": "near_sheets_same_group_counterexample",
+    "method": "poisson_supported",
+    "construction": {
+      "groups": [
+        {
+          "group": 0,
+          "proposed_faces": 3058,
+          "unsupported_faces": 671,
+          "supported_faces": 2387
+        }
+      ],
+      "depth": 6,
+      "linear_fit": true
+    }
+  },
+  {
+    "case": "near_sheets_same_group_counterexample",
+    "method": "poisson_raw",
+    "construction": {
+      "groups": [
+        {
+          "group": 0,
+          "proposed_faces": 3058,
+          "unsupported_faces": 671,
+          "supported_faces": 2387
+        }
+      ],
+      "depth": 6,
+      "linear_fit": true
+    }
+  },
+  {
+    "case": "three_source_event_0016",
+    "method": "ball_saved",
+    "construction": {
+      "method": "Open3D ball pivoting plus original-prototype geometric guards",
+      "open3d_version": "0.19.0",
+      "radius_factors": [
+        1.0
+      ],
+      "raw_faces": 14039,
+      "faces": 10103,
+      "rejected": {
+        "tangent": 3830,
+        "face_normal": 106,
+        "nonmanifold_edge_faces": 0
+      },
+      "topology": {
+        "edges": 17502,
+        "boundary_edges": 4695,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "vertices_moved": false
+    }
+  },
+  {
+    "case": "three_source_event_0016",
+    "method": "imls_saved",
+    "construction": {
+      "method": "compact oriented-plane implicit MLS and masked marching cubes",
+      "settings": {
+        "step_cells": 0.5,
+        "support_cells": 2.0,
+        "kernel_cells": 0.8,
+        "max_nearest_cells": 0.85,
+        "max_plane_offset_cells": 0.3,
+        "min_neighbors": 3,
+        "normal_angle": 60.0,
+        "require_local_hull": true,
+        "max_grid_nodes": 3000000
+      },
+      "groups": [
+        {
+          "group": 0,
+          "grid_nodes": 867085,
+          "faces": 71775,
+          "proposed_faces": 72589,
+          "unsupported_faces": 814,
+          "supported_faces": 71775
+        },
+        {
+          "group": 1,
+          "grid_nodes": 16443,
+          "faces": 2043,
+          "proposed_faces": 2267,
+          "unsupported_faces": 224,
+          "supported_faces": 2043
+        },
+        {
+          "group": 2,
+          "grid_nodes": 18009,
+          "faces": 2490,
+          "proposed_faces": 2903,
+          "unsupported_faces": 413,
+          "supported_faces": 2490
+        },
+        {
+          "group": 3,
+          "grid_nodes": 16443,
+          "faces": 2037,
+          "proposed_faces": 2476,
+          "unsupported_faces": 439,
+          "supported_faces": 2037
+        }
+      ],
+      "new_display_vertices": true,
+      "physical_samples_modified": false,
+      "display_normals": "imls_saved"
+    }
+  },
+  {
+    "case": "three_source_event_0016",
+    "method": "imls_fitted",
+    "construction": {
+      "method": "compact oriented-plane implicit MLS and masked marching cubes",
+      "settings": {
+        "step_cells": 0.5,
+        "support_cells": 2.0,
+        "kernel_cells": 0.8,
+        "max_nearest_cells": 0.85,
+        "max_plane_offset_cells": 0.3,
+        "min_neighbors": 3,
+        "normal_angle": 60.0,
+        "require_local_hull": true,
+        "max_grid_nodes": 3000000
+      },
+      "groups": [
+        {
+          "group": 0,
+          "grid_nodes": 867085,
+          "faces": 71750,
+          "proposed_faces": 72552,
+          "unsupported_faces": 802,
+          "supported_faces": 71750
+        },
+        {
+          "group": 1,
+          "grid_nodes": 16443,
+          "faces": 1999,
+          "proposed_faces": 2233,
+          "unsupported_faces": 234,
+          "supported_faces": 1999
+        },
+        {
+          "group": 2,
+          "grid_nodes": 18009,
+          "faces": 2489,
+          "proposed_faces": 2880,
+          "unsupported_faces": 391,
+          "supported_faces": 2489
+        },
+        {
+          "group": 3,
+          "grid_nodes": 16443,
+          "faces": 1995,
+          "proposed_faces": 2444,
+          "unsupported_faces": 449,
+          "supported_faces": 1995
+        }
+      ],
+      "new_display_vertices": true,
+      "physical_samples_modified": false,
+      "invalid_plane_fits": 38,
+      "display_normals": "imls_fitted"
+    }
+  },
+  {
+    "case": "three_source_event_0016",
+    "method": "poisson_supported",
+    "construction": {
+      "groups": [
+        {
+          "group": 0,
+          "proposed_faces": 27176,
+          "unsupported_faces": 31,
+          "supported_faces": 27145
+        },
+        {
+          "group": 1,
+          "proposed_faces": 5818,
+          "unsupported_faces": 2465,
+          "supported_faces": 3353
+        },
+        {
+          "group": 2,
+          "proposed_faces": 6170,
+          "unsupported_faces": 2230,
+          "supported_faces": 3940
+        },
+        {
+          "group": 3,
+          "proposed_faces": 5886,
+          "unsupported_faces": 2735,
+          "supported_faces": 3151
+        }
+      ],
+      "depth": 6,
+      "linear_fit": true
+    }
+  },
+  {
+    "case": "three_source_event_0016",
+    "method": "poisson_raw",
+    "construction": {
+      "groups": [
+        {
+          "group": 0,
+          "proposed_faces": 27176,
+          "unsupported_faces": 31,
+          "supported_faces": 27145
+        },
+        {
+          "group": 1,
+          "proposed_faces": 5818,
+          "unsupported_faces": 2465,
+          "supported_faces": 3353
+        },
+        {
+          "group": 2,
+          "proposed_faces": 6170,
+          "unsupported_faces": 2230,
+          "supported_faces": 3940
+        },
+        {
+          "group": 3,
+          "proposed_faces": 5886,
+          "unsupported_faces": 2735,
+          "supported_faces": 3151
+        }
+      ],
+      "depth": 6,
+      "linear_fit": true
+    }
+  }
+]

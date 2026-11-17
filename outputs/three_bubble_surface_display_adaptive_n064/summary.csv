@@ -1,0 +1,7 @@
+case,method,vertices,faces,edges,boundary_edges,nonmanifold_edges,inconsistent_shared_edge_winding,components,boundary_length_cells,nonmanifold_vertices,self_intersecting,sample_to_mesh_p50_cells,sample_to_mesh_p95_cells,sample_fraction_within_quarter_cell,display_vertex_to_sample_max_cells,mesh_area,area_fraction,sampled_hole_intrusion_faces,cross_nearest_truth_sheet_faces,off_true_sheet_probe_fraction
+sphere,adaptive_imls_saved,10350,20659,31044,111,0,0,1,11.157302870068682,0,False,0.006200722884386778,0.0069961859844625,1.0,0.7172665450506455,12.589007580259128,1.0018013925097904,0,0,
+sphere_cap_hole,adaptive_imls_saved,8161,16133,24311,223,0,0,1,73.5623883962885,0,False,0.0061989519745111465,0.0070556653663516045,0.9890625,0.7267250396395578,9.840608189259127,0.9788633977194847,0,0,
+planar_hole,adaptive_imls_saved,988,1803,2791,173,0,0,1,87.12132034355963,0,False,0.0,0.0,1.0,0.7071067811865476,225.375,,0,0,
+near_sheets_separate_groups,adaptive_imls_saved,1313,2434,3745,188,0,0,2,63.0,0,False,1.1175870895385742e-08,0.10000038146972656,1.0,0.42720018726587766,124.0625,,0,1584,0.0
+near_sheets_same_group_counterexample,adaptive_imls_saved,1154,2174,3327,132,0,0,1,33.0067090571373,0,False,0.04393871873617172,0.10807241499423981,1.0,0.42994625270174786,67.96439669031696,,0,1343,1.0
+three_source_event_0016,adaptive_imls_saved,46571,91440,138286,2252,0,0,5,823.2156287242244,0,False,0.04314189404249191,0.14273005723953247,0.9971965236893748,0.8497553799869862,1.6152636432019996,,,,

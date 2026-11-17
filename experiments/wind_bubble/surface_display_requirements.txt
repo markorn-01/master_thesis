@@ -1,0 +1,4 @@
+# Optional CPU display research; install in a separate environment, not .venv-iwr.
+-r mesh_comparison_requirements.txt
+scikit-image==0.25.2
+plotly==7.1.0

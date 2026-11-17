@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "focused_unit_tests_passed": 20,
+  "tests": [
+    "test_implicit_surface_display",
+    "test_display_mesh_cleanup",
+    "test_adaptive_surface_display",
+    "test_ball_pivot_mesh",
+    "test_surface_mesh"
+  ],
+  "png_files_decoded": 6,
+  "adaptive_comparison_png_visually_reviewed": true,
+  "embedded_viewer_geometry_exact": true,
+  "embedded_javascript_syntax_checked_with_node": true,
+  "browser_interaction_tested": false,
+  "browser_limitation": "No browser provider was available; in-app browser creation failed.",
+  "interactive_html_sha256": "c18e4bb8c64c42c0dfc5c1021ef4ec865ee5ee5cc9d5511f7a84ebeb59af0ba6",
+  "production_defaults_changed": false,
+  "physical_measurements_changed": false,
+  "tracking_changed": false
+}

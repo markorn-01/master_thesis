@@ -1,0 +1,210 @@
+[
+  {
+    "case": "sphere",
+    "groups": [
+      {
+        "group": 0,
+        "passed": true,
+        "attempts": [
+          {
+            "refinement": 0,
+            "step_cells": 0.5,
+            "fraction_within_tolerance": 1.0,
+            "faces": 20659
+          }
+        ]
+      }
+    ],
+    "all_group_accuracy_targets_met": true,
+    "tolerance_cells": 0.25,
+    "target_fraction": 0.95,
+    "max_refinements": 2,
+    "support_settings_unchanged": true
+  },
+  {
+    "case": "sphere_cap_hole",
+    "groups": [
+      {
+        "group": 0,
+        "passed": true,
+        "attempts": [
+          {
+            "refinement": 0,
+            "step_cells": 0.5,
+            "fraction_within_tolerance": 0.9890625,
+            "faces": 16133
+          }
+        ]
+      }
+    ],
+    "all_group_accuracy_targets_met": true,
+    "tolerance_cells": 0.25,
+    "target_fraction": 0.95,
+    "max_refinements": 2,
+    "support_settings_unchanged": true
+  },
+  {
+    "case": "planar_hole",
+    "groups": [
+      {
+        "group": 0,
+        "passed": true,
+        "attempts": [
+          {
+            "refinement": 0,
+            "step_cells": 0.5,
+            "fraction_within_tolerance": 1.0,
+            "faces": 1803
+          }
+        ]
+      }
+    ],
+    "all_group_accuracy_targets_met": true,
+    "tolerance_cells": 0.25,
+    "target_fraction": 0.95,
+    "max_refinements": 2,
+    "support_settings_unchanged": true
+  },
+  {
+    "case": "near_sheets_separate_groups",
+    "groups": [
+      {
+        "group": 0,
+        "passed": true,
+        "attempts": [
+          {
+            "refinement": 0,
+            "step_cells": 0.5,
+            "fraction_within_tolerance": 1.0,
+            "faces": 512
+          }
+        ]
+      },
+      {
+        "group": 1,
+        "passed": true,
+        "attempts": [
+          {
+            "refinement": 0,
+            "step_cells": 0.5,
+            "fraction_within_tolerance": 0.7901234567901234,
+            "faces": 450,
+            "next_cleanup_removed_faces": 0
+          },
+          {
+            "refinement": 1,
+            "step_cells": 0.25,
+            "fraction_within_tolerance": 1.0,
+            "faces": 1922
+          }
+        ]
+      }
+    ],
+    "all_group_accuracy_targets_met": true,
+    "tolerance_cells": 0.25,
+    "target_fraction": 0.95,
+    "max_refinements": 2,
+    "support_settings_unchanged": true
+  },
+  {
+    "case": "near_sheets_same_group_counterexample",
+    "groups": [
+      {
+        "group": 0,
+        "passed": true,
+        "attempts": [
+          {
+            "refinement": 0,
+            "step_cells": 0.5,
+            "fraction_within_tolerance": 0.8950617283950617,
+            "faces": 512,
+            "next_cleanup_removed_faces": 0
+          },
+          {
+            "refinement": 1,
+            "step_cells": 0.25,
+            "fraction_within_tolerance": 1.0,
+            "faces": 2174
+          }
+        ]
+      }
+    ],
+    "all_group_accuracy_targets_met": true,
+    "tolerance_cells": 0.25,
+    "target_fraction": 0.95,
+    "max_refinements": 2,
+    "support_settings_unchanged": true
+  },
+  {
+    "case": "three_source_event_0016",
+    "groups": [
+      {
+        "group": 0,
+        "passed": true,
+        "attempts": [
+          {
+            "refinement": 0,
+            "step_cells": 0.5,
+            "fraction_within_tolerance": 0.9998474214220323,
+            "faces": 71658
+          }
+        ]
+      },
+      {
+        "group": 1,
+        "passed": true,
+        "attempts": [
+          {
+            "refinement": 0,
+            "step_cells": 0.5,
+            "fraction_within_tolerance": 0.9265536723163842,
+            "faces": 2037,
+            "next_cleanup_removed_faces": 0
+          },
+          {
+            "refinement": 1,
+            "step_cells": 0.25,
+            "fraction_within_tolerance": 0.9717514124293786,
+            "faces": 8665
+          }
+        ]
+      },
+      {
+        "group": 2,
+        "passed": true,
+        "attempts": [
+          {
+            "refinement": 0,
+            "step_cells": 0.5,
+            "fraction_within_tolerance": 0.9601769911504425,
+            "faces": 2455
+          }
+        ]
+      },
+      {
+        "group": 3,
+        "passed": true,
+        "attempts": [
+          {
+            "refinement": 0,
+            "step_cells": 0.5,
+            "fraction_within_tolerance": 0.9378531073446328,
+            "faces": 2011,
+            "next_cleanup_removed_faces": 0
+          },
+          {
+            "refinement": 1,
+            "step_cells": 0.25,
+            "fraction_within_tolerance": 0.9717514124293786,
+            "faces": 8662
+          }
+        ]
+      }
+    ],
+    "all_group_accuracy_targets_met": true,
+    "tolerance_cells": 0.25,
+    "target_fraction": 0.95,
+    "max_refinements": 2,
+    "support_settings_unchanged": true
+  }
+]
