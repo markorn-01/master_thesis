@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "new_focused_tests_passed": 5,
+  "original_failure_retained": true,
+  "all_candidate_triangle_geometry_exact": true,
+  "all_physical_arrays_exact": true,
+  "pngs_decoded": 3,
+  "gifs_decoded": 2,
+  "frames_per_gif": 3,
+  "frame_duration_ms": 1000,
+  "review_figure_visually_inspected": true,
+  "fitting_thresholds_changed": false,
+  "temporal_flicker_validated": false
+}

@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "events": 17,
+  "decoded_frames": 17,
+  "frame_order_checked": true,
+  "frame_duration_ms": 1000,
+  "playback_seconds": 17,
+  "all_physical_arrays_exact": true,
+  "fallback_events": [
+    5
+  ],
+  "encoding_tests_passed": 2,
+  "smoke_empty_and_first_populated_passed": true,
+  "explicit_resume_passed": true,
+  "visual_review": [
+    "event_0005.png",
+    "event_0016.png",
+    "display_checks_over_time.png"
+  ],
+  "temporal_flicker_validated": false,
+  "physical_topology_established": false
+}
