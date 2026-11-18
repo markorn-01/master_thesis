@@ -1,0 +1,85 @@
+[
+  {
+    "name": "unequal_two_n128",
+    "root": "outputs/two_bubbles_detection_extension_iwr_n128",
+    "history": "outputs/expanded_full_sequence_validation_n128",
+    "partitions": "outputs/two_bubbles_detection_extension_review_n128",
+    "archive": "outputs/expanded_full_sequence_validation_n128/tracking_results.json.gz",
+    "events": 21,
+    "configurations": 40,
+    "focus_parent_events": [
+      9,
+      10,
+      19
+    ],
+    "terminal_parent_event": 19,
+    "terminal_future_event_available": false,
+    "actual_times": [
+      0.0,
+      0.009999999776482582,
+      0.019999999552965164,
+      0.029999999329447746,
+      0.03999999910593033,
+      0.04999999701976776,
+      0.05999999865889549,
+      0.07000000029802322,
+      0.07999999821186066,
+      0.08999999612569809,
+      0.09999999403953552,
+      0.10999999940395355,
+      0.11999999731779099,
+      0.12999999523162842,
+      0.14000000059604645,
+      0.14999999105930328,
+      0.1599999964237213,
+      0.17000000178813934,
+      0.18000000715255737,
+      0.1899999976158142,
+      0.20000000298023224
+    ],
+    "accepted_event_counts": {
+      "shared_continuation": 47,
+      "shared_combination": 3
+    }
+  },
+  {
+    "name": "three_n064",
+    "root": "outputs/three_bubbles_iwr_compgpu7_n064",
+    "history": "outputs/three_bubble_history_expanded_n064",
+    "partitions": "outputs/three_bubble_history_expanded_n064",
+    "archive": "outputs/three_bubble_history_expanded_n064/tracking_results.json.gz",
+    "events": 17,
+    "configurations": 32,
+    "focus_parent_events": [
+      6,
+      7,
+      13
+    ],
+    "terminal_parent_event": 15,
+    "terminal_future_event_available": false,
+    "actual_times": [
+      0.0,
+      0.009999999776482582,
+      0.019999999552965164,
+      0.029999999329447746,
+      0.03999999910593033,
+      0.04999999701976776,
+      0.05999999865889549,
+      0.07000000029802322,
+      0.07999999821186066,
+      0.08999999612569809,
+      0.09999999403953552,
+      0.10999999940395355,
+      0.11999999731779099,
+      0.12999999523162842,
+      0.14000000059604645,
+      0.14999984204769135,
+      0.1599999964237213
+    ],
+    "accepted_event_counts": {
+      "shared_continuation": 30,
+      "shared_combination": 3,
+      "distance_specific_continuation": 2
+    }
+  }
+]

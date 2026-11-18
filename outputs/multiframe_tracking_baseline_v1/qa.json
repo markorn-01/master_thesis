@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "hash_entries_checked": 228,
+  "synthetic_catalogs_exact": 16,
+  "saved_synthetic_rows_recomputed": 48,
+  "real_rows_without_truth_accuracy": 72,
+  "graphs_reassembled_exact": 2,
+  "focused_tests_passed": 21,
+  "candidate_tracker_implemented": false,
+  "existing_results_modified": false
+}

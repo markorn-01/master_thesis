@@ -1,0 +1,52 @@
+{
+  "baseline": "Frozen maximum-five adjacent event tracker; no future observations.",
+  "candidate_scope": "One-event-latency conditional fragment-support layer, separate from accepted ancestry events.",
+  "methods_to_compare": [
+    "adjacent_max5",
+    "delayed_static_family",
+    "delayed_normal_motion_family"
+  ],
+  "unchanged": {
+    "max_partners": 5,
+    "normal_angle_degrees": 60,
+    "coverage": 0.5,
+    "exclusive_fraction": 0.1,
+    "distance_weight": 0.25,
+    "tie_tolerance": 1e-08,
+    "family_coverage": 0.5,
+    "family_score_margin": 0.1
+  },
+  "real_gates_domain_units": [
+    0.0234375,
+    0.0390625
+  ],
+  "evidence_channels": [
+    "accepted_adjacent_events",
+    "conditional_family_support",
+    "unresolved"
+  ],
+  "forbidden_shortcuts": [
+    "No truth/source-position input to association.",
+    "Derive future continuation seeds from the frozen adjacent tracker; expected synthetic continuations are evaluation-only.",
+    "No physical estimator, detection or spatial-group changes.",
+    "No mesh geometry input; original sparse samples only.",
+    "No promotion of family support to inherited physical identity.",
+    "No invented future observation at the final saved event."
+  ],
+  "evaluation": {
+    "synthetic": "Report false/missed links, exact configurations and ambiguous/unmatched groups by suite and identifiability; known development cases, not held-out validation.",
+    "hydro": "Report changed links, added support, unresolved groups, source-overlap flags and distance sensitivity. No physical false-link rate is available.",
+    "runtime": "Paired reruns on the same machine: one untimed warmup and three timed repeats per method, excluding input/output and independent verification. Separate adjacent computation from support-layer cost; prior archive times are not a performance baseline.",
+    "latency": "At most one future event; final transition stays provisional if that event is unavailable."
+  },
+  "stopping_rule": [
+    "Evaluate only the two delayed variants with the existing frozen settings across this complete suite.",
+    "A reduction in missed synthetic links counts as an ancestry improvement only if false links do not increase on identifiable cases; report each case, not only totals.",
+    "Evaluate conditional support separately: supported-family coverage can improve without resolving ancestry. Identical-observation controls must remain explicitly nonidentifiable.",
+    "Require preservation of input arrays and all unchanged accepted events; any conflict is reported, never silently replaced.",
+    "Record paired runtime and bounded candidate counts; make no many-bubble scaling claim.",
+    "If neither delayed variant improves the declared task, retain the adjacent baseline and document that outcome; do not start automatic threshold tuning."
+  ],
+  "new_algorithm_implemented": false,
+  "research_scope": "A bounded geometric tracking experiment, not physical ancestry recovery or a complete turbulent-box tracker."
+}

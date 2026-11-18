@@ -1,0 +1,430 @@
+[
+  {
+    "name": "translation_within_gate",
+    "suite": "adjacent_regression",
+    "times": [
+      0.0,
+      1.0
+    ],
+    "gates": [
+      0.1,
+      0.2,
+      0.35
+    ],
+    "truth": [
+      [
+        0,
+        10
+      ]
+    ],
+    "meaning": "One sheet translates normally by .08; its stipulated identity is retained.",
+    "identifiable": true
+  },
+  {
+    "name": "translation_beyond_gate",
+    "suite": "adjacent_regression",
+    "times": [
+      0.0,
+      1.0
+    ],
+    "gates": [
+      0.1,
+      0.2,
+      0.35
+    ],
+    "truth": [
+      [
+        0,
+        10
+      ]
+    ],
+    "meaning": "The same sheet moves .30, beyond the .20 baseline gate; a missed link is expected.",
+    "identifiable": true
+  },
+  {
+    "name": "fresh_sampling",
+    "suite": "adjacent_regression",
+    "times": [
+      0.0,
+      1.0
+    ],
+    "gates": [
+      0.1,
+      0.2,
+      0.35
+    ],
+    "truth": [
+      [
+        0,
+        10
+      ]
+    ],
+    "meaning": "The sheet persists but is sampled at different positions; catalog row identity is irrelevant.",
+    "identifiable": true
+  },
+  {
+    "name": "approaching_aligned_sheets",
+    "suite": "adjacent_regression",
+    "times": [
+      0.0,
+      1.0
+    ],
+    "gates": [
+      0.1,
+      0.2,
+      0.35
+    ],
+    "truth": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        11
+      ]
+    ],
+    "meaning": "Two sheets approach without crossing or merging. Their ancestry is stipulated by construction.",
+    "identifiable": true
+  },
+  {
+    "name": "approaching_opposite_normals",
+    "suite": "adjacent_regression",
+    "times": [
+      0.0,
+      1.0
+    ],
+    "gates": [
+      0.1,
+      0.2,
+      0.35
+    ],
+    "truth": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        11
+      ]
+    ],
+    "meaning": "Same approach, but opposite signed normals distinguish the sheets.",
+    "identifiable": true
+  },
+  {
+    "name": "one_group_splits_into_two",
+    "suite": "adjacent_regression",
+    "times": [
+      0.0,
+      1.0
+    ],
+    "gates": [
+      0.1,
+      0.2,
+      0.35
+    ],
+    "truth": [
+      [
+        0,
+        10
+      ],
+      [
+        0,
+        11
+      ]
+    ],
+    "meaning": "One catalog group becomes two groups covering its two halves; not a physical shock-splitting model.",
+    "identifiable": true
+  },
+  {
+    "name": "two_fragments_form_one_group",
+    "suite": "adjacent_regression",
+    "times": [
+      0.0,
+      1.0
+    ],
+    "gates": [
+      0.1,
+      0.2,
+      0.35
+    ],
+    "truth": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        10
+      ]
+    ],
+    "meaning": "Two catalog fragments become one group; tests representation changes, not physical merger dynamics.",
+    "identifiable": true
+  },
+  {
+    "name": "nearby_sheet_disappears",
+    "suite": "adjacent_regression",
+    "times": [
+      0.0,
+      1.0
+    ],
+    "gates": [
+      0.1,
+      0.2,
+      0.35
+    ],
+    "truth": [
+      [
+        0,
+        10
+      ]
+    ],
+    "meaning": "Parent 0 persists and parent 1 disappears. Parent 1 must not be attached to the surviving child.",
+    "identifiable": true
+  },
+  {
+    "name": "distant_sheet_disappears",
+    "suite": "adjacent_regression",
+    "times": [
+      0.0,
+      1.0
+    ],
+    "gates": [
+      0.1,
+      0.2,
+      0.35
+    ],
+    "truth": [
+      [
+        0,
+        10
+      ]
+    ],
+    "meaning": "Parent 0 persists and parent 1 disappears. Parent 1 must not be attached to the surviving child.",
+    "identifiable": true
+  },
+  {
+    "name": "eight_fragments",
+    "suite": "three_state_development",
+    "times": [
+      0.0,
+      1.0,
+      2.0
+    ],
+    "gates": [
+      0.05,
+      0.07,
+      0.09
+    ],
+    "truth": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        10
+      ],
+      [
+        2,
+        10
+      ],
+      [
+        3,
+        10
+      ],
+      [
+        4,
+        10
+      ],
+      [
+        5,
+        10
+      ],
+      [
+        6,
+        10
+      ],
+      [
+        7,
+        10
+      ]
+    ],
+    "meaning": "Eight geometric fragments become one continued surface.",
+    "identifiable": true,
+    "expected_future_continuations_evaluation_only": [
+      [
+        10,
+        20
+      ]
+    ]
+  },
+  {
+    "name": "future_motion_positive",
+    "suite": "three_state_development",
+    "times": [
+      0.0,
+      1.0,
+      2.0
+    ],
+    "gates": [
+      0.05,
+      0.07,
+      0.09
+    ],
+    "truth": [
+      [
+        0,
+        10
+      ]
+    ],
+    "meaning": "Subsequent normal motion distinguishes two otherwise equal-distance parents under constant motion.",
+    "identifiable": true,
+    "expected_future_continuations_evaluation_only": [
+      [
+        10,
+        20
+      ]
+    ]
+  },
+  {
+    "name": "future_motion_negative",
+    "suite": "three_state_development",
+    "times": [
+      0.0,
+      1.0,
+      2.0
+    ],
+    "gates": [
+      0.05,
+      0.07,
+      0.09
+    ],
+    "truth": [
+      [
+        1,
+        10
+      ]
+    ],
+    "meaning": "Subsequent normal motion distinguishes two otherwise equal-distance parents under constant motion.",
+    "identifiable": true,
+    "expected_future_continuations_evaluation_only": [
+      [
+        10,
+        20
+      ]
+    ]
+  },
+  {
+    "name": "unobservable_ancestry_0",
+    "suite": "three_state_development",
+    "times": [
+      0.0,
+      1.0,
+      2.0
+    ],
+    "gates": [
+      0.05,
+      0.07,
+      0.09
+    ],
+    "truth": [
+      [
+        0,
+        10
+      ]
+    ],
+    "meaning": "Identical three-frame geometry, different stipulated ancestry; not identifiable.",
+    "identifiable": false,
+    "expected_future_continuations_evaluation_only": [
+      [
+        10,
+        20
+      ]
+    ]
+  },
+  {
+    "name": "unobservable_ancestry_1",
+    "suite": "three_state_development",
+    "times": [
+      0.0,
+      1.0,
+      2.0
+    ],
+    "gates": [
+      0.05,
+      0.07,
+      0.09
+    ],
+    "truth": [
+      [
+        1,
+        10
+      ]
+    ],
+    "meaning": "Identical three-frame geometry, different stipulated ancestry; not identifiable.",
+    "identifiable": false,
+    "expected_future_continuations_evaluation_only": [
+      [
+        10,
+        20
+      ]
+    ]
+  },
+  {
+    "name": "coincident_child_families",
+    "suite": "three_state_development",
+    "times": [
+      0.0,
+      1.0,
+      2.0
+    ],
+    "gates": [
+      0.05,
+      0.07,
+      0.09
+    ],
+    "truth": [],
+    "meaning": "Two indistinguishable families must remain ambiguous.",
+    "identifiable": true,
+    "expected_future_continuations_evaluation_only": [
+      [
+        10,
+        20
+      ],
+      [
+        11,
+        21
+      ]
+    ]
+  },
+  {
+    "name": "opposite_normal_distractor",
+    "suite": "three_state_development",
+    "times": [
+      0.0,
+      1.0,
+      2.0
+    ],
+    "gates": [
+      0.05,
+      0.07,
+      0.09
+    ],
+    "truth": [
+      [
+        0,
+        10
+      ]
+    ],
+    "meaning": "Opposite-normal sheet must not join the family.",
+    "identifiable": true,
+    "expected_future_continuations_evaluation_only": [
+      [
+        10,
+        20
+      ]
+    ]
+  }
+]
