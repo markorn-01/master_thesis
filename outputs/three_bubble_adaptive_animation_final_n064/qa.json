@@ -1,0 +1,38 @@
+{
+  "passed": true,
+  "hash_entries_checked": 461,
+  "unchanged_mesh_events_exact": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16
+  ],
+  "repaired_event": 5,
+  "removed_faces": 35,
+  "original_event5_arrays_exact": true,
+  "gif_frames": 17,
+  "gif_duration_ms": 17000,
+  "decoded_headers_in_order": true,
+  "decoded_event5_preview": "event_0005_decoded.png",
+  "targeted_tests": {
+    "module": "tests.experiments.test_final_combined_cleanup",
+    "passed": 3
+  },
+  "visual_review": [
+    "repair_0005.png",
+    "event_0016.png"
+  ],
+  "scope": "Display cleanup and saved-sequence regression; no physical topology or ancestry claim."
+}

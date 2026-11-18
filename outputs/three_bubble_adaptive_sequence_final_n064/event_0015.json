@@ -1,0 +1,263 @@
+{
+  "summary": {
+    "event": 15,
+    "time": 0.14999984204769135,
+    "status": "mesh_approved",
+    "samples": 6770,
+    "retained_groups": 4,
+    "approved_groups": 4,
+    "all_retained_groups_approved": true,
+    "excluded_from_grouping": 14,
+    "displayed_mesh_faces": 82972,
+    "fallback_points": 14,
+    "upstream_source_overlaps": 72,
+    "downstream_source_overlaps": 0,
+    "reused_checked_mesh": false,
+    "orientation_changes_this_run": 0,
+    "vertices": 42785,
+    "faces": 82972,
+    "edges": 126130,
+    "boundary_edges": 3344,
+    "nonmanifold_edges": 0,
+    "inconsistent_shared_edge_winding": 0,
+    "components": 12,
+    "boundary_length_cells": 1382.9339734239152,
+    "nonmanifold_vertices": 0,
+    "self_intersecting": false,
+    "sample_to_mesh_p50_cells": 0.04072608798742294,
+    "sample_to_mesh_p95_cells": 0.13999727368354797,
+    "sample_fraction_within_quarter_cell": 0.9988158673771462,
+    "display_vertex_to_sample_max_cells": 0.8499502625583953,
+    "mesh_area": 1.4966551360280747,
+    "area_fraction": null
+  },
+  "details": {
+    "reused_checked_mesh": false,
+    "construction": {
+      "method": "compact oriented-plane implicit MLS and masked marching cubes",
+      "settings": {
+        "step_cells": 0.5,
+        "support_cells": 2.0,
+        "kernel_cells": 0.8,
+        "max_nearest_cells": 0.85,
+        "max_plane_offset_cells": 0.3,
+        "min_neighbors": 3,
+        "normal_angle": 60.0,
+        "require_local_hull": true,
+        "max_grid_nodes": 3000000
+      },
+      "groups": [
+        {
+          "group": 0,
+          "grid_nodes": 813483,
+          "faces": 67154,
+          "proposed_faces": 69055,
+          "unsupported_faces": 1901,
+          "supported_faces": 67154
+        },
+        {
+          "group": 1,
+          "grid_nodes": 12825,
+          "faces": 1629,
+          "proposed_faces": 1907,
+          "unsupported_faces": 278,
+          "supported_faces": 1629
+        },
+        {
+          "group": 3,
+          "grid_nodes": 18009,
+          "faces": 2534,
+          "proposed_faces": 2939,
+          "unsupported_faces": 405,
+          "supported_faces": 2534
+        },
+        {
+          "group": 4,
+          "grid_nodes": 12825,
+          "faces": 1618,
+          "proposed_faces": 2073,
+          "unsupported_faces": 455,
+          "supported_faces": 1618
+        }
+      ],
+      "new_display_vertices": true,
+      "physical_samples_modified": false
+    },
+    "cleanup": {
+      "passed": true,
+      "passes": [
+        {
+          "nonmanifold_vertices": 108,
+          "intersection_pairs": 5,
+          "removed_faces": 329
+        },
+        {
+          "nonmanifold_vertices": 6,
+          "intersection_pairs": 0,
+          "removed_faces": 23
+        },
+        {
+          "nonmanifold_vertices": 1,
+          "intersection_pairs": 0,
+          "removed_faces": 5
+        },
+        {
+          "nonmanifold_vertices": 0,
+          "intersection_pairs": 0,
+          "removed_faces": 0
+        }
+      ],
+      "removed_faces": 357
+    },
+    "refinement": {
+      "groups": [
+        {
+          "group": 0,
+          "passed": true,
+          "attempts": [
+            {
+              "refinement": 0,
+              "step_cells": 0.5,
+              "fraction_within_tolerance": 1.0,
+              "faces": 66831
+            }
+          ]
+        },
+        {
+          "group": 1,
+          "passed": true,
+          "attempts": [
+            {
+              "refinement": 0,
+              "step_cells": 0.5,
+              "fraction_within_tolerance": 0.9496402877697842,
+              "faces": 1629,
+              "next_cleanup_removed_faces": 8
+            },
+            {
+              "refinement": 1,
+              "step_cells": 0.25,
+              "fraction_within_tolerance": 0.9928057553956835,
+              "faces": 6813
+            }
+          ]
+        },
+        {
+          "group": 3,
+          "passed": true,
+          "attempts": [
+            {
+              "refinement": 0,
+              "step_cells": 0.5,
+              "fraction_within_tolerance": 0.9714285714285714,
+              "faces": 2507
+            }
+          ]
+        },
+        {
+          "group": 4,
+          "passed": true,
+          "attempts": [
+            {
+              "refinement": 0,
+              "step_cells": 0.5,
+              "fraction_within_tolerance": 0.9424460431654677,
+              "faces": 1611,
+              "next_cleanup_removed_faces": 4
+            },
+            {
+              "refinement": 1,
+              "step_cells": 0.25,
+              "fraction_within_tolerance": 0.9928057553956835,
+              "faces": 6821
+            }
+          ]
+        }
+      ],
+      "all_group_accuracy_targets_met": true,
+      "tolerance_cells": 0.25,
+      "target_fraction": 0.95,
+      "max_refinements": 2,
+      "support_settings_unchanged": true
+    },
+    "orientation": {
+      "passed": true,
+      "changed_faces": 0,
+      "before": {
+        "edges": 126130,
+        "boundary_edges": 3344,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "after": {
+        "edges": 126130,
+        "boundary_edges": 3344,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      }
+    },
+    "groups": [
+      {
+        "group": 0,
+        "segment": 4,
+        "samples": 6268,
+        "faces": 66831,
+        "fraction_within_quarter_cell": 1.0,
+        "accuracy_passed": true,
+        "sample_to_own_group_mesh_p95_cells": 0.13950733840465546,
+        "upstream_source_overlaps": 0,
+        "downstream_source_overlaps": 0
+      },
+      {
+        "group": 1,
+        "segment": 12,
+        "samples": 139,
+        "faces": 6813,
+        "fraction_within_quarter_cell": 0.9928057553956835,
+        "accuracy_passed": true,
+        "sample_to_own_group_mesh_p95_cells": 0.15025106072425842,
+        "upstream_source_overlaps": 20,
+        "downstream_source_overlaps": 0
+      },
+      {
+        "group": 3,
+        "segment": 13,
+        "samples": 210,
+        "faces": 2507,
+        "fraction_within_quarter_cell": 0.9714285714285714,
+        "accuracy_passed": true,
+        "sample_to_own_group_mesh_p95_cells": 0.18852628767490387,
+        "upstream_source_overlaps": 22,
+        "downstream_source_overlaps": 0
+      },
+      {
+        "group": 4,
+        "segment": 14,
+        "samples": 139,
+        "faces": 6821,
+        "fraction_within_quarter_cell": 0.9928057553956835,
+        "accuracy_passed": true,
+        "sample_to_own_group_mesh_p95_cells": 0.1312360316514969,
+        "upstream_source_overlaps": 20,
+        "downstream_source_overlaps": 0
+      }
+    ],
+    "failure": null
+  },
+  "mesh_sha256": "f970a061a57b37dc06d4dfebea6bc4ec3e306fbac3ec58d982147d0db4a7a5fd",
+  "source_sha256": {
+    "/Users/minhn/Documents/Heidelberg University/fifth_semester/Thesis/master_thesis/experiments/wind_bubble/build_adaptive_sequence.py": "898113f301c2b63864fa63e7919f49434da5985229c804ed098b5d05b3594cb9",
+    "experiments/wind_bubble/adaptive_surface_display.py": "3bef4439b7677d4c3f22f2565de4525c604cde7cf62b942ec7f1eef3d360ef58",
+    "experiments/wind_bubble/check_adaptive_mesh_times.py": "ceea8c5a41a77b5a2a25ee44237b1e9d7f2f3590aaa5f97acb205ea01add615b",
+    "experiments/wind_bubble/implicit_surface_display.py": "506a3ef66935b7070c260436da641f3db95e22855b4fdbaaf9118cee4521dadd",
+    "experiments/wind_bubble/finalize_surface_display.py": "917045298fa558546da538b3bcae2501953f4f94a70ff9a52cbc32b1bb14a425",
+    "experiments/wind_bubble/orient_display_mesh.py": "ab3833ab9e09320604531fe5a14650ec3a017b95a354bd92decd45b5d7c24b90",
+    "experiments/wind_bubble/research_surface_display.py": "52940afbb27d6191efec2bb010821ba1545a42295eeb5e9d9f7cefd62e504662",
+    "experiments/wind_bubble/animate_event_history.py": "ccc4129a1e971353bc239ee60da01f673a5fce5e2b4e06a7d7f3b4fcabf31aa8"
+  },
+  "event_input_sha256": {
+    "outputs/three_bubbles_iwr_compgpu7_n064/online/surfaces_0015.npz": "c24294b27306650ff507ea7741756bbb146a5beb42d00cf0e7f3e2cdb74673ab",
+    "outputs/three_bubble_history_expanded_n064/groups_0015.npz": "fdc48f43154128d74ecba547727564b2f5279c11de53e465064dd1dc3bc40ec5"
+  },
+  "construction_and_checks_seconds": 104.4144723749996
+}

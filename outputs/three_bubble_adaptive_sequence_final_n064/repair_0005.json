@@ -1,0 +1,353 @@
+{
+  "intersection_audit": {
+    "intersection_pairs": 34,
+    "involved_faces": 35,
+    "cross_group_pairs": 34,
+    "face_pairs": [
+      [
+        36878,
+        74695
+      ],
+      [
+        36878,
+        74742
+      ],
+      [
+        36919,
+        74696
+      ],
+      [
+        36919,
+        74783
+      ],
+      [
+        36919,
+        74784
+      ],
+      [
+        36920,
+        74696
+      ],
+      [
+        36920,
+        74783
+      ],
+      [
+        36922,
+        74697
+      ],
+      [
+        36923,
+        74697
+      ],
+      [
+        36923,
+        74786
+      ],
+      [
+        36931,
+        74698
+      ],
+      [
+        36931,
+        74795
+      ],
+      [
+        36931,
+        74796
+      ],
+      [
+        36932,
+        74698
+      ],
+      [
+        36932,
+        74795
+      ],
+      [
+        36964,
+        74727
+      ],
+      [
+        36964,
+        74728
+      ],
+      [
+        36965,
+        74730
+      ],
+      [
+        36965,
+        74731
+      ],
+      [
+        36966,
+        74739
+      ],
+      [
+        36966,
+        74740
+      ],
+      [
+        36967,
+        74742
+      ],
+      [
+        36967,
+        74743
+      ],
+      [
+        36968,
+        74696
+      ],
+      [
+        36968,
+        74783
+      ],
+      [
+        36968,
+        74784
+      ],
+      [
+        36969,
+        74697
+      ],
+      [
+        36969,
+        74786
+      ],
+      [
+        36969,
+        74787
+      ],
+      [
+        36970,
+        74698
+      ],
+      [
+        36970,
+        74795
+      ],
+      [
+        36970,
+        74796
+      ],
+      [
+        36971,
+        74798
+      ],
+      [
+        36971,
+        74799
+      ]
+    ],
+    "face_groups": [
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        2
+      ]
+    ]
+  },
+  "cleanup": {
+    "passed": true,
+    "passes": [
+      {
+        "nonmanifold_vertices": 0,
+        "intersection_pairs": 34,
+        "removed_faces": 35
+      },
+      {
+        "nonmanifold_vertices": 0,
+        "intersection_pairs": 0,
+        "removed_faces": 0
+      }
+    ],
+    "removed_faces": 35
+  },
+  "orientation": {
+    "passed": true,
+    "changed_faces": 0,
+    "before": {
+      "edges": 170514,
+      "boundary_edges": 6141,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0
+    },
+    "after": {
+      "edges": 170514,
+      "boundary_edges": 6141,
+      "nonmanifold_edges": 0,
+      "inconsistent_shared_edge_winding": 0
+    }
+  },
+  "no_new_or_moved_triangles": true,
+  "group_checks": [
+    {
+      "group": 0,
+      "segment": 0,
+      "samples": 952,
+      "faces": 36957,
+      "fraction_within_quarter_cell": 1.0,
+      "accuracy_passed": true,
+      "sample_to_own_group_mesh_p95_cells": 0.11544140428304672,
+      "upstream_source_overlaps": 0,
+      "downstream_source_overlaps": 0
+    },
+    {
+      "group": 1,
+      "segment": 1,
+      "samples": 968,
+      "faces": 37720,
+      "fraction_within_quarter_cell": 1.0,
+      "accuracy_passed": true,
+      "sample_to_own_group_mesh_p95_cells": 0.1038140058517456,
+      "upstream_source_overlaps": 0,
+      "downstream_source_overlaps": 0
+    },
+    {
+      "group": 2,
+      "segment": 2,
+      "samples": 952,
+      "faces": 36952,
+      "fraction_within_quarter_cell": 1.0,
+      "accuracy_passed": true,
+      "sample_to_own_group_mesh_p95_cells": 0.11544061452150345,
+      "upstream_source_overlaps": 0,
+      "downstream_source_overlaps": 0
+    }
+  ],
+  "previous_status": "geometry_fallback",
+  "accepted": true
+}
