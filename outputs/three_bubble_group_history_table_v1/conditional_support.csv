@@ -1,0 +1,2 @@
+support_id,parent_node,child_node,future_node,parent_event,child_event,available_event,parent_time,child_time,available_time,evidence,narrow_union_coverage,wide_union_coverage,inherited_id_assigned
+s0000,e0013:g9,e0014:g4,e0015:g3,13,14,15,0.12999999523162842,0.14000000059604645,0.14999984204769135,conditional_geometric_support,0.8953488372093024,1.0,False

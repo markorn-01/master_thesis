@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "hash_entries_checked": 405,
+  "gif_decoded_frames": 17,
+  "gif_playback_seconds": 17,
+  "headers_match_event_order": true,
+  "conditional_first_visible_event": 15,
+  "future_measurements_or_support_shown": false,
+  "original_statistics_and_segments_exact": true,
+  "accepted_graph_changed": false,
+  "new_table_tests_passed": 5,
+  "distinct_focused_tests_passed": 29,
+  "final_empty_and_C_figures_visually_reviewed": true
+}

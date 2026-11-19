@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "hash_entries_checked": 250,
+  "group_csv_json_rows_exact": 45,
+  "sorted_value_quantile_checks": 135,
+  "events_accounted_without_duplicate_samples": 17,
+  "conditional_hidden_before_C": true,
+  "new_table_tests_passed": 5
+}
