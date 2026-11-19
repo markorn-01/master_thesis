@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "hash_entries_checked": 486,
+  "synthetic_results_readback": 96,
+  "real_results_readback": 144,
+  "accepted_adjacent_event_lists_exact": 144,
+  "unique_additional_relationships": {
+    "unequal_two_n128 / delayed_static_family": 2,
+    "unequal_two_n128 / delayed_normal_motion_family": 2,
+    "three_n064 / delayed_static_family": 1,
+    "three_n064 / delayed_normal_motion_family": 1
+  },
+  "static_motion_real_membership_differences": 0,
+  "terminal_windows_pending": true,
+  "physical_identity_promoted": false,
+  "runtime_rows_checked": 18,
+  "focused_tests_passed": 33,
+  "readable_figure_visually_reviewed": true
+}

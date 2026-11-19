@@ -1,0 +1,7 @@
+suite,identifiable,method,configurations,baseline_false_links,baseline_missed_links,hypothetical_union_false_links,hypothetical_union_missed_links,additional_support_links
+adjacent_regression,True,delayed_static_family,27,0,6,0,6,0
+adjacent_regression,True,delayed_normal_motion_family,27,0,6,0,6,0
+three_state_development,True,delayed_static_family,15,0,30,4,2,32
+three_state_development,True,delayed_normal_motion_family,15,0,30,0,2,28
+three_state_development,False,delayed_static_family,6,0,6,6,0,12
+three_state_development,False,delayed_normal_motion_family,6,0,6,6,0,12

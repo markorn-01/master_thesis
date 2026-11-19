@@ -1,0 +1,21 @@
+case,method,parent_event,gate_reference_cells,child_group,later_group,parent_groups,child_union_coverage,physical_ancestry_established,coverage_pass
+unequal_two_n128,delayed_static_family,9,1.5,0,0,"[0, 3]",1.0,False,True
+unequal_two_n128,delayed_static_family,9,2.5,0,0,"[0, 3]",1.0,False,True
+unequal_two_n128,delayed_static_family,10,1.5,1,1,"[1, 2, 3, 4, 5, 6, 7]",0.924812030075188,False,True
+unequal_two_n128,delayed_static_family,10,2.5,1,1,"[1, 2, 3, 4, 5, 6, 7]",1.0,False,True
+unequal_two_n128,delayed_normal_motion_family,9,1.5,0,0,"[0, 3]",1.0,False,True
+unequal_two_n128,delayed_normal_motion_family,9,2.5,0,0,"[0, 3]",1.0,False,True
+unequal_two_n128,delayed_normal_motion_family,10,1.5,1,1,"[1, 2, 3, 4, 5, 6, 7]",0.924812030075188,False,True
+unequal_two_n128,delayed_normal_motion_family,10,2.5,1,1,"[1, 2, 3, 4, 5, 6, 7]",1.0,False,True
+three_n064,delayed_static_family,7,1.5,0,0,"[0, 1]",0.9952516619183286,False,True
+three_n064,delayed_static_family,7,2.5,0,0,"[0, 1]",1.0,False,True
+three_n064,delayed_static_family,13,1.5,1,1,[2],0.4235294117647059,False,False
+three_n064,delayed_static_family,13,1.5,4,3,"[7, 8, 9, 10, 13]",0.8953488372093024,False,True
+three_n064,delayed_static_family,13,1.5,7,4,[18],0.4235294117647059,False,False
+three_n064,delayed_static_family,13,2.5,4,3,"[7, 8, 9, 10, 13]",1.0,False,True
+three_n064,delayed_normal_motion_family,7,1.5,0,0,"[0, 1]",0.9971509971509972,False,True
+three_n064,delayed_normal_motion_family,7,2.5,0,0,"[0, 1]",1.0,False,True
+three_n064,delayed_normal_motion_family,13,1.5,1,1,[2],0.4235294117647059,False,False
+three_n064,delayed_normal_motion_family,13,1.5,4,3,"[7, 8, 9, 10, 13]",0.8953488372093024,False,True
+three_n064,delayed_normal_motion_family,13,1.5,7,4,[18],0.4235294117647059,False,False
+three_n064,delayed_normal_motion_family,13,2.5,4,3,"[7, 8, 9, 10, 13]",1.0,False,True
