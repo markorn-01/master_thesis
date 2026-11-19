@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "hash_entries_checked": 247,
+  "original_catalog_joins_exact": 6,
+  "family_sample_counts": {
+    "three_n064": [
+      102,
+      172,
+      210
+    ],
+    "unequal_two_n128": [
+      368,
+      1064,
+      1432
+    ]
+  },
+  "additional_relationships": 3,
+  "focused_tests_passed": 16,
+  "new_review_tests_passed": 4,
+  "both_figures_visually_reviewed": true,
+  "accepted_graph_changed": false,
+  "physical_ancestry_established": false
+}

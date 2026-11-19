@@ -1,0 +1,204 @@
+[
+  {
+    "case": "three_n064",
+    "parent_event": 13,
+    "roles": {
+      "7": "accepted",
+      "8": "accepted",
+      "9": "conditional",
+      "10": "accepted",
+      "13": "accepted"
+    },
+    "frames": [
+      {
+        "event": 13,
+        "time": 0.12999999523162842,
+        "observations": [
+          {
+            "group": 7,
+            "samples": 21,
+            "upstream": 11,
+            "downstream": 0
+          },
+          {
+            "group": 8,
+            "samples": 20,
+            "upstream": 4,
+            "downstream": 0
+          },
+          {
+            "group": 9,
+            "samples": 20,
+            "upstream": 16,
+            "downstream": 0
+          },
+          {
+            "group": 10,
+            "samples": 20,
+            "upstream": 0,
+            "downstream": 0
+          },
+          {
+            "group": 13,
+            "samples": 21,
+            "upstream": 11,
+            "downstream": 0
+          }
+        ]
+      },
+      {
+        "event": 14,
+        "time": 0.14000000059604645,
+        "observations": [
+          {
+            "group": 4,
+            "samples": 172,
+            "upstream": 38,
+            "downstream": 0
+          }
+        ]
+      },
+      {
+        "event": 15,
+        "time": 0.14999984204769135,
+        "observations": [
+          {
+            "group": 3,
+            "samples": 210,
+            "upstream": 22,
+            "downstream": 0
+          }
+        ]
+      }
+    ],
+    "coverage": {
+      "1.5": 0.8953488372093024,
+      "2.5": 1.0
+    },
+    "bounds": [
+      [
+        0.3800693154335022,
+        0.5512304306030273,
+        0.25440117716789246
+      ],
+      [
+        0.6199306845664978,
+        0.746645450592041,
+        0.48413559794425964
+      ]
+    ],
+    "camera": [
+      22,
+      -60
+    ],
+    "image": "three_n064_delayed_support.png"
+  },
+  {
+    "case": "unequal_two_n128",
+    "parent_event": 10,
+    "roles": {
+      "1": "conditional",
+      "2": "accepted",
+      "3": "accepted",
+      "4": "accepted",
+      "5": "accepted",
+      "6": "accepted",
+      "7": "conditional"
+    },
+    "frames": [
+      {
+        "event": 10,
+        "time": 0.09999999403953552,
+        "observations": [
+          {
+            "group": 1,
+            "samples": 32,
+            "upstream": 0,
+            "downstream": 0
+          },
+          {
+            "group": 2,
+            "samples": 28,
+            "upstream": 0,
+            "downstream": 0
+          },
+          {
+            "group": 3,
+            "samples": 62,
+            "upstream": 22,
+            "downstream": 0
+          },
+          {
+            "group": 4,
+            "samples": 62,
+            "upstream": 22,
+            "downstream": 0
+          },
+          {
+            "group": 5,
+            "samples": 62,
+            "upstream": 22,
+            "downstream": 0
+          },
+          {
+            "group": 6,
+            "samples": 62,
+            "upstream": 22,
+            "downstream": 0
+          },
+          {
+            "group": 7,
+            "samples": 60,
+            "upstream": 24,
+            "downstream": 0
+          }
+        ]
+      },
+      {
+        "event": 11,
+        "time": 0.10999999940395355,
+        "observations": [
+          {
+            "group": 1,
+            "samples": 1064,
+            "upstream": 8,
+            "downstream": 0
+          }
+        ]
+      },
+      {
+        "event": 12,
+        "time": 0.11999999731779099,
+        "observations": [
+          {
+            "group": 1,
+            "samples": 1432,
+            "upstream": 0,
+            "downstream": 0
+          }
+        ]
+      }
+    ],
+    "coverage": {
+      "1.5": 0.924812030075188,
+      "2.5": 1.0
+    },
+    "bounds": [
+      [
+        0.25310516357421875,
+        0.40508878231048584,
+        0.40508875250816345
+      ],
+      [
+        0.44326838850975037,
+        0.5949112176895142,
+        0.5949112772941589
+      ]
+    ],
+    "camera": [
+      22,
+      -60
+    ],
+    "image": "unequal_two_n128_delayed_support.png"
+  }
+]
