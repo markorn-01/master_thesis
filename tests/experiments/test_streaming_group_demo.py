@@ -1,4 +1,5 @@
 """Join callback group statistics to causal visualization tables."""
+import csv
 import gzip
 import json
 from pathlib import Path
@@ -99,6 +100,28 @@ class StreamingGroupDemo(unittest.TestCase):
         path = self.tracking/'group_history.csv'
         path.write_text(path.read_text().replace('2.0', '999.0'))
         with self.assertRaisesRegex(ValueError, 'CSV does not reproduce'):
+            build_tables(self.root, self.directory/'tables')
+
+    def test_small_percentile_rounding_difference_preserves_recorded_value(self):
+        value = float(np.nextafter(np.float32(2.), np.float32(np.inf)))
+        self.rewrite_event(1, lambda r:r['group_statistics'][0].update(mach_p84=value))
+        path = self.tracking/'group_history.csv'
+        with path.open() as stream:
+            reader = csv.DictReader(stream)
+            fields, rows = reader.fieldnames, list(reader)
+        rows[1]['mach_p84'] = str(value)
+        with path.open('w', newline='') as stream:
+            writer = csv.DictWriter(stream, fieldnames=fields)
+            writer.writeheader(); writer.writerows(rows)
+        output = self.directory/'tables'
+        report = build_tables(self.root, output)
+        saved = json.loads((output/'group_history.json').read_text())
+        self.assertEqual(saved[1]['mach_p84'], value)
+        self.assertTrue(report['recorded_callback_statistics_preserved_exact'])
+
+    def test_large_percentile_difference_is_rejected(self):
+        self.rewrite_event(1, lambda r:r['group_statistics'][0].update(mach_p84=3.))
+        with self.assertRaisesRegex(ValueError, 'statistics differ'):
             build_tables(self.root, self.directory/'tables')
 
 

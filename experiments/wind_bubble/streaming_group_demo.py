@@ -14,7 +14,26 @@ import numpy as np
 
 from experiments.astrolink.freeze_multiframe_baseline import check_graph, verify_manifest, write_csv
 from experiments.wind_bubble.build_group_history_table import conditional_rows, statistics, visible_relationships
-from experiments.wind_bubble.streaming_products import GROUP_FIELDS, load_event
+from experiments.wind_bubble.streaming_products import GROUP_FIELDS, compare_tree, load_event
+
+
+def check_statistic_rows(recomputed, recorded):
+    """Verify local reconstruction while retaining the callback's saved values.
+
+    NumPy versions can round float32 percentile interpolation differently.
+    Fingerprints and categorical/count fields remain exact; floating summaries
+    use the existing online/offline tolerance, not Python dictionary equality.
+    """
+    if len(recomputed) != len(recorded):
+        raise ValueError('Callback group statistics differ from their original samples.')
+    for a, b in zip(recomputed, recorded):
+        for key in ('original_rows_sha256', 'original_positions_sha256'):
+            if a[key] != b[key]:
+                raise ValueError('Callback group statistics differ from their original samples: fingerprint mismatch.')
+    try:
+        compare_tree(recomputed, recorded, 'recomputed_group_statistics')
+    except AssertionError as exc:
+        raise ValueError('Callback group statistics differ from their original samples.') from exc
 
 
 def build_tables(root, output, replay_tracking=None):
@@ -67,9 +86,11 @@ def build_tables(root, output, replay_tracking=None):
         if record['event'] != index or record['time'] != time or float(catalog['time']) != time:
             raise ValueError('Catalog, callback record and actual event time differ.')
         current_rows, counts = statistics(catalog, labels, record['nodes'], index)
-        # Includes exact fingerprints of this catalog's original row order and positions.
-        if current_rows != record['group_statistics'] or counts != record['accounting']:
+        check_statistic_rows(current_rows, record['group_statistics'])
+        if counts != record['accounting']:
             raise ValueError('Callback group statistics differ from their original samples.')
+        # Draw the recorded values; local recomputation is validation only.
+        current_rows = record['group_statistics']
         if len(record['adjacent_records']) != (2 if index else 0):
             raise ValueError('Require both adjacent gates at each populated interval.')
         for edge in record['adjacent_records']:
@@ -133,7 +154,9 @@ def build_tables(root, output, replay_tracking=None):
     report = dict(passed=True, root=str(root), tracking_directory=str(tracking), origin=origin,
                   backend=metadata.get('backend'), events=len(times), group_observations=len(rows),
                   segments=final['segment_count'], additional_conditional_relationships=len(support),
-                  samples_counted_once=True, original_sample_statistics_exact=True,
+                  samples_counted_once=True, original_sample_fingerprints_exact=True,
+                  statistics_match_within_tolerance=True, scalar_rtol=1e-6, scalar_atol=1e-8,
+                  recorded_callback_statistics_preserved_exact=True,
                   accepted_segment_assignments_exact=True, future_visibility_respected=True,
                   conditional_support_not_in_statistics=True, physical_ancestry_established=False,
                   input_sha256=hashes,

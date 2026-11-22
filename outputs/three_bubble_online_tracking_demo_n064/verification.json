@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "origin": "hydrodynamic_host_callback",
+  "backend": "gpu",
+  "events": 17,
+  "group_observations": 45,
+  "decoded_frames": 17,
+  "playback_seconds": 17.0,
+  "additional_conditional_relationships": 1,
+  "first_conditional_event": 15,
+  "mesh_geometry_changed": false,
+  "physical_ancestry_established": false,
+  "input_sha256": {
+    "outputs/three_bubble_online_tracking_demo_n064/tables/verification.json": "56f11fed46828b5737072e471d954b11b614247e47a3cf4ad83cd2e2f932e03b",
+    "outputs/three_bubble_online_tracking_demo_n064/animation/verification.json": "9f09144cc14207d722d67d52fe7fc57df3452b596a9b3e6b2e73eda2fe7365ae"
+  }
+}

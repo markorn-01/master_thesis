@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "origin": "hydrodynamic_host_callback",
+  "gpu_equivalence_passed": true,
+  "copied_npz_fields_exact": 680,
+  "callback_csv_preserved_exact": true,
+  "original_mesh_sample_joins_exact": true,
+  "decoded_frames": 17,
+  "playback_seconds": 17.0,
+  "conditional_hidden_at_event_14": true,
+  "conditional_visible_at_event_15": true,
+  "conditional_support_assigns_no_inherited_identity": true,
+  "final_geometry_catalogs": 0,
+  "focused_unit_tests_passed": 65,
+  "focused_unit_test_backend": "CPU; JAX 0.6.2",
+  "percentile_reconstruction_rtol": 1e-06,
+  "percentile_reconstruction_atol": 1e-08,
+  "callback_statistics_used_for_display": true,
+  "input_source_output_fingerprints_match": true,
+  "execution_host_user_report": "compgpu2",
+  "gpu_index_user_report": 7,
+  "physical_ancestry_established": false
+}

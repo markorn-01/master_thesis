@@ -1,5 +1,21 @@
 # Final three-bubble demonstration from callback tracking
 
+## Completed result
+
+Step 1 is complete. The new three-bubble callback run passed GPU online/offline
+and batch checks. Its copied products were verified locally and rendered as
+`outputs/three_bubble_online_tracking_demo_n064/animation/three_bubble_group_evolution.gif`:
+17 frames, 45 group observations, 15 segments, one additional conditional link
+first visible at event 15. The checked meshes match the actual new catalogs and
+are reused unchanged. The focused CPU suite passes 65 tests.
+
+The completed input is `outputs/three_bubbles_online_tracking_iwr_compgpu8_n064`.
+Its directory keeps the original launch label; the user reports execution on
+**compgpu2, GPU 7** after changing hosts. `copy_checks.json` and the final demo's
+`qa.json` record the distinction. No additional simulation is required to close
+this demonstration. The commands below document the original launch recipe;
+always choose a fresh directory for a new run.
+
 ## Purpose and completion boundary
 
 Produce one movie with four synchronized panels: checked smooth shock surfaces,
@@ -19,6 +35,14 @@ graph from the saved adjacent decisions, checks all four delayed-support
 channels, and retains the last interval's pending status. The callback CSV
 must agree with its own records. When offline verification was requested,
 failed or missing equivalence results cannot become a successful demonstration.
+
+Local reconstruction of floating statistic values uses the established relative
+and absolute tolerances of 1e-6 and 1e-8. NumPy versions can round float32
+percentile interpolation differently: two p84 values differed by about 1.2e-7
+in this copied run. The displayed and exported table values remain the recorded
+callback values exactly. Counts, categorical labels and original sample
+fingerprints retain exact checks. Two regression tests cover accepted rounding
+differences and rejected differences outside tolerance.
 
 Accepted events appear at their child event. Added conditional support appears
 only when C has arrived; it never changes segment labels or merges statistic
