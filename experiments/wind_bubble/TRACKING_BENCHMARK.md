@@ -1,5 +1,18 @@
 # Step 3: complete-workflow cost of online tracking
 
+## Completed GPU measurement
+
+The three-bubble 64-cubed benchmark completed on compgpu6, GPU 0 (RTX 2080 Ti).
+The copied products passed local revalidation. Median execution increased from
+3.847 s without tracking to 26.866 s with the complete grouping/tracking package:
+23.020 s added, 598.5% overhead. Primary output was unchanged; tracking added
+75,534 bytes per measured run. Compilation and one warmup are excluded.
+
+See [results, figure and limitations](../../outputs/tracking_benchmark_iwr_compgpu6_gpu0_n064/README.md)
+and its `copy_checks.json` for the preserved evidence. Step 3 is complete for
+this configuration; the next activity is thesis writing, not another automatic
+simulation or optimization cycle.
+
 ## Question and fixed comparison
 
 How much runtime, memory and saved output does grouping/tracking add to the
@@ -115,6 +128,11 @@ Commit/push the harness first, then pull it into `.venv-iwr`. Select one free
 GPU using `CUDA_VISIBLE_DEVICES` and check it with `nvidia-smi`. The controller
 requires one visible GPU when using the GPU backend and disables preallocation
 in its workers.
+
+The completed compgpu6 run used `$HOME/.venvs/master-thesis-py312/bin/python`
+(Python 3.12.16), because the older `.venv-iwr` symlink selected system Python
+3.14 there and could not import its Python 3.12 packages. The commands below
+assume `python` already selects a compatible, checked environment.
 
 ```sh
 python -m unittest tests.experiments.test_tracking_benchmark \
