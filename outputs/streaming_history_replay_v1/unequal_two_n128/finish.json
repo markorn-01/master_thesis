@@ -1,0 +1,558 @@
+{
+  "events_received": 21,
+  "segment_count": 18,
+  "tracking_event_count": 50,
+  "pending_terminal_support": [
+    {
+      "method": "delayed_static_family",
+      "parent_event": 19,
+      "child_event": 20,
+      "available_event": null,
+      "available_time": null,
+      "gate_reference_cells": 1.5,
+      "result": {
+        "accepted_adjacent_events": [
+          {
+            "candidate_index": 2,
+            "kind": "combination",
+            "parents": [
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "children": [
+              2
+            ],
+            "score": 5.897636197902269,
+            "node_coverages": [
+              {
+                "side": "parent",
+                "group": 2,
+                "coverage": 1.0
+              },
+              {
+                "side": "parent",
+                "group": 3,
+                "coverage": 1.0
+              },
+              {
+                "side": "parent",
+                "group": 4,
+                "coverage": 1.0
+              },
+              {
+                "side": "parent",
+                "group": 5,
+                "coverage": 1.0
+              },
+              {
+                "side": "parent",
+                "group": 6,
+                "coverage": 1.0
+              },
+              {
+                "side": "child",
+                "group": 2,
+                "coverage": 0.9918032786885246
+              }
+            ],
+            "exclusive_central_fractions": [
+              0.14754098360655737,
+              0.14754098360655737,
+              0.14754098360655737,
+              0.14754098360655737,
+              0.30327868852459017
+            ]
+          },
+          {
+            "candidate_index": 20,
+            "kind": "continuation",
+            "parents": [
+              0
+            ],
+            "children": [
+              0
+            ],
+            "score": 1.8153571350845488,
+            "node_coverages": [
+              {
+                "side": "parent",
+                "group": 0,
+                "coverage": 1.0
+              },
+              {
+                "side": "child",
+                "group": 0,
+                "coverage": 1.0
+              }
+            ],
+            "exclusive_central_fractions": []
+          },
+          {
+            "candidate_index": 21,
+            "kind": "continuation",
+            "parents": [
+              1
+            ],
+            "children": [
+              1
+            ],
+            "score": 1.9489212728492535,
+            "node_coverages": [
+              {
+                "side": "parent",
+                "group": 1,
+                "coverage": 1.0
+              },
+              {
+                "side": "child",
+                "group": 1,
+                "coverage": 1.0
+              }
+            ],
+            "exclusive_central_fractions": []
+          }
+        ],
+        "baseline_parameters": {
+          "gate": 0.0234375,
+          "coverage": 0.5,
+          "exclusive_fraction": 0.1,
+          "distance_weight": 0.25,
+          "max_partners": 5,
+          "normal_angle": 60.0,
+          "tie_tolerance": 1e-08
+        },
+        "window_status": "pending_future",
+        "future_seed_policy": "intersection_of_accepted_continuations",
+        "future_continuations": [],
+        "protected_continuations": [],
+        "conditional_support": [],
+        "conflicts": [],
+        "analysis": null,
+        "unresolved": [],
+        "prediction_enabled": false,
+        "future_event_latency": 1,
+        "physical_ancestry_established": false,
+        "inherited_id_assigned": false
+      }
+    },
+    {
+      "method": "delayed_normal_motion_family",
+      "parent_event": 19,
+      "child_event": 20,
+      "available_event": null,
+      "available_time": null,
+      "gate_reference_cells": 1.5,
+      "result": {
+        "accepted_adjacent_events": [
+          {
+            "candidate_index": 2,
+            "kind": "combination",
+            "parents": [
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "children": [
+              2
+            ],
+            "score": 5.897636197902269,
+            "node_coverages": [
+              {
+                "side": "parent",
+                "group": 2,
+                "coverage": 1.0
+              },
+              {
+                "side": "parent",
+                "group": 3,
+                "coverage": 1.0
+              },
+              {
+                "side": "parent",
+                "group": 4,
+                "coverage": 1.0
+              },
+              {
+                "side": "parent",
+                "group": 5,
+                "coverage": 1.0
+              },
+              {
+                "side": "parent",
+                "group": 6,
+                "coverage": 1.0
+              },
+              {
+                "side": "child",
+                "group": 2,
+                "coverage": 0.9918032786885246
+              }
+            ],
+            "exclusive_central_fractions": [
+              0.14754098360655737,
+              0.14754098360655737,
+              0.14754098360655737,
+              0.14754098360655737,
+              0.30327868852459017
+            ]
+          },
+          {
+            "candidate_index": 20,
+            "kind": "continuation",
+            "parents": [
+              0
+            ],
+            "children": [
+              0
+            ],
+            "score": 1.8153571350845488,
+            "node_coverages": [
+              {
+                "side": "parent",
+                "group": 0,
+                "coverage": 1.0
+              },
+              {
+                "side": "child",
+                "group": 0,
+                "coverage": 1.0
+              }
+            ],
+            "exclusive_central_fractions": []
+          },
+          {
+            "candidate_index": 21,
+            "kind": "continuation",
+            "parents": [
+              1
+            ],
+            "children": [
+              1
+            ],
+            "score": 1.9489212728492535,
+            "node_coverages": [
+              {
+                "side": "parent",
+                "group": 1,
+                "coverage": 1.0
+              },
+              {
+                "side": "child",
+                "group": 1,
+                "coverage": 1.0
+              }
+            ],
+            "exclusive_central_fractions": []
+          }
+        ],
+        "baseline_parameters": {
+          "gate": 0.0234375,
+          "coverage": 0.5,
+          "exclusive_fraction": 0.1,
+          "distance_weight": 0.25,
+          "max_partners": 5,
+          "normal_angle": 60.0,
+          "tie_tolerance": 1e-08
+        },
+        "window_status": "pending_future",
+        "future_seed_policy": "intersection_of_accepted_continuations",
+        "future_continuations": [],
+        "protected_continuations": [],
+        "conditional_support": [],
+        "conflicts": [],
+        "analysis": null,
+        "unresolved": [],
+        "prediction_enabled": true,
+        "future_event_latency": 1,
+        "physical_ancestry_established": false,
+        "inherited_id_assigned": false
+      }
+    },
+    {
+      "method": "delayed_static_family",
+      "parent_event": 19,
+      "child_event": 20,
+      "available_event": null,
+      "available_time": null,
+      "gate_reference_cells": 2.5,
+      "result": {
+        "accepted_adjacent_events": [
+          {
+            "candidate_index": 2,
+            "kind": "combination",
+            "parents": [
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "children": [
+              2
+            ],
+            "score": 5.9422656530202875,
+            "node_coverages": [
+              {
+                "side": "parent",
+                "group": 2,
+                "coverage": 1.0
+              },
+              {
+                "side": "parent",
+                "group": 3,
+                "coverage": 1.0
+              },
+              {
+                "side": "parent",
+                "group": 4,
+                "coverage": 1.0
+              },
+              {
+                "side": "parent",
+                "group": 5,
+                "coverage": 1.0
+              },
+              {
+                "side": "parent",
+                "group": 6,
+                "coverage": 1.0
+              },
+              {
+                "side": "child",
+                "group": 2,
+                "coverage": 1.0
+              }
+            ],
+            "exclusive_central_fractions": [
+              0.10655737704918032,
+              0.10655737704918032,
+              0.10655737704918032,
+              0.10655737704918032,
+              0.14754098360655737
+            ]
+          },
+          {
+            "candidate_index": 20,
+            "kind": "continuation",
+            "parents": [
+              0
+            ],
+            "children": [
+              0
+            ],
+            "score": 1.8892142810507293,
+            "node_coverages": [
+              {
+                "side": "parent",
+                "group": 0,
+                "coverage": 1.0
+              },
+              {
+                "side": "child",
+                "group": 0,
+                "coverage": 1.0
+              }
+            ],
+            "exclusive_central_fractions": []
+          },
+          {
+            "candidate_index": 21,
+            "kind": "continuation",
+            "parents": [
+              1
+            ],
+            "children": [
+              1
+            ],
+            "score": 1.969352763709552,
+            "node_coverages": [
+              {
+                "side": "parent",
+                "group": 1,
+                "coverage": 1.0
+              },
+              {
+                "side": "child",
+                "group": 1,
+                "coverage": 1.0
+              }
+            ],
+            "exclusive_central_fractions": []
+          }
+        ],
+        "baseline_parameters": {
+          "gate": 0.0390625,
+          "coverage": 0.5,
+          "exclusive_fraction": 0.1,
+          "distance_weight": 0.25,
+          "max_partners": 5,
+          "normal_angle": 60.0,
+          "tie_tolerance": 1e-08
+        },
+        "window_status": "pending_future",
+        "future_seed_policy": "intersection_of_accepted_continuations",
+        "future_continuations": [],
+        "protected_continuations": [],
+        "conditional_support": [],
+        "conflicts": [],
+        "analysis": null,
+        "unresolved": [],
+        "prediction_enabled": false,
+        "future_event_latency": 1,
+        "physical_ancestry_established": false,
+        "inherited_id_assigned": false
+      }
+    },
+    {
+      "method": "delayed_normal_motion_family",
+      "parent_event": 19,
+      "child_event": 20,
+      "available_event": null,
+      "available_time": null,
+      "gate_reference_cells": 2.5,
+      "result": {
+        "accepted_adjacent_events": [
+          {
+            "candidate_index": 2,
+            "kind": "combination",
+            "parents": [
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "children": [
+              2
+            ],
+            "score": 5.9422656530202875,
+            "node_coverages": [
+              {
+                "side": "parent",
+                "group": 2,
+                "coverage": 1.0
+              },
+              {
+                "side": "parent",
+                "group": 3,
+                "coverage": 1.0
+              },
+              {
+                "side": "parent",
+                "group": 4,
+                "coverage": 1.0
+              },
+              {
+                "side": "parent",
+                "group": 5,
+                "coverage": 1.0
+              },
+              {
+                "side": "parent",
+                "group": 6,
+                "coverage": 1.0
+              },
+              {
+                "side": "child",
+                "group": 2,
+                "coverage": 1.0
+              }
+            ],
+            "exclusive_central_fractions": [
+              0.10655737704918032,
+              0.10655737704918032,
+              0.10655737704918032,
+              0.10655737704918032,
+              0.14754098360655737
+            ]
+          },
+          {
+            "candidate_index": 20,
+            "kind": "continuation",
+            "parents": [
+              0
+            ],
+            "children": [
+              0
+            ],
+            "score": 1.8892142810507293,
+            "node_coverages": [
+              {
+                "side": "parent",
+                "group": 0,
+                "coverage": 1.0
+              },
+              {
+                "side": "child",
+                "group": 0,
+                "coverage": 1.0
+              }
+            ],
+            "exclusive_central_fractions": []
+          },
+          {
+            "candidate_index": 21,
+            "kind": "continuation",
+            "parents": [
+              1
+            ],
+            "children": [
+              1
+            ],
+            "score": 1.969352763709552,
+            "node_coverages": [
+              {
+                "side": "parent",
+                "group": 1,
+                "coverage": 1.0
+              },
+              {
+                "side": "child",
+                "group": 1,
+                "coverage": 1.0
+              }
+            ],
+            "exclusive_central_fractions": []
+          }
+        ],
+        "baseline_parameters": {
+          "gate": 0.0390625,
+          "coverage": 0.5,
+          "exclusive_fraction": 0.1,
+          "distance_weight": 0.25,
+          "max_partners": 5,
+          "normal_angle": 60.0,
+          "tie_tolerance": 1e-08
+        },
+        "window_status": "pending_future",
+        "future_seed_policy": "intersection_of_accepted_continuations",
+        "future_continuations": [],
+        "protected_continuations": [],
+        "conditional_support": [],
+        "conflicts": [],
+        "analysis": null,
+        "unresolved": [],
+        "prediction_enabled": true,
+        "future_event_latency": 1,
+        "physical_ancestry_established": false,
+        "inherited_id_assigned": false
+      }
+    }
+  ],
+  "footprint": {
+    "events_received": 21,
+    "closed": true,
+    "retained_geometry_catalogs": 0,
+    "retained_geometry_bytes": 0,
+    "retained_adjacent_intervals": 0,
+    "retained_group_mapping_entries": 0,
+    "max_processing_geometry_catalogs": 3,
+    "max_processing_geometry_bytes": 2151744
+  },
+  "physical_ancestry_established": false
+}

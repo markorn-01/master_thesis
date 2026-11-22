@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "hash_entries_checked": 334,
+  "sequences": 2,
+  "events": 38,
+  "group_observations": 110,
+  "exact_adjacent_results": 72,
+  "exact_delayed_results": 144,
+  "new_streaming_tests_passed": 10,
+  "focused_tests_passed": 33,
+  "equal_size_40_event_buffer_test_passed": true,
+  "old_array_release_test_passed": true,
+  "input_output_isolation_and_failed_push_retry_passed": true,
+  "buffer_figure_visually_reviewed": true,
+  "hydro_callback_integrated": false
+}
