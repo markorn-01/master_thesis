@@ -1,4 +1,4 @@
-"""Controlled two-wind collision: global diagnostics and unlabeled surfaces.
+"""Controlled two-wind collision with optional incremental geometric histories.
 
 No radial shock identities, surface-integrated power, or mesh reconstruction.
 The chosen geometry is a first experiment, not a guaranteed collision-time model.
@@ -64,13 +64,21 @@ def make_catalog(time, fields, centers, dx, sources=SOURCES):
 
 
 class CollisionWriter:
-    def __init__(self, directory, centers, dx, sources=SOURCES):
+    def __init__(self, directory, centers, dx, sources=SOURCES, *, track_shocks=False):
         self.directory = Path(directory)
         self.directory.mkdir(parents=True, exist_ok=False)
         self.centers, self.dx, self.sources = np.asarray(centers), dx, sources
         self.rows = []
         self.stream = (self.directory/'history.csv').open('x', newline='')
         self.writer = None
+        self.tracking = None
+        if track_shocks:
+            try:
+                from experiments.wind_bubble.streaming_products import StreamingProductWriter
+                self.tracking = StreamingProductWriter(self.directory/'tracking')
+            except Exception:
+                self.stream.close()
+                raise
 
     def receive(self, time, *fields):
         if self.rows and float(time) <= self.rows[-1]['time']:
@@ -103,11 +111,19 @@ class CollisionWriter:
                             density=np.asarray(fields[10]), pressure=np.asarray(fields[11]),
                             z_coordinate=(self.centers.shape[2]//2+.5)*self.dx,
                             grid_spacing=self.dx)
+        if self.tracking is not None:
+            # Consume the current CPU catalog inside the ordered analysis
+            # callback. No sparse-file readback or extra device transfer.
+            self.tracking.receive(catalog)
         self.rows.append(row)
         print(f"analysis t={float(time):.5f}: {count} surface samples; Mach median={mi['median']:.5g}", flush=True)
 
-    def close(self):
-        self.stream.close()
+    def close(self, *, success=True):
+        try:
+            if self.tracking is not None:
+                self.tracking.close(success=success)
+        finally:
+            self.stream.close()
 
 
 def compare_outputs(online, offline):
@@ -129,14 +145,21 @@ def compare_outputs(online, offline):
                         np.testing.assert_allclose(x[key], y[key], rtol=1e-6, atol=1e-8, equal_nan=True, err_msg=f'{name}: {key}')
                     else:
                         np.testing.assert_array_equal(x[key], y[key], err_msg=f'{name}: {key}')
-    return dict(passed=True, compared_events=len(online.rows), fields_per_event=len(online.rows[0]),
+    result = dict(passed=True, compared_events=len(online.rows), fields_per_event=len(online.rows[0]),
                 max_absolute_scalar_difference=maximum, histogram_counts_exact=True,
                 sparse_surfaces_match=True, background_slices_match=True,
                 scalar_rtol=1e-6, scalar_atol=1e-8)
+    if (online.tracking is None) != (offline.tracking is None):
+        raise AssertionError('Both comparison paths must use the same tracking option.')
+    if online.tracking is not None:
+        from experiments.wind_bubble.streaming_products import compare_products
+        result.update(compare_products(online.tracking.directory, offline.tracking.directory))
+    return result
 
 
 def run(args, *, state_observer=None, analysis_times=None, solver_dt_max=None,
         source_positions=None, budget_builder=None, strength_builder=None, extra_source_files=()):
+    track_shocks = bool(getattr(args, 'track_shocks', False))
     if args.num_cells < 16 or args.num_cells % 16:
         raise ValueError('num-cells must be a multiple of 16 and at least 16.')
     if args.num_analysis < 3 or not np.isfinite(args.t_end) or args.t_end <= 0:
@@ -195,6 +218,9 @@ def run(args, *, state_observer=None, analysis_times=None, solver_dt_max=None,
                     Path('experiments/wind_bubble/unequal_sources.py'),
                     Path('astronomix/option_classes/simulation_config.py')]
     source_files.extend(map(Path,extra_source_files))
+    if track_shocks:
+        from experiments.wind_bubble.streaming_products import tracking_source_files
+        source_files.extend(tracking_source_files())
     metadata = dict(status='running', commit=revision, backend=jax.default_backend(),
                     python=platform.python_version(), jax=jax.__version__, num_cells=args.num_cells,
                     t_end=args.t_end, requested_times=np.asarray(times).tolist(),solver_dt_max=dt_max,
@@ -215,13 +241,14 @@ def run(args, *, state_observer=None, analysis_times=None, solver_dt_max=None,
                     source_endpoint_flags='per-source and union, advisory only',
                     source_distances='geometric descriptors, not shock ownership or physical labels',
                     histogram_weighting='one count per selected surface cell',
-                    radial_classification=False, temporal_tracking=False, surface_integrated_power=False,
+                    radial_classification=False, temporal_tracking=track_shocks, surface_integrated_power=False,
+                    tracking_scope='host-callback incremental geometric history, maximum five partners, one-event delayed support' if track_shocks else None,
                     online_retains_gas_snapshots=False, verify_offline=args.verify_offline,
                     transfer='ten fixed-shape diagnostic grids plus two 2D slices',
                     source_sha256={str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in source_files})
     meta_path = args.output_dir/'metadata.json'
     meta_path.write_text(json.dumps(metadata, indent=2)+'\n')
-    writer = CollisionWriter(args.output_dir/'online', centers, dx,sources=sources)
+    writer = None
 
     def payload(physical):
         return (*diagnostic_payload(physical, analysis, variables, helper, sampling_quality=True),
@@ -235,24 +262,32 @@ def run(args, *, state_observer=None, analysis_times=None, solver_dt_max=None,
             state_observer(time, physical)
 
     try:
+        writer = CollisionWriter(args.output_dir/'online', centers, dx, sources=sources, track_shocks=track_shocks)
         final = time_integration(state, config, params, variables, snapshot_callable=callback)
         jax.block_until_ready(final)
         jax.effects_barrier()
-        writer.close()
         np.testing.assert_allclose([r['time'] for r in writer.rows], times, rtol=0, atol=1e-6)
         if not np.isfinite(np.asarray(final)).all():
             raise AssertionError('Non-finite final gas state.')
+        writer.close()
         if args.verify_offline:
             stored = time_integration(state, base._replace(activate_snapshot_callback=False), params, variables)
             jax.block_until_ready(stored)
-            reference = CollisionWriter(args.output_dir/'offline_reference', centers, dx,sources=sources)
+            reference = None
             compiled_payload = jax.jit(payload)
             try:
+                reference = CollisionWriter(args.output_dir/'offline_reference', centers, dx,
+                                            sources=sources, track_shocks=track_shocks)
                 for time, physical in zip(np.asarray(stored.time_points), stored.states):
                     reference.receive(time, *compiled_payload(physical))
-            finally:
                 reference.close()
+            finally:
+                if reference is not None:
+                    reference.close(success=False)
             result = compare_outputs(writer, reference)
+            if track_shocks:
+                from experiments.wind_bubble.streaming_products import check_batch_reference
+                result.update(check_batch_reference(reference.directory, reference.tracking.directory))
             np.testing.assert_allclose(final, stored.final_state, rtol=1e-6, atol=1e-8)
             result['final_gas_state_matches'] = True
             (args.output_dir/'equivalence.json').write_text(json.dumps(result, indent=2)+'\n')
@@ -261,7 +296,8 @@ def run(args, *, state_observer=None, analysis_times=None, solver_dt_max=None,
         metadata.update(status='failed', error=str(exc))
         raise
     finally:
-        writer.close()
+        if writer is not None:
+            writer.close(success=False)
         meta_path.write_text(json.dumps(metadata, indent=2)+'\n')
     return writer.rows
 
@@ -273,6 +309,8 @@ def main():
     parser.add_argument('--t-end', type=float, default=.16)
     parser.add_argument('--verify-offline', action='store_true')
     parser.add_argument('--require-gpu', action='store_true')
+    parser.add_argument('--track-shocks', action='store_true',
+                        help='Run incremental CPU grouping/tracking inside the ordered analysis callback.')
     parser.add_argument('--source-strengths',type=float,nargs=2,default=None,
                         help='Positive per-source mass/luminosity multipliers, e.g. 1 0.5. Default: identical winds.')
     parser.add_argument('--match-source-budget',type=Path,default=None,

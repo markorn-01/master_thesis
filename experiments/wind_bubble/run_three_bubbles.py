@@ -19,5 +19,7 @@ if __name__=='__main__':
     parser.add_argument('--match-source-budget',type=Path,default=Path('outputs/two_bubbles_iwr_compgpu9_n064/metadata.json'))
     parser.add_argument('--verify-offline',action='store_true')
     parser.add_argument('--require-gpu',action='store_true')
+    parser.add_argument('--track-shocks',action='store_true',
+                        help='Run incremental CPU grouping/tracking inside the analysis callback.')
     parser.add_argument('--output-dir',type=Path,required=True)
     args=parser.parse_args();run(args)

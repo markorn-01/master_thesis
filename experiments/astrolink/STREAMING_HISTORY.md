@@ -9,9 +9,12 @@ statistics and both delayed-support variants. It changes execution order,
 not physical estimators or ancestry rules.
 
 Saved-data replay is validated for unequal two bubbles at 128³ and three
-bubbles at 64³. The component is **not yet connected to a hydro callback**.
-No new GPU simulation, physical convergence result or tracking-accuracy
-improvement is claimed by this execution-workflow comparison.
+bubbles at 64³. The component is now optionally connected to the ordered
+hydro host callback through `--track-shocks`; local CPU integration checks
+are separate from the replay results below. Remote GPU callback validation
+is pending. See [callback integration](../wind_bubble/ONLINE_GROUP_TRACKING.md).
+No physical convergence result or tracking-accuracy improvement is claimed
+by these execution-workflow comparisons.
 
 ## API and emitted records
 
@@ -110,6 +113,6 @@ python -m unittest tests.experiments.test_streaming_history \
   tests.experiments.test_group_history_table
 ```
 
-The next implementation boundary is callback integration and a small
-online/offline GPU test. Matching remains the dominant CPU work; buffering
-alone does not establish efficient many-bubble scaling.
+The next validation boundary is a small online/offline GPU test of the new
+callback integration. Matching remains substantial CPU work; buffering alone
+does not establish efficient many-bubble scaling.
