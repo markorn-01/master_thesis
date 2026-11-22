@@ -1,0 +1,205 @@
+{
+  "passed": true,
+  "source_directory": "outputs/online_streaming_iwr_compgpu14_n064",
+  "events": 17,
+  "group_observations": 39,
+  "geometric_event_counts": {
+    "shared_continuation": 24,
+    "shared_combination": 3
+  },
+  "comparison": {
+    "streaming_tracking_match": true,
+    "compared_tracking_events": 17,
+    "compared_group_observations": 39,
+    "tracking_full_records_exact": true
+  },
+  "transitions": [
+    {
+      "parent_event": 7,
+      "child_event": 8,
+      "parent_segments": [
+        0,
+        1
+      ],
+      "child_segments": [
+        2
+      ],
+      "parent_counts": [
+        1344,
+        1344
+      ],
+      "child_counts": [
+        3096
+      ]
+    },
+    {
+      "parent_event": 13,
+      "child_event": 14,
+      "parent_segments": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "child_segments": [
+        13
+      ],
+      "parent_counts": [
+        20,
+        20,
+        20,
+        20,
+        20
+      ],
+      "child_counts": [
+        152
+      ]
+    },
+    {
+      "parent_event": 13,
+      "child_event": 14,
+      "parent_segments": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "child_segments": [
+        14
+      ],
+      "parent_counts": [
+        20,
+        20,
+        20,
+        20,
+        20
+      ],
+      "child_counts": [
+        152
+      ]
+    }
+  ],
+  "displayed_frames": [
+    {
+      "event": 7,
+      "time": 0.07000000029802322,
+      "original_samples": 2688,
+      "displayed_samples": 2688,
+      "displayed_group_counts": {
+        "0": 1344,
+        "1": 1344
+      }
+    },
+    {
+      "event": 8,
+      "time": 0.07999999821186066,
+      "original_samples": 3096,
+      "displayed_samples": 3096,
+      "displayed_group_counts": {
+        "2": 3096
+      }
+    },
+    {
+      "event": 13,
+      "time": 0.12999999523162842,
+      "original_samples": 4680,
+      "displayed_samples": 200,
+      "displayed_group_counts": {
+        "2": 0,
+        "3": 20,
+        "4": 20,
+        "5": 20,
+        "6": 20,
+        "7": 20,
+        "8": 20,
+        "9": 20,
+        "10": 20,
+        "11": 20,
+        "12": 20
+      }
+    },
+    {
+      "event": 14,
+      "time": 0.14000000059604645,
+      "original_samples": 5192,
+      "displayed_samples": 312,
+      "displayed_group_counts": {
+        "2": 0,
+        "13": 152,
+        "14": 152
+      }
+    }
+  ],
+  "view": "completed saved history, full surfaces then inner-group zoom",
+  "positions_moved": false,
+  "tracking_decisions_changed": false,
+  "conditional_support_drawn": false,
+  "physical_ancestry_established": false,
+  "input_sha256": {
+    "outputs/online_streaming_iwr_compgpu14_n064/metadata.json": "3d42326e8f496c0479e3662e865437b43e13268e60b3938d701f6c25aca6dd63",
+    "outputs/online_streaming_iwr_compgpu14_n064/equivalence.json": "ac8ac92b297c1e701c900a43cbd7998dcf0b46e7ca9498c90cff3d3717304e4a",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/metadata.json": "aa1b86a6f0bdd32f5bb49859c9a333156f7986367faddeb25523037cddcc31bb",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/finish.json": "6f20b72aba4a91ac0c3f14005d4fec39efcd869cd1749033a7df1a5f108520c2",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/surfaces_0000.npz": "091c4409ad9111165f6653014c33067f72761132a71bc510b58ed69a0acc426e",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/groups_0000.npz": "6c145d890296d01ceaed1c12a771443c9290c8468b4eba6ca0b6d1b9757bd8fb",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/event_0000.json.gz": "f290a9f64e7facf76386d68223dadcb533a8a76cf83bdfa0703a0a2d14add944",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/surfaces_0001.npz": "65cf62327728ca5b6c4a958aa00243001cabd1a175056eb7ff1821ac1fa42e22",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/groups_0001.npz": "8fb0c4fac92eab0b481cca10bad2fc1ab5e105fa323efff14188118ae29f465f",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/event_0001.json.gz": "b2df6abb3b95d674802680616b7d27b1a9b84f41262d03cc386cbf448733ec83",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/surfaces_0002.npz": "4867e5237833c5f3e47a46e09a52e4491e6cebfe9a7a7c631e51f0991e0f4dd7",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/groups_0002.npz": "c909d8aa718d7e239cc474d33fa7fc82b769b020a1f2aed76a61a00ffef8c892",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/event_0002.json.gz": "7ee571a2803930a65134c8977d98bb0ef6f0ea072c8793ec66c78561b23664fc",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/surfaces_0003.npz": "da4a7b0a06300e8484e85431819a70efbc783f1a9521ca11aa6c22bb89a8e7c6",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/groups_0003.npz": "1cd187b4bb2d0b228e0f4dcec8765b01b4b7ebd3792f1c1d1b113f28bd69ca2f",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/event_0003.json.gz": "b095b536806a01e061fad5218d8cdc7fd2cf2bd7def0fb7d3c48e3a4128c8f6b",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/surfaces_0004.npz": "f8fb0610953737995c3809b2894cd59a34170db09d68ac880b57cea6461a0c09",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/groups_0004.npz": "743805efe280f783d854a7f6fb621473d0fdf53e9c8d05c12a59983f134dfe70",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/event_0004.json.gz": "3a89e3a01653277deb13901bb67ec0ee91042ce1540c1c741fe131e37574d676",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/surfaces_0005.npz": "940b255f76ef0b6add717cc65868946aa5a63355e5b227926a1d7a61121c2375",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/groups_0005.npz": "556b027063358997874f645b70edf99a5b01a2abfbd078a22afa40cbc6ebaafb",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/event_0005.json.gz": "e36247f52749dc0c76e9f7946c84ca395d71f9f324e23e7d4a734bdc38ae9d89",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/surfaces_0006.npz": "2c2e8e501bc842cabcdbf85340e9ff55d177e3fad0e7019dbae5ae5124da4565",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/groups_0006.npz": "7e1ddc83138957ef7607bcacb43a2d0690881746b68b056058fb290a4c3a9551",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/event_0006.json.gz": "0f5e40fc4feb822e82b301cfff0ae731bc2c7cbb096e8d5342eaf5e4e8e8bbe7",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/surfaces_0007.npz": "99757aea2db45506f3dae452a1e51a3e41e6739b9ab689d827fab15042be18ee",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/groups_0007.npz": "858ce16b8f57adca37f927331a95679153074b77a15812845d14681dd3c24b78",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/event_0007.json.gz": "a7efb3600001bd46099b79073d8fd46e207dc543500f124825d2ce4ba7332ac2",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/surfaces_0008.npz": "4b73dd226080bfcccbfc7c903d7bfcf7dfc378b01b7f1a12304038f0e14997a5",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/groups_0008.npz": "a7ad8c0b593620fccf9d046db55b4816fc4b95a4a731e45ba6eda3e5fa2a2dae",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/event_0008.json.gz": "558adce53a5d4c2c682851abb45cc58ab21896b8c8e2e368abd5c44cebdfc65d",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/surfaces_0009.npz": "7aa96fd6b7fedacf5d61de69d8b6e8631e5a5485212c9fd790b2008735dd2c62",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/groups_0009.npz": "d28ca7325ad346c2299ee2fb5164d0d6aaa66ae11b61429ba6b07150664275b8",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/event_0009.json.gz": "6b1e1bb3c64543197573f6bd4b8da5cdda49156b9fd4192c78cf31d94ecbeace",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/surfaces_0010.npz": "e099e4a3f47bbda9062d3c3a2f77d2ef1e4ae8921b7d048732fef7931127a790",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/groups_0010.npz": "935532d1cae6a746c24e68c5861f67f0f4c257a438c6962bbd88f0eb090bb678",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/event_0010.json.gz": "a9b8fa92af9b871f14741b79a485e93ad68e78d88c15653916f56cbf745f6a12",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/surfaces_0011.npz": "204f5a5b4e691ac2453da5b1dd8d1df84e6df33a3c6cf455350752b7b42116d4",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/groups_0011.npz": "0bd44e68d2f6a39c4f4be9e76b54c74a6c8488dd3cd89150e1861058db0e077f",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/event_0011.json.gz": "c08c3de6297fa184e18d2ce74ba3615180c62085027b2d12b412e144396a2252",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/surfaces_0012.npz": "ef66a3662ba867a325dbf711abb258ef0b1a89241aa4f6416cadd17752df5c3f",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/groups_0012.npz": "b68ab787497e11f12e51faf8840e5cd133000fb595a7fdb8ff2785d28b92a9c1",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/event_0012.json.gz": "375aa2e509f28522a048d4b2764c5f0250bf8e0cb684bfc0ba048a547b1f1227",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/surfaces_0013.npz": "1a449655e856a1cc4ff24e0b317329ac8752cc26d9a491e55c5cd693958f859c",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/groups_0013.npz": "c381ed17fe20bf072493611b2f1fce938d7046a572909e58c40e082abc725db2",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/event_0013.json.gz": "f1afcf492f4a12d062b43a3c432b39f7e942ea658f794af9198e3ccb4bee99f6",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/surfaces_0014.npz": "1cf6518c373f0c0359dfc13ac08b975b15d0c3bec6c50ae810d4fcd694d7e896",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/groups_0014.npz": "c6e62d37fce4396e77d8eb549bc165290e249ca71e32b018e4408a50a47a9864",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/event_0014.json.gz": "fa29b5b72932326ab0e33473a063893f0f800f82daf074c72e57410f5e46c16e",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/surfaces_0015.npz": "e44dbf8f0c38a9bfedea7a705fb530f4f93c349af0def1a6dd15196f51e62d5c",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/groups_0015.npz": "6c8fefc0e857222aab2b51950fa2d41e926317af4c2fd95c89e4caebd2a94f22",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/event_0015.json.gz": "2bb02777f81c4a70a6a1ca08aa498ceb34f164b241df936a76ca526b6d717e48",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/surfaces_0016.npz": "a41dceb5308be44e571ca722037ac4f87ca10cdb9126db17c8fcb65d2339911f",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/groups_0016.npz": "03e733ccf1dc55e1f2cf997c856a914b92a7a7ec3eac6151b5baa972973a3b5a",
+    "outputs/online_streaming_iwr_compgpu14_n064/online/tracking/event_0016.json.gz": "b96fcc5268ab1f09517421c36fb03f4c4ce35d158bbb85ec92bd3fae662bdec7"
+  },
+  "source_sha256": {
+    "/Users/minhn/Documents/Heidelberg University/fifth_semester/Thesis/master_thesis/experiments/wind_bubble/plot_streaming_review.py": "b6963812c7478fe82519e7cf5e1e51759868f353b29ac207d6ca7ad01145aa70",
+    "experiments/wind_bubble/animate_event_history.py": "ccc4129a1e971353bc239ee60da01f673a5fce5e2b4e06a7d7f3b4fcabf31aa8",
+    "experiments/wind_bubble/streaming_products.py": "07e84c74c248c794fae806704299cca42e62cc52476ff62d83672a21e5a03f13"
+  },
+  "output_sha256": {
+    "outputs/online_streaming_review_n064/tracking_review.png": "1c54a81528ea2e7ee6a43d5ea747dc5fd975b4f395b5ef526afdec25ad7c75bb"
+  }
+}
