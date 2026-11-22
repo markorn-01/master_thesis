@@ -1,0 +1,250 @@
+{
+  "step_2_complete": true,
+  "scope": "Consolidation of existing controlled tracking and display evidence.",
+  "simulations_run": 0,
+  "algorithms_changed": false,
+  "thresholds_changed": false,
+  "synthetic_development_summary": [
+    {
+      "suite": "adjacent_regression",
+      "identifiable": true,
+      "configurations": 27,
+      "methods": {
+        "delayed_static_family": {
+          "baseline_false_links": 0,
+          "baseline_missed_links": 6,
+          "hypothetical_union_false_links": 0,
+          "hypothetical_union_missed_links": 6,
+          "additional_support_links": 0
+        },
+        "delayed_normal_motion_family": {
+          "baseline_false_links": 0,
+          "baseline_missed_links": 6,
+          "hypothetical_union_false_links": 0,
+          "hypothetical_union_missed_links": 6,
+          "additional_support_links": 0
+        }
+      }
+    },
+    {
+      "suite": "three_state_development",
+      "identifiable": true,
+      "configurations": 15,
+      "methods": {
+        "delayed_static_family": {
+          "baseline_false_links": 0,
+          "baseline_missed_links": 30,
+          "hypothetical_union_false_links": 4,
+          "hypothetical_union_missed_links": 2,
+          "additional_support_links": 32
+        },
+        "delayed_normal_motion_family": {
+          "baseline_false_links": 0,
+          "baseline_missed_links": 30,
+          "hypothetical_union_false_links": 0,
+          "hypothetical_union_missed_links": 2,
+          "additional_support_links": 28
+        }
+      }
+    },
+    {
+      "suite": "three_state_development",
+      "identifiable": false,
+      "configurations": 6,
+      "methods": {
+        "delayed_static_family": {
+          "baseline_false_links": 0,
+          "baseline_missed_links": 6,
+          "hypothetical_union_false_links": 6,
+          "hypothetical_union_missed_links": 0,
+          "additional_support_links": 12
+        },
+        "delayed_normal_motion_family": {
+          "baseline_false_links": 0,
+          "baseline_missed_links": 6,
+          "hypothetical_union_false_links": 6,
+          "hypothetical_union_missed_links": 0,
+          "additional_support_links": 12
+        }
+      }
+    }
+  ],
+  "synthetic_scope": "Hypothetical union diagnostics, known development cases/gates, not held-out accuracy or promoted ancestry.",
+  "hydro_focus": [
+    {
+      "case": "unequal_two_n128",
+      "parent_event": 10,
+      "child_event": 11,
+      "accepted_combination_parents": 5,
+      "conditional_family_parents": 7,
+      "additional_parent_groups": [
+        1,
+        7
+      ],
+      "added_parent_upstream_source_overlaps": {
+        "1": 0,
+        "7": 24
+      },
+      "union_coverage_by_gate": {
+        "1.5": 0.924812030075188,
+        "2.5": 1.0
+      },
+      "physical_truth_available": false,
+      "inherited_identity_added": false
+    },
+    {
+      "case": "three_n064",
+      "parent_event": 13,
+      "child_event": 14,
+      "accepted_combination_parents": 4,
+      "conditional_family_parents": 5,
+      "additional_parent_groups": [
+        9
+      ],
+      "added_parent_upstream_source_overlaps": {
+        "9": 16
+      },
+      "union_coverage_by_gate": {
+        "1.5": 0.8953488372093024,
+        "2.5": 1.0
+      },
+      "physical_truth_available": false,
+      "inherited_identity_added": false
+    }
+  ],
+  "static_and_motion_hydro_memberships_identical_configurations": 72,
+  "hydro_pending_method_gate_records": 8,
+  "gate_agreement": [
+    {
+      "case": "equal_two_n128",
+      "intervals": 16,
+      "both_gate_event_sets_agree": 16,
+      "interpretation": "Parameter agreement; no physical truth labels."
+    },
+    {
+      "case": "unequal_two_n128",
+      "intervals": 20,
+      "both_gate_event_sets_agree": 20,
+      "interpretation": "Parameter agreement; no physical truth labels."
+    },
+    {
+      "case": "three_n064",
+      "intervals": 16,
+      "both_gate_event_sets_agree": 15,
+      "interpretation": "Parameter agreement; no physical truth labels."
+    }
+  ],
+  "gpu_execution_checks": [
+    {
+      "directory": "outputs/online_streaming_iwr_compgpu14_n032",
+      "num_sources": 2,
+      "num_cells": 32,
+      "events": 17,
+      "group_observations": 25,
+      "scalar_fields_per_event": 21,
+      "max_absolute_scalar_difference": 0.0,
+      "complete_tracking_records_exact": true,
+      "batch_reference_matches": true,
+      "gpu_final_state_check_passed": true,
+      "max_retained_geometry_catalogs": 2,
+      "final_retained_geometry_catalogs": 0
+    },
+    {
+      "directory": "outputs/online_streaming_iwr_compgpu14_n064",
+      "num_sources": 2,
+      "num_cells": 64,
+      "events": 17,
+      "group_observations": 39,
+      "scalar_fields_per_event": 21,
+      "max_absolute_scalar_difference": 0.0,
+      "complete_tracking_records_exact": true,
+      "batch_reference_matches": true,
+      "gpu_final_state_check_passed": true,
+      "max_retained_geometry_catalogs": 2,
+      "final_retained_geometry_catalogs": 0
+    },
+    {
+      "directory": "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064",
+      "num_sources": 3,
+      "num_cells": 64,
+      "events": 17,
+      "group_observations": 45,
+      "scalar_fields_per_event": 21,
+      "max_absolute_scalar_difference": 0.0,
+      "complete_tracking_records_exact": true,
+      "batch_reference_matches": true,
+      "gpu_final_state_check_passed": true,
+      "max_retained_geometry_catalogs": 2,
+      "final_retained_geometry_catalogs": 0
+    }
+  ],
+  "display": {
+    "group_observations": 45,
+    "minimum_fraction_within_quarter_cell": 0.9523809523809523,
+    "decoded_frames": 17,
+    "first_added_support_event": 15,
+    "physical_topology_established": false
+  },
+  "claim": "Online geometric shock-surface grouping and relationship histories with explicit uncertainty on the tested cases.",
+  "unique_physical_ancestry_established": false,
+  "hydro_false_link_rate_measured": false,
+  "general_turbulent_box_scaling_established": false,
+  "complete_workflow_cost_measured": false,
+  "source_reports": [
+    {
+      "evidence": "synthetic_baseline",
+      "report": "outputs/multiframe_tracking_baseline_v1/verification.json",
+      "checked_hash_entries": 225
+    },
+    {
+      "evidence": "delayed_support",
+      "report": "outputs/multiframe_support_comparison_v1/verification.json",
+      "checked_hash_entries": 241
+    },
+    {
+      "evidence": "unequal_full_sequence",
+      "report": "outputs/expanded_full_sequence_validation_n128/verification.json",
+      "checked_hash_entries": 93
+    },
+    {
+      "evidence": "equal_full_sequence",
+      "report": "outputs/equal_history_expanded_validation_n128/verification.json",
+      "checked_hash_entries": 62
+    },
+    {
+      "evidence": "equal_mode_comparison",
+      "report": "outputs/equal_history_mode_comparison_n128/verification.json",
+      "checked_hash_entries": 48
+    },
+    {
+      "evidence": "three_full_sequence",
+      "report": "outputs/three_bubble_history_expanded_n064/verification.json",
+      "checked_hash_entries": 62
+    },
+    {
+      "evidence": "incremental_replay",
+      "report": "outputs/streaming_history_replay_v1/verification.json",
+      "checked_hash_entries": 334
+    },
+    {
+      "evidence": "final_display",
+      "report": "outputs/three_bubble_adaptive_sequence_final_n064/verification.json",
+      "checked_hash_entries": 224
+    },
+    {
+      "evidence": "display_counterexamples",
+      "report": "outputs/three_bubble_surface_method_research_n064/verification.json",
+      "checked_hash_entries": 72
+    },
+    {
+      "evidence": "online_demo_tables",
+      "report": "outputs/three_bubble_online_tracking_demo_n064/tables/verification.json",
+      "checked_hash_entries": 69
+    },
+    {
+      "evidence": "online_demo_animation",
+      "report": "outputs/three_bubble_online_tracking_demo_n064/animation/verification.json",
+      "checked_hash_entries": 303
+    }
+  ]
+}
