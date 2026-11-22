@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "scope": "Local CPU harness smoke test only; not the 64-cubed GPU benchmark.",
+  "num_cells": 32,
+  "events": 5,
+  "t_end": 0.04,
+  "measured_repeats_per_mode": 2,
+  "warmups_per_mode": 1,
+  "exact_final_state_hashes": true,
+  "primary_product_comparison": true,
+  "repeated_tracking_comparison": true,
+  "batch_reference_comparison": true,
+  "phase_totals_rechecked": true,
+  "output_byte_counts_rechecked": true,
+  "source_fingerprints_match": true,
+  "focused_tests_passed": 74,
+  "gpu_measurement_completed": false
+}

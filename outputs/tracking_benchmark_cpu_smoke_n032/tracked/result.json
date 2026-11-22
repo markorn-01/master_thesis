@@ -1,0 +1,181 @@
+{
+  "status": "complete",
+  "mode": "tracked",
+  "source": {
+    "commit": "cbac91ef7585d58453f1cd3ef86ebf67ca86a758",
+    "sha256": {
+      "astronomix/_modules/_stellar_wind/stellar_wind.py": "dc7a2f45447f77f21b36771b06b37aa35d7ad7eb072cbb2f7926f7ef4999dcf9",
+      "astronomix/_physics_modules/_shock_finder/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "astronomix/_physics_modules/_shock_finder/_data_structures.py": "ada11fff7ecacae0ea3bc9521b064e67ff9674d97745890dafec467d6fb6d6c9",
+      "astronomix/_physics_modules/_shock_finder/_energy_dissipation.py": "88585623f1c17f0e0fd68b30ca69039308f6e1500eedab83833c060818630c41",
+      "astronomix/_physics_modules/_shock_finder/_gradients.py": "9dadaaa7192c5c49e8f0ff09d75f078ea62a1b2ed480374e8270c0d3059d030b",
+      "astronomix/_physics_modules/_shock_finder/_helpers.py": "e28efc81c11a3f17584e3c0c2ae15f234f73d6260a5e2e348c3e306115eaa1b4",
+      "astronomix/_physics_modules/_shock_finder/_mhd_shock.py": "08a125c3f9364311e9a3a44a2ebab6e7c5d7d0394dfc60759b6c00a95433d264",
+      "astronomix/_physics_modules/_shock_finder/_shock_mach.py": "e53742e8e9aaf278ce7392670c0f80c8bf7b3f1b0ea42dc3d42c6b3e5924cc2c",
+      "astronomix/_physics_modules/_shock_finder/_shock_surface.py": "134dca1b5346c104c41d6fbdc54c6ce4bd0d7cb3a4af18f3e1ce80111562b288",
+      "astronomix/_physics_modules/_shock_finder/_shock_zones.py": "a5b599bae84e7dfa7bd1241b76bb533742a93e63d740ac7eba64858463a77c16",
+      "astronomix/_physics_modules/_shock_finder/mhd_shock_finder.py": "44d25a783ef7a23b26bf22f542a5f18268ef2454d676233c19758cd4af46e338",
+      "astronomix/_physics_modules/_shock_finder/pfrommer_shock_finder.py": "e5ba97a66257eb9edd98709fb2545127a75bb3baeb1dffb08c5ac31bd52687a0",
+      "astronomix/option_classes/simulation_config.py": "ad84e2b0cb48ae3f13c702e169e5284df78077400140b20389550369abce8e55",
+      "astronomix/time_stepping/_time_loop.py": "4640468ceeb171afc12b07a22790d61de4e00a81f48482b66c57b936a8544453",
+      "astronomix/time_stepping/time_integration.py": "4f31a18944a6b4aefc0333ac48498d13b5f5793d4dcf4406456072d00efd3c47",
+      "experiments/astrolink/continuation_segments.py": "887f49c0d04530a39dfbb73e589457fffb5e6212e73e6def8cff8b6c2d750e5c",
+      "experiments/astrolink/continuation_status.py": "5c62f9434e95d228255c956f4da361f6932fe2bf5836494b4647676f2bf5d67f",
+      "experiments/astrolink/delayed_support.py": "338030117db5ad5d7e88f1adf626cd4d0603d45707119d64825e5b48d472eb31",
+      "experiments/astrolink/event_history.py": "63948d54a6b2c5ecfc1c3147cd395b94914aa6ae196992c45495ef60a3aa8f9e",
+      "experiments/astrolink/event_tracking.py": "0dc7a4086bfdc3c0e9358d8e1f4922ae1b67c8c929738d417c29c33d10b494c1",
+      "experiments/astrolink/expanded_event_tracking.py": "83892bd47bf0222f3e082824f7929571f7fd7e5bdb7b193c584131e92fb89567",
+      "experiments/astrolink/shock_connectivity.py": "6125812b67844ed5fbbedd637b18df291069744dab057b282b9419e3522dac7c",
+      "experiments/astrolink/streaming_history.py": "91a3eef424631e81746d80420362faa32bf76eb14ddc78daeb2053cce00318fd",
+      "experiments/astrolink/surface_history.py": "3a4556dcdce09ba7bcbe02b0c524ff8f8d865cec3ef8fc6a6b8a68ec57ee592e",
+      "experiments/astrolink/tracklet_fragments.py": "28361eddee3b893f5ebf6f989c906f0420eff3da7b88488b46223751a011e963",
+      "experiments/shock/analyze_state.py": "6aa8dff9ab5bca380deb23f9d5c02a9d3cdc1b337e30c795aa2b400da8b2ff55",
+      "experiments/wind_bubble/benchmark_online_analysis.py": "ca2a57eea26cee9dbc0c16ce548763bd9614cf6b1caf13b45f2f3a599579b016",
+      "experiments/wind_bubble/benchmark_tracking_workflow.py": "70e78ab4becbdb1145831a02cc5689e023c720ff9d7f310b4fbc0f3f42b45822",
+      "experiments/wind_bubble/build_group_history_table.py": "e1ee0dc68118cf4e1c94fba88c16c4e206ab011d4382800a2af771ce5d2f833d",
+      "experiments/wind_bubble/compare_event_history_resolutions.py": "be63d40c4f6fd22f810f27de5db1bc7136565d25c2a74c92a7702644e2a47f1a",
+      "experiments/wind_bubble/run_online_bubble.py": "69d283bdc29ba2c087cebd5e593c59a8b66d3e5ee7d4035dffc9201e3351d975",
+      "experiments/wind_bubble/run_single_bubble.py": "2362af2ee229631b29d87fc57da9e57b5614337eb357703ec39348b9bdf1bb7b",
+      "experiments/wind_bubble/run_three_bubbles.py": "8fd1a7005ad51c809e615c93e584204ef1b2105ad04eca93c37b4b1fa9cf817b",
+      "experiments/wind_bubble/run_two_bubbles.py": "85afbff6ba8ec77100eef9375fe7a5724eb486e7a0d5bb5eb96ae4ec1101f77e",
+      "experiments/wind_bubble/sparse_surfaces.py": "0ad8795e477eab7863aecef14f37c261624336e63f31536d2010c91d44d84cc4",
+      "experiments/wind_bubble/streaming_products.py": "07e84c74c248c794fae806704299cca42e62cc52476ff62d83672a21e5a03f13",
+      "experiments/wind_bubble/three_bubble_setup.py": "11d72d8443cc6c3d4fe3853c37c73328d89fc11f9e75e09bfc06b54814461cca",
+      "experiments/wind_bubble/two_bubble_source_budget.py": "4dfd054ade9d2c7f651bb56b443cc80b8f91eacd87f56e574445349b648afbb3"
+    }
+  },
+  "hostname": "vpn234c.rzuser.uni-heidelberg.de",
+  "python": "3.10.20",
+  "jax": "0.6.2",
+  "numpy": "2.2.5",
+  "backend": "cpu",
+  "device_kinds": [
+    "cpu"
+  ],
+  "cuda_visible_devices": null,
+  "preallocate": "false",
+  "num_cells": 32,
+  "num_analysis": 5,
+  "t_end": 0.04,
+  "requested_times": [
+    0.0,
+    0.009999999776482582,
+    0.019999999552965164,
+    0.029999999329447746,
+    0.03999999910593033
+  ],
+  "solver_dt_max": 0.008,
+  "source_positions": [
+    [
+      0.375,
+      0.375,
+      0.5
+    ],
+    [
+      0.625,
+      0.375,
+      0.5
+    ],
+    [
+      0.5,
+      0.625,
+      0.375
+    ]
+  ],
+  "source_strengths": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "source_budget": {
+    "num_cells": 32,
+    "injection_cell_counts": [
+      8,
+      8,
+      8
+    ],
+    "parameter_scale": 2.75,
+    "requested_mass_loss_rate_per_source": 0.01,
+    "wind_mass_loss_rate_per_source": 0.0275,
+    "wind_terminal_velocity": 10.0,
+    "nominal_wind_luminosity_per_source": 1.375,
+    "nominal_total_wind_luminosity": 4.125,
+    "discrete_mass_rates": [
+      0.006565141402540683,
+      0.006565141402540683,
+      0.006565141402540683
+    ],
+    "discrete_energy_rates": [
+      0.32825707012703415,
+      0.32825707012703415,
+      0.32825707012703415
+    ],
+    "budget_matched": true,
+    "energy_rate_definition": "Prescribed mechanical source coefficient before state-dependent EI pressure conversion; not net gas-energy deposition.",
+    "reference_scope": "Each of three sources matches one source of the equal two-wind reference; total prescribed budget is 1.5 times its total."
+  },
+  "discrete_energy_rates": [
+    0.32825707012703415,
+    0.32825707012703415,
+    0.32825707012703415
+  ],
+  "source_budget_reference_sha256": "0de3101bb4106541ae5edce2ce21596d0e64d9fbbe066532612c7ccd2766392a",
+  "compile_seconds": 22.75453325000126,
+  "compiled_memory": {
+    "temp_size_in_bytes": 67056016,
+    "argument_size_in_bytes": 1401993,
+    "output_size_in_bytes": 655400,
+    "alias_size_in_bytes": 0,
+    "planned_total_bytes": 69113409
+  },
+  "worker_peak_host_rss_bytes": 1615380480,
+  "warmup": {
+    "construction_seconds": 0.0006590830162167549,
+    "integration_seconds": 1.9346450830053072,
+    "finalization_seconds": 0.0014690840034745634,
+    "total_workflow_seconds": 1.9367732500249986,
+    "primary_output_bytes": 133118,
+    "tracking_output_bytes": 27023,
+    "output_payload_bytes": 160141,
+    "events": 5,
+    "group_observations": 12,
+    "iterations": 40,
+    "final_time": 0.03999999910593033,
+    "final_state_sha256": "9dcebc3bed88eb3d6e85bd49e9a3712541a99d40f4728dc03742bc6b199bb108"
+  },
+  "trials": [
+    {
+      "construction_seconds": 0.0007179160020314157,
+      "integration_seconds": 1.8827148340060376,
+      "finalization_seconds": 0.0011505410075187683,
+      "total_workflow_seconds": 1.8845832910155877,
+      "primary_output_bytes": 133118,
+      "tracking_output_bytes": 27023,
+      "output_payload_bytes": 160141,
+      "events": 5,
+      "group_observations": 12,
+      "iterations": 40,
+      "final_time": 0.03999999910593033,
+      "final_state_sha256": "9dcebc3bed88eb3d6e85bd49e9a3712541a99d40f4728dc03742bc6b199bb108"
+    },
+    {
+      "construction_seconds": 0.0007306249754037708,
+      "integration_seconds": 1.9390586250228807,
+      "finalization_seconds": 0.0010693339863792062,
+      "total_workflow_seconds": 1.9408585839846637,
+      "primary_output_bytes": 133118,
+      "tracking_output_bytes": 27023,
+      "output_payload_bytes": 160141,
+      "events": 5,
+      "group_observations": 12,
+      "iterations": 40,
+      "final_time": 0.03999999910593033,
+      "final_state_sha256": "9dcebc3bed88eb3d6e85bd49e9a3712541a99d40f4728dc03742bc6b199bb108"
+    }
+  ],
+  "process_wall_seconds": 31.142459082999267,
+  "sampled_peak_gpu_process_mib": null,
+  "gpu_memory_samples": 0,
+  "gpu_query_errors": 0,
+  "sample_interval_requested_seconds": 0.2
+}

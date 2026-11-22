@@ -1,0 +1,31 @@
+{
+  "status": "complete",
+  "mode": "incremental_maximum_five_with_delayed_support",
+  "events": 5,
+  "group_observations": 12,
+  "catalog_input": "current host callback catalog",
+  "input_catalogs_read_from_disk": false,
+  "future_event_latency": 1,
+  "settings": {
+    "max_partners": 5,
+    "grouping_radius_cells": 1.5,
+    "min_group_samples": 20,
+    "normal_angle": 60.0,
+    "association_gates": [
+      0.0234375,
+      0.0390625
+    ]
+  },
+  "physical_ancestry_established": false,
+  "footprint": {
+    "events_received": 5,
+    "closed": true,
+    "retained_geometry_catalogs": 0,
+    "retained_geometry_bytes": 0,
+    "retained_adjacent_intervals": 0,
+    "retained_group_mapping_entries": 0,
+    "max_processing_geometry_catalogs": 3,
+    "max_processing_geometry_bytes": 49616
+  },
+  "segment_count": 6
+}
