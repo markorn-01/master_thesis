@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "origin": "saved_catalog_replay_preview",
+  "backend": "gpu",
+  "events": 17,
+  "group_observations": 45,
+  "decoded_frames": 17,
+  "playback_seconds": 17.0,
+  "additional_conditional_relationships": 1,
+  "first_conditional_event": 15,
+  "mesh_geometry_changed": false,
+  "physical_ancestry_established": false,
+  "input_sha256": {
+    "outputs/three_bubble_streaming_demo_preview/tables/verification.json": "2757d69662c761a8ba2714ee7ea0d09230d2ca368c82b9f78c90a0e2d7fa179a",
+    "outputs/three_bubble_streaming_demo_preview/animation/verification.json": "50bf41f62f770b3039e08c08c8bc95265a82a0810ccbec65c7887a34935ed0d7"
+  }
+}
