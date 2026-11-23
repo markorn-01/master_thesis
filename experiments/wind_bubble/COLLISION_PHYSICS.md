@@ -111,3 +111,24 @@ and failure to fit does not prove absence. Look for separated fronts and
 consistent states across sampling choices, alongside the outer-front check.
 If the finer run still cannot separate them, retain a resolution-limited
 conclusion rather than endlessly changing detector thresholds.
+
+## Completed comparison
+
+The matched GPU run and saved-state recovery completed successfully. The local
+review verified the copied hashes, compared a common physical axis, and located
+all 124 post-contact pairs passing the 20% consistency level. All 54 sampled
+pressure jumps reaching the Mach-1.3 reference are covered by an existing
+exported grid cell on their axial segment or at their ray center. The central
+ridge is not established as a missed isolated shock in these two runs.
+
+The completed report, figures, qualifications and suggested explanation are in
+`outputs/three_bubble_collision_resolution_review_n064_n128/README.md`.
+Reproduce the read-only review with a fresh output directory:
+
+```bash
+python -m experiments.wind_bubble.review_collision_resolution \
+  --output-dir outputs/three_bubble_collision_resolution_review_n064_n128
+```
+
+This closes the bounded saved-data/resolution check. It neither proves shock
+absence nor certifies convergence or complete physical shock recovery.

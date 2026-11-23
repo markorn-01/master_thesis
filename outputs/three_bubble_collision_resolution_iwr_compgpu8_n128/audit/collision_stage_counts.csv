@@ -1,0 +1,11 @@
+event,time,region,cells,compression_pass,gradient_alignment_pass,pressure_jump_pass,temperature_jump_pass,minimum_jump_pass,shock_zone_pass,shock_surface_pass,compression_fail,compression_only_failure,gradient_alignment_fail,gradient_alignment_only_failure,pressure_jump_fail,pressure_jump_only_failure,temperature_jump_fail,temperature_jump_only_failure,zone_not_surface,surface_removed_by_export,exported_surface,pass_pattern_0000,pass_pattern_0001,pass_pattern_0010,pass_pattern_0011,pass_pattern_0100,pass_pattern_0101,pass_pattern_0110,pass_pattern_0111,pass_pattern_1000,pass_pattern_1001,pass_pattern_1010,pass_pattern_1011,pass_pattern_1100,pass_pattern_1101,pass_pattern_1110,pass_pattern_1111,exported_refined_positions_in_volume
+4,0.03999999910593033,central_volume_grid_centers,2400,2216,1744,1424,1872,1424,1200,464,184,0,656,224,976,104,528,0,736,0,464,0,88,0,440,0,0,0,0,184,160,0,104,0,224,0,1200,472
+4,0.03999999910593033,central_slice_grid_centers,120,96,68,80,116,80,64,24,24,0,52,16,40,0,4,0,40,0,24,0,0,0,4,0,0,0,0,24,12,0,0,0,16,0,64,472
+6,0.05999999865889549,central_volume_grid_centers,2400,1016,392,432,2296,432,360,200,1384,0,2008,72,1968,32,104,0,160,0,200,0,104,0,0,0,0,0,0,1384,448,0,32,0,72,0,360,200
+6,0.05999999865889549,central_slice_grid_centers,120,52,0,0,104,0,0,0,68,0,120,0,120,0,16,0,0,0,0,0,16,0,0,0,0,0,0,68,36,0,0,0,0,0,0,200
+8,0.07999999821186066,central_volume_grid_centers,2400,960,0,0,2176,0,0,0,1440,0,2400,0,2400,0,224,0,0,0,0,224,0,0,0,0,0,0,0,1216,960,0,0,0,0,0,0,0
+8,0.07999999821186066,central_slice_grid_centers,120,20,0,0,100,0,0,0,100,0,120,0,120,0,20,0,0,0,0,20,0,0,0,0,0,0,0,80,20,0,0,0,0,0,0,0
+12,0.11999999731779099,central_volume_grid_centers,2400,1132,144,0,2000,0,0,0,1268,0,2256,0,2400,0,400,0,0,0,0,192,64,36,108,0,0,0,0,1040,960,0,0,0,0,0,0,0
+12,0.11999999731779099,central_slice_grid_centers,120,88,8,0,100,0,0,0,32,0,112,0,120,0,20,0,0,0,0,0,12,0,8,0,0,0,0,32,68,0,0,0,0,0,0,0
+16,0.1599999964237213,central_volume_grid_centers,2400,386,0,0,2400,0,0,0,2014,0,2400,0,2400,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2014,386,0,0,0,0,0,0,0
+16,0.1599999964237213,central_slice_grid_centers,120,24,0,0,120,0,0,0,96,0,120,0,120,0,0,0,0,0,0,0,0,0,0,0,0,0,0,96,24,0,0,0,0,0,0,0
