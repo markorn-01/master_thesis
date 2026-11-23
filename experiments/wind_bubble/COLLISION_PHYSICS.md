@@ -75,6 +75,30 @@ export CUDA_VISIBLE_DEVICES=6 XLA_PYTHON_CLIENT_PREALLOCATE=false
 Use a fresh output directory. If a pull conflicts with the existing 64^3
 audit outputs, stash that specific directory before pulling; do not remove it.
 
+### Recover the completed simulation after a postprocessing error
+
+The first 128^3 run reached t=0.16 and saved its five states, but the wrapper
+passed an argument namespace instead of a directory path to the audit function.
+That call is corrected. The integration does not need to be repeated:
+
+```bash
+"$HOME/.venvs/master-thesis-py312/bin/python" \
+  -m experiments.wind_bubble.run_collision_resolution_check \
+  --audit-only --require-gpu \
+  --output-dir outputs/three_bubble_collision_resolution_iwr_compgpu8_n128
+```
+
+Use the SAME directory as the completed run. This mode checks completion,
+resolution, configuration, schedules, saved-state shapes/finiteness and all
+recorded production source hashes before auditing. Only this wrapper's own
+hash may differ to repair orchestration; both old and new hashes are recorded.
+It does not invoke the time integrator or change the saved simulation states.
+Saved state and primary-output hashes are checked again after the audit.
+The result records `resumed_from_saved_states: true`.
+
+A regression test exercises the recovery dispatch, requires the auditor's
+first argument to be a Path, and verifies that integration is never called.
+
 ## Interpretation and stopping condition
 
 Compare the same physical cuts, the independent consistency checks, and the
