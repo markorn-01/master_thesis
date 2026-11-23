@@ -1,0 +1,74 @@
+{
+  "saved_data_check_passed": true,
+  "exact_3d_rejection_reason_established": false,
+  "scope": "Slice thermodynamics and exported-catalog counts only; no production 3D mask/velocity replay.",
+  "checked_xy_bounds": [
+    [
+      0.45,
+      0.55
+    ],
+    [
+      0.335,
+      0.415
+    ]
+  ],
+  "local_z_bounds": [
+    0.42,
+    0.58
+  ],
+  "slice_z": 0.5078125,
+  "slice_half_width": 0.0078125,
+  "planar_alignment_definition": "dT/dx*drho/dx + dT/dy*drho/dy; excludes the unknown z contribution",
+  "no_local_central_detections_from_event": 7,
+  "all_planar_roi_cells_negative_from_event": 6,
+  "physical_layer_classification": "unresolved: do not label as contact-only or confirmed missed shock from this check",
+  "missing_for_full_audit": [
+    "3D density and pressure gradients",
+    "velocity divergence",
+    "production jump masks",
+    "zone and surface masks before export"
+  ],
+  "physics_or_thresholds_changed": false,
+  "input_sha256": {
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/metadata.json": "845442c9b74c7503bbe2c72ad158fdd7aadc29594080d1d58ad663bac7d4664c",
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/online/slice_0000.npz": "63bbefc8146c6f490ba78bf9b18d7f54c5a296b3e7565287d3eca29382f73c04",
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/online/surfaces_0000.npz": "ed4b0f4f043e0defba9774cedb4724e67831796415d0416ad4b8cdd15ded7af4",
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/online/slice_0001.npz": "ec5e25b89f3a2d5057206ca200b42072f99805c6ef664a88aca2c797eccfa582",
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/online/surfaces_0001.npz": "1460eb20a0fec864fb983b857e0c3fed8603dbda4a3bfc7638d6a42d3c33bb8a",
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/online/slice_0002.npz": "cbee843606e1f01bcf080faf159e579540d28ed7bd6a15989136621b8bc61249",
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/online/surfaces_0002.npz": "9a9a7aeeeda0701d00bd36828a840fe1ea33499e2e568c5f7d3ad047666883ee",
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/online/slice_0003.npz": "1c35ce9746a568d1d211af9698e3d4a4b258337cf99fb99ad32b89328aa73b55",
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/online/surfaces_0003.npz": "059e28856a5556fa5689643e170dd35888e817e360e3fa74d5ca2ae62650ef54",
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/online/slice_0004.npz": "240fc16c9ee42f5edf7f866a487830031d5b8e5c27ee254fd256729f25f9dc2d",
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/online/surfaces_0004.npz": "3082505bdd823a0e048122efb44e55b244556b381c417f93dd525859252938ae",
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/online/slice_0005.npz": "915dc959ed725684530e02197faeea8d07c18206c6e65c6a395ea130658c8f35",
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/online/surfaces_0005.npz": "10ac7581cabef9e64bb99450ca68c64fe8665ce5024cf345967cb5fc3f64111a",
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/online/slice_0006.npz": "ca25962ac7a720112bd223f45e34a0e8f52801505f1b7a648ea30c0e542f9d8b",
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/online/surfaces_0006.npz": "9249eab5b5a4e30943091179549d1bd7cc6daa64e583fceae2f7dcf48fe32b63",
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/online/slice_0007.npz": "b6b0204d845fb0f01505e02a802e5a52118c9479946fff360d379ad0c155cce0",
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/online/surfaces_0007.npz": "84d0c0a96e42cf682b915a495624ad426324e52fcf0aafe8ca7114d5f6aa4165",
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/online/slice_0008.npz": "3e6a64957aed39643a63d49aa42b14400b51f92116012c473899cb6a99fe7deb",
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/online/surfaces_0008.npz": "5c58ba66a18e4a110cca7aacf68d5ccfee4200e0cb7df836e756cf06c3f92b69",
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/online/slice_0009.npz": "8756241e83588487e476e98a2b51e9aa6246530fb533bae55addcdf270856ae3",
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/online/surfaces_0009.npz": "c9ac9e4ae7881eee8f25c3d5394703ea95eed90ca057abb3fda900e38f21c3b7",
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/online/slice_0010.npz": "a87a9563ad157f707fe2c2bf204b901e6c12daf74e4de378b2c97d55abd0ceb5",
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/online/surfaces_0010.npz": "add9204e17562e4dd97bc3b78bfd90ed8cdfb0c6f8db9397d561b42d2fe51f68",
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/online/slice_0011.npz": "b812f0b5ce9b410e731f4cc89179d214325d1c599c95011b9d0f6c3a9ac36a88",
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/online/surfaces_0011.npz": "ccdb4db8260b903afbe60f2cce6ec82eaffbd33204b30693729d318a376c812d",
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/online/slice_0012.npz": "9f0a2ca94fcfbe6079e4b758c9e5857e8665f8db94d89c009dbf079c9bd5c1e4",
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/online/surfaces_0012.npz": "f77dac3c8ae4c246941074b04fc4adae59c4e76c31d9a1eba75405e50bfd9ccb",
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/online/slice_0013.npz": "b7b395fa795779988a35433f9229dcc0f51c8945f12e8dc089c07a6a97a47823",
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/online/surfaces_0013.npz": "9e4cd79bd49dfdece050482eae4aedb4cf4cd7dd0a9e4588624db6bc2a1a3a28",
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/online/slice_0014.npz": "9cf642320a7ed6b6752b8a5b8175a4f3559fbfdc36d8b365ce092857025b5353",
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/online/surfaces_0014.npz": "8299c454a39d16739c2b0c547cdda3d39ad872976c6dc3cfd103d96cb09d9e94",
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/online/slice_0015.npz": "f3a5aa67ac2be6e0ce035b7b5c7d9f939f1ec876ed0e2a4ca95a52d091c7a6fa",
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/online/surfaces_0015.npz": "c24294b27306650ff507ea7741756bbb146a5beb42d00cf0e7f3e2cdb74673ab",
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/online/slice_0016.npz": "c39e8b0f576fba89f6071ba900d1dbe425642044ee0b022fe756c092a0424412",
+    "outputs/three_bubbles_online_tracking_iwr_compgpu8_n064/online/surfaces_0016.npz": "25a452e2cdc8ff7755a69ea1005720abd60c1b822b3cb6247b8af3f46b145dce"
+  },
+  "source_sha256": {
+    "/Users/minhn/Documents/Heidelberg University/fifth_semester/Thesis/master_thesis/experiments/wind_bubble/inspect_collision_slice.py": "9cfd7ffbd237f7d19835f556ed9001c70e08c830306ab17994d4e5362459a360",
+    "astronomix/_physics_modules/_shock_finder/_shock_zones.py": "a5b599bae84e7dfa7bd1241b76bb533742a93e63d740ac7eba64858463a77c16",
+    "astronomix/_physics_modules/_shock_finder/_gradients.py": "9dadaaa7192c5c49e8f0ff09d75f078ea62a1b2ed480374e8270c0d3059d030b"
+  }
+}
