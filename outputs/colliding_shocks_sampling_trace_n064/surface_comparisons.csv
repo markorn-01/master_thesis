@@ -1,0 +1,5 @@
+cell,x,divergence,normal_x,backward_cell,backward_divergence,backward_in_zone,backward_opposite_direction,rejected_by_backward_comparison,rejected_by_forward_comparison,selected
+30,0.4765625,-82.62364196777344,-1.0,31,-82.62364196777344,True,False,True,False,False
+31,0.4921875,-82.62364196777344,-1.0,32,-82.62364196777344,True,True,True,False,False
+32,0.5078125,-82.62364196777344,1.0,31,-82.62364196777344,True,True,True,False,False
+33,0.5234375,-82.62364196777344,1.0,32,-82.62364196777344,True,False,True,False,False

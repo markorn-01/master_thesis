@@ -1,0 +1,15 @@
+{
+  "date": "2026-11-23",
+  "environment": "Local CPU, Python 3.10, JAX 0.6.2",
+  "unittest_modules": [
+    "tests.physics_modules.shock_finder.test_colliding_shocks_reference",
+    "tests.physics_modules.shock_finder.test_planar_shock_benchmark",
+    "tests.physics_modules.shock_finder.test_shock_surface_3d"
+  ],
+  "tests_run": 24,
+  "tests_passed": true,
+  "elapsed_seconds": 73.238,
+  "benchmark_cases": 96,
+  "source_and_input_fingerprints_rechecked": true,
+  "note": "Passing unit/control tests do not imply all difficult collision cases passed. Known failures are recorded in benchmark CSVs and traces."
+}

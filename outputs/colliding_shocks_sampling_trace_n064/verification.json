@@ -1,0 +1,135 @@
+{
+  "trace_completed": true,
+  "production_changed": false,
+  "one_dimensional_sampler_matches_3d_mach": true,
+  "rows": [
+    {
+      "case": "n064_incoming_s8_f1",
+      "surface_cell": 27,
+      "reference_mach": 3.0,
+      "measured_mach": 3.0,
+      "refined_x": 0.4375,
+      "nominal_pre_x": 0.45703125,
+      "nominal_post_x": 0.4140625,
+      "sampled_pre_pressure": 1.0,
+      "sampled_post_pressure": 11.0,
+      "expected_pre_pressure": 1.0,
+      "expected_post_pressure": 10.999999999999998,
+      "upstream_endpoint_between_exact_fronts": true,
+      "upstream_ray_crosses_opposing_direction": false
+    },
+    {
+      "case": "n064_incoming_s8_f1",
+      "surface_cell": 36,
+      "reference_mach": 3.0,
+      "measured_mach": 3.0,
+      "refined_x": 0.5625,
+      "nominal_pre_x": 0.5390625,
+      "nominal_post_x": 0.58203125,
+      "sampled_pre_pressure": 1.0,
+      "sampled_post_pressure": 11.0,
+      "expected_pre_pressure": 1.0,
+      "expected_post_pressure": 10.999999999999998,
+      "upstream_endpoint_between_exact_fronts": true,
+      "upstream_ray_crosses_opposing_direction": false
+    },
+    {
+      "case": "n064_incoming_s2_f1",
+      "surface_cell": 30,
+      "reference_mach": 3.0,
+      "measured_mach": 1.0,
+      "refined_x": 0.484375,
+      "nominal_pre_x": 0.53515625,
+      "nominal_post_x": 0.4609375,
+      "sampled_pre_pressure": 11.0,
+      "sampled_post_pressure": 11.0,
+      "expected_pre_pressure": 1.0,
+      "expected_post_pressure": 10.999999999999998,
+      "upstream_endpoint_between_exact_fronts": false,
+      "upstream_ray_crosses_opposing_direction": true
+    },
+    {
+      "case": "n064_incoming_s2_f1",
+      "surface_cell": 33,
+      "reference_mach": 3.0,
+      "measured_mach": 1.0,
+      "refined_x": 0.515625,
+      "nominal_pre_x": 0.4609375,
+      "nominal_post_x": 0.53515625,
+      "sampled_pre_pressure": 11.0,
+      "sampled_post_pressure": 11.0,
+      "expected_pre_pressure": 1.0,
+      "expected_post_pressure": 10.999999999999998,
+      "upstream_endpoint_between_exact_fronts": false,
+      "upstream_ray_crosses_opposing_direction": true
+    }
+  ],
+  "surface_comparisons": [
+    {
+      "cell": 30,
+      "x": 0.4765625,
+      "divergence": -82.62364196777344,
+      "normal_x": -1.0,
+      "backward_cell": 31,
+      "backward_divergence": -82.62364196777344,
+      "backward_in_zone": true,
+      "backward_opposite_direction": false,
+      "rejected_by_backward_comparison": true,
+      "rejected_by_forward_comparison": false,
+      "selected": false
+    },
+    {
+      "cell": 31,
+      "x": 0.4921875,
+      "divergence": -82.62364196777344,
+      "normal_x": -1.0,
+      "backward_cell": 32,
+      "backward_divergence": -82.62364196777344,
+      "backward_in_zone": true,
+      "backward_opposite_direction": true,
+      "rejected_by_backward_comparison": true,
+      "rejected_by_forward_comparison": false,
+      "selected": false
+    },
+    {
+      "cell": 32,
+      "x": 0.5078125,
+      "divergence": -82.62364196777344,
+      "normal_x": 1.0,
+      "backward_cell": 31,
+      "backward_divergence": -82.62364196777344,
+      "backward_in_zone": true,
+      "backward_opposite_direction": true,
+      "rejected_by_backward_comparison": true,
+      "rejected_by_forward_comparison": false,
+      "selected": false
+    },
+    {
+      "cell": 33,
+      "x": 0.5234375,
+      "divergence": -82.62364196777344,
+      "normal_x": 1.0,
+      "backward_cell": 32,
+      "backward_divergence": -82.62364196777344,
+      "backward_in_zone": true,
+      "backward_opposite_direction": false,
+      "rejected_by_backward_comparison": true,
+      "rejected_by_forward_comparison": false,
+      "selected": false
+    }
+  ],
+  "outgoing_two_cell_zone_candidates": 4,
+  "outgoing_two_cell_surface_samples": 0,
+  "opposite_direction_backward_comparisons": 2,
+  "surface_comparison_operands_match_saved_3d_result": true,
+  "input_sha256": {
+    "outputs/colliding_shocks_reference_n032_n064/verification.json": "12303d6b6c93938a049c0cc0f7589381a3ff4d5426b1bf882a2da2a26a4bd4b6",
+    "outputs/colliding_shocks_reference_n032_n064/profiles/n064_incoming_s8_f1.npz": "930d627ecaebbb2f9ed8c6db2043ad2711a8cc3c55532fb1aea2b4b4c9b01084",
+    "outputs/colliding_shocks_reference_n032_n064/profiles/n064_incoming_s2_f1.npz": "a95da56f07329dd21544d9891786d3c64892cab72c71bc156b50debe22c5d569",
+    "outputs/colliding_shocks_reference_n032_n064/profiles/n064_outgoing_s2_f1.npz": "5bc11e11efd9b9e5431a0556a1f235e1935a66833e815224d5518e389b0f2985"
+  },
+  "source_sha256": {
+    "/Users/minhn/Documents/Heidelberg University/fifth_semester/Thesis/master_thesis/experiments/shock/trace_colliding_shock_sampling.py": "d0ef97f19f4f668421dd8134784544bcacd2182c001e918507a43669909d69e3"
+  },
+  "scope": "Known-reference state-sampling and surface-selection failures; these do not by themselves explain the earlier bubble shock-zone rejection."
+}

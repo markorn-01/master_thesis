@@ -1,0 +1,5 @@
+case,surface_cell,reference_mach,measured_mach,refined_x,nominal_pre_x,nominal_post_x,sampled_pre_pressure,sampled_post_pressure,expected_pre_pressure,expected_post_pressure,upstream_endpoint_between_exact_fronts,upstream_ray_crosses_opposing_direction
+n064_incoming_s8_f1,27,3.0,3.0,0.4375,0.45703125,0.4140625,1.0,11.0,1.0,10.999999999999998,True,False
+n064_incoming_s8_f1,36,3.0,3.0,0.5625,0.5390625,0.58203125,1.0,11.0,1.0,10.999999999999998,True,False
+n064_incoming_s2_f1,30,3.0,1.0,0.484375,0.53515625,0.4609375,11.0,11.0,1.0,10.999999999999998,False,True
+n064_incoming_s2_f1,33,3.0,1.0,0.515625,0.4609375,0.53515625,11.0,11.0,1.0,10.999999999999998,False,True

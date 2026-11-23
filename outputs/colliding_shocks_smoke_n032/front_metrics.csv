@@ -1,0 +1,11 @@
+case,resolution,phase,filter_cells,separation_cells,front_index,reference_x,reference_mach,coverage_1cell,coverage_2cell,surface_samples,finite_positive_mach_fraction,mach_median,position_error_cells_median,mach_relative_error
+n032_isolated_incoming_f1,32,isolated_incoming,1,,0,0.5,3.0,1.0,1.0,784,1.0,3.0,0.0,0.0
+n032_isolated_outgoing_f1,32,isolated_outgoing,1,,0,0.5,1.9148542155126766,1.0,1.0,784,1.0,1.9148544073104858,0.0,1.00163139116205e-07
+n032_incoming_s8_f1,32,incoming,1,8.0,0,0.375,3.0,1.0,1.0,784,1.0,3.0,0.0,0.0
+n032_incoming_s8_f1,32,incoming,1,8.0,1,0.625,3.0,1.0,1.0,784,1.0,3.0,0.0,0.0
+n032_incoming_s16_f1,32,incoming,1,16.0,0,0.25,3.0,1.0,1.0,784,1.0,3.0,0.0,0.0
+n032_incoming_s16_f1,32,incoming,1,16.0,1,0.75,3.0,1.0,1.0,784,1.0,3.0,0.0,0.0
+n032_outgoing_s8_f1,32,outgoing,1,8.0,0,0.375,1.9148542155126766,1.0,1.0,784,1.0,1.9148544073104858,0.0,1.00163139116205e-07
+n032_outgoing_s8_f1,32,outgoing,1,8.0,1,0.625,1.9148542155126766,1.0,1.0,784,1.0,1.9148544073104858,0.0,1.00163139116205e-07
+n032_outgoing_s16_f1,32,outgoing,1,16.0,0,0.25,1.9148542155126766,1.0,1.0,784,1.0,1.9148544073104858,0.0,1.00163139116205e-07
+n032_outgoing_s16_f1,32,outgoing,1,16.0,1,0.75,1.9148542155126766,1.0,1.0,784,1.0,1.9148544073104858,0.0,1.00163139116205e-07
