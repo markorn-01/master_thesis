@@ -1,0 +1,51 @@
+{
+  "completed": true,
+  "backend": "cpu",
+  "jax": "0.6.2",
+  "physical_gap": 0.015625,
+  "physical_time": 0.01210307295689818,
+  "riemann_origin": 0.453125,
+  "shock_x": 0.5,
+  "contact_x": 0.484375,
+  "reference_mach": 3.0,
+  "resolutions": [
+    32,
+    64,
+    128
+  ],
+  "same_physical_solution": true,
+  "conservative_coarsening_checked": true,
+  "filter_cells": 1,
+  "outcomes": [
+    "no_zone_candidates",
+    "mach_biased",
+    "recovered"
+  ],
+  "mach_medians": [
+    null,
+    2.2360680103302,
+    3.0
+  ],
+  "source_sha256": {
+    "/Users/minhn/Documents/Heidelberg University/fifth_semester/Thesis/master_thesis/experiments/shock/check_shock_contact_resolution.py": "e89b162b08cefcf788f53e7f5a749ee96d2fa4debf44fc87ded65d73dd8f4c66",
+    "experiments/shock/shock_contact_reference.py": "b1a742013d75d499482cb87208d77d117b8cf3cb3d935d3a0362be124a17b335",
+    "experiments/shock/colliding_shocks_reference.py": "3c428718efc6cff30999b60bbbe2882b0fbd46c569d9b069e1805e8f9ab3d663",
+    "experiments/shock/check_colliding_shocks.py": "5f64d02e313a2c2b8052d67776dfd39e9df0212d14acd6e8ec8de6e586b58afc",
+    "experiments/shock/check_shock_contact.py": "e5d0dab064234ac5fe144027123a41072fefce4660cc82e3be18878e8ccc7e39",
+    "experiments/wind_bubble/audit_detection_stages.py": "94bbcc80d7dfa533f0631c6998650f6eda967d1f9e64b27b5cebab428f37bfe1",
+    "astronomix/_physics_modules/_shock_finder/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "astronomix/_physics_modules/_shock_finder/_data_structures.py": "ada11fff7ecacae0ea3bc9521b064e67ff9674d97745890dafec467d6fb6d6c9",
+    "astronomix/_physics_modules/_shock_finder/_energy_dissipation.py": "88585623f1c17f0e0fd68b30ca69039308f6e1500eedab83833c060818630c41",
+    "astronomix/_physics_modules/_shock_finder/_gradients.py": "9dadaaa7192c5c49e8f0ff09d75f078ea62a1b2ed480374e8270c0d3059d030b",
+    "astronomix/_physics_modules/_shock_finder/_helpers.py": "e28efc81c11a3f17584e3c0c2ae15f234f73d6260a5e2e348c3e306115eaa1b4",
+    "astronomix/_physics_modules/_shock_finder/_mhd_shock.py": "08a125c3f9364311e9a3a44a2ebab6e7c5d7d0394dfc60759b6c00a95433d264",
+    "astronomix/_physics_modules/_shock_finder/_shock_mach.py": "e53742e8e9aaf278ce7392670c0f80c8bf7b3f1b0ea42dc3d42c6b3e5924cc2c",
+    "astronomix/_physics_modules/_shock_finder/_shock_surface.py": "73f1924c7f8fab1c1a7a7a96a82a45b29a69317a5ad505c02ba081c0283b5e19",
+    "astronomix/_physics_modules/_shock_finder/_shock_zones.py": "b102b87f906a17d192ba09b17a97d561bc809052e17e18cba71312e7ed1864b3",
+    "astronomix/_physics_modules/_shock_finder/mhd_shock_finder.py": "44d25a783ef7a23b26bf22f542a5f18268ef2454d676233c19758cd4af46e338",
+    "astronomix/_physics_modules/_shock_finder/pfrommer_shock_finder.py": "e5ba97a66257eb9edd98709fb2545127a75bb3baeb1dffb08c5ac31bd52687a0"
+  },
+  "production_changed": false,
+  "simulation_evolved": false,
+  "scope": "Resolution of one fixed exact shock/contact fan. Not convergence of an evolved bubble simulation."
+}

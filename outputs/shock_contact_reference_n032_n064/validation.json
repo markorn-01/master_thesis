@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-24",
+  "backend": "cpu",
+  "jax": "0.6.2",
+  "command": "python -m unittest discover -s tests/physics_modules/shock_finder -p 'test_*.py'",
+  "tests_run": 71,
+  "new_reference_control_tests": 11,
+  "all_passed": true,
+  "elapsed_seconds": 41.995,
+  "independent_general_riemann_solver_crosscheck": true,
+  "flux_and_integral_conservation_checks": true,
+  "production_files_changed": false,
+  "profile_artifacts_read_successfully": true,
+  "source_fingerprints_rechecked": 33,
+  "new_test_sha256": "b402bae54cc6739aeb89901a7fd4bae5bfbfbe666b06db422cf31e8150974b1f",
+  "gpu_confirmation": "not_run",
+  "scope": "Known-reference experiment, not a production fix or physical identification of the bubble layer."
+}

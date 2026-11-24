@@ -1,0 +1,3 @@
+case,cell,x,pressure,density,temperature,velocity_x,divergence,normal_x,log_pressure_jump,log_temperature_jump,compression,gradient_alignment,pressure_jump_pass,temperature_jump_pass,shock_zone,shock_surface
+n064_pair_c8_s0.5_f1_p0,31,0.4921875,10.999999999999996,13.500000000000002,0.8148148148148144,2.5819888974716116,-82.62364196777344,-1.0,-2.397895336151123,0.780158519744873,True,False,False,True,False,False
+n064_pair_c8_s0.5_f1_p0,32,0.5078125,1.0,1.0,1.0,0.0,-82.62364196777344,-1.0,-2.397895336151123,0.20479442179203033,True,False,False,False,False,False
