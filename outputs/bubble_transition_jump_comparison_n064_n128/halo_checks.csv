@@ -1,0 +1,5 @@
+resolution,event,halo_cells,larger_halo_cells,passed,maximum_field_difference,maximum_baseline_mach_difference,maximum_transition_mach_difference
+64,4,24,28,True,1.52587890625e-05,1.52587890625e-05,1.52587890625e-05
+64,16,24,28,True,0.0,0.0,0.0
+128,4,24,28,True,3.814697265625e-06,2.86102294921875e-06,3.814697265625e-06
+128,16,24,28,True,1.6689300537109375e-06,1.5497207641601562e-06,1.5497207641601562e-06

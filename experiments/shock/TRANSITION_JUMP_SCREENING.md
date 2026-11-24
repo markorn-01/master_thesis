@@ -120,6 +120,12 @@ saved bubble gas and retain the existing temperature-alignment diagnosis where
 it still applies. Curved-flow completeness, callback/runtime overhead and the
 old benchmark numbers have not been revalidated for this additional ray search.
 
+That [saved-bubble comparison is now recorded](../wind_bubble/BUBBLE_JUMP_SCREENING_COMPARISON.md):
+the wider screen does not repair the central gap. The frame-aware physical
+classification stays ambiguous under failed/unavailable outer controls.
+The original temperature/alignment question is not resolved by the successful
+planar screening correction, and the mode remains opt-in.
+
 ## Reproduce
 
 ```sh
