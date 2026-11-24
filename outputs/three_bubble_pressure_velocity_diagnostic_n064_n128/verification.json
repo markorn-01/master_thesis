@@ -1,0 +1,67 @@
+{
+  "completed": true,
+  "diagnostic_only": true,
+  "production_changed": false,
+  "simulation_evolved": false,
+  "settings": {
+    "gamma": 1.6666666666666667,
+    "minimum_mach": 1.3,
+    "half_widths": [
+      0.5,
+      1.5,
+      2.5,
+      3.5
+    ],
+    "tolerances": [
+      0.05,
+      0.1,
+      0.2
+    ],
+    "entropy_signal_tolerance": 0.5,
+    "endpoint_step": 0.5
+  },
+  "saved_states": 10,
+  "late_central_pressure_velocity_candidates_10pct": 0,
+  "late_central_full_jump_candidates_10pct": 0,
+  "late_central_candidates_without_valid_sampling_window": 8,
+  "outer_control_pressure_velocity_candidates_10pct": 144,
+  "outer_control_full_jump_candidates_10pct": 0,
+  "full_jump_gate_passes_bubble_positive_control": false,
+  "central_non_detection_can_rule_out_shocks": false,
+  "independent_side_probe_pairs": 64,
+  "independent_side_probe_best_relative_error": 0.27611339000528057,
+  "input_sha256": {
+    "outputs/three_bubble_collision_detection_audit_iwr_compgpu8_n064/metadata.json": "960b131e9386f9789abb1081e6adc6f3f7a6419bdf3eef63bfee1f8696f859a8",
+    "outputs/three_bubble_collision_detection_audit_iwr_compgpu8_n064/audit/verification.json": "1a8a16438fac854a7748e257809380376353925fcd3a7b3e20d23a4faae067a4",
+    "outputs/three_bubble_collision_detection_audit_iwr_compgpu8_n064/audit/state_0004.npy": "22ae85689331bb443ede6b9609649ab3a86853ea5d0211124bcd38cdf67acac9",
+    "outputs/three_bubble_collision_detection_audit_iwr_compgpu8_n064/online/surfaces_0004.npz": "3082505bdd823a0e048122efb44e55b244556b381c417f93dd525859252938ae",
+    "outputs/three_bubble_collision_detection_audit_iwr_compgpu8_n064/audit/state_0006.npy": "4591f4d80f0e60212fcea0c999adeeaadb3da3077cdb7af95adc19ed148ce083",
+    "outputs/three_bubble_collision_detection_audit_iwr_compgpu8_n064/online/surfaces_0006.npz": "9249eab5b5a4e30943091179549d1bd7cc6daa64e583fceae2f7dcf48fe32b63",
+    "outputs/three_bubble_collision_detection_audit_iwr_compgpu8_n064/audit/state_0008.npy": "11e45892a22a7af4d7d550d81231c9ebe50b8d04ab76d2dbba2bf6c44ae29d55",
+    "outputs/three_bubble_collision_detection_audit_iwr_compgpu8_n064/online/surfaces_0008.npz": "5c58ba66a18e4a110cca7aacf68d5ccfee4200e0cb7df836e756cf06c3f92b69",
+    "outputs/three_bubble_collision_detection_audit_iwr_compgpu8_n064/audit/state_0012.npy": "10881a45cc2646944effd97de9c9878af254aee734aa8b0e282498aa397ebbaa",
+    "outputs/three_bubble_collision_detection_audit_iwr_compgpu8_n064/online/surfaces_0012.npz": "f77dac3c8ae4c246941074b04fc4adae59c4e76c31d9a1eba75405e50bfd9ccb",
+    "outputs/three_bubble_collision_detection_audit_iwr_compgpu8_n064/audit/state_0016.npy": "c16004e510775880d80dba79b79c970916ba439888890737826c09b6b28ca086",
+    "outputs/three_bubble_collision_detection_audit_iwr_compgpu8_n064/online/surfaces_0016.npz": "25a452e2cdc8ff7755a69ea1005720abd60c1b822b3cb6247b8af3f46b145dce",
+    "outputs/three_bubble_collision_resolution_iwr_compgpu8_n128/metadata.json": "3257f5de620ca9998a8d1c1fb0dbfb2021e3b99b633128bba6170b13b58d4814",
+    "outputs/three_bubble_collision_resolution_iwr_compgpu8_n128/audit/verification.json": "3d902a243c0e43fba26a73ef71d32c34f32648ced546a036e6a4098c91c3a244",
+    "outputs/three_bubble_collision_resolution_iwr_compgpu8_n128/audit/state_0004.npy": "7d66149b79370e70bd33df274d5a3611922758ca7e1a7403f6bc50ab4c2c2854",
+    "outputs/three_bubble_collision_resolution_iwr_compgpu8_n128/online/surfaces_0004.npz": "ce2772d84f31865a18a50e370c0929dea2a1e44a2fa2cda1a736e581783f68ff",
+    "outputs/three_bubble_collision_resolution_iwr_compgpu8_n128/audit/state_0006.npy": "6a67878b6955a471b55ae5c87cf77932d8a4189adb26b8860427466dda03ba0f",
+    "outputs/three_bubble_collision_resolution_iwr_compgpu8_n128/online/surfaces_0006.npz": "286d4de27854afba516739121314340f534d3511b644aab984e729766f299c3a",
+    "outputs/three_bubble_collision_resolution_iwr_compgpu8_n128/audit/state_0008.npy": "f5fc11dd9a47579fd43f2a1034d7e894431727776d469eae72f67aa4fa8198d2",
+    "outputs/three_bubble_collision_resolution_iwr_compgpu8_n128/online/surfaces_0008.npz": "b4fb677167dd7621a8de141ae5f4f444eceadfa7bdba1c563816c2687a5be93f",
+    "outputs/three_bubble_collision_resolution_iwr_compgpu8_n128/audit/state_0012.npy": "0e0f5bea4e2b67e85e077698ce21f5e989cbaafd2f3a05f01133767d91ff42bf",
+    "outputs/three_bubble_collision_resolution_iwr_compgpu8_n128/online/surfaces_0012.npz": "46775d65cd41d6af6c65ca468a5c59353f9c533e6fba5c6095253b2855ad63b7",
+    "outputs/three_bubble_collision_resolution_iwr_compgpu8_n128/audit/state_0016.npy": "f5c915848479cc5e6fd07b8005fc2017042d4759215425e3fbd6f703595ce6c2",
+    "outputs/three_bubble_collision_resolution_iwr_compgpu8_n128/online/surfaces_0016.npz": "477c51616ffa7b24557f2227c2ff1fb2d32d34a71e05dc67b2861c540b398608"
+  },
+  "source_sha256": {
+    "/Users/minhn/Documents/Heidelberg University/fifth_semester/Thesis/master_thesis/experiments/wind_bubble/check_collision_pressure_velocity.py": "b093e57cfda5f8f71e3eee5bd6e13dcefb12a5d2afdb2028f85097fc92efd3c0",
+    "experiments/shock/pressure_velocity_diagnostic.py": "36873bf5433d5a66e595fc5b743210abd5f3bb0abd40841fba3723c6b96bc8bb",
+    "experiments/wind_bubble/assess_collision_physics.py": "aca81d1b859a7dd83061823252f03a792e61a60bf67e37e095ee94d94fa35c8b",
+    "experiments/wind_bubble/three_bubble_setup.py": "11d72d8443cc6c3d4fe3853c37c73328d89fc11f9e75e09bfc06b54814461cca",
+    "astronomix/_physics_modules/_shock_finder/_shock_surface.py": "73f1924c7f8fab1c1a7a7a96a82a45b29a69317a5ad505c02ba081c0283b5e19"
+  },
+  "scope": "Pressure/convergence candidates and necessary jump compatibility on saved states; no physical-shock proof, new production detection, Mach output, or thermalization output."
+}
