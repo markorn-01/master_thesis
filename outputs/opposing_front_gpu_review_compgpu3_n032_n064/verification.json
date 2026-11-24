@@ -1,0 +1,38 @@
+{
+  "completed": true,
+  "targeted_cases": [
+    "n032_incoming_s2_f1",
+    "n032_outgoing_s2_f1",
+    "n064_incoming_s2_f1",
+    "n064_outgoing_s2_f1"
+  ],
+  "targeted_cases_pass": true,
+  "before_accurate_cases": 22,
+  "after_accurate_cases": 28,
+  "improved_cases": [
+    "n032_incoming_s2_f1",
+    "n032_outgoing_s2_f1",
+    "n032_incoming_s4_f3",
+    "n064_incoming_s2_f1",
+    "n064_outgoing_s2_f1",
+    "n064_incoming_s4_f3"
+  ],
+  "regressed_cases": [],
+  "isolated_and_widest_exact_controls_pass": true,
+  "contact_surface_samples": 0,
+  "one_dimensional_trace_matches_3d_mach": true,
+  "input_sha256": {
+    "outputs/colliding_shocks_reference_n032_n064/verification.json": "12303d6b6c93938a049c0cc0f7589381a3ff4d5426b1bf882a2da2a26a4bd4b6",
+    "outputs/opposing_front_gpu_compgpu3_n032_n064/verification.json": "7e53aa2122082fab71e45b58c9310b2ca4293c755a0771a88d1e28cf15132bad",
+    "outputs/colliding_shocks_reference_n032_n064/summary.csv": "516f0683e2fd3765fd7f43987b68bfb4570350a998c6fd8d0a483b9d7b274bc0",
+    "outputs/opposing_front_gpu_compgpu3_n032_n064/summary.csv": "3e794ffc14507f664781d309e4f5128699c07690afdd234bed579f6c5a926680",
+    "outputs/opposing_front_gpu_compgpu3_n032_n064/profiles/n064_incoming_s2_f1.npz": "8fac91242129c6ec09a30dad1df8f9fb2c1b369c9ed7f9aff4fe319a22594645",
+    "outputs/colliding_shocks_reference_n032_n064/profiles/n064_incoming_s2_f1.npz": "a95da56f07329dd21544d9891786d3c64892cab72c71bc156b50debe22c5d569",
+    "outputs/opposing_front_gpu_compgpu3_n032_n064/profiles/n064_outgoing_s2_f1.npz": "10dc9d21f739d797c031f523bf1c368844b1f30ad633ce23ca234c815e6dc889",
+    "outputs/colliding_shocks_reference_n032_n064/profiles/n064_outgoing_s2_f1.npz": "5bc11e11efd9b9e5431a0556a1f235e1935a66833e815224d5518e389b0f2985"
+  },
+  "source_sha256": {
+    "/export/home/mngo/master_thesis/experiments/shock/review_colliding_shock_correction.py": "20404b76bcec99912196fd1533f8b97923fdd5e275463eb8a0b4bdf7ad1689db"
+  },
+  "scope": "Same analytic inputs, corrected detection/sampling. Not bubble validation or hydrodynamic convergence."
+}
