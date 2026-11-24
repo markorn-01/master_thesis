@@ -1,4 +1,4 @@
-"""Compare the unchanged 3D finder with an exact symmetric shock collision.
+"""Compare the production 3D finder with an exact symmetric shock collision.
 
 No time integrator is used here. Width=1 is the exact conservative cell
 average; larger odd widths are explicitly synthetic broadening controls.
@@ -134,7 +134,7 @@ def plot_results(output,summary,resolutions,widths,separations,reference):
         for ax in axes[:,col]:
             ax.set_xscale('log',base=2);ax.set_xticks(separations,labels=[f'{v:g}' for v in separations]);ax.grid(alpha=.2)
     axes[0,0].legend(fontsize=8,ncol=2)
-    fig.suptitle('Unchanged 3D finder on a known symmetric shock collision',fontsize=15)
+    fig.suptitle('Production 3D finder on a known symmetric shock collision',fontsize=15)
     fig.text(.09,.055,'Filter 1: exact conservative cell averages. Larger filters: controlled box averaging of conserved fields.\n'
         'Coverage requires separate fronts, correct normal signs and locations within 2 cells. Mach errors shown only when both are located.\n'
         'This tests detection/reconstruction, without evolving the gas. The meeting instant has no two spatially separated fronts.',fontsize=9)
@@ -213,7 +213,7 @@ def run(args):
     baseline=[r for r in summary if r['filter_cells']==1 and
               (r['phase'].startswith('isolated') or r['separation_cells']==max(separations))]
     report=dict(benchmark_completed=True,backend=jax.default_backend(),jax=jax.__version__,
-        production_changed=False,simulation_evolved=False,reference='Exact symmetric two-shock collision, then symmetric two-shock Riemann solution.',
+        source_files_unchanged_during_run=True,simulation_evolved=False,reference='Exact symmetric two-shock collision, then symmetric two-shock Riemann solution.',
         gamma=reference.gamma,incoming_mach=reference.incoming_mach,outgoing_mach=reference.outgoing_mach,
         incoming_speed=reference.incoming_speed,outgoing_speed=reference.outgoing_speed,collision_time=reference.collision_time,
         ambient_state=reference.ambient.tolist(),incident_downstream_state=reference.incoming_left.tolist(),

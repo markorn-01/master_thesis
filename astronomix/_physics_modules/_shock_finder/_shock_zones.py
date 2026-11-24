@@ -3,6 +3,7 @@
 # ============================================================================
 
 from functools import partial
+from math import ceil
 import jax.numpy as jnp
 import jax
 from jax.scipy.ndimage import map_coordinates
@@ -165,6 +166,87 @@ def get_post_pre_shock_values(
     )
 
 
+def _find_oriented_zone_exits(
+    shock_direction,
+    shock_zones,
+    field,
+    max_steps,
+    center_offsets,
+    step_size,
+    outside_offset=0.0,
+    extra_distance=0.0,
+):
+    """Find zone exits and the first opposing-normal limit on each ray.
+
+    Normals and the Boolean zone use the same nearest-neighbor cells. A
+    negative dot product with the starting normal marks an opposing front.
+    Keep the last search position before that cell; neither an exterior
+    margin nor later profile candidates may go beyond this limit. A normal
+    reversal can terminate a ray inside a joined zone (Schaal & Springel,
+    2015, Section 2.3.3). Zero normals in uniform gas are not reversals.
+
+    Continue checking directions beyond a natural zone exit so that profile
+    candidates cannot jump through a thin gap into the opposite front.
+    ``extra_distance`` extends only this guard, not the zone-exit search.
+    """
+    ndim = field.ndim
+    if shock_direction.shape != (ndim,) + field.shape:
+        raise ValueError("shock_direction must match the field's spatial shape.")
+    if shock_zones.shape != field.shape:
+        raise ValueError("shock_zones and sampled fields must have equal shape.")
+    if step_size <= 0.0:
+        raise ValueError("step_size must be positive.")
+    if outside_offset < 0.0 or outside_offset >= max_steps:
+        raise ValueError("outside_offset must be non-negative and smaller than max_steps.")
+    coordinate_dtype = jnp.result_type(field.dtype, jnp.float32)
+    coordinates = jnp.stack(jnp.meshgrid(
+        *[jnp.arange(size, dtype=coordinate_dtype) for size in field.shape],
+        indexing="ij"), axis=0)
+    direction = shock_direction.astype(coordinate_dtype)
+    if center_offsets is not None:
+        if center_offsets.shape != shock_direction.shape:
+            raise ValueError("center_offsets must have the same shape as shock_direction.")
+        coordinates = coordinates + center_offsets.astype(coordinate_dtype)
+    upper_bounds = jnp.asarray(field.shape, dtype=coordinate_dtype).reshape(
+        (ndim,) + (1,) * ndim)
+    exit_steps = int((max_steps - outside_offset) / step_size)
+    guard_steps = ceil((max_steps + extra_distance) / step_size)
+
+    def find_exit(sign):
+        def step(index, carry):
+            distance, found, limit, reversed_direction = carry
+            search_distance = (index + 1) * jnp.asarray(step_size, coordinate_dtype)
+            sample_coordinates = coordinates + sign * search_distance * direction
+            in_bounds = jnp.all((sample_coordinates >= 0.0)
+                               & (sample_coordinates <= upper_bounds - 1.0), axis=0)
+            sampled_zone = map_coordinates(
+                shock_zones.astype(coordinate_dtype), sample_coordinates,
+                order=0, mode="nearest") > 0.5
+            alignment = sum(direction[axis] * map_coordinates(
+                direction[axis], sample_coordinates, order=0, mode="nearest")
+                for axis in range(ndim))
+            first_reversal = ~reversed_direction & in_bounds & (alignment < 0.0)
+            last_own_position = jnp.maximum(search_distance - step_size, 0.0)
+            limit = jnp.where(first_reversal, last_own_position, limit)
+            first_exit = (~found & in_bounds & (index < exit_steps)
+                          & (~sampled_zone | first_reversal))
+            distance = jnp.where(first_exit, search_distance + outside_offset, distance)
+            return distance, found | first_exit, limit, reversed_direction | first_reversal
+
+        distance, found, limit, _ = jax.lax.fori_loop(
+            0, guard_steps, step,
+            (jnp.full(field.shape, float(max_steps), coordinate_dtype),
+             jnp.zeros(field.shape, dtype=jnp.bool_),
+             jnp.full(field.shape, jnp.inf, coordinate_dtype),
+             jnp.zeros(field.shape, dtype=jnp.bool_)))
+        distance = jnp.minimum(distance, limit)
+        final = coordinates + sign * distance[jnp.newaxis, ...] * direction
+        in_bounds = jnp.all((final >= 0.0) & (final <= upper_bounds - 1.0), axis=0)
+        return distance, found & in_bounds, limit
+
+    return coordinates, direction, find_exit(-1.0), find_exit(1.0)
+
+
 def get_adaptive_post_pre_shock_values(
     shock_direction,
     shock_zones,
@@ -188,89 +270,17 @@ def get_adaptive_post_pre_shock_values(
 
     Returns the four sampled fields, a validity mask requiring a zone exit on
     both sides, and the independently selected post/pre distances in grid-cell
-    units.  Rays that reach a domain boundary before leaving the zone are
-    invalid.
+    units. An opposing normal terminates the search before the other front;
+    the exterior margin cannot cross that limit. Rays that reach a domain
+    boundary before finding an exit or opposing front are invalid.
     """
-    ndim = field_a.ndim
-    if shock_direction.shape[0] != ndim:
-        raise ValueError(
-            "shock_direction must have one component per spatial dimension."
-        )
-    if shock_zones.shape != field_a.shape:
-        raise ValueError("shock_zones and sampled fields must have equal shape.")
-    if step_size <= 0.0:
-        raise ValueError("step_size must be positive.")
-    if outside_offset < 0.0 or outside_offset >= max_steps:
-        raise ValueError(
-            "outside_offset must be non-negative and smaller than max_steps."
-        )
-
-    coordinate_dtype = jnp.result_type(field_a.dtype, jnp.float32)
-    coordinates = jnp.stack(
-        jnp.meshgrid(
-            *[
-                jnp.arange(size, dtype=coordinate_dtype)
-                for size in field_a.shape
-            ],
-            indexing="ij",
-        ),
-        axis=0,
-    )
-    direction = shock_direction.astype(coordinate_dtype)
-    if center_offsets is not None:
-        if center_offsets.shape != shock_direction.shape:
-            raise ValueError(
-                "center_offsets must have the same shape as shock_direction."
-            )
-        coordinates = coordinates + center_offsets.astype(coordinate_dtype)
-
-    upper_bounds = jnp.asarray(field_a.shape, dtype=coordinate_dtype).reshape(
-        (ndim,) + (1,) * ndim
-    )
-
-    def find_exit_distance(sign):
-        distance = jnp.full(field_a.shape, float(max_steps), coordinate_dtype)
-        found = jnp.zeros(field_a.shape, dtype=jnp.bool_)
-
-        num_search_steps = int((max_steps - outside_offset) / step_size)
-        for step in range(1, num_search_steps + 1):
-            search_distance = jnp.asarray(
-                step * step_size,
-                dtype=coordinate_dtype,
-            )
-            sample_coordinates = (
-                coordinates + sign * search_distance * direction
-            )
-            in_bounds = jnp.all(
-                (sample_coordinates >= 0.0)
-                & (sample_coordinates <= upper_bounds - 1.0),
-                axis=0,
-            )
-            sampled_zone = map_coordinates(
-                shock_zones.astype(coordinate_dtype),
-                sample_coordinates,
-                order=0,
-                mode="nearest",
-            ) > 0.5
-            first_exit = ~found & in_bounds & ~sampled_zone
-            sampling_distance = search_distance + jnp.asarray(
-                outside_offset,
-                dtype=coordinate_dtype,
-            )
-            distance = jnp.where(first_exit, sampling_distance, distance)
-            found = found | first_exit
-
-        final_coordinates = coordinates + sign * distance * direction
-        final_in_bounds = jnp.all(
-            (final_coordinates >= 0.0)
-            & (final_coordinates <= upper_bounds - 1.0),
-            axis=0,
-        )
-        return distance, found & final_in_bounds
-
-    # d_shock points from hot/post-shock gas toward cold/pre-shock gas.
-    post_distance, post_found = find_exit_distance(-1.0)
-    pre_distance, pre_found = find_exit_distance(1.0)
+    if field_b.shape != field_a.shape:
+        raise ValueError("Sampled fields must have equal shape.")
+    coordinates, direction, post, pre = _find_oriented_zone_exits(
+        shock_direction, shock_zones, field_a, max_steps, center_offsets,
+        step_size, outside_offset=outside_offset)
+    post_distance, post_found, _ = post
+    pre_distance, pre_found, _ = pre
     post_coordinates = coordinates - post_distance[jnp.newaxis, ...] * direction
     pre_coordinates = coordinates + pre_distance[jnp.newaxis, ...] * direction
 
@@ -322,6 +332,10 @@ def get_profile_aware_post_pre_shock_values(
     thermodynamic values are ignored.  At least one valid candidate is
     required on each side.
 
+    An opposing normal bounds both the exit search and every exterior
+    candidate. If two zones join, samples stay on the starting front's side
+    of that reversal rather than crossing the other shock.
+
     Distances and offsets are measured in grid-cell units.  The return layout
     matches :func:`get_adaptive_post_pre_shock_values` so callers can compare
     the two estimators directly.
@@ -342,50 +356,20 @@ def get_profile_aware_post_pre_shock_values(
     if tuple(outside_offsets) != tuple(sorted(outside_offsets)):
         raise ValueError("outside_offsets must be sorted in ascending order.")
 
-    # First locate the two zone exits without adding an exterior margin.
-    (
-        _,
-        _,
-        _,
-        _,
-        exit_valid,
-        post_exit_distance,
-        pre_exit_distance,
-    ) = get_adaptive_post_pre_shock_values(
-        shock_direction,
-        shock_zones,
-        pressure,
-        field_b,
-        max_steps=max_steps,
-        center_offsets=center_offsets,
-        step_size=step_size,
-        outside_offset=0.0,
-    )
-
-    coordinate_dtype = jnp.result_type(pressure.dtype, jnp.float32)
-    coordinates = jnp.stack(
-        jnp.meshgrid(
-            *[
-                jnp.arange(size, dtype=coordinate_dtype)
-                for size in pressure.shape
-            ],
-            indexing="ij",
-        ),
-        axis=0,
-    )
-    direction = shock_direction.astype(coordinate_dtype)
-    if center_offsets is not None:
-        if center_offsets.shape != shock_direction.shape:
-            raise ValueError(
-                "center_offsets must have the same shape as shock_direction."
-            )
-        coordinates = coordinates + center_offsets.astype(coordinate_dtype)
+    # Bound the entire profile, including candidates beyond a natural exit.
+    coordinates, direction, post_boundary, pre_boundary = _find_oriented_zone_exits(
+        shock_direction, shock_zones, pressure, max_steps, center_offsets,
+        step_size, extra_distance=outside_offsets[-1])
+    post_exit_distance, post_found, post_limit = post_boundary
+    pre_exit_distance, pre_found, pre_limit = pre_boundary
+    exit_valid = post_found & pre_found
+    coordinate_dtype = coordinates.dtype
 
     upper_bounds = jnp.asarray(
         pressure.shape, dtype=coordinate_dtype
     ).reshape((ndim,) + (1,) * ndim)
 
-    def sample_candidates(sign, exit_distance):
+    def sample_candidates(sign, exit_distance, limit):
         pressure_samples = []
         field_b_samples = []
         valid_samples = []
@@ -394,6 +378,7 @@ def get_profile_aware_post_pre_shock_values(
             distance = exit_distance + jnp.asarray(
                 offset, dtype=coordinate_dtype
             )
+            distance = jnp.minimum(distance, limit)
             sample_coordinates = (
                 coordinates + sign * distance[jnp.newaxis, ...] * direction
             )
@@ -433,8 +418,8 @@ def get_profile_aware_post_pre_shock_values(
             jnp.stack(distance_samples, axis=0),
         )
 
-    post_profiles = sample_candidates(-1.0, post_exit_distance)
-    pre_profiles = sample_candidates(1.0, pre_exit_distance)
+    post_profiles = sample_candidates(-1.0, post_exit_distance, post_limit)
+    pre_profiles = sample_candidates(1.0, pre_exit_distance, pre_limit)
 
     def select_profile(profiles, select_largest):
         pressure_samples, field_b_samples, valid_samples, distances = profiles
@@ -532,6 +517,8 @@ def get_plateau_aware_post_pre_shock_values(
     A ray is invalid when it leaves the domain, cannot leave the shock zone,
     or does not reach a pressure-and-density plateau within the configured
     exterior offset window.
+    Candidates beyond an opposing normal are invalid, rather than clamped:
+    repeated samples at a limit must not fabricate a flat plateau.
     The four returned relative-change fields quantify the flatness at the
     selected downstream and upstream locations and make the sampling choice
     directly diagnosable.
@@ -577,49 +564,19 @@ def get_plateau_aware_post_pre_shock_values(
             "extrapolate_smooth_profile requires smooth-profile selection."
         )
 
-    (
-        _,
-        _,
-        _,
-        _,
-        exit_valid,
-        post_exit_distance,
-        pre_exit_distance,
-    ) = get_adaptive_post_pre_shock_values(
-        shock_direction,
-        shock_zones,
-        pressure,
-        density,
-        max_steps=max_steps,
-        center_offsets=center_offsets,
-        step_size=step_size,
-        outside_offset=0.0,
-    )
-
-    coordinate_dtype = jnp.result_type(pressure.dtype, jnp.float32)
-    coordinates = jnp.stack(
-        jnp.meshgrid(
-            *[
-                jnp.arange(size, dtype=coordinate_dtype)
-                for size in pressure.shape
-            ],
-            indexing="ij",
-        ),
-        axis=0,
-    )
-    direction = shock_direction.astype(coordinate_dtype)
-    if center_offsets is not None:
-        if center_offsets.shape != shock_direction.shape:
-            raise ValueError(
-                "center_offsets must have the same shape as shock_direction."
-            )
-        coordinates = coordinates + center_offsets.astype(coordinate_dtype)
+    coordinates, direction, post_boundary, pre_boundary = _find_oriented_zone_exits(
+        shock_direction, shock_zones, pressure, max_steps, center_offsets,
+        step_size, extra_distance=outside_offsets[-1])
+    post_exit_distance, post_found, post_limit = post_boundary
+    pre_exit_distance, pre_found, pre_limit = pre_boundary
+    exit_valid = post_found & pre_found
+    coordinate_dtype = coordinates.dtype
 
     upper_bounds = jnp.asarray(
         pressure.shape, dtype=coordinate_dtype
     ).reshape((ndim,) + (1,) * ndim)
 
-    def sample_candidates(sign, exit_distance):
+    def sample_candidates(sign, exit_distance, limit):
         pressure_samples = []
         density_samples = []
         valid_samples = []
@@ -650,6 +607,7 @@ def get_plateau_aware_post_pre_shock_values(
             )
             valid = (
                 exit_valid
+                & (distance <= limit)
                 & in_bounds
                 & jnp.isfinite(pressure_sample)
                 & jnp.isfinite(density_sample)
@@ -667,8 +625,8 @@ def get_plateau_aware_post_pre_shock_values(
             jnp.stack(distance_samples, axis=0),
         )
 
-    post_profiles = sample_candidates(-1.0, post_exit_distance)
-    pre_profiles = sample_candidates(1.0, pre_exit_distance)
+    post_profiles = sample_candidates(-1.0, post_exit_distance, post_limit)
+    pre_profiles = sample_candidates(1.0, pre_exit_distance, pre_limit)
 
     outside_offset_array = jnp.asarray(
         outside_offsets, dtype=coordinate_dtype

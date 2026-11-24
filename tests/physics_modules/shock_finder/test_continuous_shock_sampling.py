@@ -182,6 +182,56 @@ class ContinuousShockSamplingTests(unittest.TestCase):
 
         self.assertFalse(bool(valid[2]))
 
+    def test_opposing_normal_stops_joined_zone_and_exterior_candidates(self):
+        pressure=jnp.array([11.,11.,11.,11.,1.,1.,11.,11.,11.,11.,11.,11.])
+        density=jnp.ones(12)
+        # A later return to the original direction must not erase the first
+        # reversal. Checking just the final endpoint would miss this barrier.
+        direction=jnp.ones((1,12)).at[0,5:7].set(-1.)
+        zone=jnp.zeros(12,dtype=jnp.bool_).at[2:7].set(True)
+        for sampler,kwargs in (
+            (get_adaptive_post_pre_shock_values,dict(outside_offset=.5)),
+            (get_profile_aware_post_pre_shock_values,dict(outside_offsets=(.25,.5,1.,3.))),
+        ):
+            with self.subTest(sampler=sampler.__name__):
+                post,pre,_,_,valid,_,distance=jax.jit(
+                    lambda d,z,p,r:sampler(d,z,p,r,max_steps=8,**kwargs)
+                )(direction,zone,pressure,density)
+                self.assertTrue(bool(valid[3]))
+                self.assertAlmostEqual(float(post[3]),11.)
+                self.assertAlmostEqual(float(pre[3]),1.)
+                self.assertLessEqual(3.+float(distance[3]),4.25)
+
+    def test_opposing_normal_does_not_fabricate_three_point_plateau(self):
+        pressure=jnp.array([11.,11.,11.,11.,1.,1.,11.,11.,11.,11.,11.,11.])
+        direction=jnp.ones((1,12)).at[0,5:7].set(-1.)
+        zone=jnp.zeros(12,dtype=jnp.bool_).at[2:7].set(True)
+        *_,valid,_,_,_,_,_,_=get_plateau_aware_post_pre_shock_values(
+            direction,zone,pressure,jnp.ones(12),max_steps=8)
+        # There is too little unobstructed space for three plateau samples.
+        self.assertFalse(bool(valid[3]))
+
+    def test_oblique_opposing_normal_bounds_refined_sampling_in_2d_and_3d(self):
+        for ndim in (2,3):
+            with self.subTest(ndim=ndim):
+                shape=(16,)*ndim
+                x=jnp.indices(shape)[0]
+                low=(x>=3)&(x<=6)
+                pressure=jnp.where(low,1.,11.)
+                normal=jnp.ones((ndim,)+shape)/np.sqrt(ndim)
+                reversed_region=(x>=4)&(x<7)
+                direction=jnp.where(reversed_region[None],-normal,normal)
+                zone=(x>=1)&(x<=6)
+                origin=(2,)*ndim
+                *_,valid,post_distance,pre_distance=get_profile_aware_post_pre_shock_values(
+                    direction,zone,pressure,jnp.ones(shape),max_steps=8,
+                    center_offsets=.2*direction)
+                self.assertTrue(bool(valid[origin]))
+                endpoint=np.array(origin)+(.2+float(pre_distance[origin]))/np.sqrt(ndim)
+                nearest=tuple(np.floor(endpoint+.5).astype(int))
+                self.assertFalse(bool(reversed_region[nearest]))
+                self.assertLess(float(pre_distance[origin]),1.5*np.sqrt(ndim)-.2)
+
     def test_profile_sampling_reaches_pressure_plateaus(self):
         pressure = jnp.array(
             [9.0, 9.0, 8.8, 8.0, 6.0, 3.0, 1.2, 1.0, 1.0]

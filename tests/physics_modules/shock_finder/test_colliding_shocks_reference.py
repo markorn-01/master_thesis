@@ -94,6 +94,20 @@ class KnownCollisionDetectionTests(unittest.TestCase):
             self.assertGreaterEqual(rows[0]['coverage_2cell'],.99)
             self.assertLess(abs(rows[0]['mach_relative_error']),.05)
 
+    def test_two_cell_opposing_fronts_keep_both_surfaces_and_correct_mach(self):
+        # Regression for the independently known failures: incoming sampling
+        # used to cross the other front; outgoing surface ties erased both.
+        for phase in ('incoming','outgoing'):
+            with self.subTest(phase=phase):
+                time=self.reference.time_at_separation(phase,2,32)
+                profile,structure=self.reference.cell_averages(32,time)
+                rows,count=score_fronts(self.evaluate(profile),structure,32)
+                self.assertEqual(len(rows),2)
+                self.assertGreater(count,0)
+                for row in rows:
+                    self.assertEqual(row['coverage_1cell'],1.)
+                    self.assertLess(abs(row['mach_relative_error']),1e-5)
+
     def test_isobaric_contact_produces_no_surface(self):
         for width in (1,3,5):
             profile,_=contact_control(32,width)

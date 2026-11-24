@@ -56,6 +56,19 @@ class ShockSurface3DTests(unittest.TestCase):
         self.assertEqual(surface.shape, shape)
         self.assertFalse(np.asarray(surface).any())
 
+    def test_opposing_flat_minima_keep_one_surface_per_orientation(self):
+        # Opposite normals at the middle must not disqualify each other.
+        for axis in range(3):
+            with self.subTest(axis=axis):
+                shape=(8,8,8)
+                index=jnp.indices(shape)[axis]
+                zone=(index>=2)&(index<=5)
+                divergence=jnp.where(zone,-7.,0.)
+                direction=_constant_direction(shape,axis)
+                direction=direction.at[axis].set(jnp.where(index<4,-1.,1.))
+                result=jax.jit(_find_shock_surface_3d)(divergence,zone,direction)
+                np.testing.assert_array_equal(np.asarray(result),np.asarray((index==3)|(index==4)))
+
     def test_boundary_zone_does_not_wrap_to_opposite_boundary(self):
         shape = (7, 6, 5)
         shock_zones = jnp.zeros(shape, dtype=jnp.bool_)

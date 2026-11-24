@@ -1,0 +1,36 @@
+{
+  "date": "2026-11-24",
+  "backend": "cpu",
+  "python": "3.10",
+  "jax": "0.6.2",
+  "test_runs": [
+    {
+      "command": "python -m unittest discover -s tests/physics_modules/shock_finder -p 'test_*.py'",
+      "tests": 60,
+      "passed": true,
+      "elapsed_seconds": 30.491
+    },
+    {
+      "command": "python -m unittest tests.experiments.test_shared_shock_analyzer tests.experiments.test_online_bubble tests.experiments.test_sparse_surfaces tests.experiments.test_online_temporal tests.experiments.test_collision_detection_audit",
+      "tests": 28,
+      "passed": true,
+      "elapsed_seconds": 13.424
+    }
+  ],
+  "total_tests": 88,
+  "all_passed": true,
+  "reference_cases": 96,
+  "matched_saved_bubble_states": 10,
+  "gpu_validation": "not_run",
+  "fingerprints_rechecked": true,
+  "regression_test_sha256": {
+    "tests/physics_modules/shock_finder/test_colliding_shocks_reference.py": "e6c227deaa8bf3e7e9b6ec5a4cc214b8069df64f163cae7782ba3368fa5b8591",
+    "tests/physics_modules/shock_finder/test_continuous_shock_sampling.py": "09083cdf3a96cac3ef35bdb658fc18656a53013b0449e9924da87c31f447f3ca",
+    "tests/physics_modules/shock_finder/test_shock_surface_3d.py": "0660aec2fa33c06ed2b1abc8031f1aaed6c19a87046032f5b86e2842906df902"
+  },
+  "notes": [
+    "Known two-cell failures corrected at 32^3 and 64^3.",
+    "Bubble zone rejection unchanged on identical saved gas states.",
+    "Sub-cell/broadening limitations remain; no performance or physical-convergence claim."
+  ]
+}

@@ -1,5 +1,12 @@
 # Known-reference colliding-shock test
 
+This document describes the **frozen pre-correction baseline** in
+`outputs/colliding_shocks_reference_n032_n064/`. The opposing-front correction
+and its November 24 validation are documented in
+[OPPOSING_FRONT_CORRECTION.md](OPPOSING_FRONT_CORRECTION.md). Historical source
+hashes and results remain unchanged; running the benchmark on current code
+now evaluates the corrected finder.
+
 This benchmark answers a narrower question than the wind-bubble audit:
 **can the unchanged production finder recover shocks whose presence,
 positions, and strengths are known without using that finder?**
@@ -126,6 +133,10 @@ The trace expects the default 64^3 cases. The benchmark accepts `--require-gpu`
 for optional backend confirmation; GPU execution is not required for this
 analytic-state experiment. Source fingerprints are saved and checked. The
 trace requires the benchmark sources to remain unchanged since the run.
+The historical failure trace additionally expects the pre-correction behavior;
+use revision `07a8ec16a32ee50a3f444008942594d68aea54f8` in a separate checkout
+to reproduce that baseline. For current code, use the corrected benchmark and
+comparison commands in `OPPOSING_FRONT_CORRECTION.md` instead.
 
 Recorded artifacts: `outputs/colliding_shocks_reference_n032_n064/` and
 `outputs/colliding_shocks_sampling_trace_n064/`.

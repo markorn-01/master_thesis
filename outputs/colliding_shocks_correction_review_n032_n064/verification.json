@@ -1,0 +1,38 @@
+{
+  "completed": true,
+  "targeted_cases": [
+    "n032_incoming_s2_f1",
+    "n032_outgoing_s2_f1",
+    "n064_incoming_s2_f1",
+    "n064_outgoing_s2_f1"
+  ],
+  "targeted_cases_pass": true,
+  "before_accurate_cases": 22,
+  "after_accurate_cases": 28,
+  "improved_cases": [
+    "n032_incoming_s2_f1",
+    "n032_outgoing_s2_f1",
+    "n032_incoming_s4_f3",
+    "n064_incoming_s2_f1",
+    "n064_outgoing_s2_f1",
+    "n064_incoming_s4_f3"
+  ],
+  "regressed_cases": [],
+  "isolated_and_widest_exact_controls_pass": true,
+  "contact_surface_samples": 0,
+  "one_dimensional_trace_matches_3d_mach": true,
+  "input_sha256": {
+    "outputs/colliding_shocks_reference_n032_n064/verification.json": "12303d6b6c93938a049c0cc0f7589381a3ff4d5426b1bf882a2da2a26a4bd4b6",
+    "outputs/colliding_shocks_corrected_n032_n064/verification.json": "abe3bd27215fa772e052cc221de60bf7e168c75247e80e1f53bf9ecfe981de35",
+    "outputs/colliding_shocks_reference_n032_n064/summary.csv": "516f0683e2fd3765fd7f43987b68bfb4570350a998c6fd8d0a483b9d7b274bc0",
+    "outputs/colliding_shocks_corrected_n032_n064/summary.csv": "f344efc2f8533a6afcb273b8895ec71956b878832d304d498303581dda6904e8",
+    "outputs/colliding_shocks_corrected_n032_n064/profiles/n064_incoming_s2_f1.npz": "81498663d91dcc62902f68f6917f9a7d31ac7860b5069a79d8c76dd7a0bd63cc",
+    "outputs/colliding_shocks_reference_n032_n064/profiles/n064_incoming_s2_f1.npz": "a95da56f07329dd21544d9891786d3c64892cab72c71bc156b50debe22c5d569",
+    "outputs/colliding_shocks_corrected_n032_n064/profiles/n064_outgoing_s2_f1.npz": "b05cfa6ce10c362dfd14df33ba22a43c9dd4d0c4ebf59671aaa1a058d705ec4f",
+    "outputs/colliding_shocks_reference_n032_n064/profiles/n064_outgoing_s2_f1.npz": "5bc11e11efd9b9e5431a0556a1f235e1935a66833e815224d5518e389b0f2985"
+  },
+  "source_sha256": {
+    "/Users/minhn/Documents/Heidelberg University/fifth_semester/Thesis/master_thesis/experiments/shock/review_colliding_shock_correction.py": "20404b76bcec99912196fd1533f8b97923fdd5e275463eb8a0b4bdf7ad1689db"
+  },
+  "scope": "Same analytic inputs, corrected detection/sampling. Not bubble validation or hydrodynamic convergence."
+}

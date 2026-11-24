@@ -351,6 +351,23 @@ def _find_shock_surface_3d(
         shock_zones.shape, shock_direction, distance=1.0
     )
 
+    # A joined Boolean zone can contain two opposing fronts. Compare their
+    # compression only within the same orientation, or equal minima can
+    # disqualify each other and remove both surfaces. Nearest-neighbor normal
+    # samples identify the same cells as the Boolean zone samples above.
+    for distance, side in ((-1.0, "backward"), (1.0, "forward")):
+        alignment = sum(
+            shock_direction[axis]
+            * _sample_along_direction(
+                shock_direction[axis], shock_direction, distance, order=0
+            )
+            for axis in range(shock_direction.shape[0])
+        )
+        if side == "backward":
+            zone_backward = zone_backward & (alignment >= 0.0)
+        else:
+            zone_forward = zone_forward & (alignment >= 0.0)
+
     # Strict comparison forward and non-strict comparison backward provide a
     # deterministic tie break for a flat two-cell minimum.
     better_forward = zone_forward & (div_forward < div_v)
