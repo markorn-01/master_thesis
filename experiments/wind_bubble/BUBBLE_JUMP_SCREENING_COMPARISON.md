@@ -94,6 +94,12 @@ temperature rejection or noncompressive cell alone. Failed/unavailable controls
 force the classification to remain ambiguous. The earlier failed-control
 diagnosis is preserved, not replaced with a physical-absence claim.
 
+A subsequent [bounded outer-control calibration](OUTER_CONTROL_CALIBRATION.md)
+uses gas and motion from the same high-cadence run at 0.08 and 0.12. Longer
+speed fits and quarter-cell endpoint searches do not repair the strict jump
+control. All fifteen known-state checks pass, but all eight bubble comparisons
+fail. This narrows the limitation without changing these ambiguous labels.
+
 ## Integrity and limits
 
 Captured full-state hashes match their original GPU audits. Source-code hashes

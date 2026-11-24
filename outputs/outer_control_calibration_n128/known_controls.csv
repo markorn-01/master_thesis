@@ -1,0 +1,16 @@
+case,fit_events,expected_compatible,compatible_10pct,passed,measured_x_speed,reference_speed
+incident_M3,9,True,True,True,3.904707224574217,3.872983346207417
+incident_M3,17,True,True,True,3.88236573030613,3.872983346207417
+incident_M3,33,True,True,True,3.875408222541364,3.872983346207417
+reflected,9,True,True,True,-2.1623763023113494,-2.1516574145596765
+reflected,17,True,True,True,-2.1498807187559454,-2.1516574145596765
+reflected,33,True,True,True,-2.151599166569958,-2.1516574145596765
+contact,9,False,False,True,,2.0
+contact,17,False,False,True,,2.0
+contact,33,False,False,True,,2.0
+weak_M1p2,9,True,True,True,1.5188411145342975,1.5491933384829666
+weak_M1p2,17,True,True,True,1.5538271948991456,1.5491933384829666
+weak_M1p2,33,True,True,True,1.5483965860660893,1.5491933384829666
+smooth_isentropic_profile,9,False,False,True,0.9234530285105269,
+smooth_isentropic_profile,17,False,False,True,0.9743068274786545,
+smooth_isentropic_profile,33,False,False,True,1.0065366823556636,
