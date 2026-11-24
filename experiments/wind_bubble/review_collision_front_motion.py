@@ -42,6 +42,44 @@ def persistent_runs(observations, key, minimum=5, late_only=False):
     return result
 
 
+def mark_outer_positive_controls(observations):
+    """Distinguish the outermost fronts from other noncentral pressure ridges.
+
+    The historical ``outer_control`` region is only a spatial window. It can
+    include an inner wind front and is not itself a positive-control identity.
+    On the left/right choose the minimum/maximum x ridge at each event, then
+    require its pressure normal to point inward, from ambient to shocked gas.
+    A tied outermost candidate is left unclassified. Inner accepted ridges
+    cannot replace a failed or unavailable outermost front.
+    """
+    events = {}
+    for row in observations:
+        row['outermost_positive_control_candidate'] = False
+        row['outer_control_compatible_10pct'] = False
+        events.setdefault(row['event'], []).append(row)
+    for rows in events.values():
+        for left in (True, False):
+            pool = [r for r in rows if r['region'] == 'outer_control'
+                    and (r['x'] < .3125 if left else r['x'] > .6875)]
+            if not pool:
+                continue
+            edge = (min if left else max)(r['x'] for r in pool)
+            selected = [r for r in pool if abs(r['x']-edge) <= 1.e-12]
+            if len(selected) != 1:
+                continue
+            row = selected[0]
+            nx = row.get('normal_x')
+            if nx is None or (nx <= 0 if left else nx >= 0):
+                continue
+            row['outermost_positive_control_candidate'] = True
+            row['outer_control_compatible_10pct'] = bool(row['compatible_10pct'])
+        both = all(any(r['outer_control_compatible_10pct'] and
+                       (r['x'] < .3125 if left else r['x'] > .6875) for r in rows)
+                   for left in (True, False))
+        for row in rows:
+            row['both_outer_controls_pass_at_event'] = both
+
+
 def production_comparison(observations, stages, x, y, z, names):
     """Cell-center mask support within two cells; not refined point equivalence."""
     if 'shock_surface' not in names:
@@ -100,6 +138,7 @@ def run(root, output=None):
     settings = MotionSettings(**{key: value for key, value in meta['motion_settings'].items()})
     observations, pairs, tracks = analyze_motion(lines, actual, x, dy, dz, settings,
         source_positions=meta['source_positions'], source_radius=meta['injection_radius'])
+    mark_outer_positive_controls(observations)
     production_comparison(observations, np.asarray(stages), x, y, z, meta['stage_names'])
     output.mkdir(parents=True)
     write_csv(output/'front_observations.csv', observations)
@@ -108,7 +147,8 @@ def run(root, output=None):
     missing = persistent_runs(observations, 'above_threshold_without_nearby_surface_10pct', late_only=True)
     weak = [r for r in persistent_runs(observations, 'compatible_below_detection_threshold_10pct', late_only=True)
             if r['region'].startswith('central')]
-    outer = [r for r in runs if r['region'] == 'outer_control']
+    outer = persistent_runs(observations, 'outer_control_compatible_10pct')
+    noncentral = [r for r in runs if r['region'] == 'outer_control']
     central_late = [r for r in persistent_runs(observations, 'compatible_10pct', late_only=True)
                     if r['region'].startswith('central')]
     missing = [r for r in missing if r['region'].startswith('central')]
@@ -123,6 +163,11 @@ def run(root, output=None):
         measured_speed_from='Nine-event local fit of pressure-ridge position versus time; not inferred from jump states.',
         pressure_feature_tracks=len(tracks), observations=len(observations), sampled_pairs=len(pairs),
         persistent_outer_controls=outer, persistent_late_central_fronts=central_late,
+        persistent_noncentral_compatible_features=noncentral,
+        outer_control_definition='Outermost left/right pressure ridge per event, with ambient-to-downstream pressure orientation; inner noncentral fronts do not qualify.',
+        events_with_both_outer_controls_passing=sum(
+            any(r['both_outer_controls_pass_at_event'] for r in observations if r['event'] == event)
+            for event in range(len(actual))),
         persistent_late_central_fronts_without_nearby_production_surface=missing if masks_recorded else None,
         production_masks_recorded=masks_recorded, production_comparison_performed=masks_recorded,
         persistent_late_weak_central_fronts=weak,
@@ -133,6 +178,7 @@ def run(root, output=None):
             'The fitted-speed scatter is not a complete physical uncertainty estimate.',
             'The x-directed strip cannot certify strongly tilted fronts or other parts of the interface.',
             'A failed outer positive control makes central non-detection inconclusive.',
+            'Passing an outer control at one time does not validate central tests at other times.',
             'No accepted central front does not establish absence of physical shocks.'],
         settings=asdict(settings), input_sha256=hashes,
         analysis_source_sha256={str(Path(__file__)): sha(__file__),

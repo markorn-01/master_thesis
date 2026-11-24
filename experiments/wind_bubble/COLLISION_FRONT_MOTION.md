@@ -117,6 +117,14 @@ evidence. Late central evidence is reported separately for t >= 0.06.
 
 ## Required outcome checks
 
+The legacy `outer_control` region name denotes a spatial window, not a shock
+identity. Positive controls must be the outermost left/right pressure ridges
+with the appropriate ambient-to-downstream pressure orientation. Passing inner
+features cannot replace them. The corrected review records these identities
+and whether both outer controls pass at the same event. See the
+[128/256 comparison](FRONT_MOTION_RESOLUTION_COMPARISON.md) for the correction
+to the initial 256-cubed summary and the preserved original GPU report.
+
 - **Outer shock control fails:** central non-detection is inconclusive.
 - **Persistent central front passes motion and jump checks, without a nearby
   production surface, above Mach 1.3:** evidence of a missed physical front

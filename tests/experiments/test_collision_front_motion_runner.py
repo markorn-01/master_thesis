@@ -10,7 +10,9 @@ import numpy as np
 from experiments.wind_bubble.run_collision_front_motion import (
     REFERENCE, STAGES, StripWriter, experiment_plan, strip_indices,
 )
-from experiments.wind_bubble.review_collision_front_motion import persistent_runs, production_comparison
+from experiments.wind_bubble.review_collision_front_motion import (
+    persistent_runs, production_comparison, mark_outer_positive_controls,
+)
 
 
 class CollisionMotionRunnerTests(unittest.TestCase):
@@ -65,6 +67,44 @@ class CollisionMotionRunnerTests(unittest.TestCase):
         rows += [dict(track=1, region='central_left', event=i, time=.06+.001*i, accepted=True)
                  for i in (7, 8)]
         self.assertEqual(len(persistent_runs(rows, 'accepted')), 1)
+
+    def test_inner_passing_features_cannot_replace_outer_positive_controls(self):
+        rows = []
+        for event in range(9):
+            for track, position, nx, accepted in ((0, .16, 1., False), (1, .295, -1., True),
+                                                  (2, .84, -1., False), (3, .705, 1., True)):
+                rows.append(dict(track=track, event=event, time=.128+.0005*event,
+                    region='outer_control', x=position, normal_x=nx, compatible_10pct=accepted))
+        mark_outer_positive_controls(rows)
+        self.assertEqual(len(persistent_runs(rows, 'compatible_10pct')), 2)
+        self.assertEqual(persistent_runs(rows, 'outer_control_compatible_10pct'), [])
+        self.assertFalse(any(r['both_outer_controls_pass_at_event'] for r in rows))
+
+    def test_outer_controls_are_matched_in_time_and_require_outward_front_geometry(self):
+        rows = [dict(track=0, event=0, time=0., region='outer_control', x=.16,
+                     normal_x=1., compatible_10pct=True),
+                dict(track=1, event=0, time=0., region='outer_control', x=.84,
+                     normal_x=-1., compatible_10pct=True),
+                dict(track=0, event=1, time=.01, region='outer_control', x=.15,
+                     normal_x=-1., compatible_10pct=True)]
+        mark_outer_positive_controls(rows)
+        self.assertTrue(all(r['both_outer_controls_pass_at_event'] for r in rows[:2]))
+        self.assertFalse(rows[2]['outer_control_compatible_10pct'])
+        self.assertFalse(rows[2]['both_outer_controls_pass_at_event'])
+
+    def test_same_orientation_inner_feature_cannot_replace_unavailable_outermost_fit(self):
+        rows = [dict(track=0, event=0, region='outer_control', x=.16,
+                     compatible_10pct=False),
+                dict(track=1, event=0, region='outer_control', x=.25,
+                     normal_x=1., compatible_10pct=True)]
+        mark_outer_positive_controls(rows)
+        self.assertFalse(any(r['outer_control_compatible_10pct'] for r in rows))
+
+    def test_tied_outermost_features_do_not_create_an_arbitrary_control(self):
+        rows = [dict(track=i, event=0, region='outer_control', x=.16,
+                     normal_x=1., compatible_10pct=True) for i in (0, 1)]
+        mark_outer_positive_controls(rows)
+        self.assertFalse(any(r['outer_control_compatible_10pct'] for r in rows))
 
     def test_production_support_uses_the_requested_event_and_3d_distance(self):
         n = 32; x = (np.arange(n)+.5)/n
