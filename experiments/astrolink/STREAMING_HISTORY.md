@@ -12,7 +12,9 @@ Saved-data replay is validated for unequal two bubbles at 128³ and three
 bubbles at 64³. The component is now optionally connected to the ordered
 hydro host callback through `--track-shocks`; local CPU integration checks
 are separate from the replay results below. Remote GPU callback validation
-is pending. See [callback integration](../wind_bubble/ONLINE_GROUP_TRACKING.md).
+has since completed for the recorded two-bubble 32/64-cubed and three-bubble
+64-cubed configurations. See the archived comparisons in
+[callback integration](../wind_bubble/ONLINE_GROUP_TRACKING.md).
 No physical convergence result or tracking-accuracy improvement is claimed
 by these execution-workflow comparisons.
 
@@ -113,6 +115,8 @@ python -m unittest tests.experiments.test_streaming_history \
   tests.experiments.test_group_history_table
 ```
 
-The next validation boundary is a small online/offline GPU test of the new
-callback integration. Matching remains substantial CPU work; buffering alone
-does not establish efficient many-bubble scaling.
+The callback integration has now passed its recorded GPU comparisons. The
+[complete-workflow tracking benchmark](../wind_bubble/TRACKING_BENCHMARK.md)
+also completed: matching remains substantial CPU work, and buffering alone
+does not establish efficient many-bubble scaling. These later results do not
+retroactively change the versions or scope of the replay archives above.
