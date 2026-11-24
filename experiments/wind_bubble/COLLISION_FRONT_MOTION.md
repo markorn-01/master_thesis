@@ -45,6 +45,34 @@ postprocessing needs a repair, reuse the completed integration:
   --analysis-dir outputs/collision_front_motion_iwr_n128/review_retry
 ```
 
+## Matched 256-cubed resolution check
+
+The runner also accepts `--num-cells 256`. Keep `--num-events 321 --t-end 0.16`
+to match the completed high-cadence 128-cubed schedule, fixed physical injection
+radius, and prescribed source budgets. Source coefficients are adjusted using
+the actual discrete injection masks; the physical budget is not multiplied
+by eight. The primitive strip payload is about 26.3 MB before compression.
+Detection masks are still computed on the full grid; small saved strips do
+not imply negligible GPU memory or diagnostic cost. Actual 256-cubed memory
+and runtime have not yet been measured.
+
+After checking that GPU 1 on compgpu9 is free and the environment works:
+
+```sh
+export CUDA_VISIBLE_DEVICES=1 XLA_PYTHON_CLIENT_PREALLOCATE=false
+"$HOME/.venvs/master-thesis-py312/bin/python" \
+  -m experiments.wind_bubble.run_collision_front_motion \
+  --num-cells 256 --num-events 321 --t-end 0.16 \
+  --require-gpu \
+  --output-dir outputs/collision_front_motion_iwr_compgpu9_n256
+```
+
+The immediate comparison is the outer-front profiles at 0.08 and 0.12,
+followed by the two edges of the collision layer. An inconclusive automatic
+assessment is a physical-validation result, not an integration failure.
+This run is not online/offline equivalence or a promise that the strict
+sampled-state check will pass at higher resolution.
+
 ## What is measured
 
 Pressure-gradient peaks propose short front paths. Adjacent-event links

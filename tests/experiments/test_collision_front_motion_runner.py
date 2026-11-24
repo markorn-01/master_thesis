@@ -15,10 +15,13 @@ from experiments.wind_bubble.review_collision_front_motion import persistent_run
 
 class CollisionMotionRunnerTests(unittest.TestCase):
     def test_original_source_budgets_are_preserved_at_supported_grids(self):
-        for n in (32, 64, 128):
+        for n in (32, 64, 128, 256):
             reference, budget, times, _ = experiment_plan(REFERENCE, n, 321, .16)
             self.assertEqual(times.shape, (321,))
             np.testing.assert_allclose(budget['discrete_energy_rates'], reference['discrete_energy_rates'], rtol=1.e-12)
+            np.testing.assert_allclose(budget['discrete_mass_rates'], reference['discrete_mass_rates'], rtol=1.e-12)
+            self.assertEqual(times[160], np.float32(.08))
+            self.assertEqual(times[240], np.float32(.12))
             for target in (.375, .5):
                 coords = (strip_indices(n, target)+.5)/n
                 self.assertLess(coords[0], target-1/n)

@@ -1,8 +1,10 @@
 """Capture frequent small strips for a measured-speed collision-front test.
 
-Designed for one 128³ run on a 12 GiB GPU. No full gas snapshots, production
-Mach grids, grouping, or display meshes are retained. Existing production
-stage masks are sampled from full-grid calculations for comparison only.
+The 128³ run was completed on a 12 GiB GPU. A 256³ resolution check is
+supported; its actual memory use must be measured on the chosen device.
+No full gas snapshots, production Mach grids, grouping, or display meshes
+are retained. Existing production stage masks are sampled from full-grid
+calculations for comparison only.
 """
 import argparse
 from dataclasses import asdict
@@ -44,8 +46,8 @@ def strip_indices(n, center):
 
 
 def experiment_plan(reference_path, n, count, t_end):
-    if n not in (32, 64, 128):
-        raise ValueError('Use 128 cells for the physical check; 32/64 are supported for controls.')
+    if n not in (32, 64, 128, 256):
+        raise ValueError('Use 128/256 cells for the resolution check; 32/64 are supported for controls.')
     if count < 9 or not np.isfinite(t_end) or not 0 < t_end <= .16:
         raise ValueError('Require at least nine events and 0 < t-end <= 0.16.')
     reference = json.loads(reference_path.read_text())
