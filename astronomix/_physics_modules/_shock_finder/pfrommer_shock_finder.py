@@ -13,7 +13,10 @@ from astronomix.option_classes.simulation_config import (
 
 from astronomix._physics_modules._shock_finder._data_structures import ShockFinderResult
 from astronomix._physics_modules._shock_finder._gradients import _calculate_shock_direction
-from astronomix._physics_modules._shock_finder._shock_zones import identify_shock_zones
+from astronomix._physics_modules._shock_finder._shock_zones import (
+    identify_shock_zones, get_adaptive_post_pre_shock_values,
+    get_profile_aware_post_pre_shock_values, _sample_field_at_distances,
+)
 from astronomix._physics_modules._shock_finder._shock_surface import (
     calculate_shock_surface_offsets,
     identify_shock_surface,
@@ -27,6 +30,7 @@ from astronomix._physics_modules._shock_finder._energy_dissipation import calcul
         "registered_variables",
         "config",
         "profile_aware_mach",
+        "transition_aware_detection",
     ],
 )
 def find_shocks_pfrommer(
@@ -36,6 +40,7 @@ def find_shocks_pfrommer(
     helper_data: HelperData,
     mach_min: float = 1.3,
     profile_aware_mach: bool = False,
+    transition_aware_detection: bool = False,
 ) -> ShockFinderResult:
     """
     Main entry point: Identify shocks using Pfrommer et al. 2017 methodology.
@@ -58,6 +63,11 @@ def find_shocks_pfrommer(
                               from short pressure profiles beyond each zone
                               boundary; False preserves the established
                               first-outside-sample estimator
+        transition_aware_detection: opt in to bounded additional jump candidates
+                              across compressive, aligned transitions. Enforces
+                              mach_min and increasing sampled entropy at the
+                              reconstructed surface endpoints. The
+                              default leaves established results unchanged.
 
     Returns:
         ShockFinderResult
@@ -73,6 +83,7 @@ def find_shocks_pfrommer(
     shock_zones = identify_shock_zones(
         primitive_state, config, registered_variables,
         helper_data, shock_direction, mach_min,
+        transition_aware_detection=transition_aware_detection,
     )
 
     # Phase 3: shock surface (*spatial_shape)
@@ -95,6 +106,25 @@ def find_shocks_pfrommer(
         config, registered_variables,
         profile_aware=profile_aware_mach,
     )
+
+    if transition_aware_detection:
+        # The broader preliminary screen must not silently lower the strength
+        # threshold of reported surfaces. Keep every output field consistent
+        # with this final acceptance, including IDs, offsets, flux and counts.
+        sampler = get_profile_aware_post_pre_shock_values if profile_aware_mach else get_adaptive_post_pre_shock_values
+        offsets = shock_direction * surface_offsets[jnp.newaxis, ...]
+        _, _, _, _, valid, post_distance, pre_distance = sampler(
+            shock_direction, shock_zones, pressure, pressure/density,
+            max_steps=8, center_offsets=offsets,
+        )
+        log_entropy = jnp.log(jnp.maximum(pressure, 1e-30)) - (5.0/3.0)*jnp.log(jnp.maximum(density, 1e-30))
+        entropy2, entropy1 = _sample_field_at_distances(
+            log_entropy, shock_direction, post_distance, pre_distance, offsets,
+        )
+        shock_surface = (shock_surface & valid & jnp.isfinite(mach_numbers)
+                         & (mach_numbers >= mach_min) & (entropy2-entropy1 > 1e-5))
+        surface_offsets = jnp.where(shock_surface, surface_offsets, 0.0)
+        mach_numbers = jnp.where(shock_surface, mach_numbers, 0.0)
     
     # Phase 5: thermal-energy flux at shock-surface cells
     thermal_energy_flux = calculate_thermal_energy_flux(

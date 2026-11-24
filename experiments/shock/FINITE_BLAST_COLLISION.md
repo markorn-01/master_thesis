@@ -140,6 +140,10 @@ not an exact oracle for a discontinuity or its hidden endpoint states.
 
 ## Next bounded implementation target
 
+The subsequent [transition-jump screening implementation](TRANSITION_JUMP_SCREENING.md)
+adds an explicit opt-in path and records its own replay validation. This document
+and its archived numbers describe the preceding, unchanged baseline experiment.
+
 Use the archived finite-blast misses as regressions for the preliminary jump
 measurement. Keep the final reported physical Mach threshold at 1.3. A candidate
 change must recover the supported fronts while preserving the known separated

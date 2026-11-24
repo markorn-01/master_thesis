@@ -1050,11 +1050,69 @@ def _shock_zone_criterion_minimum_mach(
     return (log_p_jump >= log_p_min) & (log_T_jump >= log_T_min)
 
 
+def _sample_field_at_distances(field, direction, post_distance, pre_distance, center_offsets=None):
+    """Interpolate a diagnostic at already selected physical ray endpoints.
+
+    The caller supplies endpoint validity from its guarded state sampler. In
+    particular, a signed scalar such as log entropy must not participate in
+    the profile sampler's positive-thermodynamic-field selection.
+    """
+    dtype = jnp.result_type(field.dtype, jnp.float32)
+    coordinates = jnp.stack(jnp.meshgrid(
+        *[jnp.arange(size, dtype=dtype) for size in field.shape], indexing='ij'), axis=0)
+    if center_offsets is not None:
+        coordinates = coordinates + center_offsets
+    post = coordinates-direction*post_distance[jnp.newaxis, ...]
+    pre = coordinates+direction*pre_distance[jnp.newaxis, ...]
+    return (map_coordinates(field, post, order=1, mode='nearest'),
+            map_coordinates(field, pre, order=1, mode='nearest'))
+
+
+def _transition_jump_candidates(pressure, density, shock_direction, provisional_zone,
+                                mach_min=1.3):
+    """Bounded additional candidates across a compressive, aligned transition.
+
+    This is a screening extension, not a replacement Mach estimator. The
+    provisional mask is compression AND density/temperature alignment; it
+    does not depend on a jump that has yet to be measured. Search independently
+    for both exits, at most eight cell widths, using the existing opposing-
+    normal and domain guards. Require both jumps at the SAME endpoints and
+    positive sampled entropy beyond float32 roundoff. An isentropic ramp must
+    not become a new shock simply because the baseline is longer.
+
+    Only used by the opt-in transition-aware hydrodynamic finder. A final
+    reconstructed Mach cut is applied by that caller after surface selection.
+    The entropy floor is numerical, not a universal smooth-flow classifier.
+    """
+    gamma = 5.0 / 3.0
+    p2, p1, rho2, rho1, valid, post_distance, pre_distance = get_adaptive_post_pre_shock_values(
+        shock_direction, provisional_zone, pressure, density, max_steps=8,
+    )
+    entropy = jnp.log(jnp.maximum(pressure, 1e-30)) - gamma*jnp.log(jnp.maximum(density, 1e-30))
+    entropy2, entropy1 = _sample_field_at_distances(
+        entropy, shock_direction, post_distance, pre_distance,
+    )
+    log_p = jnp.log(jnp.maximum(p2, 1e-30)) - jnp.log(jnp.maximum(p1, 1e-30))
+    log_rho = jnp.log(jnp.maximum(rho2, 1e-30)) - jnp.log(jnp.maximum(rho1, 1e-30))
+    m2 = mach_min**2
+    p_min = (2*gamma*m2-(gamma-1))/(gamma+1)
+    rho_min = (gamma+1)*m2/((gamma-1)*m2+2)
+    positive = (p1 > 0) & (p2 > 0) & (rho1 > 0) & (rho2 > 0)
+    finite = jnp.isfinite(p1) & jnp.isfinite(p2) & jnp.isfinite(rho1) & jnp.isfinite(rho2)
+    return (provisional_zone & valid & positive & finite
+            & (log_p >= jnp.log(p_min))
+            & (log_p-log_rho >= jnp.log(p_min/rho_min))
+            # Interpolate the cell entropy field at those same endpoints.
+            # Forming entropy AFTER interpolating P and rho can fabricate an
+            # entropy difference in an exactly isentropic smooth profile.
+            & (entropy2-entropy1 > 1e-5))
+
+
 # ============================================================================
 # PUBLIC INTERFACE
 # ============================================================================
 
-@partial(jax.jit, static_argnames=["registered_variables", "config"])
+@partial(jax.jit, static_argnames=["registered_variables", "config", "transition_aware_detection"])
 def identify_shock_zones(
     primitive_state: STATE_TYPE,
     config: SimulationConfig,
@@ -1062,6 +1120,7 @@ def identify_shock_zones(
     helper_data: HelperData,
     shock_direction: FIELD_TYPE,
     mach_min: float = 1.3,
+    transition_aware_detection: bool = False,
 ) -> BOOL_FIELD_TYPE:
     """
     Identify all cells in shock zones (criteria 1 AND 2 AND 3).
@@ -1074,6 +1133,8 @@ def identify_shock_zones(
         helper_data:          geometric centers etc.
         shock_direction:      unit vector field (ndim, *spatial_shape)
         mach_min:             minimum Mach threshold
+        transition_aware_detection: opt-in bounded transition-jump screening;
+                              the default retains the one-cell test
 
     Returns:
         Boolean field, shape (*spatial_shape)
@@ -1090,5 +1151,11 @@ def identify_shock_zones(
         primitive_state, config, registered_variables, helper_data,
         shock_direction, mach_min,
     )
+
+    if transition_aware_detection:
+        provisional = criterion_1 & criterion_2 & _make_interior_mask(pressure.shape)
+        criterion_3 = criterion_3 | _transition_jump_candidates(
+            pressure, density, shock_direction, provisional, mach_min,
+        )
 
     return criterion_1 & criterion_2 & criterion_3
