@@ -20,6 +20,7 @@ class MotionSettings:
     minimum_normal_x: float = .8
     entropy_signal_tolerance: float = .5
     production_mach_threshold: float = 1.3
+    ridge_windows: tuple = ((.02, .3125), (.4375, .5625), (.6875, .98))
 
 
 def measured_speed_metrics(upstream, downstream, normal, normal_speed, gamma=5/3):
@@ -96,7 +97,7 @@ def pressure_ridges(line, x, settings=MotionSettings()):
         denominator = lower-2*center+upper
         offset = np.clip(.5*(lower-upper)/denominator, -.5, .5) if denominator < 0 else 0.
         position = x[index] + offset*(x[1]-x[0])
-        if (.02 <= position <= .3125 or .4375 <= position <= .5625 or .6875 <= position <= .98):
+        if any(low <= position <= high for low, high in settings.ridge_windows):
             rows.append(dict(index=int(index), x=float(position), sign=int(np.sign(derivative[index])),
                              pressure_gradient=float(derivative[index])))
     return rows

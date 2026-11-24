@@ -1,0 +1,9 @@
+case,num_cells,scheme,riemann_solver,num_iterations,solver_mode,limiter,reconstruction_order,time_integrator,C_cfl,dtype,boundary
+shock_contact,128,HLL,0,600,0,0,1,0,0.4,float32,open boundaries; compare total conserved content with the exact finite-domain solution
+shock_contact,128,HLLC,1,600,0,0,1,0,0.4,float32,open boundaries; compare total conserved content with the exact finite-domain solution
+contact_only,128,HLL,0,600,0,0,1,0,0.4,float32,open boundaries; compare total conserved content with the exact finite-domain solution
+contact_only,128,HLLC,1,600,0,0,1,0,0.4,float32,open boundaries; compare total conserved content with the exact finite-domain solution
+shock_contact,256,HLL,0,1000,0,0,1,0,0.4,float32,open boundaries; compare total conserved content with the exact finite-domain solution
+shock_contact,256,HLLC,1,1000,0,0,1,0,0.4,float32,open boundaries; compare total conserved content with the exact finite-domain solution
+contact_only,256,HLL,0,1000,0,0,1,0,0.4,float32,open boundaries; compare total conserved content with the exact finite-domain solution
+contact_only,256,HLLC,1,1000,0,0,1,0,0.4,float32,open boundaries; compare total conserved content with the exact finite-domain solution
