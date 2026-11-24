@@ -1,0 +1,45 @@
+{
+  "local_validation_completed": true,
+  "production_changed": false,
+  "gpu_128_run_completed": false,
+  "tests": {
+    "command": "python -m unittest tests.experiments.test_collision_front_motion tests.experiments.test_collision_front_motion_runner tests.experiments.test_collision_physics tests.experiments.test_collision_resolution_check tests.experiments.test_collision_detection_audit",
+    "count": 31,
+    "passed": true,
+    "seconds": 1.87
+  },
+  "cpu_runs": [
+    {
+      "kind": "smoke",
+      "num_cells": 32,
+      "backend": "cpu",
+      "events": 9,
+      "t_end": 0.004,
+      "metadata_sha256": "7f52f40efe3ab1acc561b9be7c4aeb31486863c9fcdf00f0e9a63e2309b95565",
+      "all_saved_strip_hashes_verified": true,
+      "raw_archive": "/private/tmp/collision_front_motion_cpu_smoke_n032_20261124",
+      "physical_validation": false
+    },
+    {
+      "kind": "pilot",
+      "num_cells": 32,
+      "backend": "cpu",
+      "events": 321,
+      "t_end": 0.16,
+      "metadata_sha256": "c97d31c06268f0adc6859da90d373b80f9f1dee2e05731cc9749e4fb4c23d718",
+      "all_saved_strip_hashes_verified": true,
+      "raw_archive": "/private/tmp/collision_front_motion_cpu_pilot_n032_20261124",
+      "physical_validation": false,
+      "review_verdict": "inconclusive_outer_control_failed",
+      "review_sha256": "978b0325f1e556cc65f500e6921a4f92261bf1108ae6bc33a8dc20bb48b46151"
+    }
+  ],
+  "reference_controls": "outputs/collision_front_motion_controls_n128/verification.json",
+  "source_sha256": {
+    "experiments/wind_bubble/collision_front_motion.py": "2ee7ff68b40edd055943c231114ef878cd1ee9df971578bc0bc10b82fe9f0217",
+    "experiments/wind_bubble/run_collision_front_motion.py": "b50bc92c2583ec93af0d442776d6255c1d97493db22481413a4977b3df06fefb",
+    "experiments/wind_bubble/review_collision_front_motion.py": "89c413280c3bffe6b3306d4adf25448e2964f1d24dde2daf7c92ab8c831c1cae",
+    "experiments/shock/check_collision_front_motion.py": "3e2005a2e39a82a0c5b8f6aabce2a5cf28a52ba3013104d20fe173c7d243070c"
+  },
+  "scope": "Known-reference validation and small integration/recording checks; no physical conclusion about the 128-cubed collision layer."
+}

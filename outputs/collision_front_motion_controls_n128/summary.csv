@@ -1,0 +1,6 @@
+case,shock_expected,pressure_observations,compatible_observations_10pct,persistent_runs_10pct,expected_classification_matches
+moving_shock_mach3,True,41,33,1,True
+moving_shock_mach1.2,True,41,33,1,True
+two_outgoing_shocks,True,76,60,2,True
+moving_contact,False,0,0,0,True
+translated_smooth_isentropic_profile,False,41,0,0,True
