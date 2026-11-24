@@ -1,0 +1,9 @@
+{
+  "implementation_tests_passed": true,
+  "command": "python -m unittest discover -s tests/physics_modules/shock_finder -p 'test_*.py'",
+  "tests": 89,
+  "seconds": 35.979,
+  "experimental_acceptance_passed": false,
+  "production_changed": false,
+  "comparison_report_sha256": "156c3600faa547a50ab931f2f8253d6847f0787d1ca84189e4577c4be49642a8"
+}
