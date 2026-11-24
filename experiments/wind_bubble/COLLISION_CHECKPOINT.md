@@ -15,6 +15,19 @@ result. No accepted replacement detector has been found for the disputed
 central layer. Another automatic threshold change or GPU rerun is not a
 specified solution to that problem.
 
+## Follow-up after Tobias clarified the reflected-front target
+
+The subsequent [evolved planar collision experiment](../shock/EVOLVED_COLLISION.md)
+now passes the numerical-flow and separated-front controls for incident Mach 3
+and 10 at 256/512/1024 cells. The production 3D finder recovers both outgoing
+fronts in all 276 required front checks and selects no central surface there.
+Early close-front misses/biases remain recorded at the coarsest resolution.
+
+This supplies the missing evolved-flow control; it does not revive the rejected
+reconstruction prototypes or settle the original bubble layer. Constant
+reservoirs do not model fading in hot cavities. A finite-blast extension is a
+distinct next question, now with a positive reference control to build on.
+
 ## Answer to Tobias's question
 
 There are two different questions:

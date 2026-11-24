@@ -109,7 +109,7 @@ def _find_shock_surface_1d(
     """
     shock_surface = jax.lax.fori_loop(
         1,
-        max_segment_id,
+        max_segment_id + 1,  # Exclusive upper bound: include the final zone.
         lambda segment_id, surf: find_segment_surface(jnp.int32(segment_id), surf),
         shock_surface_init,
     )
