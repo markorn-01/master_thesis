@@ -1,0 +1,4 @@
+region,sampled_pairs,necessary_conditions_pass,mass_relative_error_fails_10pct,momentum_relative_error_fails_10pct,enthalpy_relative_error_fails_10pct,tangential_error_fails_10pct,density_ratio_error_fails_10pct,endpoint_relative_change_fails_10pct,entropy_signal_fails,compatible_pairs_05pct,compatible_pairs_10pct,compatible_pairs_20pct
+outer_control,9718,7206,8854,8764,7484,444,8870,7806,4862,0,0,26
+central_left,860,149,850,807,860,114,860,860,852,0,0,0
+central_right,852,149,842,799,852,106,852,852,844,0,0,0
