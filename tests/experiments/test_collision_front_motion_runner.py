@@ -41,6 +41,23 @@ class CollisionMotionRunnerTests(unittest.TestCase):
             writer.receive(.01, state, stages, True)
             self.assertEqual(len(writer.actual), 2)
 
+    def test_flow_only_writer_omits_masks_instead_of_saving_false_detections(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            writer = StripWriter(Path(tmp)/'strips', [0.], 16, stage_names=())
+            state = np.ones((5, 16, 4, 4), dtype=np.float32)
+            writer.receive(0., state, np.empty((0, 16, 4, 4), dtype=np.uint8), True)
+            with np.load(writer.directory/'strip_0000.npz') as data:
+                self.assertNotIn('production_stages', data.files)
+                np.testing.assert_array_equal(data['primitive'], state)
+
+    def test_missing_masks_are_unknown_not_production_misses(self):
+        rows = [dict(event=0, x=.48, compatible_10pct=True,
+                     compatible_above_detection_threshold_10pct=True)]
+        production_comparison(rows, None, None, None, None, ())
+        self.assertFalse(rows[0]['production_masks_available'])
+        self.assertIsNone(rows[0]['production_shock_surface_nearby'])
+        self.assertIsNone(rows[0]['above_threshold_without_nearby_surface_10pct'])
+
     def test_persistence_requires_consecutive_events_and_cannot_bridge_a_gap(self):
         rows = [dict(track=1, region='central_left', event=i, time=.06+.001*i, accepted=True)
                 for i in (0, 1, 2, 4, 5, 6)]
@@ -79,6 +96,45 @@ class CollisionMotionRunnerTests(unittest.TestCase):
         review.assert_called_once_with(root, output)
         integrate.assert_not_called(); build.assert_not_called()
         self.assertTrue(result['reviewed'])
+
+    def test_flow_only_preserves_evolved_gas_and_never_computes_stage_masks(self):
+        import jax
+        from experiments.wind_bubble import run_collision_front_motion as runner
+        integrate = runner.time_integration
+        final_states = []
+
+        def capture(*args, **kwargs):
+            result = integrate(*args, **kwargs)
+            jax.block_until_ready(result); jax.effects_barrier()
+            final_states.append(np.asarray(result))
+            return result
+
+        with tempfile.TemporaryDirectory() as tmp:
+            roots = [Path(tmp)/'with_masks', Path(tmp)/'flow_only']
+            for flow_only, root in zip((False, True), roots):
+                args = Namespace(analyze_only=False, output_dir=root, analysis_dir=None,
+                    require_gpu=False, num_cells=32, num_events=9, t_end=.02,
+                    reference_metadata=REFERENCE, flow_only=flow_only)
+                stage_effect = AssertionError('Flow-only run called stage_fields') if flow_only else None
+                stage_options = dict(side_effect=stage_effect) if flow_only else dict(wraps=runner.stage_fields)
+                with patch.object(runner, 'time_integration', side_effect=capture), \
+                     patch.object(runner, 'stage_fields', **stage_options) as stage:
+                    # Output reduction is unrelated to evolving the gas. The
+                    # flow-only reader is exercised below with its real code.
+                    with patch('experiments.wind_bubble.review_collision_front_motion.make_figure'):
+                        report = runner.run(args)
+                self.assertEqual(stage.call_count == 0, flow_only)
+                self.assertEqual(report['production_comparison_performed'], not flow_only)
+                if flow_only:
+                    self.assertIsNone(report['persistent_late_central_fronts_without_nearby_production_surface'])
+                self.assertEqual(json.loads((root/'metadata.json').read_text())['status'], 'complete')
+            np.testing.assert_array_equal(final_states[0], final_states[1])
+            for name in sorted((roots[0]/'strips').glob('*.npz')):
+                with np.load(name) as full, np.load(roots[1]/'strips'/name.name) as flow:
+                    np.testing.assert_array_equal(full['time'], flow['time'])
+                    np.testing.assert_array_equal(full['primitive'], flow['primitive'])
+                    self.assertIn('production_stages', full.files)
+                    self.assertNotIn('production_stages', flow.files)
 
 
 if __name__ == '__main__':

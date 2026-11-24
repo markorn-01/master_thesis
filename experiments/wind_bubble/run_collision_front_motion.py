@@ -5,6 +5,8 @@ supported; its actual memory use must be measured on the chosen device.
 No full gas snapshots, production Mach grids, grouping, or display meshes
 are retained. Existing production stage masks are sampled from full-grid
 calculations for comparison only.
+Use --flow-only to omit those full-grid diagnostic calculations when capturing
+profiles for a resolution check; absent masks are never reported as negatives.
 """
 import argparse
 from dataclasses import asdict
@@ -69,13 +71,14 @@ def experiment_plan(reference_path, n, count, t_end):
 
 
 class StripWriter:
-    def __init__(self, directory, times, n):
+    def __init__(self, directory, times, n, stage_names=STAGES):
         self.directory = Path(directory)
         self.directory.mkdir(parents=True, exist_ok=False)
         self.requested = np.asarray(times)
         self.actual = []
         self.n = n
         self.hashes = {}
+        self.stage_names = tuple(stage_names)
 
     def receive(self, time, strip, stages, physical_valid):
         index = len(self.actual)
@@ -83,12 +86,15 @@ class StripWriter:
                 or self.actual and float(time) <= self.actual[-1]):
             raise ValueError('Unexpected or repeated strip event.')
         strip, stages = np.asarray(strip), np.asarray(stages)
-        if (strip.shape != (5, self.n, 4, 4) or stages.shape != (len(STAGES), self.n, 4, 4)
+        if (strip.shape != (5, self.n, 4, 4) or stages.shape != (len(self.stage_names), self.n, 4, 4)
                 or not bool(physical_valid) or not np.isfinite(strip).all()
                 or (strip[[0, 4]] <= 0).any()):
             raise ValueError('Invalid physical strip or full-domain state.')
         path = self.directory/f'strip_{index:04d}.npz'
-        np.savez_compressed(path, time=float(time), primitive=strip, production_stages=stages)
+        payload = dict(time=float(time), primitive=strip)
+        if self.stage_names:
+            payload['production_stages'] = stages
+        np.savez_compressed(path, **payload)
         self.hashes[path.name] = sha(path)
         self.actual.append(float(time))
         if index % 20 == 0 or index == len(self.requested)-1:
@@ -106,6 +112,8 @@ def run(args):
     reference, budget, times, budget_path = experiment_plan(
         args.reference_metadata, args.num_cells, args.num_events, args.t_end)
     n = args.num_cells
+    flow_only = getattr(args, 'flow_only', False)
+    stage_names = () if flow_only else STAGES
     state, config, params, registry, helper = build_problem(argparse.Namespace(
         num_cells=n, num_snapshots=len(times), t_end=args.t_end,
         num_injection_cells=n//16, plasma_beta=None))
@@ -143,21 +151,27 @@ def run(args):
         solver_dt_max=reference['solver_dt_max'], schedule_changed=True,
         schedule_scope='Dense strip output adds solver event boundaries; not same-state replay of the old sparse schedule.',
         transverse_y=((iy+.5)/n).tolist(), transverse_z=((iz+.5)/n).tolist(),
-        target_y=.375, target_z=.5, stage_names=STAGES,
+        target_y=.375, target_z=.5, stage_names=stage_names,
+        flow_only=flow_only, production_masks_retained=not flow_only,
         strip_shape=[5, n, 4, 4], uncompressed_primitive_payload_bytes=len(times)*5*n*16*4,
         source_sha256=source_hashes, production_changed=False,
         full_snapshots_retained=False, same_state_online_offline_comparison=False,
-        purpose='Measure pressure-front motion independently, test shock-frame Euler jumps, compare production masks.',
+        purpose=('Measure pressure-front motion and flow profiles independently; production masks are not recorded.'
+                 if flow_only else
+                 'Measure pressure-front motion independently, test shock-frame Euler jumps, compare production masks.'),
         motion_settings=asdict(MotionSettings()))
     meta_path = args.output_dir/'metadata.json'
     meta_path.write_text(json.dumps(meta, indent=2)+'\n')
-    writer = StripWriter(args.output_dir/'strips', times, n)
+    writer = StripWriter(args.output_dir/'strips', times, n, stage_names)
     def take_strip(array):
         return array[..., :, iy[0]:iy[-1]+1, iz[0]:iz[-1]+1]
     def callback(time, padded, _registry):
         physical = _unpad(padded, config)
-        fields = stage_fields(physical, config, registry, helper)
-        stages = jnp.stack([take_strip(fields[key]) for key in STAGES]).astype(jnp.uint8)
+        if flow_only:
+            stages = jnp.empty((0, n, 4, 4), dtype=jnp.uint8)
+        else:
+            fields = stage_fields(physical, config, registry, helper)
+            stages = jnp.stack([take_strip(fields[key]) for key in STAGES]).astype(jnp.uint8)
         valid = jnp.all(jnp.isfinite(physical)) & jnp.all(physical[0] > 0) & jnp.all(physical[4] > 0)
         jax.debug.callback(writer.receive, time, take_strip(physical), stages, valid, ordered=True)
     try:
@@ -187,6 +201,8 @@ def main():
     parser.add_argument('--analysis-dir', type=Path)
     parser.add_argument('--require-gpu', action='store_true')
     parser.add_argument('--analyze-only', action='store_true')
+    parser.add_argument('--flow-only', action='store_true',
+        help='Capture primitive strips without computing full-grid detection masks; useful for memory-limited resolution checks.')
     run(parser.parse_args())
 
 

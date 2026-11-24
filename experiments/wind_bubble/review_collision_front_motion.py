@@ -44,8 +44,16 @@ def persistent_runs(observations, key, minimum=5, late_only=False):
 
 def production_comparison(observations, stages, x, y, z, names):
     """Cell-center mask support within two cells; not refined point equivalence."""
+    if 'shock_surface' not in names:
+        for row in observations:
+            row['production_masks_available'] = False
+            row['production_shock_surface_nearby'] = None
+            row['compatible_without_nearby_surface_10pct'] = None
+            row['above_threshold_without_nearby_surface_10pct'] = None
+        return
     dx = x[1]-x[0]
     for row in observations:
+        row['production_masks_available'] = True
         mask = stages[row['event']]
         ids = np.flatnonzero(abs(x-row['x']) <= 2*dx)
         dist2 = ((x[ids, None, None]-row['x'])**2 + (y[None, :, None]-.375)**2
@@ -69,6 +77,9 @@ def run(root, output=None):
     if output.exists():
         raise ValueError('Use a fresh assessment directory with --analysis-dir.')
     hashes = {str(meta_path): sha(meta_path)}
+    masks_recorded = bool(meta['stage_names'])
+    if meta.get('production_masks_retained', masks_recorded) != masks_recorded:
+        raise ValueError('Inconsistent production-mask metadata.')
     bands, stages, actual = [], [], []
     for name, expected in sorted(meta['strip_sha256'].items()):
         path = root/'strips'/name
@@ -76,7 +87,11 @@ def run(root, output=None):
         if hashes[str(path)] != expected:
             raise ValueError(f'Saved strip changed: {path}')
         with np.load(path, allow_pickle=False) as d:
-            bands.append(d['primitive']); stages.append(d['production_stages'].astype(bool)); actual.append(float(d['time']))
+            bands.append(d['primitive']); actual.append(float(d['time']))
+            if masks_recorded:
+                stages.append(d['production_stages'].astype(bool))
+            elif 'production_stages' in d:
+                raise ValueError('Flow-only metadata conflicts with saved masks.')
     np.testing.assert_array_equal(actual, meta['actual_times'])
     np.testing.assert_allclose(actual, meta['requested_times'], rtol=0, atol=1.e-6)
     n = meta['num_cells']; x = (np.arange(n)+.5)/n
@@ -98,6 +113,7 @@ def run(root, output=None):
                     if r['region'].startswith('central')]
     missing = [r for r in missing if r['region'].startswith('central')]
     verdict = ('inconclusive_outer_control_failed' if not outer else
+               'flow_only_physical_check_no_production_mask_comparison' if not masks_recorded else
                'persistent_compatible_central_front_without_production_surface' if missing else
                'persistent_weak_central_front_below_configured_threshold' if weak else
                'persistent_central_front_requires_mask_and_threshold_review' if central_late else
@@ -107,7 +123,8 @@ def run(root, output=None):
         measured_speed_from='Nine-event local fit of pressure-ridge position versus time; not inferred from jump states.',
         pressure_feature_tracks=len(tracks), observations=len(observations), sampled_pairs=len(pairs),
         persistent_outer_controls=outer, persistent_late_central_fronts=central_late,
-        persistent_late_central_fronts_without_nearby_production_surface=missing,
+        persistent_late_central_fronts_without_nearby_production_surface=missing if masks_recorded else None,
+        production_masks_recorded=masks_recorded, production_comparison_performed=masks_recorded,
         persistent_late_weak_central_fronts=weak,
         full_shock_absence_proven=False, full_domain_search=False, production_changed=False,
         success_scope='Persistent entropy-admissible, shock-frame-consistent fronts using independently measured motion, on one physical ray.',
@@ -120,6 +137,8 @@ def run(root, output=None):
         settings=asdict(settings), input_sha256=hashes,
         analysis_source_sha256={str(Path(__file__)): sha(__file__),
             'experiments/wind_bubble/collision_front_motion.py': sha('experiments/wind_bubble/collision_front_motion.py')})
+    if not masks_recorded:
+        report['limitations'].append('Production masks were not recorded; this run cannot establish production detections or misses.')
     make_figure(output/'front_motion.png', lines, actual, x, observations)
     for path, expected in hashes.items():
         if sha(path) != expected:

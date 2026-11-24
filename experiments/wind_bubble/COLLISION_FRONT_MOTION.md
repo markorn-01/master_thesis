@@ -52,9 +52,13 @@ to match the completed high-cadence 128-cubed schedule, fixed physical injection
 radius, and prescribed source budgets. Source coefficients are adjusted using
 the actual discrete injection masks; the physical budget is not multiplied
 by eight. The primitive strip payload is about 26.3 MB before compression.
-Detection masks are still computed on the full grid; small saved strips do
-not imply negligible GPU memory or diagnostic cost. Actual 256-cubed memory
-and runtime have not yet been measured.
+The first full-mask 256-cubed attempt on compgpu9 failed with GPU out-of-memory
+while requesting an additional 5.18 GiB. Small saved strips do not imply small
+temporary allocations: the default diagnostic calculates masks on the full grid.
+The revised retry uses `--flow-only` to skip all full-grid detection stages.
+It saves the same primitive profiles, times, and physical source budgets.
+The GPU cost of hydrodynamic evolution remains; fitting the revised run into
+40 GiB has not yet been demonstrated.
 
 After checking that GPU 1 on compgpu9 is free and the environment works:
 
@@ -63,8 +67,8 @@ export CUDA_VISIBLE_DEVICES=1 XLA_PYTHON_CLIENT_PREALLOCATE=false
 "$HOME/.venvs/master-thesis-py312/bin/python" \
   -m experiments.wind_bubble.run_collision_front_motion \
   --num-cells 256 --num-events 321 --t-end 0.16 \
-  --require-gpu \
-  --output-dir outputs/collision_front_motion_iwr_compgpu9_n256
+  --flow-only --require-gpu \
+  --output-dir outputs/collision_front_motion_iwr_compgpu9_n256_flow_only
 ```
 
 The immediate comparison is the outer-front profiles at 0.08 and 0.12,
@@ -72,6 +76,19 @@ followed by the two edges of the collision layer. An inconclusive automatic
 assessment is a physical-validation result, not an integration failure.
 This run is not online/offline equivalence or a promise that the strict
 sampled-state check will pass at higher resolution.
+
+Flow-only metadata records `production_masks_retained=false`, and the NPZ files
+omit `production_stages`. The reader reports production comparison as unavailable
+and does not turn absent masks into false detections or claimed finder misses.
+With this mode, only physical flow/profile assessment is available; production
+mask assessment needs a separate capture if later justified.
+
+A local paired CPU smoke check at 32 cubed, nine events to t=0.02, confirmed
+exact equality of complete final gas arrays, event times, and every saved flow
+strip between default and flow-only modes. The test also checks that flow-only
+never invokes `stage_fields`, and exercises the actual flow-only reader.
+Eighteen targeted runner/front-motion tests pass. These checks verify the
+implementation; they are not a 256-cubed GPU memory measurement.
 
 ## What is measured
 
