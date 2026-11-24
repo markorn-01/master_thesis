@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "compared_events": 5,
+  "fields_per_event": 21,
+  "max_absolute_scalar_difference": 0.0,
+  "histogram_counts_exact": true,
+  "sparse_surfaces_match": true,
+  "background_slices_match": true,
+  "scalar_rtol": 1e-06,
+  "scalar_atol": 1e-08,
+  "streaming_tracking_match": true,
+  "compared_tracking_events": 5,
+  "compared_group_observations": 6,
+  "tracking_full_records_exact": true,
+  "tracking_batch_reference_match": true,
+  "batch_reference_events": 5,
+  "batch_reference_adjacent_results": 8,
+  "batch_reference_delayed_results": 16,
+  "final_gas_state_matches": true
+}

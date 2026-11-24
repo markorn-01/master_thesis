@@ -1,0 +1,210 @@
+{
+  "events_received": 5,
+  "segment_count": 6,
+  "tracking_event_count": 4,
+  "pending_terminal_support": [
+    {
+      "method": "delayed_static_family",
+      "parent_event": 3,
+      "child_event": 4,
+      "available_event": null,
+      "available_time": null,
+      "gate_reference_cells": 1.5,
+      "result": {
+        "accepted_adjacent_events": [],
+        "baseline_parameters": {
+          "gate": 0.0234375,
+          "coverage": 0.5,
+          "exclusive_fraction": 0.1,
+          "distance_weight": 0.25,
+          "max_partners": 5,
+          "normal_angle": 60.0,
+          "tie_tolerance": 1e-08
+        },
+        "window_status": "pending_future",
+        "future_seed_policy": "intersection_of_accepted_continuations",
+        "future_continuations": [],
+        "protected_continuations": [],
+        "conditional_support": [],
+        "conflicts": [],
+        "analysis": null,
+        "unresolved": [
+          {
+            "parent_group": 0,
+            "adjacent_status": "unmatched",
+            "support_status": "pending_future",
+            "physical_ancestry_established": false
+          }
+        ],
+        "prediction_enabled": false,
+        "future_event_latency": 1,
+        "physical_ancestry_established": false,
+        "inherited_id_assigned": false
+      }
+    },
+    {
+      "method": "delayed_normal_motion_family",
+      "parent_event": 3,
+      "child_event": 4,
+      "available_event": null,
+      "available_time": null,
+      "gate_reference_cells": 1.5,
+      "result": {
+        "accepted_adjacent_events": [],
+        "baseline_parameters": {
+          "gate": 0.0234375,
+          "coverage": 0.5,
+          "exclusive_fraction": 0.1,
+          "distance_weight": 0.25,
+          "max_partners": 5,
+          "normal_angle": 60.0,
+          "tie_tolerance": 1e-08
+        },
+        "window_status": "pending_future",
+        "future_seed_policy": "intersection_of_accepted_continuations",
+        "future_continuations": [],
+        "protected_continuations": [],
+        "conditional_support": [],
+        "conflicts": [],
+        "analysis": null,
+        "unresolved": [
+          {
+            "parent_group": 0,
+            "adjacent_status": "unmatched",
+            "support_status": "pending_future",
+            "physical_ancestry_established": false
+          }
+        ],
+        "prediction_enabled": true,
+        "future_event_latency": 1,
+        "physical_ancestry_established": false,
+        "inherited_id_assigned": false
+      }
+    },
+    {
+      "method": "delayed_static_family",
+      "parent_event": 3,
+      "child_event": 4,
+      "available_event": null,
+      "available_time": null,
+      "gate_reference_cells": 2.5,
+      "result": {
+        "accepted_adjacent_events": [
+          {
+            "candidate_index": 0,
+            "kind": "continuation",
+            "parents": [
+              0
+            ],
+            "children": [
+              0
+            ],
+            "score": 1.3529402831319648,
+            "node_coverages": [
+              {
+                "side": "parent",
+                "group": 0,
+                "coverage": 0.8090909090909091
+              },
+              {
+                "side": "child",
+                "group": 0,
+                "coverage": 0.8571428571428571
+              }
+            ],
+            "exclusive_central_fractions": []
+          }
+        ],
+        "baseline_parameters": {
+          "gate": 0.0390625,
+          "coverage": 0.5,
+          "exclusive_fraction": 0.1,
+          "distance_weight": 0.25,
+          "max_partners": 5,
+          "normal_angle": 60.0,
+          "tie_tolerance": 1e-08
+        },
+        "window_status": "pending_future",
+        "future_seed_policy": "intersection_of_accepted_continuations",
+        "future_continuations": [],
+        "protected_continuations": [],
+        "conditional_support": [],
+        "conflicts": [],
+        "analysis": null,
+        "unresolved": [],
+        "prediction_enabled": false,
+        "future_event_latency": 1,
+        "physical_ancestry_established": false,
+        "inherited_id_assigned": false
+      }
+    },
+    {
+      "method": "delayed_normal_motion_family",
+      "parent_event": 3,
+      "child_event": 4,
+      "available_event": null,
+      "available_time": null,
+      "gate_reference_cells": 2.5,
+      "result": {
+        "accepted_adjacent_events": [
+          {
+            "candidate_index": 0,
+            "kind": "continuation",
+            "parents": [
+              0
+            ],
+            "children": [
+              0
+            ],
+            "score": 1.3529402831319648,
+            "node_coverages": [
+              {
+                "side": "parent",
+                "group": 0,
+                "coverage": 0.8090909090909091
+              },
+              {
+                "side": "child",
+                "group": 0,
+                "coverage": 0.8571428571428571
+              }
+            ],
+            "exclusive_central_fractions": []
+          }
+        ],
+        "baseline_parameters": {
+          "gate": 0.0390625,
+          "coverage": 0.5,
+          "exclusive_fraction": 0.1,
+          "distance_weight": 0.25,
+          "max_partners": 5,
+          "normal_angle": 60.0,
+          "tie_tolerance": 1e-08
+        },
+        "window_status": "pending_future",
+        "future_seed_policy": "intersection_of_accepted_continuations",
+        "future_continuations": [],
+        "protected_continuations": [],
+        "conditional_support": [],
+        "conflicts": [],
+        "analysis": null,
+        "unresolved": [],
+        "prediction_enabled": true,
+        "future_event_latency": 1,
+        "physical_ancestry_established": false,
+        "inherited_id_assigned": false
+      }
+    }
+  ],
+  "footprint": {
+    "events_received": 5,
+    "closed": true,
+    "retained_geometry_catalogs": 0,
+    "retained_geometry_bytes": 0,
+    "retained_adjacent_intervals": 0,
+    "retained_group_mapping_entries": 0,
+    "max_processing_geometry_catalogs": 3,
+    "max_processing_geometry_bytes": 73024
+  },
+  "physical_ancestry_established": false
+}
