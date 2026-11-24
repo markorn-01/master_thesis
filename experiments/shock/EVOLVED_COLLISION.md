@@ -126,6 +126,11 @@ missing detections as fading. The original bubble should be examined for two
 moving slab boundaries, without requiring a shock at the midplane. A proposed
 temperature-orientation explanation remains something to test.
 
+That [finite-blast extension](FINITE_BLAST_COLLISION.md) has now completed.
+It finds weakening without a supported below-threshold phase and exposes
+above-supported minimum-jump screening misses. This is a separate mechanism
+from the original bubble alignment rejection; the distinction is retained.
+
 ## Reproduce
 
 ```sh

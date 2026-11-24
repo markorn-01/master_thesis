@@ -1,0 +1,49 @@
+{
+  "review_completed": true,
+  "numerical_integral_controls_passed": true,
+  "exact_stage_intersections_verified": true,
+  "independent_above_supported_misses": 40,
+  "misses_without_zone": 40,
+  "misses_with_compression_and_alignment_but_no_joint_jump": 40,
+  "misses_with_no_compression_alignment_intersection": 0,
+  "robust_threshold_crossing_observed": false,
+  "example": {
+    "resolution": 2048,
+    "event": 129,
+    "time": 0.025800000876188278,
+    "side": "left",
+    "candidate_x": 0.34974719832085055,
+    "nominal_mach_min": 1.5406044466090485,
+    "nominal_mach_max": 1.546921406737557,
+    "mach_lower_sensitivity": 1.485041740458841,
+    "mach_upper_sensitivity": 1.6025741541076697,
+    "roi_cells": 4,
+    "compression": 4,
+    "gradient_alignment": 4,
+    "pressure_jump_pass": 0,
+    "temperature_jump_pass": 1,
+    "minimum_jump": 0,
+    "shock_zone": 0,
+    "shock_surface": 0,
+    "compression_and_alignment": 4,
+    "before_jump_pressure_pass": 0,
+    "before_jump_temperature_pass": 1,
+    "before_jump_both_jumps_pass": 0
+  },
+  "input_sha256": {
+    "outputs/finite_blast_collision_n0512_n1024_n2048/verification.json": "0220946b19d456d4a12c3f4629d518632596d90b28af6c4a132d136f269b4220",
+    "outputs/finite_blast_collision_n0512_n1024_n2048/observations.csv": "1ea321d991b02c0a4514952d861620a7a2a25c6de86452dd84706fdee5750772",
+    "outputs/finite_blast_collision_n0512_n1024_n2048/tracks.csv": "ae826983459c2fb63a946fb97b6f31a6a3f4fb3d8baa7abc98258238534568a6",
+    "outputs/finite_blast_collision_n0512_n1024_n2048/controls.json": "3eccd2b99e9d3dab6d8afaf1b3d528b35acb3f4db19aa622b91683855e68698c",
+    "outputs/finite_blast_collision_n0512_n1024_n2048/resolution_comparison.csv": "8daee23070039517b237ef412df6d36e4fc67c002af869b701ddf7001e8a251e",
+    "outputs/finite_blast_collision_n0512_n1024_n2048/finite_blast_n0512.npz": "f99722a19d1939ea92d822192cfc073d1e572c36da017cbb2d7ab461d9b0e788",
+    "outputs/finite_blast_collision_n0512_n1024_n2048/finite_blast_n1024.npz": "6eb1ac49ce9b6c448567a70342de3019cf63a4cd9d735ad8c188fa170ecb24dd",
+    "outputs/finite_blast_collision_n0512_n1024_n2048/finite_blast_n2048.npz": "d47d6c733fbaadc89d8661b107f692e537b07a6c5c495db04262eb69d309a4c2"
+  },
+  "source_sha256": {
+    "/Users/minhn/Documents/Heidelberg University/fifth_semester/Thesis/master_thesis/experiments/shock/review_finite_blast_collision.py": "cccd7be486f58cb55b5e79c92071ae0510d62524dd3874d37f4aab29b6b7be15"
+  },
+  "production_changed": false,
+  "bubble_question_resolved": false,
+  "scope": "Stages of missing detections beside independently motion/jump-supported finite-blast candidates. Sampled compatibility is conditional, not an exact physical oracle or a proof about the original bubble."
+}

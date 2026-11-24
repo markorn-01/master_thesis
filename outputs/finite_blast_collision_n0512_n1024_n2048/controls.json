@@ -1,0 +1,42 @@
+[
+  {
+    "case": "above_threshold",
+    "passed": true,
+    "supported_events": 128,
+    "expected_mach": 1.9148542155126766,
+    "evidence_labels": [
+      "jump_supported_above_threshold",
+      "motion_unavailable"
+    ]
+  },
+  {
+    "case": "below_threshold",
+    "passed": true,
+    "supported_events": 128,
+    "expected_mach": 1.181692174974683,
+    "evidence_labels": [
+      "jump_supported_below_threshold",
+      "motion_unavailable"
+    ]
+  },
+  {
+    "case": "translated_smooth_isentropic_control",
+    "passed": true,
+    "supported_events": 0,
+    "expected_mach": null,
+    "evidence_labels": [
+      "jump_unverified",
+      "motion_unavailable"
+    ]
+  },
+  {
+    "case": "evolved_numerical_control",
+    "passed": true,
+    "supported_events": 28,
+    "expected_mach": 1.9148542155126766,
+    "evidence_labels": [
+      "jump_supported_above_threshold",
+      "motion_unavailable"
+    ]
+  }
+]

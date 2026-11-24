@@ -1,0 +1,23 @@
+{
+  "resolution": 2048,
+  "event": 129,
+  "time": 0.025800000876188278,
+  "side": "left",
+  "candidate_x": 0.34974719832085055,
+  "nominal_mach_min": 1.5406044466090485,
+  "nominal_mach_max": 1.546921406737557,
+  "mach_lower_sensitivity": 1.485041740458841,
+  "mach_upper_sensitivity": 1.6025741541076697,
+  "roi_cells": 4,
+  "compression": 4,
+  "gradient_alignment": 4,
+  "pressure_jump_pass": 0,
+  "temperature_jump_pass": 1,
+  "minimum_jump": 0,
+  "shock_zone": 0,
+  "shock_surface": 0,
+  "compression_and_alignment": 4,
+  "before_jump_pressure_pass": 0,
+  "before_jump_temperature_pass": 1,
+  "before_jump_both_jumps_pass": 0
+}
