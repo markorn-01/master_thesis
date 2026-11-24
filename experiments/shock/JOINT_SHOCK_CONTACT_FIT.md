@@ -135,3 +135,9 @@ missing bubble fronts.
 The present result justifies considering joint reconstruction. It does not
 justify changing production detections or claiming that Tobias's specific
 central fronts have been recovered.
+
+The subsequent [saved-bubble transfer check](../wind_bubble/BUBBLE_JOINT_RECONSTRUCTION.md)
+has now been performed with the unchanged fitter. It failed the outer controls;
+the central guarded windows were too short for this prototype. The controlled
+result therefore remains a conditional feasibility result, not a validated
+bubble detector.
