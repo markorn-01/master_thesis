@@ -13,6 +13,10 @@ and its `copy_checks.json` for the preserved evidence. Step 3 is complete for
 this configuration; the next activity is thesis writing, not another automatic
 simulation or optimization cycle.
 
+The later user-requested [CPU replay profile and support-reuse optimization](TRACKING_REPLAY_PROFILE.md)
+measures a separate local replay. Its improvement does not update these
+historical GPU timings; a new GPU workflow measurement would be required.
+
 ## Question and fixed comparison
 
 How much runtime, memory and saved output does grouping/tracking add to the

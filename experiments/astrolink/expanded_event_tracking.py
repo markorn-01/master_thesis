@@ -1,29 +1,17 @@
 """Offline bounded arity experiment; frozen production tracker stays unchanged."""
 from itertools import combinations
 import numpy as np
-from scipy.spatial import cKDTree
-from experiments.astrolink.event_tracking import event_tracking,select_events
+from experiments.astrolink.event_tracking import event_tracking,_event_candidates,_tracking_result
 
 
 def expanded_tracking(pa,na,la,pb,nb,lb,gate,*,max_partners=5):
     if type(max_partners) is not int or max_partners not in (3,4,5):
         raise ValueError('This bounded experiment supports maximum arity 3, 4 or 5.')
-    base=event_tracking(pa,na,la,pb,nb,lb,gate)
-    if max_partners==3:return base
-    pa,na,pb,nb=[np.array(a,float,copy=True) for a in [pa,na,pb,nb]]
-    la,lb=np.asarray(la),np.asarray(lb)
-    na/=np.linalg.norm(na,axis=1)[:,None];nb/=np.linalg.norm(nb,axis=1)[:,None]
-    parents=[n['parent_group'] for n in base['parents']];children=[n['child_group'] for n in base['children']]
-    sizes=[{g:int((labels==g).sum()) for g in groups} for labels,groups in [(la,parents),(lb,children)]]
-    p=base['parameters'];hits={};tree=cKDTree(pb)
-    for i in np.flatnonzero(la>=0):
-        near=np.asarray(tree.query_ball_point(pa[i],gate),int)
-        near=near[(lb[near]>=0)&((nb[near]@na[i])>=np.cos(np.deg2rad(p['normal_angle'])))]
-        for j in near:
-            a,b=hits.setdefault((int(la[i]),int(lb[j])),({},{}));distance=float(np.linalg.norm(pa[i]-pb[j]))
-            a[int(i)]=min(a.get(int(i),np.inf),distance);b[int(j)]=min(b.get(int(j),np.inf),distance)
+    if max_partners==3:return event_tracking(pa,na,la,pb,nb,lb,gate)
+    candidates,parents,children,p,hits,sizes_p,sizes_c=_event_candidates(pa,na,la,pb,nb,lb,gate)
+    sizes=[sizes_p,sizes_c]
     def support(parent,child,side):return hits.get((parent,child),({},{}))[side]
-    candidates=list(base['candidates']);audits=[]
+    audits=[]
     for kind,central,partners in [('combination',children,parents),('separation',parents,children)]:
         for center in central:
             side=0 if kind=='combination' else 1
@@ -56,14 +44,6 @@ def expanded_tracking(pa,na,la,pb,nb,lb,gate,*,max_partners=5):
                             node_coverages=coverages,exclusive_central_fractions=unique))
                         if len(candidates)>5000:raise ValueError('Too many hypotheses for this bounded experiment.')
     candidates.sort(key=lambda e:(e['kind'],e['parents'],e['children']))
-    selection=select_events(candidates,parents,children,p['tie_tolerance'])
-    events=[dict(candidate_index=i,**candidates[i]) for i in selection['accepted']]
-    links=[dict(parent_group=parent,child_group=child,accepted=True,event_index=e['candidate_index'],event_kind=e['kind'])
-        for e in events for parent in e['parents'] for child in e['children']]
-    def statuses(groups,side):
-        used={g for e in events for g in e[side]};ambiguous={g for i in selection['ambiguous'] for g in candidates[i][side]}
-        key='parent_group' if side=='parents' else 'child_group'
-        return [{key:g,'status':'assigned' if g in used else 'ambiguous' if g in ambiguous else 'unmatched'} for g in groups]
-    return dict(candidates=candidates,selection=selection,events=events,links=links,
-        parents=statuses(parents,'parents'),children=statuses(children,'children'),
-        parameters=dict(p,max_partners=max_partners),higher_arity_audit=audits)
+    result=_tracking_result(candidates,parents,children,dict(p,max_partners=max_partners))
+    result['higher_arity_audit']=audits
+    return result

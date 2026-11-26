@@ -46,15 +46,13 @@ def select_events(candidates, parents, children, tie_tolerance=1e-8):
                 ambiguous=sorted(ambiguous),exclusion_gaps=gaps)
 
 
-def event_tracking(pa,na,la,pb,nb,lb,gate,*,coverage=.5,exclusive_fraction=.1,
-                   distance_weight=.25,max_partners=3,normal_angle=60.,tie_tolerance=1e-8):
-    """Build continuation/combination/separation hypotheses and optimize conflicts.
+def _event_candidates(pa,na,la,pb,nb,lb,gate,*,coverage=.5,exclusive_fraction=.1,
+                      distance_weight=.25,max_partners=3,normal_angle=60.,tie_tolerance=1e-8):
+    """Build the original candidates and reusable oriented point support.
 
-    A one-to-one candidate covers at least coverage of each group. For a
-    many-to-one event every parent meets that threshold, their union covers
-    the child, and every parent contributes exclusive_fraction of child
-    samples not covered by its partners. One-to-many is the reverse rule.
-    Candidate events with zero unique contributions cannot claim a merger.
+    The expanded matcher extends these candidates using the same support,
+    rather than repeating the spatial search and solving a discarded model.
+    Dictionaries retain the original traversal and reduction order.
     """
     pa,na,pb,nb=[np.array(a,dtype=float,copy=True) for a in [pa,na,pb,nb]]
     la,lb=np.asarray(la),np.asarray(lb)
@@ -113,7 +111,14 @@ def event_tracking(pa,na,la,pb,nb,lb,gate,*,coverage=.5,exclusive_fraction=.1,
         for count in range(2,min(max_partners,len(eligible))+1):
             for cs in combinations(eligible,count):add([p],cs,'separation')
     candidates.sort(key=lambda e:(e['kind'],e['parents'],e['children']))
-    selection=select_events(candidates,parents,children,tie_tolerance)
+    parameters=dict(gate=gate,coverage=coverage,exclusive_fraction=exclusive_fraction,distance_weight=distance_weight,
+                    max_partners=max_partners,normal_angle=normal_angle,tie_tolerance=tie_tolerance)
+    return candidates,parents,children,parameters,hits,sizes_p,sizes_c
+
+
+def _tracking_result(candidates,parents,children,parameters):
+    """Select events once, after all allowed arities have been enumerated."""
+    selection=select_events(candidates,parents,children,parameters['tie_tolerance'])
     events=[dict(candidate_index=i,**candidates[i]) for i in selection['accepted']]
     links=[dict(parent_group=p,child_group=c,accepted=True,event_index=e['candidate_index'],event_kind=e['kind'])
            for e in events for p in e['parents'] for c in e['children']]
@@ -123,5 +128,21 @@ def event_tracking(pa,na,la,pb,nb,lb,gate,*,coverage=.5,exclusive_fraction=.1,
     return dict(candidates=candidates,selection=selection,events=events,links=links,
         parents=[dict(parent_group=p,status='assigned' if p in used_p else 'ambiguous' if p in ambiguous_p else 'unmatched') for p in parents],
         children=[dict(child_group=c,status='assigned' if c in used_c else 'ambiguous' if c in ambiguous_c else 'unmatched') for c in children],
-        parameters=dict(gate=gate,coverage=coverage,exclusive_fraction=exclusive_fraction,distance_weight=distance_weight,
-                        max_partners=max_partners,normal_angle=normal_angle,tie_tolerance=tie_tolerance))
+        parameters=parameters)
+
+
+def event_tracking(pa,na,la,pb,nb,lb,gate,*,coverage=.5,exclusive_fraction=.1,
+                   distance_weight=.25,max_partners=3,normal_angle=60.,tie_tolerance=1e-8):
+    """Build continuation/combination/separation hypotheses and optimize conflicts.
+
+    A one-to-one candidate covers at least coverage of each group. For a
+    many-to-one event every parent meets that threshold, their union covers
+    the child, and every parent contributes exclusive_fraction of child
+    samples not covered by its partners. One-to-many is the reverse rule.
+    Candidate events with zero unique contributions cannot claim a merger.
+    """
+    candidates,parents,children,parameters,_,_,_=_event_candidates(
+        pa,na,la,pb,nb,lb,gate,coverage=coverage,exclusive_fraction=exclusive_fraction,
+        distance_weight=distance_weight,max_partners=max_partners,
+        normal_angle=normal_angle,tie_tolerance=tie_tolerance)
+    return _tracking_result(candidates,parents,children,parameters)
