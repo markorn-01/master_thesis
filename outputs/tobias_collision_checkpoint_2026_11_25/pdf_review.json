@@ -5,7 +5,9 @@
   "all_figures_and_question_present": true,
   "checked_input_fingerprints": 656,
   "checked_output_fingerprints": 5,
-  "pdf_sha256": "620f7eb74064c9462434cfafa3ef57beaaf2e268072c86ace035334ed1cf2584",
+  "pdf_sha256": "b1b9460a3e4d99cdb61fa77b3691e26f71db782e4dcad239ef2f09b63c31d5c0",
   "scientific_scope_and_distinct_time_axes_reviewed": true,
-  "message_sent": false
+  "message_sent": false,
+  "plain_language_question": true,
+  "personalized_question_heading_removed": true
 }

@@ -225,9 +225,9 @@ def create_pdf(pdf_path, images, facts):
         'it does not identify the physical waves in the three-dimensional collision layer.',
     ):
         y = paragraph(text, margin, y, available)-5
-    callout('<b>Question for Tobias:</b> In Figure 1, which feature(s) would you interpret as the reflected fronts, '
-        'and over which x/time interval should they remain distinct? A marked curve or approximate x/t range '
-        'would give us a concrete physical validation target.', 102, 57)
+    callout('<b>Question:</b> In Figure 1, where do you expect the reflected shock fronts, '
+        'and at which times should they remain distinct? Marking the fronts on the plots, '
+        'or giving approximate positions and times, would help define a concrete validation target.', 102, 57)
     c.save()
 
 
@@ -248,9 +248,9 @@ def build(package=PACKAGE, pdf=PDF):
         f'correctly detects a known Mach-8 shock and returns Mach {facts["returned_control_mach"]:.2f}. '
         'A failed sampled-state fit therefore cannot establish shock absence in a thin mixed layer. '
         'The HLL/HLLC comparison gave only modest improvement, so I am not proposing another solver-switch bubble run.\n\n'
-        'I attached a short brief. Could you indicate which features in Figure 1 you would expect to be the reflected fronts, '
-        'and the approximate x/time interval where they should remain distinct? A marked figure or written x/t range '
-        'would help define the physical validation target.\n'
+        'I attached a short brief. Could you indicate where the reflected shock fronts should appear in Figure 1, '
+        'and at which times they should remain distinct? A marked figure or a brief description of their positions '
+        'and times would help define the physical validation target.\n'
     )
     (package/'message_to_tobias.txt').write_text(message)
     (package/'README.txt').write_text(

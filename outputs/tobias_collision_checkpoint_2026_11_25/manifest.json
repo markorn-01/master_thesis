@@ -682,12 +682,12 @@
     "outputs/shock_contact_hll_hllc_n128_n256/snapshots.csv": "6b0b60ccf64c338d8ae43bfc0e6baa06421d543a422105cba643ac113537bf0e",
     "outputs/shock_contact_hll_hllc_n128_n256/motion_checks.csv": "8086726271569eddcea6d884283a0c52b1ae3d5fa71fa7bdf7827c922104a726"
   },
-  "build_source_sha256": "2776861a7cd92a3fe407eb8008f034ae69a6ea72b5449aa197671304d2ff55e5",
+  "build_source_sha256": "c0d6dc7cd66d5872d88f5d3294e73598714cecf47c7211c900421aaa3d8d5cbc",
   "output_sha256": {
-    "output/pdf/collision_validation_checkpoint_2026_11_25.pdf": "620f7eb74064c9462434cfafa3ef57beaaf2e268072c86ace035334ed1cf2584",
+    "output/pdf/collision_validation_checkpoint_2026_11_25.pdf": "b1b9460a3e4d99cdb61fa77b3691e26f71db782e4dcad239ef2f09b63c31d5c0",
     "outputs/tobias_collision_checkpoint_2026_11_25/01_bubble_profiles.png": "86eff63b44ab4fccd0ae95005ab50a829c8a42460f2eb7d6475bbd2cf9b3a458",
     "outputs/tobias_collision_checkpoint_2026_11_25/02_known_shock_control.png": "59e645feea44a42cac2d759be9dd57bb53ba0d9082439a5138725b7b3a1d67e1",
     "outputs/tobias_collision_checkpoint_2026_11_25/03_solver_comparison.png": "5d2deb4ecd2aa65ba838b976ad9ce20b1cc5eb847490c43360ae32a35e79f8d8",
-    "outputs/tobias_collision_checkpoint_2026_11_25/message_to_tobias.txt": "8d4e1b6f40dba9b1b5d74e0c7c7eea819e0845aed032215dd110ae0d96db2957"
+    "outputs/tobias_collision_checkpoint_2026_11_25/message_to_tobias.txt": "4162ea8bc29c4c3adf28f28fe87bf6891e39986d2078e2c9e1402c8084868e3f"
   }
 }

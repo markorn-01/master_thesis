@@ -2,4 +2,4 @@ Hi Tobias, I followed up on the collision-front question with matched 128^3 and 
 
 Higher resolution sharpens the bubble profiles, but I have not yet established which features are distinct reflected shocks. The control exposed a limitation of the additional validation check: it can reject sampled states even when the finder correctly detects a known Mach-8 shock and returns Mach 7.98. A failed sampled-state fit therefore cannot establish shock absence in a thin mixed layer. The HLL/HLLC comparison gave only modest improvement, so I am not proposing another solver-switch bubble run.
 
-I attached a short brief. Could you indicate which features in Figure 1 you would expect to be the reflected fronts, and the approximate x/time interval where they should remain distinct? A marked figure or written x/t range would help define the physical validation target.
+I attached a short brief. Could you indicate where the reflected shock fronts should appear in Figure 1, and at which times they should remain distinct? A marked figure or a brief description of their positions and times would help define the physical validation target.
