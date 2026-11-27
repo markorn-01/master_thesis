@@ -1,0 +1,984 @@
+[
+  {
+    "event_id": "h0000",
+    "parent_event": 1,
+    "child_event": 2,
+    "kind": "continuation",
+    "parents": [
+      "e0001:g0"
+    ],
+    "children": [
+      "e0002:g0"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 2,
+    "available_time": 0.019999999552965164
+  },
+  {
+    "event_id": "h0001",
+    "parent_event": 1,
+    "child_event": 2,
+    "kind": "continuation",
+    "parents": [
+      "e0001:g1"
+    ],
+    "children": [
+      "e0002:g1"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 2,
+    "available_time": 0.019999999552965164
+  },
+  {
+    "event_id": "h0002",
+    "parent_event": 1,
+    "child_event": 2,
+    "kind": "continuation",
+    "parents": [
+      "e0001:g2"
+    ],
+    "children": [
+      "e0002:g2"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 2,
+    "available_time": 0.019999999552965164
+  },
+  {
+    "event_id": "h0003",
+    "parent_event": 1,
+    "child_event": 2,
+    "kind": "continuation",
+    "parents": [
+      "e0001:g3"
+    ],
+    "children": [
+      "e0002:g3"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 2,
+    "available_time": 0.019999999552965164
+  },
+  {
+    "event_id": "h0004",
+    "parent_event": 2,
+    "child_event": 3,
+    "kind": "continuation",
+    "parents": [
+      "e0002:g0"
+    ],
+    "children": [
+      "e0003:g0"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 3,
+    "available_time": 0.029999999329447746
+  },
+  {
+    "event_id": "h0005",
+    "parent_event": 2,
+    "child_event": 3,
+    "kind": "continuation",
+    "parents": [
+      "e0002:g1"
+    ],
+    "children": [
+      "e0003:g1"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 3,
+    "available_time": 0.029999999329447746
+  },
+  {
+    "event_id": "h0006",
+    "parent_event": 2,
+    "child_event": 3,
+    "kind": "continuation",
+    "parents": [
+      "e0002:g2"
+    ],
+    "children": [
+      "e0003:g3"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 3,
+    "available_time": 0.029999999329447746
+  },
+  {
+    "event_id": "h0007",
+    "parent_event": 2,
+    "child_event": 3,
+    "kind": "continuation",
+    "parents": [
+      "e0002:g3"
+    ],
+    "children": [
+      "e0003:g2"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 3,
+    "available_time": 0.029999999329447746
+  },
+  {
+    "event_id": "h0008",
+    "parent_event": 3,
+    "child_event": 4,
+    "kind": "continuation",
+    "parents": [
+      "e0003:g0"
+    ],
+    "children": [
+      "e0004:g0"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 4,
+    "available_time": 0.03999999910593033
+  },
+  {
+    "event_id": "h0009",
+    "parent_event": 3,
+    "child_event": 4,
+    "kind": "continuation",
+    "parents": [
+      "e0003:g1"
+    ],
+    "children": [
+      "e0004:g1"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 4,
+    "available_time": 0.03999999910593033
+  },
+  {
+    "event_id": "h0010",
+    "parent_event": 3,
+    "child_event": 4,
+    "kind": "continuation",
+    "parents": [
+      "e0003:g2"
+    ],
+    "children": [
+      "e0004:g2"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 4,
+    "available_time": 0.03999999910593033
+  },
+  {
+    "event_id": "h0011",
+    "parent_event": 3,
+    "child_event": 4,
+    "kind": "continuation",
+    "parents": [
+      "e0003:g3"
+    ],
+    "children": [
+      "e0004:g3"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 4,
+    "available_time": 0.03999999910593033
+  },
+  {
+    "event_id": "h0012",
+    "parent_event": 4,
+    "child_event": 5,
+    "kind": "continuation",
+    "parents": [
+      "e0004:g0"
+    ],
+    "children": [
+      "e0005:g0"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 5,
+    "available_time": 0.04999999701976776
+  },
+  {
+    "event_id": "h0013",
+    "parent_event": 4,
+    "child_event": 5,
+    "kind": "continuation",
+    "parents": [
+      "e0004:g1"
+    ],
+    "children": [
+      "e0005:g1"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 5,
+    "available_time": 0.04999999701976776
+  },
+  {
+    "event_id": "h0014",
+    "parent_event": 4,
+    "child_event": 5,
+    "kind": "continuation",
+    "parents": [
+      "e0004:g2"
+    ],
+    "children": [
+      "e0005:g2"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 5,
+    "available_time": 0.04999999701976776
+  },
+  {
+    "event_id": "h0015",
+    "parent_event": 4,
+    "child_event": 5,
+    "kind": "continuation",
+    "parents": [
+      "e0004:g3"
+    ],
+    "children": [
+      "e0005:g3"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 5,
+    "available_time": 0.04999999701976776
+  },
+  {
+    "event_id": "h0016",
+    "parent_event": 5,
+    "child_event": 6,
+    "kind": "continuation",
+    "parents": [
+      "e0005:g0"
+    ],
+    "children": [
+      "e0006:g0"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 6,
+    "available_time": 0.05999999865889549
+  },
+  {
+    "event_id": "h0017",
+    "parent_event": 5,
+    "child_event": 6,
+    "kind": "continuation",
+    "parents": [
+      "e0005:g1"
+    ],
+    "children": [
+      "e0006:g1"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 6,
+    "available_time": 0.05999999865889549
+  },
+  {
+    "event_id": "h0018",
+    "parent_event": 5,
+    "child_event": 6,
+    "kind": "continuation",
+    "parents": [
+      "e0005:g2"
+    ],
+    "children": [
+      "e0006:g3"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 6,
+    "available_time": 0.05999999865889549
+  },
+  {
+    "event_id": "h0019",
+    "parent_event": 5,
+    "child_event": 6,
+    "kind": "continuation",
+    "parents": [
+      "e0005:g3"
+    ],
+    "children": [
+      "e0006:g2"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 6,
+    "available_time": 0.05999999865889549
+  },
+  {
+    "event_id": "h0020",
+    "parent_event": 6,
+    "child_event": 7,
+    "kind": "continuation",
+    "parents": [
+      "e0006:g0"
+    ],
+    "children": [
+      "e0007:g0"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 7,
+    "available_time": 0.07000000029802322
+  },
+  {
+    "event_id": "h0021",
+    "parent_event": 6,
+    "child_event": 7,
+    "kind": "continuation",
+    "parents": [
+      "e0006:g1"
+    ],
+    "children": [
+      "e0007:g1"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 7,
+    "available_time": 0.07000000029802322
+  },
+  {
+    "event_id": "h0022",
+    "parent_event": 6,
+    "child_event": 7,
+    "kind": "continuation",
+    "parents": [
+      "e0006:g2"
+    ],
+    "children": [
+      "e0007:g2"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 7,
+    "available_time": 0.07000000029802322
+  },
+  {
+    "event_id": "h0023",
+    "parent_event": 6,
+    "child_event": 7,
+    "kind": "continuation",
+    "parents": [
+      "e0006:g3"
+    ],
+    "children": [
+      "e0007:g3"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 7,
+    "available_time": 0.07000000029802322
+  },
+  {
+    "event_id": "h0024",
+    "parent_event": 7,
+    "child_event": 8,
+    "kind": "continuation",
+    "parents": [
+      "e0007:g0"
+    ],
+    "children": [
+      "e0008:g0"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 8,
+    "available_time": 0.07999999821186066
+  },
+  {
+    "event_id": "h0025",
+    "parent_event": 7,
+    "child_event": 8,
+    "kind": "continuation",
+    "parents": [
+      "e0007:g1"
+    ],
+    "children": [
+      "e0008:g1"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 8,
+    "available_time": 0.07999999821186066
+  },
+  {
+    "event_id": "h0026",
+    "parent_event": 7,
+    "child_event": 8,
+    "kind": "continuation",
+    "parents": [
+      "e0007:g2"
+    ],
+    "children": [
+      "e0008:g3"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 8,
+    "available_time": 0.07999999821186066
+  },
+  {
+    "event_id": "h0027",
+    "parent_event": 7,
+    "child_event": 8,
+    "kind": "continuation",
+    "parents": [
+      "e0007:g3"
+    ],
+    "children": [
+      "e0008:g2"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 8,
+    "available_time": 0.07999999821186066
+  },
+  {
+    "event_id": "h0028",
+    "parent_event": 8,
+    "child_event": 9,
+    "kind": "continuation",
+    "parents": [
+      "e0008:g0"
+    ],
+    "children": [
+      "e0009:g0"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 9,
+    "available_time": 0.08999999612569809
+  },
+  {
+    "event_id": "h0029",
+    "parent_event": 8,
+    "child_event": 9,
+    "kind": "continuation",
+    "parents": [
+      "e0008:g1"
+    ],
+    "children": [
+      "e0009:g1"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 9,
+    "available_time": 0.08999999612569809
+  },
+  {
+    "event_id": "h0030",
+    "parent_event": 8,
+    "child_event": 9,
+    "kind": "continuation",
+    "parents": [
+      "e0008:g2"
+    ],
+    "children": [
+      "e0009:g2"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 9,
+    "available_time": 0.08999999612569809
+  },
+  {
+    "event_id": "h0031",
+    "parent_event": 8,
+    "child_event": 9,
+    "kind": "continuation",
+    "parents": [
+      "e0008:g3"
+    ],
+    "children": [
+      "e0009:g3"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 9,
+    "available_time": 0.08999999612569809
+  },
+  {
+    "event_id": "h0032",
+    "parent_event": 9,
+    "child_event": 10,
+    "kind": "combination",
+    "parents": [
+      "e0009:g0",
+      "e0009:g2"
+    ],
+    "children": [
+      "e0010:g0"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 10,
+    "available_time": 0.09999999403953552
+  },
+  {
+    "event_id": "h0033",
+    "parent_event": 9,
+    "child_event": 10,
+    "kind": "continuation",
+    "parents": [
+      "e0009:g1"
+    ],
+    "children": [
+      "e0010:g1"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 10,
+    "available_time": 0.09999999403953552
+  },
+  {
+    "event_id": "h0034",
+    "parent_event": 9,
+    "child_event": 10,
+    "kind": "continuation",
+    "parents": [
+      "e0009:g3"
+    ],
+    "children": [
+      "e0010:g28"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 10,
+    "available_time": 0.09999999403953552
+  },
+  {
+    "event_id": "h0035",
+    "parent_event": 10,
+    "child_event": 11,
+    "kind": "combination",
+    "parents": [
+      "e0010:g0",
+      "e0010:g1",
+      "e0010:g28"
+    ],
+    "children": [
+      "e0011:g0"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 11,
+    "available_time": 0.10999999940395355
+  },
+  {
+    "event_id": "h0036",
+    "parent_event": 11,
+    "child_event": 12,
+    "kind": "continuation",
+    "parents": [
+      "e0011:g0"
+    ],
+    "children": [
+      "e0012:g0"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 12,
+    "available_time": 0.11999999731779099
+  },
+  {
+    "event_id": "h0037",
+    "parent_event": 11,
+    "child_event": 12,
+    "kind": "continuation",
+    "parents": [
+      "e0011:g1"
+    ],
+    "children": [
+      "e0012:g1"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 12,
+    "available_time": 0.11999999731779099
+  },
+  {
+    "event_id": "h0038",
+    "parent_event": 12,
+    "child_event": 13,
+    "kind": "continuation",
+    "parents": [
+      "e0012:g0"
+    ],
+    "children": [
+      "e0013:g0"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 13,
+    "available_time": 0.12999999523162842
+  },
+  {
+    "event_id": "h0039",
+    "parent_event": 12,
+    "child_event": 13,
+    "kind": "continuation",
+    "parents": [
+      "e0012:g1"
+    ],
+    "children": [
+      "e0013:g1"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 13,
+    "available_time": 0.12999999523162842
+  },
+  {
+    "event_id": "h0040",
+    "parent_event": 13,
+    "child_event": 14,
+    "kind": "combination",
+    "parents": [
+      "e0013:g13",
+      "e0013:g14",
+      "e0013:g15",
+      "e0013:g16",
+      "e0013:g26"
+    ],
+    "children": [
+      "e0014:g8"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 14,
+    "available_time": 0.14000000059604645
+  },
+  {
+    "event_id": "h0041",
+    "parent_event": 13,
+    "child_event": 14,
+    "kind": "continuation",
+    "parents": [
+      "e0013:g0"
+    ],
+    "children": [
+      "e0014:g0"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 14,
+    "available_time": 0.14000000059604645
+  },
+  {
+    "event_id": "h0042",
+    "parent_event": 13,
+    "child_event": 14,
+    "kind": "continuation",
+    "parents": [
+      "e0013:g1"
+    ],
+    "children": [
+      "e0014:g1"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 14,
+    "available_time": 0.14000000059604645
+  },
+  {
+    "event_id": "h0043",
+    "parent_event": 14,
+    "child_event": 15,
+    "kind": "continuation",
+    "parents": [
+      "e0014:g0"
+    ],
+    "children": [
+      "e0015:g0"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 15,
+    "available_time": 0.14999999105930328
+  },
+  {
+    "event_id": "h0044",
+    "parent_event": 14,
+    "child_event": 15,
+    "kind": "continuation",
+    "parents": [
+      "e0014:g1"
+    ],
+    "children": [
+      "e0015:g1"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 15,
+    "available_time": 0.14999999105930328
+  },
+  {
+    "event_id": "h0045",
+    "parent_event": 14,
+    "child_event": 15,
+    "kind": "continuation",
+    "parents": [
+      "e0014:g8"
+    ],
+    "children": [
+      "e0015:g8"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 15,
+    "available_time": 0.14999999105930328
+  },
+  {
+    "event_id": "h0046",
+    "parent_event": 15,
+    "child_event": 16,
+    "kind": "combination",
+    "parents": [
+      "e0015:g2",
+      "e0015:g4",
+      "e0015:g6",
+      "e0015:g7"
+    ],
+    "children": [
+      "e0016:g2"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 16,
+    "available_time": 0.1599999964237213
+  },
+  {
+    "event_id": "h0047",
+    "parent_event": 15,
+    "child_event": 16,
+    "kind": "combination",
+    "parents": [
+      "e0015:g10",
+      "e0015:g11",
+      "e0015:g12",
+      "e0015:g14"
+    ],
+    "children": [
+      "e0016:g10"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 16,
+    "available_time": 0.1599999964237213
+  },
+  {
+    "event_id": "h0048",
+    "parent_event": 15,
+    "child_event": 16,
+    "kind": "continuation",
+    "parents": [
+      "e0015:g0"
+    ],
+    "children": [
+      "e0016:g0"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 16,
+    "available_time": 0.1599999964237213
+  },
+  {
+    "event_id": "h0049",
+    "parent_event": 15,
+    "child_event": 16,
+    "kind": "continuation",
+    "parents": [
+      "e0015:g1"
+    ],
+    "children": [
+      "e0016:g1"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 16,
+    "available_time": 0.1599999964237213
+  },
+  {
+    "event_id": "h0050",
+    "parent_event": 15,
+    "child_event": 16,
+    "kind": "continuation",
+    "parents": [
+      "e0015:g8"
+    ],
+    "children": [
+      "e0016:g8"
+    ],
+    "status": "shared",
+    "selected_at_gates": [
+      1.5,
+      2.5
+    ],
+    "available_event": 16,
+    "available_time": 0.1599999964237213
+  }
+]

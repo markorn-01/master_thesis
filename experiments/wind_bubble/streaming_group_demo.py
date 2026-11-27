@@ -36,7 +36,7 @@ def check_statistic_rows(recomputed, recorded):
         raise ValueError('Callback group statistics differ from their original samples.') from exc
 
 
-def build_tables(root, output, replay_tracking=None):
+def build_tables(root, output, replay_tracking=None, *, expected_sources=3):
     if output.exists():
         raise ValueError('Use a fresh table directory.')
     hashes = {}
@@ -46,8 +46,8 @@ def build_tables(root, output, replay_tracking=None):
         return json.loads(path.read_text())
 
     metadata = read_json(root/'metadata.json')
-    if metadata['status'] != 'complete' or len(metadata.get('source_positions', [])) != 3:
-        raise ValueError('Require a completed three-source simulation.')
+    if metadata['status'] != 'complete' or len(metadata.get('source_positions', [])) != expected_sources:
+        raise ValueError(f'Require a completed {expected_sources}-source simulation.')
     times = metadata['actual_times']
     if len(times) < 3 or not np.isfinite(times).all() or not np.all(np.diff(times) > 0):
         raise ValueError('Require at least three increasing actual event times.')

@@ -1,0 +1,172 @@
+[
+  {
+    "event": 0,
+    "time": 0.0,
+    "detected_samples": 0,
+    "retained_samples": 0,
+    "unretained_samples": 0,
+    "retained_groups": 0,
+    "all_upstream_source_overlaps": 0,
+    "all_downstream_source_overlaps": 0
+  },
+  {
+    "event": 1,
+    "time": 0.009999999776482582,
+    "detected_samples": 1328,
+    "retained_samples": 1328,
+    "unretained_samples": 0,
+    "retained_groups": 4,
+    "all_upstream_source_overlaps": 0,
+    "all_downstream_source_overlaps": 1328
+  },
+  {
+    "event": 2,
+    "time": 0.019999999552965164,
+    "detected_samples": 1568,
+    "retained_samples": 1568,
+    "unretained_samples": 0,
+    "retained_groups": 4,
+    "all_upstream_source_overlaps": 0,
+    "all_downstream_source_overlaps": 1520
+  },
+  {
+    "event": 3,
+    "time": 0.029999999329447746,
+    "detected_samples": 1928,
+    "retained_samples": 1928,
+    "unretained_samples": 0,
+    "retained_groups": 4,
+    "all_upstream_source_overlaps": 0,
+    "all_downstream_source_overlaps": 896
+  },
+  {
+    "event": 4,
+    "time": 0.03999999910593033,
+    "detected_samples": 2816,
+    "retained_samples": 2816,
+    "unretained_samples": 0,
+    "retained_groups": 4,
+    "all_upstream_source_overlaps": 0,
+    "all_downstream_source_overlaps": 0
+  },
+  {
+    "event": 5,
+    "time": 0.04999999701976776,
+    "detected_samples": 3752,
+    "retained_samples": 3752,
+    "unretained_samples": 0,
+    "retained_groups": 4,
+    "all_upstream_source_overlaps": 0,
+    "all_downstream_source_overlaps": 0
+  },
+  {
+    "event": 6,
+    "time": 0.05999999865889549,
+    "detected_samples": 4808,
+    "retained_samples": 4808,
+    "unretained_samples": 0,
+    "retained_groups": 4,
+    "all_upstream_source_overlaps": 0,
+    "all_downstream_source_overlaps": 0
+  },
+  {
+    "event": 7,
+    "time": 0.07000000029802322,
+    "detected_samples": 5432,
+    "retained_samples": 5432,
+    "unretained_samples": 0,
+    "retained_groups": 4,
+    "all_upstream_source_overlaps": 0,
+    "all_downstream_source_overlaps": 0
+  },
+  {
+    "event": 8,
+    "time": 0.07999999821186066,
+    "detected_samples": 6332,
+    "retained_samples": 6332,
+    "unretained_samples": 0,
+    "retained_groups": 4,
+    "all_upstream_source_overlaps": 0,
+    "all_downstream_source_overlaps": 0
+  },
+  {
+    "event": 9,
+    "time": 0.08999999612569809,
+    "detected_samples": 7340,
+    "retained_samples": 7332,
+    "unretained_samples": 8,
+    "retained_groups": 4,
+    "all_upstream_source_overlaps": 0,
+    "all_downstream_source_overlaps": 0
+  },
+  {
+    "event": 10,
+    "time": 0.09999999403953552,
+    "detected_samples": 7535,
+    "retained_samples": 7399,
+    "unretained_samples": 136,
+    "retained_groups": 3,
+    "all_upstream_source_overlaps": 0,
+    "all_downstream_source_overlaps": 0
+  },
+  {
+    "event": 11,
+    "time": 0.10999999940395355,
+    "detected_samples": 7966,
+    "retained_samples": 7966,
+    "unretained_samples": 0,
+    "retained_groups": 3,
+    "all_upstream_source_overlaps": 0,
+    "all_downstream_source_overlaps": 0
+  },
+  {
+    "event": 12,
+    "time": 0.11999999731779099,
+    "detected_samples": 8005,
+    "retained_samples": 7981,
+    "unretained_samples": 24,
+    "retained_groups": 2,
+    "all_upstream_source_overlaps": 0,
+    "all_downstream_source_overlaps": 0
+  },
+  {
+    "event": 13,
+    "time": 0.12999999523162842,
+    "detected_samples": 8669,
+    "retained_samples": 8590,
+    "unretained_samples": 79,
+    "retained_groups": 8,
+    "all_upstream_source_overlaps": 0,
+    "all_downstream_source_overlaps": 0
+  },
+  {
+    "event": 14,
+    "time": 0.14000000059604645,
+    "detected_samples": 9023,
+    "retained_samples": 8879,
+    "unretained_samples": 144,
+    "retained_groups": 3,
+    "all_upstream_source_overlaps": 44,
+    "all_downstream_source_overlaps": 0
+  },
+  {
+    "event": 15,
+    "time": 0.14999999105930328,
+    "detected_samples": 9980,
+    "retained_samples": 9922,
+    "unretained_samples": 58,
+    "retained_groups": 11,
+    "all_upstream_source_overlaps": 46,
+    "all_downstream_source_overlaps": 0
+  },
+  {
+    "event": 16,
+    "time": 0.1599999964237213,
+    "detected_samples": 10187,
+    "retained_samples": 10145,
+    "unretained_samples": 42,
+    "retained_groups": 5,
+    "all_upstream_source_overlaps": 46,
+    "all_downstream_source_overlaps": 0
+  }
+]

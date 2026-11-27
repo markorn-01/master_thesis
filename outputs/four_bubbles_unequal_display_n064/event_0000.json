@@ -1,0 +1,81 @@
+{
+  "summary": {
+    "event": 0,
+    "time": 0.0,
+    "status": "no_detections",
+    "samples": 0,
+    "retained_groups": 0,
+    "approved_groups": 0,
+    "displayed_faces": 0,
+    "fallback_points": 0,
+    "vertices": 0,
+    "faces": 0,
+    "edges": 0,
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "inconsistent_shared_edge_winding": 0,
+    "components": 0,
+    "boundary_length_cells": 0.0,
+    "nonmanifold_vertices": 0,
+    "self_intersecting": false,
+    "sample_to_mesh_p50_cells": null,
+    "sample_to_mesh_p95_cells": null,
+    "sample_fraction_within_quarter_cell": 0.0,
+    "display_vertex_to_sample_max_cells": null,
+    "mesh_area": 0.0,
+    "area_fraction": null
+  },
+  "details": {
+    "reused_checked_mesh": false,
+    "construction": {
+      "method": "compact oriented-plane implicit MLS and masked marching cubes",
+      "settings": {
+        "step_cells": 0.5,
+        "support_cells": 2.0,
+        "kernel_cells": 0.8,
+        "max_nearest_cells": 0.85,
+        "max_plane_offset_cells": 0.3,
+        "min_neighbors": 3,
+        "normal_angle": 60.0,
+        "require_local_hull": true,
+        "max_grid_nodes": 3000000
+      },
+      "groups": [],
+      "new_display_vertices": true,
+      "physical_samples_modified": false
+    },
+    "cleanup": {
+      "passed": true,
+      "passes": [],
+      "removed_faces": 0
+    },
+    "refinement": {
+      "groups": [],
+      "all_group_accuracy_targets_met": true,
+      "tolerance_cells": 0.25,
+      "target_fraction": 0.95,
+      "max_refinements": 2,
+      "support_settings_unchanged": true
+    },
+    "orientation": {
+      "passed": true,
+      "changed_faces": 0,
+      "before": {
+        "edges": 0,
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "after": {
+        "edges": 0,
+        "boundary_edges": 0,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      }
+    },
+    "groups": [],
+    "failure": null,
+    "final_combined_cleanup": null
+  },
+  "mesh_sha256": "3509e014010239f6017e515b4d3f0c3625e15fe930888b1a493460d61d18e7d0"
+}

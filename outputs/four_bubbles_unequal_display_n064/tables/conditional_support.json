@@ -1,0 +1,18 @@
+[
+  {
+    "support_id": "s0000",
+    "parent_node": "e0013:g12",
+    "child_node": "e0014:g8",
+    "future_node": "e0015:g8",
+    "parent_event": 13,
+    "child_event": 14,
+    "available_event": 15,
+    "parent_time": 0.12999999523162842,
+    "child_time": 0.14000000059604645,
+    "available_time": 0.14999999105930328,
+    "evidence": "conditional_geometric_support",
+    "narrow_union_coverage": 0.8633093525179856,
+    "wide_union_coverage": 1.0,
+    "inherited_id_assigned": false
+  }
+]

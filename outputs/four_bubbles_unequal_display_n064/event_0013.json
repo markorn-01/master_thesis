@@ -1,0 +1,439 @@
+{
+  "summary": {
+    "event": 13,
+    "time": 0.12999999523162842,
+    "status": "mesh_approved",
+    "samples": 8669,
+    "retained_groups": 8,
+    "approved_groups": 8,
+    "displayed_faces": 96010,
+    "fallback_points": 79,
+    "vertices": 50816,
+    "faces": 96010,
+    "edges": 147222,
+    "boundary_edges": 6414,
+    "nonmanifold_edges": 0,
+    "inconsistent_shared_edge_winding": 0,
+    "components": 56,
+    "boundary_length_cells": 2246.765382667369,
+    "nonmanifold_vertices": 0,
+    "self_intersecting": false,
+    "sample_to_mesh_p50_cells": 0.057128868997097015,
+    "sample_to_mesh_p95_cells": 0.14897587895393372,
+    "sample_fraction_within_quarter_cell": 0.9868451688009313,
+    "display_vertex_to_sample_max_cells": 0.8499847532780301,
+    "mesh_area": 1.7876383999544863,
+    "area_fraction": null
+  },
+  "details": {
+    "reused_checked_mesh": false,
+    "construction": {
+      "method": "compact oriented-plane implicit MLS and masked marching cubes",
+      "settings": {
+        "step_cells": 0.5,
+        "support_cells": 2.0,
+        "kernel_cells": 0.8,
+        "max_nearest_cells": 0.85,
+        "max_plane_offset_cells": 0.3,
+        "min_neighbors": 3,
+        "normal_angle": 60.0,
+        "require_local_hull": true,
+        "max_grid_nodes": 3000000
+      },
+      "groups": [
+        {
+          "group": 0,
+          "grid_nodes": 875520,
+          "faces": 82554,
+          "proposed_faces": 87838,
+          "unsupported_faces": 5284,
+          "supported_faces": 82554
+        },
+        {
+          "group": 1,
+          "grid_nodes": 29791,
+          "faces": 5817,
+          "proposed_faces": 6095,
+          "unsupported_faces": 278,
+          "supported_faces": 5817
+        },
+        {
+          "group": 12,
+          "grid_nodes": 1734,
+          "faces": 58,
+          "proposed_faces": 341,
+          "unsupported_faces": 283,
+          "supported_faces": 58
+        },
+        {
+          "group": 13,
+          "grid_nodes": 1734,
+          "faces": 58,
+          "proposed_faces": 341,
+          "unsupported_faces": 283,
+          "supported_faces": 58
+        },
+        {
+          "group": 14,
+          "grid_nodes": 1734,
+          "faces": 60,
+          "proposed_faces": 339,
+          "unsupported_faces": 279,
+          "supported_faces": 60
+        },
+        {
+          "group": 15,
+          "grid_nodes": 1734,
+          "faces": 51,
+          "proposed_faces": 347,
+          "unsupported_faces": 296,
+          "supported_faces": 51
+        },
+        {
+          "group": 16,
+          "grid_nodes": 1734,
+          "faces": 51,
+          "proposed_faces": 347,
+          "unsupported_faces": 296,
+          "supported_faces": 51
+        },
+        {
+          "group": 26,
+          "grid_nodes": 1734,
+          "faces": 51,
+          "proposed_faces": 347,
+          "unsupported_faces": 296,
+          "supported_faces": 51
+        }
+      ],
+      "new_display_vertices": true,
+      "physical_samples_modified": false
+    },
+    "cleanup": {
+      "passed": true,
+      "passes": [
+        {
+          "nonmanifold_vertices": 301,
+          "intersection_pairs": 20,
+          "removed_faces": 863
+        },
+        {
+          "nonmanifold_vertices": 54,
+          "intersection_pairs": 0,
+          "removed_faces": 178
+        },
+        {
+          "nonmanifold_vertices": 1,
+          "intersection_pairs": 0,
+          "removed_faces": 2
+        },
+        {
+          "nonmanifold_vertices": 0,
+          "intersection_pairs": 0,
+          "removed_faces": 0
+        }
+      ],
+      "removed_faces": 1043
+    },
+    "refinement": {
+      "groups": [
+        {
+          "group": 0,
+          "passed": true,
+          "attempts": [
+            {
+              "refinement": 0,
+              "step_cells": 0.5,
+              "fraction_within_tolerance": 0.9856925804001013,
+              "faces": 81633
+            }
+          ]
+        },
+        {
+          "group": 1,
+          "passed": true,
+          "attempts": [
+            {
+              "refinement": 0,
+              "step_cells": 0.5,
+              "fraction_within_tolerance": 1.0,
+              "faces": 5776
+            }
+          ]
+        },
+        {
+          "group": 12,
+          "passed": true,
+          "attempts": [
+            {
+              "refinement": 0,
+              "step_cells": 0.5,
+              "fraction_within_tolerance": 0.55,
+              "faces": 49,
+              "next_cleanup_removed_faces": 12
+            },
+            {
+              "refinement": 1,
+              "step_cells": 0.25,
+              "fraction_within_tolerance": 0.65,
+              "faces": 263,
+              "next_cleanup_removed_faces": 2
+            },
+            {
+              "refinement": 2,
+              "step_cells": 0.125,
+              "fraction_within_tolerance": 1.0,
+              "faces": 1553
+            }
+          ]
+        },
+        {
+          "group": 13,
+          "passed": true,
+          "attempts": [
+            {
+              "refinement": 0,
+              "step_cells": 0.5,
+              "fraction_within_tolerance": 0.55,
+              "faces": 51,
+              "next_cleanup_removed_faces": 12
+            },
+            {
+              "refinement": 1,
+              "step_cells": 0.25,
+              "fraction_within_tolerance": 0.65,
+              "faces": 265,
+              "next_cleanup_removed_faces": 2
+            },
+            {
+              "refinement": 2,
+              "step_cells": 0.125,
+              "fraction_within_tolerance": 1.0,
+              "faces": 1555
+            }
+          ]
+        },
+        {
+          "group": 14,
+          "passed": true,
+          "attempts": [
+            {
+              "refinement": 0,
+              "step_cells": 0.5,
+              "fraction_within_tolerance": 0.3,
+              "faces": 46,
+              "next_cleanup_removed_faces": 18
+            },
+            {
+              "refinement": 1,
+              "step_cells": 0.25,
+              "fraction_within_tolerance": 0.6,
+              "faces": 220,
+              "next_cleanup_removed_faces": 0
+            },
+            {
+              "refinement": 2,
+              "step_cells": 0.125,
+              "fraction_within_tolerance": 1.0,
+              "faces": 1377
+            }
+          ]
+        },
+        {
+          "group": 15,
+          "passed": true,
+          "attempts": [
+            {
+              "refinement": 0,
+              "step_cells": 0.5,
+              "fraction_within_tolerance": 0.3,
+              "faces": 34,
+              "next_cleanup_removed_faces": 18
+            },
+            {
+              "refinement": 1,
+              "step_cells": 0.25,
+              "fraction_within_tolerance": 0.6,
+              "faces": 220,
+              "next_cleanup_removed_faces": 0
+            },
+            {
+              "refinement": 2,
+              "step_cells": 0.125,
+              "fraction_within_tolerance": 1.0,
+              "faces": 1381
+            }
+          ]
+        },
+        {
+          "group": 16,
+          "passed": true,
+          "attempts": [
+            {
+              "refinement": 0,
+              "step_cells": 0.5,
+              "fraction_within_tolerance": 0.3,
+              "faces": 34,
+              "next_cleanup_removed_faces": 16
+            },
+            {
+              "refinement": 1,
+              "step_cells": 0.25,
+              "fraction_within_tolerance": 0.6,
+              "faces": 216,
+              "next_cleanup_removed_faces": 0
+            },
+            {
+              "refinement": 2,
+              "step_cells": 0.125,
+              "fraction_within_tolerance": 1.0,
+              "faces": 1368
+            }
+          ]
+        },
+        {
+          "group": 26,
+          "passed": true,
+          "attempts": [
+            {
+              "refinement": 0,
+              "step_cells": 0.5,
+              "fraction_within_tolerance": 0.3,
+              "faces": 34,
+              "next_cleanup_removed_faces": 16
+            },
+            {
+              "refinement": 1,
+              "step_cells": 0.25,
+              "fraction_within_tolerance": 0.6,
+              "faces": 216,
+              "next_cleanup_removed_faces": 0
+            },
+            {
+              "refinement": 2,
+              "step_cells": 0.125,
+              "fraction_within_tolerance": 1.0,
+              "faces": 1367
+            }
+          ]
+        }
+      ],
+      "all_group_accuracy_targets_met": true,
+      "tolerance_cells": 0.25,
+      "target_fraction": 0.95,
+      "max_refinements": 2,
+      "support_settings_unchanged": true
+    },
+    "orientation": {
+      "passed": true,
+      "changed_faces": 6,
+      "before": {
+        "edges": 147222,
+        "boundary_edges": 6414,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 10
+      },
+      "after": {
+        "edges": 147222,
+        "boundary_edges": 6414,
+        "nonmanifold_edges": 0,
+        "inconsistent_shared_edge_winding": 0
+      },
+      "vertices_moved": false,
+      "faces_added_or_removed": false
+    },
+    "groups": [
+      {
+        "group": 0,
+        "segment": 5,
+        "samples": 7898,
+        "faces": 81633,
+        "fraction_within_quarter_cell": 0.9856925804001013,
+        "accuracy_passed": true,
+        "sample_to_own_group_mesh_p95_cells": 0.14866089820861816,
+        "upstream_source_overlaps": 0,
+        "downstream_source_overlaps": 0
+      },
+      {
+        "group": 1,
+        "segment": 6,
+        "samples": 572,
+        "faces": 5776,
+        "fraction_within_quarter_cell": 1.0,
+        "accuracy_passed": true,
+        "sample_to_own_group_mesh_p95_cells": 0.18905454874038696,
+        "upstream_source_overlaps": 0,
+        "downstream_source_overlaps": 0
+      },
+      {
+        "group": 12,
+        "segment": 8,
+        "samples": 20,
+        "faces": 1553,
+        "fraction_within_quarter_cell": 1.0,
+        "accuracy_passed": true,
+        "sample_to_own_group_mesh_p95_cells": 0.1091282069683075,
+        "upstream_source_overlaps": 0,
+        "downstream_source_overlaps": 0
+      },
+      {
+        "group": 13,
+        "segment": 9,
+        "samples": 20,
+        "faces": 1555,
+        "fraction_within_quarter_cell": 1.0,
+        "accuracy_passed": true,
+        "sample_to_own_group_mesh_p95_cells": 0.1091282069683075,
+        "upstream_source_overlaps": 0,
+        "downstream_source_overlaps": 0
+      },
+      {
+        "group": 14,
+        "segment": 10,
+        "samples": 20,
+        "faces": 1377,
+        "fraction_within_quarter_cell": 1.0,
+        "accuracy_passed": true,
+        "sample_to_own_group_mesh_p95_cells": 0.1102803498506546,
+        "upstream_source_overlaps": 0,
+        "downstream_source_overlaps": 0
+      },
+      {
+        "group": 15,
+        "segment": 11,
+        "samples": 20,
+        "faces": 1381,
+        "fraction_within_quarter_cell": 1.0,
+        "accuracy_passed": true,
+        "sample_to_own_group_mesh_p95_cells": 0.11226942390203476,
+        "upstream_source_overlaps": 0,
+        "downstream_source_overlaps": 0
+      },
+      {
+        "group": 16,
+        "segment": 12,
+        "samples": 20,
+        "faces": 1368,
+        "fraction_within_quarter_cell": 1.0,
+        "accuracy_passed": true,
+        "sample_to_own_group_mesh_p95_cells": 0.10855840891599655,
+        "upstream_source_overlaps": 0,
+        "downstream_source_overlaps": 0
+      },
+      {
+        "group": 26,
+        "segment": 13,
+        "samples": 20,
+        "faces": 1367,
+        "fraction_within_quarter_cell": 1.0,
+        "accuracy_passed": true,
+        "sample_to_own_group_mesh_p95_cells": 0.10855840891599655,
+        "upstream_source_overlaps": 0,
+        "downstream_source_overlaps": 0
+      }
+    ],
+    "failure": null,
+    "final_combined_cleanup": null
+  },
+  "mesh_sha256": "8eab364aaaaf0b01b133ef373a9b8313e85c94c8a599371c2d723956763615a9"
+}

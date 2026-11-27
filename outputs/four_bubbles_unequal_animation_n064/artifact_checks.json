@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "events": 17,
+  "decoded_frames": 17,
+  "playback_seconds": 17.0,
+  "original_simulation_files_unchanged": 360,
+  "original_sample_fields_and_segments_exact": true,
+  "approved_faces_stay_within_original_groups": true,
+  "all_approved_groups_meet_quarter_cell_target": true,
+  "per_event_visibility_matches_callback_tables": true,
+  "conditional_first_visible_event": 15,
+  "only_group_accuracy_fallback_event": [
+    11
+  ],
+  "physical_topology_established": false,
+  "artifact_manifests": {
+    "outputs/four_bubbles_unequal_display_n064/verification.json": "4e7cde9d9002ca536ce4e6b4d723b287fed3e5dc6fbe4a659c67f52005b4c43e",
+    "outputs/four_bubbles_unequal_animation_n064/verification.json": "e5816ed23ee9ea6bad47c99d5f314ef3436d19f8bb1b17db0a748b532da6a3f0",
+    "outputs/four_bubbles_unequal_display_n064/display_quality.csv": "80bd2e7c04477881dfb52ce66fe42aa3e15a488b85c53dbded3c29e1232c0545",
+    "outputs/four_bubbles_unequal_animation_n064/README.md": "e158c196c6fb150be7eb3aa3d48770c6d08d55fdaa18219ee7341b21fead102f"
+  }
+}
