@@ -111,7 +111,7 @@ def load_reviews(directory):
     return reviews, hashes
 
 
-def render(review, output):
+def render(review, output, *, title=None):
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
@@ -174,7 +174,8 @@ def render(review, output):
         ax.text(x, middle+.65, f'{prefix}:g{row["group"]}\n{row["samples"]:,} points', ha='center', fontsize=11)
     ax.text(.47, -.35, f'Existing {sum(r == "accepted" for r in review["roles"].values())}-parent\ncombination', ha='center', va='top', fontsize=9, color=colors['accepted'])
     ax.text(.76, middle-.7, 'Existing continuation\nprovides the later seed', ha='center', fontsize=9, color=colors['later'])
-    title = 'Unequal two bubbles, 128³' if review['case'] == 'unequal_two_n128' else 'Three bubbles, 64³'
+    if title is None:
+        title = 'Unequal two bubbles, 128³' if review['case'] == 'unequal_two_n128' else 'Three bubbles, 64³'
     fig.suptitle(f'{title}: what the delayed-support layer added', fontsize=16, y=.975)
     fig.text(.5, .93, f'Existing combination: {len(review["roles"])-len(additional)} fragments | '
              f'Additional support: {len(additional)} | Conditional family: {len(review["roles"])} fragments',

@@ -74,6 +74,17 @@ class FourSourceSetup(unittest.TestCase):
             with self.assertRaises(ValueError):
                 weighted_budget(base, values)
 
+    def test_unequal_pilot_redistributes_the_same_total_prescribed_input(self):
+        weights = [1.5, 1., .75, .75]
+        for n in (32, 64, 128):
+            base = source_budget(n, reference_metadata())
+            equal, unequal = weighted_budget(base), weighted_budget(base, weights)
+            for key in ('discrete_mass_rates', 'discrete_energy_rates', 'nominal_wind_luminosities'):
+                np.testing.assert_allclose(sum(unequal[key]), sum(equal[key]), rtol=1e-12)
+                np.testing.assert_allclose(unequal[key][0]/unequal[key][2], 2., rtol=1e-12)
+            self.assertFalse(unequal['per_source_reference_budget_preserved'])
+            self.assertEqual(base['wind_terminal_velocity'], 10.)
+
     def test_preflight_defines_pilot_without_creating_output(self):
         args = argument_parser().parse_args(['--preflight-only', '--track-shocks', '--verify-offline'])
         plan = preflight(args)
@@ -132,6 +143,28 @@ class FourSourceInjection(unittest.TestCase):
             heat = increment[self.registry.pressure_index][mask].sum()*dx**3/dt/(float(params.gamma)-1)
             np.testing.assert_allclose(mass, plan['discrete_mass_rates'][i], rtol=1e-4)
             np.testing.assert_allclose(heat, plan['discrete_energy_rates'][i], rtol=1e-5)
+
+    def test_actual_unequal_pilot_source_rates_and_total_at_rest(self):
+        weights = (1.5, 1., .75, .75)
+        plan = source_budget(32, reference_metadata())
+        weighted = weighted_budget(plan, weights)
+        params = self.params._replace(wind_params=self.params.wind_params._replace(
+            wind_mass_loss_rate=plan['wind_mass_loss_rate_per_source']))
+        config = self.configuration(SOURCES, weights)
+        dt = .001
+        after = np.asarray(_wind_injection(self.state, jnp.asarray(dt), config, params, self.helper, self.registry))
+        increment = after-np.asarray(self.state)
+        centers, dx = np.asarray(self.helper.geometric_centers), float(config.grid_spacing)
+        for i, source in enumerate(SOURCES):
+            mask = np.linalg.norm(centers-np.asarray(source), axis=-1) <= multi.INJECTION_RADIUS-dx/2
+            mass = increment[self.registry.density_index][mask].sum()*dx**3/dt
+            heat = increment[self.registry.pressure_index][mask].sum()*dx**3/dt/(float(params.gamma)-1)
+            np.testing.assert_allclose(mass, weighted['discrete_mass_rates'][i], rtol=1e-4)
+            np.testing.assert_allclose(heat, weighted['discrete_energy_rates'][i], rtol=1e-5)
+        total_mass = increment[self.registry.density_index].sum()*dx**3/dt
+        total_heat = increment[self.registry.pressure_index].sum()*dx**3/dt/(float(params.gamma)-1)
+        np.testing.assert_allclose(total_mass, sum(plan['discrete_mass_rates']), rtol=1e-4)
+        np.testing.assert_allclose(total_heat, sum(plan['discrete_energy_rates']), rtol=1e-5)
 
     def test_catalog_excludes_all_four_sources_without_assigning_source_identity(self):
         n = 32
