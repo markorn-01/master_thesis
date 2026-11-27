@@ -1,0 +1,122 @@
+{
+  "pilot": "fixed_four_source_tetrahedron",
+  "num_cells": 64,
+  "num_sources": 4,
+  "source_positions": [
+    [
+      0.375,
+      0.375,
+      0.375
+    ],
+    [
+      0.625,
+      0.625,
+      0.375
+    ],
+    [
+      0.625,
+      0.375,
+      0.625
+    ],
+    [
+      0.375,
+      0.625,
+      0.625
+    ]
+  ],
+  "injection_radius": 0.0625,
+  "minimum_source_center_separation": 0.3535533905932738,
+  "minimum_injection_boundary_clearance": 0.3125,
+  "source_budget": {
+    "num_cells": 64,
+    "num_sources": 4,
+    "injection_cell_counts": [
+      160,
+      160,
+      160,
+      160
+    ],
+    "parameter_scale": 1.1,
+    "requested_mass_loss_rate_per_source": 0.01,
+    "wind_mass_loss_rate_per_source": 0.011000000000000001,
+    "wind_terminal_velocity": 10.0,
+    "nominal_wind_luminosity_per_source": 0.55,
+    "nominal_total_wind_luminosity": 2.2,
+    "discrete_mass_rates": [
+      0.006565141402540684,
+      0.006565141402540684,
+      0.006565141402540684,
+      0.006565141402540684
+    ],
+    "discrete_energy_rates": [
+      0.3282570701270342,
+      0.3282570701270342,
+      0.3282570701270342,
+      0.3282570701270342
+    ],
+    "budget_matched": true,
+    "energy_rate_definition": "Prescribed mechanical source coefficient before state-dependent EI pressure conversion; not net gas-energy deposition.",
+    "reference_scope": "Each of 4 sources matches one source of the equal two-wind reference; total prescribed budget is 2 times its total."
+  },
+  "weighted_budget": {
+    "source_strengths": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "source_mass_loss_rates": [
+      0.011000000000000001,
+      0.011000000000000001,
+      0.011000000000000001,
+      0.011000000000000001
+    ],
+    "nominal_wind_luminosities": [
+      0.55,
+      0.55,
+      0.55,
+      0.55
+    ],
+    "discrete_mass_rates": [
+      0.006565141402540684,
+      0.006565141402540684,
+      0.006565141402540684,
+      0.006565141402540684
+    ],
+    "discrete_energy_rates": [
+      0.3282570701270342,
+      0.3282570701270342,
+      0.3282570701270342,
+      0.3282570701270342
+    ],
+    "equal_source_reference_preserved": false,
+    "equal_source_strengths": true,
+    "per_source_reference_budget_preserved": true
+  },
+  "num_analysis": 17,
+  "t_end": 0.16,
+  "requested_times": [
+    0.0,
+    0.01,
+    0.02,
+    0.03,
+    0.04,
+    0.05,
+    0.06,
+    0.07,
+    0.08,
+    0.09,
+    0.1,
+    0.11,
+    0.12,
+    0.13,
+    0.14,
+    0.15,
+    0.16
+  ],
+  "track_shocks": true,
+  "verify_offline": true,
+  "reference_path": "outputs/two_bubbles_iwr_compgpu9_n064/metadata.json",
+  "reference_sha256": "0de3101bb4106541ae5edce2ce21596d0e64d9fbbe066532612c7ccd2766392a",
+  "scope": "Source/injection preflight only; no claim about collision time, physical ancestry, late surface-boundary clearance or turbulent-box performance."
+}
